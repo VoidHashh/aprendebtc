@@ -33,7 +33,7 @@
           <div class="sidebar__section-title">Siguiente nivel</div>
           <a href="../nivel-2/" class="sidebar__link">Nivel 2 — Ya Tengo Sats</a>
         </div>
-        <div style="padding: 0.75rem;">
+        <div class="sidebar__ad-wrap">
           <div class="ad-slot ad-sidebar" id="ad-sidebar-n1" aria-hidden="true"></div>
         </div>
       </nav>
@@ -51,9 +51,9 @@
         </nav>
 
         <article class="article">
-          <div class="nivel-badge nivel-badge--1" style="margin-bottom: 0.75rem;">Nivel 1</div>
+          <div class="nivel-badge nivel-badge--1 article__badge">Nivel 1</div>
           <h1>Dos caminos: KYC o no-KYC</h1>
-          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 2rem;">
+          <p class="article__subtitle">
             No hay camino malo. Pero sí hay una decisión que debes tomar antes de comprar.
           </p>
 
@@ -87,22 +87,22 @@
 
           <h2>Comparativa rápida</h2>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
-            <div style="background: var(--bg-secondary); border: 1px solid var(--bg-border); border-radius: var(--radius-md); padding: 1.25rem;">
-              <div style="font-weight: 700; color: var(--nivel-2); margin-bottom: 0.75rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em;">KYC</div>
-              <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">✓ Fácil y rápido</p>
-              <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">✓ Muchos métodos de pago</p>
-              <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">✓ Soporte al cliente</p>
-              <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">✗ Tus datos vinculados a tus bitcoin</p>
-              <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0;">✗ Riesgo de filtración de datos</p>
+          <div class="compare-grid">
+            <div class="compare-grid__card">
+              <div class="compare-grid__title compare-grid__title--kyc">KYC</div>
+              <p class="compare-grid__item">✓ Fácil y rápido</p>
+              <p class="compare-grid__item">✓ Muchos métodos de pago</p>
+              <p class="compare-grid__item">✓ Soporte al cliente</p>
+              <p class="compare-grid__item">✗ Tus datos vinculados a tus bitcoin</p>
+              <p class="compare-grid__item compare-grid__item--last">✗ Riesgo de filtración de datos</p>
             </div>
-            <div style="background: var(--bg-secondary); border: 1px solid var(--bg-border); border-radius: var(--radius-md); padding: 1.25rem;">
-              <div style="font-weight: 700; color: var(--nivel-4); margin-bottom: 0.75rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em;">No-KYC</div>
-              <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">✓ Máxima privacidad</p>
-              <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">✓ Sin datos personales</p>
-              <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">✗ Más complejo</p>
-              <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">✗ Prima de precio</p>
-              <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0;">✗ Proceso más lento</p>
+            <div class="compare-grid__card">
+              <div class="compare-grid__title compare-grid__title--nokyc">No-KYC</div>
+              <p class="compare-grid__item">✓ Máxima privacidad</p>
+              <p class="compare-grid__item">✓ Sin datos personales</p>
+              <p class="compare-grid__item">✗ Más complejo</p>
+              <p class="compare-grid__item">✗ Prima de precio</p>
+              <p class="compare-grid__item compare-grid__item--last">✗ Proceso más lento</p>
             </div>
           </div>
 

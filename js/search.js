@@ -1,85 +1,120 @@
 /**
- * aprendebtc.com — search.js
- * Búsqueda client-side. Placeholder funcional.
- * TODO: Poblar searchIndex con los datos reales del sitio.
+ * aprendebtc.com - search.js
+ * Client-side search with static core pages + dynamic base index.
  */
 
 (function () {
   'use strict';
 
-  // Índice de búsqueda — se irá ampliando con el contenido real
-  const searchIndex = [
-    { title: '¿Qué es Bitcoin?', url: '/base/que-es-bitcoin.html', tags: ['bitcoin', 'introducción', 'qué es'], nivel: null },
-    { title: 'Nivel 1 — Nocoinero Curioso', url: '/nivel-1/', tags: ['nivel 1', 'principiante', 'nocoinero'], nivel: 1 },
-    { title: 'Nivel 2 — Ya Tengo Sats', url: '/nivel-2/', tags: ['nivel 2', 'wallet', 'comprar bitcoin'], nivel: 2 },
-    { title: 'Nivel 3 — Rabbit Hole', url: '/nivel-3/', tags: ['nivel 3', 'lightning', 'nodo', 'privacidad'], nivel: 3 },
-    { title: 'Nivel 4 — Down the Rabbit Hole', url: '/nivel-4/', tags: ['nivel 4', 'criptografía', 'minería'], nivel: 4 },
-    { title: 'Nivel 5 — El Arquitecto', url: '/nivel-5/', tags: ['nivel 5', 'avanzado', 'multisig'], nivel: 5 },
-    { title: 'Nivel 6 — Satoshi', url: '/nivel-6/', tags: ['nivel 6', 'experto', 'protocolo'], nivel: 6 },
-    { title: 'Glosario', url: '/glosario.html', tags: ['glosario', 'términos', 'definiciones'] },
-    { title: 'Recursos', url: '/recursos.html', tags: ['recursos', 'libros', 'podcasts', 'links'] },
-    { title: 'Herramientas', url: '/herramientas/', tags: ['herramientas', 'calculadora', 'hash'] },
+  const staticIndex = [
+    { title: 'Inicio', url: '/', tags: ['home', 'landing'], section: 'General' },
+    { title: 'Nivel 1 - Nocoinero Curioso', url: '/nivel-1/', tags: ['nivel 1', 'principiante'], section: 'Niveles', nivel: 1 },
+    { title: 'Antes de empezar', url: '/nivel-1/antes-de-empezar.html', tags: ['nivel 1', 'inicio'], section: 'Nivel 1', nivel: 1 },
+    { title: 'El problema del KYC', url: '/nivel-1/el-problema-del-kyc.html', tags: ['kyc', 'privacidad'], section: 'Nivel 1', nivel: 1 },
+    { title: 'Dos caminos: KYC o no-KYC', url: '/nivel-1/dos-caminos.html', tags: ['kyc', 'no-kyc'], section: 'Nivel 1', nivel: 1 },
+    { title: 'Registrarte en un exchange', url: '/nivel-1/registrarte-en-un-exchange.html', tags: ['exchange', 'registro'], section: 'Nivel 1', nivel: 1 },
+    { title: 'Tu primera compra', url: '/nivel-1/tu-primera-compra.html', tags: ['compra', 'sats'], section: 'Nivel 1', nivel: 1 },
+    { title: 'Qué acabas de hacer', url: '/nivel-1/que-has-hecho.html', tags: ['custodia', 'keys'], section: 'Nivel 1', nivel: 1 },
+    { title: 'Base de Conocimiento', url: '/base/', tags: ['base', 'referencia'], section: 'Pilares' },
+    { title: 'Glosario', url: '/glosario.html', tags: ['términos', 'definiciones'], section: 'Pilares' },
+    { title: 'Recursos', url: '/recursos.html', tags: ['libros', 'podcasts'], section: 'Pilares' },
+    { title: 'Herramientas', url: '/herramientas/', tags: ['tools', 'hash'], section: 'Pilares' },
+    { title: 'Comunidad', url: '/comunidad/', tags: ['meetups', 'eventos'], section: 'Pilares' }
   ];
 
-  const NIVEL_LABELS = {
-    1: 'N1', 2: 'N2', 3: 'N3', 4: 'N4', 5: 'N5', 6: 'N6'
-  };
+  const nivelLabels = { 1: 'N1', 2: 'N2', 3: 'N3', 4: 'N4', 5: 'N5', 6: 'N6' };
+  let baseIndex = [];
 
-  /**
-   * Busca en el índice por query
-   * @param {string} query
-   * @returns {Array}
-   */
-  function search(query) {
-    if (!query || query.trim().length < 2) return [];
-    const q = query.toLowerCase().trim();
-    return searchIndex.filter(item => {
-      return item.title.toLowerCase().includes(q) ||
-             item.tags.some(tag => tag.includes(q));
-    }).slice(0, 8);
+  function normalize(text) {
+    return (text || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .trim();
   }
 
-  /**
-   * Renderiza los resultados en el DOM
-   */
+  function scoreItem(item, query) {
+    const q = normalize(query);
+    const title = normalize(item.title);
+    const tags = (item.tags || []).map(normalize).join(' ');
+
+    let score = 0;
+    if (title.startsWith(q)) score += 8;
+    if (title.includes(q)) score += 4;
+    if (tags.includes(q)) score += 2;
+    return score;
+  }
+
+  function search(query) {
+    const q = normalize(query);
+    if (q.length < 2) return [];
+
+    return [...staticIndex, ...baseIndex]
+      .map((item) => ({ item, score: scoreItem(item, q) }))
+      .filter((entry) => entry.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 10)
+      .map((entry) => entry.item);
+  }
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
   function renderResults(results, query) {
     const container = document.getElementById('search-results');
     if (!container) return;
 
-    if (!query || query.trim().length < 2) {
-      container.innerHTML = '<p class="search-hint">Escribe para buscar artículos, conceptos, niveles…</p>';
+    const cleanQuery = (query || '').trim();
+    if (cleanQuery.length < 2) {
+      container.innerHTML = '<p class="search-hint">Escribe para buscar artículos, conceptos y niveles...</p>';
       return;
     }
 
     if (results.length === 0) {
-      container.innerHTML = `<p class="search-hint">Sin resultados para "<strong>${query}</strong>"</p>`;
+      container.innerHTML = `<p class="search-hint">Sin resultados para "<strong>${escapeHtml(cleanQuery)}</strong>"</p>`;
       return;
     }
 
-    const html = results.map(item => `
-      <a href="${item.url}" class="search-result-item" style="
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        padding: 0.6rem 0.75rem;
-        border-radius: 6px;
-        color: var(--text-primary);
-        font-size: 0.9rem;
-        text-decoration: none;
-        transition: background 0.2s;
-      " onmouseover="this.style.background='var(--bg-primary)'" onmouseout="this.style.background=''">
-        ${item.nivel ? `<span style="font-size:0.7rem;font-weight:700;color:var(--nivel-${item.nivel});">${NIVEL_LABELS[item.nivel]}</span>` : '<span style="font-size:0.7rem;color:var(--text-muted);">📄</span>'}
-        ${item.title}
-      </a>
-    `).join('');
+    container.innerHTML = results.map((item) => {
+      const badgeLabel = item.nivel ? nivelLabels[item.nivel] : 'DOC';
+      const badgeClass = item.nivel ? `search-result-item__badge search-result-item__badge--nivel-${item.nivel}` : 'search-result-item__badge';
+      const meta = item.section || 'Contenido';
 
-    container.innerHTML = html;
+      return `
+        <a href="${item.url}" class="search-result-item">
+          <span class="${badgeClass}">${badgeLabel}</span>
+          <span class="search-result-item__body">
+            <span class="search-result-item__title">${escapeHtml(item.title)}</span>
+            <span class="search-result-item__meta">${escapeHtml(meta)}</span>
+          </span>
+        </a>
+      `;
+    }).join('');
   }
 
-  /**
-   * Inicializar la búsqueda cuando el DOM esté listo
-   */
-  function init() {
+  async function loadBaseIndex() {
+    const basePath = document.documentElement.dataset.basePath ?? '';
+    const url = `${basePath}js/search-index.base.json`;
+
+    try {
+      const response = await fetch(url, { cache: 'no-store' });
+      if (!response.ok) return;
+      const data = await response.json();
+      if (Array.isArray(data)) {
+        baseIndex = data;
+      }
+    } catch (_) {
+      // keep static index only
+    }
+  }
+
+  function bindInput() {
     const input = document.getElementById('search-input');
     if (!input) return;
 
@@ -88,21 +123,24 @@
     input.addEventListener('input', () => {
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(() => {
-        const results = search(input.value);
-        renderResults(results, input.value);
-      }, 150);
+        renderResults(search(input.value), input.value);
+      }, 120);
     });
 
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        const results = search(input.value);
-        if (results.length > 0) {
-          window.location.href = results[0].url;
-        }
+    input.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter') return;
+      const results = search(input.value);
+      if (results.length > 0) {
+        window.location.href = results[0].url;
       }
     });
   }
 
+  async function init() {
+    await loadBaseIndex();
+    bindInput();
+  }
+
   document.addEventListener('includes:loaded', init);
-  document.addEventListener('DOMContentLoaded', () => setTimeout(init, 200));
+  document.addEventListener('DOMContentLoaded', () => setTimeout(init, 150));
 })();

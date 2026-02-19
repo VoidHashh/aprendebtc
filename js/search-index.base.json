@@ -1,0 +1,245 @@
+[
+  {
+    "title": "¿Qué es Bitcoin?",
+    "url": "/base/que-es-bitcoin.html",
+    "tags": [
+      "bitcoin: los fundamentos",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "¿Cómo funciona Bitcoin?",
+    "url": "/base/como-funciona-bitcoin.html",
+    "tags": [
+      "bitcoin: los fundamentos",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "¿Qué es la blockchain?",
+    "url": "/base/que-es-blockchain.html",
+    "tags": [
+      "bitcoin: los fundamentos",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "¿Qué es la minería?",
+    "url": "/base/que-es-la-mineria.html",
+    "tags": [
+      "bitcoin: los fundamentos",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "Los 21 millones y la oferta fija",
+    "url": "/base/los-21-millones.html",
+    "tags": [
+      "bitcoin: los fundamentos",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "¿Qué es un satoshi?",
+    "url": "/base/que-es-un-satoshi.html",
+    "tags": [
+      "bitcoin: los fundamentos",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "Historia de Bitcoin",
+    "url": "/base/historia-bitcoin.html",
+    "tags": [
+      "bitcoin: los fundamentos",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "El problema del dinero tradicional",
+    "url": "/base/problema-del-dinero-tradicional.html",
+    "tags": [
+      "dinero y economía",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "Bitcoin vs dinero tradicional",
+    "url": "/base/bitcoin-vs-dinero-tradicional.html",
+    "tags": [
+      "dinero y economía",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "Historia del dinero",
+    "url": "/base/historia-del-dinero.html",
+    "tags": [
+      "dinero y economía",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "Inflación y Bitcoin",
+    "url": "/base/inflacion-y-bitcoin.html",
+    "tags": [
+      "dinero y economía",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "Economía Austríaca y Bitcoin",
+    "url": "/base/austrian-economics.html",
+    "tags": [
+      "dinero y economía",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "Bitcoin vs Oro",
+    "url": "/base/bitcoin-vs-oro.html",
+    "tags": [
+      "dinero y economía",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "Bitcoin como reserva de valor",
+    "url": "/base/bitcoin-reserva-de-valor.html",
+    "tags": [
+      "dinero y economía",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "Bitcoin vs altcoins",
+    "url": "/base/bitcoin-vs-altcoins.html",
+    "tags": [
+      "dinero y economía",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "Exchange centralizado (CEX)",
+    "url": "/base/exchange-centralizado-cex.html",
+    "tags": [
+      "compra: conceptos",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "Exchange descentralizado (DEX)",
+    "url": "/base/exchange-descentralizado-dex.html",
+    "tags": [
+      "compra: conceptos",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "KYC y no-KYC: qué significan y por qué importan",
+    "url": "/base/kyc-vs-no-kyc.html",
+    "tags": [
+      "compra: conceptos",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "DCA: la estrategia de compras periódicas",
+    "url": "/base/dca-compras-periodicas.html",
+    "tags": [
+      "compra: conceptos",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "Tipos de wallet: custodia, temperatura y formato",
+    "url": "/base/tipos-de-wallet.html",
+    "tags": [
+      "wallets y custodia",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "¿Qué es la frase semilla (seed phrase)?",
+    "url": "/base/que-es-seed-phrase.html",
+    "tags": [
+      "wallets y custodia",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "On-chain vs Lightning",
+    "url": "/base/on-chain-vs-lightning.html",
+    "tags": [
+      "red y transacciones",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "¿Qué es una dirección Bitcoin?",
+    "url": "/base/que-es-una-direccion.html",
+    "tags": [
+      "red y transacciones",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "¿Qué es una confirmación?",
+    "url": "/base/que-es-una-confirmacion.html",
+    "tags": [
+      "red y transacciones",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "¿Qué son las comisiones (fees)?",
+    "url": "/base/que-son-las-fees.html",
+    "tags": [
+      "red y transacciones",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "Seguridad básica: las reglas de oro",
+    "url": "/base/seguridad-basica.html",
+    "tags": [
+      "seguridad",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  },
+  {
+    "title": "Estafas comunes en Bitcoin",
+    "url": "/base/estafas-comunes.html",
+    "tags": [
+      "seguridad",
+      "base"
+    ],
+    "section": "Base de Conocimiento"
+  }
+]
