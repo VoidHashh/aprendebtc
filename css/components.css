@@ -359,6 +359,16 @@
   border-radius: 6px;
 }
 
+.sidebar__section--contains-active > .sidebar__section-toggle {
+  color: #DDE6F0;
+}
+
+.sidebar__section--contains-active.sidebar__section--collapsed > .sidebar__section-toggle {
+  background: rgba(247, 147, 26, 0.08);
+  border-left: 2px solid rgba(247, 147, 26, 0.7);
+  padding-left: calc(1rem - 2px);
+}
+
 .sidebar__section-toggle-icon {
   width: 14px;
   height: 14px;
@@ -1448,10 +1458,3 @@ html[data-ads="on"] .sidebar__ad-wrap {
 .site-footer__privacy-link {
   font-size: 0.8rem;
 }
-
-
-
-
-
-
-

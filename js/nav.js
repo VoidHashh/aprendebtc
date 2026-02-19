@@ -15,6 +15,74 @@
   let smoothScrollBound = false;
   let contextLinkBound = false;
 
+  const LEVEL_TREE = [
+    {
+      title: 'Nivel 1 - Nocoinero Curioso',
+      index: '/nivel-1/',
+      pages: [
+        { href: '/nivel-1/antes-de-empezar.html', text: 'Antes de empezar' },
+        { href: '/nivel-1/el-problema-del-kyc.html', text: 'El problema del KYC' },
+        { href: '/nivel-1/dos-caminos.html', text: 'Dos caminos: KYC o no-KYC' },
+        { href: '/nivel-1/registrarte-en-un-exchange.html', text: 'Registrarte en un exchange' },
+        { href: '/nivel-1/tu-primera-compra.html', text: 'Tu primera compra' },
+        { href: '/nivel-1/que-has-hecho.html', text: 'Que acabas de hacer' }
+      ]
+    },
+    {
+      title: 'Nivel 2 - Ya Tengo Sats',
+      index: '/nivel-2/',
+      pages: [
+        { href: '/nivel-2/crear-tu-wallet.html', text: 'Paso 1: Crea tu wallet propia' },
+        { href: '/nivel-2/retirar-del-exchange.html', text: 'Paso 2: Retirar del exchange' },
+        { href: '/nivel-2/tu-seed-phrase.html', text: 'Paso 3: Protege tu seed phrase' },
+        { href: '/nivel-2/comprar-en-dex-p2p.html', text: 'Comprar en DEX/P2P' },
+        { href: '/nivel-2/cajeros-bitcoin.html', text: 'Comprar en cajeros Bitcoin' },
+        { href: '/nivel-2/wallet-y-seed-nokyc.html', text: 'Wallet y seed (no-KYC)' },
+        { href: '/nivel-2/exchanges-comparativa.html', text: 'Comparativa de exchanges' },
+        { href: '/nivel-2/que-es-lightning.html', text: 'Lightning: que es' },
+        { href: '/nivel-2/usar-lightning.html', text: 'Como usar Lightning' },
+        { href: '/nivel-2/wallets-lightning.html', text: 'Wallets Lightning recomendadas' },
+        { href: '/nivel-2/lightning-address.html', text: 'Lightning Address e invoices' },
+        { href: '/nivel-2/como-hacer-backup.html', text: 'Como hacer backup correctamente' },
+        { href: '/nivel-2/wallets-recomendadas.html', text: 'Wallets recomendadas' }
+      ]
+    },
+    {
+      title: 'Nivel 3 - Rabbit Hole',
+      index: '/nivel-3/',
+      pages: [
+        { href: '/nivel-3/modelo-utxo.html', text: 'El modelo UTXO' },
+        { href: '/nivel-3/anatomia-transaccion.html', text: 'Anatomia de una transaccion' },
+        { href: '/nivel-3/mempool.html', text: 'La mempool' },
+        { href: '/nivel-3/rbf-cpfp.html', text: 'RBF y CPFP' },
+        { href: '/nivel-3/utxos-y-privacidad.html', text: 'Tus UTXOs y tu privacidad' },
+        { href: '/nivel-3/clave-privada.html', text: 'Clave privada' },
+        { href: '/nivel-3/clave-publica.html', text: 'Clave publica' },
+        { href: '/nivel-3/tipos-de-direcciones.html', text: 'Tipos de direcciones Bitcoin' },
+        { href: '/nivel-3/hd-wallets.html', text: 'HD wallets y derivation paths' },
+        { href: '/nivel-3/firma-digital.html', text: 'Firma digital' },
+        { href: '/nivel-3/que-es-un-nodo.html', text: 'Que es un nodo' },
+        { href: '/nivel-3/montar-tu-nodo.html', text: 'Monta tu propio nodo' },
+        { href: '/nivel-3/mineria-en-detalle.html', text: 'Mineria en detalle' },
+        { href: '/nivel-3/halving.html', text: 'El halving' },
+        { href: '/nivel-3/configurar-hardware-wallet.html', text: 'Configura tu hardware wallet' },
+        { href: '/nivel-3/comparativa-hardware-wallets.html', text: 'Comparativa hardware wallets' },
+        { href: '/nivel-3/coin-control.html', text: 'Coin control' }
+      ]
+    },
+    { title: 'Nivel 4 - Down the Rabbit Hole', index: '/nivel-4/', pages: [] },
+    { title: 'Nivel 5 - El Arquitecto', index: '/nivel-5/', pages: [] },
+    { title: 'Nivel 6 - Satoshi', index: '/nivel-6/', pages: [] }
+  ];
+
+  const PILLAR_LINKS = [
+    { href: '/base/', text: 'Base de conocimiento' },
+    { href: '/herramientas/', text: 'Herramientas' },
+    { href: '/comunidad/', text: 'Comunidad' },
+    { href: '/glosario.html', text: 'Glosario' },
+    { href: '/recursos.html', text: 'Recursos' }
+  ];
+
   function normalizePath(pathname) {
     if (!pathname) return '/';
     const normalized = pathname
@@ -419,35 +487,54 @@
     return section;
   }
 
+  function createLevelSidebarSection(levelItem) {
+    const links = [{ href: levelItem.index, text: 'Indice del nivel' }, ...levelItem.pages];
+    return createSidebarSection(levelItem.title, links, 'sidebar__section--primary sidebar__section--level');
+  }
+
+  function removeLegacyLevelCurrentSection(sidebar) {
+    const sections = Array.from(sidebar.querySelectorAll('.sidebar__section'));
+    sections.forEach((section) => {
+      const titleNode = section.querySelector('.sidebar__section-title');
+      if (!titleNode) return;
+      const normalized = titleNode.textContent
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .trim()
+        .toUpperCase();
+      if (normalized === 'NIVEL ACTUAL') {
+        section.remove();
+      }
+    });
+  }
+
   function injectPrimarySidebarSections() {
     const sidebar = document.querySelector('.sidebar');
     if (!sidebar) return;
     if (sidebar.dataset.primaryNavInjected === '1') return;
 
-    const nivelesSection = createSidebarSection('Niveles', [
-      { href: '/nivel-1/', text: 'Nivel 1 - Nocoinero Curioso' },
-      { href: '/nivel-2/', text: 'Nivel 2 - Ya Tengo Sats' },
-      { href: '/nivel-3/', text: 'Nivel 3 - Rabbit Hole' },
-      { href: '/nivel-4/', text: 'Nivel 4 - Down the Rabbit Hole' },
-      { href: '/nivel-5/', text: 'Nivel 5 - El Arquitecto' },
-      { href: '/nivel-6/', text: 'Nivel 6 - Satoshi' }
-    ], 'sidebar__section--primary');
+    removeLegacyLevelCurrentSection(sidebar);
 
-    const pilaresSection = createSidebarSection('Pilares', [
-      { href: '/base/', text: 'Base de Conocimiento' },
-      { href: '/herramientas/', text: 'Herramientas' },
-      { href: '/comunidad/', text: 'Comunidad' },
-      { href: '/glosario.html', text: 'Glosario' },
-      { href: '/recursos.html', text: 'Recursos' }
-    ], 'sidebar__section--primary');
+    const contextSection = sidebar.querySelector('.sidebar__section--context');
+    const adWrap = sidebar.querySelector('.sidebar__ad-wrap');
 
-    const firstStandardSection = sidebar.querySelector('.sidebar__section:not(.sidebar__section--context)');
-    if (firstStandardSection) {
-      sidebar.insertBefore(pilaresSection, firstStandardSection);
-      sidebar.insertBefore(nivelesSection, pilaresSection);
+    Array.from(sidebar.querySelectorAll('.sidebar__section')).forEach((section) => {
+      if (section === contextSection) return;
+      section.remove();
+    });
+
+    const fragment = document.createDocumentFragment();
+
+    LEVEL_TREE.forEach((levelItem) => {
+      fragment.appendChild(createLevelSidebarSection(levelItem));
+    });
+
+    fragment.appendChild(createSidebarSection('Pilares de conocimiento', PILLAR_LINKS, 'sidebar__section--primary sidebar__section--pillars'));
+
+    if (adWrap) {
+      sidebar.insertBefore(fragment, adWrap);
     } else {
-      sidebar.prepend(pilaresSection);
-      sidebar.prepend(nivelesSection);
+      sidebar.appendChild(fragment);
     }
 
     sidebar.dataset.primaryNavInjected = '1';
@@ -507,7 +594,7 @@
   function getSidebarTreeStorageKey(section, index) {
     const titleNode = section.querySelector('.sidebar__section-title, .sidebar__section-toggle-label');
     const title = sanitizeLabel(titleNode ? titleNode.textContent : `section-${index}`);
-    return `${SIDEBAR_TREE_KEY_PREFIX}${currentPath()}:${index}:${title}`;
+    return `${SIDEBAR_TREE_KEY_PREFIX}${index}:${title}`;
   }
 
   function setSidebarSectionExpanded(section, expanded) {
@@ -518,32 +605,6 @@
     toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
     section.classList.toggle('sidebar__section--collapsed', !expanded);
     children.hidden = !expanded;
-  }
-
-  function getSidebarDefaultExpanded(sectionMeta) {
-    const path = currentPath();
-    const isBasePath = path === '/base' || path.startsWith('/base/');
-    const levelMatch = path.match(/^\/nivel-(\d)(\/|$)/);
-    const isLevelPath = !!levelMatch;
-    const isLevelIndex = isLevelPath && path === `/nivel-${levelMatch[1]}`;
-    const isBaseIndex = path === '/base';
-
-    if (isLevelIndex || isBaseIndex) return true;
-
-    if (isBasePath) {
-      return sectionMeta.hasActive;
-    }
-
-    if (isLevelPath) {
-      if (sectionMeta.activeSectionIndex === -1) {
-        return sectionMeta.sectionIndex <= 1;
-      }
-
-      const distance = Math.abs(sectionMeta.sectionIndex - sectionMeta.activeSectionIndex);
-      return sectionMeta.hasActive || distance <= 1;
-    }
-
-    return sectionMeta.hasActive || sectionMeta.sectionIndex === 0;
   }
 
   function buildChevronSvg() {
@@ -602,6 +663,9 @@
       section.classList.add('sidebar__section--collapsible');
 
       const hasActive = section.querySelector('.sidebar__link--active') !== null;
+      if (hasActive) {
+        section.classList.add('sidebar__section--contains-active');
+      }
       collapsibleSections.push({
         section,
         sectionIndex: index,
@@ -613,17 +677,9 @@
       section.dataset.treeInitialized = '1';
     });
 
-    const activeSectionIndex = collapsibleSections.findIndex((item) => item.hasActive);
-
     collapsibleSections.forEach((item) => {
       const stored = window.sessionStorage.getItem(item.storageKey);
-      const shouldExpand = stored === null
-        ? getSidebarDefaultExpanded({
-            sectionIndex: item.sectionIndex,
-            hasActive: item.hasActive,
-            activeSectionIndex
-          })
-        : stored === '1';
+      const shouldExpand = stored === null ? false : stored === '1';
 
       setSidebarSectionExpanded(item.section, shouldExpand);
 
