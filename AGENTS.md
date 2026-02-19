@@ -6,12 +6,12 @@ Instrucciones operativas para cualquier agente que trabaje en este repositorio.
 
 - Proyecto: `aprendebtc.com`.
 - Marca: `aprendeBTC`.
-- Sitio multip·gina educativo sobre Bitcoin.
+- Sitio multip√°gina educativo sobre Bitcoin.
 - Estructura conceptual fija:
   - Pilares = referencia.
-  - Niveles = acciÛn paso a paso.
+  - Niveles = acci√≥n paso a paso.
 
-## 2) Reglas tÈcnicas
+## 2) Reglas t√©cnicas
 
 - Stack obligatorio: HTML/CSS/JS vanilla.
 - No frameworks, no bundlers, no dependencias de UI.
@@ -19,34 +19,34 @@ Instrucciones operativas para cualquier agente que trabaje en este repositorio.
   - `includes/header.html`
   - `includes/footer.html`
   - `js/includes.js`
-- Respetar `data-base-path` seg˙n profundidad.
+- Respetar `data-base-path` seg√∫n profundidad.
 
 ## 3) Reglas de marca y naming
 
 - Usar siempre `aprendebtc.com` y `aprendeBTC`.
-- No reintroducir textos de la marca anterior (`bitcoinf·cil`, `bitcoinfacil`).
+- No reintroducir textos de la marca anterior (`bitcoinf√°cil`, `bitcoinfacil`).
 
-## 4) Reglas de navegaciÛn
+## 4) Reglas de navegaci√≥n
 
-### Sidebar en p·ginas de nivel (obligatorio)
+### Sidebar en p√°ginas de nivel (obligatorio)
 
 En `nivel-1` a `nivel-6`:
 
 1. Incluir bloque `Nivel actual` al inicio del sidebar.
 2. Enlace del bloque: `index.html` del nivel.
-3. En el Ìndice del nivel, marcar ese enlace con `sidebar__link--active`.
+3. En el √≠ndice del nivel, marcar ese enlace con `sidebar__link--active`.
 
-### BotÛn contextual volver (global)
+### Bot√≥n contextual volver (global)
 
 - Gestionado por `js/nav.js`.
-- Mostrar `<- Volver` encima del breadcrumb en p·ginas de Base cuando exista contexto de origen.
+- Mostrar `<- Volver` encima del breadcrumb en p√°ginas de Base cuando exista contexto de origen.
 - Comportamiento:
-  - con contexto (`from`/storage) v·lido -> enlace directo a la p·gina de origen
-  - sin contexto v·lido -> no mostrar botÛn contextual
+  - con contexto (`from`/storage) v√°lido -> enlace directo a la p√°gina de origen
+  - sin contexto v√°lido -> no mostrar bot√≥n contextual
 
 ## 5) Reglas de contenido y estilo
 
-- Tono did·ctico, claro y honesto.
+- Tono did√°ctico, claro y honesto.
 - Evitar tecnicismo innecesario en niveles iniciales.
 - Enlazar a `/base/` cuando se menciona un concepto de referencia.
 - Mantener consistencia visual del sistema actual.
@@ -56,16 +56,16 @@ En `nivel-1` a `nivel-6`:
 ## 6) Publicidad
 
 - Los `ad-slot` existen pero deben quedar ocultos por defecto.
-- Solo activar si se define explÌcitamente (`data-ads="on"`).
-- Ads de AdSense est·n en pausa hasta nueva instrucciÛn.
+- Solo activar si se define expl√≠citamente (`data-ads="on"`).
+- Ads de AdSense est√°n en pausa hasta nueva instrucci√≥n.
 
-## 7) B˙squeda
+## 7) B√∫squeda
 
-- Actualizar `js/search.js` al crear p·ginas nuevas de niveles.
-- Actualizar `js/search-index.base.json` para nuevas p·ginas de base.
-- Verificar que b˙squedas clave devuelven resultados esperados.
+- Actualizar `js/search.js` al crear p√°ginas nuevas de niveles.
+- Actualizar `js/search-index.base.json` para nuevas p√°ginas de base.
+- Verificar que b√∫squedas clave devuelven resultados esperados.
 
-## 8) QA mÌnimo antes de cerrar cambios
+## 8) QA m√≠nimo antes de cerrar cambios
 
 - Ejecutar servidor/pruebas locales en modo oculto siempre que sea posible (sin abrir ventanas visibles de consola).
 
@@ -73,22 +73,22 @@ En `nivel-1` a `nivel-6`:
 1. Levantar servidor local y abrir rutas afectadas.
 2. Confirmar carga de includes (`header/footer`).
 3. Confirmar sidebar y enlace de `Nivel actual`.
-4. Confirmar breadcrumb y navegaciÛn anterior/siguiente.
+4. Confirmar breadcrumb y navegaci√≥n anterior/siguiente.
 5. Confirmar ausencia de errores JS en consola.
 6. Confirmar UTF-8 correcto (sin mojibake).
 
 ## 9) Flujo de trabajo recomendado
 
-1. Crear estructura de p·gina.
+1. Crear estructura de p√°gina.
 2. Integrar contenido en template existente.
 3. Asegurar consistencia CSS/JS reusable.
-4. Validar en navegador (ideal: pruebas headless + revisiÛn visual).
-5. Actualizar b˙squeda si aplica.
+4. Validar en navegador (ideal: pruebas headless + revisi√≥n visual).
+5. Actualizar b√∫squeda si aplica.
 
 ## 10) Notas de alcance
 
-- El `sitemap.xml` definitivo se cerrar· al final del proyecto.
-- No dejar placeholders rotos; si una ruta no existe a˙n, documentarlo.
+- El `sitemap.xml` definitivo se cerrar√° al final del proyecto.
+- No dejar placeholders rotos; si una ruta no existe a√∫n, documentarlo.
 
 
 

@@ -1,6 +1,6 @@
 # TECHNICAL.md
 
-Guía técnica y reglas de implementación para el proyecto `aprendebtc.com`.
+GuÃ­a tÃ©cnica y reglas de implementaciÃ³n para el proyecto `aprendebtc.com`.
 
 ## Stack
 
@@ -13,10 +13,10 @@ Guía técnica y reglas de implementación para el proyecto `aprendebtc.com`.
 
 - `includes/header.html` y `includes/footer.html` se inyectan con `js/includes.js`.
 - Usar `data-base-path` correcto en `<html>`:
-  - raíz: `data-base-path=""`
+  - raÃ­z: `data-base-path=""`
   - carpetas: `data-base-path="../"`
 
-Patrón por página:
+PatrÃ³n por pÃ¡gina:
 
 ```html
 <div data-include="header"></div>
@@ -27,52 +27,52 @@ Patrón por página:
 <script src="../js/search.js"></script>
 ```
 
-## Reglas de navegación
+## Reglas de navegaciÃ³n
 
 ### Sidebar de niveles (obligatorio)
 
-En todas las páginas de nivel (`nivel-1` a `nivel-6`):
+En todas las pÃ¡ginas de nivel (`nivel-1` a `nivel-6`):
 
 1. Incluir bloque `Nivel actual` al inicio del sidebar.
 2. Ese bloque enlaza a `index.html` del nivel.
 3. En el `index.html` del nivel, ese enlace va activo con `sidebar__link--active`.
 
-### Botón contextual volver
+### BotÃ³n contextual volver
 
 Gestionado globalmente en `js/nav.js`:
 
-- Muestra `<- Volver` encima del breadcrumb en páginas de Base cuando hay contexto de origen.
+- Muestra `<- Volver` encima del breadcrumb en pÃ¡ginas de Base cuando hay contexto de origen.
 - El destino se construye con `from` + `from_title` + `from_section` (y respaldo en `sessionStorage`).
-- Si no hay contexto válido, el botón no se muestra.
+- Si no hay contexto vÃ¡lido, el botÃ³n no se muestra.
 
 ## Reglas de estilo y consistencia
 
 - Mantener el sistema visual dark con acento naranja Bitcoin.
 - Evitar estilos inline nuevos; centralizar en CSS.
-- Mantener legibilidad (contraste, espaciado y jerarquía).
+- Mantener legibilidad (contraste, espaciado y jerarquÃ­a).
 - Mantener consistencia en cards, sidebar, breadcrumb y `page-nav`.
 
 ## Publicidad
 
-- Los `ad-slot` están preparados.
+- Los `ad-slot` estÃ¡n preparados.
 - Por defecto se mantienen ocultos.
-- Solo activar explícitamente con `data-ads="on"`.
-- Integración AdSense: pendiente (pausada).
+- Solo activar explÃ­citamente con `data-ads="on"`.
+- IntegraciÃ³n AdSense: pendiente (pausada).
 
-## Búsqueda
+## BÃºsqueda
 
-- `js/search.js` mantiene índice estático general.
+- `js/search.js` mantiene Ã­ndice estÃ¡tico general.
 - `js/search-index.base.json` alimenta la base de conocimiento.
-- Al crear nuevas páginas, actualizar índice de búsqueda.
+- Al crear nuevas pÃ¡ginas, actualizar Ã­ndice de bÃºsqueda.
 
-## QA mínimo antes de cerrar cambios
+## QA mÃ­nimo antes de cerrar cambios
 
 1. Cargar rutas afectadas en navegador.
 2. Confirmar includes (`header/footer`).
 3. Confirmar sidebar y enlace de `Nivel actual`.
-4. Confirmar breadcrumb y navegación entre páginas.
+4. Confirmar breadcrumb y navegaciÃ³n entre pÃ¡ginas.
 5. Confirmar ausencia de errores JS.
-6. Confirmar codificación UTF-8 (sin mojibake).
+6. Confirmar codificaciÃ³n UTF-8 (sin mojibake).
 
 ## Desarrollo local
 
@@ -90,7 +90,7 @@ Abrir:
 ## Convenciones de marca
 
 - Usar siempre `aprendeBTC` y `aprendebtc.com`.
-- No reintroducir `bitcoinfácil` ni variantes anteriores.
+- No reintroducir `bitcoinfÃ¡cil` ni variantes anteriores.
 
 
 

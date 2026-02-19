@@ -46,15 +46,15 @@
   }
 
   function textScore(value) {
-    const ok = (value.match(/[A-Za-z0-9¡…Õ”⁄·ÈÌÛ˙—Ò‹¸ø°]/g) || []).length;
-    const bad = (value.match(/[√¬‚?]/g) || []).length;
+    const ok = (value.match(/[A-Za-z0-9√Å√â√ç√ì√ö√°√©√≠√≥√∫√ë√±√ú√º¬ø¬°]/g) || []).length;
+    const bad = (value.match(/[√É√Ç√¢?]/g) || []).length;
     return ok - (bad * 3);
   }
 
   function maybeDecodeMojibake(value) {
     const raw = collapseWhitespace(value);
     if (!raw) return raw;
-    if (!/[√¬‚]/.test(raw)) return raw;
+    if (!/[√É√Ç√¢]/.test(raw)) return raw;
 
     try {
       const bytes = Uint8Array.from(Array.from(raw).map((ch) => ch.charCodeAt(0) & 0xff));
@@ -76,9 +76,9 @@
     text = text
       .replace(/\uFFFD/g, '-')
       .replace(/\s+\?\s+/g, ' - ')
+      .replace(/\s*√¢‚Ç¨‚Äù\s*/g, ' - ')
       .replace(/\s*‚Äî\s*/g, ' - ')
-      .replace(/\s*ó\s*/g, ' - ')
-      .replace(/\s*∑\s*/g, ' ∑ ')
+      .replace(/\s*¬∑\s*/g, ' ¬∑ ')
       .replace(/\s{2,}/g, ' ')
       .trim();
 
