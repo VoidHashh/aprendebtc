@@ -1,0 +1,261 @@
+/* ============================================
+   aprendebtc.com — main.css
+   Reset, variables, tipografía, layout base
+   ============================================ */
+
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* --- Reset moderno --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, video, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* --- Variables CSS --- */
+:root {
+  /* Fondos */
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-elevated: #1c2128;
+  --bg-border: #30363d;
+
+  /* Acentos — Naranja Bitcoin */
+  --accent: #F7931A;
+  --accent-hover: #F5A623;
+  --accent-muted: #D4782A;
+  --accent-bg: rgba(247, 147, 26, 0.1);
+
+  /* Texto */
+  --text-primary: #E6EDF3;
+  --text-secondary: #8B949E;
+  --text-muted: #484F58;
+
+  /* Funcionales */
+  --success: #2EA043;
+  --danger: #DA3633;
+  --info: #58A6FF;
+
+  /* Niveles */
+  --nivel-1: #F7931A;
+  --nivel-2: #2EA043;
+  --nivel-3: #58A6FF;
+  --nivel-4: #A371F7;
+  --nivel-5: #DA3633;
+  --nivel-6: #F0C000;
+
+  /* Layout */
+  --sidebar-width: 280px;
+  --header-height: 64px;
+  --max-width: 1200px;
+  --content-max-width: 760px;
+
+  /* Radios y transiciones */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --transition: 0.2s ease;
+}
+
+/* --- Tipografía base --- */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 1rem;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+}
+
+@media (min-width: 1024px) {
+  body {
+    font-size: 1.0625rem;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text-primary);
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.1rem; }
+
+@media (min-width: 768px) {
+  h1 { font-size: 2.25rem; }
+  h2 { font-size: 1.75rem; }
+}
+
+p {
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+}
+
+p:last-child { margin-bottom: 0; }
+
+strong { font-weight: 600; color: var(--text-primary); }
+em { font-style: italic; }
+
+a {
+  color: var(--info);
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+/* --- Código inline --- */
+code {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.875em;
+  background: var(--bg-secondary);
+  color: var(--accent);
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--bg-border);
+}
+
+/* --- Bloques de código --- */
+pre {
+  background: var(--bg-secondary);
+  border: 1px solid var(--bg-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+}
+
+/* --- Scrollbar personalizada --- */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--bg-border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* --- Selección de texto --- */
+::selection {
+  background: var(--accent-bg);
+  color: var(--text-primary);
+}
+
+/* --- Focus visible --- */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* --- Layout base --- */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .container { padding: 0 2rem; }
+}
+
+/* --- Layout con sidebar --- */
+.page-layout {
+  display: flex;
+  min-height: calc(100vh - var(--header-height));
+  padding-top: var(--header-height);
+}
+
+.page-layout__sidebar {
+  display: none;
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+}
+
+.page-layout__content {
+  flex: 1;
+  min-width: 0;
+  padding: 2rem 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  .page-layout__sidebar {
+    display: block;
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+  }
+
+  .page-layout__content {
+    margin-left: var(--sidebar-width);
+    padding: 2.5rem 2.5rem;
+    max-width: calc(var(--content-max-width) + var(--sidebar-width) + 5rem);
+  }
+
+  .page-layout__content .content-inner {
+    max-width: var(--content-max-width);
+  }
+}
+
+/* --- Layout sin sidebar (landing) --- */
+.page-layout--full .page-layout__content {
+  margin-left: 0;
+  max-width: none;
+  padding: 0;
+}
+
+/* --- Main sin sidebar --- */
+.main-content {
+  padding-top: var(--header-height);
+}
+
+/* --- Separadores --- */
+hr {
+  border: none;
+  border-top: 1px solid var(--bg-border);
+  margin: 2rem 0;
+}

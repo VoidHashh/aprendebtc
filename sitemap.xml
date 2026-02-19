@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Landing -->
+  <url>
+    <loc>https://aprendebtc.com/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Pilares -->
+  <url><loc>https://aprendebtc.com/glosario.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aprendebtc.com/recursos.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aprendebtc.com/base/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aprendebtc.com/herramientas/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aprendebtc.com/comunidad/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- Base de conocimiento -->
+  <url><loc>https://aprendebtc.com/base/que-es-bitcoin.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+
+  <!-- Niveles -->
+  <url><loc>https://aprendebtc.com/nivel-1/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aprendebtc.com/nivel-2/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aprendebtc.com/nivel-3/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aprendebtc.com/nivel-4/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aprendebtc.com/nivel-5/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aprendebtc.com/nivel-6/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+</urlset>
