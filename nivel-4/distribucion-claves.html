@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cómo distribuir las llaves de un multisig en diferentes ubicaciones para proteger contra robo, desastres y coacción física." />
+  <title>Distribución geográfica de claves &mdash; Nivel 4 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegaci&oacute;n del nivel 4">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 2 &middot; Multisig</div>
+          <a href="distribucion-claves.html" class="sidebar__link sidebar__link--active">Distribución geográfica de claves</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 3 &middot; Herencia</div>
+          <a href="herencia-bitcoin.html" class="sidebar__link">Herencia de Bitcoin</a>
+          <a href="guia-herencia.html" class="sidebar__link">Guía de herencia paso a paso</a>
+          <a href="herencia-multisig.html" class="sidebar__link">Herencia con multisig</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 4 &middot; Lightning avanzado</div>
+          <a href="canales-lightning.html" class="sidebar__link">Canales de pago</a>
+          <a href="liquidez-lightning.html" class="sidebar__link">Gestión de liquidez</a>
+          <a href="routing-lightning.html" class="sidebar__link">Routing de pagos</a>
+          <a href="nodo-lightning.html" class="sidebar__link">Montar tu nodo Lightning</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 5 &middot; Mineria casera</div>
+          <a href="mineria-casera.html" class="sidebar__link">Minería casera: ¿tiene sentido?</a>
+          <a href="hardware-mineria.html" class="sidebar__link">Hardware de minería</a>
+          <a href="pools-mineria.html" class="sidebar__link">Pools de minería</a>
+          <a href="mineria-bitaxe.html" class="sidebar__link">Minería con Bitaxe</a>
+          <a href="calefaccion-bitcoin.html" class="sidebar__link">Bitcoin como calefacción</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-5/" class="sidebar__link">Nivel 5 &mdash; El Arquitecto</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n4" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegaci&oacute;n">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 4</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Distribución geográfica de claves</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--4 article__badge">Nivel 4</div>
+          <h1>Distribución geográfica de claves</h1>
+          <p class="article__subtitle">No guardes todas las llaves en el mismo sitio. Distribución geográfica como defensa contra múltiples amenazas.</p>
+
+<h2>El principio</h2>
+
+<p>De nada sirve un multisig 2-de-3 si las tres llaves están en el cajón de tu escritorio. Un ladrón, un incendio, o una confiscación se llevaría las tres simultáneamente.</p>
+
+<p>La distribución geográfica asegura que ningún evento único pueda comprometer suficientes llaves como para perder los fondos o permitir un robo.</p>
+
+<h2>Escenarios de amenaza</h2>
+
+<h3>Robo</h3>
+
+<p>Un ladrón entra en tu casa. Si encuentra una hardware wallet:</p>
+
+<ul>
+
+  <li><strong>Singlesig:</strong> Tiene acceso a todo (si también encuentra la seed o puede forzarte)</li>
+
+  <li><strong>Multisig con distribución:</strong> Solo tiene 1 de 3 llaves. Inútil.</li>
+
+</ul>
+
+<p>El ladrón necesitaría robar en múltiples ubicaciones, lo que es exponencialmente más difícil y arriesgado para él.</p>
+
+<h3>Desastre natural o incendio</h3>
+
+<p>Tu casa se destruye en un incendio:</p>
+
+<ul>
+
+  <li><strong>Todo en casa:</strong> Pierdes todas las llaves y seeds</li>
+
+  <li><strong>Distribución:</strong> Pierdes 1 de 3 ubicaciones. Las otras 2 son suficientes para recuperar los fondos y migrar a una nueva configuración</li>
+
+</ul>
+
+<h3>Coacción física (ataque de $5)</h3>
+
+<p>Un atacante te amenaza físicamente para que entregues tus bitcoin:</p>
+
+<ul>
+
+  <li><strong>Singlesig con todo accesible:</strong> Puedes ser forzado a entregar todo</li>
+
+  <li><strong>Multisig con distribución:</strong> Solo puedes entregar la llave que tienes físicamente. "Necesito ir a otra ciudad para completar la transacción" cambia la dinámica</li>
+
+</ul>
+
+<p>No es protección perfecta contra violencia, pero añade fricción significativa.</p>
+
+<h2>Ejemplo de distribución 2-de-3</h2>
+
+<h3>Ubicación 1: Tu casa</h3>
+
+<ul>
+
+  <li>Hardware wallet 1 (uso habitual)</li>
+
+  <li>Copia del descriptor de la wallet</li>
+
+  <li>Opcionalmente, seed phrase 1 en metal (caja fuerte)</li>
+
+</ul>
+
+<h3>Ubicación 2: Casa de familiar de confianza</h3>
+
+<ul>
+
+  <li>Hardware wallet 2 (o solo la seed phrase en metal)</li>
+
+  <li>Copia del descriptor</li>
+
+</ul>
+
+<p>El familiar no necesita saber usarla ni tener conocimientos de Bitcoin. Solo custodia física.</p>
+
+<h3>Ubicación 3: Caja de seguridad bancaria</h3>
+
+<ul>
+
+  <li>Seed phrase 3 en metal (sin el dispositivo físico)</li>
+
+  <li>Copia del descriptor</li>
+
+</ul>
+
+<p>La caja bancaria proporciona seguridad física profesional y está en otra ubicación geográfica.</p>
+
+<h2>Variaciones según threat model</h2>
+
+<h3>Enfoque en conveniencia</h3>
+
+<ul>
+
+  <li>Ubicación 1 (casa): Llave 1 + Llave 2 accesibles</li>
+
+  <li>Ubicación 2 (remota): Llave 3</li>
+
+</ul>
+
+<p>Puedes firmar 2-de-3 sin moverte, pero tienes backup remoto.</p>
+
+<p>Riesgo: un robo en casa compromete 2 llaves (suficiente para gastar).</p>
+
+<h3>Enfoque en seguridad</h3>
+
+<ul>
+
+  <li>Ubicación 1 (casa): Solo Llave 1</li>
+
+  <li>Ubicación 2 (trabajo/familiar): Solo Llave 2</li>
+
+  <li>Ubicación 3 (caja bancaria): Solo Llave 3</li>
+
+</ul>
+
+<p>Para gastar, siempre necesitas ir a dos ubicaciones o coordinar con alguien.</p>
+
+<p>Más seguro pero menos conveniente.</p>
+
+<h3>Enfoque híbrido</h3>
+
+<ul>
+
+  <li>Ubicación 1 (casa): Llave 1</li>
+
+  <li>Ubicación 2 (accesible): Llave 2</li>
+
+  <li>Ubicación 3 (remota): Llave 3</li>
+
+</ul>
+
+<p>Las llaves 1 y 2 son accesibles para uso normal. La llave 3 es backup puro.</p>
+
+<h2>El descriptor en cada ubicación</h2>
+
+<p>El descriptor de la wallet (la configuración que define el multisig) debe estar en cada ubicación:</p>
+
+<ul>
+
+  <li>Sin el descriptor, tener 2 seeds no es suficiente para reconstruir la wallet</li>
+
+  <li>Con el descriptor + 2 seeds, puedes recuperar todo</li>
+
+</ul>
+
+<p>Considera:</p>
+
+<ul>
+
+  <li>Copia digital en USB encriptado</li>
+
+  <li>Copia impresa en papel</li>
+
+  <li>O ambas</li>
+
+</ul>
+
+<p>El descriptor no es secreto (no permite gastar), pero es esencial para la recuperación.</p>
+
+<h2>Personas de confianza</h2>
+
+<p>Si involucras a otras personas en la custodia (familiar, abogado, amigo):</p>
+
+<p><strong>Lo que necesitan saber:</strong></p>
+
+<ul>
+
+  <li>Que custodian algo importante</li>
+
+  <li>Cómo contactarte si hay problemas</li>
+
+  <li>Qué hacer si falleces (instrucciones selladas)</li>
+
+</ul>
+
+<p><strong>Lo que no necesitan saber:</strong></p>
+
+<ul>
+
+  <li>Cuánto bitcoin tienes</li>
+
+  <li>Cómo funciona todo el sistema</li>
+
+  <li>Las otras ubicaciones</li>
+
+</ul>
+
+<p>Principio de mínimo conocimiento: cada custodio sabe solo lo necesario para su rol.</p>
+
+<h2>Documentación</h2>
+
+<p>Con múltiples ubicaciones y posiblemente otras personas involucradas, la documentación clara es crucial:</p>
+
+<ul>
+
+  <li>Qué hay en cada ubicación</li>
+
+  <li>Cómo acceder (si hay cajas fuertes, combinaciones)</li>
+
+  <li>Qué hacer en caso de emergencia</li>
+
+  <li>Instrucciones para herencia</li>
+
+</ul>
+
+<p>Guarda esta documentación de forma segura pero accesible para quien la necesite en el momento correcto.</p>
+
+<h2>Equilibrio personal</h2>
+
+<p>No hay configuración perfecta universal. Depende de:</p>
+
+<ul>
+
+  <li>Tu threat model específico</li>
+
+  <li>Cuántas ubicaciones seguras tienes disponibles</li>
+
+  <li>Si tienes personas de confianza que pueden participar</li>
+
+  <li>Tu tolerancia a la complejidad vs conveniencia</li>
+
+</ul>
+
+<p>Empieza simple y ajusta según tu situación evolucione.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-4" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegaci&oacute;n entre p&aacute;ginas">
+  <a href="configurar-multisig.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Configurar multisig con Sparrow</span>
+  </a>
+  <a href="herencia-bitcoin.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Herencia de Bitcoin</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

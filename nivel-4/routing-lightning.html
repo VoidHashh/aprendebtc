@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cómo funciona el routing en Lightning Network: path finding, onion routing, fees de routing, y el papel de los nodos intermediarios." />
+  <title>Routing de pagos &mdash; Nivel 4 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegaci&oacute;n del nivel 4">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 2 &middot; Multisig</div>
+          <a href="distribucion-claves.html" class="sidebar__link">Distribución geográfica de claves</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 3 &middot; Herencia</div>
+          <a href="herencia-bitcoin.html" class="sidebar__link">Herencia de Bitcoin</a>
+          <a href="guia-herencia.html" class="sidebar__link">Guía de herencia paso a paso</a>
+          <a href="herencia-multisig.html" class="sidebar__link">Herencia con multisig</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 4 &middot; Lightning avanzado</div>
+          <a href="canales-lightning.html" class="sidebar__link">Canales de pago</a>
+          <a href="liquidez-lightning.html" class="sidebar__link">Gestión de liquidez</a>
+          <a href="routing-lightning.html" class="sidebar__link sidebar__link--active">Routing de pagos</a>
+          <a href="nodo-lightning.html" class="sidebar__link">Montar tu nodo Lightning</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 5 &middot; Mineria casera</div>
+          <a href="mineria-casera.html" class="sidebar__link">Minería casera: ¿tiene sentido?</a>
+          <a href="hardware-mineria.html" class="sidebar__link">Hardware de minería</a>
+          <a href="pools-mineria.html" class="sidebar__link">Pools de minería</a>
+          <a href="mineria-bitaxe.html" class="sidebar__link">Minería con Bitaxe</a>
+          <a href="calefaccion-bitcoin.html" class="sidebar__link">Bitcoin como calefacción</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-5/" class="sidebar__link">Nivel 5 &mdash; El Arquitecto</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n4" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegaci&oacute;n">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 4</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Routing de pagos</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--4 article__badge">Nivel 4</div>
+          <h1>Routing de pagos</h1>
+          <p class="article__subtitle">Los pagos saltan de nodo en nodo hasta llegar al destino. Cómo se encuentran las rutas y quién cobra por enrutar.</p>
+
+<h2>El concepto de routing</h2>
+
+<p>Lightning no requiere canal directo entre pagador y receptor. Los pagos pueden "saltar" a través de nodos intermediarios.</p>
+
+<p>Si Alice quiere pagar a Diana:</p>
+
+<ul>
+
+  <li>Alice tiene canal con Bob</li>
+
+  <li>Bob tiene canal con Carol</li>
+
+  <li>Carol tiene canal con Diana</li>
+
+</ul>
+
+<p>El pago fluye: Alice → Bob → Carol → Diana</p>
+
+<p>Cada salto mueve el balance dentro de un canal. El resultado neto es que Alice tiene menos bitcoin y Diana tiene más, aunque no tengan canal directo.</p>
+
+<h2>Path finding</h2>
+
+<p>¿Cómo sabe Alice qué ruta usar?</p>
+
+<p>El software de Lightning (el nodo o la wallet) tiene un "graph" de la red: conoce los canales públicos, sus capacidades, y sus fees.</p>
+
+<p>Cuando quieres pagar, el software calcula rutas posibles y elige la mejor según:</p>
+
+<ul>
+
+  <li>Menor fee total</li>
+
+  <li>Mayor probabilidad de éxito (canales con suficiente liquidez)</li>
+
+  <li>Menor número de saltos</li>
+
+</ul>
+
+<p>Si una ruta falla (un canal no tiene liquidez suficiente), el software prueba otra automáticamente.</p>
+
+<h2>Onion routing</h2>
+
+<p>Por privacidad, Lightning usa "onion routing":</p>
+
+<p>Cada nodo intermediario solo conoce:</p>
+
+<ul>
+
+  <li>De quién recibió el pago (el salto anterior)</li>
+
+  <li>A quién debe pasarlo (el salto siguiente)</li>
+
+</ul>
+
+<p>Ningún intermediario sabe:</p>
+
+<ul>
+
+  <li>Quién es el origen original</li>
+
+  <li>Quién es el destino final</li>
+
+  <li>Cuántos saltos hay en total</li>
+
+</ul>
+
+<p>Los datos están encriptados en "capas" (como una cebolla). Cada nodo descifra solo su capa, descubre el siguiente salto, y pasa el resto.</p>
+
+<p>Esto proporciona privacidad significativa incluso para nodos que participan en el routing.</p>
+
+<h2>Fees de routing</h2>
+
+<p>Los nodos intermediarios cobran por enrutar pagos. Es su incentivo para mantener liquidez y conectividad.</p>
+
+<p>Las fees tienen dos componentes:</p>
+
+<p><strong>Base fee:</strong> Cantidad fija por pago enrutado (ej: 1 sat)</p>
+
+<p><strong>Fee rate:</strong> Porcentaje de la cantidad enrutada (ej: 0.0001 o 10 ppm = 10 partes por millón)</p>
+
+<p>Ejemplo: fee de 1 sat base + 10 ppm</p>
+
+<ul>
+
+  <li>Enrutar 100.000 sats: 1 + 1 = 2 sats de fee</li>
+
+  <li>Enrutar 1.000.000 sats: 1 + 10 = 11 sats de fee</li>
+
+</ul>
+
+<p>Las fees totales son la suma de las fees de todos los nodos en la ruta.</p>
+
+<h2>Competencia de fees</h2>
+
+<p>Los nodos compiten por routing. Si tus fees son demasiado altas, los pagos eligen otras rutas. Si son demasiado bajas, no cubres tus costes de capital y operación.</p>
+
+<p>Encontrar el punto óptimo es parte del arte de operar un nodo.</p>
+
+<p>Herramientas automáticas ajustan fees dinámicamente según demanda y competencia.</p>
+
+<h2>HTLCs: el mecanismo técnico</h2>
+
+<p>El routing funciona mediante HTLCs (Hash Time-Locked Contracts):</p>
+
+<ol>
+
+  <li>Diana genera un secreto aleatorio y envía su hash a Alice (en la invoice)</li>
+
+  <li>Alice crea un HTLC con Bob: "Te doy X sats si me revelas el secreto del hash H, o me los devuelves en T tiempo"</li>
+
+  <li>Bob crea un HTLC similar con Carol</li>
+
+  <li>Carol crea un HTLC con Diana</li>
+
+  <li>Diana conoce el secreto, lo revela a Carol y cobra</li>
+
+  <li>Carol ahora conoce el secreto, lo revela a Bob y cobra</li>
+
+  <li>Bob revela a Alice y cobra</li>
+
+  <li>El pago se completó</li>
+
+</ol>
+
+<p>Si algún paso falla (timeout), los HTLCs se resuelven devolviendo los fondos. Nadie puede robar: o todo funciona, o nada.</p>
+
+<h2>Implicaciones para usuarios</h2>
+
+<h3>Usando wallet (Phoenix, Breez)</h3>
+
+<p>El routing es transparente. Tu wallet encuentra rutas automáticamente. Ves una pequeña fee de routing además de la fee de red.</p>
+
+<h3>Operando tu propio nodo</h3>
+
+<p>Decides:</p>
+
+<ul>
+
+  <li>Qué fees cobrar por routing</li>
+
+  <li>Con qué nodos conectar (afecta qué rutas pasan por ti)</li>
+
+  <li>Cómo balancear liquidez para maximizar routing útil</li>
+
+</ul>
+
+<p>Un nodo bien posicionado con buena liquidez puede generar ingresos pasivos por fees de routing. Pero no es mucho dinero: estamos hablando de satoshis, no de fortunas.</p>
+
+<h2>La salud de la red</h2>
+
+<p>El routing es lo que hace a Lightning una red y no solo conexiones aisladas.</p>
+
+<p>Para que funcione bien, necesita:</p>
+
+<ul>
+
+  <li>Nodos bien conectados que ruteen eficientemente</li>
+
+  <li>Liquidez distribuida (no concentrada en pocos canales)</li>
+
+  <li>Fees que incentiven mantener liquidez sin ser prohibitivos</li>
+
+</ul>
+
+<p>Es un ecosistema en equilibrio dinámico.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-4" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegaci&oacute;n entre p&aacute;ginas">
+  <a href="liquidez-lightning.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Gestión de liquidez</span>
+  </a>
+  <a href="nodo-lightning.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Montar tu nodo Lightning</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

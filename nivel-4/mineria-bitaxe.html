@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Guía de minería con Bitaxe: modelos disponibles, configuración, conexión a Ocean Pool, solo mining, y la filosofía del hardware abierto." />
+  <title>Minería con Bitaxe &mdash; Nivel 4 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegaci&oacute;n del nivel 4">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 2 &middot; Multisig</div>
+          <a href="distribucion-claves.html" class="sidebar__link">Distribución geográfica de claves</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 3 &middot; Herencia</div>
+          <a href="herencia-bitcoin.html" class="sidebar__link">Herencia de Bitcoin</a>
+          <a href="guia-herencia.html" class="sidebar__link">Guía de herencia paso a paso</a>
+          <a href="herencia-multisig.html" class="sidebar__link">Herencia con multisig</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 4 &middot; Lightning avanzado</div>
+          <a href="canales-lightning.html" class="sidebar__link">Canales de pago</a>
+          <a href="liquidez-lightning.html" class="sidebar__link">Gestión de liquidez</a>
+          <a href="routing-lightning.html" class="sidebar__link">Routing de pagos</a>
+          <a href="nodo-lightning.html" class="sidebar__link">Montar tu nodo Lightning</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 5 &middot; Mineria casera</div>
+          <a href="mineria-casera.html" class="sidebar__link">Minería casera: ¿tiene sentido?</a>
+          <a href="hardware-mineria.html" class="sidebar__link">Hardware de minería</a>
+          <a href="pools-mineria.html" class="sidebar__link">Pools de minería</a>
+          <a href="mineria-bitaxe.html" class="sidebar__link sidebar__link--active">Minería con Bitaxe</a>
+          <a href="calefaccion-bitcoin.html" class="sidebar__link">Bitcoin como calefacción</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-5/" class="sidebar__link">Nivel 5 &mdash; El Arquitecto</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n4" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegaci&oacute;n">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 4</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Minería con Bitaxe</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--4 article__badge">Nivel 4</div>
+          <h1>Minería con Bitaxe</h1>
+          <p class="article__subtitle">El ASIC open source para minar Bitcoin en casa. No es rentable, pero es una declaración de principios.</p>
+
+<h2>Qué es Bitaxe</h2>
+
+<p>Bitaxe es un proyecto de ASIC de minería Bitcoin completamente open source: tanto el hardware como el software son abiertos y verificables.</p>
+
+<p>Es el único proyecto significativo de hardware de minería abierto. En un mercado dominado por dos empresas chinas con diseños propietarios, Bitaxe representa una alternativa basada en transparencia y descentralización.</p>
+
+<h2>Modelos disponibles</h2>
+
+<h3>Bitaxe Ultra</h3>
+
+<ul>
+
+  <li>Chip: BM1366 (de Bitmain)</li>
+
+  <li>Hash rate: ~500 GH/s</li>
+
+  <li>Consumo: ~15W</li>
+
+</ul>
+
+<h3>Bitaxe Supra</h3>
+
+<ul>
+
+  <li>Chip: BM1368</li>
+
+  <li>Hash rate: ~600-700 GH/s</li>
+
+  <li>Consumo: ~15W</li>
+
+  <li>Mejor eficiencia que Ultra</li>
+
+</ul>
+
+<h3>Bitaxe Gamma</h3>
+
+<ul>
+
+  <li>Chip: BM1370</li>
+
+  <li>Hash rate: ~1-1.2 TH/s</li>
+
+  <li>Consumo: ~15-20W</li>
+
+  <li>El más potente de la familia</li>
+
+</ul>
+
+<p>Los chips son de Bitmain (no hay fabricante de chips de minería open source todavía), pero el diseño de la placa, el firmware, y todo lo demás es abierto.</p>
+
+<h2>Configuración básica</h2>
+
+<p>El proceso es simple:</p>
+
+<ol>
+
+  <li><strong>Conectar alimentación:</strong> USB-C con fuente de al menos 15W, o alimentación dedicada según modelo</li>
+
+</ol>
+
+<ol>
+
+  <li><strong>Conectar a WiFi:</strong> El Bitaxe crea un punto de acceso WiFi inicial. Te conectas y configuras tu red</li>
+
+</ol>
+
+<ol>
+
+  <li><strong>Acceder a la interfaz web:</strong> Una vez en tu red, accedes a la IP del Bitaxe desde el navegador</li>
+
+</ol>
+
+<ol>
+
+  <li><strong>Configurar pool:</strong> Introduces la URL del pool, puerto, y tu dirección de Bitcoin para recibir pagos</li>
+
+</ol>
+
+<ol>
+
+  <li><strong>Empezar a minar:</strong> El Bitaxe comienza a trabajar y puedes monitorear desde la interfaz web</li>
+
+</ol>
+
+<h2>Conexión a Ocean Pool</h2>
+
+<p>Ocean es el pool recomendado para Bitaxe por su filosofía de descentralización y pagos non-custodial:</p>
+
+<p><strong>Configuración:</strong></p>
+
+<ul>
+
+  <li>URL: stratum+tcp://mine.ocean.xyz</li>
+
+  <li>Puerto: 3334 (o 3333)</li>
+
+  <li>Usuario: tu dirección Bitcoin (para recibir pagos directamente)</li>
+
+  <li>Password: x (o cualquier cosa)</li>
+
+</ul>
+
+<p>Ocean no requiere crear cuenta. Los pagos van directamente a la dirección que especificas cuando alcanzas el mínimo (actualmente muy bajo para ser accesible a mineros pequeños).</p>
+
+<h2>Solo mining: la lotería</h2>
+
+<p>Bitaxe permite intentar "solo mining": minar sin pool, intentando encontrar un bloque tú solo.</p>
+
+<h3>Las probabilidades</h3>
+
+<p>Con ~1 TH/s (Bitaxe Gamma) contra ~600 EH/s de la red total:</p>
+
+<p>Probabilidad por bloque: 1 / 600.000.000 (una en seiscientos millones)</p>
+
+<p>Con un bloque cada 10 minutos, encontrarías uno cada... ~11.000 años en promedio.</p>
+
+<h3>Pero ha pasado</h3>
+
+<p>Ha habido casos documentados de mineros muy pequeños encontrando bloques por pura suerte. Es extremadamente improbable, pero no imposible.</p>
+
+<p>Si te toca, recibes todo: 3.125 BTC + fees del bloque. A precios actuales, una pequeña fortuna.</p>
+
+<h3>El enfoque racional</h3>
+
+<p>Solo mining con Bitaxe es puramente una lotería. Si quieres ingresos consistentes (aunque mínimos), usa un pool. Si quieres el emoción de la lotería y no te importa probablemente no ganar nunca, intenta solo mining.</p>
+
+<p>Algunas personas alternan: pool la mayoría del tiempo, solo mining ocasional "por si acaso".</p>
+
+<h2>La filosofía detrás de Bitaxe</h2>
+
+<p>Bitaxe no tiene sentido económico puro. Un Bitaxe Gamma cuesta ~300€ y genera quizás 50 céntimos al mes en un pool (menos que la electricidad que consume en muchos casos).</p>
+
+<p>Pero representa:</p>
+
+<h3>Hardware abierto</h3>
+
+<p>En un ecosistema donde todo el hardware viene de cajas negras propietarias, Bitaxe demuestra que es posible construir ASICs abiertos.</p>
+
+<h3>Descentralización de la fabricación</h3>
+
+<p>Cualquiera con conocimientos puede fabricar Bitaxes. No depende de una sola empresa.</p>
+
+<h3>Accesibilidad</h3>
+
+<p>Por ~150-300€ y 15W, cualquiera puede participar en la minería de Bitcoin. No necesitas garaje industrial ni miles de euros.</p>
+
+<h3>Bitcoin sin KYC</h3>
+
+<p>Los bitcoin minados son "vírgenes". Sin historial, sin paso por exchanges. Para cantidades pequeñas, es una forma de obtener BTC completamente privado.</p>
+
+<p>&gt; CALLOUT INFO: Una declaración de principios &gt; Bitaxe no es una máquina de hacer dinero. Es una declaración de principios: hardware abierto, descentralización del mining, y bitcoin sin KYC a nivel educativo.</p>
+
+<h2>Casos de uso razonables</h2>
+
+<ul>
+
+  <li><strong>Educación:</strong> Aprender cómo funciona la minería de primera mano</li>
+
+  <li><strong>Decoración geek:</strong> Un Bitaxe con pantalla mostrando stats es un objeto interesante</li>
+
+  <li><strong>Contribución simbólica:</strong> Participar en la seguridad de la red, aunque sea mínimamente</li>
+
+  <li><strong>Calefacción mínima:</strong> 15W de calor no calientan mucho, pero algo es algo</li>
+
+  <li><strong>Lotería de solo mining:</strong> El sueño de encontrar un bloque</li>
+
+</ul>
+
+          <div class="ad-slot ad-content" id="ad-content-4" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegaci&oacute;n entre p&aacute;ginas">
+  <a href="pools-mineria.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Pools de minería</span>
+  </a>
+  <a href="calefaccion-bitcoin.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Bitcoin como calefacción</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

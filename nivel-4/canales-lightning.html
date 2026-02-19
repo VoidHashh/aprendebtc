@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cómo funcionan los canales de pago en Lightning Network: apertura, balance local/remoto, cierre cooperativo y forzado. El modelo técnico." />
+  <title>Canales de pago &mdash; Nivel 4 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegaci&oacute;n del nivel 4">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 2 &middot; Multisig</div>
+          <a href="distribucion-claves.html" class="sidebar__link">Distribución geográfica de claves</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 3 &middot; Herencia</div>
+          <a href="herencia-bitcoin.html" class="sidebar__link">Herencia de Bitcoin</a>
+          <a href="guia-herencia.html" class="sidebar__link">Guía de herencia paso a paso</a>
+          <a href="herencia-multisig.html" class="sidebar__link">Herencia con multisig</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 4 &middot; Lightning avanzado</div>
+          <a href="canales-lightning.html" class="sidebar__link sidebar__link--active">Canales de pago</a>
+          <a href="liquidez-lightning.html" class="sidebar__link">Gestión de liquidez</a>
+          <a href="routing-lightning.html" class="sidebar__link">Routing de pagos</a>
+          <a href="nodo-lightning.html" class="sidebar__link">Montar tu nodo Lightning</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 5 &middot; Mineria casera</div>
+          <a href="mineria-casera.html" class="sidebar__link">Minería casera: ¿tiene sentido?</a>
+          <a href="hardware-mineria.html" class="sidebar__link">Hardware de minería</a>
+          <a href="pools-mineria.html" class="sidebar__link">Pools de minería</a>
+          <a href="mineria-bitaxe.html" class="sidebar__link">Minería con Bitaxe</a>
+          <a href="calefaccion-bitcoin.html" class="sidebar__link">Bitcoin como calefacción</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-5/" class="sidebar__link">Nivel 5 &mdash; El Arquitecto</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n4" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegaci&oacute;n">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 4</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Canales de pago</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--4 article__badge">Nivel 4</div>
+          <h1>Canales de pago</h1>
+          <p class="article__subtitle">Conexiones bidireccionales entre nodos con bitcoin bloqueado. El fundamento técnico de Lightning.</p>
+
+<h2>El concepto de canal</h2>
+
+<p>Un canal de pago Lightning es una conexión directa entre dos nodos con una cantidad de bitcoin bloqueada que puede moverse instantáneamente entre ellos.</p>
+
+<p>Imagina un tubo entre Alice y Bob con 1 BTC dentro. Ese bitcoin puede deslizarse hacia Alice o hacia Bob infinitas veces, de forma instantánea, sin tocar la blockchain. Solo cuando quieren "cerrar el tubo" y extraer su parte, vuelven a la blockchain.</p>
+
+<h2>Abrir un canal</h2>
+
+<p>Para abrir un canal, se crea una transacción on-chain que:</p>
+
+<ol>
+
+  <li>Bloquea bitcoin en una dirección multisig 2-de-2 (ambas partes deben firmar para gastar)</li>
+
+  <li>Define la capacidad total del canal</li>
+
+  <li>Establece el balance inicial de cada lado</li>
+
+</ol>
+
+<p>Ejemplo: Alice abre canal de 0.1 BTC con Bob.</p>
+
+<ul>
+
+  <li>Transacción on-chain bloquea 0.1 BTC en multisig</li>
+
+  <li>Balance inicial: Alice 0.1 BTC, Bob 0 BTC</li>
+
+  <li>Capacidad total del canal: 0.1 BTC</li>
+
+</ul>
+
+<p>Esta transacción se confirma en la blockchain. Ahora el canal está abierto.</p>
+
+<h2>Balance local y remoto</h2>
+
+<p>El bitcoin dentro del canal se distribuye entre las dos partes:</p>
+
+<ul>
+
+  <li><strong>Balance local:</strong> Lo que está de tu lado (puedes enviarlo)</li>
+
+  <li><strong>Balance remoto:</strong> Lo que está del lado del peer (puedes recibirlo)</li>
+
+</ul>
+
+<p>Si Alice tiene 0.08 BTC local y 0.02 BTC remoto:</p>
+
+<ul>
+
+  <li>Alice puede enviar hasta 0.08 BTC</li>
+
+  <li>Alice puede recibir hasta 0.02 BTC</li>
+
+</ul>
+
+<p>La suma siempre es la capacidad total del canal.</p>
+
+<h2>Pagos dentro del canal</h2>
+
+<p>Cuando Alice paga 0.01 BTC a Bob:</p>
+
+<ol>
+
+  <li>No hay transacción on-chain</li>
+
+  <li>Ambos actualizan el "estado" del canal: un acuerdo firmado de cómo se distribuye el bitcoin</li>
+
+  <li>Nuevo estado: Alice 0.07 BTC, Bob 0.03 BTC</li>
+
+  <li>El estado anterior se invalida</li>
+
+</ol>
+
+<p>Este proceso es instantáneo (milisegundos) y casi gratuito.</p>
+
+<p>Pueden hacer miles de actualizaciones sin tocar la blockchain.</p>
+
+<h2>Cerrar un canal</h2>
+
+<p>Cuando quieres sacar tu bitcoin del canal, lo cierras.</p>
+
+<h3>Cierre cooperativo</h3>
+
+<p>Ambas partes acuerdan cerrar. Se crea una transacción on-chain que:</p>
+
+<ul>
+
+  <li>Gasta el multisig del canal</li>
+
+  <li>Envía a cada parte su balance actual</li>
+
+</ul>
+
+<p>Es rápido y barato. Una sola transacción on-chain.</p>
+
+<h3>Cierre forzado (unilateral)</h3>
+
+<p>Si una parte no coopera (desaparece, es maliciosa), la otra puede cerrar unilateralmente:</p>
+
+<ul>
+
+  <li>Publica el último estado válido del canal</li>
+
+  <li>Hay un período de espera (timelock) durante el cual la otra parte puede disputar si el estado publicado no es el más reciente</li>
+
+  <li>Después del timelock, los fondos se liberan</li>
+
+</ul>
+
+<p>Es más lento y caro (más transacciones, tiempos de espera).</p>
+
+<h3>Penalización por fraude</h3>
+
+<p>Si Alice intenta cerrar con un estado antiguo donde tenía más bitcoin (fraude):</p>
+
+<ul>
+
+  <li>Bob puede publicar una "transacción de justicia" durante el período de disputa</li>
+
+  <li>Esta transacción toma TODO el bitcoin del canal como penalización</li>
+
+  <li>Alice pierde todo por intentar hacer trampa</li>
+
+</ul>
+
+<p>Este mecanismo de penalización hace que el fraude sea económicamente irracional.</p>
+
+<h2>Canales y enrutamiento</h2>
+
+<p>Un canal conecta dos nodos específicos. Pero Lightning permite pagar a cualquiera, no solo a tus peers directos.</p>
+
+<p>Si Alice tiene canal con Bob, y Bob tiene canal con Carol:</p>
+
+<ul>
+
+  <li>Alice puede pagar a Carol a través de Bob</li>
+
+  <li>El pago "salta" por los canales intermedios</li>
+
+  <li>Bob cobra una pequeña fee por enrutar</li>
+
+</ul>
+
+<p>Esto se llama "routing" y es lo que hace Lightning una red, no solo conexiones punto a punto.</p>
+
+<h2>Liquidez</h2>
+
+<p>El concepto crucial de Lightning:</p>
+
+<ul>
+
+  <li>Solo puedes enviar lo que tienes en tu lado del canal (balance local)</li>
+
+  <li>Solo puedes recibir lo que hay en el lado remoto (balance remoto)</li>
+
+</ul>
+
+<p>Si todos tus canales tienen todo el balance de tu lado, no puedes recibir nada (aunque sí enviar).</p>
+
+<p>Gestionar liquidez es el desafío principal de operar un nodo Lightning. Se explora en la siguiente página.</p>
+
+<h2>Implicaciones prácticas</h2>
+
+<h3>Para usuarios con wallet (Phoenix, Breez)</h3>
+
+<p>La wallet gestiona canales automáticamente. Cuando necesitas más capacidad, abre o ajusta canales por ti. Pagas fees por esto pero no tienes que entender los detalles.</p>
+
+<h3>Para operadores de nodo</h3>
+
+<p>Necesitas gestionar activamente:</p>
+
+<ul>
+
+  <li>Con quién abres canales</li>
+
+  <li>Cuánta capacidad asignas</li>
+
+  <li>Cómo balanceas liquidez</li>
+
+  <li>Cuándo cerrar canales improductivos</li>
+
+</ul>
+
+<p>Es un trabajo activo, no "set and forget".</p>
+
+          <div class="ad-slot ad-content" id="ad-content-4" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegaci&oacute;n entre p&aacute;ginas">
+  <a href="herencia-multisig.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Herencia con multisig</span>
+  </a>
+  <a href="liquidez-lightning.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Gestión de liquidez</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

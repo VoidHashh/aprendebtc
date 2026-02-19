@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="El desafío de la liquidez en Lightning: liquidez entrante vs saliente, cómo obtener cada una, Loop, y estrategias de balanceo." />
+  <title>Gestión de liquidez &mdash; Nivel 4 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegaci&oacute;n del nivel 4">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 2 &middot; Multisig</div>
+          <a href="distribucion-claves.html" class="sidebar__link">Distribución geográfica de claves</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 3 &middot; Herencia</div>
+          <a href="herencia-bitcoin.html" class="sidebar__link">Herencia de Bitcoin</a>
+          <a href="guia-herencia.html" class="sidebar__link">Guía de herencia paso a paso</a>
+          <a href="herencia-multisig.html" class="sidebar__link">Herencia con multisig</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 4 &middot; Lightning avanzado</div>
+          <a href="canales-lightning.html" class="sidebar__link">Canales de pago</a>
+          <a href="liquidez-lightning.html" class="sidebar__link sidebar__link--active">Gestión de liquidez</a>
+          <a href="routing-lightning.html" class="sidebar__link">Routing de pagos</a>
+          <a href="nodo-lightning.html" class="sidebar__link">Montar tu nodo Lightning</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 5 &middot; Mineria casera</div>
+          <a href="mineria-casera.html" class="sidebar__link">Minería casera: ¿tiene sentido?</a>
+          <a href="hardware-mineria.html" class="sidebar__link">Hardware de minería</a>
+          <a href="pools-mineria.html" class="sidebar__link">Pools de minería</a>
+          <a href="mineria-bitaxe.html" class="sidebar__link">Minería con Bitaxe</a>
+          <a href="calefaccion-bitcoin.html" class="sidebar__link">Bitcoin como calefacción</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-5/" class="sidebar__link">Nivel 5 &mdash; El Arquitecto</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n4" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegaci&oacute;n">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 4</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Gestión de liquidez</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--4 article__badge">Nivel 4</div>
+          <h1>Gestión de liquidez</h1>
+          <p class="article__subtitle">El problema más complejo de Lightning: tener capacidad para enviar es fácil, tener capacidad para recibir es el reto.</p>
+
+<h2>El problema fundamental</h2>
+
+<p>Para enviar pagos Lightning, necesitas balance en tu lado del canal (liquidez saliente).</p>
+
+<p>Para recibir pagos Lightning, necesitas balance en el lado remoto del canal (liquidez entrante).</p>
+
+<p>Cuando abres un canal con tus fondos, todo el balance empieza en tu lado. Puedes enviar pero no recibir.</p>
+
+<p>Este es el problema de liquidez de Lightning, y es el aspecto más complejo de gestionar un nodo.</p>
+
+<h2>Liquidez saliente (para enviar)</h2>
+
+<p>Obtenerla es simple: abre canales con tus propios fondos.</p>
+
+<p>Si abres un canal de 0.5 BTC, tienes 0.5 BTC de capacidad para enviar.</p>
+
+<p>A medida que gastas, tu balance local disminuye y el remoto aumenta. Generas liquidez entrante al gastar.</p>
+
+<h2>Liquidez entrante (para recibir)</h2>
+
+<p>Aquí está el reto. Opciones para obtenerla:</p>
+
+<h3>Gastar primero</h3>
+
+<p>La forma más natural: usa tu liquidez saliente para comprar algo o enviar a otra wallet.</p>
+
+<p>Cada sat que envías se convierte en capacidad para recibir.</p>
+
+<h3>Que otros abran canales hacia ti</h3>
+
+<p>Si tienes un nodo bien conectado y con buena reputación, otros nodos pueden querer abrir canales hacia ti para mejorar sus rutas.</p>
+
+<p>Esto te da liquidez entrante sin coste (ellos ponen el capital).</p>
+
+<p>Pero requiere que tu nodo sea atractivo como peer: uptime alto, buenas conexiones, fees competitivas.</p>
+
+<h3>Comprar liquidez</h3>
+
+<p>Servicios como Blocktank (de Synonym) o Lightning Pool permiten comprar liquidez entrante.</p>
+
+<p>Pagas una fee y alguien abre un canal hacia ti con la cantidad especificada.</p>
+
+<p>Es inmediato pero tiene coste.</p>
+
+<h3>Submarine swaps (Loop)</h3>
+
+<p>Un submarine swap intercambia bitcoin on-chain por bitcoin Lightning (o viceversa).</p>
+
+<p><strong>Loop Out:</strong> Envías Lightning, recibes on-chain. Esto "vacía" tu lado del canal, creando capacidad entrante.</p>
+
+<p><strong>Loop In:</strong> Envías on-chain, recibes Lightning. Esto "llena" tu lado del canal.</p>
+
+<p>Loop es un servicio de Lightning Labs. Hay alternativas como Boltz.</p>
+
+<h3>Circular rebalancing</h3>
+
+<p>Si tienes múltiples canales, puedes "circular" liquidez:</p>
+
+<ul>
+
+  <li>Envías un pago de ti mismo a ti mismo a través de la red</li>
+
+  <li>Sale por un canal, entra por otro</li>
+
+  <li>Equilibras los balances de tus canales</li>
+
+</ul>
+
+<p>Esto no crea liquidez nueva, pero redistribuye la existente.</p>
+
+<h2>El ciclo de un comerciante</h2>
+
+<p>Un comerciante que recibe pagos Lightning tiene el problema opuesto al usuario normal:</p>
+
+<ol>
+
+  <li>Abre canales con fondos propios (liquidez saliente)</li>
+
+  <li>Los clientes le pagan → liquidez se mueve a su lado</li>
+
+  <li>Eventualmente, todos sus canales están "llenos" de su lado</li>
+
+  <li>No puede recibir más pagos</li>
+
+  <li>Necesita "vaciar": Loop Out, gastar, o cerrar y reabrir canales</li>
+
+</ol>
+
+<p>Gestionar esto es parte del trabajo de aceptar pagos Lightning.</p>
+
+<h2>Para wallets automáticas (Phoenix, Breez)</h2>
+
+<p>Estas wallets gestionan liquidez automáticamente:</p>
+
+<ul>
+
+  <li>Cuando necesitas recibir más de lo que tienes capacidad, abren/ajustan canales</li>
+
+  <li>Cobran fees por estas operaciones</li>
+
+  <li>Tú solo ves que "funciona"</li>
+
+</ul>
+
+<p>El coste está incluido en las fees que pagas. La complejidad está oculta.</p>
+
+<h2>Para operadores de nodo</h2>
+
+<p>Gestionar un nodo Lightning rentable o funcional requiere:</p>
+
+<ul>
+
+  <li>Monitorear balances de canales regularmente</li>
+
+  <li>Rebalancear cuando se desiquilibran</li>
+
+  <li>Cerrar canales improductivos</li>
+
+  <li>Abrir canales hacia nodos bien conectados</li>
+
+  <li>Posiblemente usar servicios de liquidez</li>
+
+</ul>
+
+<p>Herramientas como Balance of Satoshis, LNDg, o ThunderHub ayudan a visualizar y gestionar.</p>
+
+<h2>El trade-off capital/liquidez</h2>
+
+<p>El capital bloqueado en canales es capital inmovilizado:</p>
+
+<ul>
+
+  <li>No genera rendimiento por sí solo</li>
+
+  <li>Tiene coste de oportunidad</li>
+
+  <li>Está expuesto a riesgo de contraparte (si el peer desaparece)</li>
+
+</ul>
+
+<p>Pero sin capital en canales, no puedes participar en la red.</p>
+
+<p>Encontrar el equilibrio entre capital bloqueado, número de canales, y liquidez útil es el arte de operar un nodo Lightning.</p>
+
+<p>&gt; CALLOUT INFO: El aspecto más complejo &gt; La gestión de liquidez es el aspecto más complejo de gestionar un nodo Lightning. No subestimes el tiempo y atención que requiere.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-4" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegaci&oacute;n entre p&aacute;ginas">
+  <a href="canales-lightning.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Canales de pago</span>
+  </a>
+  <a href="routing-lightning.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Routing de pagos</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

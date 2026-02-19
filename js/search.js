@@ -51,6 +51,23 @@
     { title: 'Comparativa de hardware wallets', url: '/nivel-3/comparativa-hardware-wallets.html', tags: ['nivel 3', 'hardware wallet', 'comparativa'], section: 'Nivel 3', nivel: 3 },
     { title: 'Coin control: gestiona tus UTXOs', url: '/nivel-3/coin-control.html', tags: ['nivel 3', 'coin control', 'utxo'], section: 'Nivel 3', nivel: 3 },
 
+
+
+    { title: 'Nivel 4 - Down the Rabbit Hole', url: '/nivel-4/', tags: ['nivel 4', 'privacidad', 'multisig', 'herencia', 'lightning', 'mineria'], section: 'Niveles', nivel: 4 },
+    { title: 'Distribucion geografica de claves', url: '/nivel-4/distribucion-claves.html', tags: ['nivel 4', 'multisig', 'claves'], section: 'Nivel 4', nivel: 4 },
+    { title: 'Herencia de Bitcoin', url: '/nivel-4/herencia-bitcoin.html', tags: ['nivel 4', 'herencia', 'planificacion'], section: 'Nivel 4', nivel: 4 },
+    { title: 'Guia de herencia paso a paso', url: '/nivel-4/guia-herencia.html', tags: ['nivel 4', 'herencia', 'guia'], section: 'Nivel 4', nivel: 4 },
+    { title: 'Herencia con multisig', url: '/nivel-4/herencia-multisig.html', tags: ['nivel 4', 'herencia', 'multisig'], section: 'Nivel 4', nivel: 4 },
+    { title: 'Canales de pago', url: '/nivel-4/canales-lightning.html', tags: ['nivel 4', 'lightning', 'canales'], section: 'Nivel 4', nivel: 4 },
+    { title: 'Gestion de liquidez', url: '/nivel-4/liquidez-lightning.html', tags: ['nivel 4', 'lightning', 'liquidez'], section: 'Nivel 4', nivel: 4 },
+    { title: 'Routing de pagos', url: '/nivel-4/routing-lightning.html', tags: ['nivel 4', 'lightning', 'routing'], section: 'Nivel 4', nivel: 4 },
+    { title: 'Montar tu nodo Lightning', url: '/nivel-4/nodo-lightning.html', tags: ['nivel 4', 'lightning', 'nodo'], section: 'Nivel 4', nivel: 4 },
+    { title: 'Mineria casera: tiene sentido', url: '/nivel-4/mineria-casera.html', tags: ['nivel 4', 'mineria', 'casa'], section: 'Nivel 4', nivel: 4 },
+    { title: 'Hardware de mineria', url: '/nivel-4/hardware-mineria.html', tags: ['nivel 4', 'mineria', 'asic'], section: 'Nivel 4', nivel: 4 },
+    { title: 'Pools de mineria', url: '/nivel-4/pools-mineria.html', tags: ['nivel 4', 'mineria', 'pools'], section: 'Nivel 4', nivel: 4 },
+    { title: 'Mineria con Bitaxe', url: '/nivel-4/mineria-bitaxe.html', tags: ['nivel 4', 'bitaxe', 'mineria'], section: 'Nivel 4', nivel: 4 },
+    { title: 'Bitcoin como calefaccion', url: '/nivel-4/calefaccion-bitcoin.html', tags: ['nivel 4', 'mineria', 'calefaccion'], section: 'Nivel 4', nivel: 4 },
+
     { title: 'Base de Conocimiento', url: '/base/', tags: ['base', 'referencia'], section: 'Pilares' },
     { title: 'Glosario', url: '/glosario.html', tags: ['terminos', 'definiciones'], section: 'Pilares' },
     { title: 'Recursos', url: '/recursos.html', tags: ['libros', 'podcasts'], section: 'Pilares' },

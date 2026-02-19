@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Análisis honesto de la minería Bitcoin en casa: rentabilidad, electricidad, ruido, calor, y motivos legítimos más allá del beneficio económico." />
+  <title>Minería casera: ¿tiene sentido? &mdash; Nivel 4 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegaci&oacute;n del nivel 4">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 2 &middot; Multisig</div>
+          <a href="distribucion-claves.html" class="sidebar__link">Distribución geográfica de claves</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 3 &middot; Herencia</div>
+          <a href="herencia-bitcoin.html" class="sidebar__link">Herencia de Bitcoin</a>
+          <a href="guia-herencia.html" class="sidebar__link">Guía de herencia paso a paso</a>
+          <a href="herencia-multisig.html" class="sidebar__link">Herencia con multisig</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 4 &middot; Lightning avanzado</div>
+          <a href="canales-lightning.html" class="sidebar__link">Canales de pago</a>
+          <a href="liquidez-lightning.html" class="sidebar__link">Gestión de liquidez</a>
+          <a href="routing-lightning.html" class="sidebar__link">Routing de pagos</a>
+          <a href="nodo-lightning.html" class="sidebar__link">Montar tu nodo Lightning</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 5 &middot; Mineria casera</div>
+          <a href="mineria-casera.html" class="sidebar__link sidebar__link--active">Minería casera: ¿tiene sentido?</a>
+          <a href="hardware-mineria.html" class="sidebar__link">Hardware de minería</a>
+          <a href="pools-mineria.html" class="sidebar__link">Pools de minería</a>
+          <a href="mineria-bitaxe.html" class="sidebar__link">Minería con Bitaxe</a>
+          <a href="calefaccion-bitcoin.html" class="sidebar__link">Bitcoin como calefacción</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-5/" class="sidebar__link">Nivel 5 &mdash; El Arquitecto</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n4" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegaci&oacute;n">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 4</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Minería casera: ¿tiene sentido?</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--4 article__badge">Nivel 4</div>
+          <h1>Minería casera: ¿tiene sentido?</h1>
+          <p class="article__subtitle">Un análisis honesto. Spoiler: probablemente no es rentable, pero hay motivos legítimos para hacerlo de todos modos.</p>
+
+<h2>La pregunta directa</h2>
+
+<p>¿Tiene sentido minar Bitcoin en casa en 2025?</p>
+
+<p>La respuesta honesta: probablemente no, si tu motivación principal es ganar dinero.</p>
+
+<p>Pero hay matices importantes que explorar.</p>
+
+<h2>El factor electricidad</h2>
+
+<p>La rentabilidad de la minería depende fundamentalmente del coste eléctrico.</p>
+
+<h3>Números aproximados</h3>
+
+<p>Un ASIC moderno como el Antminer S21 consume ~3.500W y produce ~200 TH/s.</p>
+
+<p>En 24 horas consume 84 kWh. En un mes, ~2.500 kWh.</p>
+
+<p>Con electricidad a diferentes precios:</p>
+
+<ul>
+
+  <li>0.10 €/kWh → 250 €/mes en electricidad</li>
+
+  <li>0.15 €/kWh → 375 €/mes</li>
+
+  <li>0.20 €/kWh → 500 €/mes</li>
+
+  <li>0.30 €/kWh → 750 €/mes</li>
+
+</ul>
+
+<p>Los ingresos por minería varían con el precio de Bitcoin y la dificultad de la red, pero para un S21 en 2025 pueden rondar 300-500 €/mes en valor de bitcoin.</p>
+
+<p>Con electricidad cara (&gt;0.15 €/kWh), probablemente pierdes dinero. Con electricidad barata (&lt;0.10 €/kWh), puede ser rentable.</p>
+
+<h3>Electricidad "gratis"</h3>
+
+<p>La minería puede ser rentable si tienes acceso a electricidad muy barata o "gratis":</p>
+
+<ul>
+
+  <li>Paneles solares con excedente que no puedes vender</li>
+
+  <li>Acuerdos industriales con precios muy bajos</li>
+
+  <li>Situaciones donde la electricidad está incluida en otros costes</li>
+
+</ul>
+
+<h2>Más allá de los números</h2>
+
+<h3>Ruido</h3>
+
+<p>Los ASICs son RUIDOSOS. Un S21 genera 75-80 dB. Es como tener una aspiradora industrial funcionando 24/7.</p>
+
+<p>No puedes tener un ASIC en el salón. Necesitas:</p>
+
+<ul>
+
+  <li>Garaje o sótano aislado</li>
+
+  <li>Edificio separado</li>
+
+  <li>Soluciones de insonorización costosas</li>
+
+</ul>
+
+<p>El ruido es un deal-breaker para muchas situaciones domésticas.</p>
+
+<h3>Calor</h3>
+
+<p>Un ASIC de 3.500W genera 3.500W de calor. Constantemente.</p>
+
+<p>En invierno, puede ser útil (calefacción). En verano, es un problema serio que requiere ventilación o aire acondicionado (más coste eléctrico).</p>
+
+<h3>Dificultad creciente</h3>
+
+<p>La dificultad de minería solo sube a largo plazo. El mismo equipo genera menos bitcoin cada mes a medida que más mineros se conectan y la dificultad se ajusta.</p>
+
+<p>El hardware que hoy es rentable, mañana puede no serlo.</p>
+
+<h3>Depreciación del hardware</h3>
+
+<p>Un ASIC tiene vida útil limitada. Modelos más eficientes lo vuelven obsoleto en 2-4 años. Es un activo que se deprecia rápidamente.</p>
+
+<h2>Motivos legítimos más allá del beneficio</h2>
+
+<p>Si la rentabilidad no está garantizada, ¿por qué alguien minaría en casa?</p>
+
+<h3>Bitcoin sin KYC</h3>
+
+<p>Los bitcoin minados no tienen historial. No pasaron por ningún exchange. Son "vírgenes" desde el punto de vista de análisis de cadena.</p>
+
+<p>Para quien valora máxima privacidad, esto tiene valor más allá del coste.</p>
+
+<h3>Calefacción dual-propósito</h3>
+
+<p>Si ibas a gastar electricidad en calefacción de todos modos, minar mientras calientas tiene lógica: obtienes calor + bitcoin en vez de solo calor.</p>
+
+<h3>Contribuir a la descentralización</h3>
+
+<p>Cada minero independiente, por pequeño que sea, contribuye a que la red no esté controlada por pocas entidades.</p>
+
+<p>Es un acto de participación en la infraestructura de Bitcoin.</p>
+
+<h3>Educación y experimentación</h3>
+
+<p>Entender la minería de primera mano tiene valor educativo. Un Bitaxe pequeño es una forma accesible de aprender sin invertir mucho.</p>
+
+<h3>El placer de "imprimir dinero"</h3>
+
+<p>Hay algo satisfactorio en ver sats llegar a tu wallet por trabajo que tu máquina hace. No es racional económicamente en muchos casos, pero es real.</p>
+
+<p>&gt; CALLOUT INFO: Evalúa tus motivaciones &gt; Si tu motivación principal es ganar dinero, calcula bien antes de comprar hardware. Si tu motivación es aprender, obtener bitcoin sin KYC o contribuir a la red, la rentabilidad es secundaria.</p>
+
+<h2>Opciones según situación</h2>
+
+<h3>Electricidad cara, sin espacio aislado</h3>
+
+<p>No mines. Usa ese dinero para comprar bitcoin directamente. Obtendrás más bitcoin por euro.</p>
+
+<h3>Electricidad barata, espacio disponible</h3>
+
+<p>Puede tener sentido económico. Haz los números específicos para tu situación.</p>
+
+<h3>Quieres experimentar con poco riesgo</h3>
+
+<p>Un Bitaxe (explicado más adelante) cuesta poco, consume poco, y hace poco ruido. No es rentable, pero es accesible para aprender.</p>
+
+<h3>Necesitas calefacción y tienes electricidad razonable</h3>
+
+<p>Explora opciones de minería como calefacción. Más sobre esto en páginas posteriores.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-4" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegaci&oacute;n entre p&aacute;ginas">
+  <a href="nodo-lightning.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Montar tu nodo Lightning</span>
+  </a>
+  <a href="hardware-mineria.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Hardware de minería</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

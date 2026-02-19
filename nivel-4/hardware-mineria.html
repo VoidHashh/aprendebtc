@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Hardware para minar Bitcoin: ASICs de Bitmain y MicroBT, eficiencia, Bitaxe como opción open source, y dónde comprar de forma segura." />
+  <title>Hardware de minería &mdash; Nivel 4 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegaci&oacute;n del nivel 4">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 2 &middot; Multisig</div>
+          <a href="distribucion-claves.html" class="sidebar__link">Distribución geográfica de claves</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 3 &middot; Herencia</div>
+          <a href="herencia-bitcoin.html" class="sidebar__link">Herencia de Bitcoin</a>
+          <a href="guia-herencia.html" class="sidebar__link">Guía de herencia paso a paso</a>
+          <a href="herencia-multisig.html" class="sidebar__link">Herencia con multisig</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 4 &middot; Lightning avanzado</div>
+          <a href="canales-lightning.html" class="sidebar__link">Canales de pago</a>
+          <a href="liquidez-lightning.html" class="sidebar__link">Gestión de liquidez</a>
+          <a href="routing-lightning.html" class="sidebar__link">Routing de pagos</a>
+          <a href="nodo-lightning.html" class="sidebar__link">Montar tu nodo Lightning</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 5 &middot; Mineria casera</div>
+          <a href="mineria-casera.html" class="sidebar__link">Minería casera: ¿tiene sentido?</a>
+          <a href="hardware-mineria.html" class="sidebar__link sidebar__link--active">Hardware de minería</a>
+          <a href="pools-mineria.html" class="sidebar__link">Pools de minería</a>
+          <a href="mineria-bitaxe.html" class="sidebar__link">Minería con Bitaxe</a>
+          <a href="calefaccion-bitcoin.html" class="sidebar__link">Bitcoin como calefacción</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-5/" class="sidebar__link">Nivel 5 &mdash; El Arquitecto</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n4" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegaci&oacute;n">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 4</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Hardware de minería</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--4 article__badge">Nivel 4</div>
+          <h1>Hardware de minería</h1>
+          <p class="article__subtitle">ASICs especializados para SHA-256. Desde los gigantes industriales hasta el pequeño Bitaxe open source.</p>
+
+<h2>Por qué ASICs y no GPUs</h2>
+
+<p>Bitcoin usa el algoritmo SHA-256 para la minería. En los primeros años, se podía minar con CPUs y luego con GPUs. Hoy, eso es completamente inviable.</p>
+
+<p>Los ASICs (Application-Specific Integrated Circuits) son chips diseñados exclusivamente para calcular SHA-256. Hacen una sola cosa, pero la hacen miles de veces más eficientemente que cualquier hardware de propósito general.</p>
+
+<p>Un ASIC moderno calcula más de 100 terahashes por segundo (TH/s). Una GPU potente llega a quizás 1 gigahash por segundo (GH/s). La diferencia es de 100.000x o más.</p>
+
+<p>Minar Bitcoin con GPU en 2025 es como intentar competir en Fórmula 1 con una bicicleta. No es que sea difícil; es que es físicamente imposible competir.</p>
+
+<h2>Fabricantes principales</h2>
+
+<h3>Bitmain (Antminer)</h3>
+
+<p>La empresa china dominante en el mercado. Sus modelos Antminer son los más conocidos:</p>
+
+<ul>
+
+  <li><strong>Antminer S21:</strong> ~200 TH/s, ~3.500W, eficiencia ~17.5 J/TH</li>
+
+  <li><strong>Antminer S21 Pro:</strong> ~234 TH/s, mayor eficiencia</li>
+
+  <li><strong>Antminer S19:</strong> Generación anterior, todavía común</li>
+
+</ul>
+
+<p>Bitmain tiene la mayor cuota de mercado pero también controversias históricas (prácticas comerciales, centralización).</p>
+
+<h3>MicroBT (Whatsminer)</h3>
+
+<p>El principal competidor de Bitmain:</p>
+
+<ul>
+
+  <li><strong>Whatsminer M50:</strong> ~120 TH/s, ~3.300W</li>
+
+  <li><strong>Whatsminer M60:</strong> ~186 TH/s, mayor eficiencia</li>
+
+</ul>
+
+<p>Generalmente considerados bien construidos y fiables. Competitivos en eficiencia con Bitmain.</p>
+
+<h3>Otros fabricantes</h3>
+
+<ul>
+
+  <li><strong>Canaan (Avalon):</strong> Tercer fabricante, menos común</li>
+
+  <li><strong>Intel (Blockscale):</strong> Entró y salió del mercado rápidamente</li>
+
+</ul>
+
+<p>El mercado está muy concentrado en Bitmain y MicroBT.</p>
+
+<h2>Métricas clave</h2>
+
+<h3>Hash rate (TH/s)</h3>
+
+<p>Cuántos terahashes por segundo puede calcular. Más = más probabilidad de encontrar bloques = más ingresos.</p>
+
+<h3>Consumo (W)</h3>
+
+<p>Vatios que consume. Más consumo = más coste eléctrico.</p>
+
+<h3>Eficiencia (J/TH)</h3>
+
+<p>Julios por terahash. La métrica más importante. Menos = mejor.</p>
+
+<p>Un ASIC de 20 J/TH consume el doble de electricidad por hash que uno de 10 J/TH.</p>
+
+<p>La eficiencia determina qué precio de electricidad hace rentable la minería.</p>
+
+<h2>Bitaxe: el ASIC open source</h2>
+
+<p>Bitaxe es un proyecto diferente: un pequeño ASIC de código y hardware abierto diseñado para minería casera a pequeña escala.</p>
+
+<h3>Características</h3>
+
+<ul>
+
+  <li><strong>Hash rate:</strong> ~500 GH/s a ~1.2 TH/s según modelo (Ultra, Supra, Gamma)</li>
+
+  <li><strong>Consumo:</strong> ~15W (como una bombilla)</li>
+
+  <li><strong>Ruido:</strong> Silencioso comparado con ASICs industriales</li>
+
+  <li><strong>Precio:</strong> ~150-300€</li>
+
+</ul>
+
+<h3>Perspectiva</h3>
+
+<p>Comparado con un S21 de 200 TH/s, un Bitaxe de 1 TH/s tiene 1/200 de la potencia. En términos de rentabilidad pura, no tiene sentido.</p>
+
+<p>Pero Bitaxe representa algo más:</p>
+
+<ul>
+
+  <li><strong>Hardware abierto:</strong> El único proyecto de ASIC Bitcoin completamente open source</li>
+
+  <li><strong>Descentralización:</strong> Contribuye a que no todo el hardware venga de dos empresas chinas</li>
+
+  <li><strong>Accesibilidad:</strong> Cualquiera puede minar con inversión y consumo mínimos</li>
+
+  <li><strong>Educación:</strong> Aprender minería de forma práctica y económica</li>
+
+</ul>
+
+<p>Bitaxe no es para ganar dinero. Es para participar, aprender, y apoyar un ecosistema de hardware abierto.</p>
+
+<h2>Dónde comprar</h2>
+
+<h3>ASICs grandes (Antminer, Whatsminer)</h3>
+
+<ul>
+
+  <li><strong>Directo del fabricante:</strong> Bitmain y MicroBT tienen tiendas online. Envío internacional disponible.</li>
+
+  <li><strong>Distribuidores autorizados:</strong> Listados en las webs de fabricantes. Pueden ofrecer mejor soporte local.</li>
+
+</ul>
+
+<h3>Bitaxe</h3>
+
+<ul>
+
+  <li><strong>Solo Build:</strong> Los componentes por separado, tú ensamblas</li>
+
+  <li><strong>Pre-ensamblado:</strong> Varios vendedores ofrecen Bitaxe listo para usar</li>
+
+</ul>
+
+<p>Busca vendedores con buena reputación en comunidades de Bitcoin.</p>
+
+<h3>Evitar</h3>
+
+<ul>
+
+  <li><strong>Segunda mano sin garantías:</strong> Riesgo alto de hardware desgastado o defectuoso</li>
+
+  <li><strong>Vendedores desconocidos en marketplaces:</strong> Alto riesgo de estafa</li>
+
+  <li><strong>"Ofertas" demasiado buenas:</strong> Si el precio es muy inferior al mercado, probablemente hay problema</li>
+
+</ul>
+
+<p>&gt; CALLOUT WARNING: Cuidado con segunda mano &gt; Los ASICs usados pueden tener chips degradados, ventiladores desgastados, o problemas ocultos. Si compras usado, verifica extensamente o asume el riesgo.</p>
+
+<h2>El ciclo de vida del hardware</h2>
+
+<p>Un ASIC no dura para siempre:</p>
+
+<ol>
+
+  <li><strong>Lanzamiento:</strong> Precio alto, máxima eficiencia del momento</li>
+
+  <li><strong>Madurez:</strong> Precio baja, sigue siendo competitivo</li>
+
+  <li><strong>Obsolescencia:</strong> Nuevos modelos más eficientes lo desplazan</li>
+
+  <li><strong>Retiro:</strong> Solo rentable con electricidad muy barata o nula</li>
+
+</ol>
+
+<p>El ciclo completo suele ser 2-4 años. Planifica la depreciación en tus cálculos de rentabilidad.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-4" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegaci&oacute;n entre p&aacute;ginas">
+  <a href="mineria-casera.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Minería casera: ¿tiene sentido?</span>
+  </a>
+  <a href="pools-mineria.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Pools de minería</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

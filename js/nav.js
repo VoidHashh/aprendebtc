@@ -70,7 +70,26 @@
         { href: '/nivel-3/coin-control.html', text: 'Coin control' }
       ]
     },
-    { title: 'Nivel 4 - Down the Rabbit Hole', index: '/nivel-4/', pages: [] },
+    {
+      title: 'Nivel 4 - Down the Rabbit Hole',
+      index: '/nivel-4/',
+      pages: [
+        { href: '/nivel-4/configurar-multisig.html', text: 'Configurar multisig con Sparrow' },
+        { href: '/nivel-4/distribucion-claves.html', text: 'Distribucion geografica de claves' },
+        { href: '/nivel-4/herencia-bitcoin.html', text: 'Herencia de Bitcoin' },
+        { href: '/nivel-4/guia-herencia.html', text: 'Guia de herencia paso a paso' },
+        { href: '/nivel-4/herencia-multisig.html', text: 'Herencia con multisig' },
+        { href: '/nivel-4/canales-lightning.html', text: 'Canales de pago' },
+        { href: '/nivel-4/liquidez-lightning.html', text: 'Gestion de liquidez' },
+        { href: '/nivel-4/routing-lightning.html', text: 'Routing de pagos' },
+        { href: '/nivel-4/nodo-lightning.html', text: 'Montar tu nodo Lightning' },
+        { href: '/nivel-4/mineria-casera.html', text: 'Mineria casera: tiene sentido' },
+        { href: '/nivel-4/hardware-mineria.html', text: 'Hardware de mineria' },
+        { href: '/nivel-4/pools-mineria.html', text: 'Pools de mineria' },
+        { href: '/nivel-4/mineria-bitaxe.html', text: 'Mineria con Bitaxe' },
+        { href: '/nivel-4/calefaccion-bitcoin.html', text: 'Bitcoin como calefaccion' }
+      ]
+    },
     { title: 'Nivel 5 - El Arquitecto', index: '/nivel-5/', pages: [] },
     { title: 'Nivel 6 - Satoshi', index: '/nivel-6/', pages: [] }
   ];
@@ -511,33 +530,37 @@
   function injectPrimarySidebarSections() {
     const sidebar = document.querySelector('.sidebar');
     if (!sidebar) return;
-    if (sidebar.dataset.primaryNavInjected === '1') return;
-
-    removeLegacyLevelCurrentSection(sidebar);
 
     const contextSection = sidebar.querySelector('.sidebar__section--context');
     const adWrap = sidebar.querySelector('.sidebar__ad-wrap');
 
-    Array.from(sidebar.querySelectorAll('.sidebar__section')).forEach((section) => {
-      if (section === contextSection) return;
-      section.remove();
-    });
+    if (sidebar.dataset.primaryNavInjected !== '1') {
+      removeLegacyLevelCurrentSection(sidebar);
 
-    const fragment = document.createDocumentFragment();
+      Array.from(sidebar.querySelectorAll('.sidebar__section')).forEach((section) => {
+        if (section === contextSection) return;
+        section.remove();
+      });
 
-    LEVEL_TREE.forEach((levelItem) => {
-      fragment.appendChild(createLevelSidebarSection(levelItem));
-    });
+      const fragment = document.createDocumentFragment();
 
-    fragment.appendChild(createSidebarSection('Pilares de conocimiento', PILLAR_LINKS, 'sidebar__section--primary sidebar__section--pillars'));
+      LEVEL_TREE.forEach((levelItem) => {
+        fragment.appendChild(createLevelSidebarSection(levelItem));
+      });
 
-    if (adWrap) {
-      sidebar.insertBefore(fragment, adWrap);
-    } else {
-      sidebar.appendChild(fragment);
+      fragment.appendChild(createSidebarSection('Pilares', PILLAR_LINKS, 'sidebar__section--primary sidebar__section--pillars'));
+
+      if (adWrap) {
+        sidebar.insertBefore(fragment, adWrap);
+      } else {
+        sidebar.appendChild(fragment);
+      }
+
+      sidebar.dataset.primaryNavInjected = '1';
     }
 
-    sidebar.dataset.primaryNavInjected = '1';
+    // Hide legacy static blocks (Nivel actual / secciones) if any remain in DOM.
+    sidebar.classList.add('sidebar--primary-tree-ready');
   }
 
   function markActiveNavLinks() {

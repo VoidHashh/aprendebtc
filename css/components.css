@@ -273,6 +273,10 @@
   background: rgba(255, 255, 255, 0.01);
 }
 
+.sidebar--primary-tree-ready .sidebar__section:not(.sidebar__section--primary):not(.sidebar__section--context) {
+  display: none;
+}
+
 .sidebar__section-title {
   font-size: 0.72rem;
   font-weight: 600;

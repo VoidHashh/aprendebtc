@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Opciones prácticas para herencia de Bitcoin: carta de instrucciones, Shamir&#x27;s Secret Sharing, y consideraciones para cada método." />
+  <title>Guía de herencia paso a paso &mdash; Nivel 4 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegaci&oacute;n del nivel 4">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 2 &middot; Multisig</div>
+          <a href="distribucion-claves.html" class="sidebar__link">Distribución geográfica de claves</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 3 &middot; Herencia</div>
+          <a href="herencia-bitcoin.html" class="sidebar__link">Herencia de Bitcoin</a>
+          <a href="guia-herencia.html" class="sidebar__link sidebar__link--active">Guía de herencia paso a paso</a>
+          <a href="herencia-multisig.html" class="sidebar__link">Herencia con multisig</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 4 &middot; Lightning avanzado</div>
+          <a href="canales-lightning.html" class="sidebar__link">Canales de pago</a>
+          <a href="liquidez-lightning.html" class="sidebar__link">Gestión de liquidez</a>
+          <a href="routing-lightning.html" class="sidebar__link">Routing de pagos</a>
+          <a href="nodo-lightning.html" class="sidebar__link">Montar tu nodo Lightning</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 5 &middot; Mineria casera</div>
+          <a href="mineria-casera.html" class="sidebar__link">Minería casera: ¿tiene sentido?</a>
+          <a href="hardware-mineria.html" class="sidebar__link">Hardware de minería</a>
+          <a href="pools-mineria.html" class="sidebar__link">Pools de minería</a>
+          <a href="mineria-bitaxe.html" class="sidebar__link">Minería con Bitaxe</a>
+          <a href="calefaccion-bitcoin.html" class="sidebar__link">Bitcoin como calefacción</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-5/" class="sidebar__link">Nivel 5 &mdash; El Arquitecto</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n4" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegaci&oacute;n">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 4</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Guía de herencia paso a paso</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--4 article__badge">Nivel 4</div>
+          <h1>Guía de herencia paso a paso</h1>
+          <p class="article__subtitle">Tres enfoques prácticos para asegurar que tus bitcoin lleguen a quien debe recibirlos.</p>
+
+<h2>Opción 1: Carta de instrucciones sellada</h2>
+
+<p>El método más simple. Un documento físico con todo lo necesario para que tus herederos accedan a tus bitcoin.</p>
+
+<h3>Qué incluir</h3>
+
+<ol>
+
+  <li><strong>Explicación básica:</strong> "Tengo bitcoin. Esto es lo que necesitas hacer para acceder."</li>
+
+</ol>
+
+<ol>
+
+  <li><strong>Inventario de wallets:</strong> Qué wallets tienes, de qué tipo, cantidades aproximadas.</li>
+
+</ol>
+
+<ol>
+
+  <li><strong>Ubicación de seeds:</strong> Dónde están guardadas las seed phrases.</li>
+
+</ol>
+
+<ol>
+
+  <li><strong>Instrucciones paso a paso:</strong></li>
+
+</ol>
+
+<ul>
+
+  <li>Qué software descargar (con URLs oficiales)</li>
+
+  <li>Cómo restaurar cada wallet</li>
+
+  <li>Cómo verificar el saldo</li>
+
+  <li>Cómo enviar a un exchange si quieren vender</li>
+
+</ul>
+
+<ol>
+
+  <li><strong>Contacto de ayuda:</strong> Alguien técnico a quien puedan acudir si se atascan.</li>
+
+</ol>
+
+<ol>
+
+  <li><strong>Advertencias:</strong> No compartir seeds con nadie, no responder a "soporte técnico" que contacte, etc.</li>
+
+</ol>
+
+<h3>Dónde guardar la carta</h3>
+
+<ul>
+
+  <li>Con notario (en sobre sellado a abrir solo tras certificado de defunción)</li>
+
+  <li>Con abogado de confianza</li>
+
+  <li>En caja de seguridad accesible por herederos</li>
+
+  <li>Con persona de máxima confianza</li>
+
+</ul>
+
+<h3>Riesgos</h3>
+
+<ul>
+
+  <li>Si el sobre se abre antes de tiempo, tienen acceso</li>
+
+  <li>Si el sobre se pierde o destruye, no tienen nada</li>
+
+  <li>Requiere actualizar si cambias tu setup</li>
+
+</ul>
+
+<h3>Para quién funciona</h3>
+
+<p>Situaciones simples: una persona de confianza absoluta, cantidades moderadas, herederos con algo de capacidad técnica o acceso a ayuda técnica.</p>
+
+<h2>Opción 2: Shamir's Secret Sharing</h2>
+
+<p>Shamir's Secret Sharing (SSS) es un algoritmo que permite dividir un secreto en N partes, de las cuales se necesitan M para reconstruirlo.</p>
+
+<h3>Cómo funciona</h3>
+
+<p>Tu seed phrase se convierte en, por ejemplo, 5 "shares". Cualquier 3 de esos 5 shares pueden reconstruir la seed original. Pero 2 shares no revelan absolutamente nada.</p>
+
+<p>Matemáticamente, es imposible derivar información de la seed con menos de M shares.</p>
+
+<h3>Implementación</h3>
+
+<ul>
+
+  <li><strong>SLIP39:</strong> Estándar para seeds Shamir, soportado por Trezor</li>
+
+  <li>Genera 5 shares de 20 palabras cada uno</li>
+
+  <li>Requiere 3 de 5 para recuperar</li>
+
+</ul>
+
+<h3>Distribución de shares</h3>
+
+<ul>
+
+  <li>Share 1: Heredero A</li>
+
+  <li>Share 2: Heredero B</li>
+
+  <li>Share 3: Abogado</li>
+
+  <li>Share 4: Caja de seguridad</li>
+
+  <li>Share 5: Tu casa</li>
+
+</ul>
+
+<p>Ningún heredero individual puede acceder (necesitan coordinar). Pero herederos + abogado pueden.</p>
+
+<h3>Ventajas</h3>
+
+<ul>
+
+  <li>Ningún custodio individual tiene acceso</li>
+
+  <li>Tolerancia a pérdida (pueden perderse hasta 2 shares)</li>
+
+  <li>Los shares no revelan nada por separado</li>
+
+</ul>
+
+<h3>Desventajas</h3>
+
+<ul>
+
+  <li>Más complejo de entender y configurar</li>
+
+  <li>Requiere que los herederos sepan reconstruir (o instrucciones muy claras)</li>
+
+  <li>No todas las wallets soportan SLIP39</li>
+
+</ul>
+
+<h3>Para quién funciona</h3>
+
+<p>Múltiples herederos que no confías completamente entre sí, cantidades significativas, tolerancia a la complejidad.</p>
+
+<h2>Opción 3: Servicios especializados</h2>
+
+<p>Empresas como Casa ofrecen soluciones de herencia integradas:</p>
+
+<h3>Cómo funcionan (ejemplo Casa)</h3>
+
+<ul>
+
+  <li>Custodia colaborativa: Casa tiene una llave, tú tienes otras</li>
+
+  <li>En vida: tú controlas las firmas</li>
+
+  <li>Al fallecer: el proceso de herencia de Casa permite transferir control a herederos verificados</li>
+
+</ul>
+
+<h3>Ventajas</h3>
+
+<ul>
+
+  <li>Proceso más estructurado</li>
+
+  <li>Soporte profesional para herederos</li>
+
+  <li>Menos carga técnica sobre ti y los herederos</li>
+
+</ul>
+
+<h3>Desventajas</h3>
+
+<ul>
+
+  <li>Dependencia de una empresa (¿y si cierra?)</li>
+
+  <li>Coste (suscripción mensual/anual)</li>
+
+  <li>Pérdida de algo de soberanía</li>
+
+</ul>
+
+<h3>Para quién funciona</h3>
+
+<p>Personas con cantidades significativas, poca capacidad o deseo de gestionar complejidad técnica, que valoran soporte profesional.</p>
+
+<h2>Combinación de métodos</h2>
+
+<p>Puedes combinar:</p>
+
+<ul>
+
+  <li>Multisig con heredero (siguiente página) para la estructura base</li>
+
+  <li>Carta de instrucciones para explicar el proceso</li>
+
+  <li>Shamir para algunas seeds como backup adicional</li>
+
+</ul>
+
+<p>No hay solución única. Diseña según tu situación.</p>
+
+<h2>Prueba en vida</h2>
+
+<p>Si es posible, simula el proceso:</p>
+
+<ul>
+
+  <li>¿Pueden tus herederos encontrar las instrucciones?</li>
+
+  <li>¿Entienden los pasos?</li>
+
+  <li>¿Funciona técnicamente?</li>
+
+</ul>
+
+<p>Puedes hacer una "prueba" con una wallet separada con cantidad pequeña, para verificar que el proceso funciona sin revelar tu wallet principal.</p>
+
+<h2>Actualización periódica</h2>
+
+<p>Tu plan de herencia debe revisarse:</p>
+
+<ul>
+
+  <li>Cuando cambia tu setup de wallets</li>
+
+  <li>Cuando cambia tu situación familiar</li>
+
+  <li>Al menos una vez al año para verificar que todo sigue válido</li>
+
+</ul>
+
+<p>Un plan desactualizado puede ser peor que ningún plan.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-4" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegaci&oacute;n entre p&aacute;ginas">
+  <a href="herencia-bitcoin.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Herencia de Bitcoin</span>
+  </a>
+  <a href="herencia-multisig.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Herencia con multisig</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

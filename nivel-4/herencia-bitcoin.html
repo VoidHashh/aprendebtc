@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="El problema de la herencia en Bitcoin: si mueres sin preparación, tus bitcoin desaparecen para siempre. Opciones y estrategias para planificar." />
+  <title>Herencia de Bitcoin &mdash; Nivel 4 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegaci&oacute;n del nivel 4">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 2 &middot; Multisig</div>
+          <a href="distribucion-claves.html" class="sidebar__link">Distribución geográfica de claves</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 3 &middot; Herencia</div>
+          <a href="herencia-bitcoin.html" class="sidebar__link sidebar__link--active">Herencia de Bitcoin</a>
+          <a href="guia-herencia.html" class="sidebar__link">Guía de herencia paso a paso</a>
+          <a href="herencia-multisig.html" class="sidebar__link">Herencia con multisig</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 4 &middot; Lightning avanzado</div>
+          <a href="canales-lightning.html" class="sidebar__link">Canales de pago</a>
+          <a href="liquidez-lightning.html" class="sidebar__link">Gestión de liquidez</a>
+          <a href="routing-lightning.html" class="sidebar__link">Routing de pagos</a>
+          <a href="nodo-lightning.html" class="sidebar__link">Montar tu nodo Lightning</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 5 &middot; Mineria casera</div>
+          <a href="mineria-casera.html" class="sidebar__link">Minería casera: ¿tiene sentido?</a>
+          <a href="hardware-mineria.html" class="sidebar__link">Hardware de minería</a>
+          <a href="pools-mineria.html" class="sidebar__link">Pools de minería</a>
+          <a href="mineria-bitaxe.html" class="sidebar__link">Minería con Bitaxe</a>
+          <a href="calefaccion-bitcoin.html" class="sidebar__link">Bitcoin como calefacción</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-5/" class="sidebar__link">Nivel 5 &mdash; El Arquitecto</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n4" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegaci&oacute;n">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 4</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Herencia de Bitcoin</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--4 article__badge">Nivel 4</div>
+          <h1>Herencia de Bitcoin</h1>
+          <p class="article__subtitle">Si mueres sin preparación, tus bitcoin desaparecen para siempre. No hay &quot;departamento de herencias&quot; que ayude.</p>
+
+<h2>El problema único de Bitcoin</h2>
+
+<p>En el sistema tradicional, cuando alguien muere, hay mecanismos establecidos:</p>
+
+<ul>
+
+  <li>Los bancos transfieren cuentas a herederos con certificado de defunción</li>
+
+  <li>Las propiedades se transmiten según testamento o ley</li>
+
+  <li>Hay instituciones que median y resuelven disputas</li>
+
+</ul>
+
+<p>En Bitcoin no hay institución central. No hay "soporte técnico". No hay forma de "resetear contraseña". Si la persona con las llaves muere sin dejar acceso, los bitcoin quedan bloqueados para siempre.</p>
+
+<p>Estimaciones sugieren que millones de bitcoin (quizás 3-4 millones) están perdidos para siempre, muchos por falta de planificación de herencia.</p>
+
+<h2>La paradoja de la herencia</h2>
+
+<p>El dilema:</p>
+
+<p><strong>Demasiada información:</strong> Si das a tus herederos todo lo necesario para acceder (seeds, PINs), ellos podrían acceder antes de tiempo. O un tercero que intercepte esa información.</p>
+
+<p><strong>Poca información:</strong> Si no das suficiente, cuando mueras no podrán acceder nunca.</p>
+
+<p>El objetivo es encontrar un esquema donde:</p>
+
+<ul>
+
+  <li>En vida, solo tú puedes acceder</li>
+
+  <li>En fallecimiento, las personas correctas pueden acceder</li>
+
+  <li>Terceros no autorizados nunca pueden acceder</li>
+
+</ul>
+
+<h2>Factores a considerar</h2>
+
+<h3>Complejidad técnica de tus herederos</h3>
+
+<p>¿Saben tus herederos qué es Bitcoin? ¿Pueden seguir instrucciones técnicas? ¿O necesitan un proceso extremadamente simple?</p>
+
+<p>Si no tienen conocimientos, necesitan instrucciones paso a paso muy detalladas, o necesitas involucrar a alguien técnico como intermediario.</p>
+
+<h3>Cantidad de bitcoin</h3>
+
+<p>Para cantidades pequeñas, un setup simple (carta con instrucciones) puede ser suficiente.</p>
+
+<p>Para cantidades significativas, vale la pena invertir en soluciones más robustas (multisig, servicios especializados).</p>
+
+<h3>Relaciones familiares</h3>
+
+<p>¿Confías completamente en tus herederos? ¿Hay riesgo de conflicto entre ellos? ¿Hay menores de edad?</p>
+
+<p>Estos factores influyen en qué estructura es apropiada.</p>
+
+<h3>Marco legal</h3>
+
+<p>¿Cómo interactúa tu plan de herencia Bitcoin con tu testamento legal? ¿Hay implicaciones fiscales? ¿Necesitas involucrar a un abogado?</p>
+
+<h2>Opciones principales</h2>
+
+<p>Las siguientes páginas desarrollan en detalle:</p>
+
+<h3>Carta de instrucciones sellada</h3>
+
+<p>Documento físico con todo lo necesario, guardado de forma que solo se abra tras el fallecimiento.</p>
+
+<p>Simple pero con riesgos si se accede antes de tiempo.</p>
+
+<h3>Seed dividida (Shamir's Secret Sharing)</h3>
+
+<p>La seed se divide en partes. Se necesitan M de N partes para reconstruirla.</p>
+
+<p>Las partes individuales no revelan nada sobre la seed.</p>
+
+<h3>Multisig con heredero</h3>
+
+<p>Una de las llaves del multisig está en manos del heredero (sellada). En vida no puede usarla sola. Tras el fallecimiento, combinada con otra llave, puede acceder.</p>
+
+<h3>Servicios especializados</h3>
+
+<p>Empresas como Casa ofrecen soluciones de herencia integradas con sus productos de custodia colaborativa.</p>
+
+<h3>Timelocks</h3>
+
+<p>Mecanismos que liberan acceso automáticamente si no se "renueva" periódicamente. Dead man's switch.</p>
+
+<p>&gt; CALLOUT WARNING: No pospongas esto &gt; La herencia de bitcoin no es un tema que puedas posponer indefinidamente. Si tienes una cantidad significativa, planifícalo ahora. El mañana no está garantizado.</p>
+
+<h2>La conversación difícil</h2>
+
+<p>Más allá de la mecánica técnica, necesitas:</p>
+
+<ol>
+
+  <li>Decidir quién hereda qué (testamento)</li>
+
+  <li>Informar a los herederos de que existe bitcoin (sin revelar cantidades necesariamente)</li>
+
+  <li>Asegurarte de que saben dónde encontrar las instrucciones</li>
+
+  <li>Idealmente, que sepan a quién acudir si tienen problemas técnicos</li>
+
+</ol>
+
+<p>Es una conversación incómoda, pero necesaria.</p>
+
+<h2>Principio fundamental</h2>
+
+<p>Tu plan de herencia debe ser:</p>
+
+<ul>
+
+  <li><strong>Comprensible:</strong> Los herederos deben poder seguirlo sin ti</li>
+
+  <li><strong>Seguro:</strong> Terceros no autorizados no pueden aprovecharse</li>
+
+  <li><strong>Probado:</strong> Idealmente, has verificado que funciona (sin revelar acceso real)</li>
+
+  <li><strong>Documentado:</strong> No depende de memoria ni de que estés disponible para explicar</li>
+
+</ul>
+
+<p>Las siguientes páginas detallan implementaciones específicas.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-4" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegaci&oacute;n entre p&aacute;ginas">
+  <a href="distribucion-claves.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Distribución geográfica de claves</span>
+  </a>
+  <a href="guia-herencia.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Guía de herencia paso a paso</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

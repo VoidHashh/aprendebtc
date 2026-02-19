@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Qué son los pools de minería, cómo funcionan, principales opciones (Ocean, Braiins), modelos de pago (PPLNS, PPS), y por qué importa la descentralización." />
+  <title>Pools de minería &mdash; Nivel 4 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegaci&oacute;n del nivel 4">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 2 &middot; Multisig</div>
+          <a href="distribucion-claves.html" class="sidebar__link">Distribución geográfica de claves</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 3 &middot; Herencia</div>
+          <a href="herencia-bitcoin.html" class="sidebar__link">Herencia de Bitcoin</a>
+          <a href="guia-herencia.html" class="sidebar__link">Guía de herencia paso a paso</a>
+          <a href="herencia-multisig.html" class="sidebar__link">Herencia con multisig</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 4 &middot; Lightning avanzado</div>
+          <a href="canales-lightning.html" class="sidebar__link">Canales de pago</a>
+          <a href="liquidez-lightning.html" class="sidebar__link">Gestión de liquidez</a>
+          <a href="routing-lightning.html" class="sidebar__link">Routing de pagos</a>
+          <a href="nodo-lightning.html" class="sidebar__link">Montar tu nodo Lightning</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 5 &middot; Mineria casera</div>
+          <a href="mineria-casera.html" class="sidebar__link">Minería casera: ¿tiene sentido?</a>
+          <a href="hardware-mineria.html" class="sidebar__link">Hardware de minería</a>
+          <a href="pools-mineria.html" class="sidebar__link sidebar__link--active">Pools de minería</a>
+          <a href="mineria-bitaxe.html" class="sidebar__link">Minería con Bitaxe</a>
+          <a href="calefaccion-bitcoin.html" class="sidebar__link">Bitcoin como calefacción</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-5/" class="sidebar__link">Nivel 5 &mdash; El Arquitecto</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n4" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegaci&oacute;n">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 4</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Pools de minería</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--4 article__badge">Nivel 4</div>
+          <h1>Pools de minería</h1>
+          <p class="article__subtitle">Mineros que combinan fuerzas para obtener recompensas regulares. Cómo elegir pool y por qué la descentralización importa.</p>
+
+<h2>El problema del minero solitario</h2>
+
+<p>La probabilidad de que un minero individual encuentre un bloque es proporcional a su hash rate dividido por el hash rate total de la red.</p>
+
+<p>Con la dificultad actual, un Antminer S21 (~200 TH/s) encontraría un bloque aproximadamente cada... varios años. Quizás décadas.</p>
+
+<p>Es como una lotería donde compras un boleto cada pocos años. Podrías ganar el premio gordo (6.25 BTC + fees), pero probablemente no.</p>
+
+<p>La varianza es enorme. Puedes tener suerte rápida o nunca encontrar nada.</p>
+
+<h2>La solución: pools</h2>
+
+<p>Un pool de minería agrupa el hash rate de muchos mineros. El pool encuentra bloques con regularidad (proporcional a su hash rate total) y reparte las recompensas entre los participantes según su contribución.</p>
+
+<p>En vez de esperar años por un premio gordo improbable, recibes pequeños pagos regulares proporcionales a tu trabajo.</p>
+
+<p>Es como formar un sindicato de lotería: menos premio individual, pero pagos consistentes.</p>
+
+<h2>Cómo funciona técnicamente</h2>
+
+<ol>
+
+  <li>El pool asigna trabajo a los mineros: "Busca un hash válido para este bloque candidato"</li>
+
+</ol>
+
+<ol>
+
+  <li>Los mineros envían "shares": pruebas de que están haciendo trabajo (hashes que casi son válidos)</li>
+
+</ol>
+
+<ol>
+
+  <li>Cuando algún minero encuentra un hash realmente válido, el pool lo publica y recibe la recompensa</li>
+
+</ol>
+
+<ol>
+
+  <li>El pool distribuye la recompensa entre todos los mineros según los shares que contribuyeron</li>
+
+</ol>
+
+<p>Los shares son la unidad de medida del trabajo. Más shares = más proporción de la recompensa.</p>
+
+<h2>Modelos de pago</h2>
+
+<h3>PPLNS (Pay Per Last N Shares)</h3>
+
+<p>Cuando el pool encuentra un bloque, paga según los shares enviados en las últimas N rondas.</p>
+
+<ul>
+
+  <li>Recompensa variable: depende de la suerte del pool</li>
+
+  <li>Incentiva mineros leales: cambiar de pool constantemente reduce ganancias</li>
+
+  <li>Riesgo compartido: si el pool tiene mala suerte, todos ganan menos</li>
+
+</ul>
+
+<h3>PPS (Pay Per Share)</h3>
+
+<p>El pool paga una cantidad fija por cada share, independientemente de si encuentra bloques.</p>
+
+<ul>
+
+  <li>Recompensa predecible: sabes exactamente cuánto ganarás por tu hash rate</li>
+
+  <li>El pool asume el riesgo de varianza</li>
+
+  <li>Comisiones generalmente más altas para compensar el riesgo del pool</li>
+
+</ul>
+
+<h3>FPPS (Full Pay Per Share)</h3>
+
+<p>Como PPS pero incluye también una estimación de las fees de transacciones, no solo el subsidio del bloque.</p>
+
+<h2>Pools relevantes</h2>
+
+<h3>Ocean Pool</h3>
+
+<p>Lanzado con apoyo de Jack Dorsey, enfocado en descentralización y transparencia:</p>
+
+<ul>
+
+  <li><strong>Descentralización:</strong> Los mineros pueden construir sus propios bloques (DATUM)</li>
+
+  <li><strong>Transparencia:</strong> Código abierto, construcción de bloques verificable</li>
+
+  <li><strong>Filosofía:</strong> Resistir la censura y centralización</li>
+
+  <li><strong>Non-custodial:</strong> Los pagos van directamente a tu dirección, sin cuenta</li>
+
+</ul>
+
+<p>Ocean representa la filosofía de que los pools no deberían tener poder sobre qué transacciones se incluyen en los bloques.</p>
+
+<h3>Braiins Pool (antes Slush Pool)</h3>
+
+<p>El pool más antiguo (desde 2010), con sólida reputación:</p>
+
+<ul>
+
+  <li><strong>Historia:</strong> Pionero en el concepto de pool</li>
+
+  <li><strong>Innovación:</strong> Desarrolló el protocolo Stratum</li>
+
+  <li><strong>Transparencia:</strong> Código abierto</li>
+
+  <li><strong>Opciones de pago:</strong> Múltiples modelos disponibles</li>
+
+</ul>
+
+<h3>Foundry USA</h3>
+
+<p>El pool más grande por hash rate actualmente:</p>
+
+<ul>
+
+  <li><strong>Dominancia:</strong> ~30% del hash rate global</li>
+
+  <li><strong>Enfoque institucional:</strong> Orientado a grandes operaciones</li>
+
+  <li><strong>Preocupación:</strong> Alta concentración</li>
+
+</ul>
+
+<h3>F2Pool, ViaBTC, Antpool</h3>
+
+<p>Grandes pools con mucho hash rate, generalmente asociados al ecosistema chino:</p>
+
+<ul>
+
+  <li>Alta liquidez y fiabilidad operativa</li>
+
+  <li>Menos énfasis en descentralización</li>
+
+  <li>Algunos con prácticas cuestionadas históricamente</li>
+
+</ul>
+
+<p>&gt; CALLOUT WARNING: La concentración es un riesgo &gt; La concentración de hashrate en pocos pools es un riesgo para Bitcoin. Si minas, considera pools más pequeños o descentralizados como Ocean para contribuir a la salud de la red.</p>
+
+<h2>Elegir pool</h2>
+
+<p>Factores a considerar:</p>
+
+<ul>
+
+  <li><strong>Comisiones:</strong> Van del 0% al 3%</li>
+
+  <li><strong>Modelo de pago:</strong> PPLNS vs PPS según tu preferencia de riesgo</li>
+
+  <li><strong>Reputación:</strong> Historial de pagos, transparencia</li>
+
+  <li><strong>Filosofía:</strong> ¿Contribuye a la descentralización?</li>
+
+  <li><strong>Requisitos mínimos:</strong> Algunos pools tienen mínimos de pago</li>
+
+  <li><strong>Ubicación de servidores:</strong> Latencia puede afectar eficiencia</li>
+
+</ul>
+
+<p>Para minería casera pequeña, Ocean es una buena opción por su filosofía y pagos non-custodial directos.</p>
+
+<h2>El debate de la centralización</h2>
+
+<p>Los pools grandes tienen poder preocupante:</p>
+
+<ul>
+
+  <li>Deciden qué transacciones incluir en los bloques que construyen</li>
+
+  <li>Podrían censurar transacciones específicas</li>
+
+  <li>Podrían coordinar ataques si quisieran (aunque perderían económicamente)</li>
+
+</ul>
+
+<p>La solución ideal es descentralizar:</p>
+
+<ul>
+
+  <li>Usar pools que permitan a los mineros construir sus propios bloques</li>
+
+  <li>Distribuir hash rate entre múltiples pools</li>
+
+  <li>Preferir pools con filosofía de descentralización</li>
+
+</ul>
+
+<p>Tu elección de pool es un voto sobre qué tipo de red quieres.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-4" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegaci&oacute;n entre p&aacute;ginas">
+  <a href="hardware-mineria.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Hardware de minería</span>
+  </a>
+  <a href="mineria-bitaxe.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Minería con Bitaxe</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

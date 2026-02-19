@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cómo usar multisig para herencia de Bitcoin: esquemas 2-de-3 con heredero, distribución de llaves, y timelocks como dead man&#x27;s switch." />
+  <title>Herencia con multisig &mdash; Nivel 4 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegaci&oacute;n del nivel 4">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 2 &middot; Multisig</div>
+          <a href="distribucion-claves.html" class="sidebar__link">Distribución geográfica de claves</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 3 &middot; Herencia</div>
+          <a href="herencia-bitcoin.html" class="sidebar__link">Herencia de Bitcoin</a>
+          <a href="guia-herencia.html" class="sidebar__link">Guía de herencia paso a paso</a>
+          <a href="herencia-multisig.html" class="sidebar__link sidebar__link--active">Herencia con multisig</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 4 &middot; Lightning avanzado</div>
+          <a href="canales-lightning.html" class="sidebar__link">Canales de pago</a>
+          <a href="liquidez-lightning.html" class="sidebar__link">Gestión de liquidez</a>
+          <a href="routing-lightning.html" class="sidebar__link">Routing de pagos</a>
+          <a href="nodo-lightning.html" class="sidebar__link">Montar tu nodo Lightning</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 5 &middot; Mineria casera</div>
+          <a href="mineria-casera.html" class="sidebar__link">Minería casera: ¿tiene sentido?</a>
+          <a href="hardware-mineria.html" class="sidebar__link">Hardware de minería</a>
+          <a href="pools-mineria.html" class="sidebar__link">Pools de minería</a>
+          <a href="mineria-bitaxe.html" class="sidebar__link">Minería con Bitaxe</a>
+          <a href="calefaccion-bitcoin.html" class="sidebar__link">Bitcoin como calefacción</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-5/" class="sidebar__link">Nivel 5 &mdash; El Arquitecto</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n4" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegaci&oacute;n">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 4</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Herencia con multisig</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--4 article__badge">Nivel 4</div>
+          <h1>Herencia con multisig</h1>
+          <p class="article__subtitle">Multisig como solución elegante para herencia: control total en vida, acceso para herederos tras el fallecimiento.</p>
+
+<h2>El esquema básico</h2>
+
+<p>Un multisig 2-de-3 puede estructurarse para herencia:</p>
+
+<ul>
+
+  <li><strong>Llave 1:</strong> Tú (uso diario)</li>
+
+  <li><strong>Llave 2:</strong> Heredero (guardada en sobre sellado)</li>
+
+  <li><strong>Llave 3:</strong> Tercero de confianza (abogado, albacea, servicio)</li>
+
+</ul>
+
+<h3>En vida</h3>
+
+<p>Para transacciones normales, usas Llave 1 + Llave 3.</p>
+
+<p>El heredero tiene la Llave 2 pero:</p>
+
+<ul>
+
+  <li>Está en sobre sellado que no debe abrir</li>
+
+  <li>Sin la Llave 1 o 3, no puede hacer nada</li>
+
+</ul>
+
+<p>No tienes que preocuparte de que acceda prematuramente.</p>
+
+<h3>Tras el fallecimiento</h3>
+
+<p>El tercero de confianza verifica el fallecimiento (certificado de defunción).</p>
+
+<p>El heredero abre su sobre sellado.</p>
+
+<p>Con Llave 2 (heredero) + Llave 3 (tercero), tienen las 2 de 3 necesarias.</p>
+
+<p>Pueden acceder y transferir los fondos.</p>
+
+<h2>Roles y responsabilidades</h2>
+
+<h3>El heredero</h3>
+
+<ul>
+
+  <li>Custodia la Llave 2 de forma segura</li>
+
+  <li>No la usa hasta el fallecimiento</li>
+
+  <li>Sabe que existe y tiene instrucciones básicas</li>
+
+  <li>Tras el fallecimiento, coordina con el tercero</li>
+
+</ul>
+
+<h3>El tercero de confianza</h3>
+
+<p><strong>Opción: Abogado o albacea</strong></p>
+
+<ul>
+
+  <li>Profesional con obligación legal</li>
+
+  <li>Verifica fallecimiento formalmente</li>
+
+  <li>Puede estar incluido en el testamento</li>
+
+</ul>
+
+<p><strong>Opción: Familiar o amigo de confianza</strong></p>
+
+<ul>
+
+  <li>Alguien que no es heredero directo</li>
+
+  <li>Puede verificar fallecimiento</li>
+
+  <li>Menos formal pero más accesible</li>
+
+</ul>
+
+<p><strong>Opción: Servicio especializado</strong></p>
+
+<ul>
+
+  <li>Empresas como Casa, Unchained</li>
+
+  <li>Procesos estructurados</li>
+
+  <li>Coste pero profesionalismo</li>
+
+</ul>
+
+<h3>Tú</h3>
+
+<ul>
+
+  <li>Mantienes Llave 1 para uso habitual</li>
+
+  <li>Coordinas con el tercero cuando necesitas firmar</li>
+
+  <li>Dejas instrucciones claras para el proceso post-mortem</li>
+
+</ul>
+
+<h2>El sobre sellado del heredero</h2>
+
+<p>Contenido del sobre:</p>
+
+<ol>
+
+  <li>Hardware wallet con Llave 2 (o seed phrase en metal)</li>
+
+  <li>Descriptor de la wallet multisig</li>
+
+  <li>Instrucciones escritas:</li>
+
+</ol>
+
+<ul>
+
+  <li>Qué hacer paso a paso</li>
+
+  <li>Cómo contactar al tercero de confianza</li>
+
+  <li>Qué software usar</li>
+
+  <li>Advertencias de seguridad</li>
+
+</ul>
+
+<p>El sobre debe:</p>
+
+<ul>
+
+  <li>Estar claramente etiquetado ("Abrir solo tras mi fallecimiento")</li>
+
+  <li>Guardarse en lugar seguro que el heredero conozca</li>
+
+  <li>Ser resistente a apertura accidental o curiosidad</li>
+
+</ul>
+
+<h2>Variación con timelock: Dead man's switch</h2>
+
+<p>Un refinamiento avanzado: usar timelocks para acceso automático.</p>
+
+<h3>El concepto</h3>
+
+<p>Un timelock es una condición de Bitcoin que impide gastar un UTXO hasta cierta fecha/altura de bloque.</p>
+
+<p>Puedes crear una transacción pre-firmada que:</p>
+
+<ul>
+
+  <li>Mueve los fondos a una dirección del heredero</li>
+
+  <li>Tiene un timelock de, por ejemplo, 1 año</li>
+
+</ul>
+
+<p>Periódicamente (cada 6 meses), "renuevas" creando una nueva transacción con timelock extendido y destruyendo la anterior.</p>
+
+<h3>Si dejas de renovar</h3>
+
+<p>Si mueres (o quedas incapacitado), dejas de renovar.</p>
+
+<p>Pasado el timelock, la transacción pre-firmada se vuelve válida.</p>
+
+<p>El heredero puede broadcastearla y recibir los fondos.</p>
+
+<h3>Complejidad</h3>
+
+<p>Este método es significativamente más complejo:</p>
+
+<ul>
+
+  <li>Requiere disciplina para renovar periódicamente</li>
+
+  <li>Riesgo si olvidas renovar estando vivo</li>
+
+  <li>Necesitas entender timelocks a nivel técnico</li>
+
+  <li>No todas las herramientas lo soportan fácilmente</li>
+
+</ul>
+
+<p>Es una opción para usuarios muy avanzados, no para principiantes.</p>
+
+<h2>Consideraciones prácticas</h2>
+
+<h3>Qué pasa si el tercero no coopera</h3>
+
+<p>En un 2-de-3, si tú mueres y el tercero desaparece o no coopera, el heredero está bloqueado (solo tiene 1 de 3).</p>
+
+<p>Mitigaciones:</p>
+
+<ul>
+
+  <li>Elegir tercero muy cuidadosamente</li>
+
+  <li>Tener instrucciones legales que obliguen al tercero</li>
+
+  <li>Considerar 2-de-3 donde tú tienes 2 llaves (pero esto reduce seguridad en vida)</li>
+
+</ul>
+
+<h3>Qué pasa si el heredero muere primero</h3>
+
+<p>Tu plan debe contemplar:</p>
+
+<ul>
+
+  <li>Herederos alternativos</li>
+
+  <li>Proceso para actualizar el setup si las circunstancias cambian</li>
+
+</ul>
+
+<h3>Costes y fees</h3>
+
+<ul>
+
+  <li>Las transacciones multisig tienen fees más altas</li>
+
+  <li>Si usas servicios de custodia, hay costes recurrentes</li>
+
+  <li>El setup inicial requiere tiempo y posiblemente ayuda</li>
+
+</ul>
+
+<h3>Prueba del proceso</h3>
+
+<p>Idealmente, simula el proceso con cantidades pequeñas:</p>
+
+<ul>
+
+  <li>Verifica que el heredero puede seguir las instrucciones</li>
+
+  <li>Verifica que la coordinación con el tercero funciona</li>
+
+  <li>Identifica problemas antes de que importen</li>
+
+</ul>
+
+<h2>No es solo técnico</h2>
+
+<p>El mejor setup técnico falla si:</p>
+
+<ul>
+
+  <li>Los herederos no saben que existe</li>
+
+  <li>Las instrucciones son confusas</li>
+
+  <li>Nadie sabe a quién acudir si hay problemas</li>
+
+</ul>
+
+<p>La comunicación y documentación son tan importantes como la criptografía.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-4" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegaci&oacute;n entre p&aacute;ginas">
+  <a href="guia-herencia.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Guía de herencia paso a paso</span>
+  </a>
+  <a href="canales-lightning.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Canales de pago</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

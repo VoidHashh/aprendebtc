@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cómo montar tu propio nodo Lightning: implementaciones (LND, CLN), hardware, proceso con Umbrel/RaspiBlitz, y consideraciones operativas." />
+  <title>Montar tu nodo Lightning &mdash; Nivel 4 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegaci&oacute;n del nivel 4">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 2 &middot; Multisig</div>
+          <a href="distribucion-claves.html" class="sidebar__link">Distribución geográfica de claves</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 3 &middot; Herencia</div>
+          <a href="herencia-bitcoin.html" class="sidebar__link">Herencia de Bitcoin</a>
+          <a href="guia-herencia.html" class="sidebar__link">Guía de herencia paso a paso</a>
+          <a href="herencia-multisig.html" class="sidebar__link">Herencia con multisig</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 4 &middot; Lightning avanzado</div>
+          <a href="canales-lightning.html" class="sidebar__link">Canales de pago</a>
+          <a href="liquidez-lightning.html" class="sidebar__link">Gestión de liquidez</a>
+          <a href="routing-lightning.html" class="sidebar__link">Routing de pagos</a>
+          <a href="nodo-lightning.html" class="sidebar__link sidebar__link--active">Montar tu nodo Lightning</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Seccion 5 &middot; Mineria casera</div>
+          <a href="mineria-casera.html" class="sidebar__link">Minería casera: ¿tiene sentido?</a>
+          <a href="hardware-mineria.html" class="sidebar__link">Hardware de minería</a>
+          <a href="pools-mineria.html" class="sidebar__link">Pools de minería</a>
+          <a href="mineria-bitaxe.html" class="sidebar__link">Minería con Bitaxe</a>
+          <a href="calefaccion-bitcoin.html" class="sidebar__link">Bitcoin como calefacción</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-5/" class="sidebar__link">Nivel 5 &mdash; El Arquitecto</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n4" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegaci&oacute;n">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 4</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Montar tu nodo Lightning</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--4 article__badge">Nivel 4</div>
+          <h1>Montar tu nodo Lightning</h1>
+          <p class="article__subtitle">Tu propio nodo para máxima soberanía en Lightning. No es para todos, pero si quieres contribuir a la red, aquí está el camino.</p>
+
+<h2>¿Por qué tu propio nodo Lightning?</h2>
+
+<p>Cuando usas una wallet como Phoenix, dependes de la infraestructura de ACINQ. Funciona muy bien, pero:</p>
+
+<ul>
+
+  <li>Ellos ven tus pagos (aunque no pueden robarlos)</li>
+
+  <li>Dependes de que su servicio esté disponible</li>
+
+  <li>No contribuyes directamente a la descentralización de la red</li>
+
+</ul>
+
+<p>Con tu propio nodo:</p>
+
+<ul>
+
+  <li>Verificas todo independientemente</li>
+
+  <li>Máxima privacidad (solo tú ves tus transacciones)</li>
+
+  <li>Contribuyes a la infraestructura de la red</li>
+
+  <li>Potencialmente ganas sats por fees de routing (aunque sea poco)</li>
+
+</ul>
+
+<h2>Implementaciones principales</h2>
+
+<h3>LND (Lightning Labs)</h3>
+
+<p>La implementación más popular. Escrita en Go.</p>
+
+<ul>
+
+  <li>Amplio ecosistema de herramientas compatibles</li>
+
+  <li>Bien documentada</li>
+
+  <li>Usada por la mayoría de nodos comerciales</li>
+
+</ul>
+
+<h3>CLN (Core Lightning, antes c-lightning)</h3>
+
+<p>Desarrollada por Blockstream. Escrita en C.</p>
+
+<ul>
+
+  <li>Muy eficiente en recursos</li>
+
+  <li>Diseño modular con plugins</li>
+
+  <li>Preferida por algunos puristas por su cercanía al spec</li>
+
+</ul>
+
+<h3>Eclair (ACINQ)</h3>
+
+<p>Desarrollada por ACINQ (los de Phoenix). Escrita en Scala.</p>
+
+<ul>
+
+  <li>Menos común para nodos caseros</li>
+
+  <li>Potente pero más orientada a empresas</li>
+
+</ul>
+
+<p>Para uso casero, LND es la opción más común y con mejor soporte comunitario.</p>
+
+<h2>La forma fácil: Umbrel o RaspiBlitz</h2>
+
+<p>No necesitas instalar LND manualmente. Las distribuciones lo hacen simple:</p>
+
+<h3>Umbrel</h3>
+
+<p>Si ya tienes un nodo Bitcoin con Umbrel:</p>
+
+<ol>
+
+  <li>En la "App Store" de Umbrel, instala Lightning</li>
+
+  <li>Espera a que sincronice</li>
+
+  <li>Ya tienes un nodo Lightning operativo</li>
+
+</ol>
+
+<p>Umbrel usa LND por defecto.</p>
+
+<h3>RaspiBlitz</h3>
+
+<p>RaspiBlitz está más enfocado en Lightning desde el inicio:</p>
+
+<ol>
+
+  <li>Durante el setup inicial, activa Lightning</li>
+
+  <li>Elige LND o CLN</li>
+
+  <li>Sigue el asistente de configuración</li>
+
+</ol>
+
+<p>RaspiBlitz ofrece más opciones avanzadas y scripts de gestión.</p>
+
+<h2>El proceso básico</h2>
+
+<ol>
+
+  <li><strong>Nodo Bitcoin funcionando:</strong> Necesitas un full node Bitcoin sincronizado. Lightning depende de él.</li>
+
+</ol>
+
+<ol>
+
+  <li><strong>Instalar software Lightning:</strong> LND o CLN, configurado para conectar a tu nodo Bitcoin.</li>
+
+</ol>
+
+<ol>
+
+  <li><strong>Crear/importar wallet Lightning:</strong> El nodo genera una seed específica de Lightning (separada de tu seed de Bitcoin on-chain).</li>
+
+</ol>
+
+<ol>
+
+  <li><strong>Fondear el nodo:</strong> Envías bitcoin on-chain a tu nodo Lightning.</li>
+
+</ol>
+
+<ol>
+
+  <li><strong>Abrir canales:</strong> Eliges peers y abres canales. Esto requiere transacciones on-chain.</li>
+
+</ol>
+
+<ol>
+
+  <li><strong>Gestionar:</strong> Monitorear, balancear liquidez, ajustar fees, actualizar software.</li>
+
+</ol>
+
+<h2>Elegir peers para canales</h2>
+
+<p>No abras canales al azar. Considera:</p>
+
+<ul>
+
+  <li><strong>Nodos bien conectados:</strong> Mejoran tu acceso a la red</li>
+
+  <li><strong>Nodos con buena reputación:</strong> Menos riesgo de problemas</li>
+
+  <li><strong>Diversidad:</strong> No pongas toda tu capacidad en un solo peer</li>
+
+</ul>
+
+<p>Herramientas como amboss.space y 1ML.com ayudan a explorar la red y elegir peers.</p>
+
+<h2>Configurar fees</h2>
+
+<p>Tus fees de routing determinan si los pagos pasan por tu nodo:</p>
+
+<ul>
+
+  <li>Fees muy altas → nadie usa tus canales</li>
+
+  <li>Fees muy bajas → no cubres costes de capital</li>
+
+</ul>
+
+<p>Empieza con fees moderadas y ajusta según el tráfico que observes.</p>
+
+<h2>Herramientas de gestión</h2>
+
+<h3>ThunderHub</h3>
+
+<p>Interfaz web para gestionar tu nodo LND. Incluida en Umbrel.</p>
+
+<h3>Ride The Lightning (RTL)</h3>
+
+<p>Otra interfaz web popular. Soporta LND y CLN.</p>
+
+<h3>Balance of Satoshis (BoS)</h3>
+
+<p>Herramienta de línea de comandos con funciones avanzadas de rebalanceo.</p>
+
+<h3>LNDg</h3>
+
+<p>Interfaz específica para LND con análisis de rentabilidad.</p>
+
+<h2>Realismo sobre ingresos</h2>
+
+<p>Seamos honestos: no vas a hacerte rico con fees de routing.</p>
+
+<p>Un nodo casero bien gestionado puede generar algunos miles o decenas de miles de sats al mes. Es satisfactorio pero no es un negocio.</p>
+
+<p>Los motivos legítimos para operar un nodo Lightning:</p>
+
+<ul>
+
+  <li>Máxima soberanía y privacidad</li>
+
+  <li>Contribuir a la descentralización</li>
+
+  <li>Aprender cómo funciona</li>
+
+  <li>El placer de participar en la infraestructura</li>
+
+</ul>
+
+<p>Si tu motivación principal es ganar dinero, probablemente te decepcionarás.</p>
+
+<p>&gt; CALLOUT INFO: No es para todos &gt; Un nodo Lightning bien gestionado puede generar pequeñas cantidades de sats por fees de routing. Pero no lo hagas esperando rentabilidad — hazlo porque quieres contribuir a la infraestructura.</p>
+
+<h2>Compromiso continuo</h2>
+
+<p>A diferencia de un nodo Bitcoin (que básicamente funciona solo una vez sincronizado), un nodo Lightning requiere atención:</p>
+
+<ul>
+
+  <li>Monitorear canales regularmente</li>
+
+  <li>Rebalancear liquidez</li>
+
+  <li>Actualizar software</li>
+
+  <li>Resolver problemas cuando surgen</li>
+
+</ul>
+
+<p>Si no tienes tiempo ni interés en esto, una wallet como Phoenix es mejor opción.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-4" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegaci&oacute;n entre p&aacute;ginas">
+  <a href="routing-lightning.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Routing de pagos</span>
+  </a>
+  <a href="mineria-casera.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Minería casera: ¿tiene sentido?</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>
