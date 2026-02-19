@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Qué es coin control, por qué importa para tu privacidad y fees, y cómo usar esta función en Sparrow Wallet paso a paso." />
+  <title>Coin control: gestiona tus UTXOs &mdash; Nivel 3 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegaci&oacute;n del nivel 3">
+<nav class="sidebar">
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Nivel actual</div>
+    <a href="index.html" class="sidebar__link">Nivel 3 &mdash; Rabbit Hole</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 1 &middot; Transacciones y UTXO</div>
+    <a href="modelo-utxo.html" class="sidebar__link">El modelo UTXO</a>
+    <a href="anatomia-transaccion.html" class="sidebar__link">Anatom&iacute;a de una transacci&oacute;n</a>
+    <a href="mempool.html" class="sidebar__link">La mempool</a>
+    <a href="rbf-cpfp.html" class="sidebar__link">RBF y CPFP</a>
+    <a href="utxos-y-privacidad.html" class="sidebar__link">Tus UTXOs y privacidad</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 2 &middot; Claves y direcciones</div>
+    <a href="clave-privada.html" class="sidebar__link">Clave privada</a>
+    <a href="clave-publica.html" class="sidebar__link">Clave p&uacute;blica</a>
+    <a href="tipos-de-direcciones.html" class="sidebar__link">Tipos de direcciones</a>
+    <a href="hd-wallets.html" class="sidebar__link">HD Wallets</a>
+    <a href="firma-digital.html" class="sidebar__link">Firma digital</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 3 &middot; Nodos y miner&iacute;a</div>
+    <a href="que-es-un-nodo.html" class="sidebar__link">&iquest;Qu&eacute; es un nodo?</a>
+    <a href="montar-tu-nodo.html" class="sidebar__link">Monta tu nodo</a>
+    <a href="mineria-en-detalle.html" class="sidebar__link">Miner&iacute;a en detalle</a>
+    <a href="halving.html" class="sidebar__link">El halving</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 4 &middot; Hardware y coin control</div>
+    <a href="configurar-hardware-wallet.html" class="sidebar__link">Configura hardware wallet</a>
+    <a href="comparativa-hardware-wallets.html" class="sidebar__link">Comparativa hardware wallets</a>
+    <a href="coin-control.html" class="sidebar__link sidebar__link--active">Coin control</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 5 &middot; Seguridad y fiscalidad</div>
+    <a href="seguridad-operativa.html" class="sidebar__link">Seguridad operativa</a>
+    <a href="fiscalidad-bitcoin.html" class="sidebar__link">Fiscalidad de Bitcoin</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Siguiente nivel</div>
+    <a href="../nivel-4/" class="sidebar__link">Nivel 4 &mdash; Down the Rabbit Hole</a>
+  </div>
+  <div class="sidebar__ad-wrap">
+    <div class="ad-slot ad-sidebar" id="ad-sidebar-n3" aria-hidden="true"></div>
+  </div>
+</nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegaci&oacute;n">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 3</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Coin control: gestiona tus UTXOs</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--3 article__badge">Nivel 3</div>
+          <h1>Coin control: gestiona tus UTXOs</h1>
+          <p class="article__subtitle">Selecciona manualmente qué UTXOs usar en cada transacción. Control total sobre tu privacidad y optimización de fees.</p>
+
+<h2>Qué es coin control</h2>
+
+<p>Por defecto, cuando envías bitcoin, tu wallet selecciona automáticamente qué UTXOs usar. Aplica algoritmos para minimizar fees o maximizar privacidad, pero tú no decides.</p>
+
+<p>Coin control es la capacidad de elegir manualmente qué UTXOs específicos usas en cada transacción. En vez de &quot;enviar 0.1 BTC&quot;, decides &quot;enviar estos UTXOs concretos&quot;.</p>
+
+<h2>Por qué importa</h2>
+
+<h3>Privacidad</h3>
+
+<p>Si tienes UTXOs de diferentes fuentes:</p>
+
+<ul>
+
+  <li>Algunos comprados con KYC (vinculados a tu identidad)</li>
+
+  <li>Otros comprados sin KYC (sin vínculo)</li>
+
+</ul>
+
+<p>Mezclarlos en la misma transacción los vincula todos a tu identidad por la heurística de &quot;common input ownership&quot;.</p>
+
+<p>Con coin control, mantienes separados los UTXOs según su origen. Nunca mezclas fondos de diferentes niveles de privacidad.</p>
+
+<h3>Optimización de fees</h3>
+
+<p>Si tienes varios UTXOs pequeños y uno grande, puede ser más eficiente usar solo el grande para una transacción pequeña (menos inputs = menos fees).</p>
+
+<p>Si las fees están bajas, puede ser buen momento para &quot;consolidar&quot; UTXOs pequeños en uno grande (pagas poco ahora, ahorras más adelante cuando las fees suban).</p>
+
+<h3>Gestión de dust</h3>
+
+<p>Los UTXOs muy pequeños pueden costar más en fees para gastarlos que su propio valor. Con coin control, puedes identificarlos y consolidarlos estratégicamente.</p>
+
+<h2>Cómo hacerlo en Sparrow</h2>
+
+<p>Sparrow es la wallet de escritorio de referencia para coin control.</p>
+
+<h3>La pestaña UTXOs</h3>
+
+<p>En la vista de tu wallet en Sparrow, hay una pestaña &quot;UTXOs&quot;. Ahí ves todos tus UTXOs individuales:</p>
+
+<ul>
+
+  <li>Cantidad de cada uno</li>
+
+  <li>Dirección donde están</li>
+
+  <li>Transacción de origen</li>
+
+  <li>Etiquetas (si las pusiste)</li>
+
+</ul>
+
+<h3>Etiquetar UTXOs</h3>
+
+<div class="callout callout--warning">
+  <span class="callout__icon" aria-hidden="true">&#9888;&#65039;</span>
+  <div class="callout__content">
+    <div class="callout__title">La disciplina del etiquetado</div>
+    <p class="callout__text">Coin control requiere disciplina. Etiqueta tus UTXOs desde el primer día. Es mucho más fácil mantener el orden que intentar reconstruirlo después.</p>
+  </div>
+</div>
+
+<p>Cuando recibes bitcoin en Sparrow, puedes (y deberías) añadir una etiqueta:</p>
+
+<ul>
+
+  <li>&quot;Kraken mayo 2025&quot;</li>
+
+  <li>&quot;Peach sin KYC&quot;</li>
+
+  <li>&quot;Pago de trabajo freelance&quot;</li>
+
+  <li>&quot;Cambio de compra en Tienda X&quot;</li>
+
+</ul>
+
+<p>Las etiquetas te permiten saber de dónde vino cada UTXO meses o años después.</p>
+
+<h3>Seleccionar UTXOs para enviar</h3>
+
+<ol>
+
+  <li>Ve a la pestaña UTXOs</li>
+
+  <li>Selecciona los UTXOs específicos que quieres usar (checkbox)</li>
+
+  <li>Click derecho → &quot;Send Selected&quot; (o similar)</li>
+
+  <li>Sparrow construye una transacción usando solo esos UTXOs</li>
+
+  <li>Completa el resto de la transacción (destino, fee)</li>
+
+</ol>
+
+<p>Alternativamente, en la pestaña &quot;Send&quot;, puedes hacer click en &quot;...&quot; junto a los inputs para seleccionar manualmente qué UTXOs usar.</p>
+
+<h3>Freezing (congelar) UTXOs</h3>
+
+<p>Si hay UTXOs que quieres proteger y nunca mezclar accidentalmente, puedes &quot;congelarlos&quot;. Un UTXO congelado no será seleccionado automáticamente por la wallet.</p>
+
+<p>Útil para:</p>
+
+<ul>
+
+  <li>UTXOs de alto valor que reservas para ahorro</li>
+
+  <li>UTXOs no-KYC que quieres mantener separados</li>
+
+</ul>
+
+<h2>Estrategias prácticas</h2>
+
+<h3>Separación KYC / no-KYC</h3>
+
+<p>Mantén categorías claras:</p>
+
+<ul>
+
+  <li>UTXOs de exchanges con KYC → etiquétalos como tal</li>
+
+  <li>UTXOs de fuentes sin KYC → etiquétalos también</li>
+
+  <li>Nunca los mezcles en la misma transacción</li>
+
+</ul>
+
+<h3>Consolidación estratégica</h3>
+
+<p>Cuando las fees estén especialmente bajas (mempool vacía, fin de semana):</p>
+
+<ul>
+
+  <li>Consolida UTXOs pequeños de la misma categoría de privacidad</li>
+
+  <li>Consolida cambios de transacciones anteriores</li>
+
+  <li>Reduce el número total de UTXOs, simplificando gestión futura</li>
+
+</ul>
+
+<h3>Evitar crear dust</h3>
+
+<p>Al enviar, si el cambio sería muy pequeño (unos pocos cientos de sats), considera:</p>
+
+<ul>
+
+  <li>Añadir ese cambio a la fee (Sparrow permite esto)</li>
+
+  <li>Ajustar la cantidad enviada ligeramente para evitar el cambio</li>
+
+</ul>
+
+<h2>No es para todos</h2>
+
+<p>Coin control añade complejidad. Si:</p>
+
+<ul>
+
+  <li>Tienes cantidades pequeñas</li>
+
+  <li>Solo compras por una vía (todo KYC o todo no-KYC)</li>
+
+  <li>No te preocupa especialmente la privacidad avanzada</li>
+
+</ul>
+
+<p>Entonces el coin control automático de tu wallet probablemente es suficiente.</p>
+
+<p>Pero si:</p>
+
+<ul>
+
+  <li>Tienes UTXOs de diferentes orígenes</li>
+
+  <li>Te preocupa la privacidad</li>
+
+  <li>Gestionas cantidades significativas</li>
+
+</ul>
+
+<p>Entonces coin control es una herramienta esencial que deberías dominar.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-3" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegaci&oacute;n entre p&aacute;ginas">
+  <a href="comparativa-hardware-wallets.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Comparativa de hardware wallets</span>
+  </a>
+  <a href="seguridad-operativa.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Seguridad operativa (OpSec)</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

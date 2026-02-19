@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Qué son las HD Wallets (Hierarchical Deterministic), cómo funcionan los derivation paths BIP44/49/84/86, y por qué importan para restaurar tu wallet." />
+  <title>HD Wallets y derivation paths &mdash; Nivel 3 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegaci&oacute;n del nivel 3">
+<nav class="sidebar">
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Nivel actual</div>
+    <a href="index.html" class="sidebar__link">Nivel 3 &mdash; Rabbit Hole</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 1 &middot; Transacciones y UTXO</div>
+    <a href="modelo-utxo.html" class="sidebar__link">El modelo UTXO</a>
+    <a href="anatomia-transaccion.html" class="sidebar__link">Anatom&iacute;a de una transacci&oacute;n</a>
+    <a href="mempool.html" class="sidebar__link">La mempool</a>
+    <a href="rbf-cpfp.html" class="sidebar__link">RBF y CPFP</a>
+    <a href="utxos-y-privacidad.html" class="sidebar__link">Tus UTXOs y privacidad</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 2 &middot; Claves y direcciones</div>
+    <a href="clave-privada.html" class="sidebar__link">Clave privada</a>
+    <a href="clave-publica.html" class="sidebar__link">Clave p&uacute;blica</a>
+    <a href="tipos-de-direcciones.html" class="sidebar__link">Tipos de direcciones</a>
+    <a href="hd-wallets.html" class="sidebar__link sidebar__link--active">HD Wallets</a>
+    <a href="firma-digital.html" class="sidebar__link">Firma digital</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 3 &middot; Nodos y miner&iacute;a</div>
+    <a href="que-es-un-nodo.html" class="sidebar__link">&iquest;Qu&eacute; es un nodo?</a>
+    <a href="montar-tu-nodo.html" class="sidebar__link">Monta tu nodo</a>
+    <a href="mineria-en-detalle.html" class="sidebar__link">Miner&iacute;a en detalle</a>
+    <a href="halving.html" class="sidebar__link">El halving</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 4 &middot; Hardware y coin control</div>
+    <a href="configurar-hardware-wallet.html" class="sidebar__link">Configura hardware wallet</a>
+    <a href="comparativa-hardware-wallets.html" class="sidebar__link">Comparativa hardware wallets</a>
+    <a href="coin-control.html" class="sidebar__link">Coin control</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 5 &middot; Seguridad y fiscalidad</div>
+    <a href="seguridad-operativa.html" class="sidebar__link">Seguridad operativa</a>
+    <a href="fiscalidad-bitcoin.html" class="sidebar__link">Fiscalidad de Bitcoin</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Siguiente nivel</div>
+    <a href="../nivel-4/" class="sidebar__link">Nivel 4 &mdash; Down the Rabbit Hole</a>
+  </div>
+  <div class="sidebar__ad-wrap">
+    <div class="ad-slot ad-sidebar" id="ad-sidebar-n3" aria-hidden="true"></div>
+  </div>
+</nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegaci&oacute;n">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 3</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">HD Wallets y derivation paths</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--3 article__badge">Nivel 3</div>
+          <h1>HD Wallets y derivation paths</h1>
+          <p class="article__subtitle">Una semilla, infinitas direcciones. Cómo tu wallet genera claves de forma determinística y por qué importa el derivation path.</p>
+
+<h2>El problema que resuelven las HD Wallets</h2>
+
+<p>Imagina que cada vez que quisieras recibir bitcoin tuvieras que generar una nueva clave privada aleatoria y hacer backup de ella por separado. Después de cien transacciones tendrías cien claves que guardar. Un desastre.</p>
+
+<p>Las HD Wallets (Hierarchical Deterministic) resuelven esto: una sola semilla genera infinitas claves y direcciones de forma determinística. &quot;Determinística&quot; significa que siempre produce los mismos resultados a partir de la misma entrada.</p>
+
+<p>Con una HD Wallet, guardas solo tu seed phrase de 12-24 palabras y puedes regenerar todas las claves y direcciones que necesites, para siempre.</p>
+
+<h2>Cómo funciona la jerarquía</h2>
+
+<p>HD significa &quot;jerárquico determinístico&quot;. La jerarquía se organiza en niveles: Semilla maestra └── Cuenta 0 ├── Direcciones externas (para recibir) │   ├── Dirección 0 │   ├── Dirección 1 │   └── ... └── Direcciones internas (para cambio) ├── Dirección 0 ├── Dirección 1 └── ... └── Cuenta 1 └── ...</p>
+
+<p>Cada nivel se deriva matemáticamente del anterior. Todo empieza en la semilla (derivada de tu seed phrase) y se ramifica en cuentas, y cada cuenta tiene direcciones para recibir y direcciones para cambio.</p>
+
+<h2>Derivation paths: el camino a cada dirección</h2>
+
+<p>Un derivation path es la &quot;ruta&quot; que sigue la wallet para generar una dirección específica. Se escribe con barras y números:</p>
+
+<p>`m/84&#x27;/0&#x27;/0&#x27;/0/0`</p>
+
+<p>Esto se lee como:</p>
+
+<ul>
+
+  <li>`m` = semilla maestra</li>
+
+  <li>`84&#x27;` = propósito (BIP84 = Native SegWit)</li>
+
+  <li>`0&#x27;` = tipo de moneda (0 = Bitcoin mainnet)</li>
+
+  <li>`0&#x27;` = número de cuenta</li>
+
+  <li>`0` = externa (0) o interna/cambio (1)</li>
+
+  <li>`0` = índice de la dirección</li>
+
+</ul>
+
+<p>El apóstrofe (&#x27;) indica derivación &quot;endurecida&quot; (hardened), que añade seguridad extra.</p>
+
+<h2>Los BIPs que definen los paths</h2>
+
+<p>Diferentes estándares definen qué derivation paths usar para cada tipo de dirección:</p>
+
+<h3>BIP44: direcciones Legacy (1...)</h3>
+
+<p>Path: `m/44&#x27;/0&#x27;/0&#x27;/0/0`</p>
+
+<p>El estándar original para HD wallets. Genera direcciones Legacy (P2PKH).</p>
+
+<h3>BIP49: SegWit envuelto (3...)</h3>
+
+<p>Path: `m/49&#x27;/0&#x27;/0&#x27;/0/0`</p>
+
+<p>Para direcciones P2SH-SegWit (SegWit compatible con sistemas Legacy).</p>
+
+<h3>BIP84: Native SegWit (bc1q...)</h3>
+
+<p>Path: `m/84&#x27;/0&#x27;/0&#x27;/0/0`</p>
+
+<p>El estándar actual para direcciones Native SegWit. El más común en 2025.</p>
+
+<h3>BIP86: Taproot (bc1p...)</h3>
+
+<p>Path: `m/86&#x27;/0&#x27;/0&#x27;/0/0`</p>
+
+<p>Para las direcciones Taproot más modernas.</p>
+
+<div class="callout callout--info">
+  <span class="callout__icon" aria-hidden="true">&#128218;</span>
+  <div class="callout__content">
+    <div class="callout__title">Profundiza en la Base de Conocimiento</div>
+    <p class="callout__text"><a href="../herramientas/hd-wallet.html">Herramienta HD Wallet</a></p>
+  </div>
+</div>
+
+<h2>Por qué importa esto al restaurar</h2>
+
+<p>Cuando restauras tu wallet con la seed phrase en otra aplicación, esa aplicación necesita saber qué derivation paths usar para encontrar tus direcciones.</p>
+
+<p>Si creaste tu wallet con BIP84 (Native SegWit) y la restauras en una app que por defecto usa BIP44 (Legacy), la app generará direcciones diferentes y no verás tu saldo.</p>
+
+<p><strong>La solución:</strong></p>
+
+<ul>
+
+  <li>Usa wallets que soporten múltiples estándares y detecten automáticamente dónde hay fondos</li>
+
+  <li>Si no detecta automáticamente, configura manualmente el derivation path correcto</li>
+
+  <li>Sparrow, por ejemplo, te permite especificar el path exacto</li>
+
+</ul>
+
+<h2>El estándar de facto en 2025</h2>
+
+<p>La mayoría de wallets modernas usan BIP84 (Native SegWit) por defecto. Si creaste tu wallet recientemente en Blue Wallet, Sparrow, o similar, probablemente uses BIP84.</p>
+
+<p>Al restaurar:</p>
+
+<ol>
+
+  <li>Intenta primero con la configuración por defecto de la wallet receptora</li>
+
+  <li>Si no ves tu saldo, prueba cambiando el tipo de script/derivation path</li>
+
+  <li>Sparrow tiene opción de escanear múltiples paths automáticamente</li>
+
+</ol>
+
+<h2>Múltiples cuentas</h2>
+
+<p>Los derivation paths permiten tener múltiples &quot;cuentas&quot; dentro de la misma wallet:</p>
+
+<ul>
+
+  <li>Cuenta 0: `m/84&#x27;/0&#x27;/0&#x27;/...`</li>
+
+  <li>Cuenta 1: `m/84&#x27;/0&#x27;/1&#x27;/...`</li>
+
+  <li>Cuenta 2: `m/84&#x27;/0&#x27;/2&#x27;/...`</li>
+
+</ul>
+
+<p>Esto es útil para separar fondos (ahorros vs gastos, personal vs negocio) sin necesitar múltiples seeds.</p>
+
+<p>La mayoría de usuarios usan solo la cuenta 0 y no necesitan preocuparse por esto.</p>
+
+<h2>Conclusión práctica</h2>
+
+<p>Para el uso diario no necesitas pensar en derivation paths. Tu wallet lo gestiona automáticamente.</p>
+
+<p>Pero es importante saber que existen para:</p>
+
+<ul>
+
+  <li>Entender por qué restaurar en otra wallet puede requerir configuración</li>
+
+  <li>Diagnosticar problemas si no ves tu saldo al restaurar</li>
+
+  <li>Usar herramientas avanzadas que te pidan especificar el path</li>
+
+</ul>
+
+<p>Si alguna vez restauras tu wallet y no ves tu saldo, el derivation path es lo primero que debes verificar.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-3" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegaci&oacute;n entre p&aacute;ginas">
+  <a href="tipos-de-direcciones.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Tipos de direcciones Bitcoin</span>
+  </a>
+  <a href="firma-digital.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Firma digital</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

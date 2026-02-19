@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" data-base-path="../">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Entiende lo que controlas: UTXOs, transacciones, claves y privacidad pr&aacute;ctica." />
+  <meta name="description" content="Entiende lo que controlas: UTXOs, transacciones, claves, direcciones, nodos, miner&iacute;a y hardware wallet." />
   <title>Rabbit Hole &mdash; Nivel 3 | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,6 +17,11 @@
     <aside class="page-layout__sidebar" aria-label="Navegaci&oacute;n del nivel 3">
       <nav class="sidebar">
         <div class="sidebar__section">
+          <div class="sidebar__section-title">Nivel actual</div>
+          <a href="index.html" class="sidebar__link sidebar__link--active">Nivel 3 &mdash; Rabbit Hole</a>
+        </div>
+
+        <div class="sidebar__section">
           <div class="sidebar__section-title">Secci&oacute;n 1 &middot; Transacciones y UTXO</div>
           <a href="modelo-utxo.html" class="sidebar__link">El modelo UTXO</a>
           <a href="anatomia-transaccion.html" class="sidebar__link">Anatom&iacute;a de una transacci&oacute;n</a>
@@ -24,6 +29,7 @@
           <a href="rbf-cpfp.html" class="sidebar__link">RBF y CPFP</a>
           <a href="utxos-y-privacidad.html" class="sidebar__link">Tus UTXOs y privacidad</a>
         </div>
+
         <div class="sidebar__section">
           <div class="sidebar__section-title">Secci&oacute;n 2 &middot; Claves y direcciones</div>
           <a href="clave-privada.html" class="sidebar__link">Clave privada</a>
@@ -32,6 +38,7 @@
           <a href="hd-wallets.html" class="sidebar__link">HD Wallets</a>
           <a href="firma-digital.html" class="sidebar__link">Firma digital</a>
         </div>
+
         <div class="sidebar__section">
           <div class="sidebar__section-title">Secci&oacute;n 3 &middot; Nodos y miner&iacute;a</div>
           <a href="que-es-un-nodo.html" class="sidebar__link">&iquest;Qu&eacute; es un nodo?</a>
@@ -39,21 +46,25 @@
           <a href="mineria-en-detalle.html" class="sidebar__link">Miner&iacute;a en detalle</a>
           <a href="halving.html" class="sidebar__link">El halving</a>
         </div>
+
         <div class="sidebar__section">
           <div class="sidebar__section-title">Secci&oacute;n 4 &middot; Hardware y coin control</div>
           <a href="configurar-hardware-wallet.html" class="sidebar__link">Configura hardware wallet</a>
           <a href="comparativa-hardware-wallets.html" class="sidebar__link">Comparativa hardware wallets</a>
           <a href="coin-control.html" class="sidebar__link">Coin control</a>
         </div>
+
         <div class="sidebar__section">
           <div class="sidebar__section-title">Secci&oacute;n 5 &middot; Seguridad y fiscalidad</div>
           <a href="seguridad-operativa.html" class="sidebar__link">Seguridad operativa</a>
           <a href="fiscalidad-bitcoin.html" class="sidebar__link">Fiscalidad de Bitcoin</a>
         </div>
+
         <div class="sidebar__section">
           <div class="sidebar__section-title">Siguiente nivel</div>
           <a href="../nivel-4/" class="sidebar__link">Nivel 4 &mdash; Down the Rabbit Hole</a>
         </div>
+
         <div class="sidebar__ad-wrap">
           <div class="ad-slot ad-sidebar" id="ad-sidebar-n3" aria-hidden="true"></div>
         </div>
@@ -71,14 +82,14 @@
         <div class="level1-intro">
           <div class="nivel-badge nivel-badge--3 article__badge">Nivel 3</div>
           <h1>Rabbit Hole</h1>
-          <p>Entiende lo que controlas: UTXOs, transacciones, claves y privacidad pr&aacute;ctica.</p>
+          <p>Entiende lo que controlas: UTXOs, transacciones, claves, direcciones, nodos, miner&iacute;a y hardware wallet.</p>
         </div>
 
         <div class="callout callout--info">
           <span class="callout__icon" aria-hidden="true">i</span>
           <div class="callout__content">
             <div class="callout__title">C&oacute;mo usar este nivel</div>
-            <p class="callout__text">Empieza por UTXOs y transacciones. Despu&eacute;s pasa a claves y direcciones para cerrar el modelo mental completo.</p>
+            <p class="callout__text">Sigue el orden: UTXO y transacciones, luego claves y direcciones, despu&eacute;s nodos/miner&iacute;a y finalmente hardware wallet y coin control.</p>
           </div>
         </div>
 
@@ -95,6 +106,24 @@
         <div class="level1-page-list level1-page-list--spaced">
           <a href="clave-privada.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">6</span><span class="level1-page-card__content"><span class="level1-page-card__title">Clave privada</span><span class="level1-page-card__desc">La base criptogr&aacute;fica del control sobre tus bitcoin.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
           <a href="clave-publica.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">7</span><span class="level1-page-card__content"><span class="level1-page-card__title">Clave p&uacute;blica</span><span class="level1-page-card__desc">C&oacute;mo se deriva, para qu&eacute; sirve y qu&eacute; revela.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="tipos-de-direcciones.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">8</span><span class="level1-page-card__content"><span class="level1-page-card__title">Tipos de direcciones Bitcoin</span><span class="level1-page-card__desc">Legacy, SegWit y Taproot: diferencias y uso recomendado.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="hd-wallets.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">9</span><span class="level1-page-card__content"><span class="level1-page-card__title">HD Wallets y derivation paths</span><span class="level1-page-card__desc">Una semilla, m&uacute;ltiples cuentas y direcciones determin&iacute;sticas.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="firma-digital.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">10</span><span class="level1-page-card__content"><span class="level1-page-card__title">Firma digital</span><span class="level1-page-card__desc">C&oacute;mo autorizas transacciones sin revelar tu clave privada.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+        </div>
+
+        <h2 class="section-heading">Secci&oacute;n 3 &middot; Nodos y miner&iacute;a</h2>
+        <div class="level1-page-list level1-page-list--spaced">
+          <a href="que-es-un-nodo.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">11</span><span class="level1-page-card__content"><span class="level1-page-card__title">&iquest;Qu&eacute; es un nodo?</span><span class="level1-page-card__desc">Qu&eacute; valida un nodo y por qu&eacute; te da soberan&iacute;a.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="montar-tu-nodo.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">12</span><span class="level1-page-card__content"><span class="level1-page-card__title">Monta tu propio nodo</span><span class="level1-page-card__desc">Gu&iacute;a pr&aacute;ctica para ejecutar tu nodo en casa.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="mineria-en-detalle.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">13</span><span class="level1-page-card__content"><span class="level1-page-card__title">Miner&iacute;a en detalle</span><span class="level1-page-card__desc">C&oacute;mo se producen bloques y qu&eacute; incentivos sostienen la red.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="halving.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">14</span><span class="level1-page-card__content"><span class="level1-page-card__title">El halving</span><span class="level1-page-card__desc">Qu&eacute; cambia cada halving y por qu&eacute; importa a largo plazo.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+        </div>
+
+        <h2 class="section-heading">Secci&oacute;n 4 &middot; Hardware y coin control</h2>
+        <div class="level1-page-list level1-page-list--spaced">
+          <a href="configurar-hardware-wallet.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">15</span><span class="level1-page-card__content"><span class="level1-page-card__title">Configura tu hardware wallet</span><span class="level1-page-card__desc">Paso a paso para configurar y verificar tu dispositivo.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="comparativa-hardware-wallets.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">16</span><span class="level1-page-card__content"><span class="level1-page-card__title">Comparativa de hardware wallets</span><span class="level1-page-card__desc">Diferencias clave entre opciones populares.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="coin-control.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">17</span><span class="level1-page-card__content"><span class="level1-page-card__title">Coin control: gestiona tus UTXOs</span><span class="level1-page-card__desc">Selecciona inputs con criterio para mejorar privacidad y fees.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
         </div>
 
         <div class="page-nav page-nav--single">

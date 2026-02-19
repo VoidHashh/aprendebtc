@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Qué es un nodo Bitcoin, tipos (full node, pruned, SPV), y por qué ejecutar tu propio nodo te da soberanía real sobre tus bitcoin." />
+  <title>¿Qué es un nodo? &mdash; Nivel 3 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegaci&oacute;n del nivel 3">
+<nav class="sidebar">
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Nivel actual</div>
+    <a href="index.html" class="sidebar__link">Nivel 3 &mdash; Rabbit Hole</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 1 &middot; Transacciones y UTXO</div>
+    <a href="modelo-utxo.html" class="sidebar__link">El modelo UTXO</a>
+    <a href="anatomia-transaccion.html" class="sidebar__link">Anatom&iacute;a de una transacci&oacute;n</a>
+    <a href="mempool.html" class="sidebar__link">La mempool</a>
+    <a href="rbf-cpfp.html" class="sidebar__link">RBF y CPFP</a>
+    <a href="utxos-y-privacidad.html" class="sidebar__link">Tus UTXOs y privacidad</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 2 &middot; Claves y direcciones</div>
+    <a href="clave-privada.html" class="sidebar__link">Clave privada</a>
+    <a href="clave-publica.html" class="sidebar__link">Clave p&uacute;blica</a>
+    <a href="tipos-de-direcciones.html" class="sidebar__link">Tipos de direcciones</a>
+    <a href="hd-wallets.html" class="sidebar__link">HD Wallets</a>
+    <a href="firma-digital.html" class="sidebar__link">Firma digital</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 3 &middot; Nodos y miner&iacute;a</div>
+    <a href="que-es-un-nodo.html" class="sidebar__link sidebar__link--active">&iquest;Qu&eacute; es un nodo?</a>
+    <a href="montar-tu-nodo.html" class="sidebar__link">Monta tu nodo</a>
+    <a href="mineria-en-detalle.html" class="sidebar__link">Miner&iacute;a en detalle</a>
+    <a href="halving.html" class="sidebar__link">El halving</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 4 &middot; Hardware y coin control</div>
+    <a href="configurar-hardware-wallet.html" class="sidebar__link">Configura hardware wallet</a>
+    <a href="comparativa-hardware-wallets.html" class="sidebar__link">Comparativa hardware wallets</a>
+    <a href="coin-control.html" class="sidebar__link">Coin control</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 5 &middot; Seguridad y fiscalidad</div>
+    <a href="seguridad-operativa.html" class="sidebar__link">Seguridad operativa</a>
+    <a href="fiscalidad-bitcoin.html" class="sidebar__link">Fiscalidad de Bitcoin</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Siguiente nivel</div>
+    <a href="../nivel-4/" class="sidebar__link">Nivel 4 &mdash; Down the Rabbit Hole</a>
+  </div>
+  <div class="sidebar__ad-wrap">
+    <div class="ad-slot ad-sidebar" id="ad-sidebar-n3" aria-hidden="true"></div>
+  </div>
+</nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegaci&oacute;n">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 3</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">¿Qué es un nodo?</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--3 article__badge">Nivel 3</div>
+          <h1>¿Qué es un nodo?</h1>
+          <p class="article__subtitle">El software que verifica todas las reglas de Bitcoin de forma independiente. Don&#x27;t trust, verify.</p>
+
+<h2>La red Bitcoin no es un servidor</h2>
+
+<p>Bitcoin no es una aplicación que corre en los servidores de una empresa. Es una red de miles de ordenadores independientes que ejecutan el mismo software y verifican las mismas reglas.</p>
+
+<p>Cada uno de estos ordenadores es un nodo. Cuando alguien envía una transacción, los nodos la verifican. Cuando un minero propone un bloque, los nodos comprueban que cumple todas las reglas. Si algo no cuadra, lo rechazan.</p>
+
+<p>No hay autoridad central que decida qué es válido. El consenso emerge de que todos los nodos aplican las mismas reglas independientemente.</p>
+
+<h2>Tipos de nodos</h2>
+
+<h3>Full node (nodo completo)</h3>
+
+<p>Un full node descarga y verifica toda la blockchain desde el bloque génesis (2009) hasta hoy. Verifica cada transacción y cada bloque de forma independiente.</p>
+
+<p>Requisitos actuales:</p>
+
+<ul>
+
+  <li>Espacio en disco: ~600 GB (y creciendo)</li>
+
+  <li>RAM: 2-4 GB mínimo</li>
+
+  <li>Conexión a internet: no necesita ser muy rápida, pero sí estable</li>
+
+  <li>Tiempo de sincronización inicial: 1-7 días dependiendo del hardware</li>
+
+</ul>
+
+<p>Un full node no confía en nadie. Verifica todo por sí mismo.</p>
+
+<h3>Pruned node (nodo podado)</h3>
+
+<p>Un pruned node verifica todo igual que un full node, pero después de verificar los bloques antiguos, descarta los datos. Solo mantiene los más recientes.</p>
+
+<p>Requisitos:</p>
+
+<ul>
+
+  <li>Espacio en disco: ~10 GB (configurable)</li>
+
+  <li>El resto igual que full node</li>
+
+</ul>
+
+<p>Ventaja: menos espacio en disco. Desventaja: no puedes servir bloques antiguos a otros nodos, y algunas funcionalidades (como rescanning completo) no están disponibles.</p>
+
+<h3>SPV (Simplified Payment Verification)</h3>
+
+<p>Los clientes SPV (como muchas wallets móviles) no verifican todo. Descargan solo las cabeceras de los bloques y confían en que los nodos completos a los que se conectan son honestos.</p>
+
+<p>Ventaja: muy ligeros, funcionan en móviles. Desventaja: confías en terceros. No es &quot;don&#x27;t trust, verify&quot;.</p>
+
+<h2>Por qué importa ejecutar tu propio nodo</h2>
+
+<h3>Verificación independiente</h3>
+
+<p>Cuando usas una wallet móvil que se conecta a servidores de terceros, confías en que esos servidores te dicen la verdad sobre tu saldo y tus transacciones.</p>
+
+<p>Con tu propio nodo, no confías en nadie. Tu nodo verifica directamente contra la blockchain que tú mismo has validado.</p>
+
+<h3>Privacidad</h3>
+
+<p>Cuando tu wallet se conecta a un servidor de terceros, ese servidor ve:</p>
+
+<ul>
+
+  <li>Tus direcciones</li>
+
+  <li>Tus consultas de saldo</li>
+
+  <li>Cuándo estás activo</li>
+
+</ul>
+
+<p>Con tu propio nodo, nadie ve qué direcciones consultas. Tu actividad queda entre tú y tu nodo.</p>
+
+<h3>Contribución a la red</h3>
+
+<p>Los full nodes son la columna vertebral de Bitcoin. Cuantos más nodos independientes hay, más robusta y descentralizada es la red.</p>
+
+<p>Al ejecutar un nodo, contribuyes a la salud del ecosistema.</p>
+
+<h3>Soberanía real</h3>
+
+<p>Si mañana los gobiernos presionaran a los grandes proveedores de nodos para censurar ciertas transacciones, los usuarios con sus propios nodos no se verían afectados.</p>
+
+<p>Tu nodo, tus reglas. Nadie puede impedirte verificar la blockchain.</p>
+
+<h2>¿Es obligatorio tener un nodo?</h2>
+
+<p>No. Puedes usar Bitcoin perfectamente con wallets que se conectan a nodos de terceros. Millones de personas lo hacen.</p>
+
+<p>Pero hay un espectro de soberanía:</p>
+
+<ul>
+
+  <li><strong>Mínima:</strong> Wallet custodial (ni siquiera tienes las llaves)</li>
+
+  <li><strong>Básica:</strong> Wallet no-custodial conectada a nodos de terceros</li>
+
+  <li><strong>Alta:</strong> Wallet no-custodial conectada a tu propio nodo</li>
+
+  <li><strong>Máxima:</strong> Todo lo anterior + nodo Lightning propio</li>
+
+</ul>
+
+<p>Para cantidades pequeñas y uso casual, conectar a nodos de terceros es aceptable. Para cantidades significativas o si valoras la soberanía máxima, tu propio nodo es el camino.</p>
+
+<div class="callout callout--info">
+  <span class="callout__icon" aria-hidden="true">&#128161;</span>
+  <div class="callout__content">
+    <div class="callout__title">No es obligatorio, pero es el ideal</div>
+    <p class="callout__text">No necesitas un nodo para usar Bitcoin. Pero si quieres verificar por ti mismo en vez de confiar en terceros, este es el camino. El nivel máximo de soberanía.</p>
+  </div>
+</div>
+
+<h2>Software de nodo</h2>
+
+<p>El software de referencia es <strong>Bitcoin Core</strong>, mantenido por desarrolladores de todo el mundo. Es el más probado y el que define las reglas de consenso.</p>
+
+<p>Alternativas:</p>
+
+<ul>
+
+  <li><strong>btcd:</strong> Implementación en Go</li>
+
+  <li><strong>Libbitcoin:</strong> Otra implementación independiente</li>
+
+</ul>
+
+<p>Para la mayoría de usuarios, Bitcoin Core (o distribuciones que lo incluyen como Umbrel) es la elección correcta.</p>
+
+<p>En la siguiente página veremos cómo montar tu propio nodo de forma práctica.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-3" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegaci&oacute;n entre p&aacute;ginas">
+  <a href="firma-digital.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Firma digital</span>
+  </a>
+  <a href="montar-tu-nodo.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Monta tu propio nodo</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

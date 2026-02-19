@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Guía práctica para montar tu nodo Bitcoin en casa: hardware necesario, software (Umbrel, RaspiBlitz), y proceso de instalación." />
+  <title>Monta tu propio nodo &mdash; Nivel 3 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegaci&oacute;n del nivel 3">
+<nav class="sidebar">
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Nivel actual</div>
+    <a href="index.html" class="sidebar__link">Nivel 3 &mdash; Rabbit Hole</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 1 &middot; Transacciones y UTXO</div>
+    <a href="modelo-utxo.html" class="sidebar__link">El modelo UTXO</a>
+    <a href="anatomia-transaccion.html" class="sidebar__link">Anatom&iacute;a de una transacci&oacute;n</a>
+    <a href="mempool.html" class="sidebar__link">La mempool</a>
+    <a href="rbf-cpfp.html" class="sidebar__link">RBF y CPFP</a>
+    <a href="utxos-y-privacidad.html" class="sidebar__link">Tus UTXOs y privacidad</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 2 &middot; Claves y direcciones</div>
+    <a href="clave-privada.html" class="sidebar__link">Clave privada</a>
+    <a href="clave-publica.html" class="sidebar__link">Clave p&uacute;blica</a>
+    <a href="tipos-de-direcciones.html" class="sidebar__link">Tipos de direcciones</a>
+    <a href="hd-wallets.html" class="sidebar__link">HD Wallets</a>
+    <a href="firma-digital.html" class="sidebar__link">Firma digital</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 3 &middot; Nodos y miner&iacute;a</div>
+    <a href="que-es-un-nodo.html" class="sidebar__link">&iquest;Qu&eacute; es un nodo?</a>
+    <a href="montar-tu-nodo.html" class="sidebar__link sidebar__link--active">Monta tu nodo</a>
+    <a href="mineria-en-detalle.html" class="sidebar__link">Miner&iacute;a en detalle</a>
+    <a href="halving.html" class="sidebar__link">El halving</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 4 &middot; Hardware y coin control</div>
+    <a href="configurar-hardware-wallet.html" class="sidebar__link">Configura hardware wallet</a>
+    <a href="comparativa-hardware-wallets.html" class="sidebar__link">Comparativa hardware wallets</a>
+    <a href="coin-control.html" class="sidebar__link">Coin control</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 5 &middot; Seguridad y fiscalidad</div>
+    <a href="seguridad-operativa.html" class="sidebar__link">Seguridad operativa</a>
+    <a href="fiscalidad-bitcoin.html" class="sidebar__link">Fiscalidad de Bitcoin</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Siguiente nivel</div>
+    <a href="../nivel-4/" class="sidebar__link">Nivel 4 &mdash; Down the Rabbit Hole</a>
+  </div>
+  <div class="sidebar__ad-wrap">
+    <div class="ad-slot ad-sidebar" id="ad-sidebar-n3" aria-hidden="true"></div>
+  </div>
+</nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegaci&oacute;n">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 3</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Monta tu propio nodo</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--3 article__badge">Nivel 3</div>
+          <h1>Monta tu propio nodo</h1>
+          <p class="article__subtitle">Hardware, software, y los pasos para tener tu propio nodo verificando la blockchain en casa.</p>
+
+<h2>Lo que necesitas</h2>
+
+<p>Montar un nodo Bitcoin en casa es más accesible de lo que parece. No necesitas un ordenador potente ni conocimientos avanzados de informática.</p>
+
+<h3>Hardware mínimo</h3>
+
+<p><strong>Opción económica: Raspberry Pi</strong></p>
+
+<ul>
+
+  <li>Raspberry Pi 4 (4GB RAM) o Raspberry Pi 5</li>
+
+  <li>SSD de 1TB (la blockchain ocupa ~600GB y crece)</li>
+
+  <li>Fuente de alimentación oficial del Pi</li>
+
+  <li>Tarjeta microSD (para el sistema operativo inicial)</li>
+
+  <li>Caja/carcasa (opcional pero recomendado)</li>
+
+  <li>Cable Ethernet (conexión por cable es más estable que WiFi)</li>
+
+</ul>
+
+<p>Coste total: 150-250€ dependiendo de dónde compres.</p>
+
+<p><strong>Opción más potente: mini PC o ordenador reciclado</strong></p>
+
+<ul>
+
+  <li>Cualquier ordenador con al menos 4GB RAM y 1TB de almacenamiento</li>
+
+  <li>Funciona con hardware de hace 10 años si tiene SSD</li>
+
+</ul>
+
+<p><strong>Opciones pre-ensambladas</strong></p>
+
+<ul>
+
+  <li>Start9, Nodl, y otros venden nodos listos para usar</li>
+
+  <li>Más caros pero sin montaje</li>
+
+</ul>
+
+<h3>Conexión</h3>
+
+<ul>
+
+  <li>Internet estable (no necesita ser rápida, 10 Mbps sobra)</li>
+
+  <li>Preferiblemente por cable Ethernet</li>
+
+  <li>El nodo estará encendido 24/7</li>
+
+</ul>
+
+<h2>Software: las distribuciones fáciles</h2>
+
+<p>No necesitas instalar Bitcoin Core manualmente y configurar todo desde cero. Hay distribuciones que lo hacen trivial:</p>
+
+<h3>Umbrel</h3>
+
+<p>La opción más popular por su interfaz amigable. Instalas Umbrel en tu Pi o mini PC y tienes:</p>
+
+<ul>
+
+  <li>Bitcoin Core preconfigurado</li>
+
+  <li>Interfaz web bonita para monitorear</li>
+
+  <li>Tienda de apps: Lightning (LND), Electrum Server, y muchas más</li>
+
+  <li>Actualizaciones fáciles</li>
+
+</ul>
+
+<p>Ideal para principiantes.</p>
+
+<h3>RaspiBlitz</h3>
+
+<p>Enfocado en Lightning Network pero incluye Bitcoin Core. Interfaz por línea de comandos (más técnico) pero muy completo y bien documentado.</p>
+
+<p>Buena opción si quieres aprender más sobre cómo funciona todo por dentro.</p>
+
+<h3>MyNode</h3>
+
+<p>Similar a Umbrel en facilidad de uso. Versión gratuita (Community) y de pago (Premium) con más funciones.</p>
+
+<h3>Start9</h3>
+
+<p>Sistema operativo completo para nodos, con énfasis en privacidad y self-hosting de otros servicios además de Bitcoin.</p>
+
+<h2>El proceso general</h2>
+
+<p>Independientemente de la distribución que elijas, el flujo es similar:</p>
+
+<ol>
+
+  <li><strong>Preparar el hardware:</strong> Conectar SSD al Pi, poner en su caja, conectar ethernet y alimentación.</li>
+
+  <li><strong>Flashear el sistema operativo:</strong> Descargas la imagen de Umbrel/RaspiBlitz/etc., la grabas en la microSD (con Balena Etcher o similar), insertas la SD en el Pi.</li>
+
+  <li><strong>Primer arranque:</strong> El Pi arranca, configuras contraseña y ajustes básicos vía interfaz web o pantalla.</li>
+
+  <li><strong>Sincronización inicial:</strong> Tu nodo empieza a descargar y verificar toda la blockchain. Esto tarda entre 1 y 7 días dependiendo de tu hardware y conexión. El Pi trabaja duro durante este período.</li>
+
+  <li><strong>Nodo operativo:</strong> Una vez sincronizado, tu nodo está verificando bloques nuevos en tiempo real. Ya puedes conectar tu wallet a él.</li>
+
+</ol>
+
+<div class="callout callout--info">
+  <span class="callout__icon" aria-hidden="true">&#128161;</span>
+  <div class="callout__content">
+    <div class="callout__title">La paciencia de la primera sincronización</div>
+    <p class="callout__text">La sincronización inicial es el paso más largo. Dejar el nodo corriendo sin interrupción acelera el proceso. Una vez completado, el nodo se mantiene sincronizado con mínimo esfuerzo.</p>
+  </div>
+</div>
+
+<h2>Conectar tu wallet al nodo</h2>
+
+<p>Una vez tu nodo está operativo, puedes conectar tu wallet para que use tu nodo en vez de servidores de terceros:</p>
+
+<p><strong>Sparrow:</strong> En configuración de servidor, puedes apuntar a tu propio nodo (Bitcoin Core directamente o vía Electrum Server si lo instalaste).</p>
+
+<p><strong>Blue Wallet:</strong> Soporta conectar a tu propio servidor Electrum.</p>
+
+<p><strong>Hardware wallets:</strong> A través de Sparrow conectado a tu nodo.</p>
+
+<p>La configuración exacta depende de tu setup, pero la documentación de Umbrel/RaspiBlitz cubre los casos comunes.</p>
+
+<h2>Qué puedes hacer con tu nodo</h2>
+
+<h3>Lo básico</h3>
+
+<ul>
+
+  <li>Verificar todas las transacciones y bloques independientemente</li>
+
+  <li>Conectar tu wallet para máxima privacidad y verificación</li>
+
+  <li>Consultar la blockchain directamente</li>
+
+</ul>
+
+<h3>Con apps adicionales (vía Umbrel, etc.)</h3>
+
+<ul>
+
+  <li>Explorador de bloques propio (mempool.space local)</li>
+
+  <li>Servidor Electrum para conectar múltiples wallets</li>
+
+  <li>Nodo Lightning (siguiente nivel de soberanía)</li>
+
+  <li>BTCPay Server para aceptar pagos como comerciante</li>
+
+</ul>
+
+<h2>Mantenimiento</h2>
+
+<p>Un nodo bien configurado requiere poco mantenimiento:</p>
+
+<ul>
+
+  <li>Actualizaciones de software (Umbrel lo hace muy fácil)</li>
+
+  <li>Monitorear espacio en disco (la blockchain crece ~60GB/año)</li>
+
+  <li>Reiniciar ocasionalmente si hay problemas</li>
+
+</ul>
+
+<p>No necesitas mirarlo cada día. Pero es bueno verificar de vez en cuando que todo funciona.</p>
+
+<h2>¿Vale la pena?</h2>
+
+<p>Si tienes cantidades significativas de bitcoin y valoras la soberanía: sí.</p>
+
+<p>Si solo tienes pequeñas cantidades y usas bitcoin ocasionalmente: probablemente no es urgente, pero es un buen proyecto de aprendizaje.</p>
+
+<p>El coste es moderado (150-250€ una vez), el consumo eléctrico es bajo (un Pi consume ~5W), y la satisfacción de verificar todo tú mismo no tiene precio.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-3" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegaci&oacute;n entre p&aacute;ginas">
+  <a href="que-es-un-nodo.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">¿Qué es un nodo?</span>
+  </a>
+  <a href="mineria-en-detalle.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Minería en detalle</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

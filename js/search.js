@@ -1,4 +1,4 @@
-﻿/**
+/**
  * aprendebtc.com - search.js
  * Client-side search with static core pages + dynamic base index.
  */
@@ -40,6 +40,16 @@
     { title: 'Tus UTXOs y tu privacidad', url: '/nivel-3/utxos-y-privacidad.html', tags: ['nivel 3', 'utxo', 'privacidad'], section: 'Nivel 3', nivel: 3 },
     { title: 'Clave privada', url: '/nivel-3/clave-privada.html', tags: ['nivel 3', 'claves', 'criptografia'], section: 'Nivel 3', nivel: 3 },
     { title: 'Clave p\u00fablica', url: '/nivel-3/clave-publica.html', tags: ['nivel 3', 'claves', 'criptografia'], section: 'Nivel 3', nivel: 3 },
+    { title: 'Tipos de direcciones Bitcoin', url: '/nivel-3/tipos-de-direcciones.html', tags: ['nivel 3', 'direcciones', 'segwit', 'taproot'], section: 'Nivel 3', nivel: 3 },
+    { title: 'HD Wallets y derivation paths', url: '/nivel-3/hd-wallets.html', tags: ['nivel 3', 'hd wallets', 'derivation path'], section: 'Nivel 3', nivel: 3 },
+    { title: 'Firma digital', url: '/nivel-3/firma-digital.html', tags: ['nivel 3', 'firmas', 'criptografia'], section: 'Nivel 3', nivel: 3 },
+    { title: '\u00bfQu\u00e9 es un nodo?', url: '/nivel-3/que-es-un-nodo.html', tags: ['nivel 3', 'nodo', 'validacion'], section: 'Nivel 3', nivel: 3 },
+    { title: 'Monta tu propio nodo', url: '/nivel-3/montar-tu-nodo.html', tags: ['nivel 3', 'nodo', 'instalacion'], section: 'Nivel 3', nivel: 3 },
+    { title: 'Miner\u00eda en detalle', url: '/nivel-3/mineria-en-detalle.html', tags: ['nivel 3', 'mineria', 'pow'], section: 'Nivel 3', nivel: 3 },
+    { title: 'El halving', url: '/nivel-3/halving.html', tags: ['nivel 3', 'halving', 'emision'], section: 'Nivel 3', nivel: 3 },
+    { title: 'Configura tu hardware wallet', url: '/nivel-3/configurar-hardware-wallet.html', tags: ['nivel 3', 'hardware wallet', 'custodia'], section: 'Nivel 3', nivel: 3 },
+    { title: 'Comparativa de hardware wallets', url: '/nivel-3/comparativa-hardware-wallets.html', tags: ['nivel 3', 'hardware wallet', 'comparativa'], section: 'Nivel 3', nivel: 3 },
+    { title: 'Coin control: gestiona tus UTXOs', url: '/nivel-3/coin-control.html', tags: ['nivel 3', 'coin control', 'utxo'], section: 'Nivel 3', nivel: 3 },
 
     { title: 'Base de Conocimiento', url: '/base/', tags: ['base', 'referencia'], section: 'Pilares' },
     { title: 'Glosario', url: '/glosario.html', tags: ['terminos', 'definiciones'], section: 'Pilares' },

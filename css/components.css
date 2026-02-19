@@ -319,6 +319,32 @@
   color: var(--text-primary);
 }
 
+/* ===== CONTEXT BACK BUTTON ===== */
+.context-back-wrap {
+  margin-bottom: 0.85rem;
+}
+
+.context-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--bg-border);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1.2;
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+
+.context-back:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-muted);
+  background: var(--bg-elevated);
+}
+
 /* ===== BADGES DE NIVEL ===== */
 .nivel-badge {
   display: inline-flex;
@@ -1167,17 +1193,23 @@ html[data-ads="on"] .sidebar__ad-wrap {
 }
 
 .level1-page-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
   min-width: 0;
 }
 
 .level1-page-card__title {
+  display: block;
   font-weight: 600;
-  margin-bottom: 0.2rem;
+  line-height: 1.35;
 }
 
 .level1-page-card__desc {
+  display: block;
   font-size: 0.85rem;
   color: var(--text-secondary);
+  line-height: 1.55;
 }
 
 .level1-page-card__arrow {

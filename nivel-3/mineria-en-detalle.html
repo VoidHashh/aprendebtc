@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cómo funciona la minería de Bitcoin: hash rate, dificultad, nonce, bloques candidatos y recompensas. El proceso técnico explicado." />
+  <title>Minería en detalle &mdash; Nivel 3 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegaci&oacute;n del nivel 3">
+<nav class="sidebar">
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Nivel actual</div>
+    <a href="index.html" class="sidebar__link">Nivel 3 &mdash; Rabbit Hole</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 1 &middot; Transacciones y UTXO</div>
+    <a href="modelo-utxo.html" class="sidebar__link">El modelo UTXO</a>
+    <a href="anatomia-transaccion.html" class="sidebar__link">Anatom&iacute;a de una transacci&oacute;n</a>
+    <a href="mempool.html" class="sidebar__link">La mempool</a>
+    <a href="rbf-cpfp.html" class="sidebar__link">RBF y CPFP</a>
+    <a href="utxos-y-privacidad.html" class="sidebar__link">Tus UTXOs y privacidad</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 2 &middot; Claves y direcciones</div>
+    <a href="clave-privada.html" class="sidebar__link">Clave privada</a>
+    <a href="clave-publica.html" class="sidebar__link">Clave p&uacute;blica</a>
+    <a href="tipos-de-direcciones.html" class="sidebar__link">Tipos de direcciones</a>
+    <a href="hd-wallets.html" class="sidebar__link">HD Wallets</a>
+    <a href="firma-digital.html" class="sidebar__link">Firma digital</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 3 &middot; Nodos y miner&iacute;a</div>
+    <a href="que-es-un-nodo.html" class="sidebar__link">&iquest;Qu&eacute; es un nodo?</a>
+    <a href="montar-tu-nodo.html" class="sidebar__link">Monta tu nodo</a>
+    <a href="mineria-en-detalle.html" class="sidebar__link sidebar__link--active">Miner&iacute;a en detalle</a>
+    <a href="halving.html" class="sidebar__link">El halving</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 4 &middot; Hardware y coin control</div>
+    <a href="configurar-hardware-wallet.html" class="sidebar__link">Configura hardware wallet</a>
+    <a href="comparativa-hardware-wallets.html" class="sidebar__link">Comparativa hardware wallets</a>
+    <a href="coin-control.html" class="sidebar__link">Coin control</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Secci&oacute;n 5 &middot; Seguridad y fiscalidad</div>
+    <a href="seguridad-operativa.html" class="sidebar__link">Seguridad operativa</a>
+    <a href="fiscalidad-bitcoin.html" class="sidebar__link">Fiscalidad de Bitcoin</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Siguiente nivel</div>
+    <a href="../nivel-4/" class="sidebar__link">Nivel 4 &mdash; Down the Rabbit Hole</a>
+  </div>
+  <div class="sidebar__ad-wrap">
+    <div class="ad-slot ad-sidebar" id="ad-sidebar-n3" aria-hidden="true"></div>
+  </div>
+</nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegaci&oacute;n">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 3</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Minería en detalle</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--3 article__badge">Nivel 3</div>
+          <h1>Minería en detalle</h1>
+          <p class="article__subtitle">El puzzle criptográfico que asegura la red. Hash rate, dificultad, nonce, y cómo los mineros compiten por crear bloques.</p>
+
+<h2>El propósito de la minería</h2>
+
+<p>La minería tiene dos funciones esenciales:</p>
+
+<p><strong>Crear nuevos bitcoin:</strong> Los mineros reciben bitcoin nuevos como recompensa por su trabajo. Es la única forma en que se crean bitcoin nuevos (además de los que Satoshi pre-minó al inicio).</p>
+
+<p><strong>Asegurar la red:</strong> El trabajo computacional que los mineros realizan hace que reescribir el historial de transacciones sea prohibitivamente caro. Esto es lo que hace a Bitcoin resistente a ataques.</p>
+
+<p>Ambas funciones están entrelazadas en un sistema de incentivos elegante.</p>
+
+<div class="callout callout--info">
+  <span class="callout__icon" aria-hidden="true">&#128218;</span>
+  <div class="callout__content">
+    <div class="callout__title">Profundiza en la Base de Conocimiento</div>
+    <p class="callout__text"><a href="../base/que-es-la-mineria.html">Qué es la minería</a></p>
+  </div>
+</div>
+
+<h2>El puzzle criptográfico</h2>
+
+<p>Los mineros compiten por resolver un puzzle: encontrar un número (nonce) que, combinado con los datos del bloque, produzca un hash con ciertas características.</p>
+
+<h3>Qué es un hash</h3>
+
+<p>Una función hash toma cualquier dato de entrada y produce una salida de tamaño fijo. Bitcoin usa SHA-256, que produce 256 bits (64 caracteres hexadecimales).</p>
+
+<p>Propiedades clave:</p>
+
+<ul>
+
+  <li>La misma entrada siempre produce la misma salida</li>
+
+  <li>Es imposible predecir la salida sin calcularla</li>
+
+  <li>Un pequeño cambio en la entrada produce una salida completamente diferente</li>
+
+  <li>No puedes deducir la entrada a partir de la salida</li>
+
+</ul>
+
+<h3>El objetivo (target)</h3>
+
+<p>Para que un bloque sea válido, su hash debe ser menor que un valor objetivo (target). En la práctica, esto significa que el hash debe empezar con cierta cantidad de ceros.</p>
+
+<p>Por ejemplo, un target podría requerir que el hash empiece con 19 ceros. Los mineros prueban millones de valores hasta encontrar uno que produzca un hash válido.</p>
+
+<h3>El nonce</h3>
+
+<p>El bloque contiene un campo llamado &quot;nonce&quot; (number used once) que el minero puede cambiar libremente. El proceso:</p>
+
+<ol>
+
+  <li>Construir el bloque candidato con las transacciones elegidas</li>
+
+  <li>Poner el nonce en 0</li>
+
+  <li>Calcular el hash del bloque</li>
+
+  <li>¿El hash es menor que el target? Si sí, bloque válido. Si no:</li>
+
+  <li>Incrementar el nonce y volver al paso 3</li>
+
+</ol>
+
+<p>Este proceso se repite miles de millones de veces por segundo.</p>
+
+<h2>Hash rate: la potencia de cálculo</h2>
+
+<p>El hash rate es la cantidad de hashes que un minero (o toda la red) puede calcular por segundo.</p>
+
+<ul>
+
+  <li>Un ordenador normal: ~10-50 MH/s (megahashes por segundo)</li>
+
+  <li>Un ASIC moderno: ~100-400 TH/s (terahashes por segundo)</li>
+
+  <li>Toda la red Bitcoin: ~500-700 EH/s (exahashes por segundo)</li>
+
+</ul>
+
+<p>La diferencia es abismal. Por eso minar con ordenadores normales dejó de ser viable hace años.</p>
+
+<h2>Ajuste de dificultad</h2>
+
+<p>Bitcoin ajusta la dificultad del puzzle cada 2016 bloques (aproximadamente cada 2 semanas).</p>
+
+<p>El objetivo: mantener el ritmo de un bloque cada ~10 minutos en promedio.</p>
+
+<ul>
+
+  <li>Si los últimos 2016 bloques se minaron en menos de 2 semanas: la dificultad sube</li>
+
+  <li>Si tardaron más de 2 semanas: la dificultad baja</li>
+
+</ul>
+
+<p>Este mecanismo hace que Bitcoin se adapte automáticamente:</p>
+
+<ul>
+
+  <li>Si se conectan más mineros, la dificultad sube</li>
+
+  <li>Si mineros se desconectan (por ejemplo, tras una subida de precio de electricidad), la dificultad baja</li>
+
+</ul>
+
+<p>La dificultad ha subido exponencialmente desde 2009. Hoy es ~90 billones de veces más difícil que al inicio.</p>
+
+<h2>El bloque candidato</h2>
+
+<p>Antes de minar, el minero construye un bloque candidato:</p>
+
+<ol>
+
+  <li>Toma transacciones de la mempool (priorizando las que pagan más fees)</li>
+
+  <li>Las ordena y verifica</li>
+
+  <li>Añade una transacción especial al inicio: la &quot;coinbase transaction&quot; que crea los bitcoin nuevos y los envía a su dirección</li>
+
+  <li>Calcula el hash del conjunto y empieza a buscar el nonce válido</li>
+
+</ol>
+
+<p>Cada minero construye su propio bloque candidato. Pueden elegir diferentes transacciones. Compiten en paralelo.</p>
+
+<h2>La recompensa</h2>
+
+<p>Cuando un minero encuentra un hash válido, broadcast el bloque a la red. Si es aceptado, recibe:</p>
+
+<p><strong>Subsidy (subsidio):</strong> Bitcoin nuevos creados. Actualmente 3.125 BTC por bloque (desde el halving de 2024).</p>
+
+<p><strong>Fees:</strong> La suma de todas las comisiones de las transacciones incluidas en el bloque.</p>
+
+<p>Recompensa total = subsidy + fees</p>
+
+<p>A medida que el subsidy disminuye con cada halving, las fees se vuelven una proporción mayor de la recompensa.</p>
+
+<h2>Por qué esto asegura la red</h2>
+
+<p>Para reescribir un bloque antiguo, un atacante tendría que:</p>
+
+<ol>
+
+  <li>Rehacer el trabajo del bloque objetivo</li>
+
+  <li>Rehacer el trabajo de todos los bloques posteriores (porque cada bloque referencia al anterior)</li>
+
+  <li>Hacerlo más rápido que el resto de la red sigue añadiendo bloques nuevos</li>
+
+</ol>
+
+<p>Esto requeriría más del 50% del hash rate de toda la red, durante un tiempo prolongado, gastando cantidades astronómicas de electricidad.</p>
+
+<p>El coste de atacar Bitcoin supera con creces cualquier beneficio potencial. Es económicamente irracional, y esa es la seguridad real de Bitcoin.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-3" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegaci&oacute;n entre p&aacute;ginas">
+  <a href="montar-tu-nodo.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Monta tu propio nodo</span>
+  </a>
+  <a href="halving.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">El halving</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>
