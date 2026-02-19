@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Qué es el modelo UTXO de Bitcoin y por qué es importante. Entiende cómo funciona tu saldo y por qué cada moneda tiene un historial." />
+  <title>El modelo UTXO — Nivel 3 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 3">
+<nav class="sidebar">
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 1 · Transacciones y UTXO</div>
+    <a href="modelo-utxo.html" class="sidebar__link sidebar__link--active">El modelo UTXO</a>
+    <a href="anatomia-transaccion.html" class="sidebar__link">Anatomía de una transacción</a>
+    <a href="mempool.html" class="sidebar__link">La mempool</a>
+    <a href="rbf-cpfp.html" class="sidebar__link">RBF y CPFP</a>
+    <a href="utxos-y-privacidad.html" class="sidebar__link">Tus UTXOs y privacidad</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 2 · Claves y direcciones</div>
+    <a href="clave-privada.html" class="sidebar__link">Clave privada</a>
+    <a href="clave-publica.html" class="sidebar__link">Clave pública</a>
+    <a href="tipos-de-direcciones.html" class="sidebar__link">Tipos de direcciones</a>
+    <a href="hd-wallets.html" class="sidebar__link">HD Wallets</a>
+    <a href="firma-digital.html" class="sidebar__link">Firma digital</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 3 · Nodos y minería</div>
+    <a href="que-es-un-nodo.html" class="sidebar__link">¿Qué es un nodo?</a>
+    <a href="montar-tu-nodo.html" class="sidebar__link">Monta tu nodo</a>
+    <a href="mineria-en-detalle.html" class="sidebar__link">Minería en detalle</a>
+    <a href="halving.html" class="sidebar__link">El halving</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 4 · Hardware y coin control</div>
+    <a href="configurar-hardware-wallet.html" class="sidebar__link">Configura hardware wallet</a>
+    <a href="comparativa-hardware-wallets.html" class="sidebar__link">Comparativa hardware wallets</a>
+    <a href="coin-control.html" class="sidebar__link">Coin control</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 5 · Seguridad y fiscalidad</div>
+    <a href="seguridad-operativa.html" class="sidebar__link">Seguridad operativa</a>
+    <a href="fiscalidad-bitcoin.html" class="sidebar__link">Fiscalidad de Bitcoin</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Siguiente nivel</div>
+    <a href="../nivel-4/" class="sidebar__link">Nivel 4 — Down the Rabbit Hole</a>
+  </div>
+  <div class="sidebar__ad-wrap">
+    <div class="ad-slot ad-sidebar" id="ad-sidebar-n3" aria-hidden="true"></div>
+  </div>
+</nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 3</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">El modelo UTXO</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--3 article__badge">Nivel 3</div>
+          <h1>El modelo UTXO</h1>
+          <p class="article__subtitle">Bitcoin no funciona con cuentas y saldos. Funciona con monedas digitales individuales que gastas y recibes.</p>
+
+<h2>Olvidate del concepto de &quot;saldo&quot;</h2>
+
+<p>Cuando miras tu cuenta bancaria, ves un número: tu saldo. El banco mantiene una base de datos con una entrada para ti que dice cuánto dinero tienes. Cuando pagas o recibes, ese número sube o baja.</p>
+
+<p>Bitcoin no funciona así.</p>
+
+<p>En Bitcoin no existe una base de datos central que diga &quot;la wallet X tiene 0.5 BTC&quot;. Lo que existe es un registro público de todas las transacciones, y tu &quot;saldo&quot; es simplemente la suma de todas las monedas individuales que has recibido y no has gastado todavía.</p>
+
+<h2>Qué es un UTXO</h2>
+
+<p>UTXO significa Unspent Transaction Output. En español: salida de transacción no gastada.</p>
+
+<p>Cada vez que recibes bitcoin, recibes un UTXO: una &quot;moneda digital&quot; de una cantidad específica. No es 0.5 BTC genéricos, es un UTXO específico de exactamente 0.5 BTC que llegó a tu dirección en una transacción concreta.</p>
+
+<p>Tu wallet muestra un &quot;saldo&quot; sumando todos tus UTXOs. Si tienes tres UTXOs de 0.1, 0.25 y 0.15 BTC, tu wallet muestra 0.5 BTC de saldo. Pero internamente, tienes tres monedas separadas.</p>
+
+<h2>La analogía del efectivo</h2>
+
+<p>Imagina tu cartera física llena de billetes. No tienes &quot;150€ de saldo&quot;. Tienes, por ejemplo, un billete de 100€, uno de 20€, dos de 10€ y dos de 5€.</p>
+
+<p>Si quieres pagar 30€, tienes que usar billetes reales. Podrías usar el de 20€ + uno de 10€. O tres de 10€ + no tienes tres, así que usarías el de 20€ + dos de 5€. O el de 100€ y recibir 70€ de cambio.</p>
+
+<p>Los UTXOs funcionan igual. No puedes pagar &quot;parte de un UTXO&quot;. Gastas UTXOs completos y recibes el cambio como un nuevo UTXO.</p>
+
+<h2>Ejemplo práctico</h2>
+
+<p>Supongamos que tienes dos UTXOs:</p>
+
+<ul>
+
+  <li>UTXO A: 0.3 BTC (recibido de Kraken el 15 de enero)</li>
+
+  <li>UTXO B: 0.2 BTC (recibido de Peach el 3 de febrero)</li>
+
+</ul>
+
+<p>Tu wallet muestra: 0.5 BTC</p>
+
+<p>Ahora quieres enviar 0.1 BTC a un amigo.</p>
+
+<p>La wallet elige uno de tus UTXOs para gastar. Digamos que usa el UTXO B (0.2 BTC). La transacción tendrá:</p>
+
+<ul>
+
+  <li><strong>Input:</strong> UTXO B (0.2 BTC)</li>
+
+  <li><strong>Output 1:</strong> 0.1 BTC → dirección de tu amigo</li>
+
+  <li><strong>Output 2:</strong> 0.099 BTC → dirección de cambio (tuya)</li>
+
+  <li><strong>Fee:</strong> 0.001 BTC → al minero</li>
+
+</ul>
+
+<p>El UTXO B desaparece (ya está gastado). En su lugar aparecen dos nuevos UTXOs: uno de 0.1 BTC que ahora controla tu amigo, y uno de 0.099 BTC que es tu cambio.</p>
+
+<p>Después de la transacción, tienes:</p>
+
+<ul>
+
+  <li>UTXO A: 0.3 BTC (sin tocar)</li>
+
+  <li>UTXO nuevo: 0.099 BTC (tu cambio)</li>
+
+</ul>
+
+<p>Total: 0.399 BTC (el 0.001 fue la fee)</p>
+
+<div class="callout callout--info">
+  <span class="callout__icon" aria-hidden="true">&#128218;</span>
+  <div class="callout__content">
+    <div class="callout__title">Profundiza en la Base de Conocimiento</div>
+    <p class="callout__text"><a href="../herramientas/conversor.html">Conversor de unidades</a></p>
+  </div>
+</div>
+
+<h2>Por qué importa el modelo UTXO</h2>
+
+<h3>Privacidad</h3>
+
+<p>Cada UTXO tiene un historial. Puedes rastrear de dónde vino siguiendo las transacciones hacia atrás en la blockchain.</p>
+
+<p>Si compraste bitcoin en un exchange con KYC, ese exchange sabe que envió bitcoin a cierta dirección. Ese UTXO está, en cierto sentido, &quot;marcado&quot; con tu identidad para cualquier empresa de análisis de cadena.</p>
+
+<p>Si compraste sin KYC, el UTXO no tiene tu nombre asociado desde el origen.</p>
+
+<p>Esto tiene consecuencias prácticas que exploraremos más adelante en este nivel.</p>
+
+<h3>Gestión de fees</h3>
+
+<p>Los UTXOs grandes son más eficientes que muchos UTXOs pequeños. Una transacción que gasta 10 UTXOs pequeños ocupa más espacio (y por tanto paga más fees) que una que gasta 1 UTXO grande.</p>
+
+<p>Por eso, cuando las fees están bajas, puede tener sentido &quot;consolidar&quot; UTXOs pequeños en uno grande. Y por eso los exchanges que procesan muchos retiros a veces los agrupan en pocas transacciones con muchos outputs.</p>
+
+<h3>Polvo (dust)</h3>
+
+<p>Los UTXOs muy pequeños pueden llegar a costar más en fees para gastarlos que su propio valor. Estos UTXOs &quot;polvo&quot; (dust) se quedan atrapados en tu wallet, aumentando tu saldo nominal pero siendo prácticamente inútiles.</p>
+
+<p>Las buenas prácticas evitan crear dust: no hacer demasiados micropagos on-chain, consolidar UTXOs pequeños cuando las fees están bajas.</p>
+
+<h2>Tu wallet hace todo esto por ti</h2>
+
+<p>La buena noticia es que las wallets modernas gestionan los UTXOs automáticamente. Cuando envías bitcoin, tu wallet:</p>
+
+<ol>
+
+  <li>Selecciona qué UTXOs usar (según algoritmos de optimización de fees y privacidad)</li>
+
+  <li>Calcula la fee necesaria</li>
+
+  <li>Genera la dirección de cambio</li>
+
+  <li>Construye y firma la transacción</li>
+
+</ol>
+
+<p>No necesitas pensar en UTXOs para usar Bitcoin. Pero entenderlos te permite tomar mejores decisiones, especialmente cuando gestiones cantidades significativas o te preocupe la privacidad.</p>
+
+<p>En el nivel 3 veremos cómo hacer &quot;coin control&quot;: elegir manualmente qué UTXOs usar en cada transacción. Por ahora, lo importante es entender el concepto.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-3" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="wallets-recomendadas.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Wallets recomendadas en 2025</span>
+  </a>
+  <a href="anatomia-transaccion.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Anatomía de una transacción</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

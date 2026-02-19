@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cómo tus UTXOs afectan tu privacidad en Bitcoin. KYC vs no-KYC, análisis de cadena, y por qué importa no mezclar monedas." />
+  <title>Tus UTXOs y tu privacidad — Nivel 3 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 3">
+<nav class="sidebar">
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 1 · Transacciones y UTXO</div>
+    <a href="modelo-utxo.html" class="sidebar__link">El modelo UTXO</a>
+    <a href="anatomia-transaccion.html" class="sidebar__link">Anatomía de una transacción</a>
+    <a href="mempool.html" class="sidebar__link">La mempool</a>
+    <a href="rbf-cpfp.html" class="sidebar__link">RBF y CPFP</a>
+    <a href="utxos-y-privacidad.html" class="sidebar__link sidebar__link--active">Tus UTXOs y privacidad</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 2 · Claves y direcciones</div>
+    <a href="clave-privada.html" class="sidebar__link">Clave privada</a>
+    <a href="clave-publica.html" class="sidebar__link">Clave pública</a>
+    <a href="tipos-de-direcciones.html" class="sidebar__link">Tipos de direcciones</a>
+    <a href="hd-wallets.html" class="sidebar__link">HD Wallets</a>
+    <a href="firma-digital.html" class="sidebar__link">Firma digital</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 3 · Nodos y minería</div>
+    <a href="que-es-un-nodo.html" class="sidebar__link">¿Qué es un nodo?</a>
+    <a href="montar-tu-nodo.html" class="sidebar__link">Monta tu nodo</a>
+    <a href="mineria-en-detalle.html" class="sidebar__link">Minería en detalle</a>
+    <a href="halving.html" class="sidebar__link">El halving</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 4 · Hardware y coin control</div>
+    <a href="configurar-hardware-wallet.html" class="sidebar__link">Configura hardware wallet</a>
+    <a href="comparativa-hardware-wallets.html" class="sidebar__link">Comparativa hardware wallets</a>
+    <a href="coin-control.html" class="sidebar__link">Coin control</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 5 · Seguridad y fiscalidad</div>
+    <a href="seguridad-operativa.html" class="sidebar__link">Seguridad operativa</a>
+    <a href="fiscalidad-bitcoin.html" class="sidebar__link">Fiscalidad de Bitcoin</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Siguiente nivel</div>
+    <a href="../nivel-4/" class="sidebar__link">Nivel 4 — Down the Rabbit Hole</a>
+  </div>
+  <div class="sidebar__ad-wrap">
+    <div class="ad-slot ad-sidebar" id="ad-sidebar-n3" aria-hidden="true"></div>
+  </div>
+</nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 3</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Tus UTXOs y tu privacidad</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--3 article__badge">Nivel 3</div>
+          <h1>Tus UTXOs y tu privacidad</h1>
+          <p class="article__subtitle">Cada UTXO tiene un historial. Si compraste con KYC, ese historial lleva tu nombre. Las consecuencias prácticas.</p>
+
+<h2>La promesa y la realidad</h2>
+
+<p>Bitcoin se percibe a veces como anónimo. La realidad es diferente: Bitcoin es pseudónimo. Las direcciones no tienen tu nombre, pero las transacciones son completamente públicas y permanentes.</p>
+
+<p>Cualquiera puede ver todas las transacciones de la blockchain. Empresas especializadas (Chainalysis, Elliptic) dedican sus recursos a vincular direcciones con identidades reales. Y si algún punto de tu historial de transacciones está asociado a tu identidad, ese vínculo puede propagarse hacia adelante y hacia atrás.</p>
+
+<p>Esta página conecta la decisión KYC/no-KYC del nivel 1 con sus consecuencias prácticas.</p>
+
+<h2>El rastro del KYC</h2>
+
+<p>Cuando compras bitcoin en un exchange con KYC:</p>
+
+<ol>
+
+  <li>El exchange verifica tu identidad (DNI, selfie, dirección)</li>
+
+  <li>Registra cada compra y retiro que haces</li>
+
+  <li>Cuando retiras a tu wallet, el exchange sabe que esa dirección es tuya</li>
+
+  <li>El exchange comparte datos con empresas de análisis y, cuando se lo requieren, con autoridades</li>
+
+</ol>
+
+<p>Resultado: el UTXO que llega a tu wallet está vinculado a ti en las bases de datos de terceros. No en la blockchain misma, pero sí en sistemas externos que la analizan.</p>
+
+<h2>Las heurísticas del análisis de cadena</h2>
+
+<p>Las empresas de análisis usan varias técnicas para rastrear fondos:</p>
+
+<h3>Common input ownership</h3>
+
+<p>Si una transacción tiene múltiples inputs, probablemente todos pertenecen a la misma persona. Tiene sentido: ¿por qué combinarías tus UTXOs con los de un desconocido?</p>
+
+<p>Consecuencia: si gastas juntos un UTXO de Kraken (con tu nombre) y uno de un cajero (sin tu nombre), ahora ambos están vinculados a ti.</p>
+
+<h3>Identificación del cambio</h3>
+
+<p>En una transacción con dos outputs, uno es el pago y otro es el cambio. Los analistas usan patrones para deducir cuál es cuál:</p>
+
+<ul>
+
+  <li>El output más pequeño suele ser el pago (típico cuando compras algo)</li>
+
+  <li>El output que va a un nuevo tipo de dirección del mismo monedero es probablemente el cambio</li>
+
+  <li>Patrones de redondeo: un pago de exactamente 0.01 BTC probablemente sea el pago, no el cambio</li>
+
+</ul>
+
+<h3>Reutilización de direcciones</h3>
+
+<p>Si recibes múltiples pagos en la misma dirección, todos quedan trivialmente vinculados. Las wallets HD generan direcciones nuevas automáticamente, pero algunos usuarios reutilizan direcciones por error o desconocimiento.</p>
+
+<h3>Clustering</h3>
+
+<p>Combinando todas estas heurísticas, los analistas agrupan direcciones que probablemente pertenecen al mismo dueño. Si una dirección del cluster está identificada (por ejemplo, el depósito de un exchange), todo el cluster queda vinculado a esa identidad.</p>
+
+<h2>Si compraste sin KYC</h2>
+
+<p>Tus UTXOs no tienen tu nombre asociado desde el origen. El vendedor P2P o el cajero no tienen tus datos. Esto te da una ventaja inicial de privacidad.</p>
+
+<p>Pero puedes perderla:</p>
+
+<ul>
+
+  <li>Si mezclas un UTXO anónimo con uno KYC en la misma transacción, el común input ownership los vincula</li>
+
+  <li>Si depositas en un exchange con KYC, ese exchange ahora sabe que esa dirección (y las anteriores en su historial) te pertenecen</li>
+
+  <li>Si compras algo que requiere dar tu dirección física y pagas desde tu wallet personal, el comerciante puede vincular la transacción contigo</li>
+
+</ul>
+
+<div class="callout callout--warning">
+  <span class="callout__icon" aria-hidden="true">&#9888;&#65039;</span>
+  <div class="callout__content">
+    <div class="callout__title">No mezcles UTXOs sin pensar</div>
+    <p class="callout__text">Si combinas un UTXO anónimo con uno KYC en la misma transacción, ambos quedan vinculados a tu identidad. Esto deshace cualquier privacidad que tuviera el UTXO anónimo.</p>
+  </div>
+</div>
+
+<h2>Qué puedes hacer</h2>
+
+<h3>Coin control</h3>
+
+<p>Muchas wallets avanzadas (Sparrow, por ejemplo) te permiten seleccionar manualmente qué UTXOs usar en cada transacción. En vez de dejar que la wallet elija automáticamente, tú decides.</p>
+
+<p>Esto te permite:</p>
+
+<ul>
+
+  <li>Mantener separados los UTXOs KYC de los no-KYC</li>
+
+  <li>Etiquetar cada UTXO por su origen</li>
+
+  <li>Evitar mezclar fondos de diferentes fuentes</li>
+
+</ul>
+
+<p>El coin control se cubre en detalle más adelante en este nivel.</p>
+
+<h3>No reutilizar direcciones</h3>
+
+<p>Tu wallet HD ya lo hace automáticamente si está bien configurada. Cada recepción genera una dirección nueva. Verifica que esta función está activa.</p>
+
+<h3>Herramientas avanzadas de privacidad</h3>
+
+<p>Para romper el vínculo entre UTXOs y tu identidad existen técnicas como CoinJoin y PayJoin. Estas se explican en el nivel 4.</p>
+
+<h2>El espectro de la privacidad</h2>
+
+<p>No todo es blanco o negro. Hay grados:</p>
+
+<p><strong>Mínima privacidad:</strong> Compras todo en exchange KYC, retiras siempre a la misma wallet, reutilizas direcciones.</p>
+
+<p><strong>Privacidad básica:</strong> Compras con KYC pero usas wallet HD, no reutilizas direcciones, haces coin control básico.</p>
+
+<p><strong>Privacidad mejorada:</strong> Compras parte con KYC, parte sin KYC, mantienes los UTXOs separados, usas coin control estricto.</p>
+
+<p><strong>Privacidad alta:</strong> Compras solo sin KYC, usas CoinJoin, te conectas vía Tor, gestionas todo con disciplina.</p>
+
+<p>Cada persona debe encontrar su punto en este espectro según sus circunstancias, su threat model, y el esfuerzo que esté dispuesta a invertir.</p>
+
+<p>Este tema se profundiza significativamente en el nivel 4, donde veremos técnicas avanzadas de privacidad.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-3" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="rbf-cpfp.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">RBF y CPFP: acelerar transacciones</span>
+  </a>
+  <a href="clave-privada.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Clave privada</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

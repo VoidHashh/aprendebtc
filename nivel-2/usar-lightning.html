@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Guía práctica para usar Lightning Network: instalar wallet, recibir con invoices, enviar pagos, y hacer tu primera transacción." />
+  <title>Cómo usar Lightning paso a paso — Nivel 2 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 2">
+<nav class="sidebar">
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 1 · Saca tus bitcoin del exchange</div>
+    <a href="crear-tu-wallet.html" class="sidebar__link">Paso 1: Crea tu wallet propia</a>
+    <a href="retirar-del-exchange.html" class="sidebar__link">Paso 2: Retirar del exchange</a>
+    <a href="tu-seed-phrase.html" class="sidebar__link">Paso 3: Protege tu seed phrase</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 2 · No-KYC desde el inicio</div>
+    <a href="comprar-en-dex-p2p.html" class="sidebar__link">Comprar en DEX/P2P</a>
+    <a href="cajeros-bitcoin.html" class="sidebar__link">Comprar en cajeros Bitcoin</a>
+    <a href="wallet-y-seed-nokyc.html" class="sidebar__link">Wallet y seed (no-KYC)</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 3 · Exchanges</div>
+    <a href="exchanges-comparativa.html" class="sidebar__link">Comparativa de exchanges</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 4 · Lightning Network</div>
+    <a href="que-es-lightning.html" class="sidebar__link">Lightning: qué es</a>
+    <a href="usar-lightning.html" class="sidebar__link sidebar__link--active">Cómo usar Lightning</a>
+    <a href="wallets-lightning.html" class="sidebar__link">Wallets Lightning</a>
+    <a href="lightning-address.html" class="sidebar__link">Lightning Address e invoices</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 5 · Seguridad esencial</div>
+    <a href="como-hacer-backup.html" class="sidebar__link">Cómo hacer backup</a>
+    <a href="wallets-recomendadas.html" class="sidebar__link">Wallets recomendadas</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Siguiente nivel</div>
+    <a href="../nivel-3/" class="sidebar__link">Nivel 3 — Rabbit Hole</a>
+  </div>
+  <div class="sidebar__ad-wrap">
+    <div class="ad-slot ad-sidebar" id="ad-sidebar-n2" aria-hidden="true"></div>
+  </div>
+</nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 2</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Cómo usar Lightning paso a paso</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--2 article__badge">Nivel 2</div>
+          <h1>Cómo usar Lightning paso a paso</h1>
+          <p class="article__subtitle">Tu primer pago Lightning en minutos. Enviar, recibir, y entender el flujo básico.</p>
+
+<h2>Lo que necesitas para empezar</h2>
+
+<p>Para usar Lightning necesitas una wallet que lo soporte. En la siguiente página verás las opciones recomendadas, pero el flujo general es el mismo en todas:</p>
+
+<ol>
+
+  <li>Instalas la wallet</li>
+
+  <li>La wallet configura tu acceso a Lightning (puede requerir una transacción on-chain inicial o no, dependiendo de la wallet)</li>
+
+  <li>Ya puedes enviar y recibir pagos Lightning</li>
+
+</ol>
+
+<p>Algunas wallets (como Phoenix) gestionan todo automáticamente. Otras (como Zeus) te dan más control. Para empezar, una wallet que &quot;simplemente funcione&quot; es lo mejor.</p>
+
+<h2>Cómo recibir pagos Lightning</h2>
+
+<p>Hay dos formas principales de recibir pagos en Lightning:</p>
+
+<h3>Invoice (factura)</h3>
+
+<p>Una invoice o factura Lightning es un código temporal que generas para recibir un pago específico. Se ve como una cadena larga de caracteres que empieza por &quot;lnbc&quot; y también puede mostrarse como código QR.</p>
+
+<p>Para generar una invoice:</p>
+
+<ol>
+
+  <li>Abre tu wallet Lightning</li>
+
+  <li>Selecciona &quot;Recibir&quot; o &quot;Receive&quot;</li>
+
+  <li>Introduce la cantidad que esperas recibir (en algunas wallets es opcional)</li>
+
+  <li>La wallet genera el código de la invoice</li>
+
+  <li>Comparte ese código o QR con quien te va a pagar</li>
+
+</ol>
+
+<p>Las invoices tienen fecha de expiración (generalmente entre 1 hora y 24 horas). Si no se pagan en ese tiempo, caducan y necesitas generar una nueva.</p>
+
+<h3>Lightning Address</h3>
+
+<p>Una Lightning Address es una dirección permanente con formato de email: tunombre@servicio.com. A diferencia de las invoices, no caduca y no necesitas generar una nueva para cada pago.</p>
+
+<p>Configurar tu Lightning Address depende de la wallet que uses. Algunas lo ofrecen integrado, otras requieren usar un servicio externo.</p>
+
+<p>La siguiente página cubre esto en más detalle.</p>
+
+<h2>Cómo enviar pagos Lightning</h2>
+
+<p>Para pagar con Lightning:</p>
+
+<ol>
+
+  <li>Abre tu wallet</li>
+
+  <li>Selecciona &quot;Enviar&quot; o &quot;Send&quot;</li>
+
+  <li>Escanea el código QR de la invoice del receptor, o pega el código de texto</li>
+
+  <li>Revisa la cantidad y confirma</li>
+
+  <li>El pago se procesa en segundos</li>
+
+</ol>
+
+<p>Si el receptor tiene Lightning Address, puedes introducir directamente su dirección (como enviar un email) en vez de escanear una invoice.</p>
+
+<div class="callout callout--info">
+  <span class="callout__icon" aria-hidden="true">&#128161;</span>
+  <div class="callout__content">
+    <div class="callout__title">Prueba contigo mismo</div>
+    <p class="callout__text">Una buena forma de entender el flujo es instalar dos wallets Lightning diferentes (por ejemplo, Phoenix y Breez) y enviarte sats de una a otra. Verás lo rápido que es y perderás el miedo a equivocarte.</p>
+  </div>
+</div>
+
+<h2>Tu primer pago: paso a paso</h2>
+
+<p>Vamos a hacer un ejercicio práctico. Necesitas una wallet Lightning ya instalada y con algo de saldo (aunque sea una cantidad mínima).</p>
+
+<h3>Opción A: Envía a una Lightning Address pública</h3>
+
+<p>Muchos creadores de contenido publican su Lightning Address. Busca en Twitter/X o Nostr a alguien que la tenga en su perfil (formato tipo usuario@walletofsatoshi.com o similar).</p>
+
+<ol>
+
+  <li>Abre tu wallet</li>
+
+  <li>Selecciona &quot;Enviar&quot;</li>
+
+  <li>Introduce la Lightning Address</li>
+
+  <li>Pon una cantidad mínima (100 sats, por ejemplo)</li>
+
+  <li>Confirma y envía</li>
+
+</ol>
+
+<p>Verás que el pago se completa en 1-2 segundos.</p>
+
+<h3>Opción B: Genera y paga tu propia invoice</h3>
+
+<p>Si tienes dos wallets:</p>
+
+<ol>
+
+  <li>En la wallet A, genera una invoice por una cantidad pequeña</li>
+
+  <li>En la wallet B, escanea el QR de esa invoice</li>
+
+  <li>Confirma el pago</li>
+
+  <li>Verás el saldo moverse de B a A instantáneamente</li>
+
+</ol>
+
+<p>Este ejercicio te muestra tanto el lado receptor como el pagador.</p>
+
+<h2>Qué puede salir mal</h2>
+
+<p>Lightning funciona muy bien la mayoría del tiempo, pero ocasionalmente:</p>
+
+<p><strong>No se encuentra ruta:</strong> Si intentas enviar una cantidad grande o el receptor tiene mala conectividad en la red Lightning, puede que no se encuentre un camino para el pago. La wallet te avisará y no perderás fondos.</p>
+
+<p><strong>Invoice expirada:</strong> Si tardas demasiado en pagar, la invoice caduca. Simplemente pide una nueva al receptor.</p>
+
+<p><strong>Saldo insuficiente:</strong> Necesitas tener suficiente saldo Lightning para cubrir el pago más la pequeña comisión de routing.</p>
+
+<p>En todos estos casos, si el pago no se completa, tu dinero no se pierde. O se completa, o falla y el saldo vuelve a ti.</p>
+
+<h2>Siguiente paso</h2>
+
+<p>Ahora que entiendes el flujo básico, la siguiente página te presenta las wallets Lightning recomendadas según tu nivel y necesidades.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-2" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="que-es-lightning.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Lightning Network: bitcoin instantáneo</span>
+  </a>
+  <a href="wallets-lightning.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Wallets Lightning recomendadas</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

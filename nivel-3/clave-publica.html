@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Qué es una clave pública Bitcoin, cómo se deriva de la privada, y su relación con las direcciones. El flujo criptográfico explicado." />
+  <title>Clave pública — Nivel 3 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 3">
+<nav class="sidebar">
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 1 · Transacciones y UTXO</div>
+    <a href="modelo-utxo.html" class="sidebar__link">El modelo UTXO</a>
+    <a href="anatomia-transaccion.html" class="sidebar__link">Anatomía de una transacción</a>
+    <a href="mempool.html" class="sidebar__link">La mempool</a>
+    <a href="rbf-cpfp.html" class="sidebar__link">RBF y CPFP</a>
+    <a href="utxos-y-privacidad.html" class="sidebar__link">Tus UTXOs y privacidad</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 2 · Claves y direcciones</div>
+    <a href="clave-privada.html" class="sidebar__link">Clave privada</a>
+    <a href="clave-publica.html" class="sidebar__link sidebar__link--active">Clave pública</a>
+    <a href="tipos-de-direcciones.html" class="sidebar__link">Tipos de direcciones</a>
+    <a href="hd-wallets.html" class="sidebar__link">HD Wallets</a>
+    <a href="firma-digital.html" class="sidebar__link">Firma digital</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 3 · Nodos y minería</div>
+    <a href="que-es-un-nodo.html" class="sidebar__link">¿Qué es un nodo?</a>
+    <a href="montar-tu-nodo.html" class="sidebar__link">Monta tu nodo</a>
+    <a href="mineria-en-detalle.html" class="sidebar__link">Minería en detalle</a>
+    <a href="halving.html" class="sidebar__link">El halving</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 4 · Hardware y coin control</div>
+    <a href="configurar-hardware-wallet.html" class="sidebar__link">Configura hardware wallet</a>
+    <a href="comparativa-hardware-wallets.html" class="sidebar__link">Comparativa hardware wallets</a>
+    <a href="coin-control.html" class="sidebar__link">Coin control</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 5 · Seguridad y fiscalidad</div>
+    <a href="seguridad-operativa.html" class="sidebar__link">Seguridad operativa</a>
+    <a href="fiscalidad-bitcoin.html" class="sidebar__link">Fiscalidad de Bitcoin</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Siguiente nivel</div>
+    <a href="../nivel-4/" class="sidebar__link">Nivel 4 — Down the Rabbit Hole</a>
+  </div>
+  <div class="sidebar__ad-wrap">
+    <div class="ad-slot ad-sidebar" id="ad-sidebar-n3" aria-hidden="true"></div>
+  </div>
+</nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 3</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Clave pública</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--3 article__badge">Nivel 3</div>
+          <h1>Clave pública</h1>
+          <p class="article__subtitle">Se calcula desde la clave privada, pero no revela la privada. La magia matemática que hace funcionar Bitcoin.</p>
+
+<h2>De la privada a la pública</h2>
+
+<p>Tu clave privada es un número secreto. Tu clave pública es otro número que se calcula a partir de la privada usando matemáticas de curva elíptica.</p>
+
+<p>La propiedad crucial: de la clave privada puedes calcular la pública fácilmente. Pero de la pública no puedes obtener la privada. Esta &quot;función de un solo sentido&quot; es la base de la seguridad de Bitcoin.</p>
+
+<p>No necesitas entender las matemáticas subyacentes (eso viene en el nivel 5). Lo importante es entender qué implica esta propiedad.</p>
+
+<h2>Para qué sirve la clave pública</h2>
+
+<p>La clave pública tiene dos funciones principales:</p>
+
+<p><strong>Derivar direcciones:</strong> Las direcciones Bitcoin se calculan a partir de la clave pública aplicando funciones hash. Puedes compartir direcciones para recibir bitcoin sin revelar tu clave pública completa.</p>
+
+<p><strong>Verificar firmas:</strong> Cuando firmas una transacción con tu clave privada, cualquiera puede verificar que la firma es válida usando tu clave pública. Esto prueba que controlas la clave privada sin revelarla.</p>
+
+<h2>El flujo completo</h2>
+
+<p>El camino desde tu seed phrase hasta poder enviar y recibir bitcoin:</p>
+
+<ol>
+
+  <li><strong>Seed phrase (12-24 palabras)</strong> → representación legible de una semilla</li>
+
+  <li><strong>Semilla maestra</strong> → número derivado de la seed phrase</li>
+
+  <li><strong>Claves privadas</strong> → números derivados de la semilla usando derivation paths</li>
+
+  <li><strong>Claves públicas</strong> → calculadas a partir de cada clave privada (curva elíptica)</li>
+
+  <li><strong>Direcciones</strong> → calculadas a partir de cada clave pública (funciones hash)</li>
+
+</ol>
+
+<p>Cada paso es determinístico: dada la misma entrada, siempre produce la misma salida. Por eso puedes regenerar todo desde la seed phrase.</p>
+
+<div class="callout callout--info">
+  <span class="callout__icon" aria-hidden="true">&#128218;</span>
+  <div class="callout__content">
+    <div class="callout__title">Profundiza en la Base de Conocimiento</div>
+    <p class="callout__text"><a href="../herramientas/claves.html">Herramienta de claves</a></p>
+  </div>
+</div>
+
+<h2>Clave pública vs dirección</h2>
+
+<p>A veces se confunden, pero son cosas diferentes:</p>
+
+<p>La <strong>clave pública</strong> es un punto en una curva elíptica, representable como un número largo (65 bytes sin comprimir, 33 bytes comprimido).</p>
+
+<p>La <strong>dirección</strong> es un hash de la clave pública, codificado en un formato más corto y legible (como bc1q... o 1...).</p>
+
+<p>La dirección es más corta, incluye verificación de errores (checksum), y no revela la clave pública directamente hasta que gastas desde ella.</p>
+
+<p>Cuando recibes bitcoin en una dirección, la clave pública permanece oculta. Cuando gastas desde esa dirección, la clave pública se revela en la transacción (es necesaria para verificar la firma).</p>
+
+<p>Por eso es buena práctica no reutilizar direcciones: después de gastar, la clave pública es conocida, y aunque romper la criptografía actual es inviable, minimizar exposición es prudente.</p>
+
+<h2>La analogía del candado</h2>
+
+<p>Imagina un candado que cualquiera puede cerrar pero solo tú puedes abrir:</p>
+
+<ul>
+
+  <li>La <strong>clave privada</strong> es la llave única que abre el candado</li>
+
+  <li>La <strong>clave pública</strong> es el candado en sí, abierto, que cualquiera puede usar para cerrar (enviar bitcoin)</li>
+
+  <li>La <strong>dirección</strong> es como un identificador del candado que publicas</li>
+
+</ul>
+
+<p>Cuando alguien te envía bitcoin, básicamente &quot;cierra el candado&quot; con tu clave pública. Solo tu clave privada puede &quot;abrirlo&quot; (gastar esos bitcoin).</p>
+
+<h2>Implicaciones prácticas</h2>
+
+<h3>Seguridad</h3>
+
+<p>Tu clave pública se expone cuando gastas bitcoin. Si algún día la criptografía de curva elíptica se rompiera (algo no previsto en décadas, si acaso), las claves públicas expuestas serían vulnerables.</p>
+
+<p>Las direcciones Taproot (bc1p...) mejoran esto ocultando más información. Pero la mejor práctica general es: no reutilices direcciones.</p>
+
+<h3>Verificación</h3>
+
+<p>Cualquiera puede verificar que una firma es válida conociendo la clave pública. Esto es lo que permite a los nodos validar transacciones sin conocer las claves privadas de nadie.</p>
+
+<h3>Derivación determinística</h3>
+
+<p>Como todo se deriva matemáticamente de la seed phrase, puedes regenerar cualquier wallet compatible en cualquier momento. Esto es lo que hace posible el backup con solo 12-24 palabras.</p>
+
+<h2>Lo que no necesitas hacer</h2>
+
+<p>En el uso normal:</p>
+
+<ul>
+
+  <li>No necesitas ver ni gestionar tus claves públicas directamente</li>
+
+  <li>Tu wallet las maneja internamente</li>
+
+  <li>Solo interactúas con direcciones (para recibir) y seed phrase (para backup)</li>
+
+</ul>
+
+<p>Las claves públicas existen y son cruciales para el funcionamiento de Bitcoin, pero como usuario las ves raramente a menos que hagas debugging o uses herramientas avanzadas.</p>
+
+<p>En la siguiente página veremos los diferentes tipos de direcciones que se derivan de las claves públicas.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-3" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="clave-privada.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Clave privada</span>
+  </a>
+  <a href="tipos-de-direcciones.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Tipos de direcciones Bitcoin</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

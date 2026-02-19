@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Tu seed phrase es la llave maestra de tus bitcoin. Aprende cómo guardarla de forma segura y qué errores evitar a toda costa." />
+  <title>Paso 3: Protege tu frase semilla — Nivel 2 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 2">
+<nav class="sidebar">
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 1 · Saca tus bitcoin del exchange</div>
+    <a href="crear-tu-wallet.html" class="sidebar__link">Paso 1: Crea tu wallet propia</a>
+    <a href="retirar-del-exchange.html" class="sidebar__link">Paso 2: Retirar del exchange</a>
+    <a href="tu-seed-phrase.html" class="sidebar__link sidebar__link--active">Paso 3: Protege tu seed phrase</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 2 · No-KYC desde el inicio</div>
+    <a href="comprar-en-dex-p2p.html" class="sidebar__link">Comprar en DEX/P2P</a>
+    <a href="cajeros-bitcoin.html" class="sidebar__link">Comprar en cajeros Bitcoin</a>
+    <a href="wallet-y-seed-nokyc.html" class="sidebar__link">Wallet y seed (no-KYC)</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 3 · Exchanges</div>
+    <a href="exchanges-comparativa.html" class="sidebar__link">Comparativa de exchanges</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 4 · Lightning Network</div>
+    <a href="que-es-lightning.html" class="sidebar__link">Lightning: qué es</a>
+    <a href="usar-lightning.html" class="sidebar__link">Cómo usar Lightning</a>
+    <a href="wallets-lightning.html" class="sidebar__link">Wallets Lightning</a>
+    <a href="lightning-address.html" class="sidebar__link">Lightning Address e invoices</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 5 · Seguridad esencial</div>
+    <a href="como-hacer-backup.html" class="sidebar__link">Cómo hacer backup</a>
+    <a href="wallets-recomendadas.html" class="sidebar__link">Wallets recomendadas</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Siguiente nivel</div>
+    <a href="../nivel-3/" class="sidebar__link">Nivel 3 — Rabbit Hole</a>
+  </div>
+  <div class="sidebar__ad-wrap">
+    <div class="ad-slot ad-sidebar" id="ad-sidebar-n2" aria-hidden="true"></div>
+  </div>
+</nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 2</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Paso 3: Protege tu frase semilla</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--2 article__badge">Nivel 2</div>
+          <h1>Paso 3: Protege tu frase semilla</h1>
+          <p class="article__subtitle">Las 12 o 24 palabras que controlan todos tus bitcoin. Cómo protegerlas para siempre.</p>
+
+<h2>Qué es exactamente tu seed phrase</h2>
+
+<p>Cuando creaste tu wallet, se generaron 12 o 24 palabras en inglés. Esta lista de palabras, en ese orden específico, es tu frase semilla o seed phrase.</p>
+
+<p>Desde un punto de vista técnico, estas palabras son una representación legible de un número aleatorio gigantesco que sirve como raíz para generar todas tus claves privadas y direcciones. Pero lo que importa en la práctica es esto: con esas palabras, puedes recuperar el acceso a todos tus bitcoin desde cualquier dispositivo compatible.</p>
+
+<div class="callout callout--info">
+  <span class="callout__icon" aria-hidden="true">&#128218;</span>
+  <div class="callout__content">
+    <div class="callout__title">Profundiza en la Base de Conocimiento</div>
+    <p class="callout__text"><a href="../base/que-es-seed-phrase.html">Qué es una seed phrase</a></p>
+  </div>
+</div>
+
+<h2>Lo que tu seed phrase puede hacer</h2>
+
+<p>Si pierdes tu teléfono, se te rompe el ordenador, o borras la wallet por accidente, puedes instalar la misma aplicación (o cualquier otra wallet compatible) en otro dispositivo, introducir tus palabras, y recuperar el acceso completo a tus fondos.</p>
+
+<p>Esto es la belleza de la autocustodia: no dependes de ninguna empresa, servicio ni tercero. Mientras tengas tu seed phrase, tienes tus bitcoin.</p>
+
+<h2>El otro lado de la moneda</h2>
+
+<p>La misma propiedad que hace que tu seed phrase sea tan poderosa también la hace peligrosa: cualquiera que tenga esas palabras puede acceder a tus bitcoin.</p>
+
+<p>No hay contraseña adicional (a menos que añadas una passphrase, que es un tema más avanzado). No hay autenticación de dos factores. No hay &quot;soporte técnico&quot; al que llamar para bloquear el acceso. Si alguien obtiene tu seed phrase, puede vaciar tu wallet en minutos.</p>
+
+<div class="callout callout--danger">
+  <span class="callout__icon" aria-hidden="true">&#128680;</span>
+  <div class="callout__content">
+    <div class="callout__title">Tu responsabilidad absoluta</div>
+    <p class="callout__text">Si alguien obtiene tu frase semilla, tiene acceso total a tus bitcoin. No hay banco que te ayude. No hay forma de revertirlo. Es tu responsabilidad protegerla.</p>
+  </div>
+</div>
+
+<h2>Cómo guardar tu seed phrase</h2>
+
+<h3>La regla de oro: offline y físico</h3>
+
+<p>Tu seed phrase nunca debe existir en formato digital en un dispositivo conectado a internet. Esto significa:</p>
+
+<ul>
+
+  <li>Escríbela en papel, a mano, con letra clara</li>
+
+  <li>Verifica que cada palabra está escrita correctamente y en el orden correcto</li>
+
+  <li>Guarda ese papel en un lugar seguro</li>
+
+</ul>
+
+<h3>Dónde guardarla</h3>
+
+<p>El nivel de seguridad debe ser proporcional a la cantidad de bitcoin que proteges:</p>
+
+<p>Para cantidades pequeñas, un cajón cerrado con llave o un lugar discreto en casa puede ser suficiente. No necesitas una caja fuerte para guardar la seed phrase de una wallet con 100€.</p>
+
+<p>Para cantidades moderadas a significativas, considera una caja fuerte en casa, una caja de seguridad bancaria, o entregar una copia sellada a una persona de máxima confianza.</p>
+
+<h3>Para máxima durabilidad</h3>
+
+<p>El papel se degrada con el tiempo, puede mojarse, quemarse, o destruirse. Si tienes cantidades significativas de bitcoin y quieres protección a largo plazo, considera grabar tu seed phrase en metal.</p>
+
+<p>Productos como Seedplate, Cryptosteel, o Billfodl son placas de acero o titanio diseñadas específicamente para este propósito. Resisten fuego, agua, y condiciones extremas. El coste es de 50-150€, una inversión razonable si proteges cantidades importantes.</p>
+
+<h2>Lo que nunca debes hacer</h2>
+
+<p>Estos errores han costado millones en bitcoin robados:</p>
+
+<p><strong>No hagas foto con el móvil.</strong> Las fotos se sincronizan automáticamente con la nube (iCloud, Google Photos). Ahora tu seed phrase está en los servidores de una empresa, accesible para hackers o empleados malintencionados.</p>
+
+<p><strong>No hagas captura de pantalla.</strong> Mismo problema. Además, muchas aplicaciones tienen acceso a tu galería de imágenes.</p>
+
+<p><strong>No la guardes en notas del móvil, email, o cualquier servicio en la nube.</strong> Gmail, Dropbox, Google Drive, iCloud Notes — todos son objetivos habituales de hackeos y filtraciones.</p>
+
+<p><strong>No la envíes por WhatsApp, Telegram, SMS, ni a nadie.</strong> Aunque confíes en el destinatario, los mensajes pueden ser interceptados, los teléfonos pueden ser robados, y las cuentas pueden ser hackeadas.</p>
+
+<p><strong>No la introduzcas en ninguna web.</strong> Ningún servicio legítimo te pedirá tu seed phrase completa. Si alguien te la pide, es una estafa. Sin excepciones.</p>
+
+<h2>Verificar que funciona</h2>
+
+<p>Antes de mover cantidades significativas a tu wallet, haz una prueba de restauración:</p>
+
+<ol>
+
+  <li>Instala la misma wallet (o una compatible) en otro dispositivo</li>
+
+  <li>Selecciona &quot;Restaurar wallet&quot; o &quot;Import wallet&quot;</li>
+
+  <li>Introduce tu seed phrase</li>
+
+  <li>Verifica que puedes ver las mismas direcciones y el mismo saldo</li>
+
+</ol>
+
+<p>Si funciona, sabes que tu backup es correcto. Si no funciona, revisa las palabras antes de depender de esa seed phrase para cantidades mayores.</p>
+
+<h2>Siguiente paso</h2>
+
+<p>Ya tienes tu wallet configurada, tus bitcoin retirados del exchange, y tu seed phrase protegida. Si has llegado hasta aquí por el camino del exchange (KYC), has completado los pasos fundamentales de la autocustodia.</p>
+
+<p>Si estás explorando el camino sin KYC, las siguientes páginas te guiarán por las opciones de compra que no requieren verificación de identidad.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-2" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="retirar-del-exchange.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Paso 2: Retirar bitcoin del exchange a tu wallet</span>
+  </a>
+  <a href="comprar-en-dex-p2p.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Comprar en exchanges descentralizados (P2P)</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

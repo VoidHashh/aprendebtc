@@ -1,4 +1,4 @@
-/**
+﻿/**
  * aprendebtc.com - search.js
  * Client-side search with static core pages + dynamic base index.
  */
@@ -8,15 +8,41 @@
 
   const staticIndex = [
     { title: 'Inicio', url: '/', tags: ['home', 'landing'], section: 'General' },
+
     { title: 'Nivel 1 - Nocoinero Curioso', url: '/nivel-1/', tags: ['nivel 1', 'principiante'], section: 'Niveles', nivel: 1 },
     { title: 'Antes de empezar', url: '/nivel-1/antes-de-empezar.html', tags: ['nivel 1', 'inicio'], section: 'Nivel 1', nivel: 1 },
     { title: 'El problema del KYC', url: '/nivel-1/el-problema-del-kyc.html', tags: ['kyc', 'privacidad'], section: 'Nivel 1', nivel: 1 },
     { title: 'Dos caminos: KYC o no-KYC', url: '/nivel-1/dos-caminos.html', tags: ['kyc', 'no-kyc'], section: 'Nivel 1', nivel: 1 },
     { title: 'Registrarte en un exchange', url: '/nivel-1/registrarte-en-un-exchange.html', tags: ['exchange', 'registro'], section: 'Nivel 1', nivel: 1 },
     { title: 'Tu primera compra', url: '/nivel-1/tu-primera-compra.html', tags: ['compra', 'sats'], section: 'Nivel 1', nivel: 1 },
-    { title: 'Qué acabas de hacer', url: '/nivel-1/que-has-hecho.html', tags: ['custodia', 'keys'], section: 'Nivel 1', nivel: 1 },
+    { title: 'Qu\u00e9 acabas de hacer', url: '/nivel-1/que-has-hecho.html', tags: ['custodia', 'keys'], section: 'Nivel 1', nivel: 1 },
+
+    { title: 'Nivel 2 - Ya Tengo Sats', url: '/nivel-2/', tags: ['nivel 2', 'autocustodia', 'lightning'], section: 'Niveles', nivel: 2 },
+    { title: 'Paso 1: Crea tu wallet propia', url: '/nivel-2/crear-tu-wallet.html', tags: ['nivel 2', 'wallet', 'autocustodia'], section: 'Nivel 2', nivel: 2 },
+    { title: 'Paso 2: Retirar bitcoin del exchange a tu wallet', url: '/nivel-2/retirar-del-exchange.html', tags: ['nivel 2', 'retiro', 'exchange'], section: 'Nivel 2', nivel: 2 },
+    { title: 'Paso 3: Protege tu frase semilla', url: '/nivel-2/tu-seed-phrase.html', tags: ['nivel 2', 'seed', 'seguridad'], section: 'Nivel 2', nivel: 2 },
+    { title: 'Comprar en exchanges descentralizados (P2P)', url: '/nivel-2/comprar-en-dex-p2p.html', tags: ['nivel 2', 'p2p', 'no-kyc'], section: 'Nivel 2', nivel: 2 },
+    { title: 'Comprar en cajeros Bitcoin', url: '/nivel-2/cajeros-bitcoin.html', tags: ['nivel 2', 'cajeros', 'compra'], section: 'Nivel 2', nivel: 2 },
+    { title: 'Tu wallet y seed phrase (camino no-KYC)', url: '/nivel-2/wallet-y-seed-nokyc.html', tags: ['nivel 2', 'wallet', 'no-kyc'], section: 'Nivel 2', nivel: 2 },
+    { title: 'Comparativa de exchanges', url: '/nivel-2/exchanges-comparativa.html', tags: ['nivel 2', 'exchanges', 'comparativa'], section: 'Nivel 2', nivel: 2 },
+    { title: 'Lightning Network: bitcoin instant\u00e1neo', url: '/nivel-2/que-es-lightning.html', tags: ['nivel 2', 'lightning', 'pagos'], section: 'Nivel 2', nivel: 2 },
+    { title: 'C\u00f3mo usar Lightning paso a paso', url: '/nivel-2/usar-lightning.html', tags: ['nivel 2', 'lightning', 'guia'], section: 'Nivel 2', nivel: 2 },
+    { title: 'Wallets Lightning recomendadas', url: '/nivel-2/wallets-lightning.html', tags: ['nivel 2', 'lightning', 'wallets'], section: 'Nivel 2', nivel: 2 },
+    { title: 'Lightning Address y facturas (invoices)', url: '/nivel-2/lightning-address.html', tags: ['nivel 2', 'lightning', 'invoice'], section: 'Nivel 2', nivel: 2 },
+    { title: 'C\u00f3mo hacer backup correctamente', url: '/nivel-2/como-hacer-backup.html', tags: ['nivel 2', 'backup', 'seed'], section: 'Nivel 2', nivel: 2 },
+    { title: 'Wallets recomendadas', url: '/nivel-2/wallets-recomendadas.html', tags: ['nivel 2', 'wallets', 'seguridad'], section: 'Nivel 2', nivel: 2 },
+
+    { title: 'Nivel 3 - Rabbit Hole', url: '/nivel-3/', tags: ['nivel 3', 'utxo', 'transacciones'], section: 'Niveles', nivel: 3 },
+    { title: 'El modelo UTXO', url: '/nivel-3/modelo-utxo.html', tags: ['nivel 3', 'utxo'], section: 'Nivel 3', nivel: 3 },
+    { title: 'Anatom\u00eda de una transacci\u00f3n', url: '/nivel-3/anatomia-transaccion.html', tags: ['nivel 3', 'transacciones', 'inputs', 'outputs'], section: 'Nivel 3', nivel: 3 },
+    { title: 'La mempool', url: '/nivel-3/mempool.html', tags: ['nivel 3', 'mempool', 'confirmaciones'], section: 'Nivel 3', nivel: 3 },
+    { title: 'RBF y CPFP: acelerar transacciones', url: '/nivel-3/rbf-cpfp.html', tags: ['nivel 3', 'rbf', 'cpfp', 'fees'], section: 'Nivel 3', nivel: 3 },
+    { title: 'Tus UTXOs y tu privacidad', url: '/nivel-3/utxos-y-privacidad.html', tags: ['nivel 3', 'utxo', 'privacidad'], section: 'Nivel 3', nivel: 3 },
+    { title: 'Clave privada', url: '/nivel-3/clave-privada.html', tags: ['nivel 3', 'claves', 'criptografia'], section: 'Nivel 3', nivel: 3 },
+    { title: 'Clave p\u00fablica', url: '/nivel-3/clave-publica.html', tags: ['nivel 3', 'claves', 'criptografia'], section: 'Nivel 3', nivel: 3 },
+
     { title: 'Base de Conocimiento', url: '/base/', tags: ['base', 'referencia'], section: 'Pilares' },
-    { title: 'Glosario', url: '/glosario.html', tags: ['términos', 'definiciones'], section: 'Pilares' },
+    { title: 'Glosario', url: '/glosario.html', tags: ['terminos', 'definiciones'], section: 'Pilares' },
     { title: 'Recursos', url: '/recursos.html', tags: ['libros', 'podcasts'], section: 'Pilares' },
     { title: 'Herramientas', url: '/herramientas/', tags: ['tools', 'hash'], section: 'Pilares' },
     { title: 'Comunidad', url: '/comunidad/', tags: ['meetups', 'eventos'], section: 'Pilares' }
@@ -72,7 +98,7 @@
 
     const cleanQuery = (query || '').trim();
     if (cleanQuery.length < 2) {
-      container.innerHTML = '<p class="search-hint">Escribe para buscar artículos, conceptos y niveles...</p>';
+      container.innerHTML = '<p class="search-hint">Escribe para buscar art\u00edculos, conceptos y niveles...</p>';
       return;
     }
 

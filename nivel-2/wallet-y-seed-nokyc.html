@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Si compras bitcoin sin KYC, necesitas tu wallet configurada antes de la compra. Misma wallet, misma responsabilidad, diferente origen." />
+  <title>Tu wallet y seed phrase (camino no-KYC) — Nivel 2 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 2">
+<nav class="sidebar">
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 1 · Saca tus bitcoin del exchange</div>
+    <a href="crear-tu-wallet.html" class="sidebar__link">Paso 1: Crea tu wallet propia</a>
+    <a href="retirar-del-exchange.html" class="sidebar__link">Paso 2: Retirar del exchange</a>
+    <a href="tu-seed-phrase.html" class="sidebar__link">Paso 3: Protege tu seed phrase</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 2 · No-KYC desde el inicio</div>
+    <a href="comprar-en-dex-p2p.html" class="sidebar__link">Comprar en DEX/P2P</a>
+    <a href="cajeros-bitcoin.html" class="sidebar__link">Comprar en cajeros Bitcoin</a>
+    <a href="wallet-y-seed-nokyc.html" class="sidebar__link sidebar__link--active">Wallet y seed (no-KYC)</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 3 · Exchanges</div>
+    <a href="exchanges-comparativa.html" class="sidebar__link">Comparativa de exchanges</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 4 · Lightning Network</div>
+    <a href="que-es-lightning.html" class="sidebar__link">Lightning: qué es</a>
+    <a href="usar-lightning.html" class="sidebar__link">Cómo usar Lightning</a>
+    <a href="wallets-lightning.html" class="sidebar__link">Wallets Lightning</a>
+    <a href="lightning-address.html" class="sidebar__link">Lightning Address e invoices</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 5 · Seguridad esencial</div>
+    <a href="como-hacer-backup.html" class="sidebar__link">Cómo hacer backup</a>
+    <a href="wallets-recomendadas.html" class="sidebar__link">Wallets recomendadas</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Siguiente nivel</div>
+    <a href="../nivel-3/" class="sidebar__link">Nivel 3 — Rabbit Hole</a>
+  </div>
+  <div class="sidebar__ad-wrap">
+    <div class="ad-slot ad-sidebar" id="ad-sidebar-n2" aria-hidden="true"></div>
+  </div>
+</nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 2</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Tu wallet y seed phrase (camino no-KYC)</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--2 article__badge">Nivel 2</div>
+          <h1>Tu wallet y seed phrase (camino no-KYC)</h1>
+          <p class="article__subtitle">La autocustodia es igual para todos. Lo que cambia es cómo llegaron los bitcoin a tu wallet.</p>
+
+<h2>La diferencia clave del camino no-KYC</h2>
+
+<p>Si vienes del exchange (camino KYC), primero compraste bitcoin y luego creaste tu wallet para sacarlo. Si vas por el camino no-KYC, el orden se invierte: necesitas tener tu wallet lista antes de comprar.</p>
+
+<p>La razón es simple: cuando compras en un cajero, escaneas el QR de tu wallet. Cuando cierras un trato en Bisq o Peach, das tu dirección al vendedor. No hay un &quot;depósito temporal&quot; en ningún servicio. Los bitcoin van directamente a ti.</p>
+
+<h2>Tu wallet: exactamente igual</h2>
+
+<p>El proceso de crear tu wallet y proteger tu seed phrase es idéntico al que se describe en las páginas anteriores de este nivel:</p>
+
+<ol>
+
+  <li>Descarga una wallet no-custodial (Blue Wallet para móvil, Sparrow para desktop)</li>
+
+  <li>Crea una nueva wallet</li>
+
+  <li>Anota tu seed phrase de 12 o 24 palabras</li>
+
+  <li>Guárdala de forma segura (papel, metal, lugar seguro)</li>
+
+  <li>Verifica que puedes restaurar la wallet en otro dispositivo</li>
+
+</ol>
+
+<p>No hay ninguna diferencia técnica en la wallet ni en la seed phrase entre bitcoin comprado con KYC y bitcoin comprado sin KYC. La wallet no sabe ni le importa de dónde vienen los fondos.</p>
+
+<div class="callout callout--info">
+  <span class="callout__icon" aria-hidden="true">&#128161;</span>
+  <div class="callout__content">
+    <div class="callout__title">Misma wallet, misma responsabilidad</div>
+    <p class="callout__text">Da igual por qué camino hayas llegado. Tu seed phrase es tu responsabilidad absoluta, y las reglas de seguridad son las mismas: offline, físico, y nunca compartido con nadie.</p>
+  </div>
+</div>
+
+<h2>Lo que sí cambia: el historial de tus UTXOs</h2>
+
+<p>Aunque la wallet sea idéntica, hay una diferencia fundamental en lo que significan tus bitcoin desde el punto de vista de la privacidad.</p>
+
+<p>Si compraste en un exchange con KYC, ese exchange reportó tu compra asociada a tu identidad. Cuando retiraste a tu wallet, la transacción quedó registrada en la blockchain y las empresas de análisis de cadena pueden vincular esa dirección contigo.</p>
+
+<p>Si compraste sin KYC, no hay ningún registro centralizado que vincule esa compra con tu identidad. El vendedor P2P o el cajero no tienen tus datos. La transacción existe en la blockchain, pero nadie sabe que eres tú.</p>
+
+<p>Esta diferencia tiene consecuencias prácticas que explorarás en el nivel 3, cuando hablemos de UTXOs y privacidad. Por ahora, lo importante es entender que el origen de tus bitcoin importa.</p>
+
+<h2>Prepara tu wallet antes de comprar</h2>
+
+<p>Si vas a usar un cajero o una plataforma P2P, asegúrate de tener tu wallet completamente configurada antes de iniciar la compra:</p>
+
+<ul>
+
+  <li>Wallet instalada y funcionando</li>
+
+  <li>Seed phrase anotada y guardada de forma segura</li>
+
+  <li>Sabes cómo generar una dirección de recepción</li>
+
+  <li>Sabes cómo mostrar el código QR de tu dirección (para cajeros)</li>
+
+</ul>
+
+<p>No es momento de estar descargando apps y creando wallets mientras tienes al vendedor P2P esperando o frente al cajero con billetes en la mano.</p>
+
+<div class="callout callout--info">
+  <span class="callout__icon" aria-hidden="true">&#128218;</span>
+  <div class="callout__content">
+    <div class="callout__title">Profundiza en la Base de Conocimiento</div>
+    <p class="callout__text"><a href="../base/tipos-de-wallet.html">Tipos de wallet</a></p>
+  </div>
+</div>
+
+<h2>Convergencia de caminos</h2>
+
+<p>A partir de aquí, hayas venido por el camino KYC o el no-KYC, tienes lo mismo: bitcoin bajo tu propio control en una wallet no-custodial, con una seed phrase que solo tú conoces.</p>
+
+<p>La siguiente sección explora las opciones de exchanges para quienes todavía están decidiendo dónde comprar, y después entramos en Lightning Network para usar bitcoin en el día a día.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-2" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="cajeros-bitcoin.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Comprar en cajeros Bitcoin</span>
+  </a>
+  <a href="exchanges-comparativa.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Comparativa de exchanges</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

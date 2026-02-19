@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cómo acelerar una transacción Bitcoin atascada usando RBF (Replace-By-Fee) o CPFP (Child-Pays-For-Parent). Guía práctica." />
+  <title>RBF y CPFP: acelerar transacciones — Nivel 3 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 3">
+<nav class="sidebar">
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 1 · Transacciones y UTXO</div>
+    <a href="modelo-utxo.html" class="sidebar__link">El modelo UTXO</a>
+    <a href="anatomia-transaccion.html" class="sidebar__link">Anatomía de una transacción</a>
+    <a href="mempool.html" class="sidebar__link">La mempool</a>
+    <a href="rbf-cpfp.html" class="sidebar__link sidebar__link--active">RBF y CPFP</a>
+    <a href="utxos-y-privacidad.html" class="sidebar__link">Tus UTXOs y privacidad</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 2 · Claves y direcciones</div>
+    <a href="clave-privada.html" class="sidebar__link">Clave privada</a>
+    <a href="clave-publica.html" class="sidebar__link">Clave pública</a>
+    <a href="tipos-de-direcciones.html" class="sidebar__link">Tipos de direcciones</a>
+    <a href="hd-wallets.html" class="sidebar__link">HD Wallets</a>
+    <a href="firma-digital.html" class="sidebar__link">Firma digital</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 3 · Nodos y minería</div>
+    <a href="que-es-un-nodo.html" class="sidebar__link">¿Qué es un nodo?</a>
+    <a href="montar-tu-nodo.html" class="sidebar__link">Monta tu nodo</a>
+    <a href="mineria-en-detalle.html" class="sidebar__link">Minería en detalle</a>
+    <a href="halving.html" class="sidebar__link">El halving</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 4 · Hardware y coin control</div>
+    <a href="configurar-hardware-wallet.html" class="sidebar__link">Configura hardware wallet</a>
+    <a href="comparativa-hardware-wallets.html" class="sidebar__link">Comparativa hardware wallets</a>
+    <a href="coin-control.html" class="sidebar__link">Coin control</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 5 · Seguridad y fiscalidad</div>
+    <a href="seguridad-operativa.html" class="sidebar__link">Seguridad operativa</a>
+    <a href="fiscalidad-bitcoin.html" class="sidebar__link">Fiscalidad de Bitcoin</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Siguiente nivel</div>
+    <a href="../nivel-4/" class="sidebar__link">Nivel 4 — Down the Rabbit Hole</a>
+  </div>
+  <div class="sidebar__ad-wrap">
+    <div class="ad-slot ad-sidebar" id="ad-sidebar-n3" aria-hidden="true"></div>
+  </div>
+</nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 3</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">RBF y CPFP: acelerar transacciones</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--3 article__badge">Nivel 3</div>
+          <h1>RBF y CPFP: acelerar transacciones</h1>
+          <p class="article__subtitle">Tu transacción está atascada en la mempool. Dos técnicas para acelararla sin perder los fondos.</p>
+
+<h2>El problema: transacción atascada</h2>
+
+<p>Has enviado una transacción con una fee que parecía razonable, pero la mempool se ha congestionado y llevas horas (o días) esperando confirmación. Tu wallet muestra la transacción como &quot;pendiente&quot; y no hay señales de que vaya a confirmar pronto.</p>
+
+<p>Esto no significa que hayas perdido tus bitcoin. La transacción está en la mempool, esperando. Pero necesitas acelararla para que se confirme en tiempo razonable.</p>
+
+<p>Tienes dos herramientas: RBF y CPFP.</p>
+
+<h2>RBF: Replace-By-Fee</h2>
+
+<p>RBF significa literalmente &quot;reemplazar por fee&quot;. Consiste en enviar una nueva versión de la misma transacción, pero con una fee más alta. La versión antigua queda invalidada.</p>
+
+<h3>Cómo funciona</h3>
+
+<ol>
+
+  <li>Tu wallet crea una transacción que gasta exactamente los mismos UTXOs que la original</li>
+
+  <li>La nueva transacción paga una fee significativamente mayor</li>
+
+  <li>Los nodos y mineros ven la nueva transacción y descartan la antigua</li>
+
+  <li>La versión con fee alta se confirma; la antigua nunca llegará a un bloque</li>
+
+</ol>
+
+<h3>Requisitos</h3>
+
+<p><strong>La transacción original debe ser RBF-compatible.</strong> Esto significa que fue marcada con una bandera especial (sequence number &lt; 0xffffffff - 1) que indica &quot;esta transacción puede ser reemplazada&quot;.</p>
+
+<p>La mayoría de wallets modernas habilitan RBF por defecto (Sparrow, Blue Wallet en modo avanzado). Algunas lo tienen como opción que debes activar.</p>
+
+<p>Si la transacción original no era RBF-compatible, esta técnica no funciona.</p>
+
+<h3>Cómo hacerlo en Sparrow</h3>
+
+<ol>
+
+  <li>Ve a la pestaña &quot;Transactions&quot;</li>
+
+  <li>Encuentra la transacción pendiente</li>
+
+  <li>Click derecho → &quot;Increase Fee&quot; o &quot;Bump Fee&quot;</li>
+
+  <li>Sparrow calcula la fee necesaria para que se confirme</li>
+
+  <li>Revisa y firma la nueva transacción</li>
+
+  <li>La nueva transacción reemplaza a la antigua</li>
+
+</ol>
+
+<h3>Cuánto aumentar</h3>
+
+<p>Mempool.space te dice qué fee necesitas para entrar en los próximos bloques. Ponla al menos un poco por encima de ese umbral para tener margen.</p>
+
+<p>El aumento debe ser suficiente para que los mineros prefieran la nueva versión. Un incremento trivial no sirve.</p>
+
+<div class="callout callout--info">
+  <span class="callout__icon" aria-hidden="true">&#128161;</span>
+  <div class="callout__content">
+    <div class="callout__title">RBF es la opción limpia</div>
+    <p class="callout__text">RBF es más limpio y eficiente que CPFP porque no crea transacciones adicionales. Si tienes la opción, es la técnica preferida.</p>
+  </div>
+</div>
+
+<h2>CPFP: Child-Pays-For-Parent</h2>
+
+<p>CPFP es una técnica alternativa para cuando RBF no está disponible o no es posible (por ejemplo, si eres el receptor, no el emisor, de la transacción atascada).</p>
+
+<h3>Cómo funciona</h3>
+
+<p>La idea: creas una nueva transacción (hijo) que gasta uno de los outputs de la transacción atascada (padre). El hijo paga una fee tan alta que cubre la fee de ambas transacciones.</p>
+
+<p>El minero tiene un incentivo para incluir ambas: no puede incluir la transacción hijo sin incluir primero la padre (necesita el UTXO que gasta), y la suma de fees de las dos es atractiva.</p>
+
+<h3>Cuándo usar CPFP</h3>
+
+<p><strong>Eres el receptor:</strong> Alguien te envió bitcoin con fee baja. La transacción está atascada. Tú no puedes hacer RBF porque no eres quien la envió. Pero puedes gastar el output (aunque no esté confirmado) y pagar fee alta.</p>
+
+<p><strong>RBF no está disponible:</strong> La transacción original no era RBF-compatible y no puedes reemplazarla.</p>
+
+<h3>Cómo hacerlo</h3>
+
+<ol>
+
+  <li>En tu wallet, identifica el UTXO de la transacción pendiente (el que recibirás cuando confirme)</li>
+
+  <li>Crea una nueva transacción que gaste ese UTXO</li>
+
+  <li>Calcula la fee necesaria: debe cubrir tanto la fee original (insuficiente) como lo que falta para que ambas sean atractivas para el minero</li>
+
+  <li>Envía la transacción</li>
+
+</ol>
+
+<p>Sparrow permite crear transacciones que gastan UTXOs no confirmados. Selecciona el UTXO, crea una transacción, y ponle fee alta.</p>
+
+<h3>El cálculo de fee</h3>
+
+<p>Si la transacción padre pagó 1 sat/vB y necesitas 20 sat/vB para confirmar rápido:</p>
+
+<ul>
+
+  <li>Fee extra necesaria para el padre: (20 - 1) × tamaño del padre</li>
+
+  <li>Fee del hijo: 20 sat/vB × tamaño del hijo</li>
+
+</ul>
+
+<p>La fee total del hijo debe cubrir lo que le falta al padre más su propia fee.</p>
+
+<p>Es más complejo que RBF, pero funciona.</p>
+
+<h2>Comparación</h2>
+
+<p>| Aspecto | RBF | CPFP | |---------|-----|------| | Quién puede hacerlo | Emisor de la transacción | Receptor (o emisor si tiene el cambio) | | Requisitos | Transacción original RBF-compatible | Ninguno especial | | Eficiencia | Reemplaza, no crea transacción extra | Crea transacción adicional | | Complejidad | Simple | Más cálculos |</p>
+
+<h2>Prevención: mejor que curación</h2>
+
+<p>La mejor estrategia es no necesitar estas técnicas:</p>
+
+<ul>
+
+  <li>Consulta mempool.space antes de enviar</li>
+
+  <li>Usa una fee apropiada a tu urgencia</li>
+
+  <li>Habilita RBF por defecto en tu wallet</li>
+
+  <li>Si no tienes prisa, pon fee baja y acepta esperar</li>
+
+</ul>
+
+<p>Pero cuando ya tienes una transacción atascada, RBF y CPFP son tus herramientas de rescate.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-3" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="mempool.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">La mempool</span>
+  </a>
+  <a href="utxos-y-privacidad.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Tus UTXOs y tu privacidad</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

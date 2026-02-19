@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Aprende a crear tu primera wallet Bitcoin no-custodial. Guía paso a paso para instalar Blue Wallet o Sparrow y tomar control de tus bitcoin." />
+  <title>Paso 1: Crea tu wallet propia — Nivel 2 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 2">
+<nav class="sidebar">
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 1 · Saca tus bitcoin del exchange</div>
+    <a href="crear-tu-wallet.html" class="sidebar__link sidebar__link--active">Paso 1: Crea tu wallet propia</a>
+    <a href="retirar-del-exchange.html" class="sidebar__link">Paso 2: Retirar del exchange</a>
+    <a href="tu-seed-phrase.html" class="sidebar__link">Paso 3: Protege tu seed phrase</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 2 · No-KYC desde el inicio</div>
+    <a href="comprar-en-dex-p2p.html" class="sidebar__link">Comprar en DEX/P2P</a>
+    <a href="cajeros-bitcoin.html" class="sidebar__link">Comprar en cajeros Bitcoin</a>
+    <a href="wallet-y-seed-nokyc.html" class="sidebar__link">Wallet y seed (no-KYC)</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 3 · Exchanges</div>
+    <a href="exchanges-comparativa.html" class="sidebar__link">Comparativa de exchanges</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 4 · Lightning Network</div>
+    <a href="que-es-lightning.html" class="sidebar__link">Lightning: qué es</a>
+    <a href="usar-lightning.html" class="sidebar__link">Cómo usar Lightning</a>
+    <a href="wallets-lightning.html" class="sidebar__link">Wallets Lightning</a>
+    <a href="lightning-address.html" class="sidebar__link">Lightning Address e invoices</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 5 · Seguridad esencial</div>
+    <a href="como-hacer-backup.html" class="sidebar__link">Cómo hacer backup</a>
+    <a href="wallets-recomendadas.html" class="sidebar__link">Wallets recomendadas</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Siguiente nivel</div>
+    <a href="../nivel-3/" class="sidebar__link">Nivel 3 — Rabbit Hole</a>
+  </div>
+  <div class="sidebar__ad-wrap">
+    <div class="ad-slot ad-sidebar" id="ad-sidebar-n2" aria-hidden="true"></div>
+  </div>
+</nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 2</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Paso 1: Crea tu wallet propia</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--2 article__badge">Nivel 2</div>
+          <h1>Paso 1: Crea tu wallet propia</h1>
+          <p class="article__subtitle">Tu primer paso hacia la autocustodia: instalar una wallet donde solo tú controlas las llaves.</p>
+
+<h2>Por qué necesitas tu propia wallet</h2>
+
+<p>Mientras tus bitcoin están en un exchange, no son realmente tuyos. El exchange tiene las llaves privadas, lo que significa que tiene el control. Si el exchange quiebra, es hackeado, o decide congelar tu cuenta, puedes perder el acceso a tus fondos.</p>
+
+<p>Una wallet no-custodial es una aplicación donde tú controlas las llaves privadas. Nadie más puede acceder a tus bitcoin ni impedir que los muevas. Es la diferencia entre tener dinero en el banco de otro y tenerlo en tu propia caja fuerte.</p>
+
+<div class="callout callout--info">
+  <span class="callout__icon" aria-hidden="true">&#128218;</span>
+  <div class="callout__content">
+    <div class="callout__title">Profundiza en la Base de Conocimiento</div>
+    <p class="callout__text"><a href="../base/tipos-de-wallet.html">Tipos de wallet</a></p>
+  </div>
+</div>
+
+<h2>Wallets recomendadas para empezar</h2>
+
+<p>Para dar tus primeros pasos en autocustodia, te recomiendo dos opciones según tu situación:</p>
+
+<p><strong>Blue Wallet</strong> es ideal si quieres empezar desde el móvil. Es gratuita, de código abierto, y tiene una interfaz limpia. Perfecta para cantidades moderadas y para aprender cómo funciona todo.</p>
+
+<p><strong>Sparrow Wallet</strong> es la opción de escritorio más completa para Bitcoin. Tiene más funciones avanzadas que usarás a medida que profundices, como coin control y conexión a tu propio nodo. Si planeas gestionar cantidades significativas o quieres una herramienta que crezca contigo, empieza directamente con Sparrow.</p>
+
+<p>Ambas son gratuitas y de código abierto, lo que significa que su código puede ser auditado por cualquiera.</p>
+
+<h2>Cómo instalar tu wallet</h2>
+
+<p>El proceso es similar en cualquier wallet que elijas:</p>
+
+<ol>
+
+  <li>Ve a la web oficial de la wallet. Para Blue Wallet: bluewallet.io. Para Sparrow: sparrowwallet.com. No busques en Google y hagas clic en el primer resultado — hay sitios falsos que imitan a las wallets legítimas.</li>
+
+  <li>Descarga la aplicación para tu sistema operativo (iOS, Android, Windows, Mac, Linux).</li>
+
+  <li>Si quieres verificar que el archivo descargado es auténtico, puedes comprobar la firma PGP. Esto es opcional para empezar, pero recomendable si vas a manejar cantidades importantes.</li>
+
+  <li>Instala y abre la aplicación.</li>
+
+  <li>Selecciona &quot;Crear nueva wallet&quot; o &quot;Create new wallet&quot;.</li>
+
+  <li>La wallet generará automáticamente tu frase semilla: 12 o 24 palabras en inglés que son la llave maestra de todos tus bitcoin.</li>
+
+</ol>
+
+<div class="callout callout--warning">
+  <span class="callout__icon" aria-hidden="true">&#9888;&#65039;</span>
+  <div class="callout__content">
+    <div class="callout__title">Descarga solo desde fuentes oficiales</div>
+    <p class="callout__text">Existen wallets falsas diseñadas específicamente para robarte. Siempre accede a la web oficial escribiendo la dirección directamente, no desde enlaces en emails, anuncios o resultados de búsqueda patrocinados.</p>
+  </div>
+</div>
+
+<h2>Tu frase semilla: la llave maestra</h2>
+
+<p>Cuando creas la wallet, verás una lista de 12 o 24 palabras en inglés. Esta es tu seed phrase o frase semilla.</p>
+
+<p>Esta frase es todo lo que necesitas para recuperar tus bitcoin si pierdes el teléfono, se te rompe el ordenador, o necesitas restaurar la wallet en otro dispositivo. Pero también significa que cualquiera que tenga estas palabras puede acceder a tus fondos.</p>
+
+<p>Por ahora, anota las palabras en papel, en el orden correcto, y guarda ese papel en un lugar seguro. La siguiente página te explica exactamente cómo protegerla a largo plazo.</p>
+
+<div class="callout callout--info">
+  <span class="callout__icon" aria-hidden="true">&#128218;</span>
+  <div class="callout__content">
+    <div class="callout__title">Profundiza en la Base de Conocimiento</div>
+    <p class="callout__text"><a href="../base/que-es-seed-phrase.html">Qué es una seed phrase</a></p>
+  </div>
+</div>
+
+<h2>Verificar que todo funciona</h2>
+
+<p>Una vez creada la wallet, navega por la interfaz. Familiarízate con:</p>
+
+<ul>
+
+  <li>Dónde ver tu saldo (ahora mismo será cero)</li>
+
+  <li>Cómo generar una dirección para recibir bitcoin</li>
+
+  <li>El historial de transacciones</li>
+
+</ul>
+
+<p>No hace falta que envíes nada todavía. Primero asegúrate de que entiendes la interfaz y de que has guardado tu frase semilla correctamente.</p>
+
+<p>En la siguiente página aprenderás a retirar tus bitcoin del exchange a esta nueva wallet.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-2" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="index.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Ya Tengo Sats</span>
+  </a>
+  <a href="retirar-del-exchange.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Paso 2: Retirar bitcoin del exchange a tu wallet</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

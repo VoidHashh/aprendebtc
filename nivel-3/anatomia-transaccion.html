@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cómo funciona una transacción Bitcoin por dentro: inputs, outputs, change address y fees. Entiende cada componente." />
+  <title>Anatomía de una transacción — Nivel 3 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 3">
+<nav class="sidebar">
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 1 · Transacciones y UTXO</div>
+    <a href="modelo-utxo.html" class="sidebar__link">El modelo UTXO</a>
+    <a href="anatomia-transaccion.html" class="sidebar__link sidebar__link--active">Anatomía de una transacción</a>
+    <a href="mempool.html" class="sidebar__link">La mempool</a>
+    <a href="rbf-cpfp.html" class="sidebar__link">RBF y CPFP</a>
+    <a href="utxos-y-privacidad.html" class="sidebar__link">Tus UTXOs y privacidad</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 2 · Claves y direcciones</div>
+    <a href="clave-privada.html" class="sidebar__link">Clave privada</a>
+    <a href="clave-publica.html" class="sidebar__link">Clave pública</a>
+    <a href="tipos-de-direcciones.html" class="sidebar__link">Tipos de direcciones</a>
+    <a href="hd-wallets.html" class="sidebar__link">HD Wallets</a>
+    <a href="firma-digital.html" class="sidebar__link">Firma digital</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 3 · Nodos y minería</div>
+    <a href="que-es-un-nodo.html" class="sidebar__link">¿Qué es un nodo?</a>
+    <a href="montar-tu-nodo.html" class="sidebar__link">Monta tu nodo</a>
+    <a href="mineria-en-detalle.html" class="sidebar__link">Minería en detalle</a>
+    <a href="halving.html" class="sidebar__link">El halving</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 4 · Hardware y coin control</div>
+    <a href="configurar-hardware-wallet.html" class="sidebar__link">Configura hardware wallet</a>
+    <a href="comparativa-hardware-wallets.html" class="sidebar__link">Comparativa hardware wallets</a>
+    <a href="coin-control.html" class="sidebar__link">Coin control</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 5 · Seguridad y fiscalidad</div>
+    <a href="seguridad-operativa.html" class="sidebar__link">Seguridad operativa</a>
+    <a href="fiscalidad-bitcoin.html" class="sidebar__link">Fiscalidad de Bitcoin</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Siguiente nivel</div>
+    <a href="../nivel-4/" class="sidebar__link">Nivel 4 — Down the Rabbit Hole</a>
+  </div>
+  <div class="sidebar__ad-wrap">
+    <div class="ad-slot ad-sidebar" id="ad-sidebar-n3" aria-hidden="true"></div>
+  </div>
+</nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 3</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Anatomía de una transacción</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--3 article__badge">Nivel 3</div>
+          <h1>Anatomía de una transacción</h1>
+          <p class="article__subtitle">Inputs, outputs, cambio y fees. Los componentes que forman cada transacción Bitcoin.</p>
+
+<h2>La transacción como caja negra</h2>
+
+<p>Hasta ahora has usado tu wallet para enviar y recibir bitcoin. Introduces una dirección, una cantidad, y la wallet hace el resto. Funciona, pero es una caja negra.</p>
+
+<p>Abrir esa caja negra te da poder: entiendes por qué las fees varían, por qué algunas transacciones tardan más, y cómo tus decisiones afectan tu privacidad.</p>
+
+<h2>La estructura básica</h2>
+
+<p>Una transacción Bitcoin tiene tres componentes principales:</p>
+
+<p><strong>Inputs:</strong> Los UTXOs que gastas. Son las &quot;monedas&quot; que usas para pagar.</p>
+
+<p><strong>Outputs:</strong> Los nuevos UTXOs que se crean. Típicamente dos: uno para el destinatario y otro para tu cambio.</p>
+
+<p><strong>Fee:</strong> La comisión para el minero que incluye tu transacción en un bloque. No aparece como output; es la diferencia entre inputs y outputs.</p>
+
+<h2>Inputs: de dónde viene el dinero</h2>
+
+<p>Los inputs son referencias a UTXOs anteriores que te pertenecen. Cada input dice básicamente: &quot;Quiero gastar este UTXO específico, y aquí está la firma digital que demuestra que soy el dueño.&quot;</p>
+
+<p>Una transacción puede tener múltiples inputs. Si quieres pagar 1 BTC y tu UTXO más grande es de 0.6 BTC, tu wallet puede combinar varios UTXOs: 0.6 + 0.3 + 0.15 = 1.05 BTC en inputs.</p>
+
+<p>Cada input añadido aumenta el tamaño de la transacción (más datos que verificar y almacenar), lo que significa más fees. Por eso, tener pocos UTXOs grandes es más eficiente que muchos pequeños.</p>
+
+<h2>Outputs: a dónde va el dinero</h2>
+
+<p>Los outputs son los nuevos UTXOs que crea la transacción. Cada output especifica:</p>
+
+<ul>
+
+  <li>Una cantidad de bitcoin</li>
+
+  <li>Una dirección (técnicamente, un script de bloqueo) que determina quién puede gastar ese UTXO</li>
+
+</ul>
+
+<p>En una transacción típica de pago hay dos outputs:</p>
+
+<p><strong>Output de pago:</strong> La cantidad que envías a la dirección del destinatario.</p>
+
+<p><strong>Output de cambio:</strong> La diferencia entre lo que gastaste (inputs) y lo que enviaste + fees, que vuelve a una dirección tuya.</p>
+
+<h2>La dirección de cambio (change address)</h2>
+
+<p>Aquí es donde el modelo UTXO se diferencia claramente del modelo de cuenta.</p>
+
+<p>Si tu UTXO es de 0.5 BTC y quieres enviar 0.1 BTC, no puedes &quot;gastar parcialmente&quot; el UTXO. Gastas los 0.5 BTC completos y creas dos nuevos UTXOs:</p>
+
+<ul>
+
+  <li>0.1 BTC → dirección del destinatario</li>
+
+  <li>~0.399 BTC → dirección de cambio (tuya)</li>
+
+  <li>~0.001 BTC → fee al minero</li>
+
+</ul>
+
+<p>Tu wallet genera automáticamente una nueva dirección de cambio para cada transacción. Esto es bueno para la privacidad: si siempre recibieras el cambio en la misma dirección, sería trivial vincular todas tus transacciones.</p>
+
+<h2>Ejemplo con números reales</h2>
+
+<p>Situación inicial:</p>
+
+<ul>
+
+  <li>Tienes un UTXO de 50.000 sats (0.0005 BTC)</li>
+
+  <li>Quieres enviar 15.000 sats a un amigo</li>
+
+</ul>
+
+<p>Tu wallet construye la transacción:</p>
+
+<p><strong>Input:</strong></p>
+
+<ul>
+
+  <li>UTXO de 50.000 sats</li>
+
+</ul>
+
+<p><strong>Outputs:</strong></p>
+
+<ul>
+
+  <li>Output 1: 15.000 sats → dirección de tu amigo</li>
+
+  <li>Output 2: 34.500 sats → tu dirección de cambio</li>
+
+</ul>
+
+<p><strong>Fee:</strong> 500 sats (50.000 - 15.000 - 34.500 = 500)</p>
+
+<p>La suma de inputs (50.000) siempre es igual a la suma de outputs (15.000 + 34.500) más la fee (500).</p>
+
+<h2>La fee: el coste de la transacción</h2>
+
+<p>La fee no aparece como un output explícito. Es simplemente la diferencia entre inputs y outputs. El minero que incluye tu transacción en un bloque reclama esa diferencia como parte de su recompensa.</p>
+
+<p>Las fees se miden en sats por byte virtual (sat/vB). Una transacción simple ocupa unos 140-200 vBytes. Una transacción compleja con muchos inputs/outputs puede ocupar 500+ vBytes.</p>
+
+<p>Esto explica por qué:</p>
+
+<ul>
+
+  <li>Transacciones con muchos inputs cuestan más (más datos)</li>
+
+  <li>Consolidar UTXOs pequeños puede ser caro si hay congestión</li>
+
+  <li>Las fees varían según la demanda de espacio en bloques</li>
+
+</ul>
+
+<div class="callout callout--info">
+  <span class="callout__icon" aria-hidden="true">&#128218;</span>
+  <div class="callout__content">
+    <div class="callout__title">Profundiza en la Base de Conocimiento</div>
+    <p class="callout__text"><a href="../base/que-son-las-fees.html">Qué son las fees</a></p>
+  </div>
+</div>
+
+<h2>Visualizar transacciones</h2>
+
+<p>Puedes ver cualquier transacción en un explorador de bloques como mempool.space:</p>
+
+<ol>
+
+  <li>Copia el ID de transacción (txid) de tu wallet</li>
+
+  <li>Pégalo en la barra de búsqueda del explorador</li>
+
+  <li>Verás los inputs a la izquierda, los outputs a la derecha, y la fee abajo</li>
+
+</ol>
+
+<p>Explorar tus propias transacciones es una buena forma de entender el modelo. Verás cómo cada transacción consume UTXOs existentes y crea nuevos.</p>
+
+<h2>Por qué esto importa</h2>
+
+<p>Entender la anatomía de las transacciones te permite:</p>
+
+<ul>
+
+  <li>Estimar fees con precisión antes de enviar</li>
+
+  <li>Entender por qué una transacción tarda más o menos</li>
+
+  <li>Tomar mejores decisiones sobre coin control (nivel avanzado)</li>
+
+  <li>Detectar si algo no va bien antes de confirmar</li>
+
+</ul>
+
+<p>En la siguiente página veremos dónde esperan las transacciones antes de ser incluidas en un bloque: la mempool.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-3" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="modelo-utxo.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">El modelo UTXO</span>
+  </a>
+  <a href="mempool.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">La mempool</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

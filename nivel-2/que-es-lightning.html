@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lightning Network es la segunda capa de Bitcoin para pagos instantáneos y casi gratuitos. Qué es, para qué sirve y sus limitaciones." />
+  <title>Lightning Network: bitcoin instantáneo — Nivel 2 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 2">
+<nav class="sidebar">
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 1 · Saca tus bitcoin del exchange</div>
+    <a href="crear-tu-wallet.html" class="sidebar__link">Paso 1: Crea tu wallet propia</a>
+    <a href="retirar-del-exchange.html" class="sidebar__link">Paso 2: Retirar del exchange</a>
+    <a href="tu-seed-phrase.html" class="sidebar__link">Paso 3: Protege tu seed phrase</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 2 · No-KYC desde el inicio</div>
+    <a href="comprar-en-dex-p2p.html" class="sidebar__link">Comprar en DEX/P2P</a>
+    <a href="cajeros-bitcoin.html" class="sidebar__link">Comprar en cajeros Bitcoin</a>
+    <a href="wallet-y-seed-nokyc.html" class="sidebar__link">Wallet y seed (no-KYC)</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 3 · Exchanges</div>
+    <a href="exchanges-comparativa.html" class="sidebar__link">Comparativa de exchanges</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 4 · Lightning Network</div>
+    <a href="que-es-lightning.html" class="sidebar__link sidebar__link--active">Lightning: qué es</a>
+    <a href="usar-lightning.html" class="sidebar__link">Cómo usar Lightning</a>
+    <a href="wallets-lightning.html" class="sidebar__link">Wallets Lightning</a>
+    <a href="lightning-address.html" class="sidebar__link">Lightning Address e invoices</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 5 · Seguridad esencial</div>
+    <a href="como-hacer-backup.html" class="sidebar__link">Cómo hacer backup</a>
+    <a href="wallets-recomendadas.html" class="sidebar__link">Wallets recomendadas</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Siguiente nivel</div>
+    <a href="../nivel-3/" class="sidebar__link">Nivel 3 — Rabbit Hole</a>
+  </div>
+  <div class="sidebar__ad-wrap">
+    <div class="ad-slot ad-sidebar" id="ad-sidebar-n2" aria-hidden="true"></div>
+  </div>
+</nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 2</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Lightning Network: bitcoin instantáneo</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--2 article__badge">Nivel 2</div>
+          <h1>Lightning Network: bitcoin instantáneo</h1>
+          <p class="article__subtitle">Una capa sobre Bitcoin que permite pagos al instante por fracciones de céntimo. El bitcoin del día a día.</p>
+
+<h2>El problema que resuelve Lightning</h2>
+
+<p>Bitcoin on-chain (las transacciones normales que van directamente a la blockchain) es seguro y descentralizado, pero tiene limitaciones prácticas:</p>
+
+<p>Cada transacción tarda en confirmarse. En condiciones normales, al menos 10 minutos para la primera confirmación. En momentos de congestión, puede ser mucho más.</p>
+
+<p>Las comisiones varían según la demanda de espacio en los bloques. En picos de actividad, enviar una transacción pequeña puede costar más que el propio importe.</p>
+
+<p>Estos dos factores hacen que Bitcoin on-chain no sea ideal para pagos pequeños y cotidianos: comprar un café, dejar una propina, pagar una suscripción mensual.</p>
+
+<h2>Qué es Lightning Network</h2>
+
+<p>Lightning Network es una &quot;segunda capa&quot; construida sobre Bitcoin. No es una criptomoneda diferente ni un sistema separado. Es una red de canales de pago que permite mover bitcoin entre usuarios de forma instantánea y casi gratuita.</p>
+
+<p><strong>Instantáneo</strong> significa literalmente segundos. No 10 minutos, no una hora. Envías y el receptor lo tiene inmediatamente.</p>
+
+<p><strong>Casi gratuito</strong> significa fracciones de céntimo. Enviar 10€ por Lightning puede costar 0.001€ o menos. A veces cero.</p>
+
+<p>Esto es posible porque los pagos Lightning no se registran individualmente en la blockchain. Solo se registran on-chain cuando se abren o cierran los canales subyacentes, permitiendo que miles de transacciones ocurran &quot;fuera de cadena&quot; con liquidación periódica.</p>
+
+<div class="callout callout--info">
+  <span class="callout__icon" aria-hidden="true">&#128218;</span>
+  <div class="callout__content">
+    <div class="callout__title">Profundiza en la Base de Conocimiento</div>
+    <p class="callout__text"><a href="../base/on-chain-vs-lightning.html">On-chain vs Lightning</a></p>
+  </div>
+</div>
+
+<h2>Una analogía simple</h2>
+
+<p>Imagina la diferencia entre una transferencia bancaria y pagar con tarjeta contactless.</p>
+
+<p>La transferencia bancaria (Bitcoin on-chain) es segura y definitiva, pero tarda tiempo en procesarse y tiene un coste fijo que no tiene sentido para importes pequeños.</p>
+
+<p>El pago con tarjeta contactless (Lightning) es instantáneo y prácticamente sin coste por transacción. Lo usas para el día a día sin pensar.</p>
+
+<p>Ambos mueven dinero. Ambos son útiles. Se usan para cosas diferentes.</p>
+
+<h2>Para qué sirve Lightning en la práctica</h2>
+
+<p><strong>Compras del día a día:</strong> Cada vez más comercios aceptan Lightning, especialmente en comunidades bitcoiner. Cafeterías, bares, tiendas online.</p>
+
+<p><strong>Propinas y micropagos:</strong> En plataformas como Nostr, puedes enviar &quot;zaps&quot; (propinas en sats) a creadores de contenido. Cantidades que no tendrían sentido on-chain (100, 500, 1000 satoshis) son perfectamente viables en Lightning.</p>
+
+<p><strong>Suscripciones y pagos recurrentes:</strong> Algunos servicios permiten pagar mes a mes con Lightning, sin dar datos de tarjeta.</p>
+
+<p><strong>Pagos entre personas:</strong> Dividir una cuenta, enviar dinero a un amigo, pagar servicios profesionales. Inmediato y sin comisiones bancarias.</p>
+
+<p><strong>Compras online:</strong> Tiendas que aceptan Bitcoin a menudo prefieren Lightning por la inmediatez de la confirmación.</p>
+
+<h2>Lo que Lightning no es</h2>
+
+<p>Lightning no reemplaza a Bitcoin on-chain. Son complementarios.</p>
+
+<p>Para ahorro a largo plazo, cantidades grandes, o máxima seguridad, Bitcoin on-chain sigue siendo la base. Tu cold storage, tus ahorros importantes, van on-chain.</p>
+
+<p>Lightning es para el dinero que vas a usar: gastos cotidianos, cantidades que no te importaría llevar en efectivo en la cartera.</p>
+
+<p>La regla práctica que usan muchos: Lightning para lo que llevarías en la cartera, on-chain para lo que guardarías en la caja fuerte.</p>
+
+<h2>Limitaciones actuales</h2>
+
+<p>Lightning está en desarrollo activo y tiene algunas limitaciones:</p>
+
+<p><strong>Liquidez:</strong> Los canales de pago tienen capacidad limitada. Para cantidades muy grandes (miles de euros), puede ser difícil encontrar ruta. On-chain es más apropiado.</p>
+
+<p><strong>Disponibilidad:</strong> Necesitas que tu wallet o nodo esté disponible para recibir ciertos tipos de pagos. Las wallets móviles modernas manejan esto bastante bien, pero no es tan &quot;fire and forget&quot; como una dirección on-chain.</p>
+
+<p><strong>Complejidad técnica subyacente:</strong> Aunque las wallets modernas lo ocultan bien, Lightning es técnicamente más complejo que on-chain. Más cosas pueden salir mal.</p>
+
+<p>Para el usuario típico usando una buena wallet móvil, estas limitaciones raramente se notan en el uso diario. Pero es honesto mencionarlas.</p>
+
+<h2>Siguiente paso</h2>
+
+<p>En las siguientes páginas verás cómo usar Lightning en la práctica: qué wallets instalar, cómo enviar y recibir pagos, y cómo configurar tu Lightning Address para recibir pagos de forma permanente.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-2" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="exchanges-comparativa.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Comparativa de exchanges</span>
+  </a>
+  <a href="usar-lightning.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Cómo usar Lightning paso a paso</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

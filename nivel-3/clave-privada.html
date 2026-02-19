@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Qué es una clave privada Bitcoin, cómo se genera, formatos (hexadecimal, WIF), y su relación con la seed phrase." />
+  <title>Clave privada — Nivel 3 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 3">
+<nav class="sidebar">
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 1 · Transacciones y UTXO</div>
+    <a href="modelo-utxo.html" class="sidebar__link">El modelo UTXO</a>
+    <a href="anatomia-transaccion.html" class="sidebar__link">Anatomía de una transacción</a>
+    <a href="mempool.html" class="sidebar__link">La mempool</a>
+    <a href="rbf-cpfp.html" class="sidebar__link">RBF y CPFP</a>
+    <a href="utxos-y-privacidad.html" class="sidebar__link">Tus UTXOs y privacidad</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 2 · Claves y direcciones</div>
+    <a href="clave-privada.html" class="sidebar__link sidebar__link--active">Clave privada</a>
+    <a href="clave-publica.html" class="sidebar__link">Clave pública</a>
+    <a href="tipos-de-direcciones.html" class="sidebar__link">Tipos de direcciones</a>
+    <a href="hd-wallets.html" class="sidebar__link">HD Wallets</a>
+    <a href="firma-digital.html" class="sidebar__link">Firma digital</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 3 · Nodos y minería</div>
+    <a href="que-es-un-nodo.html" class="sidebar__link">¿Qué es un nodo?</a>
+    <a href="montar-tu-nodo.html" class="sidebar__link">Monta tu nodo</a>
+    <a href="mineria-en-detalle.html" class="sidebar__link">Minería en detalle</a>
+    <a href="halving.html" class="sidebar__link">El halving</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 4 · Hardware y coin control</div>
+    <a href="configurar-hardware-wallet.html" class="sidebar__link">Configura hardware wallet</a>
+    <a href="comparativa-hardware-wallets.html" class="sidebar__link">Comparativa hardware wallets</a>
+    <a href="coin-control.html" class="sidebar__link">Coin control</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 5 · Seguridad y fiscalidad</div>
+    <a href="seguridad-operativa.html" class="sidebar__link">Seguridad operativa</a>
+    <a href="fiscalidad-bitcoin.html" class="sidebar__link">Fiscalidad de Bitcoin</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Siguiente nivel</div>
+    <a href="../nivel-4/" class="sidebar__link">Nivel 4 — Down the Rabbit Hole</a>
+  </div>
+  <div class="sidebar__ad-wrap">
+    <div class="ad-slot ad-sidebar" id="ad-sidebar-n3" aria-hidden="true"></div>
+  </div>
+</nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 3</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Clave privada</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--3 article__badge">Nivel 3</div>
+          <h1>Clave privada</h1>
+          <p class="article__subtitle">Un número aleatorio gigantesco que te da control sobre tus bitcoin. La base de todo el sistema.</p>
+
+<h2>El concepto fundamental</h2>
+
+<p>Una clave privada es un número. Eso es todo en esencia: un número aleatorio extremadamente grande.</p>
+
+<p>Este número es lo que te da control sobre bitcoin. Quien conoce la clave privada puede gastar los bitcoin asociados a ella. Quien no la conoce, no puede. No hay excepciones, no hay puertas traseras, no hay &quot;olvidé mi contraseña&quot;.</p>
+
+<p>El sistema criptográfico de Bitcoin garantiza que:</p>
+
+<ul>
+
+  <li>Es trivial calcular la clave pública a partir de la privada</li>
+
+  <li>Es prácticamente imposible calcular la clave privada a partir de la pública</li>
+
+  <li>Solo quien conoce la clave privada puede firmar transacciones válidas</li>
+
+</ul>
+
+<h2>Qué tan grande es &quot;extremadamente grande&quot;</h2>
+
+<p>Una clave privada de Bitcoin tiene 256 bits. Esto significa 2^256 posibles valores.</p>
+
+<p>Para poner esto en perspectiva: hay aproximadamente 2^256 ≈ 10^77 posibles claves privadas. El número estimado de átomos en el universo observable es aproximadamente 10^80.</p>
+
+<p>La probabilidad de que alguien genere la misma clave privada que tú por casualidad es tan cercana a cero que, en términos prácticos, es cero. No va a pasar.</p>
+
+<p>Por eso, cuando tu wallet genera una clave privada &quot;aleatoriamente&quot;, puedes confiar en que es única. El espacio de posibilidades es tan vasto que las colisiones son imposibles a escala humana.</p>
+
+<h2>Formatos de clave privada</h2>
+
+<p>El mismo número de 256 bits puede representarse de diferentes formas:</p>
+
+<h3>Hexadecimal (64 caracteres)</h3>
+
+<p>La representación más directa: el número en base 16.</p>
+
+<p>Ejemplo (inventado): `E9873D79C6D87DC0FB6A5778633389F4453213303DA61F20BD67FC233AA33262`</p>
+
+<h3>WIF (Wallet Import Format)</h3>
+
+<p>Un formato más compacto con verificación de errores incorporada. Empieza por 5, K, o L dependiendo de la configuración.</p>
+
+<p>Ejemplo (inventado): `5HueCGU8rMjxEXxiPuD5BDku4MkFqeZyd4dZ1jvhTVqvbTLvyTJ`</p>
+
+<p>El WIF incluye un checksum que detecta errores de transcripción. Si cambias un carácter, el checksum falla y sabes que hay un error.</p>
+
+<h2>Clave privada vs seed phrase</h2>
+
+<p>Es importante no confundir estos conceptos:</p>
+
+<p><strong>La seed phrase (12-24 palabras)</strong> es una representación legible de una semilla maestra. A partir de esa semilla, usando estándares como BIP39 y derivation paths, se generan múltiples claves privadas.</p>
+
+<p><strong>La clave privada</strong> es el número específico que controla un conjunto de bitcoin. Una wallet HD genera muchas claves privadas a partir de una sola seed.</p>
+
+<p>Cuando haces backup de tu seed phrase, estás haciendo backup de la capacidad de regenerar todas las claves privadas derivadas de ella. Es un backup maestro.</p>
+
+<p>Si exportas una clave privada individual (algo que raramente necesitas hacer), solo estás exportando el control de los bitcoin asociados a esa clave específica.</p>
+
+<div class="callout callout--info">
+  <span class="callout__icon" aria-hidden="true">&#128218;</span>
+  <div class="callout__content">
+    <div class="callout__title">Profundiza en la Base de Conocimiento</div>
+    <p class="callout__text"><a href="../herramientas/claves.html">Herramienta de claves</a></p>
+  </div>
+</div>
+
+<h2>Seguridad de la clave privada</h2>
+
+<p>Tu clave privada nunca debe:</p>
+
+<ul>
+
+  <li>Estar en un dispositivo conectado a internet (a menos que sea una hot wallet para cantidades pequeñas)</li>
+
+  <li>Ser compartida con nadie bajo ninguna circunstancia</li>
+
+  <li>Ser introducida en ninguna web ni servicio online</li>
+
+  <li>Ser almacenada en texto plano en tu ordenador</li>
+
+</ul>
+
+<p>Las hardware wallets existen precisamente para esto: mantener la clave privada en un dispositivo que nunca la expone, ni siquiera al ordenador al que está conectado.</p>
+
+<h2>No necesitas verla directamente</h2>
+
+<p>En el uso normal de una wallet, nunca ves tu clave privada en crudo. La wallet la genera, la almacena encriptada, y la usa para firmar transacciones. Tú interactúas con la seed phrase para backup y con direcciones para recibir.</p>
+
+<p>Hay escenarios donde podrías necesitar exportar una clave privada individual (migración a wallet incompatible, casos específicos), pero son excepciones. En general, trabajas con la seed phrase.</p>
+
+<h2>El poder absoluto</h2>
+
+<p>La clave privada representa poder absoluto sobre los bitcoin que controla. No hay intermediarios, no hay autoridades, no hay recurso si se pierde o se roba.</p>
+
+<p>Esta responsabilidad total es lo que hace a Bitcoin diferente del sistema financiero tradicional. Nadie puede confiscar tus bitcoin si solo tú conoces la clave privada. Pero tampoco nadie puede recuperarlos si la pierdes.</p>
+
+<p>En la siguiente página veremos el otro lado: la clave pública, que se deriva de la privada y permite recibir bitcoin sin exponer el control sobre ellos.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-3" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="utxos-y-privacidad.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Tus UTXOs y tu privacidad</span>
+  </a>
+  <a href="clave-publica.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Clave pública</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

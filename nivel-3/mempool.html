@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Qué es la mempool de Bitcoin, cómo funciona, y cómo usar herramientas como mempool.space para estimar fees y tiempos de confirmación." />
+  <title>La mempool — Nivel 3 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 3">
+<nav class="sidebar">
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 1 · Transacciones y UTXO</div>
+    <a href="modelo-utxo.html" class="sidebar__link">El modelo UTXO</a>
+    <a href="anatomia-transaccion.html" class="sidebar__link">Anatomía de una transacción</a>
+    <a href="mempool.html" class="sidebar__link sidebar__link--active">La mempool</a>
+    <a href="rbf-cpfp.html" class="sidebar__link">RBF y CPFP</a>
+    <a href="utxos-y-privacidad.html" class="sidebar__link">Tus UTXOs y privacidad</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 2 · Claves y direcciones</div>
+    <a href="clave-privada.html" class="sidebar__link">Clave privada</a>
+    <a href="clave-publica.html" class="sidebar__link">Clave pública</a>
+    <a href="tipos-de-direcciones.html" class="sidebar__link">Tipos de direcciones</a>
+    <a href="hd-wallets.html" class="sidebar__link">HD Wallets</a>
+    <a href="firma-digital.html" class="sidebar__link">Firma digital</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 3 · Nodos y minería</div>
+    <a href="que-es-un-nodo.html" class="sidebar__link">¿Qué es un nodo?</a>
+    <a href="montar-tu-nodo.html" class="sidebar__link">Monta tu nodo</a>
+    <a href="mineria-en-detalle.html" class="sidebar__link">Minería en detalle</a>
+    <a href="halving.html" class="sidebar__link">El halving</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 4 · Hardware y coin control</div>
+    <a href="configurar-hardware-wallet.html" class="sidebar__link">Configura hardware wallet</a>
+    <a href="comparativa-hardware-wallets.html" class="sidebar__link">Comparativa hardware wallets</a>
+    <a href="coin-control.html" class="sidebar__link">Coin control</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 5 · Seguridad y fiscalidad</div>
+    <a href="seguridad-operativa.html" class="sidebar__link">Seguridad operativa</a>
+    <a href="fiscalidad-bitcoin.html" class="sidebar__link">Fiscalidad de Bitcoin</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Siguiente nivel</div>
+    <a href="../nivel-4/" class="sidebar__link">Nivel 4 — Down the Rabbit Hole</a>
+  </div>
+  <div class="sidebar__ad-wrap">
+    <div class="ad-slot ad-sidebar" id="ad-sidebar-n3" aria-hidden="true"></div>
+  </div>
+</nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 3</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">La mempool</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--3 article__badge">Nivel 3</div>
+          <h1>La mempool</h1>
+          <p class="article__subtitle">La sala de espera de las transacciones. Donde tu pago aguarda su turno para entrar en un bloque.</p>
+
+<h2>La sala de espera de Bitcoin</h2>
+
+<p>Cuando envías una transacción Bitcoin, no va directamente a la blockchain. Primero llega a la mempool (memory pool): un área de espera donde las transacciones aguardan a que un minero las incluya en el próximo bloque.</p>
+
+<p>Cada nodo de Bitcoin mantiene su propia mempool. Cuando tu wallet envía una transacción, esta se propaga por la red de nodo en nodo hasta que la mayoría la conoce.</p>
+
+<h2>Cómo funciona la cola</h2>
+
+<p>La mempool no es una cola ordenada de tipo &quot;primero que llega, primero que sale&quot;. Es más bien una subasta: los mineros eligen las transacciones que les pagan más por unidad de espacio.</p>
+
+<p>El espacio en cada bloque es limitado (aproximadamente 1 MB de datos, o unos 4.000 transacciones típicas). Los mineros maximizan sus ingresos seleccionando las transacciones con fee más alta por byte virtual.</p>
+
+<p>Cuando la mempool tiene pocas transacciones, incluso las fees bajas se confirman rápido. Cuando está congestionada, las transacciones con fees bajas pueden esperar horas o días.</p>
+
+<h2>Mempool.space: la ventana a la mempool</h2>
+
+<p>La herramienta más útil para observar el estado de la mempool es mempool.space. Muestra en tiempo real:</p>
+
+<ul>
+
+  <li>Cuántas transacciones esperan confirmación</li>
+
+  <li>Qué fees se están confirmando en los próximos bloques</li>
+
+  <li>Estimaciones de cuándo se confirmarían transacciones según su fee</li>
+
+  <li>Visualización de bloques recientes y futuros</li>
+
+</ul>
+
+<p>Antes de enviar una transacción, consulta mempool.space. Si la mempool está llena y las fees están altas, quizás prefieras esperar. Si está vacía, puedes usar una fee mínima.</p>
+
+<h2>Estimación de fees</h2>
+
+<p>Las wallets modernas consultan la mempool automáticamente y sugieren fees apropiadas. Pero entender cómo funcionan te permite tomar mejores decisiones.</p>
+
+<p>Los niveles típicos que verás:</p>
+
+<p><strong>Prioridad alta:</strong> Tu transacción debería entrar en el próximo bloque (~10 minutos). Fee más alta.</p>
+
+<p><strong>Prioridad media:</strong> En los próximos 3-6 bloques (~30-60 minutos). Fee moderada.</p>
+
+<p><strong>Prioridad baja / económica:</strong> Puede tardar horas, pero se confirmará cuando la mempool se vacíe. Fee mínima.</p>
+
+<p><strong>Sin prisa:</strong> Algunas wallets permiten poner la fee mínima absoluta. Puede tardar días, pero si no te importa esperar, ahorras dinero.</p>
+
+<h2>Congestión y ciclos</h2>
+
+<p>La mempool tiene ciclos predecibles:</p>
+
+<ul>
+
+  <li>Tiende a llenarse durante horarios de actividad en EEUU y Europa (mañanas y tardes en esas zonas horarias)</li>
+
+  <li>Se vacía durante la noche y fines de semana</li>
+
+  <li>Los halvings, lanzamientos de proyectos, y eventos de mercado causan picos de congestión</li>
+
+</ul>
+
+<p>Si tu transacción no tiene prisa, enviarla el fin de semana o de madrugada suele resultar en fees más bajas.</p>
+
+<h2>Qué pasa si mi transacción se atasca</h2>
+
+<p>Si pusiste una fee demasiado baja y tu transacción lleva horas (o días) sin confirmar, tienes opciones:</p>
+
+<p><strong>Esperar:</strong> La mempool eventualmente se vacía. Incluso transacciones con fees muy bajas se confirman durante períodos de baja actividad.</p>
+
+<p><strong>RBF (Replace-By-Fee):</strong> Reemplazar tu transacción por otra idéntica con fee más alta. Requiere que tu wallet lo soporte y que la transacción original lo permitiera.</p>
+
+<p><strong>CPFP (Child-Pays-For-Parent):</strong> Crear una nueva transacción que gasta el output de la atascada, con fee alta que compense ambas.</p>
+
+<p>Estos métodos se explican en detalle en la siguiente página.</p>
+
+<div class="callout callout--info">
+  <span class="callout__icon" aria-hidden="true">&#128161;</span>
+  <div class="callout__content">
+    <div class="callout__title">Paciencia vs urgencia</div>
+    <p class="callout__text">Si no tienes prisa, pon una fee baja y espera. Si necesitas que confirme rápido, paga más. No hay fee &quot;correcta&quot; universal — depende de cuánto valoras tu tiempo vs tu dinero.</p>
+  </div>
+</div>
+
+<h2>Mempool llena: ¿preocupante?</h2>
+
+<p>Ver la mempool llena con miles de transacciones pendientes puede parecer alarmante, pero es funcionamiento normal. Es el mercado de fees en acción: cuando hay mucha demanda, los precios (fees) suben.</p>
+
+<p>A largo plazo, Lightning Network reduce la presión sobre la mempool canalizando transacciones pequeñas y frecuentes fuera de la cadena principal.</p>
+
+<p>Para transacciones on-chain, entender la mempool te permite:</p>
+
+<ul>
+
+  <li>Elegir el momento adecuado para enviar</li>
+
+  <li>Poner una fee apropiada a tu urgencia</li>
+
+  <li>Evitar pagar de más cuando no es necesario</li>
+
+  <li>Saber qué hacer si tu transacción se atasca</li>
+
+</ul>
+
+          <div class="ad-slot ad-content" id="ad-content-3" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="anatomia-transaccion.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Anatomía de una transacción</span>
+  </a>
+  <a href="rbf-cpfp.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">RBF y CPFP: acelerar transacciones</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

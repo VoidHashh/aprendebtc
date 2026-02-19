@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Diferencias entre Lightning Address e invoices. Cómo configurar tu dirección permanente para recibir pagos Lightning y zaps en Nostr." />
+  <title>Lightning Address y facturas (invoices) — Nivel 2 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 2">
+<nav class="sidebar">
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 1 · Saca tus bitcoin del exchange</div>
+    <a href="crear-tu-wallet.html" class="sidebar__link">Paso 1: Crea tu wallet propia</a>
+    <a href="retirar-del-exchange.html" class="sidebar__link">Paso 2: Retirar del exchange</a>
+    <a href="tu-seed-phrase.html" class="sidebar__link">Paso 3: Protege tu seed phrase</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 2 · No-KYC desde el inicio</div>
+    <a href="comprar-en-dex-p2p.html" class="sidebar__link">Comprar en DEX/P2P</a>
+    <a href="cajeros-bitcoin.html" class="sidebar__link">Comprar en cajeros Bitcoin</a>
+    <a href="wallet-y-seed-nokyc.html" class="sidebar__link">Wallet y seed (no-KYC)</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 3 · Exchanges</div>
+    <a href="exchanges-comparativa.html" class="sidebar__link">Comparativa de exchanges</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 4 · Lightning Network</div>
+    <a href="que-es-lightning.html" class="sidebar__link">Lightning: qué es</a>
+    <a href="usar-lightning.html" class="sidebar__link">Cómo usar Lightning</a>
+    <a href="wallets-lightning.html" class="sidebar__link">Wallets Lightning</a>
+    <a href="lightning-address.html" class="sidebar__link sidebar__link--active">Lightning Address e invoices</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 5 · Seguridad esencial</div>
+    <a href="como-hacer-backup.html" class="sidebar__link">Cómo hacer backup</a>
+    <a href="wallets-recomendadas.html" class="sidebar__link">Wallets recomendadas</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Siguiente nivel</div>
+    <a href="../nivel-3/" class="sidebar__link">Nivel 3 — Rabbit Hole</a>
+  </div>
+  <div class="sidebar__ad-wrap">
+    <div class="ad-slot ad-sidebar" id="ad-sidebar-n2" aria-hidden="true"></div>
+  </div>
+</nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 2</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Lightning Address y facturas (invoices)</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--2 article__badge">Nivel 2</div>
+          <h1>Lightning Address y facturas (invoices)</h1>
+          <p class="article__subtitle">Dos formas de recibir pagos Lightning: códigos temporales para un pago o dirección permanente para siempre.</p>
+
+<h2>Dos formas de recibir, dos casos de uso</h2>
+
+<p>Lightning ofrece dos mecanismos para recibir pagos, y entender cuándo usar cada uno te ahorrará confusiones.</p>
+
+<p><strong>Invoice (factura):</strong> Un código único y temporal que generas para recibir un pago específico. Caduca después de cierto tiempo (normalmente 1-24 horas). Ideal para transacciones puntuales donde sabes la cantidad.</p>
+
+<p><strong>Lightning Address:</strong> Una dirección permanente con formato de email (tunombre@servicio.com) que nunca caduca. Cualquiera puede enviarte pagos en cualquier momento sin que tengas que generar nada. Ideal para recibir propinas, donaciones o pagos recurrentes.</p>
+
+<h2>Invoices: el método clásico</h2>
+
+<p>Las invoices fueron el primer método de pago en Lightning y siguen siendo fundamentales.</p>
+
+<h3>Cómo funcionan</h3>
+
+<p>Cuando quieres recibir un pago:</p>
+
+<ol>
+
+  <li>Abres tu wallet y seleccionas &quot;Recibir&quot;</li>
+
+  <li>Opcionalmente introduces la cantidad esperada</li>
+
+  <li>La wallet genera un código largo que empieza por &quot;lnbc&quot; (Lightning Network Bitcoin)</li>
+
+  <li>Compartes ese código (texto o QR) con quien te va a pagar</li>
+
+  <li>El pagador escanea o pega el código y confirma</li>
+
+  <li>Recibes el pago instantáneamente</li>
+
+</ol>
+
+<h3>Características de las invoices</h3>
+
+<p><strong>Especificidad:</strong> Puedes (y en muchas wallets debes) especificar la cantidad exacta. Esto evita errores.</p>
+
+<p><strong>Caducidad:</strong> Las invoices expiran. Si no se pagan en el tiempo establecido, hay que generar una nueva. Esto es por diseño, por razones técnicas del protocolo.</p>
+
+<p><strong>Un solo uso:</strong> Cada invoice es para un único pago. Si quieres recibir otro pago, generas otra invoice.</p>
+
+<p><strong>No requiere que estés online:</strong> Una vez generada la invoice, puedes cerrar la wallet. El pago se procesará cuando el pagador lo envíe (siempre que la invoice no haya caducado y tu wallet pueda recibirlo).</p>
+
+<h2>Lightning Address: tu dirección permanente</h2>
+
+<p>Lightning Address resuelve la fricción de tener que generar invoices constantemente.</p>
+
+<h3>Cómo funciona</h3>
+
+<p>Una Lightning Address se ve como un email: usuario@servicio.com. Por ejemplo: carlos@phoenix.acinq.co o ana@getalby.com.</p>
+
+<p>Cualquiera puede enviar sats a esa dirección en cualquier momento, sin que tengas que hacer nada. No necesitas generar código, no hay caducidad, y la dirección no cambia.</p>
+
+<p>Técnicamente, cuando alguien envía a tu Lightning Address, el servicio genera una invoice automáticamente en tu nombre y procesa el pago.</p>
+
+<h3>Dónde obtener tu Lightning Address</h3>
+
+<p>Depende de la wallet que uses:</p>
+
+<p><strong>Phoenix:</strong> Ofrece una Lightning Address integrada automáticamente al crear la wallet.</p>
+
+<p><strong>Breez:</strong> Tiene opciones de Lightning Address integradas.</p>
+
+<p><strong>Alby:</strong> Extensión de navegador que te da una Lightning Address y gestiona pagos web.</p>
+
+<p><strong>Servicios dedicados:</strong> Stacker News, Fountain, y otros servicios te asignan Lightning Address al crear cuenta.</p>
+
+<p>Si tu wallet no ofrece Lightning Address nativo, puedes usar servicios como Alby o conectar tu wallet a uno de estos servicios.</p>
+
+<h3>Cuándo usar cada formato</h3>
+
+<p><strong>Usa invoice cuando:</strong></p>
+
+<ul>
+
+  <li>Sabes la cantidad exacta a recibir</li>
+
+  <li>Es una transacción puntual con alguien que tienes delante o en chat</li>
+
+  <li>Quieres especificar una descripción del pago</li>
+
+  <li>No tienes Lightning Address configurado</li>
+
+</ul>
+
+<p><strong>Usa Lightning Address cuando:</strong></p>
+
+<ul>
+
+  <li>Quieres recibir propinas o donaciones sin fricción</li>
+
+  <li>Publicas tu dirección para que cualquiera pueda pagarte</li>
+
+  <li>Necesitas una forma permanente de recibir pagos</li>
+
+  <li>Usas Nostr y quieres recibir zaps</li>
+
+</ul>
+
+<h2>Zaps en Nostr: Lightning en acción</h2>
+
+<p>Una de las aplicaciones más visibles de Lightning Address es el sistema de zaps en Nostr.</p>
+
+<p>Nostr es un protocolo de redes sociales descentralizado donde los usuarios pueden enviar &quot;zaps&quot; (propinas en satoshis) a publicaciones y perfiles que les gustan. Para recibir zaps, configuras tu Lightning Address en tu perfil de Nostr.</p>
+
+<p>Cuando alguien hace zap a tu publicación, los sats van directamente a tu wallet Lightning. No hay intermediarios que se queden comisión (más allá de las mínimas de routing).</p>
+
+<p>Esto crea una economía de contenido donde los creadores reciben valor directamente de su audiencia, sin plataformas que moneticen sus datos ni que puedan censurarlos.</p>
+
+<div class="callout callout--info">
+  <span class="callout__icon" aria-hidden="true">&#128218;</span>
+  <div class="callout__content">
+    <div class="callout__title">Profundiza en la Base de Conocimiento</div>
+    <p class="callout__text"><a href="../comunidad/nostr-y-bitcoin.html">Nostr y Bitcoin</a></p>
+  </div>
+</div>
+
+<h2>Configurando tu Lightning Address</h2>
+
+<p>El proceso exacto depende de tu wallet, pero el flujo general es:</p>
+
+<ol>
+
+  <li>Abre la configuración de tu wallet Lightning</li>
+
+  <li>Busca la sección de Lightning Address o &quot;dirección permanente&quot;</li>
+
+  <li>Si es automático, simplemente copia la dirección asignada</li>
+
+  <li>Si tienes que elegir, selecciona un nombre de usuario</li>
+
+  <li>Comparte tu Lightning Address donde quieras recibirlo: bio de redes sociales, web personal, Nostr</li>
+
+</ol>
+
+<p>Una vez configurado, ya puedes recibir pagos de cualquiera que conozca tu dirección, sin más pasos por tu parte.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-2" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="wallets-lightning.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Wallets Lightning recomendadas</span>
+  </a>
+  <a href="como-hacer-backup.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Cómo hacer backup correctamente</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

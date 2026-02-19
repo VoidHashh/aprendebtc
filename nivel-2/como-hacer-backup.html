@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Guía completa de backup para Bitcoin: seed phrase, archivos de wallet, verificación y distribución de copias de seguridad." />
+  <title>Cómo hacer backup correctamente — Nivel 2 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 2">
+<nav class="sidebar">
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 1 · Saca tus bitcoin del exchange</div>
+    <a href="crear-tu-wallet.html" class="sidebar__link">Paso 1: Crea tu wallet propia</a>
+    <a href="retirar-del-exchange.html" class="sidebar__link">Paso 2: Retirar del exchange</a>
+    <a href="tu-seed-phrase.html" class="sidebar__link">Paso 3: Protege tu seed phrase</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 2 · No-KYC desde el inicio</div>
+    <a href="comprar-en-dex-p2p.html" class="sidebar__link">Comprar en DEX/P2P</a>
+    <a href="cajeros-bitcoin.html" class="sidebar__link">Comprar en cajeros Bitcoin</a>
+    <a href="wallet-y-seed-nokyc.html" class="sidebar__link">Wallet y seed (no-KYC)</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 3 · Exchanges</div>
+    <a href="exchanges-comparativa.html" class="sidebar__link">Comparativa de exchanges</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 4 · Lightning Network</div>
+    <a href="que-es-lightning.html" class="sidebar__link">Lightning: qué es</a>
+    <a href="usar-lightning.html" class="sidebar__link">Cómo usar Lightning</a>
+    <a href="wallets-lightning.html" class="sidebar__link">Wallets Lightning</a>
+    <a href="lightning-address.html" class="sidebar__link">Lightning Address e invoices</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Sección 5 · Seguridad esencial</div>
+    <a href="como-hacer-backup.html" class="sidebar__link sidebar__link--active">Cómo hacer backup</a>
+    <a href="wallets-recomendadas.html" class="sidebar__link">Wallets recomendadas</a>
+  </div>
+  <div class="sidebar__section">
+    <div class="sidebar__section-title">Siguiente nivel</div>
+    <a href="../nivel-3/" class="sidebar__link">Nivel 3 — Rabbit Hole</a>
+  </div>
+  <div class="sidebar__ad-wrap">
+    <div class="ad-slot ad-sidebar" id="ad-sidebar-n2" aria-hidden="true"></div>
+  </div>
+</nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 2</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Cómo hacer backup correctamente</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--2 article__badge">Nivel 2</div>
+          <h1>Cómo hacer backup correctamente</h1>
+          <p class="article__subtitle">Un backup que no has verificado no es un backup. Cómo asegurarte de que puedes recuperar tus bitcoin.</p>
+
+<h2>Por qué el backup es crítico</h2>
+
+<p>En el sistema financiero tradicional, si pierdes la contraseña del banco, llamas a atención al cliente. Si pierdes la tarjeta, pides otra. Hay una entidad central que puede restaurar tu acceso.</p>
+
+<p>En Bitcoin no existe esa entidad. Tú eres el banco. Si pierdes el acceso a tu wallet y no tienes backup, tus bitcoin desaparecen para siempre. No hay &quot;olvidé mi contraseña&quot;, no hay número de soporte, no hay tribunal que pueda ordenar una recuperación.</p>
+
+<p>Esto no es un defecto; es una característica. La misma propiedad que hace que nadie pueda confiscarte los bitcoin (porque no hay tercero que controle el acceso) implica que nadie puede recuperarlos por ti si los pierdes.</p>
+
+<h2>La seed phrase: tu backup fundamental</h2>
+
+<p>Tu seed phrase (frase semilla) de 12 o 24 palabras es el backup más importante. Con ella puedes regenerar todas las claves privadas y direcciones de tu wallet en cualquier dispositivo compatible.</p>
+
+<p>Ya cubrimos cómo proteger la seed phrase en una página anterior de este nivel. Aquí ampliamos con consideraciones adicionales.</p>
+
+<div class="callout callout--info">
+  <span class="callout__icon" aria-hidden="true">&#128218;</span>
+  <div class="callout__content">
+    <div class="callout__title">Profundiza en la Base de Conocimiento</div>
+    <p class="callout__text"><a href="../base/seguridad-basica.html">Seguridad básica</a></p>
+  </div>
+</div>
+
+<h3>Múltiples copias, múltiples ubicaciones</h3>
+
+<p>No pongas todos los huevos en la misma cesta. Si tu única copia de la seed phrase está en casa y hay un incendio, lo pierdes todo.</p>
+
+<p>La práctica recomendada es tener al menos dos copias en ubicaciones geográficamente separadas:</p>
+
+<ul>
+
+  <li>Una copia en casa (caja fuerte, lugar seguro)</li>
+
+  <li>Otra copia en ubicación secundaria (casa de familiar de confianza, caja de seguridad bancaria, otro lugar que controles)</li>
+
+</ul>
+
+<p>Las copias deben estar igualmente protegidas. No tiene sentido tener una en caja fuerte y otra en un cajón abierto de otra casa.</p>
+
+<h3>Materiales duraderos</h3>
+
+<p>El papel funciona para el corto-medio plazo, pero tiene vulnerabilidades: agua, fuego, degradación con el tiempo, tinta que se borra.</p>
+
+<p>Para protección a largo plazo de cantidades significativas, considera grabar tu seed phrase en metal:</p>
+
+<p><strong>Placas de acero/titanio:</strong> Productos como Seedplate, Cryptosteel, Billfodl están diseñados específicamente para esto. Resisten fuego, agua, corrosión, y aplastamiento.</p>
+
+<p><strong>Coste:</strong> Entre 50€ y 150€ dependiendo del producto. Si tienes más de 1.000€ en bitcoin, es una inversión razonable.</p>
+
+<p><strong>Proceso:</strong> Cada producto tiene su método. Algunos usan letras que encajas, otros requieren grabar o estampar. Sigue las instrucciones del fabricante.</p>
+
+<h2>Backup de archivos de wallet</h2>
+
+<p>Algunas wallets, especialmente las de escritorio como Sparrow, generan archivos de configuración adicionales que puede ser útil respaldar.</p>
+
+<h3>Archivo de wallet en Sparrow</h3>
+
+<p>Sparrow guarda la configuración de tu wallet en un archivo .json encriptado. Este archivo contiene:</p>
+
+<ul>
+
+  <li>Configuración de la wallet (tipo de direcciones, derivation paths)</li>
+
+  <li>Etiquetas que hayas puesto a tus direcciones y transacciones</li>
+
+  <li>Configuración de conexión a nodos</li>
+
+</ul>
+
+<p>Aunque puedes regenerar la wallet solo con la seed phrase, tener este archivo facilita la restauración exacta de tu configuración.</p>
+
+<p>Para exportarlo: en Sparrow, ve a File &gt; Export Wallet &gt; Sparrow y guarda el archivo.</p>
+
+<h3>Dónde guardar archivos de backup</h3>
+
+<p>A diferencia de la seed phrase, estos archivos pueden guardarse en formato digital (están encriptados). Un USB en ubicación segura, junto con la contraseña de desencriptación en otra ubicación, es una opción razonable.</p>
+
+<h2>La prueba definitiva: verificar el backup</h2>
+
+<p>Este es el paso que casi nadie hace y que marca la diferencia entre un backup real y una falsa sensación de seguridad.</p>
+
+<div class="callout callout--danger">
+  <span class="callout__icon" aria-hidden="true">&#128680;</span>
+  <div class="callout__content">
+    <div class="callout__title">Verificación obligatoria</div>
+    <p class="callout__text">Un backup que no has verificado no es un backup. Restaura tu wallet en otro dispositivo al menos una vez para confirmar que las palabras están correctas y que el proceso funciona.</p>
+  </div>
+</div>
+
+<h3>Cómo verificar</h3>
+
+<ol>
+
+  <li>Consigue un segundo dispositivo (puede ser un móvil viejo, un ordenador prestado, o simplemente otra instalación de la wallet)</li>
+
+  <li>Instala la misma wallet o una compatible (por ejemplo, si usas Blue Wallet en el móvil principal, puedes verificar restaurando en Sparrow en el ordenador)</li>
+
+  <li>Selecciona &quot;Restaurar wallet&quot; o &quot;Import wallet&quot;</li>
+
+  <li>Introduce tu seed phrase palabra por palabra</li>
+
+  <li>Verifica que aparecen las mismas direcciones y el mismo saldo</li>
+
+  <li>Una vez verificado, puedes eliminar esta wallet de prueba del segundo dispositivo (o dejarlo como wallet de respaldo)</li>
+
+</ol>
+
+<h3>Qué puede fallar</h3>
+
+<p>Si la restauración no funciona o muestra saldo incorrecto:</p>
+
+<p><strong>Error en las palabras:</strong> Alguna palabra está mal escrita o en orden incorrecto. Revisa carácter por carácter.</p>
+
+<p><strong>Derivation path diferente:</strong> La wallet de restauración puede estar usando un derivation path distinto al original. Prueba con otra wallet o configura manualmente el path correcto.</p>
+
+<p><strong>Red equivocada:</strong> Algunas wallets soportan testnet. Asegúrate de estar en mainnet.</p>
+
+<p><strong>Wallet vacía:</strong> Si acabas de crear la wallet y no has recibido fondos, no hay nada que ver. El backup sigue siendo correcto.</p>
+
+<h2>Frecuencia de verificación</h2>
+
+<p>No necesitas verificar constantemente, pero sí periódicamente:</p>
+
+<ul>
+
+  <li>Después de crear el backup inicial</li>
+
+  <li>Después de cualquier cambio significativo (mover a hardware wallet, cambiar configuración)</li>
+
+  <li>Al menos una vez al año para cantidades importantes</li>
+
+</ul>
+
+<p>Piensa en ello como un simulacro de incendio. Esperas no necesitarlo nunca, pero si llega el momento, sabrás que funciona.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-2" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="lightning-address.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Lightning Address y facturas (invoices)</span>
+  </a>
+  <a href="wallets-recomendadas.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Wallets recomendadas en 2025</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>
