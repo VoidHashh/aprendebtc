@@ -220,6 +220,10 @@ pre code {
   padding: 2rem 1.25rem;
 }
 
+.page-layout__content .content-inner {
+  width: 100%;
+  margin-inline: auto;
+}
 @media (min-width: 1024px) {
   .page-layout__sidebar {
     display: block;
@@ -232,12 +236,14 @@ pre code {
 
   .page-layout__content {
     margin-left: var(--sidebar-width);
-    padding: 2.5rem 2.5rem;
-    max-width: calc(var(--content-max-width) + var(--sidebar-width) + 5rem);
+    width: calc(100% - var(--sidebar-width));
+    max-width: none;
+    padding: 2.5rem 3rem;
   }
 
   .page-layout__content .content-inner {
-    max-width: var(--content-max-width);
+    max-width: min(var(--content-max-width), 74ch);
+    margin-inline: auto;
   }
 }
 
