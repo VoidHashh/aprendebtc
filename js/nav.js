@@ -1,6 +1,6 @@
 /**
  * aprendebtc.com - nav.js
- * Handles: mobile menu, search overlay, active link states,
+ * Handles: mobile menu, search overlay, active states,
  * smooth anchor scroll, contextual return links, and sidebar tree navigation.
  */
 
@@ -24,19 +24,14 @@
   }
 
   function currentPath() {
-    return window.location.pathname;
-  }
-
-  function getCurrentAbsoluteUrl() {
-    return `${window.location.pathname}${window.location.search}${window.location.hash}`;
+    return normalizePath(window.location.pathname);
   }
 
   function inferSectionLabel(pathname) {
     const path = normalizePath(pathname);
-
     const nivelMatch = path.match(/^\/nivel-(\d)(\/|$)/);
-    if (nivelMatch) return `Nivel ${nivelMatch[1]}`;
 
+    if (nivelMatch) return `Nivel ${nivelMatch[1]}`;
     if (path === '/base' || path.startsWith('/base/')) return 'Base de Conocimiento';
     if (path === '/comunidad' || path.startsWith('/comunidad/')) return 'Comunidad';
     if (path === '/herramientas' || path.startsWith('/herramientas/')) return 'Herramientas';
@@ -47,24 +42,49 @@
   }
 
   function collapseWhitespace(value) {
-    return (value || '').replace(/\s+/g, ' ').trim();
+    return String(value || '').replace(/\s+/g, ' ').trim();
   }
 
-  function getPageTitleText() {
-    const h1 = document.querySelector('h1');
-    if (h1) {
-      const h1Text = collapseWhitespace(h1.textContent);
-      if (h1Text) return h1Text;
+  function textScore(value) {
+    const ok = (value.match(/[A-Za-z0-9ÁÉÍÓÚáéíóúÑñÜü¿¡]/g) || []).length;
+    const bad = (value.match(/[ÃÂâ?]/g) || []).length;
+    return ok - (bad * 3);
+  }
+
+  function maybeDecodeMojibake(value) {
+    const raw = collapseWhitespace(value);
+    if (!raw) return raw;
+    if (!/[ÃÂâ]/.test(raw)) return raw;
+
+    try {
+      const bytes = Uint8Array.from(Array.from(raw).map((ch) => ch.charCodeAt(0) & 0xff));
+      const decoded = new TextDecoder('utf-8', { fatal: false }).decode(bytes);
+      if (decoded && textScore(decoded) >= textScore(raw)) {
+        return collapseWhitespace(decoded);
+      }
+    } catch (_) {
+      // noop
     }
 
-    const breadcrumbCurrent = document.querySelector('.breadcrumb__current');
-    if (breadcrumbCurrent) {
-      const breadcrumbText = collapseWhitespace(breadcrumbCurrent.textContent);
-      if (breadcrumbText) return breadcrumbText;
-    }
+    return raw;
+  }
 
-    const title = document.title.split('|')[0];
-    return collapseWhitespace(title);
+  function sanitizeLabel(value) {
+    let text = collapseWhitespace(value);
+    text = maybeDecodeMojibake(text);
+
+    text = text
+      .replace(/\uFFFD/g, '-')
+      .replace(/\s+\?\s+/g, ' - ')
+      .replace(/\s*â€”\s*/g, ' - ')
+      .replace(/\s*—\s*/g, ' - ')
+      .replace(/\s*·\s*/g, ' · ')
+      .replace(/\s{2,}/g, ' ')
+      .trim();
+
+    text = text.replace(/^Nivel\s+(\d)\s*-\s*Ya\s+Tengo\s+Sats$/i, 'Nivel $1 - Ya Tengo Sats');
+
+    return text;
   }
 
   function sanitizeSameOriginPath(pathValue) {
@@ -80,6 +100,22 @@
     }
   }
 
+  function getPageTitleText() {
+    const h1 = document.querySelector('h1');
+    if (h1) {
+      const title = sanitizeLabel(h1.textContent);
+      if (title) return title;
+    }
+
+    const breadcrumbCurrent = document.querySelector('.breadcrumb__current');
+    if (breadcrumbCurrent) {
+      const title = sanitizeLabel(breadcrumbCurrent.textContent);
+      if (title) return title;
+    }
+
+    return sanitizeLabel(document.title.split('|')[0]);
+  }
+
   function readContextFromStorage() {
     try {
       const raw = window.sessionStorage.getItem(RETURN_CONTEXT_KEY);
@@ -91,8 +127,8 @@
 
       return {
         path,
-        title: collapseWhitespace(parsed.title || ''),
-        section: collapseWhitespace(parsed.section || inferSectionLabel(path))
+        title: sanitizeLabel(parsed.title || ''),
+        section: sanitizeLabel(parsed.section || inferSectionLabel(path))
       };
     } catch (_) {
       return null;
@@ -107,8 +143,8 @@
 
     const payload = {
       path: safePath,
-      title: collapseWhitespace(context.title || ''),
-      section: collapseWhitespace(context.section || inferSectionLabel(safePath))
+      title: sanitizeLabel(context.title || ''),
+      section: sanitizeLabel(context.section || inferSectionLabel(safePath))
     };
 
     try {
@@ -119,8 +155,8 @@
   }
 
   function getCurrentLevelContext() {
-    const current = normalizePath(window.location.pathname);
-    if (!/^\/nivel-\d(\/|$)/.test(current)) return null;
+    const path = currentPath();
+    if (!/^\/nivel-\d(\/|$)/.test(path)) return null;
 
     return {
       path: window.location.pathname,
@@ -136,8 +172,8 @@
 
     return {
       path: fromPath,
-      title: collapseWhitespace(params.get('from_title') || ''),
-      section: collapseWhitespace(params.get('from_section') || inferSectionLabel(fromPath))
+      title: sanitizeLabel(params.get('from_title') || ''),
+      section: sanitizeLabel(params.get('from_section') || inferSectionLabel(fromPath))
     };
   }
 
@@ -146,116 +182,86 @@
 
     try {
       const ref = new URL(document.referrer);
-      if (ref.origin === window.location.origin) return ref;
+      if (ref.origin !== window.location.origin) return null;
+      return ref;
     } catch (_) {
       return null;
     }
-
-    return null;
   }
 
-  function sectionFallbackPath(pathname) {
-    const path = normalizePath(pathname);
+  function getReturnContext() {
+    const current = currentPath();
 
-    if (path === '/nivel-1' || path.startsWith('/nivel-1/')) return '/nivel-1/';
-    if (path === '/nivel-2' || path.startsWith('/nivel-2/')) return '/nivel-2/';
-    if (path === '/nivel-3' || path.startsWith('/nivel-3/')) return '/nivel-3/';
-    if (path === '/nivel-4' || path.startsWith('/nivel-4/')) return '/nivel-4/';
-    if (path === '/nivel-5' || path.startsWith('/nivel-5/')) return '/nivel-5/';
-    if (path === '/nivel-6' || path.startsWith('/nivel-6/')) return '/nivel-6/';
-    if (path === '/base' || path.startsWith('/base/')) return '/base/';
-    if (path === '/comunidad' || path.startsWith('/comunidad/')) return '/comunidad/';
-    if (path === '/herramientas' || path.startsWith('/herramientas/')) return '/herramientas/';
+    const fromQuery = readContextFromQuery();
+    if (fromQuery) {
+      const target = normalizePath(new URL(fromQuery.path, window.location.origin).pathname);
+      if (target !== current) {
+        saveContextToStorage(fromQuery);
+        return { ...fromQuery, source: 'query' };
+      }
+    }
 
-    if (path === '/glosario.html' || path === '/recursos.html') return '/';
+    const fromStorage = readContextFromStorage();
+    if (fromStorage) {
+      const target = normalizePath(new URL(fromStorage.path, window.location.origin).pathname);
+      if (target !== current) {
+        return { ...fromStorage, source: 'storage' };
+      }
+    }
 
-    return '/';
+    const ref = getSameOriginReferrer();
+    if (!ref) return null;
+
+    const refPath = normalizePath(ref.pathname);
+    if (refPath === current) return null;
+
+    return {
+      path: `${ref.pathname}${ref.search || ''}${ref.hash || ''}`,
+      title: '',
+      section: inferSectionLabel(ref.pathname),
+      source: 'referrer'
+    };
   }
 
   function formatContextLabel(context) {
     if (!context) return '';
 
-    const section = collapseWhitespace(context.section || inferSectionLabel(context.path));
-    const title = collapseWhitespace(context.title || '');
+    const section = sanitizeLabel(context.section || inferSectionLabel(context.path));
+    const title = sanitizeLabel(context.title || '');
 
-    if (section && title) return `${section} · ${title}`;
+    if (section && title) return `${section} - ${title}`;
     if (title) return title;
     if (section) return section;
 
     return context.path;
   }
 
-  function getReturnContext() {
-    const current = normalizePath(window.location.pathname);
-
-    const fromQuery = readContextFromQuery();
-    if (fromQuery && normalizePath(new URL(fromQuery.path, window.location.origin).pathname) !== current) {
-      saveContextToStorage(fromQuery);
-      return { ...fromQuery, source: 'query' };
-    }
-
-    const fromStorage = readContextFromStorage();
-    if (fromStorage && normalizePath(new URL(fromStorage.path, window.location.origin).pathname) !== current) {
-      return { ...fromStorage, source: 'storage' };
-    }
-
-    const ref = getSameOriginReferrer();
-    if (ref) {
-      const refPath = normalizePath(ref.pathname);
-      if (refPath !== current) {
-        return {
-          path: `${ref.pathname}${ref.search || ''}${ref.hash || ''}`,
-          title: '',
-          section: inferSectionLabel(ref.pathname),
-          source: 'referrer'
-        };
-      }
-    }
-
-    return null;
-  }
-
   function buildContextBackModel(returnContext) {
-    const current = normalizePath(window.location.pathname);
+    const path = currentPath();
+    const isBasePage = path === '/base' || path.startsWith('/base/');
+    if (!isBasePage || !returnContext) return null;
 
-    if (returnContext) {
-      const targetPath = normalizePath(new URL(returnContext.path, window.location.origin).pathname);
-      if (targetPath !== current) {
-        if (returnContext.source === 'referrer' && !returnContext.title) {
-          return {
-            href: returnContext.path,
-            text: '<- Volver a la pagina anterior',
-            aria: 'Volver a la pagina anterior'
-          };
-        }
+    const targetUrl = new URL(returnContext.path, window.location.origin);
+    const targetPath = normalizePath(targetUrl.pathname);
 
-        const label = formatContextLabel(returnContext);
-        return {
-          href: returnContext.path,
-          text: `<- Volver a: ${label}`,
-          aria: `Volver a ${label}`
-        };
-      }
-    }
+    if (targetPath === path) return null;
+    if (targetPath === '/base' || targetPath.startsWith('/base/')) return null;
 
-    const fallback = sectionFallbackPath(window.location.pathname);
-    if (normalizePath(fallback) !== current) {
-      return {
-        href: fallback,
-        text: '<- Ir al indice de la seccion',
-        aria: 'Ir al indice de la seccion'
-      };
-    }
+    const label = formatContextLabel(returnContext);
 
-    return null;
+    return {
+      href: returnContext.path,
+      text: `<- Volver a: ${label}`,
+      aria: `Volver a ${label}`
+    };
   }
 
   function initContextBackButton(returnContext) {
     const breadcrumb = document.querySelector('.breadcrumb');
     if (!breadcrumb || !breadcrumb.parentNode) return;
 
-    const existingWrap = breadcrumb.parentNode.querySelector('.context-back-wrap');
-    if (existingWrap) existingWrap.remove();
+    const existing = breadcrumb.parentNode.querySelector('.context-back-wrap');
+    if (existing) existing.remove();
 
     const model = buildContextBackModel(returnContext);
     if (!model) return;
@@ -280,11 +286,8 @@
     const existing = sidebar.querySelector('.sidebar__section--context');
     if (existing) existing.remove();
 
-    if (!returnContext) return;
-
-    const current = normalizePath(window.location.pathname);
-    const targetPath = normalizePath(new URL(returnContext.path, window.location.origin).pathname);
-    if (current === targetPath) return;
+    const model = buildContextBackModel(returnContext);
+    if (!model) return;
 
     const section = document.createElement('div');
     section.className = 'sidebar__section sidebar__section--context sidebar__section--locked';
@@ -295,8 +298,8 @@
 
     const link = document.createElement('a');
     link.className = 'sidebar__link sidebar__link--context';
-    link.href = returnContext.path;
-    link.textContent = `<- Volver a: ${formatContextLabel(returnContext)}`;
+    link.href = model.href;
+    link.textContent = model.text;
 
     section.appendChild(title);
     section.appendChild(link);
@@ -325,9 +328,7 @@
     }
 
     if (resolved.origin !== window.location.origin) return false;
-    if (!resolved.pathname.startsWith('/base/')) return false;
-
-    return true;
+    return resolved.pathname.startsWith('/base/');
   }
 
   function augmentLinkWithContext(anchor, context) {
@@ -349,8 +350,7 @@
       resolved.searchParams.delete('from_section');
     }
 
-    const nextHref = `${resolved.pathname}${resolved.search}${resolved.hash}`;
-    anchor.setAttribute('href', nextHref);
+    anchor.setAttribute('href', `${resolved.pathname}${resolved.search}${resolved.hash}`);
   }
 
   function initContextualLinkPropagation(returnContext) {
@@ -360,34 +360,101 @@
       saveContextToStorage(levelContext);
     }
 
-    if (returnContext && window.location.pathname.startsWith('/base/')) {
+    if (returnContext && (currentPath() === '/base' || currentPath().startsWith('/base/'))) {
       saveContextToStorage(returnContext);
     }
 
-    const contextToPropagate = levelContext || (window.location.pathname.startsWith('/base/') ? returnContext : null);
+    const contextToPropagate = levelContext || (currentPath().startsWith('/base/') ? returnContext : null);
     if (!contextToPropagate) return;
 
     document.querySelectorAll('a[href]').forEach((anchor) => {
       augmentLinkWithContext(anchor, contextToPropagate);
     });
 
-    if (!contextLinkBound) {
-      document.addEventListener('click', (event) => {
-        const anchor = event.target.closest('a[href]');
-        if (!anchor) return;
+    if (contextLinkBound) return;
 
-        const freshLevelContext = getCurrentLevelContext();
-        const context = freshLevelContext || readContextFromQuery() || readContextFromStorage();
-        if (!context) return;
+    document.addEventListener('click', (event) => {
+      const anchor = event.target.closest('a[href]');
+      if (!anchor) return;
 
-        augmentLinkWithContext(anchor, context);
-      });
-      contextLinkBound = true;
+      const freshLevelContext = getCurrentLevelContext();
+      const context = freshLevelContext || readContextFromQuery() || readContextFromStorage();
+      if (!context) return;
+
+      augmentLinkWithContext(anchor, context);
+    });
+
+    contextLinkBound = true;
+  }
+
+  function sanitizeSidebarTexts() {
+    document.querySelectorAll('.sidebar__section-title, .sidebar__link').forEach((node) => {
+      const cleaned = sanitizeLabel(node.textContent);
+      if (cleaned) node.textContent = cleaned;
+    });
+
+    document.querySelectorAll('.breadcrumb__item, .breadcrumb__current').forEach((node) => {
+      const cleaned = sanitizeLabel(node.textContent);
+      if (cleaned) node.textContent = cleaned;
+    });
+  }
+
+  function createSidebarSection(title, links, sectionClass) {
+    const section = document.createElement('div');
+    section.className = `sidebar__section ${sectionClass || ''}`.trim();
+
+    const titleNode = document.createElement('div');
+    titleNode.className = 'sidebar__section-title';
+    titleNode.textContent = sanitizeLabel(title);
+    section.appendChild(titleNode);
+
+    links.forEach((item) => {
+      const link = document.createElement('a');
+      link.className = 'sidebar__link';
+      link.href = item.href;
+      link.textContent = sanitizeLabel(item.text);
+      section.appendChild(link);
+    });
+
+    return section;
+  }
+
+  function injectPrimarySidebarSections() {
+    const sidebar = document.querySelector('.sidebar');
+    if (!sidebar) return;
+    if (sidebar.dataset.primaryNavInjected === '1') return;
+
+    const nivelesSection = createSidebarSection('Niveles', [
+      { href: '/nivel-1/', text: 'Nivel 1 - Nocoinero Curioso' },
+      { href: '/nivel-2/', text: 'Nivel 2 - Ya Tengo Sats' },
+      { href: '/nivel-3/', text: 'Nivel 3 - Rabbit Hole' },
+      { href: '/nivel-4/', text: 'Nivel 4 - Down the Rabbit Hole' },
+      { href: '/nivel-5/', text: 'Nivel 5 - El Arquitecto' },
+      { href: '/nivel-6/', text: 'Nivel 6 - Satoshi' }
+    ], 'sidebar__section--primary');
+
+    const pilaresSection = createSidebarSection('Pilares', [
+      { href: '/base/', text: 'Base de Conocimiento' },
+      { href: '/herramientas/', text: 'Herramientas' },
+      { href: '/comunidad/', text: 'Comunidad' },
+      { href: '/glosario.html', text: 'Glosario' },
+      { href: '/recursos.html', text: 'Recursos' }
+    ], 'sidebar__section--primary');
+
+    const firstStandardSection = sidebar.querySelector('.sidebar__section:not(.sidebar__section--context)');
+    if (firstStandardSection) {
+      sidebar.insertBefore(pilaresSection, firstStandardSection);
+      sidebar.insertBefore(nivelesSection, pilaresSection);
+    } else {
+      sidebar.prepend(pilaresSection);
+      sidebar.prepend(nivelesSection);
     }
+
+    sidebar.dataset.primaryNavInjected = '1';
   }
 
   function markActiveNavLinks() {
-    const current = normalizePath(currentPath());
+    const path = currentPath();
 
     document.querySelectorAll('.site-nav__link[href], .mobile-menu__link[href]').forEach((link) => {
       const href = link.getAttribute('href');
@@ -401,14 +468,14 @@
       }
 
       if (linkPath === '/' || linkPath === '') return;
-      if (current === linkPath || current.startsWith(`${linkPath}/`)) {
+      if (path === linkPath || path.startsWith(`${linkPath}/`)) {
         link.classList.add('site-nav__link--active');
       }
     });
   }
 
   function markActiveSidebarLink() {
-    const current = normalizePath(currentPath());
+    const path = currentPath();
 
     document.querySelectorAll('.sidebar__link[href]').forEach((link) => {
       const href = link.getAttribute('href');
@@ -421,17 +488,26 @@
         return;
       }
 
-      if (current === linkPath) {
+      if (path === linkPath) {
         link.classList.add('sidebar__link--active');
-        link.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        return;
+      }
+
+      if (linkPath !== '/' && path.startsWith(`${linkPath}/`)) {
+        link.classList.add('sidebar__link--section-active');
       }
     });
+
+    const active = document.querySelector('.sidebar__link--active');
+    if (active) {
+      active.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
   }
 
   function getSidebarTreeStorageKey(section, index) {
     const titleNode = section.querySelector('.sidebar__section-title, .sidebar__section-toggle-label');
-    const title = collapseWhitespace(titleNode ? titleNode.textContent : `section-${index}`);
-    return `${SIDEBAR_TREE_KEY_PREFIX}${normalizePath(window.location.pathname)}:${index}:${title}`;
+    const title = sanitizeLabel(titleNode ? titleNode.textContent : `section-${index}`);
+    return `${SIDEBAR_TREE_KEY_PREFIX}${currentPath()}:${index}:${title}`;
   }
 
   function setSidebarSectionExpanded(section, expanded) {
@@ -445,34 +521,33 @@
   }
 
   function getSidebarDefaultExpanded(sectionMeta) {
-    const path = normalizePath(window.location.pathname);
+    const path = currentPath();
     const isBasePath = path === '/base' || path.startsWith('/base/');
     const levelMatch = path.match(/^\/nivel-(\d)(\/|$)/);
     const isLevelPath = !!levelMatch;
     const isLevelIndex = isLevelPath && path === `/nivel-${levelMatch[1]}`;
     const isBaseIndex = path === '/base';
 
-    if (isLevelIndex || isBaseIndex) {
-      // In index pages we prioritize discovery: keep all tree sections expanded.
-      return true;
-    }
+    if (isLevelIndex || isBaseIndex) return true;
 
     if (isBasePath) {
-      // In Base pages keep focus: open only the active conceptual block.
       return sectionMeta.hasActive;
     }
 
     if (isLevelPath) {
       if (sectionMeta.activeSectionIndex === -1) {
-        return sectionMeta.sectionIndex === 0;
+        return sectionMeta.sectionIndex <= 1;
       }
 
-      // In level content pages open the active section and adjacent sections.
       const distance = Math.abs(sectionMeta.sectionIndex - sectionMeta.activeSectionIndex);
       return sectionMeta.hasActive || distance <= 1;
     }
 
-    return sectionMeta.hasActive;
+    return sectionMeta.hasActive || sectionMeta.sectionIndex === 0;
+  }
+
+  function buildChevronSvg() {
+    return '<svg viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path d="M5.5 7.5L10 12l4.5-4.5" /></svg>';
   }
 
   function initSidebarTree() {
@@ -496,7 +571,7 @@
       }
 
       const links = Array.from(section.querySelectorAll(':scope > .sidebar__link'));
-      if (links.length < 2) {
+      if (links.length === 0) {
         section.dataset.treeInitialized = '1';
         return;
       }
@@ -513,12 +588,11 @@
 
       const label = document.createElement('span');
       label.className = 'sidebar__section-toggle-label';
-      label.textContent = collapseWhitespace(title.textContent);
+      label.textContent = sanitizeLabel(title.textContent);
 
       const icon = document.createElement('span');
       icon.className = 'sidebar__section-toggle-icon';
-      icon.textContent = 'v';
-      icon.setAttribute('aria-hidden', 'true');
+      icon.innerHTML = buildChevronSvg();
 
       toggle.appendChild(label);
       toggle.appendChild(icon);
@@ -602,9 +676,7 @@
     });
 
     overlay.addEventListener('click', (event) => {
-      if (!menu.contains(event.target)) {
-        closeMenu();
-      }
+      if (!menu.contains(event.target)) closeMenu();
     });
 
     document.addEventListener('keydown', (event) => {
@@ -662,8 +734,10 @@
     document.addEventListener('click', (event) => {
       const link = event.target.closest('a[href^="#"]');
       if (!link) return;
+
       const target = document.querySelector(link.getAttribute('href'));
       if (!target) return;
+
       event.preventDefault();
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
@@ -675,10 +749,12 @@
     const returnContext = getReturnContext();
 
     initContextualLinkPropagation(returnContext);
-    markActiveNavLinks();
-    markActiveSidebarLink();
+    sanitizeSidebarTexts();
     initContextBackButton(returnContext);
     initSidebarContextBlock(returnContext);
+    injectPrimarySidebarSections();
+    markActiveNavLinks();
+    markActiveSidebarLink();
     initSidebarTree();
     initMobileMenu();
     initSearch();
@@ -693,7 +769,3 @@
     document.addEventListener('DOMContentLoaded', () => setTimeout(init, 100));
   }
 })();
-
-
-
-
