@@ -23,11 +23,11 @@ El proyecto se organiza en dos capas:
 
 ### Niveles progresivos
 
-- `/nivel-1/` Nocoinero Curioso
-- `/nivel-2/` Ya Tengo Sats
-- `/nivel-3/` Rabbit Hole
-- `/nivel-4/` Down the Rabbit Hole
-- `/nivel-5/` El Arquitecto
+- `/nivel-1/` Explorador
+- `/nivel-2/` Soberano
+- `/nivel-3/` Analista
+- `/nivel-4/` En la madriguera
+- `/nivel-5/` Mentor
 - `/nivel-6/` Satoshi
 
 ## Estructura del repositorio

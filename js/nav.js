@@ -17,7 +17,7 @@
 
   const LEVEL_TREE = [
     {
-      title: 'Nivel 1 - Nocoinero Curioso',
+      title: 'Nivel 1 - Explorador',
       index: '/nivel-1/',
       pages: [
         { href: '/nivel-1/antes-de-empezar.html', text: 'Antes de empezar' },
@@ -29,7 +29,7 @@
       ]
     },
     {
-      title: 'Nivel 2 - Ya Tengo Sats',
+      title: 'Nivel 2 - Soberano',
       index: '/nivel-2/',
       pages: [
         { href: '/nivel-2/crear-tu-wallet.html', text: 'Paso 1: Crea tu wallet propia' },
@@ -48,7 +48,7 @@
       ]
     },
     {
-      title: 'Nivel 3 - Rabbit Hole',
+      title: 'Nivel 3 - Analista',
       index: '/nivel-3/',
       pages: [
         { href: '/nivel-3/modelo-utxo.html', text: 'El modelo UTXO' },
@@ -71,7 +71,7 @@
       ]
     },
     {
-      title: 'Nivel 4 - Down the Rabbit Hole',
+      title: 'Nivel 4 - En la madriguera',
       index: '/nivel-4/',
       pages: [
         { href: '/nivel-4/configurar-multisig.html', text: 'Configurar multisig con Sparrow' },
@@ -91,7 +91,7 @@
       ]
     },
     {
-      title: 'Nivel 5 - El Arquitecto',
+      title: 'Nivel 5 - Mentor',
       index: '/nivel-5/',
       pages: [
         { href: '/nivel-5/funciones-hash.html', text: 'Funciones hash' },
@@ -269,7 +269,7 @@
       .replace(/\s{2,}/g, ' ')
       .trim();
 
-    text = text.replace(/^Nivel\s+(\d)\s*-\s*Ya\s+Tengo\s+Sats$/i, 'Nivel $1 - Ya Tengo Sats');
+    text = text.replace(/^Nivel\s+(\d)\s*-\s*Ya\s+Tengo\s+Sats$/i, 'Nivel $1 - Soberano');
 
     return text;
   }

@@ -9,7 +9,7 @@
   const staticIndex = [
     { title: 'Inicio', url: '/', tags: ['home', 'landing'], section: 'General' },
 
-    { title: 'Nivel 1 - Nocoinero Curioso', url: '/nivel-1/', tags: ['nivel 1', 'principiante'], section: 'Niveles', nivel: 1 },
+    { title: 'Nivel 1 - Explorador', url: '/nivel-1/', tags: ['nivel 1', 'principiante'], section: 'Niveles', nivel: 1 },
     { title: 'Antes de empezar', url: '/nivel-1/antes-de-empezar.html', tags: ['nivel 1', 'inicio'], section: 'Nivel 1', nivel: 1 },
     { title: 'El problema del KYC', url: '/nivel-1/el-problema-del-kyc.html', tags: ['kyc', 'privacidad'], section: 'Nivel 1', nivel: 1 },
     { title: 'Dos caminos: KYC o no-KYC', url: '/nivel-1/dos-caminos.html', tags: ['kyc', 'no-kyc'], section: 'Nivel 1', nivel: 1 },
@@ -17,7 +17,7 @@
     { title: 'Tu primera compra', url: '/nivel-1/tu-primera-compra.html', tags: ['compra', 'sats'], section: 'Nivel 1', nivel: 1 },
     { title: 'Qu\u00e9 acabas de hacer', url: '/nivel-1/que-has-hecho.html', tags: ['custodia', 'keys'], section: 'Nivel 1', nivel: 1 },
 
-    { title: 'Nivel 2 - Ya Tengo Sats', url: '/nivel-2/', tags: ['nivel 2', 'autocustodia', 'lightning'], section: 'Niveles', nivel: 2 },
+    { title: 'Nivel 2 - Soberano', url: '/nivel-2/', tags: ['nivel 2', 'autocustodia', 'lightning'], section: 'Niveles', nivel: 2 },
     { title: 'Paso 1: Crea tu wallet propia', url: '/nivel-2/crear-tu-wallet.html', tags: ['nivel 2', 'wallet', 'autocustodia'], section: 'Nivel 2', nivel: 2 },
     { title: 'Paso 2: Retirar bitcoin del exchange a tu wallet', url: '/nivel-2/retirar-del-exchange.html', tags: ['nivel 2', 'retiro', 'exchange'], section: 'Nivel 2', nivel: 2 },
     { title: 'Paso 3: Protege tu frase semilla', url: '/nivel-2/tu-seed-phrase.html', tags: ['nivel 2', 'seed', 'seguridad'], section: 'Nivel 2', nivel: 2 },
@@ -32,7 +32,7 @@
     { title: 'C\u00f3mo hacer backup correctamente', url: '/nivel-2/como-hacer-backup.html', tags: ['nivel 2', 'backup', 'seed'], section: 'Nivel 2', nivel: 2 },
     { title: 'Wallets recomendadas', url: '/nivel-2/wallets-recomendadas.html', tags: ['nivel 2', 'wallets', 'seguridad'], section: 'Nivel 2', nivel: 2 },
 
-    { title: 'Nivel 3 - Rabbit Hole', url: '/nivel-3/', tags: ['nivel 3', 'utxo', 'transacciones'], section: 'Niveles', nivel: 3 },
+    { title: 'Nivel 3 - Analista', url: '/nivel-3/', tags: ['nivel 3', 'utxo', 'transacciones'], section: 'Niveles', nivel: 3 },
     { title: 'El modelo UTXO', url: '/nivel-3/modelo-utxo.html', tags: ['nivel 3', 'utxo'], section: 'Nivel 3', nivel: 3 },
     { title: 'Anatom\u00eda de una transacci\u00f3n', url: '/nivel-3/anatomia-transaccion.html', tags: ['nivel 3', 'transacciones', 'inputs', 'outputs'], section: 'Nivel 3', nivel: 3 },
     { title: 'La mempool', url: '/nivel-3/mempool.html', tags: ['nivel 3', 'mempool', 'confirmaciones'], section: 'Nivel 3', nivel: 3 },
@@ -53,7 +53,7 @@
 
 
 
-    { title: 'Nivel 4 - Down the Rabbit Hole', url: '/nivel-4/', tags: ['nivel 4', 'privacidad', 'multisig', 'herencia', 'lightning', 'mineria'], section: 'Niveles', nivel: 4 },
+    { title: 'Nivel 4 - En la madriguera', url: '/nivel-4/', tags: ['nivel 4', 'privacidad', 'multisig', 'herencia', 'lightning', 'mineria'], section: 'Niveles', nivel: 4 },
     { title: 'Distribucion geografica de claves', url: '/nivel-4/distribucion-claves.html', tags: ['nivel 4', 'multisig', 'claves'], section: 'Nivel 4', nivel: 4 },
     { title: 'Herencia de Bitcoin', url: '/nivel-4/herencia-bitcoin.html', tags: ['nivel 4', 'herencia', 'planificacion'], section: 'Nivel 4', nivel: 4 },
     { title: 'Guia de herencia paso a paso', url: '/nivel-4/guia-herencia.html', tags: ['nivel 4', 'herencia', 'guia'], section: 'Nivel 4', nivel: 4 },
@@ -68,7 +68,7 @@
     { title: 'Mineria con Bitaxe', url: '/nivel-4/mineria-bitaxe.html', tags: ['nivel 4', 'bitaxe', 'mineria'], section: 'Nivel 4', nivel: 4 },
     { title: 'Bitcoin como calefaccion', url: '/nivel-4/calefaccion-bitcoin.html', tags: ['nivel 4', 'mineria', 'calefaccion'], section: 'Nivel 4', nivel: 4 },
 
-    { title: 'Nivel 5 - El Arquitecto', url: '/nivel-5/', tags: ['nivel 5', 'criptografia', 'script', 'protocolo'], section: 'Niveles', nivel: 5 },
+    { title: 'Nivel 5 - Mentor', url: '/nivel-5/', tags: ['nivel 5', 'criptografia', 'script', 'protocolo'], section: 'Niveles', nivel: 5 },
 
     { title: 'Nivel 6 - Satoshi', url: '/nivel-6/', tags: ['nivel 6', 'filosofia', 'contribucion', 'educacion'], section: 'Niveles', nivel: 6 },
     { title: 'Por que Bitcoin importa de verdad', url: '/nivel-6/por-que-bitcoin-importa.html', tags: ['nivel 6', 'filosofia'], section: 'Nivel 6', nivel: 6 },

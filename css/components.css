@@ -1581,6 +1581,12 @@ html[data-ads="on"] .sidebar__ad-wrap {
   max-width: 600px;
 }
 
+.level1-intro p.level1-intro__why {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 0.6rem;
+}
+
 .section-heading {
   margin-bottom: 1.25rem;
 }
