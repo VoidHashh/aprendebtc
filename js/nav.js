@@ -171,7 +171,10 @@
       title: 'Herramientas',
       index: '/herramientas/',
       pages: [
-        { href: '/herramientas/conversor.html', text: 'Conversor de unidades' },
+        { href: '/herramientas/conversor.html', text: 'Conversor BTC / EUR / sats' },
+        { href: '/herramientas/calculadora-dca.html', text: 'Calculadora DCA' },
+        { href: '/herramientas/calculadora-fees.html', text: 'Calculadora de fees' },
+        { href: '/herramientas/calculadora-impuestos.html', text: 'Calculadora de impuestos (ES)' },
         { href: '/herramientas/claves.html', text: 'Generador de claves y direcciones' },
         { href: '/herramientas/hd-wallet.html', text: 'HD Wallet explorer' },
         { href: '/herramientas/transaccion.html', text: 'Constructor de transacciones' },

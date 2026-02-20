@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Simula una estrategia DCA en Bitcoin. Calcula cuánto habrías acumulado invirtiendo periódicamente desde cualquier fecha." />
+  <title>Calculadora DCA de Bitcoin — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="index.html" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Calculadora DCA</span>
+        </nav>
+
+        <article class="article">
+          <h1>Calculadora DCA de Bitcoin</h1>
+          <p class="article__subtitle">Descubre cuánto habrías acumulado con compras periódicas de bitcoin.</p>
+
+          <!-- Formulario de entrada -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Configura tu simulación</h2>
+            
+            <div class="tool-row">
+              <div class="tool-field">
+                <label class="tool-label" for="amount">Cantidad por compra (€)</label>
+                <input 
+                  type="number" 
+                  id="amount" 
+                  class="tool-input" 
+                  value="50"
+                  min="1"
+                  step="1"
+                />
+              </div>
+              <div class="tool-field">
+                <label class="tool-label" for="frequency">Frecuencia</label>
+                <select id="frequency" class="tool-select">
+                  <option value="daily">Diario</option>
+                  <option value="weekly">Semanal</option>
+                  <option value="biweekly">Quincenal</option>
+                  <option value="monthly" selected>Mensual</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="tool-row">
+              <div class="tool-field">
+                <label class="tool-label" for="start-date">Fecha de inicio</label>
+                <input 
+                  type="date" 
+                  id="start-date" 
+                  class="tool-input"
+                />
+              </div>
+              <div class="tool-field">
+                <label class="tool-label" for="end-date">Fecha de fin</label>
+                <input 
+                  type="date" 
+                  id="end-date" 
+                  class="tool-input"
+                />
+              </div>
+            </div>
+
+            <div class="tool-btn-row">
+              <button class="tool-btn" id="calculate-btn">
+                 Calcular DCA
+              </button>
+            </div>
+          </div>
+
+          <!-- Loading -->
+          <div class="tool-loading" id="loading" style="display: none;">
+            <div class="tool-spinner"></div>
+            <span>Obteniendo datos históricos...</span>
+          </div>
+
+          <!-- Error -->
+          <div class="tool-error" id="api-error" style="display: none;"></div>
+
+          <!-- Resultados (ocultos inicialmente) -->
+          <div id="results-section" style="display: none;">
+            
+            <!-- Cards de resultados -->
+            <div class="tool-container">
+              <h2 class="tool-container__title">Resultados de tu estrategia DCA</h2>
+              
+              <div class="tool-row tool-row--three">
+                <div class="tool-result-card">
+                  <div class="tool-result-card__label">Total invertido</div>
+                  <div class="tool-result-card__value" id="total-invested">—</div>
+                </div>
+                <div class="tool-result-card">
+                  <div class="tool-result-card__label">Valor actual</div>
+                  <div class="tool-result-card__value tool-result-card__value--accent" id="current-value">—</div>
+                </div>
+                <div class="tool-result-card">
+                  <div class="tool-result-card__label">Rendimiento</div>
+                  <div class="tool-result-card__value" id="return-percentage">—</div>
+                </div>
+              </div>
+
+              <div class="tool-row tool-row--three" style="margin-top: 1rem;">
+                <div class="tool-result-card">
+                  <div class="tool-result-card__label">Bitcoin acumulado</div>
+                  <div class="tool-result-card__value" id="btc-accumulated">—</div>
+                </div>
+                <div class="tool-result-card">
+                  <div class="tool-result-card__label">Precio promedio</div>
+                  <div class="tool-result-card__value" id="avg-price">—</div>
+                </div>
+                <div class="tool-result-card">
+                  <div class="tool-result-card__label">Compras realizadas</div>
+                  <div class="tool-result-card__value" id="num-purchases">—</div>
+                </div>
+              </div>
+
+              <div class="tool-result-card" style="margin-top: 1rem;">
+                <div class="tool-result-card__label">Ganancia/Pérdida neta</div>
+                <div class="tool-result-card__value" id="net-profit" style="font-size: 1.5rem;">—</div>
+              </div>
+            </div>
+
+            <!-- Gráfico -->
+            <div class="tool-container">
+              <h2 class="tool-container__title">Evolución de tu inversión</h2>
+              <div class="tool-chart">
+                <canvas id="dca-chart" class="tool-chart__canvas" aria-label="Grafico de evolucion DCA" role="img"></canvas>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Disclaimer -->
+          <div class="tool-disclaimer">
+            <strong>Aviso:</strong> Rendimientos pasados no garantizan resultados futuros. 
+            Esta herramienta es solo para fines educativos y no constituye asesoramiento financiero.
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">¿Qué es DCA?</div>
+            <p class="tool-callout__text">
+              Dollar Cost Averaging es una estrategia que consiste en invertir cantidades fijas a intervalos regulares, 
+              independientemente del precio. Reduce el estrés del timing. 
+              <a href="../base/dca-compras-periodicas.html">Aprende más sobre DCA →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === CONSTANTES ===
+    const SATS_PER_BTC = 100000000;
+    
+    // === ELEMENTOS DEL DOM ===
+    const amountInput = document.getElementById('amount');
+    const frequencySelect = document.getElementById('frequency');
+    const startDateInput = document.getElementById('start-date');
+    const endDateInput = document.getElementById('end-date');
+    const calculateBtn = document.getElementById('calculate-btn');
+    const loadingEl = document.getElementById('loading');
+    const apiError = document.getElementById('api-error');
+    const resultsSection = document.getElementById('results-section');
+
+    // Resultados
+    const totalInvestedEl = document.getElementById('total-invested');
+    const currentValueEl = document.getElementById('current-value');
+    const returnPercentageEl = document.getElementById('return-percentage');
+    const btcAccumulatedEl = document.getElementById('btc-accumulated');
+    const avgPriceEl = document.getElementById('avg-price');
+    const numPurchasesEl = document.getElementById('num-purchases');
+    const netProfitEl = document.getElementById('net-profit');
+
+    // Gráfico
+    let dcaChart = null;
+
+    // === INICIALIZACIÓN DE FECHAS ===
+    function initDates() {
+      const today = new Date();
+      const threeYearsAgo = new Date();
+      threeYearsAgo.setFullYear(today.getFullYear() - 3);
+
+      // Formato YYYY-MM-DD
+      endDateInput.value = today.toISOString().split('T')[0];
+      startDateInput.value = threeYearsAgo.toISOString().split('T')[0];
+
+      // Límites
+      endDateInput.max = today.toISOString().split('T')[0];
+      startDateInput.max = today.toISOString().split('T')[0];
+    }
+
+    // === FUNCIONES DE FORMATO ===
+    function formatNumber(num, decimals = 2) {
+      if (num === null || num === undefined || isNaN(num)) return '—';
+      const parts = Number(num.toFixed(decimals)).toString().split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+      return parts.join(',');
+    }
+
+    function formatBtc(btc) {
+      if (btc === null || isNaN(btc)) return '—';
+      let formatted = btc.toFixed(8).replace(/\.?0+$/, '');
+      if (formatted.endsWith('.')) formatted = formatted.slice(0, -1);
+      return formatted.replace('.', ',');
+    }
+
+    function formatSats(sats) {
+      return Math.round(sats).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
+
+    // === OBTENER DATOS DE PRECIO ===
+    async function fetchPriceData(startDate, endDate) {
+      // Convertir a timestamps Unix (segundos)
+      const fromTimestamp = Math.floor(startDate.getTime() / 1000);
+      const toTimestamp = Math.floor(endDate.getTime() / 1000);
+
+      const url = `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=eur&from=${fromTimestamp}&to=${toTimestamp}`;
+
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Error al obtener datos de precio');
+      }
+
+      const data = await response.json();
+      return data.prices; // Array de [timestamp, price]
+    }
+
+    // === GENERAR FECHAS DE COMPRA ===
+    function generatePurchaseDates(startDate, endDate, frequency) {
+      const dates = [];
+      const current = new Date(startDate);
+      const end = new Date(endDate);
+
+      // Intervalo en días según frecuencia
+      const intervals = {
+        daily: 1,
+        weekly: 7,
+        biweekly: 14,
+        monthly: 30 // Aproximado
+      };
+
+      const interval = intervals[frequency];
+
+      while (current <= end) {
+        dates.push(new Date(current));
+        
+        if (frequency === 'monthly') {
+          // Para mensual, añadir un mes exacto
+          current.setMonth(current.getMonth() + 1);
+        } else {
+          current.setDate(current.getDate() + interval);
+        }
+      }
+
+      return dates;
+    }
+
+    // === ENCONTRAR PRECIO MÁS CERCANO ===
+    function findClosestPrice(timestamp, prices) {
+      // prices es array de [timestamp, price]
+      // Buscar el precio más cercano a la fecha dada
+      
+      let closest = prices[0];
+      let minDiff = Math.abs(timestamp - prices[0][0]);
+
+      for (let i = 1; i < prices.length; i++) {
+        const diff = Math.abs(timestamp - prices[i][0]);
+        if (diff < minDiff) {
+          minDiff = diff;
+          closest = prices[i];
+        }
+        // Si ya pasamos, no seguir buscando (los precios están ordenados)
+        if (prices[i][0] > timestamp && diff > minDiff) break;
+      }
+
+      return closest[1];
+    }
+
+    // === CALCULAR DCA ===
+    async function calculateDCA() {
+      // Validar inputs
+      const amount = parseFloat(amountInput.value);
+      const frequency = frequencySelect.value;
+      const startDate = new Date(startDateInput.value);
+      const endDate = new Date(endDateInput.value);
+
+      if (isNaN(amount) || amount <= 0) {
+        showError('Introduce una cantidad válida');
+        return;
+      }
+
+      if (startDate >= endDate) {
+        showError('La fecha de inicio debe ser anterior a la fecha de fin');
+        return;
+      }
+
+      // Mostrar loading
+      loadingEl.style.display = 'flex';
+      apiError.style.display = 'none';
+      resultsSection.style.display = 'none';
+      calculateBtn.disabled = true;
+
+      try {
+        // Obtener datos de precio
+        const prices = await fetchPriceData(startDate, endDate);
+
+        if (!prices || prices.length === 0) {
+          throw new Error('No se obtuvieron datos de precio');
+        }
+
+        // Generar fechas de compra
+        const purchaseDates = generatePurchaseDates(startDate, endDate, frequency);
+
+        if (purchaseDates.length === 0) {
+          throw new Error('No hay fechas de compra en el rango seleccionado');
+        }
+
+        // Simular compras
+        let totalInvested = 0;
+        let totalBtc = 0;
+        const chartData = {
+          labels: [],
+          invested: [],
+          value: []
+        };
+
+        for (const date of purchaseDates) {
+          const timestamp = date.getTime();
+          const price = findClosestPrice(timestamp, prices);
+
+          // Comprar BTC
+          const btcBought = amount / price;
+          totalInvested += amount;
+          totalBtc += btcBought;
+
+          // Calcular valor actual de lo acumulado hasta ahora
+          const currentPrice = prices[prices.length - 1][1];
+          const currentValue = totalBtc * currentPrice;
+
+          // Datos para el gráfico
+          chartData.labels.push(date.toLocaleDateString('es-ES', { month: 'short', year: '2-digit' }));
+          chartData.invested.push(totalInvested);
+          chartData.value.push(currentValue);
+        }
+
+        // Precio actual (último del array)
+        const currentPrice = prices[prices.length - 1][1];
+        const currentValue = totalBtc * currentPrice;
+        const profit = currentValue - totalInvested;
+        const returnPct = ((currentValue - totalInvested) / totalInvested) * 100;
+        const avgPrice = totalInvested / totalBtc;
+
+        // Mostrar resultados
+        displayResults({
+          totalInvested,
+          currentValue,
+          profit,
+          returnPct,
+          totalBtc,
+          avgPrice,
+          numPurchases: purchaseDates.length,
+          chartData
+        });
+
+      } catch (error) {
+        console.error('Error:', error);
+        showError(error.message || 'Error al calcular. Inténtalo de nuevo.');
+      } finally {
+        loadingEl.style.display = 'none';
+        calculateBtn.disabled = false;
+      }
+    }
+
+    // === MOSTRAR ERROR ===
+    function showError(message) {
+      apiError.textContent = message;
+      apiError.style.display = 'block';
+    }
+
+    // === MOSTRAR RESULTADOS ===
+    function displayResults(data) {
+      // Total invertido
+      totalInvestedEl.textContent = formatNumber(data.totalInvested, 0) + ' €';
+
+      // Valor actual
+      currentValueEl.textContent = formatNumber(data.currentValue, 2) + ' €';
+
+      // Rendimiento
+      const returnClass = data.returnPct >= 0 
+        ? 'tool-result-card__value tool-result-card__value--green'
+        : 'tool-result-card__value tool-result-card__value--red';
+      returnPercentageEl.className = returnClass;
+      returnPercentageEl.textContent = (data.returnPct >= 0 ? '+' : '') + formatNumber(data.returnPct, 1) + '%';
+
+      // BTC acumulado
+      const sats = data.totalBtc * SATS_PER_BTC;
+      btcAccumulatedEl.innerHTML = `${formatBtc(data.totalBtc)} BTC<br><span style="font-size: 0.8rem; color: var(--text-secondary);">(${formatSats(sats)} sats)</span>`;
+
+      // Precio promedio
+      avgPriceEl.textContent = formatNumber(data.avgPrice, 0) + ' €/BTC';
+
+      // Número de compras
+      numPurchasesEl.textContent = data.numPurchases;
+
+      // Ganancia/Pérdida neta
+      const profitClass = data.profit >= 0
+        ? 'tool-result-card__value tool-result-card__value--green'
+        : 'tool-result-card__value tool-result-card__value--red';
+      netProfitEl.className = profitClass;
+      netProfitEl.style.fontSize = '1.5rem';
+      netProfitEl.textContent = (data.profit >= 0 ? '+' : '') + formatNumber(data.profit, 2) + ' €';
+
+      // Renderizar gráfico
+      renderChart(data.chartData);
+
+      // Mostrar sección de resultados
+      resultsSection.style.display = 'block';
+
+      // Scroll suave a resultados
+      resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // === RENDERIZAR GRAFICO ===
+    let lastChartData = null;
+    let resizeTimer;
+
+    function renderChart(chartData) {
+      lastChartData = chartData;
+
+      const canvas = document.getElementById('dca-chart');
+      if (!canvas) return;
+
+      const container = canvas.parentElement;
+      const css = getComputedStyle(document.documentElement);
+      const accent = (css.getPropertyValue('--accent') || '#F7931A').trim();
+      const muted = '#8b949e';
+      const grid = 'rgba(48, 54, 61, 0.5)';
+      const textColor = (css.getPropertyValue('--text-secondary') || '#8B949E').trim();
+
+      // Downsample for readability
+      let labels = chartData.labels || [];
+      let invested = chartData.invested || [];
+      let value = chartData.value || [];
+
+      if (labels.length > 60) {
+        const step = Math.ceil(labels.length / 60);
+        labels = labels.filter((_, i) => i % step === 0 || i === labels.length - 1);
+        invested = invested.filter((_, i) => i % step === 0 || i === invested.length - 1);
+        value = value.filter((_, i) => i % step === 0 || i === value.length - 1);
+      }
+
+      const dpr = window.devicePixelRatio || 1;
+
+      let width = canvas.clientWidth || 640;
+      let height = canvas.clientHeight || 260;
+
+      if (container) {
+        const style = getComputedStyle(container);
+        const padX = parseFloat(style.paddingLeft || '0') + parseFloat(style.paddingRight || '0');
+        const padY = parseFloat(style.paddingTop || '0') + parseFloat(style.paddingBottom || '0');
+        width = Math.max(320, Math.floor((container.clientWidth - padX) || width));
+        height = Math.max(220, Math.floor((container.clientHeight - padY) || height));
+      }
+
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, width, height);
+
+      const padding = { top: 18, right: 16, bottom: 28, left: 46 };
+      const plotW = width - padding.left - padding.right;
+      const plotH = height - padding.top - padding.bottom;
+
+      const all = invested.concat(value).filter((n) => typeof n === 'number' && !isNaN(n));
+      const min = Math.min.apply(null, all.length ? all : [0]);
+      const max = Math.max.apply(null, all.length ? all : [1]);
+      const pad = (max - min) * 0.08 || 1;
+      const yMin = Math.max(0, min - pad);
+      const yMax = max + pad;
+
+      function xAt(i) {
+        const denom = Math.max(1, labels.length - 1);
+        return padding.left + (i / denom) * plotW;
+      }
+
+      function yAt(v) {
+        const t = (v - yMin) / (yMax - yMin || 1);
+        return padding.top + (1 - t) * plotH;
+      }
+
+      // Grid
+      ctx.strokeStyle = grid;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      const gridLines = 4;
+      for (let i = 0; i <= gridLines; i++) {
+        const y = padding.top + (i / gridLines) * plotH;
+        ctx.moveTo(padding.left, y);
+        ctx.lineTo(width - padding.right, y);
+      }
+      ctx.stroke();
+
+      // Y labels
+      ctx.fillStyle = textColor;
+      ctx.font = '11px Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'middle';
+      for (let i = 0; i <= gridLines; i++) {
+        const val = yMax - (i / gridLines) * (yMax - yMin);
+        const y = padding.top + (i / gridLines) * plotH;
+        ctx.fillText(formatNumber(val, 0) + ' EUR', padding.left - 8, y);
+      }
+
+      function strokeSeries(series, color) {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        series.forEach((v, i) => {
+          const x = xAt(i);
+          const y = yAt(v);
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+      }
+
+      strokeSeries(invested, muted);
+      strokeSeries(value, accent);
+
+      // X labels (start/end)
+      ctx.fillStyle = textColor;
+      ctx.font = '11px Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'top';
+      if (labels.length) {
+        ctx.fillText(labels[0], padding.left, height - padding.bottom + 8);
+        ctx.textAlign = 'right';
+        ctx.fillText(labels[labels.length - 1], width - padding.right, height - padding.bottom + 8);
+      }
+    }
+
+    function scheduleChartResize() {
+      if (!lastChartData) return;
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        renderChart(lastChartData);
+      }, 120);
+    }
+
+    window.addEventListener('resize', scheduleChartResize);
+
+    // === EVENT LISTENERS ===
+    calculateBtn.addEventListener('click', calculateDCA);
+
+    // Permitir Enter para calcular
+    [amountInput, startDateInput, endDateInput].forEach(input => {
+      input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') calculateDCA();
+      });
+    });
+
+    // === INICIALIZACIÓN ===
+    initDates();
+
+  })();
+  </script>
+</body>
+</html>

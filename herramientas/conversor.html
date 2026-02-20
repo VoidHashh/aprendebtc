@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Herramienta: Conversor." />
-  <title>Conversor | aprendebtc.com</title>
+  <meta name="description" content="Convierte entre BTC, satoshis, mBTC, EUR y USD en tiempo real. Precio actualizado automáticamente." />
+  <title>Conversor de Bitcoin — Herramientas | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
 </head>
 <body>
   <div data-include="header"></div>
@@ -24,18 +25,92 @@
 
     <main class="page-layout__content" id="main-content">
       <div class="content-inner">
-        <nav class="breadcrumb" aria-label="Ruta de navegacion">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
           <a href="../" class="breadcrumb__item">Inicio</a>
           <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
           <a href="index.html" class="breadcrumb__item">Herramientas</a>
           <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
-          <span class="breadcrumb__current">Conversor</span>
+          <span class="breadcrumb__current">Conversor BTC / EUR / sats</span>
         </nav>
 
         <article class="article">
-          <h1>Conversor</h1>
-          <p class="article__subtitle">Herramienta en preparacion.</p>
-          <p>Placeholder activo. Esta herramienta se habilitara en una siguiente iteracion.</p>
+          <h1>Conversor BTC / EUR / sats</h1>
+          <p class="article__subtitle">Convierte entre cualquier unidad de Bitcoin y monedas fiat al instante.</p>
+
+          <!-- Ticker de precio -->
+          <div class="tool-price-ticker" id="price-ticker">
+            <span class="tool-price-ticker__dot" id="ticker-dot"></span>
+            <span class="tool-price-ticker__text" id="ticker-text">Cargando precio...</span>
+            <button class="tool-btn tool-btn--secondary tool-btn--small tool-price-ticker__btn" id="refresh-price" aria-label="Actualizar precio">
+              Actualizar
+            </button>
+          </div>
+
+          <!-- Contenedor principal -->
+          <div class="tool-container">
+            <div class="tool-field" style="margin-bottom: 1.5rem;">
+              <label class="tool-label" for="input-value">Cantidad</label>
+              <div class="tool-input-group">
+                <input 
+                  type="text" 
+                  id="input-value" 
+                  class="tool-input tool-input--large" 
+                  placeholder="0"
+                  inputmode="decimal"
+                  autocomplete="off"
+                  aria-describedby="input-help"
+                />
+                <select id="input-unit" class="tool-select" aria-label="Unidad de entrada">
+                  <option value="btc">BTC</option>
+                  <option value="sats" selected>sats</option>
+                  <option value="mbtc">mBTC</option>
+                  <option value="eur">EUR</option>
+                  <option value="usd">USD</option>
+                </select>
+              </div>
+              <span id="input-help" class="tool-note">Escribe una cantidad y selecciona la unidad</span>
+            </div>
+
+            <!-- Resultados -->
+            <div class="tool-results" id="results">
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">Bitcoin</div>
+                <div class="tool-result-card__value tool-result-card__value--accent" id="result-btc">0 BTC</div>
+              </div>
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">Satoshis</div>
+                <div class="tool-result-card__value" id="result-sats">0 sats</div>
+              </div>
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">Milibitcoin</div>
+                <div class="tool-result-card__value" id="result-mbtc">0 mBTC</div>
+              </div>
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">Euros</div>
+                <div class="tool-result-card__value" id="result-eur">— €</div>
+              </div>
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">Dólares</div>
+                <div class="tool-result-card__value" id="result-usd">— $</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Error de API (oculto por defecto) -->
+          <div class="tool-error" id="api-error" style="display: none;">
+            Precio no disponible — las conversiones BTC/sats/mBTC siguen funcionando.
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">¿Qué es un satoshi?</div>
+            <p class="tool-callout__text">
+              Un satoshi (sat) es la unidad más pequeña de bitcoin: 1 BTC = 100.000.000 sats. 
+              <a href="../base/que-es-un-satoshi.html">Aprende más sobre satoshis →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
         </article>
       </div>
     </main>
@@ -45,5 +120,226 @@
   <script src="../js/includes.js"></script>
   <script src="../js/nav.js"></script>
   <script src="../js/search.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === ESTADO ===
+    let priceData = {
+      eur: null,
+      usd: null,
+      lastUpdated: null,
+      error: false
+    };
+
+    // === CONSTANTES ===
+    const SATS_PER_BTC = 100000000; // 100 millones
+    const MBTC_PER_BTC = 1000;
+    const API_URL = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=eur,usd';
+    const REFRESH_INTERVAL = 60000; // 60 segundos
+
+    // === ELEMENTOS DEL DOM ===
+    const inputValue = document.getElementById('input-value');
+    const inputUnit = document.getElementById('input-unit');
+    const tickerDot = document.getElementById('ticker-dot');
+    const tickerText = document.getElementById('ticker-text');
+    const refreshBtn = document.getElementById('refresh-price');
+    const apiError = document.getElementById('api-error');
+
+    const resultBtc = document.getElementById('result-btc');
+    const resultSats = document.getElementById('result-sats');
+    const resultMbtc = document.getElementById('result-mbtc');
+    const resultEur = document.getElementById('result-eur');
+    const resultUsd = document.getElementById('result-usd');
+
+    // === FUNCIONES DE FORMATO ===
+
+    /**
+     * Formatea un número con separador de miles (punto) y decimales (coma)
+     * @param {number} num - Número a formatear
+     * @param {number} decimals - Número de decimales
+     * @returns {string}
+     */
+    function formatNumber(num, decimals = 2) {
+      if (num === null || num === undefined || isNaN(num)) return '—';
+      
+      // Redondear al número de decimales especificado
+      const rounded = Number(num.toFixed(decimals));
+      
+      // Separar parte entera y decimal
+      const parts = rounded.toString().split('.');
+      
+      // Añadir separador de miles (punto)
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+      
+      // Unir con coma como separador decimal
+      return parts.join(',');
+    }
+
+    /**
+     * Formatea satoshis (sin decimales, con separador de miles)
+     */
+    function formatSats(sats) {
+      if (sats === null || isNaN(sats)) return '—';
+      return Math.round(sats).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
+
+    /**
+     * Formatea BTC con hasta 8 decimales, eliminando ceros innecesarios
+     */
+    function formatBtc(btc) {
+      if (btc === null || isNaN(btc)) return '—';
+      // Máximo 8 decimales, eliminar ceros trailing
+      let formatted = btc.toFixed(8).replace(/\.?0+$/, '');
+      // Si quedó vacío después del punto, añadir un 0
+      if (formatted.endsWith('.')) formatted = formatted.slice(0, -1);
+      // Reemplazar punto por coma
+      return formatted.replace('.', ',');
+    }
+
+    /**
+     * Parsea un input que puede usar coma o punto como decimal
+     */
+    function parseInput(value) {
+      if (!value) return 0;
+      // Reemplazar coma por punto para parsear
+      const normalized = value.replace(/\./g, '').replace(',', '.');
+      const parsed = parseFloat(normalized);
+      return isNaN(parsed) ? 0 : parsed;
+    }
+
+    // === CONVERSIONES ===
+
+    /**
+     * Convierte cualquier unidad a BTC
+     */
+    function toBtc(value, unit) {
+      switch (unit) {
+        case 'btc': return value;
+        case 'sats': return value / SATS_PER_BTC;
+        case 'mbtc': return value / MBTC_PER_BTC;
+        case 'eur': 
+          return priceData.eur ? value / priceData.eur : null;
+        case 'usd': 
+          return priceData.usd ? value / priceData.usd : null;
+        default: return null;
+      }
+    }
+
+    /**
+     * Convierte BTC a la unidad especificada
+     */
+    function fromBtc(btc, unit) {
+      if (btc === null) return null;
+      switch (unit) {
+        case 'btc': return btc;
+        case 'sats': return btc * SATS_PER_BTC;
+        case 'mbtc': return btc * MBTC_PER_BTC;
+        case 'eur': 
+          return priceData.eur ? btc * priceData.eur : null;
+        case 'usd': 
+          return priceData.usd ? btc * priceData.usd : null;
+        default: return null;
+      }
+    }
+
+    // === ACTUALIZAR RESULTADOS ===
+
+    function updateResults() {
+      const value = parseInput(inputValue.value);
+      const unit = inputUnit.value;
+
+      // Convertir a BTC primero
+      const btc = toBtc(value, unit);
+
+      // Actualizar cada resultado
+      if (btc !== null) {
+        resultBtc.textContent = formatBtc(btc) + ' BTC';
+        resultSats.textContent = formatSats(fromBtc(btc, 'sats')) + ' sats';
+        resultMbtc.textContent = formatNumber(fromBtc(btc, 'mbtc'), 5) + ' mBTC';
+        
+        const eur = fromBtc(btc, 'eur');
+        const usd = fromBtc(btc, 'usd');
+        
+        resultEur.textContent = eur !== null ? formatNumber(eur, 2) + ' €' : '— €';
+        resultUsd.textContent = usd !== null ? formatNumber(usd, 2) + ' $' : '— $';
+      } else {
+        // Si no se puede convertir (ej: EUR sin precio)
+        resultBtc.textContent = '— BTC';
+        resultSats.textContent = '— sats';
+        resultMbtc.textContent = '— mBTC';
+        resultEur.textContent = '— €';
+        resultUsd.textContent = '— $';
+      }
+    }
+
+    // === OBTENER PRECIO ===
+
+    async function fetchPrice() {
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error('API error');
+        
+        const data = await response.json();
+        
+        priceData.eur = data.bitcoin.eur;
+        priceData.usd = data.bitcoin.usd;
+        priceData.lastUpdated = new Date();
+        priceData.error = false;
+
+        updateTicker();
+        apiError.style.display = 'none';
+        tickerDot.classList.remove('tool-price-ticker__dot--error');
+        
+        // Actualizar resultados con el nuevo precio
+        updateResults();
+
+      } catch (error) {
+        console.error('Error fetching price:', error);
+        priceData.error = true;
+        
+        tickerText.textContent = 'Precio no disponible';
+        tickerDot.classList.add('tool-price-ticker__dot--error');
+        apiError.style.display = 'block';
+      }
+    }
+
+    function updateTicker() {
+      if (!priceData.eur || !priceData.lastUpdated) return;
+
+      const elapsed = Math.round((Date.now() - priceData.lastUpdated.getTime()) / 1000);
+      const timeText = elapsed < 5 ? 'ahora' : `hace ${elapsed}s`;
+      
+      tickerText.textContent = `1 BTC = ${formatNumber(priceData.eur, 0)} € · actualizado ${timeText}`;
+    }
+
+    // === EVENT LISTENERS ===
+
+    // Actualizar mientras se escribe
+    inputValue.addEventListener('input', updateResults);
+    
+    // Actualizar al cambiar unidad
+    inputUnit.addEventListener('change', updateResults);
+
+    // Botón de actualizar precio
+    refreshBtn.addEventListener('click', () => {
+      tickerText.textContent = 'Actualizando...';
+      fetchPrice();
+    });
+
+    // === INICIALIZACIÓN ===
+
+    // Obtener precio inicial
+    fetchPrice();
+
+    // Auto-refresh del precio cada 60 segundos
+    setInterval(fetchPrice, REFRESH_INTERVAL);
+
+    // Actualizar el texto del ticker cada segundo (para mostrar "hace Xs")
+    setInterval(updateTicker, 1000);
+
+  })();
+  </script>
 </body>
 </html>

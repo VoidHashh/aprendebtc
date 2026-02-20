@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Estima la comisión de tu transacción Bitcoin. Datos de la mempool en tiempo real y recomendaciones de fee." />
+  <title>Calculadora de fees Bitcoin — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="index.html" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Calculadora de fees</span>
+        </nav>
+
+        <article class="article">
+          <h1>Calculadora de fees Bitcoin</h1>
+          <p class="article__subtitle">Calcula cuánto costará tu próxima transacción Bitcoin según la congestión de la red.</p>
+
+          <!-- Ticker de mempool -->
+          <div class="tool-price-ticker" id="mempool-ticker">
+            <span class="tool-price-ticker__dot" id="mempool-dot"></span>
+            <span class="tool-price-ticker__text" id="mempool-text">Conectando con mempool...</span>
+            <button class="tool-btn tool-btn--secondary tool-btn--small tool-price-ticker__btn" id="refresh-fees" aria-label="Actualizar fees">
+              Actualizar
+            </button>
+          </div>
+
+          <!-- Error de API (oculto por defecto) -->
+          <div class="tool-error" id="api-error" style="display: none;">
+            No se pudieron obtener datos de la mempool. Inténtalo de nuevo.
+          </div>
+
+          <!-- Tarifas recomendadas -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Tarifas recomendadas (sat/vB)</h2>
+            
+            <div class="tool-row tool-row--four" id="fee-rates">
+              <div class="tool-result-card" data-priority="fastest">
+                <div class="tool-result-card__label"> Prioridad alta</div>
+                <div class="tool-result-card__value tool-result-card__value--accent" id="fee-fastest">—</div>
+                <div class="tool-note" style="margin-top: 0.25rem;">~10 min</div>
+              </div>
+              <div class="tool-result-card" data-priority="halfHour">
+                <div class="tool-result-card__label"> Media</div>
+                <div class="tool-result-card__value" id="fee-halfhour">—</div>
+                <div class="tool-note" style="margin-top: 0.25rem;">~30 min</div>
+              </div>
+              <div class="tool-result-card" data-priority="hour">
+                <div class="tool-result-card__label"> Baja</div>
+                <div class="tool-result-card__value" id="fee-hour">—</div>
+                <div class="tool-note" style="margin-top: 0.25rem;">~1 hora</div>
+              </div>
+              <div class="tool-result-card" data-priority="economy">
+                <div class="tool-result-card__label"> Económica</div>
+                <div class="tool-result-card__value" id="fee-economy">—</div>
+                <div class="tool-note" style="margin-top: 0.25rem;">Sin prisa</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Calculadora de coste -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Calcular coste de tu transacción</h2>
+            
+            <!-- Presets de tamaño -->
+            <label class="tool-label">Tipo de transacción</label>
+            <div class="tool-presets" id="size-presets">
+              <button class="tool-preset" data-size="141">Simple (1→1)</button>
+              <button class="tool-preset tool-preset--active" data-size="225">Típica (1→2)</button>
+              <button class="tool-preset" data-size="374">Compleja (2→2)</button>
+              <button class="tool-preset" data-size="custom">Personalizado</button>
+            </div>
+
+            <div class="tool-row">
+              <div class="tool-field">
+                <label class="tool-label" for="tx-size">Tamaño (vBytes)</label>
+                <input 
+                  type="number" 
+                  id="tx-size" 
+                  class="tool-input" 
+                  value="225"
+                  min="1"
+                  aria-describedby="size-help"
+                />
+                <span id="size-help" class="tool-note">Una transacción típica ocupa ~225 vB</span>
+              </div>
+              <div class="tool-field">
+                <label class="tool-label" for="fee-rate">Tarifa (sat/vB)</label>
+                <input 
+                  type="number" 
+                  id="fee-rate" 
+                  class="tool-input" 
+                  value="10"
+                  min="1"
+                  placeholder="sat/vB"
+                />
+              </div>
+            </div>
+
+            <!-- Resultado del coste -->
+            <div class="tool-results" style="margin-top: 1rem;">
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">Fee total</div>
+                <div class="tool-result-card__value tool-result-card__value--accent" id="total-fee-sats">— sats</div>
+              </div>
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">En euros</div>
+                <div class="tool-result-card__value" id="total-fee-eur">— €</div>
+              </div>
+            </div>
+
+            <!-- Opcional: porcentaje sobre cantidad enviada -->
+            <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--bg-border);">
+              <div class="tool-field">
+                <label class="tool-label" for="send-amount">Cantidad a enviar (opcional, en €)</label>
+                <input 
+                  type="number" 
+                  id="send-amount" 
+                  class="tool-input" 
+                  placeholder="Ej: 100"
+                  min="0"
+                  step="0.01"
+                />
+                <span class="tool-note">Para calcular la fee como % de tu envío</span>
+              </div>
+              <div class="tool-result-card" style="margin-top: 0.75rem; display: none;" id="fee-percentage-card">
+                <div class="tool-result-card__label">Fee como % del envío</div>
+                <div class="tool-result-card__value" id="fee-percentage">—</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Enlace externo -->
+          <p style="text-align: center; margin: 1.5rem 0;">
+            <a href="https://mempool.space" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">
+              Ver mempool en tiempo real → mempool.space ↗
+            </a>
+          </p>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">¿Cómo funcionan las fees?</div>
+            <p class="tool-callout__text">
+              Las fees de Bitcoin no dependen del monto enviado, sino del tamaño de tu transacción en bytes. 
+              <a href="../base/que-son-las-fees.html">Aprende más sobre fees →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === ESTADO ===
+    let feeData = {
+      fastestFee: null,
+      halfHourFee: null,
+      hourFee: null,
+      economyFee: null,
+      minimumFee: null,
+      mempoolSize: null,
+      lastUpdated: null,
+      error: false
+    };
+
+    let btcPrice = null; // Precio en EUR
+
+    // === CONSTANTES ===
+    const FEES_API = 'https://mempool.space/api/v1/fees/recommended';
+    const MEMPOOL_API = 'https://mempool.space/api/mempool';
+    const PRICE_API = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=eur';
+    const SATS_PER_BTC = 100000000;
+    const REFRESH_INTERVAL = 30000; // 30 segundos
+
+    // === ELEMENTOS DEL DOM ===
+    const mempoolDot = document.getElementById('mempool-dot');
+    const mempoolText = document.getElementById('mempool-text');
+    const refreshBtn = document.getElementById('refresh-fees');
+    const apiError = document.getElementById('api-error');
+
+    const feeFastest = document.getElementById('fee-fastest');
+    const feeHalfhour = document.getElementById('fee-halfhour');
+    const feeHour = document.getElementById('fee-hour');
+    const feeEconomy = document.getElementById('fee-economy');
+
+    const txSizeInput = document.getElementById('tx-size');
+    const feeRateInput = document.getElementById('fee-rate');
+    const sendAmountInput = document.getElementById('send-amount');
+
+    const totalFeeSats = document.getElementById('total-fee-sats');
+    const totalFeeEur = document.getElementById('total-fee-eur');
+    const feePercentageCard = document.getElementById('fee-percentage-card');
+    const feePercentage = document.getElementById('fee-percentage');
+
+    const sizePresets = document.getElementById('size-presets');
+
+    // === FUNCIONES DE FORMATO ===
+
+    function formatNumber(num, decimals = 2) {
+      if (num === null || num === undefined || isNaN(num)) return '—';
+      const parts = Number(num.toFixed(decimals)).toString().split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+      return parts.join(',');
+    }
+
+    function formatSats(sats) {
+      if (sats === null || isNaN(sats)) return '—';
+      return Math.round(sats).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
+
+    // === OBTENER DATOS ===
+
+    async function fetchFees() {
+      try {
+        const [feesResponse, mempoolResponse, priceResponse] = await Promise.all([
+          fetch(FEES_API),
+          fetch(MEMPOOL_API),
+          fetch(PRICE_API)
+        ]);
+
+        if (!feesResponse.ok) throw new Error('Fees API error');
+
+        const feesData = await feesResponse.json();
+        feeData.fastestFee = feesData.fastestFee;
+        feeData.halfHourFee = feesData.halfHourFee;
+        feeData.hourFee = feesData.hourFee;
+        feeData.economyFee = feesData.economyFee;
+        feeData.minimumFee = feesData.minimumFee;
+
+        if (mempoolResponse.ok) {
+          const mempoolData = await mempoolResponse.json();
+          feeData.mempoolSize = mempoolData.count;
+        }
+
+        if (priceResponse.ok) {
+          const priceData = await priceResponse.json();
+          btcPrice = priceData.bitcoin.eur;
+        }
+
+        feeData.lastUpdated = new Date();
+        feeData.error = false;
+
+        updateUI();
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        feeData.error = true;
+        mempoolDot.classList.add('tool-price-ticker__dot--error');
+        mempoolText.textContent = 'Error de conexión';
+        apiError.style.display = 'block';
+      }
+    }
+
+    // === ACTUALIZAR UI ===
+
+    function updateUI() {
+      // Actualizar tarifas
+      feeFastest.textContent = feeData.fastestFee ? feeData.fastestFee + ' sat/vB' : '—';
+      feeHalfhour.textContent = feeData.halfHourFee ? feeData.halfHourFee + ' sat/vB' : '—';
+      feeHour.textContent = feeData.hourFee ? feeData.hourFee + ' sat/vB' : '—';
+      feeEconomy.textContent = feeData.economyFee ? feeData.economyFee + ' sat/vB' : '—';
+
+      // Actualizar ticker
+      if (feeData.mempoolSize !== null) {
+        mempoolText.textContent = `Mempool: ${formatSats(feeData.mempoolSize)} transacciones pendientes`;
+      } else {
+        mempoolText.textContent = 'Mempool conectada';
+      }
+
+      mempoolDot.classList.remove('tool-price-ticker__dot--error');
+      apiError.style.display = 'none';
+
+      // Actualizar cálculo
+      calculateFee();
+    }
+
+    // === CALCULAR FEE ===
+
+    function calculateFee() {
+      const txSize = parseInt(txSizeInput.value) || 0;
+      const feeRate = parseInt(feeRateInput.value) || 0;
+      const sendAmount = parseFloat(sendAmountInput.value) || 0;
+
+      // Fee en sats
+      const feeSats = txSize * feeRate;
+      totalFeeSats.textContent = formatSats(feeSats) + ' sats';
+
+      // Fee en EUR
+      if (btcPrice && feeSats > 0) {
+        const feeBtc = feeSats / SATS_PER_BTC;
+        const feeEur = feeBtc * btcPrice;
+        totalFeeEur.textContent = formatNumber(feeEur, 4) + ' €';
+      } else {
+        totalFeeEur.textContent = '— €';
+      }
+
+      // Porcentaje sobre envío
+      if (sendAmount > 0 && btcPrice && feeSats > 0) {
+        const feeBtc = feeSats / SATS_PER_BTC;
+        const feeEur = feeBtc * btcPrice;
+        const percentage = (feeEur / sendAmount) * 100;
+        feePercentage.textContent = formatNumber(percentage, 2) + '%';
+        feePercentageCard.style.display = 'block';
+
+        // Colorear según el porcentaje
+        if (percentage > 5) {
+          feePercentage.className = 'tool-result-card__value tool-result-card__value--red';
+        } else if (percentage > 1) {
+          feePercentage.className = 'tool-result-card__value';
+        } else {
+          feePercentage.className = 'tool-result-card__value tool-result-card__value--green';
+        }
+      } else {
+        feePercentageCard.style.display = 'none';
+      }
+    }
+
+    // === EVENT LISTENERS ===
+
+    // Actualizar mientras se escribe
+    txSizeInput.addEventListener('input', calculateFee);
+    feeRateInput.addEventListener('input', calculateFee);
+    sendAmountInput.addEventListener('input', calculateFee);
+
+    // Presets de tamaño
+    sizePresets.addEventListener('click', (e) => {
+      const preset = e.target.closest('.tool-preset');
+      if (!preset) return;
+
+      // Actualizar estado activo
+      sizePresets.querySelectorAll('.tool-preset').forEach(p => {
+        p.classList.remove('tool-preset--active');
+      });
+      preset.classList.add('tool-preset--active');
+
+      // Aplicar valor
+      const size = preset.dataset.size;
+      if (size === 'custom') {
+        txSizeInput.focus();
+        txSizeInput.select();
+      } else {
+        txSizeInput.value = size;
+        calculateFee();
+      }
+    });
+
+    // Clic en tarjetas de fee para usar esa tarifa
+    document.getElementById('fee-rates').addEventListener('click', (e) => {
+      const card = e.target.closest('.tool-result-card');
+      if (!card) return;
+
+      const priority = card.dataset.priority;
+      let rate = null;
+
+      switch (priority) {
+        case 'fastest': rate = feeData.fastestFee; break;
+        case 'halfHour': rate = feeData.halfHourFee; break;
+        case 'hour': rate = feeData.hourFee; break;
+        case 'economy': rate = feeData.economyFee; break;
+      }
+
+      if (rate) {
+        feeRateInput.value = rate;
+        calculateFee();
+        
+        // Feedback visual
+        card.style.transform = 'scale(0.98)';
+        setTimeout(() => { card.style.transform = ''; }, 100);
+      }
+    });
+
+    // Botón de actualizar
+    refreshBtn.addEventListener('click', () => {
+      mempoolText.textContent = 'Actualizando...';
+      fetchFees();
+    });
+
+    // === INICIALIZACIÓN ===
+
+    fetchFees();
+
+    // Auto-refresh cada 30 segundos
+    setInterval(fetchFees, REFRESH_INTERVAL);
+
+  })();
+  </script>
+</body>
+</html>

@@ -106,6 +106,16 @@
     { title: 'Glosario', url: '/glosario.html', tags: ['terminos', 'definiciones'], section: 'Pilares' },
     { title: 'Recursos', url: '/recursos.html', tags: ['libros', 'podcasts'], section: 'Pilares' },
     { title: 'Herramientas', url: '/herramientas/', tags: ['tools', 'hash'], section: 'Pilares' },
+    { title: 'Conversor BTC / EUR / sats', url: '/herramientas/conversor.html', tags: ['herramientas', 'conversor', 'sats', 'eur', 'usd'], section: 'Herramientas' },
+    { title: 'Calculadora de fees', url: '/herramientas/calculadora-fees.html', tags: ['herramientas', 'fees', 'mempool', 'sat/vb'], section: 'Herramientas' },
+    { title: 'Calculadora DCA', url: '/herramientas/calculadora-dca.html', tags: ['herramientas', 'dca', 'compras periodicas'], section: 'Herramientas' },
+    { title: 'Calculadora de impuestos (ES)', url: '/herramientas/calculadora-impuestos.html', tags: ['herramientas', 'impuestos', 'irpf', 'espana'], section: 'Herramientas' },
+    { title: 'Generador de claves y direcciones', url: '/herramientas/claves.html', tags: ['herramientas', 'claves', 'direcciones'], section: 'Herramientas' },
+    { title: 'HD Wallet explorer', url: '/herramientas/hd-wallet.html', tags: ['herramientas', 'hd wallet', 'derivation'], section: 'Herramientas' },
+    { title: 'Constructor de transacciones', url: '/herramientas/transaccion.html', tags: ['herramientas', 'transacciones', 'raw'], section: 'Herramientas' },
+    { title: 'Interprete de Script', url: '/herramientas/script.html', tags: ['herramientas', 'script'], section: 'Herramientas' },
+    { title: 'Calculadora de hash', url: '/herramientas/hash.html', tags: ['herramientas', 'hash'], section: 'Herramientas' },
+    { title: 'ECDSA y Schnorr Sign/Verify', url: '/herramientas/firma.html', tags: ['herramientas', 'firma', 'ecdsa', 'schnorr'], section: 'Herramientas' },
     { title: 'Comunidad', url: '/comunidad/', tags: ['meetups', 'eventos'], section: 'Pilares' }
   ];
 

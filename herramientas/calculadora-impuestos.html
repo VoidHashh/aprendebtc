@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Estima los impuestos sobre tus ganancias con Bitcoin en España. Tramos IRPF actualizados para ganancias patrimoniales." />
+  <title>Calculadora de impuestos Bitcoin — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="index.html" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Calculadora de impuestos</span>
+        </nav>
+
+        <article class="article">
+          <h1>Calculadora de impuestos Bitcoin</h1>
+          <p class="article__subtitle">Calcula cuánto deberás pagar a Hacienda por tus ganancias con Bitcoin (España).</p>
+
+          <!-- Formulario de entrada -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Datos de tu operación</h2>
+
+            <!-- Toggle modo de entrada -->
+            <div style="margin-bottom: 1.25rem;">
+              <label class="tool-toggle">
+                <input type="checkbox" class="tool-toggle__input" id="input-mode-toggle" />
+                <span class="tool-toggle__slider"></span>
+                <span class="tool-toggle__label" id="input-mode-label">Introducir por precio unitario (€/BTC)</span>
+              </label>
+            </div>
+            
+            <!-- Inputs por precio unitario (modo por defecto) -->
+            <div id="unit-price-mode">
+              <div class="tool-row">
+                <div class="tool-field">
+                  <label class="tool-label" for="buy-price-unit">Precio de compra (€/BTC)</label>
+                  <input 
+                    type="number" 
+                    id="buy-price-unit" 
+                    class="tool-input" 
+                    placeholder="Ej: 25000"
+                    min="0"
+                    step="0.01"
+                  />
+                </div>
+                <div class="tool-field">
+                  <label class="tool-label" for="sell-price-unit">Precio de venta (€/BTC)</label>
+                  <input 
+                    type="number" 
+                    id="sell-price-unit" 
+                    class="tool-input" 
+                    placeholder="Ej: 45000"
+                    min="0"
+                    step="0.01"
+                  />
+                </div>
+              </div>
+              <div class="tool-field">
+                <label class="tool-label" for="btc-amount">Cantidad vendida (BTC)</label>
+                <input 
+                  type="number" 
+                  id="btc-amount" 
+                  class="tool-input" 
+                  placeholder="Ej: 0,5"
+                  min="0"
+                  step="0.00000001"
+                  style="max-width: 300px;"
+                />
+              </div>
+            </div>
+
+            <!-- Inputs por importe total (oculto por defecto) -->
+            <div id="total-amount-mode" style="display: none;">
+              <div class="tool-row">
+                <div class="tool-field">
+                  <label class="tool-label" for="buy-total">Importe total de compra (€)</label>
+                  <input 
+                    type="number" 
+                    id="buy-total" 
+                    class="tool-input" 
+                    placeholder="Ej: 12500"
+                    min="0"
+                    step="0.01"
+                  />
+                </div>
+                <div class="tool-field">
+                  <label class="tool-label" for="sell-total">Importe total de venta (€)</label>
+                  <input 
+                    type="number" 
+                    id="sell-total" 
+                    class="tool-input" 
+                    placeholder="Ej: 22500"
+                    min="0"
+                    step="0.01"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-btn-row">
+              <button class="tool-btn" id="calculate-btn">
+                 Calcular impuestos
+              </button>
+              <button class="tool-btn tool-btn--secondary" id="clear-btn">
+                Limpiar
+              </button>
+            </div>
+          </div>
+
+          <!-- Error -->
+          <div class="tool-error" id="calc-error" style="display: none;"></div>
+
+          <!-- Resultados (ocultos inicialmente) -->
+          <div id="results-section" style="display: none;">
+            
+            <!-- Resultado principal -->
+            <div class="tool-container">
+              <h2 class="tool-container__title">Resultado</h2>
+              
+              <!-- Ganancia o pérdida -->
+              <div class="tool-result-card" style="margin-bottom: 1rem;">
+                <div class="tool-result-card__label" id="profit-loss-label">Ganancia patrimonial</div>
+                <div class="tool-result-card__value" id="profit-loss-value" style="font-size: 1.75rem;">—</div>
+              </div>
+
+              <div class="tool-row tool-row--three">
+                <div class="tool-result-card">
+                  <div class="tool-result-card__label">Impuesto a pagar</div>
+                  <div class="tool-result-card__value tool-result-card__value--accent" id="tax-amount">—</div>
+                </div>
+                <div class="tool-result-card">
+                  <div class="tool-result-card__label">Tipo efectivo</div>
+                  <div class="tool-result-card__value" id="effective-rate">—</div>
+                </div>
+                <div class="tool-result-card">
+                  <div class="tool-result-card__label">Ganancia neta</div>
+                  <div class="tool-result-card__value" id="net-gain">—</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Desglose por tramos -->
+            <div class="tool-container" id="brackets-section">
+              <h2 class="tool-container__title">Desglose por tramos IRPF</h2>
+              
+              <div class="tool-table-wrapper">
+                <table class="tool-table" id="brackets-table">
+                  <thead>
+                    <tr>
+                      <th>Tramo</th>
+                      <th>Base imponible</th>
+                      <th>Tipo</th>
+                      <th>Impuesto</th>
+                    </tr>
+                  </thead>
+                  <tbody id="brackets-tbody">
+                    <!-- Se llena dinámicamente -->
+                  </tbody>
+                  <tfoot>
+                    <tr style="font-weight: 600;">
+                      <td colspan="3">Total</td>
+                      <td id="total-tax-footer">—</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+
+            <!-- Mensaje de pérdida -->
+            <div class="tool-container" id="loss-message" style="display: none;">
+              <div style="text-align: center; padding: 1rem;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;"></div>
+                <p style="color: var(--text-primary); font-weight: 600; margin-bottom: 0.5rem;">
+                  No hay impuesto a pagar
+                </p>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                  Puedes compensar esta pérdida con ganancias patrimoniales de los próximos 4 años.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Tramos de referencia -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Tramos IRPF España 2026 (Ganancias patrimoniales)</h2>
+            <div class="tool-table-wrapper">
+              <table class="tool-table">
+                <thead>
+                  <tr>
+                    <th>Base imponible</th>
+                    <th>Tipo impositivo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Hasta 6.000 €</td>
+                    <td>19%</td>
+                  </tr>
+                  <tr>
+                    <td>6.001 € – 50.000 €</td>
+                    <td>21%</td>
+                  </tr>
+                  <tr>
+                    <td>50.001 € – 200.000 €</td>
+                    <td>23%</td>
+                  </tr>
+                  <tr>
+                    <td>200.001 € – 300.000 €</td>
+                    <td>27%</td>
+                  </tr>
+                  <tr>
+                    <td>Más de 300.000 €</td>
+                    <td>28%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Disclaimers -->
+          <div class="tool-disclaimer">
+            <strong> Aviso importante:</strong> Esta calculadora aplica los tramos de IRPF de España para ganancias patrimoniales. 
+            Para otros países, la fiscalidad puede ser completamente diferente. Consulta con un asesor fiscal de tu jurisdicción.
+          </div>
+
+          <div class="tool-disclaimer" style="margin-top: 0.75rem;">
+            <strong> Nota legal:</strong> Esta herramienta proporciona una estimación orientativa y NO constituye asesoramiento fiscal. 
+            Cada situación personal puede tener particularidades (otras ganancias/pérdidas, deducciones, etc.). 
+            Consulta siempre con un profesional para tu declaración.
+          </div>
+
+          <div class="tool-disclaimer" style="margin-top: 0.75rem;">
+            <strong> Actualización:</strong> Tramos actualizados según la normativa vigente en 2026. 
+            Los tipos impositivos pueden cambiar con nueva legislación.
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Fiscalidad de Bitcoin en España</div>
+            <p class="tool-callout__text">
+              Las ganancias por venta de Bitcoin tributan como ganancias patrimoniales en el IRPF. 
+              <a href="../nivel-3/fiscalidad-bitcoin.html">Aprende más sobre fiscalidad →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === TRAMOS IRPF ESPAÑA 2026 (Ganancias patrimoniales) ===
+    const TAX_BRACKETS = [
+      { limit: 6000, rate: 0.19 },
+      { limit: 50000, rate: 0.21 },
+      { limit: 200000, rate: 0.23 },
+      { limit: 300000, rate: 0.27 },
+      { limit: Infinity, rate: 0.28 }
+    ];
+
+    // === ELEMENTOS DEL DOM ===
+    const inputModeToggle = document.getElementById('input-mode-toggle');
+    const inputModeLabel = document.getElementById('input-mode-label');
+    const unitPriceMode = document.getElementById('unit-price-mode');
+    const totalAmountMode = document.getElementById('total-amount-mode');
+
+    // Inputs modo precio unitario
+    const buyPriceUnit = document.getElementById('buy-price-unit');
+    const sellPriceUnit = document.getElementById('sell-price-unit');
+    const btcAmount = document.getElementById('btc-amount');
+
+    // Inputs modo importe total
+    const buyTotal = document.getElementById('buy-total');
+    const sellTotal = document.getElementById('sell-total');
+
+    // Botones
+    const calculateBtn = document.getElementById('calculate-btn');
+    const clearBtn = document.getElementById('clear-btn');
+
+    // Error y resultados
+    const calcError = document.getElementById('calc-error');
+    const resultsSection = document.getElementById('results-section');
+
+    // Elementos de resultado
+    const profitLossLabel = document.getElementById('profit-loss-label');
+    const profitLossValue = document.getElementById('profit-loss-value');
+    const taxAmount = document.getElementById('tax-amount');
+    const effectiveRate = document.getElementById('effective-rate');
+    const netGain = document.getElementById('net-gain');
+    const bracketsTbody = document.getElementById('brackets-tbody');
+    const totalTaxFooter = document.getElementById('total-tax-footer');
+    const bracketsSection = document.getElementById('brackets-section');
+    const lossMessage = document.getElementById('loss-message');
+
+    // === FUNCIONES DE FORMATO ===
+    function formatNumber(num, decimals = 2) {
+      if (num === null || num === undefined || isNaN(num)) return '—';
+      const parts = Number(num.toFixed(decimals)).toString().split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+      return parts.join(',');
+    }
+
+    function parseNumberInput(value) {
+      if (!value) return NaN;
+      // Aceptar tanto punto como coma como decimal
+      const normalized = value.toString().replace(',', '.');
+      return parseFloat(normalized);
+    }
+
+    // === TOGGLE MODO DE ENTRADA ===
+    inputModeToggle.addEventListener('change', () => {
+      const isTotalMode = inputModeToggle.checked;
+      
+      if (isTotalMode) {
+        unitPriceMode.style.display = 'none';
+        totalAmountMode.style.display = 'block';
+        inputModeLabel.textContent = 'Introducir por importe total (€)';
+      } else {
+        unitPriceMode.style.display = 'block';
+        totalAmountMode.style.display = 'none';
+        inputModeLabel.textContent = 'Introducir por precio unitario (€/BTC)';
+      }
+
+      // Limpiar resultados al cambiar modo
+      resultsSection.style.display = 'none';
+      calcError.style.display = 'none';
+    });
+
+    // === CALCULAR IMPUESTO POR TRAMOS ===
+    function calculateTaxByBrackets(gain) {
+      if (gain <= 0) return { total: 0, breakdown: [] };
+
+      let remaining = gain;
+      let previousLimit = 0;
+      let totalTax = 0;
+      const breakdown = [];
+
+      for (const bracket of TAX_BRACKETS) {
+        if (remaining <= 0) break;
+
+        const bracketSize = bracket.limit - previousLimit;
+        const taxableInBracket = Math.min(remaining, bracketSize);
+        const taxInBracket = taxableInBracket * bracket.rate;
+
+        breakdown.push({
+          from: previousLimit,
+          to: Math.min(bracket.limit, previousLimit + taxableInBracket),
+          rate: bracket.rate,
+          base: taxableInBracket,
+          tax: taxInBracket
+        });
+
+        totalTax += taxInBracket;
+        remaining -= taxableInBracket;
+        previousLimit = bracket.limit;
+      }
+
+      return { total: totalTax, breakdown };
+    }
+
+    // === CALCULAR ===
+    function calculate() {
+      // Ocultar errores previos
+      calcError.style.display = 'none';
+
+      let buyValue, sellValue;
+      const isTotalMode = inputModeToggle.checked;
+
+      if (isTotalMode) {
+        // Modo importe total
+        buyValue = parseNumberInput(buyTotal.value);
+        sellValue = parseNumberInput(sellTotal.value);
+
+        if (isNaN(buyValue) || buyValue < 0) {
+          showError('Introduce un importe de compra válido');
+          return;
+        }
+        if (isNaN(sellValue) || sellValue < 0) {
+          showError('Introduce un importe de venta válido');
+          return;
+        }
+      } else {
+        // Modo precio unitario
+        const buyPrice = parseNumberInput(buyPriceUnit.value);
+        const sellPrice = parseNumberInput(sellPriceUnit.value);
+        const amount = parseNumberInput(btcAmount.value);
+
+        if (isNaN(buyPrice) || buyPrice <= 0) {
+          showError('Introduce un precio de compra válido');
+          return;
+        }
+        if (isNaN(sellPrice) || sellPrice <= 0) {
+          showError('Introduce un precio de venta válido');
+          return;
+        }
+        if (isNaN(amount) || amount <= 0) {
+          showError('Introduce una cantidad de BTC válida');
+          return;
+        }
+
+        buyValue = buyPrice * amount;
+        sellValue = sellPrice * amount;
+      }
+
+      // Calcular ganancia/pérdida
+      const profitLoss = sellValue - buyValue;
+
+      // Calcular impuesto
+      const taxResult = calculateTaxByBrackets(profitLoss);
+
+      // Mostrar resultados
+      displayResults(profitLoss, taxResult, sellValue);
+    }
+
+    // === MOSTRAR ERROR ===
+    function showError(message) {
+      calcError.textContent = message;
+      calcError.style.display = 'block';
+    }
+
+    // === MOSTRAR RESULTADOS ===
+    function displayResults(profitLoss, taxResult, sellValue) {
+      // Ganancia o pérdida
+      if (profitLoss >= 0) {
+        profitLossLabel.textContent = 'Ganancia patrimonial';
+        profitLossValue.className = 'tool-result-card__value tool-result-card__value--green';
+        profitLossValue.style.fontSize = '1.75rem';
+        profitLossValue.textContent = '+' + formatNumber(profitLoss, 2) + ' €';
+      } else {
+        profitLossLabel.textContent = 'Pérdida patrimonial';
+        profitLossValue.className = 'tool-result-card__value tool-result-card__value--red';
+        profitLossValue.style.fontSize = '1.75rem';
+        profitLossValue.textContent = formatNumber(profitLoss, 2) + ' €';
+      }
+
+      if (profitLoss > 0) {
+        // Hay ganancia: mostrar impuestos
+        taxAmount.textContent = formatNumber(taxResult.total, 2) + ' €';
+        
+        const effectiveRatePct = (taxResult.total / profitLoss) * 100;
+        effectiveRate.textContent = formatNumber(effectiveRatePct, 2) + '%';
+
+        const netGainValue = profitLoss - taxResult.total;
+        netGain.textContent = formatNumber(netGainValue, 2) + ' €';
+        netGain.className = 'tool-result-card__value tool-result-card__value--green';
+
+        // Mostrar desglose por tramos
+        renderBracketsTable(taxResult.breakdown);
+        totalTaxFooter.textContent = formatNumber(taxResult.total, 2) + ' €';
+
+        bracketsSection.style.display = 'block';
+        lossMessage.style.display = 'none';
+
+      } else {
+        // Hay pérdida o ganancia cero: no hay impuesto
+        taxAmount.textContent = '0 €';
+        effectiveRate.textContent = '0%';
+        netGain.textContent = formatNumber(profitLoss, 2) + ' €';
+        netGain.className = profitLoss < 0 
+          ? 'tool-result-card__value tool-result-card__value--red'
+          : 'tool-result-card__value';
+
+        bracketsSection.style.display = 'none';
+        lossMessage.style.display = profitLoss < 0 ? 'block' : 'none';
+      }
+
+      // Mostrar sección de resultados
+      resultsSection.style.display = 'block';
+
+      // Scroll suave a resultados
+      resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // === RENDERIZAR TABLA DE TRAMOS ===
+    function renderBracketsTable(breakdown) {
+      bracketsTbody.innerHTML = '';
+
+      breakdown.forEach((bracket, index) => {
+        const row = document.createElement('tr');
+        
+        // Formatear rango del tramo
+        let rangeText;
+        if (bracket.to === Infinity) {
+          rangeText = `Más de ${formatNumber(bracket.from, 0)} €`;
+        } else if (bracket.from === 0) {
+          rangeText = `Hasta ${formatNumber(bracket.to, 0)} €`;
+        } else {
+          rangeText = `${formatNumber(bracket.from, 0)} € – ${formatNumber(bracket.to, 0)} €`;
+        }
+
+        row.innerHTML = `
+          <td>${rangeText}</td>
+          <td>${formatNumber(bracket.base, 2)} €</td>
+          <td>${(bracket.rate * 100).toFixed(0)}%</td>
+          <td>${formatNumber(bracket.tax, 2)} €</td>
+        `;
+
+        bracketsTbody.appendChild(row);
+      });
+    }
+
+    // === LIMPIAR ===
+    function clearForm() {
+      // Limpiar inputs
+      buyPriceUnit.value = '';
+      sellPriceUnit.value = '';
+      btcAmount.value = '';
+      buyTotal.value = '';
+      sellTotal.value = '';
+
+      // Ocultar resultados y errores
+      resultsSection.style.display = 'none';
+      calcError.style.display = 'none';
+    }
+
+    // === EVENT LISTENERS ===
+    calculateBtn.addEventListener('click', calculate);
+    clearBtn.addEventListener('click', clearForm);
+
+    // Permitir Enter para calcular
+    [buyPriceUnit, sellPriceUnit, btcAmount, buyTotal, sellTotal].forEach(input => {
+      input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') calculate();
+      });
+    });
+
+  })();
+  </script>
+</body>
+</html>
