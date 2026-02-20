@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Genera y analiza claves privadas Bitcoin. Entiende el formato hexadecimal, decimal y WIF. Herramienta educativa." />
+  <title>Generador de clave privada — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+        <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="index.html" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Clave privada</span>
+        </nav>
+
+        <article class="article">
+          <h1>Generador de clave privada</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Genera una clave privada aleatoria y explora sus diferentes formatos.
+          </p>
+
+          <!-- Disclaimer educativo -->
+          <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">Herramienta educativa</div>
+              <p class="callout__text">Esta herramienta es para aprendizaje. NO la uses para generar claves para fondos reales.</p>
+            </div>
+          </div>
+
+          <!-- Generación / Input -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Clave privada</h2>
+            
+            <div class="tool-btn-row" style="margin-bottom: 1rem;">
+              <button class="tool-btn" id="btn-generate">
+                🎲 Generar clave aleatoria
+              </button>
+            </div>
+
+            <div class="tool-field">
+              <label class="tool-label" for="private-key-input">O introduce una clave privada (64 hex)</label>
+              <input 
+                type="text" 
+                id="private-key-input" 
+                class="tool-input" 
+                placeholder="Ej: e8f32e723decf..."
+                maxlength="64"
+                style="font-family: 'JetBrains Mono', monospace;"
+              />
+              <span class="tool-note" id="input-length">0 / 64 caracteres</span>
+            </div>
+
+            <!-- Validación -->
+            <div id="validation-status" style="margin-top: 1rem; display: none;">
+              <div class="tool-result-card" style="text-align: left;">
+                <div id="validation-icon" style="font-size: 1.25rem; margin-bottom: 0.25rem;"></div>
+                <div id="validation-text" style="font-size: 0.9rem;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Formatos de salida -->
+          <div class="tool-container" id="output-section" style="display: none;">
+            <h2 class="tool-container__title">Formatos de la clave privada</h2>
+
+            <!-- Hexadecimal -->
+            <div class="output-row" style="margin-bottom: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <label class="tool-label" style="margin-bottom: 0;">Hexadecimal (32 bytes)</label>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-hex">📋</button>
+              </div>
+              <div class="tool-output" id="output-hex" style="word-break: break-all;">—</div>
+            </div>
+
+            <!-- Decimal -->
+            <div class="output-row" style="margin-bottom: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <label class="tool-label" style="margin-bottom: 0;">Decimal</label>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-decimal">📋</button>
+              </div>
+              <div class="tool-output" id="output-decimal" style="word-break: break-all; font-size: 0.75rem;">—</div>
+            </div>
+
+            <!-- Binario -->
+            <div class="output-row" style="margin-bottom: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <label class="tool-label" style="margin-bottom: 0;">Binario (256 bits)</label>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-binary">📋</button>
+              </div>
+              <div class="tool-output" id="output-binary" style="word-break: break-all; font-size: 0.65rem; line-height: 1.8;">—</div>
+            </div>
+
+            <!-- WIF Comprimida -->
+            <div class="output-row" style="margin-bottom: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <label class="tool-label" style="margin-bottom: 0;">WIF (comprimida) — empieza por K o L</label>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-wif-compressed">📋</button>
+              </div>
+              <div class="tool-output" id="output-wif-compressed" style="word-break: break-all; color: var(--accent);">—</div>
+            </div>
+
+            <!-- WIF No comprimida -->
+            <div class="output-row">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <label class="tool-label" style="margin-bottom: 0;">WIF (no comprimida) — empieza por 5</label>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-wif-uncompressed">📋</button>
+              </div>
+              <div class="tool-output" id="output-wif-uncompressed" style="word-break: break-all;">—</div>
+            </div>
+          </div>
+
+          <!-- Rango válido -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Rango válido</h2>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+              Una clave privada válida debe ser un número entre 1 y n-1, donde n es el orden de la curva secp256k1:
+            </p>
+            
+            <div style="background: var(--bg-primary); padding: 0.75rem; border-radius: var(--radius-md); margin-bottom: 0.75rem;">
+              <div class="tool-label" style="margin-bottom: 0.25rem;">Mínimo (1)</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-secondary);">
+                0000000000000000000000000000000000000000000000000000000000000001
+              </div>
+            </div>
+            
+            <div style="background: var(--bg-primary); padding: 0.75rem; border-radius: var(--radius-md);">
+              <div class="tool-label" style="margin-bottom: 0.25rem;">Máximo (n-1)</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-secondary);">
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364140
+              </div>
+            </div>
+
+            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 1rem;">
+              Esto representa aproximadamente 2<sup>256</sup> posibles claves privadas — un número tan grande que 
+              es prácticamente imposible generar la misma clave dos veces por casualidad.
+            </p>
+          </div>
+
+          <!-- Qué es WIF -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">¿Qué es WIF?</h2>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+              <strong>WIF (Wallet Import Format)</strong> codifica la clave privada en Base58Check, 
+              añadiendo un prefijo de versión y un checksum para detectar errores de copia.
+            </p>
+
+            <!-- Diagrama visual del proceso WIF -->
+            <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md); overflow-x: auto;">
+              <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; font-size: 0.8rem;">
+                <div style="background: rgba(247, 147, 26, 0.2); padding: 0.5rem; border-radius: 4px;">
+                  <div style="font-weight: 600; color: var(--accent);">0x80</div>
+                  <div style="font-size: 0.7rem; color: var(--text-secondary);">prefix</div>
+                </div>
+                <span style="color: var(--text-secondary);">+</span>
+                <div style="background: rgba(88, 166, 255, 0.2); padding: 0.5rem; border-radius: 4px;">
+                  <div style="font-weight: 600; color: #58a6ff;">key</div>
+                  <div style="font-size: 0.7rem; color: var(--text-secondary);">32 bytes</div>
+                </div>
+                <span style="color: var(--text-secondary);">+</span>
+                <div style="background: rgba(163, 113, 247, 0.2); padding: 0.5rem; border-radius: 4px;">
+                  <div style="font-weight: 600; color: #a371f7;">0x01</div>
+                  <div style="font-size: 0.7rem; color: var(--text-secondary);">compressed?</div>
+                </div>
+                <span style="color: var(--text-secondary);">→</span>
+                <div style="background: rgba(46, 160, 67, 0.2); padding: 0.5rem; border-radius: 4px;">
+                  <div style="font-weight: 600; color: #2ea043;">SHA256²</div>
+                  <div style="font-size: 0.7rem; color: var(--text-secondary);">checksum</div>
+                </div>
+                <span style="color: var(--text-secondary);">→</span>
+                <div style="background: rgba(219, 97, 162, 0.2); padding: 0.5rem; border-radius: 4px;">
+                  <div style="font-weight: 600; color: #db61a2;">Base58</div>
+                  <div style="font-size: 0.7rem; color: var(--text-secondary);">encode</div>
+                </div>
+                <span style="color: var(--text-secondary);">→</span>
+                <div style="background: var(--bg-secondary); padding: 0.5rem; border-radius: 4px; border: 1px solid var(--accent);">
+                  <div style="font-weight: 600; color: var(--accent);">WIF</div>
+                  <div style="font-size: 0.7rem; color: var(--text-secondary);">K... o L...</div>
+                </div>
+              </div>
+            </div>
+
+            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 1rem;">
+              El prefijo <code>0x80</code> indica mainnet. El flag <code>0x01</code> solo se añade si la clave 
+              corresponde a una public key comprimida (el estándar actual). El checksum son los primeros 4 bytes 
+              del doble SHA-256 del payload.
+            </p>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más sobre claves privadas</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-3/clave-privada.html">Claves privadas en detalle →</a> · 
+              <a href="../nivel-5/curva-eliptica.html">La curva secp256k1 →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+  <script src="../js/hex-utils.js"></script>
+  <script src="../js/base58.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === CONSTANTES ===
+    // Orden de la curva secp256k1 (n)
+    const SECP256K1_ORDER = BigInt('0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141');
+    const WIF_PREFIX_MAINNET = 0x80;
+    const COMPRESSION_FLAG = 0x01;
+
+    // === ELEMENTOS DEL DOM ===
+    const btnGenerate = document.getElementById('btn-generate');
+    const privateKeyInput = document.getElementById('private-key-input');
+    const inputLength = document.getElementById('input-length');
+    const validationStatus = document.getElementById('validation-status');
+    const validationIcon = document.getElementById('validation-icon');
+    const validationText = document.getElementById('validation-text');
+    const outputSection = document.getElementById('output-section');
+
+    const outputHex = document.getElementById('output-hex');
+    const outputDecimal = document.getElementById('output-decimal');
+    const outputBinary = document.getElementById('output-binary');
+    const outputWifCompressed = document.getElementById('output-wif-compressed');
+    const outputWifUncompressed = document.getElementById('output-wif-uncompressed');
+
+    // === FUNCIONES ===
+
+    /**
+     * Genera 32 bytes aleatorios criptográficamente seguros
+     */
+    function generateRandomPrivateKey() {
+      const bytes = new Uint8Array(32);
+      crypto.getRandomValues(bytes);
+      return HexUtils.bytesToHex(bytes);
+    }
+
+    /**
+     * Valida que la clave privada esté en el rango válido
+     */
+    function isValidPrivateKey(hexKey) {
+      if (!/^[0-9a-fA-F]{64}$/.test(hexKey)) {
+        return { valid: false, reason: 'Debe tener 64 caracteres hexadecimales' };
+      }
+
+      const keyBigInt = BigInt('0x' + hexKey);
+      
+      if (keyBigInt === 0n) {
+        return { valid: false, reason: 'La clave no puede ser cero' };
+      }
+      
+      if (keyBigInt >= SECP256K1_ORDER) {
+        return { valid: false, reason: 'La clave excede el orden de la curva (n)' };
+      }
+
+      return { valid: true };
+    }
+
+    /**
+     * Convierte hex a binario con espacios cada 8 bits
+     */
+    function hexToBinaryFormatted(hex) {
+      let binary = '';
+      for (let i = 0; i < hex.length; i++) {
+        binary += parseInt(hex[i], 16).toString(2).padStart(4, '0');
+      }
+      // Añadir espacio cada 8 bits
+      return binary.match(/.{8}/g).join(' ');
+    }
+
+    /**
+     * Genera WIF desde clave privada hex
+     */
+    async function generateWIF(privateKeyHex, compressed = true) {
+      const keyBytes = HexUtils.hexToBytes(privateKeyHex);
+      
+      // Construir payload: prefix + key + [compression flag]
+      let payload;
+      if (compressed) {
+        payload = new Uint8Array(34);
+        payload[0] = WIF_PREFIX_MAINNET;
+        payload.set(keyBytes, 1);
+        payload[33] = COMPRESSION_FLAG;
+      } else {
+        payload = new Uint8Array(33);
+        payload[0] = WIF_PREFIX_MAINNET;
+        payload.set(keyBytes, 1);
+      }
+
+      // Calcular checksum
+      const checksum = await Base58.calculateChecksum(payload);
+
+      // Concatenar payload + checksum
+      const result = new Uint8Array(payload.length + 4);
+      result.set(payload);
+      result.set(checksum, payload.length);
+
+      // Codificar en Base58
+      return Base58.encode(result);
+    }
+
+    /**
+     * Actualiza todos los outputs con la clave privada
+     */
+    async function updateOutputs(privateKeyHex) {
+      const validation = isValidPrivateKey(privateKeyHex);
+
+      // Mostrar validación
+      validationStatus.style.display = 'block';
+      
+      if (validation.valid) {
+        validationIcon.textContent = '✓';
+        validationIcon.style.color = '#2ea043';
+        validationText.textContent = 'Clave privada válida';
+        validationText.style.color = '#2ea043';
+        outputSection.style.display = 'block';
+      } else {
+        validationIcon.textContent = '✗';
+        validationIcon.style.color = '#da3633';
+        validationText.textContent = 'Inválida: ' + validation.reason;
+        validationText.style.color = '#da3633';
+        outputSection.style.display = 'none';
+        return;
+      }
+
+      // Hexadecimal
+      outputHex.textContent = privateKeyHex.toLowerCase();
+
+      // Decimal
+      const decimalValue = BigInt('0x' + privateKeyHex);
+      outputDecimal.textContent = decimalValue.toString();
+
+      // Binario
+      outputBinary.textContent = hexToBinaryFormatted(privateKeyHex);
+
+      // WIF comprimida
+      outputWifCompressed.textContent = await generateWIF(privateKeyHex, true);
+
+      // WIF no comprimida
+      outputWifUncompressed.textContent = await generateWIF(privateKeyHex, false);
+    }
+
+    /**
+     * Limpia los outputs
+     */
+    function clearOutputs() {
+      validationStatus.style.display = 'none';
+      outputSection.style.display = 'none';
+      outputHex.textContent = '—';
+      outputDecimal.textContent = '—';
+      outputBinary.textContent = '—';
+      outputWifCompressed.textContent = '—';
+      outputWifUncompressed.textContent = '—';
+    }
+
+    // === EVENT LISTENERS ===
+
+    // Generar clave aleatoria
+    btnGenerate.addEventListener('click', async () => {
+      const privateKey = generateRandomPrivateKey();
+      privateKeyInput.value = privateKey;
+      inputLength.textContent = '64 / 64 caracteres';
+      inputLength.style.color = '#2ea043';
+      await updateOutputs(privateKey);
+    });
+
+    // Input manual
+    privateKeyInput.addEventListener('input', async () => {
+      const value = privateKeyInput.value.replace(/[^0-9a-fA-F]/g, '');
+      privateKeyInput.value = value;
+      
+      inputLength.textContent = `${value.length} / 64 caracteres`;
+      inputLength.style.color = value.length === 64 ? '#2ea043' : 'var(--text-secondary)';
+
+      if (value.length === 64) {
+        await updateOutputs(value);
+      } else {
+        clearOutputs();
+      }
+    });
+
+    // Copiar al portapapeles
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const targetId = btn.dataset.target;
+        const target = document.getElementById(targetId);
+        const text = target.textContent;
+
+        if (text && text !== '—') {
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.textContent = '✓';
+            setTimeout(() => { btn.textContent = '📋'; }, 1000);
+          } catch (err) {
+            console.error('Error copiando:', err);
+          }
+        }
+      });
+    });
+
+  })();
+  </script>
+</body>
+</html>

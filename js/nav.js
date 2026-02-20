@@ -183,6 +183,8 @@
         { href: '/herramientas/merkle-tree.html', text: 'Generador de Merkle Tree' },
         { href: '/herramientas/block-tools.html', text: 'Herramientas de bloques' },
         { href: '/herramientas/claves.html', text: 'Generador de claves y direcciones' },
+        { href: '/herramientas/private-key.html', text: 'Generador de clave privada' },
+        { href: '/herramientas/public-key.html', text: 'Derivar clave publica' },
         { href: '/herramientas/hd-wallet.html', text: 'HD Wallet explorer' },
         { href: '/herramientas/transaccion.html', text: 'Constructor de transacciones' },
         { href: '/herramientas/script.html', text: 'Interprete de Script' },

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Deriva la clave pública desde una clave privada Bitcoin. Formato comprimido y no comprimido sobre secp256k1." />
+  <title>Derivar clave pública — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <!-- noble-secp256k1 para operaciones de curva elíptica -->
+  <script src="https://unpkg.com/@noble/secp256k1@1.7.1/lib/index.js" defer></script>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+        <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="index.html" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Clave pública</span>
+        </nav>
+
+        <article class="article">
+          <h1>Derivar clave pública</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Multiplica tu clave privada por el punto generador G para obtener la clave pública.
+          </p>
+
+          <!-- Disclaimer educativo -->
+          <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">Herramienta educativa</div>
+              <p class="callout__text">Esta herramienta es para aprendizaje. NO la uses para generar claves para fondos reales.</p>
+            </div>
+          </div>
+
+          <!-- Input -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Clave privada</h2>
+            
+            <div class="tool-field">
+              <label class="tool-label" for="private-key-input">Clave privada en hexadecimal (64 caracteres)</label>
+              <input 
+                type="text" 
+                id="private-key-input" 
+                class="tool-input" 
+                placeholder="Introduce o genera una clave privada..."
+                maxlength="64"
+                style="font-family: 'JetBrains Mono', monospace;"
+              />
+              <span class="tool-note" id="input-status">0 / 64 caracteres</span>
+            </div>
+
+            <div class="tool-btn-row">
+              <button class="tool-btn tool-btn--secondary" id="btn-generate">
+                🎲 Generar aleatoria
+              </button>
+              <button class="tool-btn" id="btn-derive">
+                🔑 Derivar clave pública
+              </button>
+            </div>
+          </div>
+
+          <!-- Error -->
+          <div class="tool-error" id="error-message" style="display: none;"></div>
+
+          <!-- Outputs -->
+          <div class="tool-container" id="output-section" style="display: none;">
+            <h2 class="tool-container__title">Clave pública derivada</h2>
+
+            <!-- Comprimida -->
+            <div class="output-row" style="margin-bottom: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <label class="tool-label" style="margin-bottom: 0;">Comprimida (33 bytes) — prefijo 02 o 03</label>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-compressed">📋</button>
+              </div>
+              <div class="tool-output" id="output-compressed" style="word-break: break-all; color: var(--accent);">—</div>
+              <span class="tool-note">Formato estándar actual. Más eficiente.</span>
+            </div>
+
+            <!-- No comprimida -->
+            <div class="output-row" style="margin-bottom: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <label class="tool-label" style="margin-bottom: 0;">No comprimida (65 bytes) — prefijo 04</label>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-uncompressed">📋</button>
+              </div>
+              <div class="tool-output" id="output-uncompressed" style="word-break: break-all; font-size: 0.75rem;">—</div>
+              <span class="tool-note">Formato legacy. Contiene X e Y completas.</span>
+            </div>
+
+            <!-- Coordenadas -->
+            <div class="tool-row" style="margin-top: 1.5rem;">
+              <div class="tool-field">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                  <label class="tool-label" style="margin-bottom: 0;">Coordenada X (32 bytes)</label>
+                  <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-x">📋</button>
+                </div>
+                <div class="tool-output" id="output-x" style="word-break: break-all; font-size: 0.8rem;">—</div>
+              </div>
+              <div class="tool-field">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                  <label class="tool-label" style="margin-bottom: 0;">Coordenada Y (32 bytes)</label>
+                  <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-y">📋</button>
+                </div>
+                <div class="tool-output" id="output-y" style="word-break: break-all; font-size: 0.8rem;">—</div>
+              </div>
+            </div>
+
+            <!-- Paridad de Y -->
+            <div style="margin-top: 1rem; padding: 0.75rem; background: var(--bg-primary); border-radius: var(--radius-md);">
+              <span class="tool-label">Paridad de Y:</span>
+              <span id="y-parity" style="font-weight: 600; margin-left: 0.5rem;">—</span>
+              <span id="y-parity-explanation" style="color: var(--text-secondary); font-size: 0.85rem; margin-left: 0.5rem;"></span>
+            </div>
+          </div>
+
+          <!-- Proceso visual -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">El proceso de derivación</h2>
+            
+            <div style="background: var(--bg-primary); padding: 1.25rem; border-radius: var(--radius-md); text-align: center;">
+              <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <div style="background: rgba(88, 166, 255, 0.2); padding: 1rem; border-radius: var(--radius-md);">
+                  <div style="font-weight: 700; color: #58a6ff; font-size: 1.1rem;">k</div>
+                  <div style="font-size: 0.75rem; color: var(--text-secondary);">Clave privada</div>
+                  <div style="font-size: 0.7rem; color: var(--text-secondary);">(escalar)</div>
+                </div>
+                
+                <div style="font-size: 1.5rem; color: var(--text-secondary);">×</div>
+                
+                <div style="background: rgba(163, 113, 247, 0.2); padding: 1rem; border-radius: var(--radius-md);">
+                  <div style="font-weight: 700; color: #a371f7; font-size: 1.1rem;">G</div>
+                  <div style="font-size: 0.75rem; color: var(--text-secondary);">Punto generador</div>
+                  <div style="font-size: 0.7rem; color: var(--text-secondary);">(constante)</div>
+                </div>
+                
+                <div style="font-size: 1.5rem; color: var(--text-secondary);">=</div>
+                
+                <div style="background: rgba(247, 147, 26, 0.2); padding: 1rem; border-radius: var(--radius-md); border: 2px solid var(--accent);">
+                  <div style="font-weight: 700; color: var(--accent); font-size: 1.1rem;">P</div>
+                  <div style="font-size: 0.75rem; color: var(--text-secondary);">Clave pública</div>
+                  <div style="font-size: 0.7rem; color: var(--text-secondary);">(punto en curva)</div>
+                </div>
+              </div>
+            </div>
+
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem; text-align: center;">
+              Esta multiplicación tarda milisegundos. El proceso inverso (encontrar k dado P) 
+              es <strong>computacionalmente imposible</strong> — esa asimetría es la base de la seguridad de Bitcoin.
+            </p>
+          </div>
+
+          <!-- Parámetros de secp256k1 -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Parámetros de secp256k1</h2>
+            
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <div style="background: var(--bg-primary); padding: 0.75rem; border-radius: var(--radius-md);">
+                <div class="tool-label" style="margin-bottom: 0.25rem;">p (campo primo)</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--text-secondary); word-break: break-all;">
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F
+                </div>
+              </div>
+              
+              <div style="background: var(--bg-primary); padding: 0.75rem; border-radius: var(--radius-md);">
+                <div class="tool-label" style="margin-bottom: 0.25rem;">G<sub>x</sub> (coordenada X del generador)</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--text-secondary); word-break: break-all;">
+                  79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798
+                </div>
+              </div>
+              
+              <div style="background: var(--bg-primary); padding: 0.75rem; border-radius: var(--radius-md);">
+                <div class="tool-label" style="margin-bottom: 0.25rem;">G<sub>y</sub> (coordenada Y del generador)</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--text-secondary); word-break: break-all;">
+                  483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8
+                </div>
+              </div>
+              
+              <div style="background: var(--bg-primary); padding: 0.75rem; border-radius: var(--radius-md);">
+                <div class="tool-label" style="margin-bottom: 0.25rem;">n (orden de la curva)</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--text-secondary); word-break: break-all;">
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comprimida vs no comprimida -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">¿Comprimida vs no comprimida?</h2>
+            
+            <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1rem;">
+              La curva elíptica secp256k1 es <strong>simétrica respecto al eje X</strong>. 
+              Esto significa que para cualquier coordenada X, solo hay dos posibles valores de Y: 
+              uno par y otro impar.
+            </p>
+            
+            <div class="tool-table-wrapper">
+              <table class="tool-table">
+                <thead>
+                  <tr>
+                    <th>Formato</th>
+                    <th>Tamaño</th>
+                    <th>Contenido</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Comprimida</strong></td>
+                    <td>33 bytes</td>
+                    <td>02/03 + coordenada X (el prefijo indica paridad de Y)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>No comprimida</strong></td>
+                    <td>65 bytes</td>
+                    <td>04 + coordenada X + coordenada Y</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem;">
+              <strong>Hoy en día solo se usa el formato comprimido.</strong> El no comprimido es legacy de los 
+              primeros tiempos de Bitcoin. Usar comprimido ahorra 32 bytes en cada transacción.
+            </p>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más sobre criptografía de curva elíptica</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-5/curva-eliptica.html">La curva secp256k1 →</a> · 
+              <a href="../nivel-3/clave-publica.html">Claves públicas →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+  <script src="../js/hex-utils.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === CONSTANTES ===
+    const SECP256K1_ORDER = BigInt('0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141');
+
+    // === ELEMENTOS DEL DOM ===
+    const privateKeyInput = document.getElementById('private-key-input');
+    const inputStatus = document.getElementById('input-status');
+    const btnGenerate = document.getElementById('btn-generate');
+    const btnDerive = document.getElementById('btn-derive');
+    const errorMessage = document.getElementById('error-message');
+    const outputSection = document.getElementById('output-section');
+
+    const outputCompressed = document.getElementById('output-compressed');
+    const outputUncompressed = document.getElementById('output-uncompressed');
+    const outputX = document.getElementById('output-x');
+    const outputY = document.getElementById('output-y');
+    const yParity = document.getElementById('y-parity');
+    const yParityExplanation = document.getElementById('y-parity-explanation');
+
+    // === FUNCIONES ===
+
+    /**
+     * Genera 32 bytes aleatorios
+     */
+    function generateRandomPrivateKey() {
+      const bytes = new Uint8Array(32);
+      crypto.getRandomValues(bytes);
+      return HexUtils.bytesToHex(bytes);
+    }
+
+    /**
+     * Valida clave privada
+     */
+    function isValidPrivateKey(hexKey) {
+      if (!/^[0-9a-fA-F]{64}$/.test(hexKey)) {
+        return { valid: false, reason: 'Debe tener 64 caracteres hexadecimales' };
+      }
+      const keyBigInt = BigInt('0x' + hexKey);
+      if (keyBigInt === 0n) {
+        return { valid: false, reason: 'La clave no puede ser cero' };
+      }
+      if (keyBigInt >= SECP256K1_ORDER) {
+        return { valid: false, reason: 'La clave excede el orden de la curva' };
+      }
+      return { valid: true };
+    }
+
+    /**
+     * Deriva la clave pública usando noble-secp256k1
+     */
+    function derivePublicKey(privateKeyHex) {
+      // noble-secp256k1 expone getPublicKey
+      if (typeof nobleSecp256k1 === 'undefined' && typeof secp256k1 === 'undefined') {
+        throw new Error('Librería secp256k1 no cargada');
+      }
+
+      const secp = typeof nobleSecp256k1 !== 'undefined' ? nobleSecp256k1 : secp256k1;
+      
+      // Obtener clave pública comprimida (33 bytes)
+      const pubKeyCompressed = secp.getPublicKey(privateKeyHex, true);
+      
+      // Obtener clave pública no comprimida (65 bytes)
+      const pubKeyUncompressed = secp.getPublicKey(privateKeyHex, false);
+
+      return {
+        compressed: HexUtils.bytesToHex(pubKeyCompressed),
+        uncompressed: HexUtils.bytesToHex(pubKeyUncompressed)
+      };
+    }
+
+    /**
+     * Extrae coordenadas X e Y de la clave pública no comprimida
+     */
+    function extractCoordinates(uncompressedHex) {
+      // Formato: 04 + X (32 bytes) + Y (32 bytes)
+      const x = uncompressedHex.substring(2, 66);
+      const y = uncompressedHex.substring(66, 130);
+      return { x, y };
+    }
+
+    /**
+     * Determina la paridad de Y
+     */
+    function getYParity(yHex) {
+      const lastChar = yHex.slice(-1).toLowerCase();
+      const lastNibble = parseInt(lastChar, 16);
+      return lastNibble % 2 === 0 ? 'par' : 'impar';
+    }
+
+    /**
+     * Muestra error
+     */
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.style.display = 'block';
+      outputSection.style.display = 'none';
+    }
+
+    /**
+     * Oculta error
+     */
+    function hideError() {
+      errorMessage.style.display = 'none';
+    }
+
+    /**
+     * Deriva y muestra la clave pública
+     */
+    function derive() {
+      const privateKey = privateKeyInput.value.replace(/[^0-9a-fA-F]/g, '').toLowerCase();
+      
+      // Validar
+      const validation = isValidPrivateKey(privateKey);
+      if (!validation.valid) {
+        showError(validation.reason);
+        return;
+      }
+
+      hideError();
+
+      try {
+        // Derivar
+        const publicKeys = derivePublicKey(privateKey);
+        const coords = extractCoordinates(publicKeys.uncompressed);
+        const parity = getYParity(coords.y);
+
+        // Mostrar resultados
+        outputCompressed.textContent = publicKeys.compressed;
+        outputUncompressed.textContent = publicKeys.uncompressed;
+        outputX.textContent = coords.x;
+        outputY.textContent = coords.y;
+        
+        yParity.textContent = parity.toUpperCase();
+        yParity.style.color = parity === 'par' ? '#2ea043' : '#58a6ff';
+        
+        const prefix = publicKeys.compressed.substring(0, 2);
+        yParityExplanation.textContent = `→ prefijo ${prefix} (${prefix === '02' ? 'Y par' : 'Y impar'})`;
+
+        outputSection.style.display = 'block';
+
+      } catch (error) {
+        showError('Error derivando clave pública: ' + error.message);
+      }
+    }
+
+    // === EVENT LISTENERS ===
+
+    privateKeyInput.addEventListener('input', () => {
+      const value = privateKeyInput.value.replace(/[^0-9a-fA-F]/g, '');
+      privateKeyInput.value = value;
+      inputStatus.textContent = `${value.length} / 64 caracteres`;
+      inputStatus.style.color = value.length === 64 ? '#2ea043' : 'var(--text-secondary)';
+    });
+
+    btnGenerate.addEventListener('click', () => {
+      const privateKey = generateRandomPrivateKey();
+      privateKeyInput.value = privateKey;
+      inputStatus.textContent = '64 / 64 caracteres';
+      inputStatus.style.color = '#2ea043';
+      derive();
+    });
+
+    btnDerive.addEventListener('click', derive);
+
+    privateKeyInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') derive();
+    });
+
+    // Copiar al portapapeles
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const targetId = btn.dataset.target;
+        const target = document.getElementById(targetId);
+        const text = target.textContent;
+
+        if (text && text !== '—') {
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.textContent = '✓';
+            setTimeout(() => { btn.textContent = '📋'; }, 1000);
+          } catch (err) {
+            console.error('Error copiando:', err);
+          }
+        }
+      });
+    });
+
+    // Esperar a que se cargue la librería secp256k1
+    function waitForSecp256k1() {
+      return new Promise((resolve) => {
+        const check = () => {
+          if (typeof nobleSecp256k1 !== 'undefined' || typeof secp256k1 !== 'undefined') {
+            resolve();
+          } else {
+            setTimeout(check, 100);
+          }
+        };
+        check();
+      });
+    }
+
+    // Inicialización
+    waitForSecp256k1().then(() => {
+      btnDerive.disabled = false;
+      btnGenerate.disabled = false;
+    }).catch(() => {
+      showError('No se pudo cargar la librería de criptografía');
+    });
+
+  })();
+  </script>
+
+  <!-- Fallback: cargar noble-secp256k1 de forma alternativa -->
+  <script>
+    // Si el módulo ESM no carga, intentar con versión UMD
+    window.addEventListener('load', function() {
+      if (typeof nobleSecp256k1 === 'undefined' && typeof secp256k1 === 'undefined') {
+        // Implementación básica usando Web Crypto para casos simples
+        // En producción, usar una CDN confiable o servir localmente
+        console.warn('Cargando implementación alternativa de secp256k1...');
+        
+        // Cargar desde CDN alternativa
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/@noble/secp256k1@1.7.1/lib/index.js';
+        script.onload = function() {
+          console.log('secp256k1 cargado desde CDN alternativa');
+        };
+        document.head.appendChild(script);
+      }
+    });
+  </script>
+</body>
+</html>

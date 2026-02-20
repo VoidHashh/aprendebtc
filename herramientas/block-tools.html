@@ -622,7 +622,7 @@
       },
       halving1: {
         // Bloque #210000 - 28 de noviembre 2012
-        header: '01000000b10d9877e1aaf1a2869d62b3e86f60c3f7f4e8f4a0ad0a6e9c6d3b9d00000000903e8f7a1a93c2b1b55d5f0e8c7f6b4a3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f00b1f51a6ba0081b1e2b3c4d',
+        header: '01000000b10d9877e1aaf1a2869d62b3e86f60c3f7f4e8f4a0ad0a6e9c6d3b9d00000000903e8f7a1a93c2b1b55d5f0e8c7f6b4a3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8ab62cb650a6ba00813577904d',
         version: '01000000',
         prevBlock: 'b10d9877e1aaf1a2869d62b3e86f60c3f7f4e8f4a0ad0a6e9c6d3b9d00000000',
         merkleRoot: '903e8f7a1a93c2b1b55d5f0e8c7f6b4a3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a',
@@ -632,7 +632,7 @@
       },
       halving4: {
         // Bloque #840000 - 20 de abril 2024
-        header: '00e0ff3f8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f00000000a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b28c3f6166193402172a3b4c5d',
+        header: '3fff00e08b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f000000a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b28c952366170342192a6f4f5d',
         version: '3fff00e0',
         prevBlock: '8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f000000',
         merkleRoot: 'a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2',
@@ -758,6 +758,38 @@
       return Math.floor(date.getTime() / 1000);
     }
 
+    function buildHeaderFromPreset(preset) {
+      const version = String(preset.version || '').replace(/[^0-9a-fA-F]/g, '').toLowerCase();
+      const prevBlock = String(preset.prevBlock || '').replace(/[^0-9a-fA-F]/g, '').toLowerCase();
+      const merkleRoot = String(preset.merkleRoot || '').replace(/[^0-9a-fA-F]/g, '').toLowerCase();
+      const bits = String(preset.bits || '').replace(/[^0-9a-fA-F]/g, '').toLowerCase();
+      const timestamp = Number(preset.timestamp);
+      const nonce = Number(preset.nonce);
+
+      if (
+        version.length !== 8 ||
+        prevBlock.length !== 64 ||
+        merkleRoot.length !== 64 ||
+        bits.length !== 8 ||
+        !Number.isFinite(timestamp) ||
+        !Number.isFinite(nonce)
+      ) {
+        return '';
+      }
+
+      const timestampLE = intToLittleEndianHex(timestamp, 4);
+      const nonceLE = intToLittleEndianHex(nonce, 4);
+      return `${version}${prevBlock}${merkleRoot}${timestampLE}${bits}${nonceLE}`;
+    }
+
+    function getPresetHeader(preset) {
+      const rawHeader = String(preset.header || '').replace(/[^0-9a-fA-F]/g, '').toLowerCase();
+      if (rawHeader.length === 160) {
+        return rawHeader;
+      }
+      return buildHeaderFromPreset(preset);
+    }
+
     // === PESTAÑAS ===
 
     tabs.forEach(tab => {
@@ -781,7 +813,7 @@
     document.querySelectorAll('[data-preset]').forEach(card => {
       card.addEventListener('click', () => {
         const preset = BLOCK_PRESETS[card.dataset.preset];
-        headerInput.value = preset.header;
+        headerInput.value = getPresetHeader(preset);
         headerInput.dispatchEvent(new Event('input'));
         decodeHeader();
       });
@@ -985,7 +1017,7 @@
 
     // Cargar bloque génesis por defecto en decoder
     const genesis = BLOCK_PRESETS.genesis;
-    headerInput.value = genesis.header;
+    headerInput.value = getPresetHeader(genesis);
     headerInput.dispatchEvent(new Event('input'));
 
   })();
