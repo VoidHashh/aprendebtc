@@ -593,7 +593,9 @@
 
   function createLevelSidebarSection(levelItem) {
     const links = [{ href: levelItem.index, text: 'Indice del nivel' }, ...levelItem.pages];
-    return createSidebarSection(levelItem.title, links, 'sidebar__section--primary sidebar__section--level');
+    const levelMatch = levelItem.index.match(/\/nivel-(\d)\//);
+    const levelClass = levelMatch ? ` sidebar__section--nivel-${levelMatch[1]}` : '';
+    return createSidebarSection(levelItem.title, links, `sidebar__section--primary sidebar__section--level${levelClass}`);
   }
 
   function createPillarSidebarSection(pillarItem) {
@@ -673,7 +675,7 @@
   function markActiveNavLinks() {
     const path = currentPath();
 
-    document.querySelectorAll('.site-nav__link[href], .mobile-menu__link[href]').forEach((link) => {
+    document.querySelectorAll('.site-nav__link[href], .mobile-menu__link[href], .mobile-tree__link[href]').forEach((link) => {
       const href = link.getAttribute('href');
       if (!href) return;
 
@@ -822,6 +824,155 @@
     });
   }
 
+
+  function setMobileTreeCollapsed(node, collapsed, toggle) {
+    node.classList.toggle('mobile-tree__group--collapsed', collapsed);
+    node.classList.toggle('mobile-tree__item--collapsed', collapsed);
+    if (toggle) {
+      toggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    }
+  }
+
+  function buildMobileMenuTree() {
+    const host = document.getElementById('mobile-menu-tree');
+    if (!host) return;
+
+    host.innerHTML = '';
+
+    const path = currentPath();
+    const groups = [
+      {
+        title: 'Niveles',
+        items: LEVEL_TREE.map((level) => {
+          const levelMatch = level.index.match(/\/nivel-(\d)\//);
+          const levelNum = levelMatch ? levelMatch[1] : '';
+          return {
+            title: level.title,
+            levelNum,
+            links: [{ href: level.index, text: 'Indice del nivel' }, ...level.pages]
+          };
+        })
+      },
+      {
+        title: 'Pilares',
+        items: PILLAR_TREE.map((pillar) => ({
+          title: pillar.title,
+          levelNum: '',
+          links: [{ href: pillar.index, text: pillar.pages.length > 0 ? 'Indice del pilar' : 'Abrir pagina' }, ...pillar.pages]
+        }))
+      }
+    ];
+
+    groups.forEach((group) => {
+      const groupNode = document.createElement('div');
+      groupNode.className = 'mobile-tree__group mobile-tree__group--collapsed';
+
+      const groupToggle = document.createElement('button');
+      groupToggle.type = 'button';
+      groupToggle.className = 'mobile-tree__toggle';
+      groupToggle.setAttribute('aria-expanded', 'false');
+
+      const groupLabel = document.createElement('span');
+      groupLabel.className = 'mobile-tree__toggle-label';
+      groupLabel.textContent = sanitizeLabel(group.title);
+
+      const groupIcon = document.createElement('span');
+      groupIcon.className = 'mobile-tree__toggle-icon';
+      groupIcon.innerHTML = buildChevronSvg();
+
+      groupToggle.appendChild(groupLabel);
+      groupToggle.appendChild(groupIcon);
+      groupNode.appendChild(groupToggle);
+
+      const groupChildren = document.createElement('div');
+      groupChildren.className = 'mobile-tree__children';
+
+      let groupHasActive = false;
+
+      group.items.forEach((item) => {
+        const itemNode = document.createElement('div');
+        itemNode.className = 'mobile-tree__item mobile-tree__item--collapsed';
+        if (item.levelNum) {
+          itemNode.classList.add(`mobile-tree__item--level-${item.levelNum}`);
+        }
+
+        const itemToggle = document.createElement('button');
+        itemToggle.type = 'button';
+        itemToggle.className = 'mobile-tree__toggle';
+        itemToggle.setAttribute('aria-expanded', 'false');
+
+        const itemLabel = document.createElement('span');
+        itemLabel.className = 'mobile-tree__toggle-label';
+        if (item.levelNum) {
+          const dot = document.createElement('span');
+          dot.className = `nivel-dot nivel-dot--${item.levelNum}`;
+          dot.setAttribute('aria-hidden', 'true');
+          itemLabel.appendChild(dot);
+        }
+        itemLabel.appendChild(document.createTextNode(sanitizeLabel(item.title)));
+
+        const itemIcon = document.createElement('span');
+        itemIcon.className = 'mobile-tree__toggle-icon';
+        itemIcon.innerHTML = buildChevronSvg();
+
+        itemToggle.appendChild(itemLabel);
+        itemToggle.appendChild(itemIcon);
+        itemNode.appendChild(itemToggle);
+
+        const itemChildren = document.createElement('div');
+        itemChildren.className = 'mobile-tree__children';
+
+        let itemHasActive = false;
+
+        item.links.forEach((linkData) => {
+          const link = document.createElement('a');
+          link.className = 'mobile-tree__link';
+          link.href = linkData.href;
+          link.textContent = sanitizeLabel(linkData.text);
+
+          let linkPath;
+          try {
+            linkPath = normalizePath(new URL(linkData.href, window.location.origin).pathname);
+          } catch (_) {
+            linkPath = '';
+          }
+
+          if (linkPath && path === linkPath) {
+            link.classList.add('mobile-tree__link--active');
+            itemHasActive = true;
+            groupHasActive = true;
+          }
+
+          itemChildren.appendChild(link);
+        });
+
+        itemNode.appendChild(itemChildren);
+        groupChildren.appendChild(itemNode);
+
+        if (itemHasActive) {
+          setMobileTreeCollapsed(itemNode, false, itemToggle);
+        }
+
+        itemToggle.addEventListener('click', () => {
+          const collapsed = itemNode.classList.contains('mobile-tree__item--collapsed');
+          setMobileTreeCollapsed(itemNode, !collapsed, itemToggle);
+        });
+      });
+
+      groupNode.appendChild(groupChildren);
+      host.appendChild(groupNode);
+
+      if (groupHasActive) {
+        setMobileTreeCollapsed(groupNode, false, groupToggle);
+      }
+
+      groupToggle.addEventListener('click', () => {
+        const collapsed = groupNode.classList.contains('mobile-tree__group--collapsed');
+        setMobileTreeCollapsed(groupNode, !collapsed, groupToggle);
+      });
+    });
+  }
+
   function initMobileMenu() {
     if (mobileMenuBound) return;
 
@@ -830,6 +981,8 @@
     const menu = document.getElementById('mobile-menu');
 
     if (!toggleBtn || !overlay || !menu) return;
+
+    buildMobileMenuTree();
 
     function openMenu() {
       overlay.classList.add('mobile-menu-overlay--visible');
@@ -863,6 +1016,12 @@
 
     overlay.addEventListener('click', (event) => {
       if (!menu.contains(event.target)) closeMenu();
+    });
+
+    menu.addEventListener('click', (event) => {
+      const link = event.target.closest('a[href]');
+      if (!link) return;
+      closeMenu();
     });
 
     document.addEventListener('keydown', (event) => {

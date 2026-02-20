@@ -1,128 +1,43 @@
-<header class="site-header" role="banner">
+﻿<header class="site-header" role="banner">
   <div class="site-header__inner">
-
-    <!-- Logo -->
     <a href="/" class="site-logo" aria-label="Inicio aprendebtc.com">
       <span>aprende</span><span>BTC</span>
     </a>
 
-    <!-- Navegación desktop -->
-    <nav class="site-nav" role="navigation" aria-label="Navegación principal">
-
-      <!-- Niveles (dropdown) -->
-      <div class="site-nav__item">
-        <span class="site-nav__link" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">
-          Niveles <span class="chevron" aria-hidden="true">▾</span>
-        </span>
-        <div class="site-nav__dropdown" role="menu">
-          <a href="/nivel-1/" class="site-nav__dropdown-item" role="menuitem">
-            <span class="nivel-dot nivel-dot--1" aria-hidden="true"></span>
-            <div>
-              <div class="site-nav__dropdown-title">Nivel 1</div>
-              <div class="site-nav__dropdown-subtitle">Nocoinero Curioso</div>
-            </div>
-          </a>
-          <a href="/nivel-2/" class="site-nav__dropdown-item" role="menuitem">
-            <span class="nivel-dot nivel-dot--2" aria-hidden="true"></span>
-            <div>
-              <div class="site-nav__dropdown-title">Nivel 2</div>
-              <div class="site-nav__dropdown-subtitle">Ya Tengo Sats</div>
-            </div>
-          </a>
-          <a href="/nivel-3/" class="site-nav__dropdown-item" role="menuitem">
-            <span class="nivel-dot nivel-dot--3" aria-hidden="true"></span>
-            <div>
-              <div class="site-nav__dropdown-title">Nivel 3</div>
-              <div class="site-nav__dropdown-subtitle">Rabbit Hole</div>
-            </div>
-          </a>
-          <a href="/nivel-4/" class="site-nav__dropdown-item" role="menuitem">
-            <span class="nivel-dot nivel-dot--4" aria-hidden="true"></span>
-            <div>
-              <div class="site-nav__dropdown-title">Nivel 4</div>
-              <div class="site-nav__dropdown-subtitle">Down the Rabbit Hole</div>
-            </div>
-          </a>
-          <a href="/nivel-5/" class="site-nav__dropdown-item" role="menuitem">
-            <span class="nivel-dot nivel-dot--5" aria-hidden="true"></span>
-            <div>
-              <div class="site-nav__dropdown-title">Nivel 5</div>
-              <div class="site-nav__dropdown-subtitle">El Arquitecto</div>
-            </div>
-          </a>
-          <a href="/nivel-6/" class="site-nav__dropdown-item" role="menuitem">
-            <span class="nivel-dot nivel-dot--6" aria-hidden="true"></span>
-            <div>
-              <div class="site-nav__dropdown-title">Nivel 6</div>
-              <div class="site-nav__dropdown-subtitle">Satoshi</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <a href="/base/" class="site-nav__link">Conocimiento</a>
-      <a href="/herramientas/" class="site-nav__link">Herramientas</a>
-      <a href="/comunidad/" class="site-nav__link">Comunidad</a>
-      <a href="/glosario.html" class="site-nav__link">Glosario</a>
-      <a href="/recursos.html" class="site-nav__link">Recursos</a>
-    </nav>
-
-    <!-- Acciones: búsqueda + hamburger -->
     <div class="header-actions">
       <button class="header-btn" id="search-toggle" aria-label="Buscar">
         🔍
       </button>
-      <button class="header-btn hamburger-btn" id="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+      <button class="header-btn hamburger-btn" id="mobile-menu-toggle" aria-label="Abrir menu" aria-expanded="false">
         ☰
       </button>
     </div>
-
   </div>
 </header>
 
-<!-- Menú móvil -->
 <div class="mobile-menu-overlay" id="mobile-menu-overlay" aria-hidden="true">
-  <nav class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Menú móvil">
+  <nav class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Menu movil">
     <div class="mobile-menu__logo">
       <span class="brand-primary">aprende</span><span class="brand-accent">BTC</span>
     </div>
 
-    <div class="mobile-menu__section">
-      <div class="mobile-menu__section-title">Niveles</div>
-      <a href="/nivel-1/" class="mobile-menu__link"><span class="nivel-dot nivel-dot--1"></span> Nivel 1 — Nocoinero Curioso</a>
-      <a href="/nivel-2/" class="mobile-menu__link"><span class="nivel-dot nivel-dot--2"></span> Nivel 2 — Ya Tengo Sats</a>
-      <a href="/nivel-3/" class="mobile-menu__link"><span class="nivel-dot nivel-dot--3"></span> Nivel 3 — Rabbit Hole</a>
-      <a href="/nivel-4/" class="mobile-menu__link"><span class="nivel-dot nivel-dot--4"></span> Nivel 4 — Down the Rabbit Hole</a>
-      <a href="/nivel-5/" class="mobile-menu__link"><span class="nivel-dot nivel-dot--5"></span> Nivel 5 — El Arquitecto</a>
-      <a href="/nivel-6/" class="mobile-menu__link"><span class="nivel-dot nivel-dot--6"></span> Nivel 6 — Satoshi</a>
-    </div>
-
-    <div class="mobile-menu__section">
-      <div class="mobile-menu__section-title">Pilares</div>
-      <a href="/base/" class="mobile-menu__link">📚 Base de Conocimiento</a>
-      <a href="/herramientas/" class="mobile-menu__link">🛠 Herramientas</a>
-      <a href="/comunidad/" class="mobile-menu__link">💬 Comunidad</a>
-      <a href="/glosario.html" class="mobile-menu__link">📖 Glosario</a>
-      <a href="/recursos.html" class="mobile-menu__link">🔗 Recursos</a>
-    </div>
-
+    <div class="mobile-menu__tree" id="mobile-menu-tree"></div>
   </nav>
 </div>
 
-<!-- Search overlay -->
-<div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Búsqueda">
+<div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Busqueda">
   <div class="search-box">
     <div class="search-box__input">
       <span class="search-box__icon" aria-hidden="true">🔍</span>
       <input type="text" id="search-input" placeholder="Buscar en aprendeBTC..." autocomplete="off" aria-label="Buscar" />
     </div>
     <div class="search-box__results" id="search-results">
-      <p class="search-hint">Escribe para buscar artículos, conceptos, niveles…</p>
+      <p class="search-hint">Escribe para buscar articulos, conceptos, niveles...</p>
     </div>
   </div>
 </div>
 
 <!-- Google Analytics placeholder -->
 <script>/* GA_PLACEHOLDER */</script>
-<!-- Ad slot: header banner (728x90 desktop, 320x50 móvil) -->
+<!-- Ad slot: header banner (728x90 desktop, 320x50 movil) -->
 <div class="ad-slot ad-header" id="ad-header" aria-hidden="true"></div>

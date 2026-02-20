@@ -81,10 +81,10 @@ a {
   --nivel-6: #F0C000;
 
   /* Layout */
-  --sidebar-width: 280px;
+  --sidebar-width: 300px;
   --header-height: 64px;
   --max-width: 1200px;
-  --content-max-width: 760px;
+  --content-max-width: 780px;
 
   /* Radios y transiciones */
   --radius-sm: 6px;
@@ -238,7 +238,7 @@ pre code {
     margin-left: var(--sidebar-width);
     width: calc(100% - var(--sidebar-width));
     max-width: none;
-    padding: 2.5rem 3rem;
+    padding: 2.25rem 2.4rem;
   }
 
   .page-layout__content .content-inner {
@@ -264,4 +264,20 @@ hr {
   border: none;
   border-top: 1px solid var(--bg-border);
   margin: 2rem 0;
+}
+
+@media (max-width: 767px) {
+  .page-layout__content {
+    padding: 1.25rem 1rem 1.6rem;
+  }
+
+  .page-layout__content .content-inner {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .page-layout__content {
+    padding: 2.6rem 3.1rem;
+  }
 }
