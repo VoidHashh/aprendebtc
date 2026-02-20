@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="P2TR explicado: key path y script path, tweaked keys, Bech32m encoding. El tipo de transacción más avanzado de Bitcoin." />
+  <title>P2TR (Pay-to-Taproot) &mdash; Nivel 5 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 5">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 1 &middot; Criptografía</div>
+          <a href="funciones-hash.html" class="sidebar__link">Funciones hash</a>
+          <a href="curva-eliptica.html" class="sidebar__link">Criptografía de curva elíptica</a>
+          <a href="ecdsa.html" class="sidebar__link">ECDSA (Elliptic Curve Digital Signature Algorithm)</a>
+          <a href="schnorr.html" class="sidebar__link">Firmas Schnorr</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 2 &middot; Transacciones en detalle</div>
+          <a href="estructura-transaccion.html" class="sidebar__link">Estructura de una transacción</a>
+          <a href="segwit-internals.html" class="sidebar__link">SegWit por dentro</a>
+          <a href="taproot-internals.html" class="sidebar__link">Taproot por dentro</a>
+          <a href="psbt.html" class="sidebar__link">PSBT (Partially Signed Bitcoin Transaction)</a>
+          <a href="locktime-sequence.html" class="sidebar__link">Locktime y Sequence</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 3 &middot; Script</div>
+          <a href="bitcoin-script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="p2pkh.html" class="sidebar__link">P2PKH (Pay-to-Public-Key-Hash)</a>
+          <a href="p2sh.html" class="sidebar__link">P2SH (Pay-to-Script-Hash)</a>
+          <a href="p2wpkh-p2wsh.html" class="sidebar__link">P2WPKH y P2WSH (Native SegWit)</a>
+          <a href="p2tr.html" class="sidebar__link sidebar__link--active">P2TR (Pay-to-Taproot)</a>
+          <a href="op-return.html" class="sidebar__link">OP_RETURN</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 4 &middot; Bloques y protocolo</div>
+          <a href="estructura-bloque.html" class="sidebar__link">Estructura de un bloque</a>
+          <a href="merkle-tree.html" class="sidebar__link">Árbol de Merkle</a>
+          <a href="proof-of-work.html" class="sidebar__link">Proof of Work en detalle</a>
+          <a href="protocolo-p2p.html" class="sidebar__link">Protocolo P2P</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-6/" class="sidebar__link">Nivel 6 &mdash; Satoshi</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n5" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 5</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">P2TR (Pay-to-Taproot)</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--5 article__badge">Nivel 5</div>
+          <h1>P2TR (Pay-to-Taproot)</h1>
+          <p class="article__subtitle">La culminación de años de desarrollo. Privacidad por defecto, eficiencia máxima, flexibilidad total.</p>
+
+<h2>El estándar más avanzado</h2>
+
+<p>P2TR (Pay-to-Taproot), definido en BIP 341, es el tipo de transacción más moderno de Bitcoin. Las direcciones empiezan por <code>bc1p</code>.</p>
+
+<p>P2TR combina todo lo aprendido de los tipos anteriores:</p>
+
+<ul>
+
+<li>La simplicidad de P2PKH cuando solo hay una clave</li>
+
+<li>La flexibilidad de P2SH/P2WSH para scripts complejos</li>
+
+<li>La privacidad de ocultar condiciones no usadas</li>
+
+<li>La eficiencia de firmas Schnorr</li>
+
+</ul>
+
+<h2>El scriptPubKey</h2>
+
+<p>OP_1 &lt;32 bytes: tweakedPubKey&gt;</p>
+
+<p>En hexadecimal: 5120&lt;32 bytes tweakedPubKey&gt;</p>
+
+<p>OP_1 (0x51) indica witness version 1. Los 32 bytes son la coordenada x de la clave pública &quot;tweaked&quot;.</p>
+
+<h2>La tweaked key</h2>
+
+<p>La clave pública en la dirección no es la clave interna directamente. Es una versión &quot;ajustada&quot; (tweaked): Q = P + hash(P || m) · G</p>
+
+<p>Donde:</p>
+
+<ul>
+
+<li>P = clave pública interna</li>
+
+<li>m = Merkle root del árbol de scripts (o bytes vacíos si no hay scripts)</li>
+
+<li>G = punto generador</li>
+
+<li>Q = clave tweaked (la que aparece en la dirección)</li>
+
+</ul>
+
+<p>Este tweak tiene dos propósitos:</p>
+
+<ol>
+
+<li>Comprometer el árbol de scripts sin revelarlo</li>
+
+<li>Permitir gastar por key path con una firma de Q</li>
+
+</ol>
+
+<h2>Key path: el camino rápido</h2>
+
+<p>Si puedes firmar con la clave correspondiente a Q, el gasto es trivial:</p>
+
+<p><strong>Witness:</strong> &lt;64 bytes: firma Schnorr&gt;</p>
+
+<p>Solo 64 bytes. El nodo verifica que la firma es válida para Q. No sabe ni le importa si había scripts alternativos.</p>
+
+<p>Desde fuera, todo gasto por key path se ve igual: una firma de 64 bytes. Un multisig 3-de-5 donde los 3 firmantes cooperan se ve idéntico a un pago simple de una persona.</p>
+
+<h2>Script path: cuando necesitas scripts</h2>
+
+<p>Si quieres gastar usando un script del árbol MAST:</p>
+
+<p><strong>Witness:</strong> &lt;datos que satisfacen el script&gt; &lt;script&gt; &lt;control block&gt; ``` El control block contiene:</p>
+
+<p>1 byte: versión + flag de paridad de la clave interna 32 bytes: clave pública interna P 32 bytes × n: prueba Merkle (hermanos en el árbol)</p>
+
+<p>El nodo:</p>
+
+<p>Extrae P del control block Calcula el hash del script Usa la prueba Merkle para calcular el Merkle root m Calcula Q&#x27; = P + hash(P || m) · G Verifica Q&#x27; == Q (del scriptPubKey) Ejecuta el script con los datos proporcionados</p>
+
+<p>Ejemplo: herencia con script path Condiciones deseadas:</p>
+
+<p>Key path: firma de Alice (propietaria) Script 1: firma de Bob (heredero) después de 1 año Script 2: multisig 2-de-3 de emergencia</p>
+
+<p>Setup:</p>
+
+<p>P = clave pública de Alice (o agregación MuSig2 si hay copropietarios) Árbol MAST con dos scripts</p>
+
+<p>En el caso común, Alice gasta con su firma (key path). Nadie sabe que existían las otras condiciones. Si Alice muere, Bob espera 1 año y usa el script 1. Se revela ese script pero no el script 2. Bech32m (BIP 350) Las direcciones Taproot usan Bech32m, una corrección de Bech32. Bech32 original tenía un edge case: si el último carácter era p, añadir o quitar q al final no cambiaba el checksum. Bech32m corrige esto. Las direcciones Taproot empiezan por bc1p: bc1p5d7rjq7g6rdk2yhzks9smlaqtedr4dekq08ge8ztwac72sfr9rusxg3297 El p indica witness version 1 (OP_1 = 0x51, y 0x51 - 0x50 = 1). Tapscript: reglas de script modificadas BIP 342 define Tapscript, las reglas de ejecución de scripts dentro de Taproot: Cambios principales:</p>
+
+<p>OP_CHECKMULTISIG deshabilitado (usar OP_CHECKSIGADD) Firmas Schnorr de 64 bytes Limits de recursos ajustados Opcodes de éxito (OP_SUCCESSx) reservados para futuras actualizaciones</p>
+
+<p>OP_CHECKSIGADD: &lt;n&gt; &lt;pubKey&gt; OP_CHECKSIGADD Verifica una firma. Si es válida, incrementa n y lo empuja. Si no, empuja n sin cambiar. Para multisig k-de-n: OP_0 &lt;sig_n&gt; &lt;pubKey_n&gt; OP_CHECKSIGADD ... &lt;sig_1&gt; &lt;pubKey_1&gt; OP_CHECKSIGADD &lt;k&gt; OP_NUMEQUAL Adopción Taproot se activó en noviembre 2021 (bloque 709.632). La adopción ha sido gradual:</p>
+
+<p>Wallets: Sparrow, Blue Wallet, y hardware wallets principales lo soportan Exchanges: soporte variable, mejorando con el tiempo Uso: creciente, especialmente para nuevos protocolos y usuarios técnicos</p>
+
+<p>Para máxima privacidad y eficiencia, Taproot es la mejor opción cuando está soportado por todas las partes involucradas.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-5" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="p2wpkh-p2wsh.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">P2WPKH y P2WSH</span>
+  </a>
+  <a href="op-return.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">OP_RETURN</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

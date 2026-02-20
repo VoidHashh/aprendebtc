@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Timelocks en Bitcoin: nLocktime, nSequence, CLTV, CSV. Bloqueos temporales absolutos y relativos. Usos en Lightning y herencia." />
+  <title>Locktime y Sequence &mdash; Nivel 5 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 5">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 1 &middot; Criptografía</div>
+          <a href="funciones-hash.html" class="sidebar__link">Funciones hash</a>
+          <a href="curva-eliptica.html" class="sidebar__link">Criptografía de curva elíptica</a>
+          <a href="ecdsa.html" class="sidebar__link">ECDSA (Elliptic Curve Digital Signature Algorithm)</a>
+          <a href="schnorr.html" class="sidebar__link">Firmas Schnorr</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 2 &middot; Transacciones en detalle</div>
+          <a href="estructura-transaccion.html" class="sidebar__link">Estructura de una transacción</a>
+          <a href="segwit-internals.html" class="sidebar__link">SegWit por dentro</a>
+          <a href="taproot-internals.html" class="sidebar__link">Taproot por dentro</a>
+          <a href="psbt.html" class="sidebar__link">PSBT (Partially Signed Bitcoin Transaction)</a>
+          <a href="locktime-sequence.html" class="sidebar__link sidebar__link--active">Locktime y Sequence</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 3 &middot; Script</div>
+          <a href="bitcoin-script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="p2pkh.html" class="sidebar__link">P2PKH (Pay-to-Public-Key-Hash)</a>
+          <a href="p2sh.html" class="sidebar__link">P2SH (Pay-to-Script-Hash)</a>
+          <a href="p2wpkh-p2wsh.html" class="sidebar__link">P2WPKH y P2WSH (Native SegWit)</a>
+          <a href="p2tr.html" class="sidebar__link">P2TR (Pay-to-Taproot)</a>
+          <a href="op-return.html" class="sidebar__link">OP_RETURN</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 4 &middot; Bloques y protocolo</div>
+          <a href="estructura-bloque.html" class="sidebar__link">Estructura de un bloque</a>
+          <a href="merkle-tree.html" class="sidebar__link">Árbol de Merkle</a>
+          <a href="proof-of-work.html" class="sidebar__link">Proof of Work en detalle</a>
+          <a href="protocolo-p2p.html" class="sidebar__link">Protocolo P2P</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-6/" class="sidebar__link">Nivel 6 &mdash; Satoshi</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n5" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 5</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Locktime y Sequence</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--5 article__badge">Nivel 5</div>
+          <h1>Locktime y Sequence</h1>
+          <p class="article__subtitle">Bloquear transacciones en el tiempo. La base de contratos inteligentes temporales en Bitcoin.</p>
+
+<h2>Timelocks: control temporal</h2>
+
+<p>Bitcoin permite restringir cuándo una transacción o UTXO puede gastarse. Hay dos dimensiones:</p>
+
+<p><strong>Absoluto vs relativo:</strong> ¿La restricción es una fecha/altura fija, o un período desde otro evento?</p>
+
+<p><strong>Nivel de transacción vs nivel de script:</strong> ¿La restricción se aplica a toda la transacción, o es una condición dentro del script?</p>
+
+<h2>nLocktime (transacción)</h2>
+
+<p>Cada transacción tiene un campo nLocktime de 4 bytes que especifica cuándo puede incluirse en un bloque.</p>
+
+<h3>Interpretación</h3>
+
+<ul>
+
+<li>Si nLocktime &lt; 500.000.000: se interpreta como altura de bloque</li>
+
+<li>Si nLocktime ≥ 500.000.000: se interpreta como timestamp Unix</li>
+
+</ul>
+
+<h3>Comportamiento</h3>
+
+<p>Si nLocktime = 0 (el default): la transacción puede incluirse en cualquier bloque.</p>
+
+<p>Si nLocktime = 800000: la transacción no puede incluirse hasta el bloque 800.000 o posterior.</p>
+
+<p>Si nLocktime = 1700000000 (timestamp): la transacción no puede incluirse hasta ese momento Unix (~noviembre 2023).</p>
+
+<h3>Limitación</h3>
+
+<p>El nLocktime solo se respeta si al menos un input tiene nSequence &lt; 0xFFFFFFFF. Si todos los inputs tienen sequence máximo, el locktime se ignora (comportamiento legacy).</p>
+
+<h2>nSequence (input)</h2>
+
+<p>Cada input tiene un campo nSequence de 4 bytes. Históricamente era para un mecanismo de reemplazo que nunca funcionó bien. Hoy tiene múltiples funciones:</p>
+
+<h3>Señal de RBF</h3>
+
+<p>Si nSequence &lt; 0xFFFFFFFE (cualquier valor menor que el máximo menos uno), la transacción señala que acepta Replace-By-Fee.</p>
+
+<h3>Timelock relativo (BIP 68)</h3>
+
+<p>Si el bit más significativo (bit 31) es 0, los bits 0-15 especifican un timelock relativo:</p>
+
+<ul>
+
+<li>Si el bit 22 es 0: el valor es en bloques</li>
+
+<li>Si el bit 22 es 1: el valor es en unidades de 512 segundos</li>
+
+</ul>
+
+<p>El input no puede incluirse hasta que el UTXO que gasta tenga esa &quot;edad&quot; en bloques o tiempo.</p>
+
+<p>Ejemplo: nSequence = 0x0000000A (10 en decimal, bit 31 = 0, bit 22 = 0) El input no puede gastarse hasta 10 bloques después de que el UTXO fue confirmado.</p>
+
+<h3>Desactivar locktime</h3>
+
+<p>Si nSequence = 0xFFFFFFFF: el locktime de la transacción se ignora y no hay timelock relativo.</p>
+
+<h2>OP_CHECKLOCKTIMEVERIFY (CLTV)</h2>
+
+<p>BIP 65. Un opcode de script que verifica timelocks absolutos. &lt;locktime&gt; OP_CHECKLOCKTIMEVERIFY OP_DROP</p>
+
+<p>La transacción solo es válida si su nLocktime es ≥ al valor especificado. Esto bloquea un UTXO hasta una fecha/altura específica dentro del propio script.</p>
+
+<p>Ejemplo de uso: fondos que no pueden moverse hasta 2025: 1735689600 OP_CHECKLOCKTIMEVERIFY OP_DROP &lt;pubKey&gt; OP_CHECKSIG</p>
+
+<h2>OP_CHECKSEQUENCEVERIFY (CSV)</h2>
+
+<p>BIP 112. Verifica timelocks relativos dentro del script. &lt;sequence&gt; OP_CHECKSEQUENCEVERIFY OP_DROP</p>
+
+<p>La transacción solo es válida si el nSequence del input correspondiente indica un timelock relativo ≥ al especificado.</p>
+
+<p>Ejemplo: fondos que no pueden moverse hasta 144 bloques (~1 día) después de ser recibidos: 144 OP_CHECKSEQUENCEVERIFY OP_DROP &lt;pubKey&gt; OP_CHECKSIG</p>
+
+<h2>Casos de uso</h2>
+
+<h3>Lightning Network</h3>
+
+<p>Los canales Lightning usan CSV extensivamente. Cuando se cierra un canal de forma no cooperativa, hay un período de disputa (típicamente 144-2016 bloques) durante el cual la otra parte puede publicar una transacción de penalización si el cierre intentaba hacer trampa.</p>
+
+<h3>Herencia (Dead man&#x27;s switch)</h3>
+
+<p>Una transacción pre-firmada con un locktime de 1 año en el futuro. Si el propietario sigue activo, crea una nueva transacción con locktime extendido. Si deja de renovar, el locktime expira y los herederos pueden broadcast la transacción.</p>
+
+<h3>Vault</h3>
+
+<p>Un esquema donde los fondos pasan por una dirección intermedia con un CSV. Durante el período de espera, el propietario puede &quot;cancelar&quot; enviando a una dirección de recuperación. Esto da tiempo para reaccionar ante un robo.</p>
+
+<h3>Escrow temporal</h3>
+
+<p>Fondos que se liberan automáticamente si no hay disputa después de X tiempo.</p>
+
+<h2>Interacción entre mecanismos</h2>
+
+<p>Los diferentes timelocks se aplican acumulativamente:</p>
+
+<ul>
+
+<li>nLocktime de la transacción debe satisfacerse</li>
+
+<li>nSequence de cada input debe satisfacerse (si tiene timelock relativo)</li>
+
+<li>CLTV dentro del script debe satisfacerse</li>
+
+<li>CSV dentro del script debe satisfacerse</li>
+
+</ul>
+
+<p>Una transacción debe cumplir TODAS las condiciones aplicables.</p>
+
+<div class="callout callout--info"><span class="callout__icon" aria-hidden="true">&#128161;</span><div class="callout__content"><div class="callout__title">La base de contratos inteligentes</div><p class="callout__text">Los timelocks pueden parecer simples, pero son la base de protocolos complejos. Lightning Network, vaults, herencia, atomic swaps... todos dependen de poder expresar condiciones temporales en Bitcoin.</p></div></div>
+
+          <div class="ad-slot ad-content" id="ad-content-5" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="psbt.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">PSBT (Partially Signed Bitcoin Transaction)</span>
+  </a>
+  <a href="bitcoin-script.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Bitcoin Script</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

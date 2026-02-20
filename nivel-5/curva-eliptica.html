@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cómo funciona la criptografía de curva elíptica en Bitcoin. La curva secp256k1, el problema del logaritmo discreto y la derivación de claves." />
+  <title>Criptografía de curva elíptica &mdash; Nivel 5 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 5">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 1 &middot; Criptografía</div>
+          <a href="funciones-hash.html" class="sidebar__link">Funciones hash</a>
+          <a href="curva-eliptica.html" class="sidebar__link sidebar__link--active">Criptografía de curva elíptica</a>
+          <a href="ecdsa.html" class="sidebar__link">ECDSA (Elliptic Curve Digital Signature Algorithm)</a>
+          <a href="schnorr.html" class="sidebar__link">Firmas Schnorr</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 2 &middot; Transacciones en detalle</div>
+          <a href="estructura-transaccion.html" class="sidebar__link">Estructura de una transacción</a>
+          <a href="segwit-internals.html" class="sidebar__link">SegWit por dentro</a>
+          <a href="taproot-internals.html" class="sidebar__link">Taproot por dentro</a>
+          <a href="psbt.html" class="sidebar__link">PSBT (Partially Signed Bitcoin Transaction)</a>
+          <a href="locktime-sequence.html" class="sidebar__link">Locktime y Sequence</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 3 &middot; Script</div>
+          <a href="bitcoin-script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="p2pkh.html" class="sidebar__link">P2PKH (Pay-to-Public-Key-Hash)</a>
+          <a href="p2sh.html" class="sidebar__link">P2SH (Pay-to-Script-Hash)</a>
+          <a href="p2wpkh-p2wsh.html" class="sidebar__link">P2WPKH y P2WSH (Native SegWit)</a>
+          <a href="p2tr.html" class="sidebar__link">P2TR (Pay-to-Taproot)</a>
+          <a href="op-return.html" class="sidebar__link">OP_RETURN</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 4 &middot; Bloques y protocolo</div>
+          <a href="estructura-bloque.html" class="sidebar__link">Estructura de un bloque</a>
+          <a href="merkle-tree.html" class="sidebar__link">Árbol de Merkle</a>
+          <a href="proof-of-work.html" class="sidebar__link">Proof of Work en detalle</a>
+          <a href="protocolo-p2p.html" class="sidebar__link">Protocolo P2P</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-6/" class="sidebar__link">Nivel 6 &mdash; Satoshi</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n5" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 5</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Criptografía de curva elíptica</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--5 article__badge">Nivel 5</div>
+          <h1>Criptografía de curva elíptica</h1>
+          <p class="article__subtitle">La matemática que permite derivar claves públicas de privadas, pero no al revés. El fundamento de la seguridad de Bitcoin.</p>
+
+<h2>El concepto fundamental</h2>
+
+<p>La criptografía de curva elíptica (ECC) es el sistema matemático que permite a Bitcoin funcionar sin confianza: puedes demostrar que controlas una clave privada sin revelarla.</p>
+
+<p>La propiedad clave: multiplicar un número (tu clave privada) por un punto especial de la curva (el punto generador G) es computacionalmente trivial. Pero dado el resultado (tu clave pública), encontrar el número original es prácticamente imposible.</p>
+
+<p>Esta asimetría es la base de todo el sistema de firmas digitales de Bitcoin.</p>
+
+<h2>La curva secp256k1</h2>
+
+<p>Bitcoin usa una curva elíptica específica llamada secp256k1, definida por la ecuación: y² = x³ + 7 (mod p)</p>
+
+<p>Donde p es un número primo muy grande. Los puntos (x, y) que satisfacen esta ecuación sobre el campo finito definido por p forman la curva.</p>
+
+<p>Los parámetros completos de secp256k1 son: p = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F = 2²⁵⁶ - 2³² - 977 a = 0 (coeficiente de x) b = 7 (término constante) G (punto generador): Gx = 0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798 Gy = 0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8 n (orden del grupo) = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141 h (cofactor) = 1</p>
+
+<p>No necesitas memorizar estos números. Lo importante es entender que son constantes públicas que todo el software de Bitcoin usa.</p>
+
+<h2>Operaciones en la curva</h2>
+
+<h3>Suma de puntos</h3>
+
+<p>Dados dos puntos P y Q en la curva, se puede calcular un tercer punto P + Q mediante una operación geométrica definida. La suma de puntos tiene propiedades algebraicas útiles (asociatividad, elemento neutro, inversos).</p>
+
+<h3>Multiplicación escalar</h3>
+
+<p>Multiplicar un punto P por un escalar k significa sumar P consigo mismo k veces: k · P = P + P + P + ... (k veces)</p>
+
+<p>Hay algoritmos eficientes para calcular esto sin hacer k sumas individuales (duplicación y suma).</p>
+
+<h2>De la clave privada a la pública</h2>
+
+<p>Tu clave privada es simplemente un número entero k entre 1 y n-1 (donde n es el orden del grupo, aproximadamente 2²⁵⁶).</p>
+
+<p>Tu clave pública es el punto: K = k · G</p>
+
+<p>Donde G es el punto generador definido en los parámetros de secp256k1.</p>
+
+<p>Esta multiplicación es rápida: un ordenador moderno la calcula en microsegundos.</p>
+
+<h2>El problema del logaritmo discreto</h2>
+
+<p>Dado K (la clave pública) y G (conocido por todos), encontrar k (la clave privada) se llama el problema del logaritmo discreto en curvas elípticas (ECDLP).</p>
+
+<p>No existe ningún algoritmo conocido que resuelva este problema en tiempo razonable para curvas bien diseñadas como secp256k1. El mejor ataque conocido requiere aproximadamente 2¹²⁸ operaciones, lo que está más allá de la capacidad computacional de cualquier tecnología actual o previsible.</p>
+
+<p>Para poner esto en perspectiva: 2¹²⁸ operaciones, incluso a trillones de operaciones por segundo, tomaría más tiempo que la edad del universo.</p>
+
+<h2>Por qué secp256k1</h2>
+
+<p>Satoshi eligió secp256k1 por varias razones:</p>
+
+<p><strong>Eficiencia:</strong> Los parámetros &quot;especiales&quot; de secp256k1 (como a=0, b=7, y p con estructura específica) permiten optimizaciones computacionales.</p>
+
+<p><strong>Transparencia:</strong> Los parámetros no tienen estructura sospechosa que pudiera ocultar una puerta trasera. Comparada con curvas del NIST que tienen coeficientes &quot;mágicos&quot; de origen no explicado, secp256k1 es más transparente.</p>
+
+<p><strong>Estándar existente:</strong> Era una curva definida en el estándar SEC2 antes de Bitcoin.</p>
+
+<h2>Implicaciones prácticas</h2>
+
+<p>Para el usuario de Bitcoin, la curva elíptica es invisible. Tu wallet maneja todo automáticamente.</p>
+
+<p>Pero entender el concepto explica:</p>
+
+<ul>
+
+<li>Por qué puedes compartir tu clave pública (para recibir) sin revelar tu clave privada</li>
+
+<li>Por qué perder tu clave privada significa perder tus bitcoin irrecuperablemente</li>
+
+<li>Por qué Bitcoin es seguro (asumiendo que el ECDLP sigue siendo difícil)</li>
+
+</ul>
+
+<div class="callout callout--info"><span class="callout__icon" aria-hidden="true">&#128161;</span><div class="callout__content"><div class="callout__title">Computación cuántica</div><p class="callout__text">Los ordenadores cuánticos teóricamente podrían resolver el ECDLP eficientemente usando el algoritmo de Shor. Sin embargo, los ordenadores cuánticos actuales están lejos de tener la capacidad necesaria. La comunidad Bitcoin monitoriza este desarrollo y hay propuestas para migrar a criptografía post-cuántica si fuera necesario en el futuro.</p></div></div>
+
+          <div class="ad-slot ad-content" id="ad-content-5" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="funciones-hash.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Funciones hash</span>
+  </a>
+  <a href="ecdsa.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">ECDSA (Elliptic Curve Digital Signature Algorithm)</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

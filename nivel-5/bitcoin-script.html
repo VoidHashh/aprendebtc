@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="El lenguaje de programación de Bitcoin: basado en pila, no Turing-completo, opcodes principales. Cómo se ejecutan los scripts." />
+  <title>Bitcoin Script &mdash; Nivel 5 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 5">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 1 &middot; Criptografía</div>
+          <a href="funciones-hash.html" class="sidebar__link">Funciones hash</a>
+          <a href="curva-eliptica.html" class="sidebar__link">Criptografía de curva elíptica</a>
+          <a href="ecdsa.html" class="sidebar__link">ECDSA (Elliptic Curve Digital Signature Algorithm)</a>
+          <a href="schnorr.html" class="sidebar__link">Firmas Schnorr</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 2 &middot; Transacciones en detalle</div>
+          <a href="estructura-transaccion.html" class="sidebar__link">Estructura de una transacción</a>
+          <a href="segwit-internals.html" class="sidebar__link">SegWit por dentro</a>
+          <a href="taproot-internals.html" class="sidebar__link">Taproot por dentro</a>
+          <a href="psbt.html" class="sidebar__link">PSBT (Partially Signed Bitcoin Transaction)</a>
+          <a href="locktime-sequence.html" class="sidebar__link">Locktime y Sequence</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 3 &middot; Script</div>
+          <a href="bitcoin-script.html" class="sidebar__link sidebar__link--active">Bitcoin Script</a>
+          <a href="p2pkh.html" class="sidebar__link">P2PKH (Pay-to-Public-Key-Hash)</a>
+          <a href="p2sh.html" class="sidebar__link">P2SH (Pay-to-Script-Hash)</a>
+          <a href="p2wpkh-p2wsh.html" class="sidebar__link">P2WPKH y P2WSH (Native SegWit)</a>
+          <a href="p2tr.html" class="sidebar__link">P2TR (Pay-to-Taproot)</a>
+          <a href="op-return.html" class="sidebar__link">OP_RETURN</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 4 &middot; Bloques y protocolo</div>
+          <a href="estructura-bloque.html" class="sidebar__link">Estructura de un bloque</a>
+          <a href="merkle-tree.html" class="sidebar__link">Árbol de Merkle</a>
+          <a href="proof-of-work.html" class="sidebar__link">Proof of Work en detalle</a>
+          <a href="protocolo-p2p.html" class="sidebar__link">Protocolo P2P</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-6/" class="sidebar__link">Nivel 6 &mdash; Satoshi</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n5" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 5</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Bitcoin Script</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--5 article__badge">Nivel 5</div>
+          <h1>Bitcoin Script</h1>
+          <p class="article__subtitle">El lenguaje que define las condiciones para gastar bitcoin. Simple por diseño, poderoso en la práctica.</p>
+
+<h2>Qué es Bitcoin Script</h2>
+
+<p>Bitcoin tiene su propio lenguaje de programación llamado Script. Cada UTXO está bloqueado por un script (scriptPubKey) que define las condiciones para gastarlo. Para gastar, el input proporciona datos (scriptSig o witness) que satisfacen esas condiciones.</p>
+
+<p>Script no es como los lenguajes de programación convencionales. Es intencionalmente limitado para minimizar la superficie de ataque y garantizar que la ejecución siempre termine.</p>
+
+<h2>Características del lenguaje</h2>
+
+<h3>Basado en pila (stack-based)</h3>
+
+<p>Script usa una pila de datos. Los valores se empujan (push) a la pila y los operadores (opcodes) actúan sobre los valores en la pila.</p>
+
+<p>No hay variables con nombres. No hay memoria direccionable. Solo la pila.</p>
+
+<h3>No Turing-completo</h3>
+
+<p>Script no tiene bucles. No puedes escribir <code>while</code> o <code>for</code>. Cada script tiene un número finito y predecible de operaciones.</p>
+
+<p>Esto es intencional: garantiza que la validación siempre termine y previene ataques de denegación de servicio donde un script malicioso consume recursos indefinidamente.</p>
+
+<h3>Determinista</h3>
+
+<p>Dado el mismo estado inicial, un script siempre produce el mismo resultado. No hay aleatoriedad ni acceso a información externa.</p>
+
+<h2>Ejecución de scripts</h2>
+
+<p>Históricamente, la ejecución combinaba scriptSig y scriptPubKey:</p>
+
+<ol>
+
+<li>Los datos del scriptSig se ejecutan (típicamente solo pushes a la pila)</li>
+
+<li>El scriptPubKey se ejecuta sobre la pila resultante</li>
+
+<li>Si la pila termina con un valor TRUE (no cero) en el tope, el gasto es válido</li>
+
+</ol>
+
+<p>En SegWit, el witness reemplaza al scriptSig pero el concepto es similar.</p>
+
+<h2>Opcodes principales</h2>
+
+<h3>Manipulación de pila</h3>
+
+<ul>
+
+<li><code>OP_DUP</code>: Duplica el elemento en el tope de la pila</li>
+
+<li><code>OP_DROP</code>: Elimina el elemento en el tope</li>
+
+<li><code>OP_SWAP</code>: Intercambia los dos elementos superiores</li>
+
+<li><code>OP_PICK</code>: Copia el n-ésimo elemento al tope</li>
+
+<li><code>OP_ROLL</code>: Mueve el n-ésimo elemento al tope</li>
+
+</ul>
+
+<h3>Operaciones lógicas y aritméticas</h3>
+
+<ul>
+
+<li><code>OP_EQUAL</code>: Compara dos elementos, empuja TRUE si son iguales</li>
+
+<li><code>OP_EQUALVERIFY</code>: Como OP_EQUAL pero falla si no son iguales</li>
+
+<li><code>OP_ADD</code>, <code>OP_SUB</code>: Suma y resta</li>
+
+<li><code>OP_NOT</code>, <code>OP_BOOLAND</code>, <code>OP_BOOLOR</code>: Operaciones booleanas</li>
+
+</ul>
+
+<h3>Criptografía</h3>
+
+<ul>
+
+<li><code>OP_HASH160</code>: Aplica RIPEMD160(SHA256(x)) al tope de la pila</li>
+
+<li><code>OP_SHA256</code>: Aplica SHA256</li>
+
+<li><code>OP_CHECKSIG</code>: Verifica una firma contra una clave pública</li>
+
+<li><code>OP_CHECKMULTISIG</code>: Verifica múltiples firmas contra múltiples claves</li>
+
+<li><code>OP_CHECKSIGADD</code>: Versión Tapscript para multisig eficiente</li>
+
+</ul>
+
+<h3>Control de flujo</h3>
+
+<ul>
+
+<li><code>OP_IF</code>, <code>OP_ELSE</code>, <code>OP_ENDIF</code>: Ejecución condicional</li>
+
+<li><code>OP_VERIFY</code>: Falla si el tope no es TRUE</li>
+
+<li><code>OP_RETURN</code>: Marca el output como no gastable</li>
+
+</ul>
+
+<h3>Timelocks</h3>
+
+<ul>
+
+<li><code>OP_CHECKLOCKTIMEVERIFY (OP_CLTV)</code>: Verifica locktime absoluto</li>
+
+<li><code>OP_CHECKSEQUENCEVERIFY (OP_CSV)</code>: Verifica timelock relativo</li>
+
+</ul>
+
+<h2>Ejemplo: ejecución de P2PKH</h2>
+
+<p>Script de bloqueo (scriptPubKey): OP_DUP OP_HASH160 &lt;pubKeyHash&gt; OP_EQUALVERIFY OP_CHECKSIG</p>
+
+<p>Datos de desbloqueo (scriptSig): &lt;signature&gt; &lt;pubKey&gt;</p>
+
+<p>Ejecución paso a paso: Pila inicial: (vacía)</p>
+
+<p>Push &lt;signature&gt; Pila: [signature] Push &lt;pubKey&gt; Pila: [signature, pubKey] OP_DUP Pila: [signature, pubKey, pubKey] OP_HASH160 Pila: [signature, pubKey, hash(pubKey)] Push &lt;pubKeyHash&gt; Pila: [signature, pubKey, hash(pubKey), pubKeyHash] OP_EQUALVERIFY Compara hash(pubKey) con pubKeyHash Si son iguales, elimina ambos y continúa Si no, FALLO inmediato Pila: [signature, pubKey] OP_CHECKSIG Verifica que signature es válida para pubKey Empuja TRUE o FALSE Pila: [TRUE]</p>
+
+<p>Resultado: TRUE → gasto válido</p>
+
+<h2>Limitaciones y por qué existen</h2>
+
+<p><strong>Sin bucles:</strong> Previene scripts que nunca terminan.</p>
+
+<p><strong>Sin acceso al estado:</strong> Los scripts no pueden leer el saldo de otras direcciones ni información de bloques anteriores. Esto mantiene la validación simple y paralelizable.</p>
+
+<p><strong>Tamaño limitado:</strong> Los scripts tienen límite de tamaño y de operaciones. Previene ataques de complejidad.</p>
+
+<p><strong>Opcodes deshabilitados:</strong> Satoshi deshabilitó varios opcodes originales (OP_CAT, OP_MUL, etc.) por precaución ante posibles vulnerabilidades. Algunos están siendo reconsiderados para futuras actualizaciones.</p>
+
+<h2>Script en la práctica</h2>
+
+<p>La mayoría de usuarios nunca escriben Script directamente. Las wallets generan los scripts estándar (P2PKH, P2WPKH, P2TR) automáticamente.</p>
+
+<p>Pero entender Script es esencial para:</p>
+
+<ul>
+
+<li>Desarrollar protocolos avanzados</li>
+
+<li>Auditar transacciones complejas</li>
+
+<li>Comprender las posibilidades y límites de Bitcoin</li>
+
+</ul>
+
+<div class="callout callout--info"><span class="callout__icon" aria-hidden="true">&#128161;</span><div class="callout__content"><div class="callout__title">Experimenta con Script</div><p class="callout__text">Puedes probar scripts en <a href="../herramientas/script.html">/herramientas/script</a>. Escribe opcodes, observa la pila, y entiende la ejecución paso a paso.</p></div></div>
+
+          <div class="ad-slot ad-content" id="ad-content-5" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="locktime-sequence.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Locktime y Sequence</span>
+  </a>
+  <a href="p2pkh.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">P2PKH (Pay-to-Public-Key-Hash)</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

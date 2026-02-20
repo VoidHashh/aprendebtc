@@ -90,16 +90,101 @@
         { href: '/nivel-4/calefaccion-bitcoin.html', text: 'Bitcoin como calefaccion' }
       ]
     },
-    { title: 'Nivel 5 - El Arquitecto', index: '/nivel-5/', pages: [] },
+    {
+      title: 'Nivel 5 - El Arquitecto',
+      index: '/nivel-5/',
+      pages: [
+        { href: '/nivel-5/funciones-hash.html', text: 'Funciones hash' },
+        { href: '/nivel-5/curva-eliptica.html', text: 'Criptografia de curva eliptica' },
+        { href: '/nivel-5/ecdsa.html', text: 'ECDSA' },
+        { href: '/nivel-5/schnorr.html', text: 'Firmas Schnorr' },
+        { href: '/nivel-5/estructura-transaccion.html', text: 'Estructura de una transaccion' },
+        { href: '/nivel-5/segwit-internals.html', text: 'SegWit por dentro' },
+        { href: '/nivel-5/taproot-internals.html', text: 'Taproot por dentro' },
+        { href: '/nivel-5/psbt.html', text: 'PSBT' },
+        { href: '/nivel-5/locktime-sequence.html', text: 'Locktime y Sequence' },
+        { href: '/nivel-5/bitcoin-script.html', text: 'Bitcoin Script' },
+        { href: '/nivel-5/p2pkh.html', text: 'P2PKH' },
+        { href: '/nivel-5/p2sh.html', text: 'P2SH' },
+        { href: '/nivel-5/p2wpkh-p2wsh.html', text: 'P2WPKH y P2WSH' },
+        { href: '/nivel-5/p2tr.html', text: 'P2TR' },
+        { href: '/nivel-5/op-return.html', text: 'OP_RETURN' },
+        { href: '/nivel-5/estructura-bloque.html', text: 'Estructura de un bloque' },
+        { href: '/nivel-5/merkle-tree.html', text: 'Arbol de Merkle' },
+        { href: '/nivel-5/proof-of-work.html', text: 'Proof of Work en detalle' },
+        { href: '/nivel-5/protocolo-p2p.html', text: 'Protocolo P2P' }
+      ]
+    },
     { title: 'Nivel 6 - Satoshi', index: '/nivel-6/', pages: [] }
   ];
 
-  const PILLAR_LINKS = [
-    { href: '/base/', text: 'Base de conocimiento' },
-    { href: '/herramientas/', text: 'Herramientas' },
-    { href: '/comunidad/', text: 'Comunidad' },
-    { href: '/glosario.html', text: 'Glosario' },
-    { href: '/recursos.html', text: 'Recursos' }
+  const PILLAR_TREE = [
+    {
+      title: 'Base de Conocimiento',
+      index: '/base/',
+      pages: [
+        { href: '/base/que-es-bitcoin.html', text: 'Que es Bitcoin' },
+        { href: '/base/como-funciona-bitcoin.html', text: 'Como funciona Bitcoin' },
+        { href: '/base/que-es-blockchain.html', text: 'Que es la blockchain' },
+        { href: '/base/que-es-la-mineria.html', text: 'Que es la mineria' },
+        { href: '/base/los-21-millones.html', text: 'Los 21 millones y la oferta fija' },
+        { href: '/base/que-es-un-satoshi.html', text: 'Que es un satoshi' },
+        { href: '/base/historia-bitcoin.html', text: 'Historia de Bitcoin' },
+        { href: '/base/problema-del-dinero-tradicional.html', text: 'El problema del dinero tradicional' },
+        { href: '/base/bitcoin-vs-dinero-tradicional.html', text: 'Bitcoin vs dinero tradicional' },
+        { href: '/base/historia-del-dinero.html', text: 'Historia del dinero' },
+        { href: '/base/inflacion-y-bitcoin.html', text: 'Inflacion y Bitcoin' },
+        { href: '/base/austrian-economics.html', text: 'Economia Austriaca y Bitcoin' },
+        { href: '/base/bitcoin-vs-oro.html', text: 'Bitcoin vs Oro' },
+        { href: '/base/bitcoin-reserva-de-valor.html', text: 'Bitcoin como reserva de valor' },
+        { href: '/base/bitcoin-vs-altcoins.html', text: 'Bitcoin vs altcoins' },
+        { href: '/base/exchange-centralizado-cex.html', text: 'Exchange centralizado (CEX)' },
+        { href: '/base/exchange-descentralizado-dex.html', text: 'Exchange descentralizado (DEX)' },
+        { href: '/base/kyc-vs-no-kyc.html', text: 'KYC y no-KYC' },
+        { href: '/base/dca-compras-periodicas.html', text: 'DCA: compras periodicas' },
+        { href: '/base/tipos-de-wallet.html', text: 'Tipos de wallet' },
+        { href: '/base/que-es-seed-phrase.html', text: 'Que es la seed phrase' },
+        { href: '/base/on-chain-vs-lightning.html', text: 'On-chain vs Lightning' },
+        { href: '/base/que-es-una-direccion.html', text: 'Que es una direccion Bitcoin' },
+        { href: '/base/que-es-una-confirmacion.html', text: 'Que es una confirmacion' },
+        { href: '/base/que-son-las-fees.html', text: 'Que son las comisiones (fees)' },
+        { href: '/base/seguridad-basica.html', text: 'Seguridad basica' },
+        { href: '/base/estafas-comunes.html', text: 'Estafas comunes en Bitcoin' }
+      ]
+    },
+    {
+      title: 'Herramientas',
+      index: '/herramientas/',
+      pages: [
+        { href: '/herramientas/conversor.html', text: 'Conversor de unidades' },
+        { href: '/herramientas/claves.html', text: 'Generador de claves y direcciones' },
+        { href: '/herramientas/hd-wallet.html', text: 'HD Wallet explorer' },
+        { href: '/herramientas/transaccion.html', text: 'Constructor de transacciones' },
+        { href: '/herramientas/script.html', text: 'Interprete de Script' },
+        { href: '/herramientas/hash.html', text: 'Calculadora de hash' },
+        { href: '/herramientas/firma.html', text: 'ECDSA y Schnorr Sign/Verify' }
+      ]
+    },
+    {
+      title: 'Comunidad',
+      index: '/comunidad/',
+      pages: [
+        { href: '/comunidad/comunidades-online.html', text: 'Comunidades online' },
+        { href: '/comunidad/meetups-presenciales.html', text: 'Meetups presenciales' },
+        { href: '/comunidad/conferencias.html', text: 'Conferencias' },
+        { href: '/comunidad/nostr-y-bitcoin.html', text: 'Nostr y Bitcoin' }
+      ]
+    },
+    {
+      title: 'Glosario',
+      index: '/glosario.html',
+      pages: []
+    },
+    {
+      title: 'Recursos',
+      index: '/recursos.html',
+      pages: []
+    }
   ];
 
   function normalizePath(pathname) {
@@ -511,6 +596,24 @@
     return createSidebarSection(levelItem.title, links, 'sidebar__section--primary sidebar__section--level');
   }
 
+  function createPillarSidebarSection(pillarItem) {
+    const rootLabel = pillarItem.pages.length > 0 ? 'Indice del pilar' : 'Abrir pagina';
+    const links = [{ href: pillarItem.index, text: rootLabel }, ...pillarItem.pages];
+    return createSidebarSection(pillarItem.title, links, 'sidebar__section--primary sidebar__section--pillar');
+  }
+
+  function createSidebarGroupHeading(title, sectionClass) {
+    const section = document.createElement('div');
+    section.className = `sidebar__section sidebar__section--locked ${sectionClass || ''}`.trim();
+
+    const titleNode = document.createElement('div');
+    titleNode.className = 'sidebar__section-title';
+    titleNode.textContent = sanitizeLabel(title);
+    section.appendChild(titleNode);
+
+    return section;
+  }
+
   function removeLegacyLevelCurrentSection(sidebar) {
     const sections = Array.from(sidebar.querySelectorAll('.sidebar__section'));
     sections.forEach((section) => {
@@ -548,7 +651,11 @@
         fragment.appendChild(createLevelSidebarSection(levelItem));
       });
 
-      fragment.appendChild(createSidebarSection('Pilares', PILLAR_LINKS, 'sidebar__section--primary sidebar__section--pillars'));
+      fragment.appendChild(createSidebarGroupHeading('Pilares', 'sidebar__section--primary sidebar__section--pillars-heading'));
+
+      PILLAR_TREE.forEach((pillarItem) => {
+        fragment.appendChild(createPillarSidebarSection(pillarItem));
+      });
 
       if (adWrap) {
         sidebar.insertBefore(fragment, adWrap);

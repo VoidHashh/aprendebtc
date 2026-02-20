@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="OP_RETURN explicado: outputs no gastables, almacenamiento de datos en la blockchain, usos legítimos, controversias y límites." />
+  <title>OP_RETURN &mdash; Nivel 5 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 5">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 1 &middot; Criptografía</div>
+          <a href="funciones-hash.html" class="sidebar__link">Funciones hash</a>
+          <a href="curva-eliptica.html" class="sidebar__link">Criptografía de curva elíptica</a>
+          <a href="ecdsa.html" class="sidebar__link">ECDSA (Elliptic Curve Digital Signature Algorithm)</a>
+          <a href="schnorr.html" class="sidebar__link">Firmas Schnorr</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 2 &middot; Transacciones en detalle</div>
+          <a href="estructura-transaccion.html" class="sidebar__link">Estructura de una transacción</a>
+          <a href="segwit-internals.html" class="sidebar__link">SegWit por dentro</a>
+          <a href="taproot-internals.html" class="sidebar__link">Taproot por dentro</a>
+          <a href="psbt.html" class="sidebar__link">PSBT (Partially Signed Bitcoin Transaction)</a>
+          <a href="locktime-sequence.html" class="sidebar__link">Locktime y Sequence</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 3 &middot; Script</div>
+          <a href="bitcoin-script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="p2pkh.html" class="sidebar__link">P2PKH (Pay-to-Public-Key-Hash)</a>
+          <a href="p2sh.html" class="sidebar__link">P2SH (Pay-to-Script-Hash)</a>
+          <a href="p2wpkh-p2wsh.html" class="sidebar__link">P2WPKH y P2WSH (Native SegWit)</a>
+          <a href="p2tr.html" class="sidebar__link">P2TR (Pay-to-Taproot)</a>
+          <a href="op-return.html" class="sidebar__link sidebar__link--active">OP_RETURN</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 4 &middot; Bloques y protocolo</div>
+          <a href="estructura-bloque.html" class="sidebar__link">Estructura de un bloque</a>
+          <a href="merkle-tree.html" class="sidebar__link">Árbol de Merkle</a>
+          <a href="proof-of-work.html" class="sidebar__link">Proof of Work en detalle</a>
+          <a href="protocolo-p2p.html" class="sidebar__link">Protocolo P2P</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-6/" class="sidebar__link">Nivel 6 &mdash; Satoshi</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n5" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 5</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">OP_RETURN</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--5 article__badge">Nivel 5</div>
+          <h1>OP_RETURN</h1>
+          <p class="article__subtitle">El opcode para meter datos arbitrarios en la blockchain. Una válvula de escape diseñada para evitar males mayores.</p>
+
+<p>Qué es OP_RETURN OP_RETURN es un opcode de Bitcoin Script que inmediatamente marca un output como inválido para gastar. Cualquier script que empiece con OP_RETURN es &quot;provably unspendable&quot; (demostrablemente no gastable). Pero tiene un uso secundario crucial: permite incluir hasta 80 bytes de datos arbitrarios en la blockchain. El script OP_RETURN &lt;datos&gt; En hexadecimal: 6a&lt;longitud&gt;&lt;datos&gt; Ejemplo con el texto &quot;Hello Bitcoin&quot;: 6a0d48656c6c6f20426974636f696e Comportamiento especial Cuando un nodo ve un output con OP_RETURN:</p>
+
+<p>Verifica que los datos no excedan el límite (80 bytes estándar) NO añade este output al UTXO set El output queda en la blockchain pero no consume memoria de estado</p>
+
+<p>Este último punto es crucial: los outputs OP_RETURN no inflan el UTXO set que todos los nodos deben mantener en memoria. Por qué existe Antes de OP_RETURN, la gente que quería poner datos en la blockchain usaba hacks:</p>
+
+<p>Crear outputs con claves públicas falsas (que contenían los datos) Estos outputs eran técnicamente gastables pero nadie tenía la clave privada Permanecían en el UTXO set para siempre, consumiendo recursos de todos los nodos</p>
+
+<p>OP_RETURN fue un compromiso: dar un mecanismo oficial para meter datos que:</p>
+
+<p>No infla el UTXO set Es claramente datos, no fondos &quot;perdidos&quot; Tiene un límite de tamaño razonable</p>
+
+<p>CALLOUT INFO: Un compromiso pragmático OP_RETURN fue diseñado bajo el principio de &quot;si van a hacerlo de todos modos, mejor darles una forma que haga menos daño&quot;. Es mejor tener datos explícitos que no inflan el UTXO set que datos disfrazados que sí lo hacen.</p>
+
+<p>Usos legítimos Proof of existence (timestamping) Puedes demostrar que un documento existía antes de cierta fecha:</p>
+
+<p>Hashear el documento Incluir el hash en un OP_RETURN La transacción confirmada prueba que el hash existía en ese momento</p>
+
+<p>Servicios como OpenTimestamps usan esto para timestamping descentralizado. Protocolos de capa superior Varios protocolos usan OP_RETURN para anclar datos:</p>
+
+<p>Omni Layer (el Tether original) Counterparty Diversos sistemas de identidad y certificación</p>
+
+<p>Mensajes y marcadores Algunas transacciones incluyen mensajes o identificadores en OP_RETURN por razones de auditoría o comunicación. La controversia OP_RETURN ha sido controvertido desde su introducción: Argumento &quot;purista&quot;: Bitcoin es dinero, no una base de datos. El espacio de bloque debería usarse solo para transacciones financieras, no para almacenar JPEGs, textos o hashes de documentos. Argumento pragmático: La blockchain es un timestamping service por naturaleza. Si la gente quiere anclar datos, es mejor que lo hagan de forma limpia (OP_RETURN) que de formas que dañan más la red. El límite de 80 bytes refleja este compromiso: suficiente para un hash y metadatos, no suficiente para almacenar archivos grandes. Inscriptions y Ordinals En 2023-2024, los Ordinals e Inscriptions reavivaron este debate. Pero técnicamente, Inscriptions no usan OP_RETURN. Usan el witness data de transacciones Taproot, que tiene límites mucho más generosos. El debate sobre el uso del espacio de bloque continúa, pero es un debate separado de OP_RETURN. Límites Estándar (relay policy): 80 bytes de datos. Las transacciones con OP_RETURN más grande son válidas pero la mayoría de nodos no las retransmiten. Consenso: Técnicamente se pueden incluir datos más grandes si un minero los incluye directamente, pero la política estándar de 80 bytes es respetada por la mayoría. Un OP_RETURN por transacción: La política estándar permite solo un output OP_RETURN por transacción. Implicaciones prácticas Para usuarios normales: probablemente nunca necesites usar OP_RETURN directamente. Para desarrolladores: es útil para anclar datos de protocolos de capa superior, pero considera si realmente necesitas la blockchain o si hay alternativas más apropiadas. Para el ecosistema: OP_RETURN es una herramienta que existe y se usa. Entender su propósito y limitaciones ayuda a entender los debates sobre el uso del espacio de bloque.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-5" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="p2tr.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">P2TR</span>
+  </a>
+  <a href="estructura-bloque.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Estructura de un bloque</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

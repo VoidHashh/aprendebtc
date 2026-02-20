@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cómo funciona Segregated Witness internamente: el problema de maleabilidad, weight units, estructura de witness, y BIP 141/143." />
+  <title>SegWit por dentro &mdash; Nivel 5 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 5">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 1 &middot; Criptografía</div>
+          <a href="funciones-hash.html" class="sidebar__link">Funciones hash</a>
+          <a href="curva-eliptica.html" class="sidebar__link">Criptografía de curva elíptica</a>
+          <a href="ecdsa.html" class="sidebar__link">ECDSA (Elliptic Curve Digital Signature Algorithm)</a>
+          <a href="schnorr.html" class="sidebar__link">Firmas Schnorr</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 2 &middot; Transacciones en detalle</div>
+          <a href="estructura-transaccion.html" class="sidebar__link">Estructura de una transacción</a>
+          <a href="segwit-internals.html" class="sidebar__link sidebar__link--active">SegWit por dentro</a>
+          <a href="taproot-internals.html" class="sidebar__link">Taproot por dentro</a>
+          <a href="psbt.html" class="sidebar__link">PSBT (Partially Signed Bitcoin Transaction)</a>
+          <a href="locktime-sequence.html" class="sidebar__link">Locktime y Sequence</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 3 &middot; Script</div>
+          <a href="bitcoin-script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="p2pkh.html" class="sidebar__link">P2PKH (Pay-to-Public-Key-Hash)</a>
+          <a href="p2sh.html" class="sidebar__link">P2SH (Pay-to-Script-Hash)</a>
+          <a href="p2wpkh-p2wsh.html" class="sidebar__link">P2WPKH y P2WSH (Native SegWit)</a>
+          <a href="p2tr.html" class="sidebar__link">P2TR (Pay-to-Taproot)</a>
+          <a href="op-return.html" class="sidebar__link">OP_RETURN</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 4 &middot; Bloques y protocolo</div>
+          <a href="estructura-bloque.html" class="sidebar__link">Estructura de un bloque</a>
+          <a href="merkle-tree.html" class="sidebar__link">Árbol de Merkle</a>
+          <a href="proof-of-work.html" class="sidebar__link">Proof of Work en detalle</a>
+          <a href="protocolo-p2p.html" class="sidebar__link">Protocolo P2P</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-6/" class="sidebar__link">Nivel 6 &mdash; Satoshi</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n5" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 5</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">SegWit por dentro</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--5 article__badge">Nivel 5</div>
+          <h1>SegWit por dentro</h1>
+          <p class="article__subtitle">La actualización que separó las firmas del cálculo del txid. El prerrequisito técnico para Lightning Network.</p>
+
+<h2>El problema: Transaction Malleability</h2>
+
+<p>Antes de SegWit, las transacciones Bitcoin tenían un problema llamado maleabilidad: era posible modificar una transacción válida de forma que siguiera siendo válida pero con un txid diferente.</p>
+
+<p>¿Cómo? El scriptSig (que contiene la firma) podía modificarse de formas que no invalidaban la firma. Por ejemplo, añadir bytes que no afectan la ejecución del script.</p>
+
+<p>El txid se calculaba sobre toda la transacción, incluyendo el scriptSig. Un cambio en el scriptSig cambiaba el txid.</p>
+
+<h2>Por qué importaba la maleabilidad</h2>
+
+<p>Imagina este escenario:</p>
+
+<ol>
+
+<li>Alice crea una transacción que envía bitcoin a Bob (txid: ABC123)</li>
+
+<li>Antes de confirmar, alguien modifica el scriptSig → nuevo txid: DEF456</li>
+
+<li>La versión DEF456 se confirma</li>
+
+<li>Alice busca ABC123 y no lo encuentra</li>
+
+<li>Alice podría pensar que la transacción falló y reenviarla, pagando dos veces</li>
+
+</ol>
+
+<p>Para usuarios normales era un inconveniente menor. Pero para protocolos de segunda capa como Lightning Network, era fatal: Lightning requiere construir cadenas de transacciones que gastan outputs de transacciones no confirmadas. Si el txid puede cambiar, toda la cadena se invalida.</p>
+
+<h2>La solución: Segregated Witness</h2>
+
+<p>SegWit (Segregated Witness, BIP 141) resuelve esto separando los datos de firma (&quot;witness&quot;) del cálculo del txid.</p>
+
+<p>La idea:</p>
+
+<ul>
+
+<li>Los datos que pueden ser modificados (firmas) van en una estructura separada: el witness</li>
+
+<li>El txid se calcula solo sobre los datos &quot;base&quot; (versión, inputs sin scriptSig, outputs, locktime)</li>
+
+<li>El witness no afecta el txid</li>
+
+</ul>
+
+<p>Ahora el txid es inmutable una vez que se conocen los inputs y outputs. La firma puede ir en cualquier formato compatible sin cambiar el txid.</p>
+
+<h2>Estructura de transacción SegWit</h2>
+
+<p>La serialización incluye un marker (0x00) y flag (0x01) después de la versión, indicando que hay datos witness al final.</p>
+
+<p>Los inputs tienen scriptSig vacío. Los datos de firma van en la sección witness correspondiente a cada input.</p>
+
+<p>La serialización &quot;legacy&quot; (sin witness) se usa para calcular el txid. La serialización completa (con witness) se usa para el wtxid y para transmitir/almacenar.</p>
+
+<h2>Weight Units y block weight</h2>
+
+<p>SegWit introdujo un nuevo sistema de medición: weight units (WU).</p>
+
+<p>Reglas:</p>
+
+<ul>
+
+<li>1 byte de datos base (versión, inputs, outputs, locktime) = 4 WU</li>
+
+<li>1 byte de witness = 1 WU</li>
+
+</ul>
+
+<p>Máximo por bloque: 4.000.000 WU</p>
+
+<p>Esto es equivalente a:</p>
+
+<ul>
+
+<li>Un bloque de 1 MB si es todo datos base (transacciones legacy)</li>
+
+<li>Un bloque de ~4 MB si es todo witness (teórico, imposible en práctica)</li>
+
+<li>Un bloque típico de 1.5-2 MB con mezcla de transacciones</li>
+
+</ul>
+
+<p>El diseño incentiva las transacciones SegWit: los datos de firma (witness) son más baratos, resultando en fees menores para los usuarios.</p>
+
+<h2>Virtual bytes (vBytes)</h2>
+
+<p>Para simplificar el cálculo de fees, se usa la unidad &quot;virtual byte&quot; o vByte: vBytes = weight / 4</p>
+
+<p>Una transacción de 400 WU = 100 vBytes.</p>
+
+<p>Las fees se expresan típicamente en sat/vB (satoshis por virtual byte).</p>
+
+<h2>BIP 143: nuevo algoritmo de firma</h2>
+
+<p>SegWit también cambió cómo se hashean los datos para firmar (BIP 143).</p>
+
+<p>El antiguo algoritmo tenía problemas:</p>
+
+<ul>
+
+<li>Para firmar cada input, había que hashear la transacción completa</li>
+
+<li>En transacciones con muchos inputs, esto era O(n²) en complejidad</li>
+
+<li>Permitía ataques donde transacciones especialmente diseñadas tardaban mucho en verificar</li>
+
+</ul>
+
+<p>BIP 143 usa un nuevo esquema donde los datos comunes se hashean una vez y se reutilizan. Firmar es ahora O(n).</p>
+
+<h2>Versiones de witness</h2>
+
+<p>El witness program tiene un número de versión:</p>
+
+<ul>
+
+<li>Versión 0 (OP_0): SegWit original (P2WPKH, P2WSH)</li>
+
+<li>Versión 1 (OP_1): Taproot (P2TR)</li>
+
+<li>Versiones 2-16: reservadas para futuras mejoras</li>
+
+</ul>
+
+<p>Las direcciones bc1q... son versión 0. Las direcciones bc1p... son versión 1.</p>
+
+<h2>Activación</h2>
+
+<p>SegWit se activó el 24 de agosto de 2017 (bloque 481.824) mediante un soft fork. Fue una de las actualizaciones más debatidas de la historia de Bitcoin, culminando en el &quot;User Activated Soft Fork&quot; (UASF) donde los usuarios amenazaron con activar SegWit sin apoyo mayoritario de mineros.</p>
+
+<p>La controversia sobre SegWit y el tamaño de bloque resultó en el fork de Bitcoin Cash, que rechazó SegWit y optó por aumentar el límite de bloque en su lugar.</p>
+
+<div class="callout callout--info"><span class="callout__icon" aria-hidden="true">&#128161;</span><div class="callout__content"><div class="callout__title">Legado de SegWit</div><p class="callout__text">SegWit no solo resolvió la maleabilidad. Habilitó Lightning Network, redujo fees para transacciones SegWit, preparó el camino para Taproot, y estableció un precedente para actualizaciones futuras mediante soft forks con activación por usuarios.</p></div></div>
+
+          <div class="ad-slot ad-content" id="ad-content-5" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="estructura-transaccion.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Estructura de una transacción</span>
+  </a>
+  <a href="taproot-internals.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Taproot por dentro</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

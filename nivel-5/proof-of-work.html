@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cómo funciona Proof of Work en Bitcoin: el puzzle criptográfico, target y dificultad, ajuste cada 2016 bloques, y por qué el gasto energético es una feature." />
+  <title>Proof of Work en detalle &mdash; Nivel 5 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 5">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 1 &middot; Criptografía</div>
+          <a href="funciones-hash.html" class="sidebar__link">Funciones hash</a>
+          <a href="curva-eliptica.html" class="sidebar__link">Criptografía de curva elíptica</a>
+          <a href="ecdsa.html" class="sidebar__link">ECDSA (Elliptic Curve Digital Signature Algorithm)</a>
+          <a href="schnorr.html" class="sidebar__link">Firmas Schnorr</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 2 &middot; Transacciones en detalle</div>
+          <a href="estructura-transaccion.html" class="sidebar__link">Estructura de una transacción</a>
+          <a href="segwit-internals.html" class="sidebar__link">SegWit por dentro</a>
+          <a href="taproot-internals.html" class="sidebar__link">Taproot por dentro</a>
+          <a href="psbt.html" class="sidebar__link">PSBT (Partially Signed Bitcoin Transaction)</a>
+          <a href="locktime-sequence.html" class="sidebar__link">Locktime y Sequence</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 3 &middot; Script</div>
+          <a href="bitcoin-script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="p2pkh.html" class="sidebar__link">P2PKH (Pay-to-Public-Key-Hash)</a>
+          <a href="p2sh.html" class="sidebar__link">P2SH (Pay-to-Script-Hash)</a>
+          <a href="p2wpkh-p2wsh.html" class="sidebar__link">P2WPKH y P2WSH (Native SegWit)</a>
+          <a href="p2tr.html" class="sidebar__link">P2TR (Pay-to-Taproot)</a>
+          <a href="op-return.html" class="sidebar__link">OP_RETURN</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 4 &middot; Bloques y protocolo</div>
+          <a href="estructura-bloque.html" class="sidebar__link">Estructura de un bloque</a>
+          <a href="merkle-tree.html" class="sidebar__link">Árbol de Merkle</a>
+          <a href="proof-of-work.html" class="sidebar__link sidebar__link--active">Proof of Work en detalle</a>
+          <a href="protocolo-p2p.html" class="sidebar__link">Protocolo P2P</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-6/" class="sidebar__link">Nivel 6 &mdash; Satoshi</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n5" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 5</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Proof of Work en detalle</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--5 article__badge">Nivel 5</div>
+          <h1>Proof of Work en detalle</h1>
+          <p class="article__subtitle">El puzzle que asegura la red. Por qué gastar energía es exactamente el punto.</p>
+
+<h2>El problema a resolver</h2>
+
+<p>Los mineros compiten por el derecho a añadir el siguiente bloque a la blockchain. El mecanismo de competición es Proof of Work (PoW): demostrar que has gastado recursos computacionales.</p>
+
+<p>El puzzle: encontrar un valor (nonce) tal que el hash del header del bloque sea menor que un número objetivo (target). SHA256(SHA256(block_header)) &lt; target</p>
+
+<h2>Por qué funciona</h2>
+
+<p>Los hashes son impredecibles. No hay forma de saber qué nonce producirá un hash bajo excepto probando. Cada intento tiene la misma probabilidad de éxito.</p>
+
+<p>Si el target requiere que el hash empiece con 20 ceros en binario, la probabilidad de éxito por intento es 1/2²⁰ ≈ 1 en un millón.</p>
+
+<p>Con la dificultad actual (2025), la probabilidad es aproximadamente 1 en 10²² por intento. Esto requiere una cantidad astronómica de intentos.</p>
+
+<h2>El proceso del minero</h2>
+
+<ol>
+
+<li><strong>Construir el bloque candidato:</strong></li>
+
+</ol>
+
+<ul>
+
+<li>Seleccionar transacciones de la mempool</li>
+
+<li>Crear la coinbase transaction (recompensa + fees)</li>
+
+<li>Calcular la Merkle root</li>
+
+</ul>
+
+<ol>
+
+<li><strong>Montar el header:</strong></li>
+
+</ol>
+
+<ul>
+
+<li>Version, prev block hash, merkle root, timestamp, bits, nonce=0</li>
+
+</ul>
+
+<ol>
+
+<li><strong>Buscar el nonce:</strong></li>
+
+</ol>
+
+<p>while SHA256(SHA256(header)) &gt;= target: nonce += 1 actualizar header con nuevo nonce</p>
+
+<ol>
+
+<li><strong>Si se encuentra:</strong></li>
+
+</ol>
+
+<ul>
+
+<li>Broadcast del bloque a la red</li>
+
+<li>Cobrar la recompensa</li>
+
+</ul>
+
+<ol>
+
+<li><strong>Si se agotan los nonces (2³² = 4 mil millones):</strong></li>
+
+</ol>
+
+<ul>
+
+<li>Modificar el extraNonce en la coinbase</li>
+
+<li>Esto cambia la Merkle root</li>
+
+<li>Empezar de nuevo con nonce=0</li>
+
+</ul>
+
+<h2>Target y bits</h2>
+
+<p>El target es un número de 256 bits. El campo <code>bits</code> en el header es una codificación compacta: bits = 0x1903a30c Exponente: 0x19 = 25 Coeficiente: 0x03a30c Target = 0x03a30c × 2^(8×(25-3)) = 0x03a30c × 2^176 = un número muy grande con muchos ceros al inicio</p>
+
+<p>Cuanto menor es el target, más difícil es encontrar un hash válido.</p>
+
+<h2>Ajuste de dificultad</h2>
+
+<p>Cada 2016 bloques (~2 semanas si los bloques son de 10 minutos), la dificultad se ajusta: nuevo_target = target_actual × (tiempo_real / tiempo_esperado)</p>
+
+<p>Donde:</p>
+
+<ul>
+
+<li>tiempo_esperado = 2016 × 10 minutos = 20160 minutos</li>
+
+<li>tiempo_real = tiempo que tardaron los últimos 2016 bloques</li>
+
+</ul>
+
+<p>Si los bloques se minaron más rápido de lo esperado → el target baja → la dificultad sube.</p>
+
+<p>Si fueron más lentos → el target sube → la dificultad baja.</p>
+
+<p>Hay límites: el ajuste no puede ser más de 4x en ninguna dirección.</p>
+
+<h2>Por qué el gasto energético es una feature</h2>
+
+<p>Crítica común: &quot;Bitcoin gasta demasiada energía.&quot;</p>
+
+<p>La respuesta técnica: el gasto energético es exactamente lo que hace a Bitcoin seguro.</p>
+
+<h3>El coste de atacar</h3>
+
+<p>Para reorganizar la blockchain y revertir transacciones, un atacante necesitaría:</p>
+
+<ol>
+
+<li>Más del 50% del hashrate de la red</li>
+
+<li>Mantenerlo el tiempo suficiente para construir una cadena más larga</li>
+
+<li>Gastar electricidad durante todo ese tiempo</li>
+
+</ol>
+
+<p>Con el hashrate actual (~500-700 EH/s), esto costaría miles de millones de dólares en hardware y electricidad. Y el atacante obtendría... la posibilidad de gastar dos veces sus propios bitcoin (no robar los de otros).</p>
+
+<p>El ataque destruiría la confianza en la red, hundiendo el valor de cualquier bitcoin que el atacante tuviera. Es económicamente irracional.</p>
+
+<h3>Sin gasto, sin seguridad</h3>
+
+<p>Un sistema sin coste de participación sería trivial de atacar. El coste energético de PoW es el &quot;muro&quot; que protege las transacciones confirmadas.</p>
+
+<p>Alternativas como Proof of Stake tienen sus propios trade-offs. Bitcoin eligió un modelo donde la seguridad está anclada en el mundo físico (energía), no en la posesión de tokens.</p>
+
+<h2>Hash rate de la red</h2>
+
+<p>El hash rate total de la red Bitcoin ha crecido exponencialmente:</p>
+
+<ul>
+
+<li>2010: MH/s (megahashes)</li>
+
+<li>2013: TH/s (terahashes)</li>
+
+<li>2017: EH/s (exahashes)</li>
+
+<li>2025: ~500-700 EH/s</li>
+
+</ul>
+
+<p>Esto representa una inversión acumulada de miles de millones en hardware y electricidad. Es esta inversión lo que hace a la red segura.</p>
+
+<div class="callout callout--info"><span class="callout__icon" aria-hidden="true">&#128161;</span><div class="callout__content"><div class="callout__title">Experimenta con hashing</div><p class="callout__text">Puedes ver cómo funciona el hashing y experimentar con diferentes inputs en <a href="../herramientas/hash.html">/herramientas/hash</a>. Observa cómo un cambio mínimo produce un hash completamente diferente.</p></div></div>
+
+          <div class="ad-slot ad-content" id="ad-content-5" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="merkle-tree.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Árbol de Merkle</span>
+  </a>
+  <a href="protocolo-p2p.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Protocolo P2P</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

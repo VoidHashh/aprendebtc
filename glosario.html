@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Glosario de terminos clave de Bitcoin." />
-  <title>Glosario | aprendebtc.com | aprendebtc.com</title>
+  <title>Glosario | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="css/main.css" />
@@ -13,21 +13,31 @@
 <body>
   <div data-include="header"></div>
 
-  <main class="main-content" id="main-content">
-    <div class="container" style="padding-top: 2rem; padding-bottom: 3rem; max-width: 860px;">
-      <nav class="breadcrumb" aria-label="Ruta de navegacion">
-        <a href="" class="breadcrumb__item">Inicio</a>
-        <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
-        <span class="breadcrumb__current">Glosario</span>
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
       </nav>
+    </aside>
 
-      <article class="article">
-        <h1>Glosario</h1>
-        <p class="article__subtitle">Definiciones clave de Bitcoin en una sola pagina.</p>
-        <p>Esta pagina de glosario ya esta habilitada para mantener la navegacion global sin errores.</p><p>El listado completo de terminos se incorporara en la siguiente fase.</p>
-      </article>
-    </div>
-  </main>
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegacion">
+          <a href="./" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Glosario</span>
+        </nav>
+
+        <article class="article">
+          <h1>Glosario</h1>
+          <p class="article__subtitle">Definiciones clave de Bitcoin en una sola pagina.</p>
+          <p>Esta pagina de glosario ya esta habilitada para mantener la navegacion global sin errores.</p><p>El listado completo de terminos se incorporara en la siguiente fase.</p>
+        </article>
+      </div>
+    </main>
+  </div>
 
   <div data-include="footer"></div>
   <script src="js/includes.js"></script>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Anatomía de un bloque Bitcoin: el header de 80 bytes, campos del header, coinbase transaction, tamaño vs peso. Estructura completa." />
+  <title>Estructura de un bloque &mdash; Nivel 5 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 5">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 1 &middot; Criptografía</div>
+          <a href="funciones-hash.html" class="sidebar__link">Funciones hash</a>
+          <a href="curva-eliptica.html" class="sidebar__link">Criptografía de curva elíptica</a>
+          <a href="ecdsa.html" class="sidebar__link">ECDSA (Elliptic Curve Digital Signature Algorithm)</a>
+          <a href="schnorr.html" class="sidebar__link">Firmas Schnorr</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 2 &middot; Transacciones en detalle</div>
+          <a href="estructura-transaccion.html" class="sidebar__link">Estructura de una transacción</a>
+          <a href="segwit-internals.html" class="sidebar__link">SegWit por dentro</a>
+          <a href="taproot-internals.html" class="sidebar__link">Taproot por dentro</a>
+          <a href="psbt.html" class="sidebar__link">PSBT (Partially Signed Bitcoin Transaction)</a>
+          <a href="locktime-sequence.html" class="sidebar__link">Locktime y Sequence</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 3 &middot; Script</div>
+          <a href="bitcoin-script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="p2pkh.html" class="sidebar__link">P2PKH (Pay-to-Public-Key-Hash)</a>
+          <a href="p2sh.html" class="sidebar__link">P2SH (Pay-to-Script-Hash)</a>
+          <a href="p2wpkh-p2wsh.html" class="sidebar__link">P2WPKH y P2WSH (Native SegWit)</a>
+          <a href="p2tr.html" class="sidebar__link">P2TR (Pay-to-Taproot)</a>
+          <a href="op-return.html" class="sidebar__link">OP_RETURN</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 4 &middot; Bloques y protocolo</div>
+          <a href="estructura-bloque.html" class="sidebar__link sidebar__link--active">Estructura de un bloque</a>
+          <a href="merkle-tree.html" class="sidebar__link">Árbol de Merkle</a>
+          <a href="proof-of-work.html" class="sidebar__link">Proof of Work en detalle</a>
+          <a href="protocolo-p2p.html" class="sidebar__link">Protocolo P2P</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-6/" class="sidebar__link">Nivel 6 &mdash; Satoshi</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n5" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 5</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Estructura de un bloque</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--5 article__badge">Nivel 5</div>
+          <h1>Estructura de un bloque</h1>
+          <p class="article__subtitle">80 bytes que enlazan toda la historia. El header del bloque y lo que contiene.</p>
+
+<p>Visión general Un bloque Bitcoin tiene dos partes:</p>
+
+<p>Header: 80 bytes fijos con metadatos del bloque Transacciones: Lista de transacciones, empezando por la coinbase</p>
+
+<p>El header es lo que se hashea para la minería. Las transacciones son el contenido útil. El header del bloque (80 bytes) [Version]        4 bytes [Prev Block]     32 bytes [Merkle Root]    32 bytes [Timestamp]      4 bytes [Bits]           4 bytes [Nonce]          4 bytes Version (4 bytes) Indica la versión del bloque y se usa para señalización de soft forks. Los bits individuales pueden señalar soporte para actualizaciones propuestas. Valor típico actual: 0x20000000 (versión 2 con bits de señalización). Previous Block Hash (32 bytes) El hash SHA256(SHA256(header)) del bloque anterior. Este campo es lo que forma la &quot;cadena&quot; en blockchain. Para modificar un bloque antiguo, tendrías que recalcular todos los bloques posteriores porque cada uno referencia al anterior. Merkle Root (32 bytes) Un hash que resume todas las transacciones del bloque. Calculado construyendo un árbol de Merkle de los txids. Permite probar que una transacción está en el bloque sin descargar todas las transacciones (Merkle proof). Timestamp (4 bytes) Timestamp Unix del momento en que el minero creó el bloque. No tiene que ser preciso, pero debe cumplir ciertas reglas:</p>
+
+<p>Mayor que la mediana de los 11 bloques anteriores Menor que el tiempo actual + 2 horas (según los nodos)</p>
+
+<p>El timestamp se usa para calcular ajustes de dificultad. Bits (4 bytes) Codificación compacta del target de dificultad. El hash del bloque debe ser menor que el target derivado de este campo. Formato: el primer byte es el exponente, los siguientes 3 son el coeficiente. Ejemplo: 0x1d00ffff (dificultad del bloque génesis)</p>
+
+<p>Exponente: 0x1d = 29 Coeficiente: 0x00ffff</p>
+
+<p>Target = 0x00ffff × 2^(8×(0x1d-3)) Nonce (4 bytes) El número que el minero varía para buscar un hash válido. Cada incremento del nonce produce un hash completamente diferente. 4 bytes = 2³² posibilidades. Si no se encuentra un hash válido, el minero modifica otros campos (timestamp, transacciones, extraNonce). Ejemplo de header real Bloque #800000: Version:    00000020 Prev Block: 00000000000000000002a7c4c1e48d76c5a37902165a270156b7a8d72728a054 Merkle:     f6b7a1e47c32ec8b17d7f0d8e9b8c2f4a3d5e6c7b8a9d0e1f2c3b4a5d6e7f8a9 Timestamp:  64c9ab2f (1691035439 = julio 2023) Bits:       17053894 Nonce:      2c8b7a1e (Valores ilustrativos simplificados) La coinbase transaction La primera transacción de cada bloque es especial:</p>
+
+<p>No tiene inputs reales (el &quot;input&quot; referencia txid 0x00...00) Crea los nuevos bitcoin (subsidy) + recoge todas las fees El campo scriptSig puede contener datos arbitrarios (el &quot;extraNonce&quot; y mensajes)</p>
+
+<p>Satoshi incluyó en el bloque génesis: &quot;The Times 03/Jan/2009 Chancellor on brink of second bailout for banks&quot; Los mineros usan parte del coinbase scriptSig como &quot;extraNonce&quot; cuando los 4 bytes del nonce no son suficientes. Tamaño vs peso Límite histórico: 1 MB por bloque (pre-SegWit) Límite actual: 4.000.000 weight units (WU) Esto equivale a:</p>
+
+<p>Exactamente 1 MB si no hay SegWit Hasta ~4 MB si todo fuera witness data (imposible en práctica) Típicamente 1.5-2 MB con mezcla de transacciones</p>
+
+<p>El bloque génesis El bloque #0, creado por Satoshi el 3 de enero de 2009:</p>
+
+<p>Hash: 000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f No tiene bloque anterior (prev block = 0x00...00) Contiene solo la coinbase con el mensaje del Times Curiosamente, los 50 BTC de recompensa son no gastables por un quirk del código</p>
+
+<p>Propagación de bloques Cuando un minero encuentra un bloque válido:</p>
+
+<p>Lo anuncia a sus peers (inv message) Los peers solicitan el bloque (getdata) El minero envía el bloque completo Cada receptor valida y retransmite</p>
+
+<p>Con compact blocks (BIP 152), se envían solo los IDs cortos de las transacciones. El receptor reconstruye el bloque con transacciones que ya tiene en su mempool, reduciendo drásticamente el ancho de banda.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-5" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="op-return.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">OP_RETURN</span>
+  </a>
+  <a href="merkle-tree.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Árbol de Merkle</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

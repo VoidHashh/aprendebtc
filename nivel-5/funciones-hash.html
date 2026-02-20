@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Qué son las funciones hash, propiedades criptográficas, SHA-256 y RIPEMD-160 en Bitcoin. Ejemplos prácticos de hashing." />
+  <title>Funciones hash &mdash; Nivel 5 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 5">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 1 &middot; Criptografía</div>
+          <a href="funciones-hash.html" class="sidebar__link sidebar__link--active">Funciones hash</a>
+          <a href="curva-eliptica.html" class="sidebar__link">Criptografía de curva elíptica</a>
+          <a href="ecdsa.html" class="sidebar__link">ECDSA (Elliptic Curve Digital Signature Algorithm)</a>
+          <a href="schnorr.html" class="sidebar__link">Firmas Schnorr</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 2 &middot; Transacciones en detalle</div>
+          <a href="estructura-transaccion.html" class="sidebar__link">Estructura de una transacción</a>
+          <a href="segwit-internals.html" class="sidebar__link">SegWit por dentro</a>
+          <a href="taproot-internals.html" class="sidebar__link">Taproot por dentro</a>
+          <a href="psbt.html" class="sidebar__link">PSBT (Partially Signed Bitcoin Transaction)</a>
+          <a href="locktime-sequence.html" class="sidebar__link">Locktime y Sequence</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 3 &middot; Script</div>
+          <a href="bitcoin-script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="p2pkh.html" class="sidebar__link">P2PKH (Pay-to-Public-Key-Hash)</a>
+          <a href="p2sh.html" class="sidebar__link">P2SH (Pay-to-Script-Hash)</a>
+          <a href="p2wpkh-p2wsh.html" class="sidebar__link">P2WPKH y P2WSH (Native SegWit)</a>
+          <a href="p2tr.html" class="sidebar__link">P2TR (Pay-to-Taproot)</a>
+          <a href="op-return.html" class="sidebar__link">OP_RETURN</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 4 &middot; Bloques y protocolo</div>
+          <a href="estructura-bloque.html" class="sidebar__link">Estructura de un bloque</a>
+          <a href="merkle-tree.html" class="sidebar__link">Árbol de Merkle</a>
+          <a href="proof-of-work.html" class="sidebar__link">Proof of Work en detalle</a>
+          <a href="protocolo-p2p.html" class="sidebar__link">Protocolo P2P</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-6/" class="sidebar__link">Nivel 6 &mdash; Satoshi</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n5" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 5</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Funciones hash</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--5 article__badge">Nivel 5</div>
+          <h1>Funciones hash</h1>
+          <p class="article__subtitle">La base criptográfica que hace posible la minería, las direcciones y la integridad de la blockchain.</p>
+
+<h2>Qué es una función hash</h2>
+
+<p>Una función hash es un algoritmo matemático que toma una entrada de cualquier tamaño (un byte, un archivo de gigabytes, lo que sea) y produce una salida de tamaño fijo llamada digest o hash.</p>
+
+<p>En Bitcoin, la función principal es SHA-256, que produce un hash de 256 bits (64 caracteres hexadecimales).</p>
+
+<p>Ejemplo: Entrada: &quot;Bitcoin&quot; SHA-256: b4056df6691f8dc72e56302ddad345d65fead3ead9299609a826e2344eb63aa4 Entrada: &quot;bitcoin&quot; (solo cambia la mayúscula) SHA-256: 6b88c087247aa2f07ee1c5956b8e1a9f4c7f892a70e324f1bb3d161e05ca107b</p>
+
+<p>Un cambio mínimo en la entrada produce un hash completamente diferente. Esta propiedad se llama efecto avalancha.</p>
+
+<h2>Propiedades criptográficas</h2>
+
+<p>Para que una función hash sea útil en criptografía, debe cumplir varias propiedades:</p>
+
+<h3>Determinista</h3>
+
+<p>La misma entrada siempre produce exactamente el mismo hash. Sin excepciones. Esto permite verificar datos: si el hash coincide, los datos no han sido modificados.</p>
+
+<h3>Efecto avalancha</h3>
+
+<p>Un cambio de un solo bit en la entrada cambia aproximadamente el 50% de los bits del hash. No hay correlación predecible entre cambios en la entrada y cambios en la salida.</p>
+
+<h3>Resistencia a preimagen</h3>
+
+<p>Dado un hash, es computacionalmente imposible encontrar una entrada que lo produzca. &quot;Imposible&quot; aquí significa que el único método es probar entradas aleatorias hasta dar con una que funcione, lo que tomaría más tiempo que la edad del universo para hashes de 256 bits.</p>
+
+<h3>Resistencia a colisiones</h3>
+
+<p>Es prácticamente imposible encontrar dos entradas diferentes que produzcan el mismo hash. Matemáticamente, las colisiones existen (infinitas entradas, finitos hashes), pero encontrar una a propósito es computacionalmente inviable.</p>
+
+<h3>Resistencia a segunda preimagen</h3>
+
+<p>Dada una entrada y su hash, es imposible encontrar otra entrada diferente que produzca el mismo hash.</p>
+
+<h2>SHA-256 en Bitcoin</h2>
+
+<p>SHA-256 (Secure Hash Algorithm, 256 bits) es la función hash principal de Bitcoin. Se usa en:</p>
+
+<p><strong>Minería:</strong> Los mineros calculan SHA-256(SHA-256(block_header)) hasta encontrar un hash menor que el target. El doble hashing añade seguridad adicional.</p>
+
+<p><strong>Identificación de transacciones:</strong> El txid de una transacción es el doble SHA-256 de la transacción serializada.</p>
+
+<p><strong>Árbol de Merkle:</strong> Los hashes de las transacciones se combinan en un árbol usando SHA-256 hasta obtener la Merkle root.</p>
+
+<p><strong>Derivación de direcciones:</strong> Las claves públicas se hashean con SHA-256 antes de aplicar RIPEMD-160.</p>
+
+<h2>RIPEMD-160</h2>
+
+<p>RIPEMD-160 es otra función hash que produce salidas de 160 bits (40 caracteres hexadecimales). En Bitcoin se usa en combinación con SHA-256.</p>
+
+<p>La combinación se llama HASH160: HASH160(x) = RIPEMD160(SHA256(x))</p>
+
+<p>Esta operación se aplica a las claves públicas para derivar el hash que aparece en las direcciones. Usar HASH160 en vez de solo SHA-256 produce hashes más cortos (160 bits vs 256 bits), lo que resulta en direcciones más cortas.</p>
+
+<h2>Por qué dos funciones hash diferentes</h2>
+
+<p>La combinación de SHA-256 y RIPEMD-160 proporciona defensa en profundidad: si una de las dos funciones resultara tener vulnerabilidades en el futuro, la otra añade una capa de protección.</p>
+
+<p>RIPEMD-160 fue desarrollado en Europa, mientras que SHA-256 viene del NIST estadounidense. Usar algoritmos de diferentes orígenes reduce el riesgo de que ambos tengan la misma vulnerabilidad oculta.</p>
+
+<h2>Ejemplo práctico: verificar integridad</h2>
+
+<p>Cuando descargas una wallet, el sitio oficial suele publicar el hash SHA-256 del archivo. Después de descargar:</p>
+
+<ol>
+
+<li>Calculas el hash del archivo descargado</li>
+
+<li>Comparas con el hash publicado</li>
+
+<li>Si coinciden, el archivo no ha sido modificado</li>
+
+</ol>
+
+<p>Este mismo principio es lo que hace que la blockchain sea inmutable: cada bloque contiene el hash del anterior. Modificar un bloque cambiaría su hash, invalidando todos los bloques posteriores.</p>
+
+<div class="callout callout--info"><span class="callout__icon" aria-hidden="true">&#128161;</span><div class="callout__content"><div class="callout__title">Pruébalo tú mismo</div><p class="callout__text">Puedes experimentar con funciones hash en <a href="../herramientas/hash.html">/herramientas/hash</a>. Introduce cualquier texto y observa cómo cambia el hash con cada modificación.</p></div></div>
+
+          <div class="ad-slot ad-content" id="ad-content-5" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="index.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">El Arquitecto</span>
+  </a>
+  <a href="curva-eliptica.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Criptografía de curva elíptica</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

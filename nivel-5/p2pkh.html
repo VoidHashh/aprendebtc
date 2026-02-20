@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="P2PKH explicado: el tipo de transacción original de Bitcoin. ScriptPubKey, scriptSig, ejecución paso a paso, y por qué se hashea la clave." />
+  <title>P2PKH (Pay-to-Public-Key-Hash) &mdash; Nivel 5 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 5">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 1 &middot; Criptografía</div>
+          <a href="funciones-hash.html" class="sidebar__link">Funciones hash</a>
+          <a href="curva-eliptica.html" class="sidebar__link">Criptografía de curva elíptica</a>
+          <a href="ecdsa.html" class="sidebar__link">ECDSA (Elliptic Curve Digital Signature Algorithm)</a>
+          <a href="schnorr.html" class="sidebar__link">Firmas Schnorr</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 2 &middot; Transacciones en detalle</div>
+          <a href="estructura-transaccion.html" class="sidebar__link">Estructura de una transacción</a>
+          <a href="segwit-internals.html" class="sidebar__link">SegWit por dentro</a>
+          <a href="taproot-internals.html" class="sidebar__link">Taproot por dentro</a>
+          <a href="psbt.html" class="sidebar__link">PSBT (Partially Signed Bitcoin Transaction)</a>
+          <a href="locktime-sequence.html" class="sidebar__link">Locktime y Sequence</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 3 &middot; Script</div>
+          <a href="bitcoin-script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="p2pkh.html" class="sidebar__link sidebar__link--active">P2PKH (Pay-to-Public-Key-Hash)</a>
+          <a href="p2sh.html" class="sidebar__link">P2SH (Pay-to-Script-Hash)</a>
+          <a href="p2wpkh-p2wsh.html" class="sidebar__link">P2WPKH y P2WSH (Native SegWit)</a>
+          <a href="p2tr.html" class="sidebar__link">P2TR (Pay-to-Taproot)</a>
+          <a href="op-return.html" class="sidebar__link">OP_RETURN</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 4 &middot; Bloques y protocolo</div>
+          <a href="estructura-bloque.html" class="sidebar__link">Estructura de un bloque</a>
+          <a href="merkle-tree.html" class="sidebar__link">Árbol de Merkle</a>
+          <a href="proof-of-work.html" class="sidebar__link">Proof of Work en detalle</a>
+          <a href="protocolo-p2p.html" class="sidebar__link">Protocolo P2P</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-6/" class="sidebar__link">Nivel 6 &mdash; Satoshi</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n5" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 5</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">P2PKH (Pay-to-Public-Key-Hash)</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--5 article__badge">Nivel 5</div>
+          <h1>P2PKH (Pay-to-Public-Key-Hash)</h1>
+          <p class="article__subtitle">El script clásico de Bitcoin. Direcciones que empiezan por 1. Sencillo, probado, pero menos eficiente que las alternativas modernas.</p>
+
+<h2>El estándar original</h2>
+
+<p>P2PKH (Pay-to-Public-Key-Hash) es el tipo de transacción que Satoshi diseñó originalmente para Bitcoin. Las direcciones que empiezan por &quot;1&quot; (como <code>1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2</code>) son direcciones P2PKH.</p>
+
+<p>Aunque hoy existen alternativas más eficientes (SegWit, Taproot), P2PKH sigue siendo válido y hay billones de dólares en UTXOs P2PKH.</p>
+
+<h2>El script de bloqueo (scriptPubKey)</h2>
+
+<p>OP_DUP OP_HASH160 &lt;20 bytes: pubKeyHash&gt; OP_EQUALVERIFY OP_CHECKSIG</p>
+
+<p>Desglosado:</p>
+
+<ul>
+
+<li><code>OP_DUP</code> (0x76): Duplica el tope de la pila</li>
+
+<li><code>OP_HASH160</code> (0xa9): Aplica HASH160 al tope</li>
+
+<li><code>&lt;pubKeyHash&gt;</code>: 20 bytes, el hash de la clave pública del receptor</li>
+
+<li><code>OP_EQUALVERIFY</code> (0x88): Verifica igualdad, falla si no son iguales</li>
+
+<li><code>OP_CHECKSIG</code> (0xac): Verifica la firma</li>
+
+</ul>
+
+<p>En hexadecimal, un scriptPubKey P2PKH típico: 76a914&lt;20 bytes pubKeyHash&gt;88ac</p>
+
+<h2>El script de desbloqueo (scriptSig)</h2>
+
+<p>Para gastar un output P2PKH, el scriptSig proporciona: &lt;signature&gt; &lt;pubKey&gt;</p>
+
+<p>La firma es típicamente 71-72 bytes (DER + sighash byte). La clave pública es 33 bytes (comprimida) o 65 bytes (sin comprimir).</p>
+
+<h2>Ejecución completa</h2>
+
+<p>Estado inicial de la pila: vacía</p>
+
+<p>Push &lt;signature&gt; (del scriptSig) Pila: [sig] Push &lt;pubKey&gt; (del scriptSig) Pila: [sig, pubKey] OP_DUP (del scriptPubKey) Duplica pubKey Pila: [sig, pubKey, pubKey] OP_HASH160 Hashea la copia de pubKey Pila: [sig, pubKey, hash(pubKey)] Push &lt;pubKeyHash&gt; (del scriptPubKey) Pila: [sig, pubKey, hash(pubKey), expectedHash] OP_EQUALVERIFY ¿hash(pubKey) == expectedHash? Si no: FALLO INMEDIATO Si sí: elimina ambos valores Pila: [sig, pubKey] OP_CHECKSIG ¿sig es válida para pubKey sobre esta transacción? Si sí: empuja TRUE Si no: empuja FALSE Pila: [TRUE] o [FALSE]</p>
+
+<p>Resultado final: si TRUE, el gasto es válido</p>
+
+<h2>Por qué hashear la clave pública</h2>
+
+<p>Podrías preguntarte: ¿por qué no bloquear directamente a la clave pública (P2PK) en vez del hash?</p>
+
+<p>De hecho, las primeras transacciones de Bitcoin eran P2PK. Pero P2PKH tiene ventajas:</p>
+
+<h3>Direcciones más cortas</h3>
+
+<p>Una clave pública comprimida tiene 33 bytes. Su HASH160 tiene 20 bytes. Direcciones más cortas son más prácticas.</p>
+
+<h3>Protección extra ante futuros ataques</h3>
+
+<p>La clave pública solo se revela cuando gastas. Mientras no gastes, solo el hash es público.</p>
+
+<p>Si algún día se encontrara una forma de derivar claves privadas de claves públicas (por ejemplo, con computación cuántica), los UTXOs P2PKH no gastados seguirían protegidos por la capa adicional del hash.</p>
+
+<p>Esto no es protección perfecta (eventualmente tienes que gastar y revelar la clave), pero añade una capa de defensa en profundidad.</p>
+
+<h2>Tamaño y costes</h2>
+
+<p>Un input P2PKH típico ocupa:</p>
+
+<ul>
+
+<li>scriptSig: ~107 bytes (firma + pubKey)</li>
+
+<li>Outpoint + sequence: 40 bytes</li>
+
+</ul>
+
+<p>Un output P2PKH ocupa:</p>
+
+<ul>
+
+<li>Value: 8 bytes</li>
+
+<li>scriptPubKey: 25 bytes (1 + 1 + 1 + 20 + 1 + 1)</li>
+
+</ul>
+
+<p>Comparado con P2WPKH (SegWit), P2PKH paga más fees porque el scriptSig cuenta como datos &quot;base&quot; (4 WU por byte), mientras que el witness de P2WPKH solo cuenta 1 WU por byte.</p>
+
+<h2>Cuándo usar P2PKH hoy</h2>
+
+<p>En general, no deberías crear nuevos outputs P2PKH si tu wallet soporta SegWit o Taproot. Las alternativas modernas son más baratas y ofrecen mejores propiedades.</p>
+
+<p>Sin embargo, P2PKH sigue siendo útil para:</p>
+
+<ul>
+
+<li>Compatibilidad con sistemas muy antiguos</li>
+
+<li>Gastar UTXOs P2PKH existentes (no tienes opción del tipo de input)</li>
+
+<li>Situaciones específicas donde el receptor solo soporta legacy</li>
+
+</ul>
+
+<h2>Direcciones P2PKH</h2>
+
+<p>Las direcciones P2PKH usan codificación Base58Check:</p>
+
+<ol>
+
+<li>Tomar el pubKeyHash (20 bytes)</li>
+
+<li>Añadir prefijo de versión: 0x00 para mainnet</li>
+
+<li>Calcular checksum: SHA256(SHA256(versión + pubKeyHash))[0:4]</li>
+
+<li>Concatenar: versión + pubKeyHash + checksum</li>
+
+<li>Codificar en Base58</li>
+
+</ol>
+
+<p>El resultado es una dirección que empieza por &quot;1&quot; y tiene 25-34 caracteres.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-5" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="bitcoin-script.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Bitcoin Script</span>
+  </a>
+  <a href="p2sh.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">P2SH (Pay-to-Script-Hash)</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="El protocolo de red de Bitcoin: descubrimiento de peers, mensajes principales, propagación de transacciones y bloques, compact blocks, y ataques de red." />
+  <title>Protocolo P2P &mdash; Nivel 5 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 5">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 1 &middot; Criptografía</div>
+          <a href="funciones-hash.html" class="sidebar__link">Funciones hash</a>
+          <a href="curva-eliptica.html" class="sidebar__link">Criptografía de curva elíptica</a>
+          <a href="ecdsa.html" class="sidebar__link">ECDSA (Elliptic Curve Digital Signature Algorithm)</a>
+          <a href="schnorr.html" class="sidebar__link">Firmas Schnorr</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 2 &middot; Transacciones en detalle</div>
+          <a href="estructura-transaccion.html" class="sidebar__link">Estructura de una transacción</a>
+          <a href="segwit-internals.html" class="sidebar__link">SegWit por dentro</a>
+          <a href="taproot-internals.html" class="sidebar__link">Taproot por dentro</a>
+          <a href="psbt.html" class="sidebar__link">PSBT (Partially Signed Bitcoin Transaction)</a>
+          <a href="locktime-sequence.html" class="sidebar__link">Locktime y Sequence</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 3 &middot; Script</div>
+          <a href="bitcoin-script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="p2pkh.html" class="sidebar__link">P2PKH (Pay-to-Public-Key-Hash)</a>
+          <a href="p2sh.html" class="sidebar__link">P2SH (Pay-to-Script-Hash)</a>
+          <a href="p2wpkh-p2wsh.html" class="sidebar__link">P2WPKH y P2WSH (Native SegWit)</a>
+          <a href="p2tr.html" class="sidebar__link">P2TR (Pay-to-Taproot)</a>
+          <a href="op-return.html" class="sidebar__link">OP_RETURN</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 4 &middot; Bloques y protocolo</div>
+          <a href="estructura-bloque.html" class="sidebar__link">Estructura de un bloque</a>
+          <a href="merkle-tree.html" class="sidebar__link">Árbol de Merkle</a>
+          <a href="proof-of-work.html" class="sidebar__link">Proof of Work en detalle</a>
+          <a href="protocolo-p2p.html" class="sidebar__link sidebar__link--active">Protocolo P2P</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-6/" class="sidebar__link">Nivel 6 &mdash; Satoshi</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n5" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 5</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Protocolo P2P</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--5 article__badge">Nivel 5</div>
+          <h1>Protocolo P2P</h1>
+          <p class="article__subtitle">Cómo los nodos se encuentran, comunican y mantienen consenso sin coordinación central.</p>
+
+<h2>Arquitectura de la red</h2>
+
+<p>Bitcoin es una red peer-to-peer (P2P): los nodos se conectan directamente entre sí sin servidores centrales. No hay jerarquía. Cada nodo es igual a los demás.</p>
+
+<p>Cuando ejecutas un nodo Bitcoin, te conectas a otros nodos (peers), recibes y envías transacciones, descargas y verificas bloques, y contribuyes a la propagación de información.</p>
+
+<h2>Descubrimiento de peers</h2>
+
+<p>¿Cómo encuentra tu nodo otros nodos para conectarse?</p>
+
+<h3>DNS seeds</h3>
+
+<p>Bitcoin Core tiene hardcoded varios &quot;DNS seeds&quot;: dominios que responden con direcciones IP de nodos activos.</p>
+
+<p>Al iniciar por primera vez, el nodo consulta estos DNS seeds y obtiene una lista inicial de peers.</p>
+
+<h3>Mensaje addr</h3>
+
+<p>Una vez conectado, los nodos intercambian direcciones de otros nodos que conocen mediante mensajes <code>addr</code>. Tu nodo guarda estas direcciones para futuras conexiones.</p>
+
+<h3>Conexiones manuales</h3>
+
+<p>También puedes añadir peers manualmente con <code>addnode</code> si conoces direcciones específicas.</p>
+
+<h2>El handshake inicial</h2>
+
+<p>Cuando tu nodo se conecta a un peer:</p>
+
+<ol>
+
+<li><strong>version:</strong> Envía información sobre tu nodo (versión del software, altura del blockchain, servicios que ofreces)</li>
+
+</ol>
+
+<ol>
+
+<li><strong>verack:</strong> El peer responde con su propia información y un acknowledgment</li>
+
+</ol>
+
+<ol>
+
+<li><strong>Negociación:</strong> Ambos determinan qué features soportan mutuamente</li>
+
+</ol>
+
+<p>Después del handshake, los nodos pueden intercambiar transacciones, bloques y otra información.</p>
+
+<h2>Mensajes principales del protocolo</h2>
+
+<h3>Inventario y solicitud</h3>
+
+<ul>
+
+<li><code>inv</code> (inventory): &quot;Tengo estos items (transacciones o bloques)&quot;</li>
+
+<li><code>getdata</code>: &quot;Envíame estos items específicos&quot;</li>
+
+<li><code>notfound</code>: &quot;No tengo lo que pediste&quot;</li>
+
+</ul>
+
+<h3>Transacciones</h3>
+
+<ul>
+
+<li><code>tx</code>: Una transacción completa</li>
+
+<li><code>mempool</code>: Solicita el inventario de la mempool del peer</li>
+
+</ul>
+
+<h3>Bloques</h3>
+
+<ul>
+
+<li><code>block</code>: Un bloque completo</li>
+
+<li><code>headers</code>: Solo los headers (para sincronización inicial rápida)</li>
+
+<li><code>getheaders</code>: Solicita headers a partir de cierto punto</li>
+
+<li><code>getblocks</code>: Solicita inventario de bloques</li>
+
+</ul>
+
+<h3>Sincronización</h3>
+
+<ul>
+
+<li><code>sendheaders</code>: Pide que el peer anuncie bloques nuevos con headers directamente</li>
+
+<li><code>sendcmpct</code>: Negocia el uso de compact blocks</li>
+
+</ul>
+
+<h2>Propagación de transacciones</h2>
+
+<p>Cuando creas una transacción:</p>
+
+<ol>
+
+<li>Tu wallet la envía a tu nodo (o al nodo al que está conectada)</li>
+
+<li>Tu nodo verifica la transacción</li>
+
+<li>Si es válida, la añade a su mempool</li>
+
+<li>Anuncia la transacción a sus peers con <code>inv</code></li>
+
+<li>Los peers interesados la solicitan con <code>getdata</code></li>
+
+<li>Les envías la transacción con <code>tx</code></li>
+
+<li>Ellos verifican, añaden a su mempool, y propagan a sus peers</li>
+
+</ol>
+
+<p>En segundos, una transacción válida se propaga a toda la red.</p>
+
+<h2>Propagación de bloques</h2>
+
+<p>Similar a las transacciones, pero más crítico en tiempo:</p>
+
+<ol>
+
+<li>Un minero encuentra un bloque válido</li>
+
+<li>Lo anuncia a sus peers</li>
+
+<li>Los peers lo solicitan, verifican, y propagan</li>
+
+<li>Cada nodo actualiza su vista del blockchain</li>
+
+</ol>
+
+<p>La velocidad de propagación importa: mientras un bloque se propaga, otro minero podría encontrar un bloque competidor (stale block/orphan).</p>
+
+<h2>Compact blocks (BIP 152)</h2>
+
+<p>Problema: los bloques pueden ser grandes (1-2 MB). Transmitirlos completos es lento.</p>
+
+<p>Solución: compact blocks. En vez del bloque completo:</p>
+
+<ol>
+
+<li>El minero envía un &quot;compact block&quot;: header + IDs cortos de las transacciones</li>
+
+<li>El receptor ya tiene la mayoría de transacciones en su mempool</li>
+
+<li>Solo solicita las transacciones que no tiene</li>
+
+<li>Reconstruye el bloque localmente</li>
+
+</ol>
+
+<p>Esto reduce drásticamente el ancho de banda y acelera la propagación.</p>
+
+<h2>Ataques de red</h2>
+
+<h3>Eclipse attack</h3>
+
+<p>Un atacante controla todos los peers de tu nodo. Puede:</p>
+
+<ul>
+
+<li>Mostrarte una blockchain falsa</li>
+
+<li>Ocultarte transacciones o bloques</li>
+
+<li>Hacer que creas que tus transacciones se confirmaron cuando no</li>
+
+</ul>
+
+<p><strong>Mitigación:</strong></p>
+
+<ul>
+
+<li>Conectar a muchos peers diversos</li>
+
+<li>Usar Tor para dificultar el targeting</li>
+
+<li>Conexiones manuales a nodos de confianza</li>
+
+</ul>
+
+<h3>Sybil attack</h3>
+
+<p>Un atacante crea muchos nodos falsos para dominar la red.</p>
+
+<p><strong>Mitigación:</strong></p>
+
+<ul>
+
+<li>No confiar en métricas que dependan del número de nodos</li>
+
+<li>El consenso de Bitcoin no depende de &quot;votos&quot; de nodos sino de proof-of-work</li>
+
+</ul>
+
+<h3>DoS attacks</h3>
+
+<p>Enviar mensajes malformados o excesivos para consumir recursos del nodo.</p>
+
+<p><strong>Mitigación:</strong></p>
+
+<ul>
+
+<li>Límites de tasa en mensajes</li>
+
+<li>Banning de peers que se comportan mal</li>
+
+<li>Validación estricta antes de propagar</li>
+
+</ul>
+
+<h2>Tor y privacidad de red</h2>
+
+<p>Tu IP es visible para los peers a los que te conectas. Para mayor privacidad:</p>
+
+<ul>
+
+<li>Bitcoin Core soporta conexiones vía Tor</li>
+
+<li>Puedes configurar tu nodo para anunciar una dirección .onion</li>
+
+<li>Las conexiones Tor añaden latencia pero mejoran la privacidad</li>
+
+</ul>
+
+<div class="callout callout--info"><span class="callout__icon" aria-hidden="true">&#128161;</span><div class="callout__content"><div class="callout__title">Evolución continua</div><p class="callout__text">El protocolo P2P de Bitcoin ha evolucionado significativamente desde 2009. Cada mejora busca hacer la red más eficiente y resistente sin comprometer la descentralización. BIP 152 (compact blocks), Erlay (propuesta para reducir ancho de banda de inventario), y otras mejoras continúan desarrollándose.</p></div></div>
+
+<h2>Puente al nivel 6</h2>
+
+<p>Has llegado al núcleo técnico de Bitcoin: criptografía, scripts, transacciones, bloques, protocolo. Ahora la pregunta es: ¿por qué todo esto importa? El nivel 6 explora la filosofía detrás del protocolo y cómo contribuir a su futuro.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-5" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="proof-of-work.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Proof of Work en detalle</span>
+  </a>
+  <a href="../nivel-6/" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Satoshi</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

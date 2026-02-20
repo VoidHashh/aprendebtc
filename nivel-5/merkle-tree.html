@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cómo funcionan los árboles de Merkle en Bitcoin: construcción, Merkle root, pruebas de inclusión SPV, y eficiencia logarítmica." />
+  <title>Árbol de Merkle &mdash; Nivel 5 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 5">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 1 &middot; Criptografía</div>
+          <a href="funciones-hash.html" class="sidebar__link">Funciones hash</a>
+          <a href="curva-eliptica.html" class="sidebar__link">Criptografía de curva elíptica</a>
+          <a href="ecdsa.html" class="sidebar__link">ECDSA (Elliptic Curve Digital Signature Algorithm)</a>
+          <a href="schnorr.html" class="sidebar__link">Firmas Schnorr</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 2 &middot; Transacciones en detalle</div>
+          <a href="estructura-transaccion.html" class="sidebar__link">Estructura de una transacción</a>
+          <a href="segwit-internals.html" class="sidebar__link">SegWit por dentro</a>
+          <a href="taproot-internals.html" class="sidebar__link">Taproot por dentro</a>
+          <a href="psbt.html" class="sidebar__link">PSBT (Partially Signed Bitcoin Transaction)</a>
+          <a href="locktime-sequence.html" class="sidebar__link">Locktime y Sequence</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 3 &middot; Script</div>
+          <a href="bitcoin-script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="p2pkh.html" class="sidebar__link">P2PKH (Pay-to-Public-Key-Hash)</a>
+          <a href="p2sh.html" class="sidebar__link">P2SH (Pay-to-Script-Hash)</a>
+          <a href="p2wpkh-p2wsh.html" class="sidebar__link">P2WPKH y P2WSH (Native SegWit)</a>
+          <a href="p2tr.html" class="sidebar__link">P2TR (Pay-to-Taproot)</a>
+          <a href="op-return.html" class="sidebar__link">OP_RETURN</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 4 &middot; Bloques y protocolo</div>
+          <a href="estructura-bloque.html" class="sidebar__link">Estructura de un bloque</a>
+          <a href="merkle-tree.html" class="sidebar__link sidebar__link--active">Árbol de Merkle</a>
+          <a href="proof-of-work.html" class="sidebar__link">Proof of Work en detalle</a>
+          <a href="protocolo-p2p.html" class="sidebar__link">Protocolo P2P</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-6/" class="sidebar__link">Nivel 6 &mdash; Satoshi</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n5" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 5</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Árbol de Merkle</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--5 article__badge">Nivel 5</div>
+          <h1>Árbol de Merkle</h1>
+          <p class="article__subtitle">Resumir miles de transacciones en 32 bytes. La estructura que hace posible la verificación ligera.</p>
+
+<h2>El concepto</h2>
+
+<p>Un árbol de Merkle es una estructura de datos que permite resumir una lista de elementos en un solo hash (la Merkle root) de forma que:</p>
+
+<ol>
+
+<li>Cualquier cambio en cualquier elemento cambia la root</li>
+
+<li>Puedes probar que un elemento está en la lista proporcionando solo O(log n) hashes</li>
+
+</ol>
+
+<p>En Bitcoin, los elementos son los txids de las transacciones del bloque.</p>
+
+<h2>Construcción del árbol</h2>
+
+<p>Dado un bloque con transacciones T1, T2, T3, T4: Merkle Root /           \ H(AB)           H(CD) /     \         /     \ H(A)    H(B)    H(C)    H(D) |       |       |       | T1      T2      T3      T4</p>
+
+<p>Paso a paso:</p>
+
+<ol>
+
+<li><strong>Nivel 0 (hojas):</strong> Hashear cada transacción</li>
+
+</ol>
+
+<ul>
+
+<li>H(A) = SHA256(SHA256(T1))</li>
+
+<li>H(B) = SHA256(SHA256(T2))</li>
+
+<li>H(C) = SHA256(SHA256(T3))</li>
+
+<li>H(D) = SHA256(SHA256(T4))</li>
+
+</ul>
+
+<ol>
+
+<li><strong>Nivel 1:</strong> Concatenar pares y hashear</li>
+
+</ol>
+
+<ul>
+
+<li>H(AB) = SHA256(SHA256(H(A) || H(B)))</li>
+
+<li>H(CD) = SHA256(SHA256(H(C) || H(D)))</li>
+
+</ul>
+
+<ol>
+
+<li><strong>Nivel 2 (root):</strong> Concatenar y hashear</li>
+
+</ol>
+
+<ul>
+
+<li>Root = SHA256(SHA256(H(AB) || H(CD)))</li>
+
+</ul>
+
+<p>Bitcoin usa doble SHA256 en cada paso, igual que en otras partes del protocolo.</p>
+
+<h2>Número impar de elementos</h2>
+
+<p>Si hay un número impar de elementos en algún nivel, el último se duplica:</p>
+
+<p>Con 3 transacciones (T1, T2, T3): Merkle Root /           \ H(AB)           H(CC) /     \         /     \ H(A)    H(B)    H(C)    H(C) |       |       | T1      T2      T3</p>
+
+<p>H(C) se concatena consigo mismo para formar H(CC).</p>
+
+<h2>Merkle proof (prueba de inclusión)</h2>
+
+<p>Para probar que T3 está en el bloque, no necesitas todas las transacciones. Solo necesitas:</p>
+
+<ol>
+
+<li>El txid de T3 → H(C)</li>
+
+<li>Su hermano en el árbol → H(D) (o H(C) duplicado si era impar)</li>
+
+<li>El hash del subárbol hermano → H(AB)</li>
+
+<li>La Merkle root (del header del bloque)</li>
+
+</ol>
+
+<p>Con estos datos, cualquiera puede:</p>
+
+<ol>
+
+<li>Calcular H(CD) = SHA256(SHA256(H(C) || H(D)))</li>
+
+<li>Calcular Root&#x27; = SHA256(SHA256(H(AB) || H(CD)))</li>
+
+<li>Verificar que Root&#x27; == Merkle root del bloque</li>
+
+</ol>
+
+<p>Si coincide, T3 está definitivamente en el bloque.</p>
+
+<h2>Eficiencia logarítmica</h2>
+
+<p>Para un bloque con n transacciones:</p>
+
+<ul>
+
+<li>La prueba requiere log₂(n) hashes</li>
+
+<li>Un bloque con 4096 transacciones solo necesita 12 hashes (~384 bytes) para probar cualquier transacción</li>
+
+</ul>
+
+<p>Esto hace viable la verificación ligera (SPV) en dispositivos con recursos limitados.</p>
+
+<h2>SPV (Simplified Payment Verification)</h2>
+
+<p>Los clientes SPV (como muchas wallets móviles) no descargan bloques completos. Solo descargan:</p>
+
+<ol>
+
+<li>Headers de todos los bloques (80 bytes cada uno)</li>
+
+<li>Merkle proofs de las transacciones que les interesan</li>
+
+</ol>
+
+<p>Un cliente SPV puede verificar que una transacción está en un bloque válido sin tener todas las transacciones del bloque.</p>
+
+<h3>Limitaciones de SPV</h3>
+
+<p>SPV confía en que los mineros no incluyen transacciones inválidas. Un full node verifica cada transacción independientemente; un cliente SPV solo verifica la inclusión.</p>
+
+<p>Para máxima seguridad, ejecuta tu propio nodo completo. Pero SPV es un compromiso razonable para muchos casos de uso móvil.</p>
+
+<h2>Representación visual</h2>
+
+<p>Un bloque con 8 transacciones: Root ┌───────────┴───────────┐ ABCD                      EFGH ┌──────┴──────┐           ┌──────┴──────┐ AB             CD         EF             GH ┌──┴──┐       ┌──┴──┐     ┌──┴──┐       ┌──┴──┐ A    B        C    D      E    F        G    H │    │        │    │      │    │        │    │ T1   T2       T3   T4     T5   T6       T7   T8</p>
+
+<p>Para probar T5:</p>
+
+<ul>
+
+<li>Proporcionar: H(F), H(GH), H(ABCD)</li>
+
+<li>El verificador calcula: H(EF), H(EFGH), Root</li>
+
+<li>Compara con la Merkle root del header</li>
+
+</ul>
+
+<h2>Aplicaciones más allá de Bitcoin</h2>
+
+<p>Los árboles de Merkle se usan en muchos sistemas:</p>
+
+<ul>
+
+<li>Git (para verificar integridad de repositorios)</li>
+
+<li>Sistemas de archivos distribuidos (IPFS)</li>
+
+<li>Bases de datos verificables</li>
+
+<li>Otros protocolos blockchain</li>
+
+</ul>
+
+<p>La idea de resumir datos en un hash raíz con pruebas de inclusión eficientes es fundamental en sistemas distribuidos.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-5" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="estructura-bloque.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Estructura de un bloque</span>
+  </a>
+  <a href="proof-of-work.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Proof of Work en detalle</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

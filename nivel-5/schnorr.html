@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Firmas Schnorr en Bitcoin: ventajas sobre ECDSA, agregación de firmas, MuSig2, y cómo Taproot las implementa. BIP 340 explicado." />
+  <title>Firmas Schnorr &mdash; Nivel 5 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 5">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 1 &middot; Criptografía</div>
+          <a href="funciones-hash.html" class="sidebar__link">Funciones hash</a>
+          <a href="curva-eliptica.html" class="sidebar__link">Criptografía de curva elíptica</a>
+          <a href="ecdsa.html" class="sidebar__link">ECDSA (Elliptic Curve Digital Signature Algorithm)</a>
+          <a href="schnorr.html" class="sidebar__link sidebar__link--active">Firmas Schnorr</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 2 &middot; Transacciones en detalle</div>
+          <a href="estructura-transaccion.html" class="sidebar__link">Estructura de una transacción</a>
+          <a href="segwit-internals.html" class="sidebar__link">SegWit por dentro</a>
+          <a href="taproot-internals.html" class="sidebar__link">Taproot por dentro</a>
+          <a href="psbt.html" class="sidebar__link">PSBT (Partially Signed Bitcoin Transaction)</a>
+          <a href="locktime-sequence.html" class="sidebar__link">Locktime y Sequence</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 3 &middot; Script</div>
+          <a href="bitcoin-script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="p2pkh.html" class="sidebar__link">P2PKH (Pay-to-Public-Key-Hash)</a>
+          <a href="p2sh.html" class="sidebar__link">P2SH (Pay-to-Script-Hash)</a>
+          <a href="p2wpkh-p2wsh.html" class="sidebar__link">P2WPKH y P2WSH (Native SegWit)</a>
+          <a href="p2tr.html" class="sidebar__link">P2TR (Pay-to-Taproot)</a>
+          <a href="op-return.html" class="sidebar__link">OP_RETURN</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 4 &middot; Bloques y protocolo</div>
+          <a href="estructura-bloque.html" class="sidebar__link">Estructura de un bloque</a>
+          <a href="merkle-tree.html" class="sidebar__link">Árbol de Merkle</a>
+          <a href="proof-of-work.html" class="sidebar__link">Proof of Work en detalle</a>
+          <a href="protocolo-p2p.html" class="sidebar__link">Protocolo P2P</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-6/" class="sidebar__link">Nivel 6 &mdash; Satoshi</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n5" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 5</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Firmas Schnorr</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--5 article__badge">Nivel 5</div>
+          <h1>Firmas Schnorr</h1>
+          <p class="article__subtitle">La evolución de las firmas digitales en Bitcoin. Más eficientes, más privadas, matemáticamente más elegantes.</p>
+
+<h2>Contexto histórico</h2>
+
+<p>Las firmas Schnorr fueron inventadas por Claus Schnorr en los años 80 y son matemáticamente más simples que ECDSA. Entonces, ¿por qué Bitcoin empezó con ECDSA?</p>
+
+<p>Cuando Satoshi creó Bitcoin en 2008, las firmas Schnorr estaban bajo patente (expiró en 2008). ECDSA no tenía este problema. Además, ECDSA tenía implementaciones más maduras y probadas en el momento.</p>
+
+<p>Con Taproot (activado en noviembre 2021, bloque 709.632), Bitcoin adoptó firmas Schnorr mediante BIP 340 para las transacciones que usan direcciones bc1p (P2TR).</p>
+
+<h2>Ventajas sobre ECDSA</h2>
+
+<h3>Linealidad</h3>
+
+<p>La propiedad más importante: las firmas Schnorr son lineales. Esto significa que múltiples firmas pueden agregarse en una sola.</p>
+
+<p>En un multisig 3-de-3 con ECDSA, necesitas incluir 3 firmas separadas en la transacción. Con Schnorr, las 3 firmas se combinan matemáticamente en una sola firma que ocupa el mismo espacio que una firma individual.</p>
+
+<p>Resultado: menor tamaño de transacción (menores fees) y mayor privacidad (un multisig parece una transacción normal de una sola firma).</p>
+
+<h3>Seguridad demostrable</h3>
+
+<p>La seguridad de Schnorr se reduce formalmente al problema del logaritmo discreto: si puedes romper Schnorr, puedes resolver el logaritmo discreto, y viceversa.</p>
+
+<p>ECDSA no tiene una reducción de seguridad tan limpia. Funciona, pero la prueba matemática de su seguridad es menos elegante.</p>
+
+<h3>Verificación por lotes</h3>
+
+<p>Verificar muchas firmas Schnorr simultáneamente es más eficiente que verificarlas una por una. Esto beneficia a los nodos que validan bloques con muchas transacciones.</p>
+
+<h3>Firmas más pequeñas</h3>
+
+<p>Una firma Schnorr ocupa 64 bytes. Una firma ECDSA en formato DER típicamente ocupa 71-72 bytes.</p>
+
+<h2>Cómo funciona (simplificado)</h2>
+
+<p>Para firmar un mensaje m con clave privada d:</p>
+
+<ol>
+
+<li>Elegir nonce aleatorio k</li>
+
+<li>Calcular R = k · G (punto en la curva)</li>
+
+<li>Calcular e = hash(R || P || m) donde P es la clave pública y || es concatenación</li>
+
+<li>Calcular s = k + e · d</li>
+
+</ol>
+
+<p>La firma es el par (R, s), donde R es un punto (representado por su coordenada x) y s es un escalar.</p>
+
+<p>La verificación comprueba que s · G = R + e · P.</p>
+
+<p>La diferencia clave con ECDSA: el cálculo de s es una simple suma, no una división modular. Esta simplicidad es lo que permite la agregación.</p>
+
+<h2>MuSig2: firmas multisig agregadas</h2>
+
+<p>MuSig2 es un protocolo que permite a múltiples firmantes crear una firma Schnorr agregada en dos rondas de comunicación.</p>
+
+<p>El flujo:</p>
+
+<ol>
+
+<li>Cada participante genera y comparte un nonce público</li>
+
+<li>Se calcula un nonce agregado</li>
+
+<li>Cada participante calcula su firma parcial</li>
+
+<li>Las firmas parciales se suman para obtener la firma final</li>
+
+</ol>
+
+<p>El resultado es una firma que parece exactamente igual a una firma de una sola persona. Un observador externo no puede distinguir si la transacción fue firmada por una persona o por un comité de diez.</p>
+
+<h2>BIP 340: Schnorr en Bitcoin</h2>
+
+<p>BIP 340 define exactamente cómo Bitcoin implementa Schnorr:</p>
+
+<ul>
+
+<li>Usa la curva secp256k1 (la misma que ECDSA)</li>
+
+<li>Las claves públicas se representan con 32 bytes (solo coordenada x, se asume y par)</li>
+
+<li>Las firmas tienen exactamente 64 bytes</li>
+
+<li>El hash usa un esquema de &quot;tagged hashes&quot; para evitar colisiones con otros usos</li>
+
+</ul>
+
+<div class="callout callout--info"><span class="callout__icon" aria-hidden="true">&#128161;</span><div class="callout__content"><div class="callout__title">Schnorr no reemplaza ECDSA completamente</div><p class="callout__text">Las direcciones Legacy (1...) y SegWit (bc1q...) siguen usando ECDSA. Solo las direcciones Taproot (bc1p...) usan Schnorr. ECDSA seguirá siendo parte de Bitcoin mientras existan UTXOs en direcciones antiguas.</p></div></div>
+
+<h2>Implicaciones prácticas</h2>
+
+<p>Para usuarios:</p>
+
+<ul>
+
+<li>Las transacciones Taproot son más baratas (firmas más pequeñas)</li>
+
+<li>Mejor privacidad en setups multisig</li>
+
+<li>Las wallets que soportan Taproot aprovechan Schnorr automáticamente</li>
+
+</ul>
+
+<p>Para desarrolladores:</p>
+
+<ul>
+
+<li>Nuevas posibilidades de contratos inteligentes</li>
+
+<li>Diseños de protocolos más elegantes</li>
+
+<li>Menor complejidad en verificación</li>
+
+</ul>
+
+<h2>El futuro</h2>
+
+<p>Schnorr habilita mejoras futuras:</p>
+
+<ul>
+
+<li>Cross-input signature aggregation: agregar firmas de diferentes inputs de la misma transacción</li>
+
+<li>Protocolos de firma umbral más eficientes</li>
+
+<li>Mejores esquemas de custodia colaborativa</li>
+
+</ul>
+
+<p>La base criptográfica de Schnorr es más flexible que ECDSA, abriendo posibilidades que antes eran imposibles o imprácticas.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-5" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="ecdsa.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">ECDSA (Elliptic Curve Digital Signature Algorithm)</span>
+  </a>
+  <a href="estructura-transaccion.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Estructura de una transacción</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Nivel 5: criptografia, script y protocolo." />
-  <title>Nivel 5 | aprendebtc.com | aprendebtc.com</title>
+  <meta name="description" content="Nivel 5 de aprendeBTC: criptografía, script, transacciones raw y protocolo Bitcoin en profundidad." />
+  <title>El Arquitecto &mdash; Nivel 5 | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="../css/main.css" />
@@ -13,21 +13,121 @@
 <body>
   <div data-include="header"></div>
 
-  <main class="main-content" id="main-content">
-    <div class="container" style="padding-top: 2rem; padding-bottom: 3rem; max-width: 860px;">
-      <nav class="breadcrumb" aria-label="Ruta de navegacion">
-        <a href="../" class="breadcrumb__item">Inicio</a>
-        <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
-        <span class="breadcrumb__current">Nivel 5 - El Arquitecto</span>
-      </nav>
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 5">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 1 &middot; Criptografía</div>
+          <a href="funciones-hash.html" class="sidebar__link">Funciones hash</a>
+          <a href="curva-eliptica.html" class="sidebar__link">Criptografía de curva elíptica</a>
+          <a href="ecdsa.html" class="sidebar__link">ECDSA (Elliptic Curve Digital Signature Algorithm)</a>
+          <a href="schnorr.html" class="sidebar__link">Firmas Schnorr</a>
+        </div>
 
-      <article class="article">
-        <h1>Nivel 5 - El Arquitecto</h1>
-        <p class="article__subtitle">Criptografia, scripts, transacciones raw y protocolo.</p>
-        <p>Indice del nivel 5 habilitado para mantener la navegacion sin errores.</p>
-      </article>
-    </div>
-  </main>
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 2 &middot; Transacciones en detalle</div>
+          <a href="estructura-transaccion.html" class="sidebar__link">Estructura de una transacción</a>
+          <a href="segwit-internals.html" class="sidebar__link">SegWit por dentro</a>
+          <a href="taproot-internals.html" class="sidebar__link">Taproot por dentro</a>
+          <a href="psbt.html" class="sidebar__link">PSBT (Partially Signed Bitcoin Transaction)</a>
+          <a href="locktime-sequence.html" class="sidebar__link">Locktime y Sequence</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 3 &middot; Script</div>
+          <a href="bitcoin-script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="p2pkh.html" class="sidebar__link">P2PKH (Pay-to-Public-Key-Hash)</a>
+          <a href="p2sh.html" class="sidebar__link">P2SH (Pay-to-Script-Hash)</a>
+          <a href="p2wpkh-p2wsh.html" class="sidebar__link">P2WPKH y P2WSH (Native SegWit)</a>
+          <a href="p2tr.html" class="sidebar__link">P2TR (Pay-to-Taproot)</a>
+          <a href="op-return.html" class="sidebar__link">OP_RETURN</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 4 &middot; Bloques y protocolo</div>
+          <a href="estructura-bloque.html" class="sidebar__link">Estructura de un bloque</a>
+          <a href="merkle-tree.html" class="sidebar__link">Árbol de Merkle</a>
+          <a href="proof-of-work.html" class="sidebar__link">Proof of Work en detalle</a>
+          <a href="protocolo-p2p.html" class="sidebar__link">Protocolo P2P</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-6/" class="sidebar__link">Nivel 6 &mdash; Satoshi</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n5" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Nivel 5 &mdash; El Arquitecto</span>
+        </nav>
+
+        <div class="level1-intro">
+          <div class="nivel-badge nivel-badge--5 article__badge">Nivel 5</div>
+          <h1>El Arquitecto</h1>
+          <p>Criptografía, transacciones raw, script y protocolo para comprender Bitcoin desde dentro.</p>
+        </div>
+
+        <div class="callout callout--info">
+          <span class="callout__icon" aria-hidden="true">i</span>
+          <div class="callout__content">
+            <div class="callout__title">Cómo usar este nivel</div>
+            <p class="callout__text">Avanza por secciones en orden: primero criptografía, luego internals de transacciones, después script y por último bloques/protocolo.</p>
+          </div>
+        </div>
+
+        <h2 class="section-heading">Sección 1 &middot; Criptografía</h2>
+        <div class="level1-page-list level1-page-list--spaced">
+          <a href="funciones-hash.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">1</span><span class="level1-page-card__content"><span class="level1-page-card__title">Funciones hash</span><span class="level1-page-card__desc">La base criptográfica que hace posible la minería, las direcciones y la integridad de la blockchain.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="curva-eliptica.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">2</span><span class="level1-page-card__content"><span class="level1-page-card__title">Criptografía de curva elíptica</span><span class="level1-page-card__desc">La matemática que permite derivar claves públicas de privadas, pero no al revés. El fundamento de la seguridad de Bitcoin.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="ecdsa.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">3</span><span class="level1-page-card__content"><span class="level1-page-card__title">ECDSA (Elliptic Curve Digital Signature Algorithm)</span><span class="level1-page-card__desc">El algoritmo que permite demostrar propiedad de bitcoin sin revelar la clave privada. Usado en Bitcoin desde el día uno.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="schnorr.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">4</span><span class="level1-page-card__content"><span class="level1-page-card__title">Firmas Schnorr</span><span class="level1-page-card__desc">La evolución de las firmas digitales en Bitcoin. Más eficientes, más privadas, matemáticamente más elegantes.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+        </div>
+
+        <h2 class="section-heading">Sección 2 &middot; Transacciones en detalle</h2>
+        <div class="level1-page-list level1-page-list--spaced">
+          <a href="estructura-transaccion.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">5</span><span class="level1-page-card__content"><span class="level1-page-card__title">Estructura de una transacción</span><span class="level1-page-card__desc">Cada campo, cada byte. Cómo se construye una transacción Bitcoin a nivel de protocolo.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="segwit-internals.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">6</span><span class="level1-page-card__content"><span class="level1-page-card__title">SegWit por dentro</span><span class="level1-page-card__desc">La actualización que separó las firmas del cálculo del txid. El prerrequisito técnico para Lightning Network.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="taproot-internals.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">7</span><span class="level1-page-card__content"><span class="level1-page-card__title">Taproot por dentro</span><span class="level1-page-card__desc">La actualización más significativa desde SegWit. Firmas Schnorr, scripts Merklelizados, y privacidad por defecto.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="psbt.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">8</span><span class="level1-page-card__content"><span class="level1-page-card__title">PSBT (Partially Signed Bitcoin Transaction)</span><span class="level1-page-card__desc">El estándar que permite construir transacciones complejas en múltiples pasos. Esencial para multisig, hardware wallets y privacidad.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="locktime-sequence.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">9</span><span class="level1-page-card__content"><span class="level1-page-card__title">Locktime y Sequence</span><span class="level1-page-card__desc">Bloquear transacciones en el tiempo. La base de contratos inteligentes temporales en Bitcoin.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+        </div>
+
+        <h2 class="section-heading">Sección 3 &middot; Script</h2>
+        <div class="level1-page-list level1-page-list--spaced">
+          <a href="bitcoin-script.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">10</span><span class="level1-page-card__content"><span class="level1-page-card__title">Bitcoin Script</span><span class="level1-page-card__desc">El lenguaje que define las condiciones para gastar bitcoin. Simple por diseño, poderoso en la práctica.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="p2pkh.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">11</span><span class="level1-page-card__content"><span class="level1-page-card__title">P2PKH (Pay-to-Public-Key-Hash)</span><span class="level1-page-card__desc">El script clásico de Bitcoin. Direcciones que empiezan por 1. Sencillo, probado, pero menos eficiente que las alternativas modernas.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="p2sh.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">12</span><span class="level1-page-card__content"><span class="level1-page-card__title">P2SH (Pay-to-Script-Hash)</span><span class="level1-page-card__desc">Bloquea fondos al hash de un script. El receptor define las condiciones, el emisor solo necesita la dirección.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="p2wpkh-p2wsh.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">13</span><span class="level1-page-card__content"><span class="level1-page-card__title">P2WPKH y P2WSH (Native SegWit)</span><span class="level1-page-card__desc">El estándar moderno para transacciones Bitcoin. Direcciones bc1q, fees reducidas, y el encoding Bech32.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="p2tr.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">14</span><span class="level1-page-card__content"><span class="level1-page-card__title">P2TR (Pay-to-Taproot)</span><span class="level1-page-card__desc">La culminación de años de desarrollo. Privacidad por defecto, eficiencia máxima, flexibilidad total.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="op-return.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">15</span><span class="level1-page-card__content"><span class="level1-page-card__title">OP_RETURN</span><span class="level1-page-card__desc">El opcode para meter datos arbitrarios en la blockchain. Una válvula de escape diseñada para evitar males mayores.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+        </div>
+
+        <h2 class="section-heading">Sección 4 &middot; Bloques y protocolo</h2>
+        <div class="level1-page-list level1-page-list--spaced">
+          <a href="estructura-bloque.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">16</span><span class="level1-page-card__content"><span class="level1-page-card__title">Estructura de un bloque</span><span class="level1-page-card__desc">80 bytes que enlazan toda la historia. El header del bloque y lo que contiene.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="merkle-tree.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">17</span><span class="level1-page-card__content"><span class="level1-page-card__title">Árbol de Merkle</span><span class="level1-page-card__desc">Resumir miles de transacciones en 32 bytes. La estructura que hace posible la verificación ligera.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="proof-of-work.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">18</span><span class="level1-page-card__content"><span class="level1-page-card__title">Proof of Work en detalle</span><span class="level1-page-card__desc">El puzzle que asegura la red. Por qué gastar energía es exactamente el punto.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="protocolo-p2p.html" class="level1-page-card"><span class="level1-page-card__icon" aria-hidden="true">19</span><span class="level1-page-card__content"><span class="level1-page-card__title">Protocolo P2P</span><span class="level1-page-card__desc">Cómo los nodos se encuentran, comunican y mantienen consenso sin coordinación central.</span></span><span class="level1-page-card__arrow" aria-hidden="true">&rarr;</span></a>
+        </div>
+
+        <div class="page-nav page-nav--single">
+          <a href="../nivel-6/" class="page-nav__item page-nav__item--next">
+            <span class="page-nav__label">Siguiente nivel</span>
+            <span class="page-nav__title">Nivel 6 &mdash; Satoshi</span>
+          </a>
+        </div>
+      </div>
+    </main>
+  </div>
 
   <div data-include="footer"></div>
   <script src="../js/includes.js"></script>

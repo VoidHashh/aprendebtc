@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Anatomía byte a byte de una transacción Bitcoin: version, inputs, outputs, witness, locktime. Cómo se calcula el txid y wtxid." />
+  <title>Estructura de una transacción &mdash; Nivel 5 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 5">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 1 &middot; Criptografía</div>
+          <a href="funciones-hash.html" class="sidebar__link">Funciones hash</a>
+          <a href="curva-eliptica.html" class="sidebar__link">Criptografía de curva elíptica</a>
+          <a href="ecdsa.html" class="sidebar__link">ECDSA (Elliptic Curve Digital Signature Algorithm)</a>
+          <a href="schnorr.html" class="sidebar__link">Firmas Schnorr</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 2 &middot; Transacciones en detalle</div>
+          <a href="estructura-transaccion.html" class="sidebar__link sidebar__link--active">Estructura de una transacción</a>
+          <a href="segwit-internals.html" class="sidebar__link">SegWit por dentro</a>
+          <a href="taproot-internals.html" class="sidebar__link">Taproot por dentro</a>
+          <a href="psbt.html" class="sidebar__link">PSBT (Partially Signed Bitcoin Transaction)</a>
+          <a href="locktime-sequence.html" class="sidebar__link">Locktime y Sequence</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 3 &middot; Script</div>
+          <a href="bitcoin-script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="p2pkh.html" class="sidebar__link">P2PKH (Pay-to-Public-Key-Hash)</a>
+          <a href="p2sh.html" class="sidebar__link">P2SH (Pay-to-Script-Hash)</a>
+          <a href="p2wpkh-p2wsh.html" class="sidebar__link">P2WPKH y P2WSH (Native SegWit)</a>
+          <a href="p2tr.html" class="sidebar__link">P2TR (Pay-to-Taproot)</a>
+          <a href="op-return.html" class="sidebar__link">OP_RETURN</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 4 &middot; Bloques y protocolo</div>
+          <a href="estructura-bloque.html" class="sidebar__link">Estructura de un bloque</a>
+          <a href="merkle-tree.html" class="sidebar__link">Árbol de Merkle</a>
+          <a href="proof-of-work.html" class="sidebar__link">Proof of Work en detalle</a>
+          <a href="protocolo-p2p.html" class="sidebar__link">Protocolo P2P</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-6/" class="sidebar__link">Nivel 6 &mdash; Satoshi</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n5" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 5</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Estructura de una transacción</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--5 article__badge">Nivel 5</div>
+          <h1>Estructura de una transacción</h1>
+          <p class="article__subtitle">Cada campo, cada byte. Cómo se construye una transacción Bitcoin a nivel de protocolo.</p>
+
+<h2>Visión general</h2>
+
+<p>Una transacción Bitcoin es una estructura de datos que especifica:</p>
+
+<ul>
+
+<li>Qué UTXOs se gastan (inputs)</li>
+
+<li>Qué nuevos UTXOs se crean (outputs)</li>
+
+<li>Condiciones adicionales (locktime, witness data)</li>
+
+</ul>
+
+<p>Todo se serializa en una secuencia de bytes que se transmite por la red y se almacena en la blockchain.</p>
+
+<h2>Anatomía completa</h2>
+
+<p>Una transacción SegWit tiene la siguiente estructura: [Version]           4 bytes [Marker]            1 byte (0x00) - solo SegWit [Flag]              1 byte (0x01) - solo SegWit [Input Count]       varint [Inputs]            variable [Output Count]      varint [Outputs]           variable [Witness]           variable - solo SegWit [Locktime]          4 bytes</p>
+
+<p>Vamos campo por campo.</p>
+
+<h2>Version (4 bytes)</h2>
+
+<p>Indica la versión del formato de transacción. Actualmente:</p>
+
+<ul>
+
+<li><code>01000000</code> (little-endian) = versión 1</li>
+
+<li><code>02000000</code> = versión 2 (necesaria para OP_CHECKSEQUENCEVERIFY)</li>
+
+</ul>
+
+<h2>Marker y Flag (SegWit)</h2>
+
+<p>En transacciones SegWit, después de la versión vienen:</p>
+
+<ul>
+
+<li>Marker: <code>00</code></li>
+
+<li>Flag: <code>01</code></li>
+
+</ul>
+
+<p>Estos bytes indican que hay datos witness al final. Las transacciones legacy no tienen estos campos.</p>
+
+<h2>Input Count (varint)</h2>
+
+<p>Un entero de longitud variable que indica cuántos inputs tiene la transacción.</p>
+
+<p>El formato varint:</p>
+
+<ul>
+
+<li>0x00-0xFC: 1 byte, valor directo</li>
+
+<li>0xFD: 3 bytes, los siguientes 2 bytes son el valor (little-endian)</li>
+
+<li>0xFE: 5 bytes, los siguientes 4 bytes son el valor</li>
+
+<li>0xFF: 9 bytes, los siguientes 8 bytes son el valor</li>
+
+</ul>
+
+<h2>Inputs</h2>
+
+<p>Cada input tiene: [Previous txid]     32 bytes (hash de la transacción que creó el UTXO) [Previous vout]     4 bytes (índice del output en esa transacción) [ScriptSig size]    varint [ScriptSig]         variable (vacío en SegWit nativo) [Sequence]          4 bytes</p>
+
+<p>El txid anterior está en orden de bytes invertido (little-endian) comparado con cómo se muestra normalmente.</p>
+
+<h2>Output Count (varint)</h2>
+
+<p>Número de outputs.</p>
+
+<h2>Outputs</h2>
+
+<p>Cada output tiene: [Value]             8 bytes (satoshis, little-endian) [ScriptPubKey size] varint [ScriptPubKey]      variable (el script que bloquea este output)</p>
+
+<p>El valor en satoshis usa 8 bytes little-endian. Por ejemplo, 100.000 sats = <code>A086010000000000</code>.</p>
+
+<h2>Witness (SegWit)</h2>
+
+<p>Para cada input, el witness contiene los datos de firma y otros elementos necesarios para satisfacer el script. La estructura es: [Item count]        varint (número de elementos para este input) [Item 1 size]       varint [Item 1 data]       variable [Item 2 size]       varint [Item 2 data]       variable ...</p>
+
+<p>En un P2WPKH típico, el witness tiene 2 elementos: la firma y la clave pública.</p>
+
+<h2>Locktime (4 bytes)</h2>
+
+<p>Especifica cuándo la transacción puede incluirse en un bloque:</p>
+
+<ul>
+
+<li>Si &lt; 500.000.000: altura de bloque mínima</li>
+
+<li>Si ≥ 500.000.000: timestamp Unix mínimo</li>
+
+<li><code>00000000</code>: sin restricción (lo más común)</li>
+
+</ul>
+
+<h2>Ejemplo real</h2>
+
+<p>Una transacción SegWit simple (1 input P2WPKH, 2 outputs): 01000000            Version: 1 00                  Marker 01                  Flag 01                  1 input [32 bytes txid]   Previous transaction 01000000          vout: 1 00                Empty scriptSig ffffffff          Sequence: max 02                  2 outputs e803000000000000  1000 sats 160014[20 bytes]  P2WPKH scriptPubKey 1027000000000000  10000 sats 160014[20 bytes]  P2WPKH scriptPubKey 02                  2 witness items 47[71 bytes sig]  Signature 21[33 bytes pub]  Public key 00000000            Locktime: 0</p>
+
+<h2>txid y wtxid</h2>
+
+<p><strong>txid:</strong> El identificador tradicional de la transacción. Se calcula como SHA256(SHA256(serialización legacy)), excluyendo marker, flag y witness.</p>
+
+<p><strong>wtxid:</strong> Incluye todos los datos (con witness). Se usa internamente para commitment en el bloque.</p>
+
+<p>En transacciones legacy, txid = wtxid (no hay witness). En SegWit, son diferentes.</p>
+
+<p>La separación del witness del cálculo del txid es precisamente lo que resolvió el problema de maleabilidad que impedía Lightning Network.</p>
+
+<div class="callout callout--info"><span class="callout__icon" aria-hidden="true">&#128161;</span><div class="callout__content"><div class="callout__title">Herramienta de decodificación</div><p class="callout__text">Puedes decodificar transacciones raw en <a href="../herramientas/transaccion.html">/herramientas/transaccion</a>. Pega el hexadecimal y verás cada campo anotado.</p></div></div>
+
+          <div class="ad-slot ad-content" id="ad-content-5" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="schnorr.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Firmas Schnorr</span>
+  </a>
+  <a href="segwit-internals.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">SegWit por dentro</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="El formato PSBT (BIP 174): flujo de trabajo para transacciones multifirma, air-gapped signing, CoinJoin. Creator, Updater, Signer, Finalizer." />
+  <title>PSBT (Partially Signed Bitcoin Transaction) &mdash; Nivel 5 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 5">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 1 &middot; Criptografía</div>
+          <a href="funciones-hash.html" class="sidebar__link">Funciones hash</a>
+          <a href="curva-eliptica.html" class="sidebar__link">Criptografía de curva elíptica</a>
+          <a href="ecdsa.html" class="sidebar__link">ECDSA (Elliptic Curve Digital Signature Algorithm)</a>
+          <a href="schnorr.html" class="sidebar__link">Firmas Schnorr</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 2 &middot; Transacciones en detalle</div>
+          <a href="estructura-transaccion.html" class="sidebar__link">Estructura de una transacción</a>
+          <a href="segwit-internals.html" class="sidebar__link">SegWit por dentro</a>
+          <a href="taproot-internals.html" class="sidebar__link">Taproot por dentro</a>
+          <a href="psbt.html" class="sidebar__link sidebar__link--active">PSBT (Partially Signed Bitcoin Transaction)</a>
+          <a href="locktime-sequence.html" class="sidebar__link">Locktime y Sequence</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 3 &middot; Script</div>
+          <a href="bitcoin-script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="p2pkh.html" class="sidebar__link">P2PKH (Pay-to-Public-Key-Hash)</a>
+          <a href="p2sh.html" class="sidebar__link">P2SH (Pay-to-Script-Hash)</a>
+          <a href="p2wpkh-p2wsh.html" class="sidebar__link">P2WPKH y P2WSH (Native SegWit)</a>
+          <a href="p2tr.html" class="sidebar__link">P2TR (Pay-to-Taproot)</a>
+          <a href="op-return.html" class="sidebar__link">OP_RETURN</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 4 &middot; Bloques y protocolo</div>
+          <a href="estructura-bloque.html" class="sidebar__link">Estructura de un bloque</a>
+          <a href="merkle-tree.html" class="sidebar__link">Árbol de Merkle</a>
+          <a href="proof-of-work.html" class="sidebar__link">Proof of Work en detalle</a>
+          <a href="protocolo-p2p.html" class="sidebar__link">Protocolo P2P</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-6/" class="sidebar__link">Nivel 6 &mdash; Satoshi</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n5" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 5</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">PSBT (Partially Signed Bitcoin Transaction)</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--5 article__badge">Nivel 5</div>
+          <h1>PSBT (Partially Signed Bitcoin Transaction)</h1>
+          <p class="article__subtitle">El estándar que permite construir transacciones complejas en múltiples pasos. Esencial para multisig, hardware wallets y privacidad.</p>
+
+<h2>El problema que resuelve</h2>
+
+<p>En el modelo simple, una persona crea y firma una transacción en un solo paso. Pero hay escenarios más complejos:</p>
+
+<p><strong>Multisig:</strong> Necesitas firmas de múltiples dispositivos o personas. ¿Cómo pasas la transacción parcialmente firmada entre ellos?</p>
+
+<p><strong>Air-gapped signing:</strong> Tu clave privada está en un dispositivo sin conexión a internet. ¿Cómo le pasas la transacción para firmar?</p>
+
+<p><strong>CoinJoin:</strong> Múltiples participantes contribuyen inputs y outputs. Cada uno firma solo sus inputs. ¿Cómo se coordina?</p>
+
+<p>PSBT (BIP 174) define un formato estándar para transacciones en proceso de construcción/firma.</p>
+
+<h2>Los roles en PSBT</h2>
+
+<p>El flujo PSBT define roles (que pueden ser la misma entidad o diferentes):</p>
+
+<h3>Creator</h3>
+
+<p>Crea la estructura base: inputs (qué UTXOs gastar) y outputs (destinos y cantidades). No incluye firmas ni datos para firmar todavía.</p>
+
+<h3>Updater</h3>
+
+<p>Añade información necesaria para firmar:</p>
+
+<ul>
+
+<li>UTXOs previos completos (necesarios para verificar las cantidades)</li>
+
+<li>Scripts de redeem/witness si aplica</li>
+
+<li>Derivation paths (para que hardware wallets sepan qué clave usar)</li>
+
+<li>Información de sighash</li>
+
+</ul>
+
+<h3>Signer</h3>
+
+<p>Firma los inputs que puede firmar. Un PSBT puede pasar por múltiples signers, cada uno añadiendo su firma.</p>
+
+<p>El signer verifica que la información del PSBT es correcta antes de firmar.</p>
+
+<h3>Combiner</h3>
+
+<p>Si hay múltiples versiones del PSBT con diferentes firmas (cada signer devolvió su copia firmada), el combiner las fusiona.</p>
+
+<h3>Finalizer</h3>
+
+<p>Convierte las firmas parciales en scriptSig/witness finales. Verifica que hay suficientes firmas para cada input.</p>
+
+<h3>Extractor</h3>
+
+<p>Extrae la transacción final (raw transaction) lista para broadcast a la red.</p>
+
+<h2>Estructura del PSBT</h2>
+
+<p>Un PSBT es una secuencia de mapas clave-valor: &lt;magic: 0x70736274ff&gt; &quot;psbt&quot; + 0xff &lt;global map&gt; &lt;input maps, uno por input&gt; &lt;output maps, uno por output&gt;</p>
+
+<p>Cada mapa contiene pares clave-valor donde:</p>
+
+<ul>
+
+<li>La clave indica el tipo de dato</li>
+
+<li>El valor contiene el dato</li>
+
+</ul>
+
+<p>Por ejemplo, una clave global <code>0x00</code> indica la transacción unsigned. Una clave de input <code>0x06</code> indica una firma parcial.</p>
+
+<h2>Ejemplo de flujo práctico</h2>
+
+<p>Escenario: multisig 2-de-3 con hardware wallets.</p>
+
+<ol>
+
+<li><strong>Creator (Sparrow):</strong> El usuario configura la transacción en Sparrow. Define inputs y outputs. Sparrow genera el PSBT inicial.</li>
+
+</ol>
+
+<ol>
+
+<li><strong>Updater (Sparrow):</strong> Sparrow añade los UTXOs previos y los derivation paths para cada hardware wallet.</li>
+
+</ol>
+
+<ol>
+
+<li><strong>Signer 1 (Coldcard):</strong> El usuario exporta el PSBT a microSD. La Coldcard lo lee, muestra los detalles, el usuario verifica y confirma. La Coldcard firma su parte y guarda el PSBT actualizado.</li>
+
+</ol>
+
+<ol>
+
+<li><strong>Signer 2 (Trezor):</strong> El PSBT (ahora con 1 firma) se pasa al Trezor vía USB. El Trezor firma su parte.</li>
+
+</ol>
+
+<ol>
+
+<li><strong>Finalizer (Sparrow):</strong> Sparrow recibe el PSBT con 2 firmas. Verifica que son suficientes (2-de-3). Construye los witness finales.</li>
+
+</ol>
+
+<ol>
+
+<li><strong>Extractor (Sparrow):</strong> Sparrow extrae la transacción raw final.</li>
+
+</ol>
+
+<ol>
+
+<li><strong>Broadcast:</strong> Sparrow envía la transacción a la red.</li>
+
+</ol>
+
+<h2>Formato de transferencia</h2>
+
+<p>Los PSBTs se representan típicamente en:</p>
+
+<p><strong>Base64:</strong> Para copiar/pegar o códigos QR. El string empieza por <code>cHNidP8</code> (la codificación de &quot;psbt&quot;).</p>
+
+<p><strong>Binario:</strong> Para archivos (.psbt) que se pasan por USB o microSD.</p>
+
+<h2>Versiones de PSBT</h2>
+
+<p><strong>PSBT v0 (BIP 174):</strong> La versión original. Ampliamente soportada.</p>
+
+<p><strong>PSBT v2 (BIP 370):</strong> Versión mejorada que permite modificar la transacción después de añadir firmas en ciertos casos. Menos soportada todavía.</p>
+
+<h2>Soporte en el ecosistema</h2>
+
+<p>La mayoría de hardware wallets y software de calidad soportan PSBT:</p>
+
+<ul>
+
+<li>Sparrow: soporte completo, la herramienta de referencia para PSBT</li>
+
+<li>Coldcard, Trezor, Ledger, Passport, Jade: soporte como signers</li>
+
+<li>Bitcoin Core: soporte via RPC</li>
+
+<li>Blue Wallet: soporte básico</li>
+
+</ul>
+
+<div class="callout callout--info"><span class="callout__icon" aria-hidden="true">&#128161;</span><div class="callout__content"><div class="callout__title">El estándar de interoperabilidad</div><p class="callout__text">PSBT es lo que permite que diferentes wallets y dispositivos trabajen juntos. Sin PSBT, cada fabricante tendría su formato propietario y multisig entre diferentes marcas sería una pesadilla.</p></div></div>
+
+          <div class="ad-slot ad-content" id="ad-content-5" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="taproot-internals.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Taproot por dentro</span>
+  </a>
+  <a href="locktime-sequence.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Locktime y Sequence</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

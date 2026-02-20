@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Arquitectura de Taproot: BIP 340/341/342, key path vs script path, MAST, tweaked keys, y cómo mejora la privacidad y eficiencia." />
+  <title>Taproot por dentro &mdash; Nivel 5 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 5">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 1 &middot; Criptografía</div>
+          <a href="funciones-hash.html" class="sidebar__link">Funciones hash</a>
+          <a href="curva-eliptica.html" class="sidebar__link">Criptografía de curva elíptica</a>
+          <a href="ecdsa.html" class="sidebar__link">ECDSA (Elliptic Curve Digital Signature Algorithm)</a>
+          <a href="schnorr.html" class="sidebar__link">Firmas Schnorr</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 2 &middot; Transacciones en detalle</div>
+          <a href="estructura-transaccion.html" class="sidebar__link">Estructura de una transacción</a>
+          <a href="segwit-internals.html" class="sidebar__link">SegWit por dentro</a>
+          <a href="taproot-internals.html" class="sidebar__link sidebar__link--active">Taproot por dentro</a>
+          <a href="psbt.html" class="sidebar__link">PSBT (Partially Signed Bitcoin Transaction)</a>
+          <a href="locktime-sequence.html" class="sidebar__link">Locktime y Sequence</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 3 &middot; Script</div>
+          <a href="bitcoin-script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="p2pkh.html" class="sidebar__link">P2PKH (Pay-to-Public-Key-Hash)</a>
+          <a href="p2sh.html" class="sidebar__link">P2SH (Pay-to-Script-Hash)</a>
+          <a href="p2wpkh-p2wsh.html" class="sidebar__link">P2WPKH y P2WSH (Native SegWit)</a>
+          <a href="p2tr.html" class="sidebar__link">P2TR (Pay-to-Taproot)</a>
+          <a href="op-return.html" class="sidebar__link">OP_RETURN</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 4 &middot; Bloques y protocolo</div>
+          <a href="estructura-bloque.html" class="sidebar__link">Estructura de un bloque</a>
+          <a href="merkle-tree.html" class="sidebar__link">Árbol de Merkle</a>
+          <a href="proof-of-work.html" class="sidebar__link">Proof of Work en detalle</a>
+          <a href="protocolo-p2p.html" class="sidebar__link">Protocolo P2P</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-6/" class="sidebar__link">Nivel 6 &mdash; Satoshi</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n5" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 5</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Taproot por dentro</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--5 article__badge">Nivel 5</div>
+          <h1>Taproot por dentro</h1>
+          <p class="article__subtitle">La actualización más significativa desde SegWit. Firmas Schnorr, scripts Merklelizados, y privacidad por defecto.</p>
+
+<h2>Los tres BIPs de Taproot</h2>
+
+<p>Taproot es realmente un conjunto de tres mejoras que se activaron juntas en noviembre de 2021:</p>
+
+<p><strong>BIP 340:</strong> Define las firmas Schnorr para secp256k1.</p>
+
+<p><strong>BIP 341:</strong> Define Taproot propiamente: cómo se construyen las direcciones P2TR, el key path, el script path, y la estructura MAST.</p>
+
+<p><strong>BIP 342:</strong> Define Tapscript, las reglas de script modificadas para outputs Taproot.</p>
+
+<h2>La dirección P2TR</h2>
+
+<p>Una dirección Taproot (bc1p...) bloquea fondos a una &quot;tweaked public key&quot;: Q = P + hash(P || m) · G</p>
+
+<p>Donde:</p>
+
+<ul>
+
+<li>P es la clave pública interna</li>
+
+<li>m es el Merkle root del árbol de scripts (o bytes vacíos si no hay scripts)</li>
+
+<li>G es el punto generador</li>
+
+<li>Q es la clave pública tweaked que aparece en la dirección</li>
+
+</ul>
+
+<p>El scriptPubKey de un output P2TR es simplemente: OP_1 &lt;32 bytes: Q&gt;</p>
+
+<p>OP_1 indica witness version 1 (Taproot). Los 32 bytes son la coordenada x de Q.</p>
+
+<h2>Key path: el camino rápido</h2>
+
+<p>Si conoces la clave privada correspondiente a P, puedes calcular la clave privada correspondiente a Q (el &quot;tweak&quot; es un ajuste determinístico).</p>
+
+<p>Para gastar por key path:</p>
+
+<ol>
+
+<li>Calcular la clave privada tweaked</li>
+
+<li>Firmar con Schnorr</li>
+
+<li>El witness es solo la firma (64 bytes)</li>
+
+</ol>
+
+<p>Esto es lo más eficiente posible: una firma, sin revelar ningún script.</p>
+
+<p>Desde fuera, cualquier gasto por key path se ve exactamente igual, independientemente de qué scripts alternativos existieran.</p>
+
+<h2>Script path: cuando necesitas condiciones</h2>
+
+<p>Si quieres gastar usando un script alternativo (timelock, multisig, etc.):</p>
+
+<ol>
+
+<li>Revelas el script específico que quieres usar</li>
+
+<li>Provees una prueba Merkle que demuestra que ese script estaba en el árbol</li>
+
+<li>Provees los datos que satisfacen el script</li>
+
+</ol>
+
+<p>El witness incluye:</p>
+
+<ul>
+
+<li>Los elementos que satisfacen el script</li>
+
+<li>El script mismo</li>
+
+<li>El control block (clave pública interna + prueba Merkle)</li>
+
+</ul>
+
+<h2>MAST: Merklelized Alternative Script Trees</h2>
+
+<p>MAST permite tener múltiples condiciones de gasto organizadas en un árbol de Merkle: Merkle Root /           \ Hash A        Hash B /    \        /    \ Script1 Script2 Script3 Script4</p>
+
+<p>Solo se revela el script usado y su prueba Merkle. Los demás scripts permanecen ocultos.</p>
+
+<p>Ejemplo: una herencia con tres condiciones:</p>
+
+<ol>
+
+<li>Firma del propietario (key path, sin scripts)</li>
+
+<li>Firma del heredero después de 1 año (script path: timelock + firma)</li>
+
+<li>Multisig 2-de-3 de emergencia</li>
+
+</ol>
+
+<p>Si el propietario gasta con su firma (key path), nadie sabe que existían las otras condiciones. Solo si usa una condición alternativa se revela ese script específico, no los demás.</p>
+
+<h2>Beneficios de privacidad</h2>
+
+<p>Antes de Taproot:</p>
+
+<ul>
+
+<li>Un multisig 2-de-3 era visiblemente diferente de un gasto simple</li>
+
+<li>Un timelock era visiblemente diferente</li>
+
+<li>Se podía inferir mucho sobre el contrato observando la transacción</li>
+
+</ul>
+
+<p>Con Taproot:</p>
+
+<ul>
+
+<li>El caso común (key path) es indistinguible de cualquier otro gasto Taproot</li>
+
+<li>Solo en el caso excepcional (script path) se revela información</li>
+
+<li>Incluso entonces, solo se revela el script usado, no los alternativos</li>
+
+</ul>
+
+<h2>Tapscript (BIP 342)</h2>
+
+<p>Tapscript modifica las reglas de Bitcoin Script para outputs Taproot:</p>
+
+<ul>
+
+<li>OP_CHECKMULTISIG y OP_CHECKMULTISIGVERIFY se deshabilitan (usar Schnorr agregado en su lugar)</li>
+
+<li>Se añade OP_CHECKSIGADD para multisig eficiente con Schnorr</li>
+
+<li>Las firmas usan Schnorr (64 bytes) en lugar de ECDSA DER</li>
+
+<li>Límites de recursos ajustados</li>
+
+</ul>
+
+<p>Tapscript también incluye versionado interno, permitiendo futuras mejoras a las reglas de script sin necesidad de un nuevo soft fork.</p>
+
+<h2>Ejemplo: key path spend</h2>
+
+<p>Output: <code>5120[32 bytes Q]</code></p>
+
+<p>Para gastar: Witness: [64 bytes signature]</p>
+
+<p>El nodo verificador:</p>
+
+<ol>
+
+<li>Ve OP_1, sabe que es Taproot</li>
+
+<li>Intenta verificar como key path: ¿la firma es válida para Q?</li>
+
+<li>Si sí, el gasto es válido</li>
+
+</ol>
+
+<h2>Ejemplo: script path spend</h2>
+
+<p>Para gastar con un script: Witness: [datos que satisfacen el script] [el script] [control block: versión+paridad || clave interna || merkle proof]</p>
+
+<p>El nodo verificador:</p>
+
+<ol>
+
+<li>Extrae la clave interna P del control block</li>
+
+<li>Verifica la prueba Merkle</li>
+
+<li>Recalcula Q a partir de P y el Merkle root</li>
+
+<li>Verifica que Q coincide con lo que está en el output</li>
+
+<li>Ejecuta el script con los datos proporcionados</li>
+
+</ol>
+
+<p>Si todo verifica, el gasto es válido.</p>
+
+<div class="callout callout--info"><span class="callout__icon" aria-hidden="true">&#128161;</span><div class="callout__content"><div class="callout__title">Adopción gradual</div><p class="callout__text">Taproot ha visto adopción creciente pero gradual. Las wallets están añadiendo soporte progresivamente. Para aprovechar Taproot, necesitas que tanto tu wallet como el servicio receptor lo soporten.</p></div></div>
+
+          <div class="ad-slot ad-content" id="ad-content-5" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="segwit-internals.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">SegWit por dentro</span>
+  </a>
+  <a href="psbt.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">PSBT (Partially Signed Bitcoin Transaction)</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

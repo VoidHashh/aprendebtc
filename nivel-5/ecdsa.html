@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cómo funciona ECDSA en Bitcoin: proceso de firma, verificación, el peligro del nonce, y formato DER. Seguridad de las firmas digitales." />
+  <title>ECDSA (Elliptic Curve Digital Signature Algorithm) &mdash; Nivel 5 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 5">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 1 &middot; Criptografía</div>
+          <a href="funciones-hash.html" class="sidebar__link">Funciones hash</a>
+          <a href="curva-eliptica.html" class="sidebar__link">Criptografía de curva elíptica</a>
+          <a href="ecdsa.html" class="sidebar__link sidebar__link--active">ECDSA (Elliptic Curve Digital Signature Algorithm)</a>
+          <a href="schnorr.html" class="sidebar__link">Firmas Schnorr</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 2 &middot; Transacciones en detalle</div>
+          <a href="estructura-transaccion.html" class="sidebar__link">Estructura de una transacción</a>
+          <a href="segwit-internals.html" class="sidebar__link">SegWit por dentro</a>
+          <a href="taproot-internals.html" class="sidebar__link">Taproot por dentro</a>
+          <a href="psbt.html" class="sidebar__link">PSBT (Partially Signed Bitcoin Transaction)</a>
+          <a href="locktime-sequence.html" class="sidebar__link">Locktime y Sequence</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 3 &middot; Script</div>
+          <a href="bitcoin-script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="p2pkh.html" class="sidebar__link">P2PKH (Pay-to-Public-Key-Hash)</a>
+          <a href="p2sh.html" class="sidebar__link">P2SH (Pay-to-Script-Hash)</a>
+          <a href="p2wpkh-p2wsh.html" class="sidebar__link">P2WPKH y P2WSH (Native SegWit)</a>
+          <a href="p2tr.html" class="sidebar__link">P2TR (Pay-to-Taproot)</a>
+          <a href="op-return.html" class="sidebar__link">OP_RETURN</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 4 &middot; Bloques y protocolo</div>
+          <a href="estructura-bloque.html" class="sidebar__link">Estructura de un bloque</a>
+          <a href="merkle-tree.html" class="sidebar__link">Árbol de Merkle</a>
+          <a href="proof-of-work.html" class="sidebar__link">Proof of Work en detalle</a>
+          <a href="protocolo-p2p.html" class="sidebar__link">Protocolo P2P</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-6/" class="sidebar__link">Nivel 6 &mdash; Satoshi</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n5" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 5</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">ECDSA (Elliptic Curve Digital Signature Algorithm)</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--5 article__badge">Nivel 5</div>
+          <h1>ECDSA (Elliptic Curve Digital Signature Algorithm)</h1>
+          <p class="article__subtitle">El algoritmo que permite demostrar propiedad de bitcoin sin revelar la clave privada. Usado en Bitcoin desde el día uno.</p>
+
+<h2>Qué es ECDSA</h2>
+
+<p>ECDSA (Elliptic Curve Digital Signature Algorithm) es el algoritmo de firma digital que Bitcoin usó desde su creación para todas las transacciones hasta la llegada de Taproot.</p>
+
+<p>Una firma ECDSA permite demostrar que conoces la clave privada asociada a una clave pública, sin revelar la clave privada. Esta prueba es verificable por cualquiera que tenga la clave pública.</p>
+
+<h2>El proceso de firma</h2>
+
+<p>Para firmar un mensaje m (en Bitcoin, los datos de la transacción) con la clave privada d:</p>
+
+<h3>Paso 1: Hashear el mensaje</h3>
+
+<p>e = SHA256(SHA256(m))</p>
+
+<p>El doble hash produce un número de 256 bits.</p>
+
+<h3>Paso 2: Generar el nonce</h3>
+
+<p>Elegir un número aleatorio k entre 1 y n-1 (donde n es el orden de la curva).</p>
+
+<p>Este paso es crítico y volveremos a él.</p>
+
+<h3>Paso 3: Calcular el punto R</h3>
+
+<p>R = k · G</p>
+
+<p>Donde G es el punto generador de secp256k1. R es un punto en la curva.</p>
+
+<h3>Paso 4: Calcular r</h3>
+
+<p>r = Rx mod n</p>
+
+<p>Donde Rx es la coordenada x del punto R.</p>
+
+<h3>Paso 5: Calcular s</h3>
+
+<p>s = k⁻¹ · (e + r · d) mod n</p>
+
+<p>Donde k⁻¹ es el inverso modular de k, e es el hash del mensaje, y d es la clave privada.</p>
+
+<h3>La firma</h3>
+
+<p>La firma es el par (r, s). Son dos números de 256 bits cada uno.</p>
+
+<h2>El proceso de verificación</h2>
+
+<p>Cualquiera con la clave pública Q puede verificar que (r, s) es una firma válida del mensaje m:</p>
+
+<ol>
+
+<li>Calcular e = SHA256(SHA256(m))</li>
+
+<li>Calcular u₁ = e · s⁻¹ mod n</li>
+
+<li>Calcular u₂ = r · s⁻¹ mod n</li>
+
+<li>Calcular el punto R&#x27; = u₁ · G + u₂ · Q</li>
+
+<li>Verificar que R&#x27;x mod n = r</li>
+
+</ol>
+
+<p>Si la verificación pasa, la firma es válida. El firmante conoce la clave privada correspondiente a Q.</p>
+
+<h2>El peligro del nonce</h2>
+
+<p>El nonce k debe ser:</p>
+
+<ul>
+
+<li>Verdaderamente aleatorio</li>
+
+<li>Único para cada firma</li>
+
+<li>Secreto</li>
+
+</ul>
+
+<p>Si k se reutiliza para dos firmas diferentes con la misma clave privada, la clave privada se puede calcular matemáticamente a partir de las dos firmas. Esto no es un ataque teórico: ha ocurrido en la práctica y ha causado pérdidas reales de bitcoin.</p>
+
+<p>Si k es predecible o tiene baja entropía, también puede ser vulnerable.</p>
+
+<div class="callout callout--warning"><span class="callout__icon" aria-hidden="true">&#9888;&#65039;</span><div class="callout__content"><div class="callout__title">La seguridad de ECDSA depende del nonce</div><p class="callout__text">La seguridad de ECDSA depende completamente de la calidad del nonce. Las hardware wallets y wallets de buena reputación implementan RFC 6979, que genera nonces de forma determinística a partir de la clave privada y el mensaje. Esto elimina el riesgo de nonces repetidos o de mala calidad.</p></div></div>
+
+<h2>Formato DER</h2>
+
+<p>En las transacciones Bitcoin, las firmas ECDSA se codifican en formato DER (Distinguished Encoding Rules): 30 [longitud total] 02 [longitud de r] [r] 02 [longitud de s] [s]</p>
+
+<p>Ejemplo de firma DER (hexadecimal): 3045022100884d142d86652a3f47ba4746ec719bbfbd040a570b1deccbb6498c75c4ae24cb02204b9f039ff08df09cbe9f6addac960298cad530a863ea8f53982c09db8f6e3813</p>
+
+<p>Desglosado:</p>
+
+<ul>
+
+<li><code>30</code> = inicio de secuencia</li>
+
+<li><code>45</code> = 69 bytes de longitud total</li>
+
+<li><code>0221</code> = entero de 33 bytes (r)</li>
+
+<li><code>00884d...</code> = valor de r (con byte 00 de padding si el bit alto es 1)</li>
+
+<li><code>0220</code> = entero de 32 bytes (s)</li>
+
+<li><code>4b9f...</code> = valor de s</li>
+
+</ul>
+
+<h2>SIGHASH flags</h2>
+
+<p>Al final de la firma se añade un byte que indica qué partes de la transacción se firmaron:</p>
+
+<ul>
+
+<li><code>SIGHASH_ALL (0x01)</code>: firma todos los inputs y outputs. El más común.</li>
+
+<li><code>SIGHASH_NONE (0x02)</code>: firma los inputs pero no los outputs.</li>
+
+<li><code>SIGHASH_SINGLE (0x03)</code>: firma los inputs y solo el output correspondiente.</li>
+
+<li><code>SIGHASH_ANYONECANPAY (0x80)</code>: puede combinarse con los anteriores. Firma solo el input propio.</li>
+
+</ul>
+
+<p>Estos flags permiten casos de uso avanzados como transacciones colaborativas donde diferentes partes firman diferentes componentes.</p>
+
+<h2>Limitaciones de ECDSA</h2>
+
+<p>ECDSA funciona, pero tiene limitaciones que motivaron la introducción de firmas Schnorr con Taproot:</p>
+
+<ul>
+
+<li>No es lineal: no puedes combinar múltiples firmas en una sola</li>
+
+<li>La seguridad no tiene una reducción limpia al problema del logaritmo discreto</li>
+
+<li>Las firmas son más grandes que las de Schnorr para el mismo nivel de seguridad</li>
+
+<li>La verificación por lotes no es tan eficiente</li>
+
+</ul>
+
+<p>La siguiente página explora Schnorr como alternativa moderna.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-5" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="curva-eliptica.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">Criptografía de curva elíptica</span>
+  </a>
+  <a href="schnorr.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">Firmas Schnorr</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

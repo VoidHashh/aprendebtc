@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SegWit nativo explicado: P2WPKH para pagos simples, P2WSH para scripts complejos. Estructura, encoding Bech32, ventajas sobre P2SH." />
+  <title>P2WPKH y P2WSH (Native SegWit) &mdash; Nivel 5 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 5">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 1 &middot; Criptografía</div>
+          <a href="funciones-hash.html" class="sidebar__link">Funciones hash</a>
+          <a href="curva-eliptica.html" class="sidebar__link">Criptografía de curva elíptica</a>
+          <a href="ecdsa.html" class="sidebar__link">ECDSA (Elliptic Curve Digital Signature Algorithm)</a>
+          <a href="schnorr.html" class="sidebar__link">Firmas Schnorr</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 2 &middot; Transacciones en detalle</div>
+          <a href="estructura-transaccion.html" class="sidebar__link">Estructura de una transacción</a>
+          <a href="segwit-internals.html" class="sidebar__link">SegWit por dentro</a>
+          <a href="taproot-internals.html" class="sidebar__link">Taproot por dentro</a>
+          <a href="psbt.html" class="sidebar__link">PSBT (Partially Signed Bitcoin Transaction)</a>
+          <a href="locktime-sequence.html" class="sidebar__link">Locktime y Sequence</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 3 &middot; Script</div>
+          <a href="bitcoin-script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="p2pkh.html" class="sidebar__link">P2PKH (Pay-to-Public-Key-Hash)</a>
+          <a href="p2sh.html" class="sidebar__link">P2SH (Pay-to-Script-Hash)</a>
+          <a href="p2wpkh-p2wsh.html" class="sidebar__link sidebar__link--active">P2WPKH y P2WSH (Native SegWit)</a>
+          <a href="p2tr.html" class="sidebar__link">P2TR (Pay-to-Taproot)</a>
+          <a href="op-return.html" class="sidebar__link">OP_RETURN</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 4 &middot; Bloques y protocolo</div>
+          <a href="estructura-bloque.html" class="sidebar__link">Estructura de un bloque</a>
+          <a href="merkle-tree.html" class="sidebar__link">Árbol de Merkle</a>
+          <a href="proof-of-work.html" class="sidebar__link">Proof of Work en detalle</a>
+          <a href="protocolo-p2p.html" class="sidebar__link">Protocolo P2P</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-6/" class="sidebar__link">Nivel 6 &mdash; Satoshi</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n5" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 5</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">P2WPKH y P2WSH (Native SegWit)</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--5 article__badge">Nivel 5</div>
+          <h1>P2WPKH y P2WSH (Native SegWit)</h1>
+          <p class="article__subtitle">El estándar moderno para transacciones Bitcoin. Direcciones bc1q, fees reducidas, y el encoding Bech32.</p>
+
+<h2>SegWit nativo vs envuelto</h2>
+
+<p>SegWit puede usarse de dos formas:</p>
+
+<ul>
+
+<li><strong>Envuelto en P2SH:</strong> Direcciones que empiezan por 3. Compatible con wallets legacy.</li>
+
+<li><strong>Nativo:</strong> Direcciones que empiezan por bc1q. Más eficiente, requiere soporte SegWit.</li>
+
+</ul>
+
+<p>Esta página cubre SegWit nativo, definido en BIP 141 y BIP 143.</p>
+
+<h2>P2WPKH: el equivalente SegWit de P2PKH</h2>
+
+<p>P2WPKH (Pay-to-Witness-Public-Key-Hash) es la versión SegWit del clásico P2PKH.</p>
+
+<h3>ScriptPubKey</h3>
+
+<p>OP_0 &lt;20 bytes: pubKeyHash&gt;</p>
+
+<p>En hexadecimal: 0014&lt;20 bytes pubKeyHash&gt;</p>
+
+<p>Solo 22 bytes. OP_0 indica witness version 0. Los 20 bytes son el hash de la clave pública.</p>
+
+<h3>Witness</h3>
+
+<p>En vez de scriptSig, los datos van en el witness: &lt;signature&gt; &lt;pubKey&gt;</p>
+
+<p>El scriptSig está vacío (0 bytes).</p>
+
+<h3>Ejecución</h3>
+
+<p>El nodo ve OP_0 seguido de 20 bytes y reconoce el patrón P2WPKH. Aplica la lógica equivalente a P2PKH pero usando los datos del witness:</p>
+
+<ol>
+
+<li>Verificar que HASH160(pubKey del witness) == pubKeyHash del scriptPubKey</li>
+
+<li>Verificar que la firma es válida para la pubKey</li>
+
+</ol>
+
+<h3>Ventaja de fees</h3>
+
+<p>En P2PKH, la firma (~72 bytes) y pubKey (~33 bytes) van en el scriptSig, contando 4 WU por byte.</p>
+
+<p>En P2WPKH, van en el witness, contando 1 WU por byte.</p>
+
+<p>Resultado: ~30% menos fees para la misma operación.</p>
+
+<h2>P2WSH: scripts complejos en SegWit</h2>
+
+<p>P2WSH (Pay-to-Witness-Script-Hash) es la versión SegWit de P2SH, para scripts más complejos que un simple pago a clave pública.</p>
+
+<h3>ScriptPubKey</h3>
+
+<p>OP_0 &lt;32 bytes: witnessScriptHash&gt;</p>
+
+<p>Nota: P2WSH usa SHA256 directamente (32 bytes), no HASH160 (20 bytes). Esto aumenta la seguridad del hash.</p>
+
+<p>En hexadecimal: 0020&lt;32 bytes witnessScriptHash&gt;</p>
+
+<h3>Witness</h3>
+
+<p>&lt;elementos que satisfacen el witnessScript&gt; &lt;witnessScript&gt;</p>
+
+<h3>Ejecución</h3>
+
+<ol>
+
+<li>El nodo ve OP_0 + 32 bytes, reconoce P2WSH</li>
+
+<li>Toma el último elemento del witness como witnessScript</li>
+
+<li>Verifica SHA256(witnessScript) == witnessScriptHash</li>
+
+<li>Ejecuta el witnessScript con los elementos anteriores del witness</li>
+
+</ol>
+
+<h3>Ejemplo: multisig 2-de-3</h3>
+
+<p>WitnessScript: OP_2 &lt;pubKey1&gt; &lt;pubKey2&gt; &lt;pubKey3&gt; OP_3 OP_CHECKMULTISIG</p>
+
+<p>Witness para gastar: &lt;&gt; &lt;sig1&gt; &lt;sig2&gt; &lt;witnessScript&gt;</p>
+
+<p>El elemento vacío inicial es por el bug histórico de CHECKMULTISIG.</p>
+
+<h2>Encoding Bech32 (BIP 173)</h2>
+
+<p>Las direcciones SegWit nativas usan un nuevo formato de encoding llamado Bech32.</p>
+
+<h3>Características</h3>
+
+<ul>
+
+<li>Solo minúsculas (o solo mayúsculas): <code>bc1q...</code> no <code>Bc1Q...</code></li>
+
+<li>Sin caracteres confusos: no usa 1, b, i, o (fáciles de confundir con otros)</li>
+
+<li>Detección de errores mejorada: detecta hasta 4 errores, localiza hasta 2</li>
+
+<li>Prefijo legible: <code>bc</code> para mainnet, <code>tb</code> para testnet</li>
+
+</ul>
+
+<h3>Estructura</h3>
+
+<p>bc1q[datos codificados][checksum de 6 caracteres]</p>
+
+<p>El <code>q</code> después de <code>bc1</code> indica witness version 0. Las direcciones Taproot usan <code>p</code> (version 1).</p>
+
+<h3>Ejemplo</h3>
+
+<p>bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq</p>
+
+<ul>
+
+<li><code>bc</code>: mainnet</li>
+
+<li><code>1</code>: separador</li>
+
+<li><code>q</code>: version 0</li>
+
+<li><code>ar0srrr7xfkvy5l643lydnw9re59gtzz</code>: pubKeyHash codificado</li>
+
+<li><code>wf5mdq</code>: checksum</li>
+
+</ul>
+
+<h2>Comparativa de tamaños</h2>
+
+<p>| Tipo | ScriptPubKey | Input (aprox) | Fees relativas | |------|--------------|---------------|----------------| | P2PKH | 25 bytes | 148 bytes | 100% | | P2SH-P2WPKH | 23 bytes | 91 bytes | ~80% | | P2WPKH | 22 bytes | 68 bytes | ~68% | | P2WSH (2-de-3) | 34 bytes | ~140 bytes | Varía |</p>
+
+<h2>Cuándo usar cada uno</h2>
+
+<p><strong>P2WPKH:</strong> Para pagos simples a una sola clave. Es el estándar actual para uso general.</p>
+
+<p><strong>P2WSH:</strong> Para scripts complejos: multisig, timelocks, contratos.</p>
+
+<p><strong>P2TR (Taproot):</strong> La evolución más reciente. Mejor privacidad y eficiencia para casos complejos. Debería preferirse cuando está soportado.</p>
+
+<h2>Soporte en el ecosistema</h2>
+
+<p>En 2025, la gran mayoría de wallets y servicios soportan SegWit nativo:</p>
+
+<ul>
+
+<li>Todas las hardware wallets principales</li>
+
+<li>Sparrow, Blue Wallet, Electrum</li>
+
+<li>Exchanges principales (Kraken, Coinbase, Binance, etc.)</li>
+
+</ul>
+
+<p>Si tu wallet o servicio no soporta bc1q, considera actualizarte.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-5" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="p2sh.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">P2SH (Pay-to-Script-Hash)</span>
+  </a>
+  <a href="p2tr.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">P2TR (Pay-to-Taproot)</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

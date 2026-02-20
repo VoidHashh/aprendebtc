@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="P2SH explicado: cómo funciona el hash del script, redeemScript, casos de uso para multisig y SegWit envuelto. BIP 16." />
+  <title>P2SH (Pay-to-Script-Hash) &mdash; Nivel 5 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 5">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 1 &middot; Criptografía</div>
+          <a href="funciones-hash.html" class="sidebar__link">Funciones hash</a>
+          <a href="curva-eliptica.html" class="sidebar__link">Criptografía de curva elíptica</a>
+          <a href="ecdsa.html" class="sidebar__link">ECDSA (Elliptic Curve Digital Signature Algorithm)</a>
+          <a href="schnorr.html" class="sidebar__link">Firmas Schnorr</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 2 &middot; Transacciones en detalle</div>
+          <a href="estructura-transaccion.html" class="sidebar__link">Estructura de una transacción</a>
+          <a href="segwit-internals.html" class="sidebar__link">SegWit por dentro</a>
+          <a href="taproot-internals.html" class="sidebar__link">Taproot por dentro</a>
+          <a href="psbt.html" class="sidebar__link">PSBT (Partially Signed Bitcoin Transaction)</a>
+          <a href="locktime-sequence.html" class="sidebar__link">Locktime y Sequence</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 3 &middot; Script</div>
+          <a href="bitcoin-script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="p2pkh.html" class="sidebar__link">P2PKH (Pay-to-Public-Key-Hash)</a>
+          <a href="p2sh.html" class="sidebar__link sidebar__link--active">P2SH (Pay-to-Script-Hash)</a>
+          <a href="p2wpkh-p2wsh.html" class="sidebar__link">P2WPKH y P2WSH (Native SegWit)</a>
+          <a href="p2tr.html" class="sidebar__link">P2TR (Pay-to-Taproot)</a>
+          <a href="op-return.html" class="sidebar__link">OP_RETURN</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Sección 4 &middot; Bloques y protocolo</div>
+          <a href="estructura-bloque.html" class="sidebar__link">Estructura de un bloque</a>
+          <a href="merkle-tree.html" class="sidebar__link">Árbol de Merkle</a>
+          <a href="proof-of-work.html" class="sidebar__link">Proof of Work en detalle</a>
+          <a href="protocolo-p2p.html" class="sidebar__link">Protocolo P2P</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Siguiente nivel</div>
+          <a href="../nivel-6/" class="sidebar__link">Nivel 6 &mdash; Satoshi</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-n5" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 5</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">P2SH (Pay-to-Script-Hash)</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--5 article__badge">Nivel 5</div>
+          <h1>P2SH (Pay-to-Script-Hash)</h1>
+          <p class="article__subtitle">Bloquea fondos al hash de un script. El receptor define las condiciones, el emisor solo necesita la dirección.</p>
+
+<h2>El concepto</h2>
+
+<p>P2SH (Pay-to-Script-Hash), definido en BIP 16, introdujo una idea elegante: en vez de poner el script de bloqueo completo en el output, se pone solo su hash. El script completo (llamado redeemScript) se revela al gastar.</p>
+
+<p>Las direcciones P2SH empiezan por &quot;3&quot; (como <code>3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy</code>).</p>
+
+<h2>El problema que resuelve</h2>
+
+<p>Imagina un multisig 2-de-3. El script de bloqueo sería largo: OP_2 &lt;pubKey1&gt; &lt;pubKey2&gt; &lt;pubKey3&gt; OP_3 OP_CHECKMULTISIG</p>
+
+<p>Son ~105 bytes solo para el scriptPubKey. El emisor tendría que conocer todas las claves públicas y construir este script.</p>
+
+<p>Con P2SH:</p>
+
+<ul>
+
+<li>El receptor construye el script complejo</li>
+
+<li>Calcula su hash</li>
+
+<li>Da al emisor una dirección corta basada en ese hash</li>
+
+<li>El emisor envía a esa dirección sin conocer el script</li>
+
+</ul>
+
+<h2>El script de bloqueo (scriptPubKey)</h2>
+
+<p>OP_HASH160 &lt;20 bytes: scriptHash&gt; OP_EQUAL</p>
+
+<p>En hexadecimal: a914&lt;20 bytes scriptHash&gt;87</p>
+
+<p>Solo 23 bytes, independientemente de lo complejo que sea el redeemScript.</p>
+
+<h2>El script de desbloqueo (scriptSig)</h2>
+
+<p>&lt;datos que satisfacen el redeemScript&gt; &lt;redeemScript&gt;</p>
+
+<p>El scriptSig incluye:</p>
+
+<ol>
+
+<li>Los datos necesarios para satisfacer el redeemScript (firmas, etc.)</li>
+
+<li>El redeemScript completo</li>
+
+</ol>
+
+<h2>Ejecución</h2>
+
+<p>La validación ocurre en dos fases:</p>
+
+<h3>Fase 1: Verificar el hash</h3>
+
+<p>Push &lt;datos&gt; (ignorados en esta fase) Push &lt;redeemScript&gt; OP_HASH160 Pila: [datos..., hash(redeemScript)] Push &lt;scriptHash&gt; Pila: [datos..., hash(redeemScript), expectedHash] OP_EQUAL ¿hash(redeemScript) == expectedHash? Pila: [datos..., TRUE/FALSE]</p>
+
+<p>Si el hash no coincide, falla inmediatamente.</p>
+
+<h3>Fase 2: Ejecutar el redeemScript</h3>
+
+<p>Si la fase 1 pasa (el hash coincide), el redeemScript se &quot;deserializa&quot; y ejecuta con los datos proporcionados.</p>
+
+<p>Es como si el redeemScript fuera el scriptPubKey original, y los datos anteriores fueran el scriptSig.</p>
+
+<h2>Ejemplo: P2SH-Multisig</h2>
+
+<p>RedeemScript para 2-de-3: OP_2 &lt;pubKey1&gt; &lt;pubKey2&gt; &lt;pubKey3&gt; OP_3 OP_CHECKMULTISIG</p>
+
+<p>Para gastar, el scriptSig sería: OP_0 &lt;sig1&gt; &lt;sig2&gt; &lt;redeemScript&gt;</p>
+
+<p>(El OP_0 al inicio es por un bug histórico en OP_CHECKMULTISIG que consume un elemento extra de la pila.)</p>
+
+<p>El receptor calcula: scriptHash = HASH160(redeemScript)</p>
+
+<p>Y da al emisor una dirección derivada de ese hash.</p>
+
+<h2>P2SH-P2WPKH: SegWit envuelto</h2>
+
+<p>Cuando SegWit se activó, muchas wallets y servicios no lo soportaban. P2SH permitió una transición gradual:</p>
+
+<p>El redeemScript es simplemente: OP_0 &lt;20 bytes pubKeyHash&gt;</p>
+
+<p>Esto indica un witness program versión 0. El nodo reconoce que debe buscar los datos de firma en el witness, no en el scriptSig.</p>
+
+<p>Desde fuera, parece una transacción P2SH normal (dirección empieza por 3). Pero internamente usa SegWit.</p>
+
+<p>Esto permitió a usuarios con wallets SegWit recibir de servicios que solo soportaban direcciones legacy o P2SH.</p>
+
+<h2>Limitaciones de P2SH</h2>
+
+<h3>Tamaño del redeemScript</h3>
+
+<p>El redeemScript completo debe caber en el scriptSig, que tiene límites de tamaño. Para scripts muy complejos, esto puede ser un problema.</p>
+
+<h3>Revelación completa</h3>
+
+<p>Al gastar, revelas TODO el redeemScript. Si tienes un esquema con múltiples condiciones alternativas, todas se revelan aunque solo uses una.</p>
+
+<p>Taproot resuelve esto con MAST: solo revelas la rama que usas.</p>
+
+<h3>Fees</h3>
+
+<p>El redeemScript va en el scriptSig, que cuenta como datos &quot;base&quot; (4 WU/byte). P2WSH (SegWit nativo) pone el script en el witness (1 WU/byte), resultando en fees menores.</p>
+
+<h2>Direcciones P2SH</h2>
+
+<p>Las direcciones P2SH usan Base58Check con prefijo 0x05 para mainnet:</p>
+
+<ol>
+
+<li>scriptHash (20 bytes)</li>
+
+<li>Prefijo: 0x05</li>
+
+<li>Checksum: SHA256(SHA256(...))[0:4]</li>
+
+<li>Concatenar y codificar en Base58</li>
+
+</ol>
+
+<p>El resultado empieza por &quot;3&quot;.</p>
+
+<h2>Cuándo usar P2SH hoy</h2>
+
+<ul>
+
+<li>P2SH-P2WPKH: si necesitas compatibilidad con sistemas que no soportan bc1q</li>
+
+<li>Multisig legacy: aunque P2WSH es preferible para nuevos setups</li>
+
+<li>Compatibilidad con contratos existentes</li>
+
+</ul>
+
+<p>Para nuevos usos, SegWit nativo (P2WSH) o Taproot son preferibles.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-5" aria-hidden="true"></div>
+
+<nav class="page-nav" aria-label="Navegación entre páginas">
+  <a href="p2pkh.html" class="page-nav__item">
+    <span class="page-nav__label">&larr; Anterior</span>
+    <span class="page-nav__title">P2PKH (Pay-to-Public-Key-Hash)</span>
+  </a>
+  <a href="p2wpkh-p2wsh.html" class="page-nav__item page-nav__item--next">
+    <span class="page-nav__label">Siguiente &rarr;</span>
+    <span class="page-nav__title">P2WPKH y P2WSH (Native SegWit)</span>
+  </a>
+</nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>
