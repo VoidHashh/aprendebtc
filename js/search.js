@@ -117,7 +117,6 @@
     { title: 'Conversor de dificultad y target', url: '/herramientas/difficulty-converter.html', tags: ['herramientas', 'dificultad', 'target', 'bits'], section: 'Herramientas' },
     { title: 'Generador de Merkle Tree', url: '/herramientas/merkle-tree.html', tags: ['herramientas', 'merkle', 'txid', 'arbol'], section: 'Herramientas' },
     { title: 'Herramientas de bloques', url: '/herramientas/block-tools.html', tags: ['herramientas', 'block header', 'bloques', 'hash'], section: 'Herramientas' },
-    { title: 'Generador de claves y direcciones', url: '/herramientas/claves.html', tags: ['herramientas', 'claves', 'direcciones'], section: 'Herramientas' },
     { title: 'Generador de clave privada', url: '/herramientas/private-key.html', tags: ['herramientas', 'clave privada', 'wif', 'hex'], section: 'Herramientas' },
     { title: 'Derivar clave publica', url: '/herramientas/public-key.html', tags: ['herramientas', 'clave publica', 'secp256k1', 'comprimida'], section: 'Herramientas' },
     { title: 'HD Wallet explorer', url: '/herramientas/hd-wallet.html', tags: ['herramientas', 'hd wallet', 'derivation'], section: 'Herramientas' },
