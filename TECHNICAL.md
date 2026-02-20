@@ -54,9 +54,18 @@ Gestionado en `js/nav.js`:
 ## Footer (donaciones y enlaces)
 
 - Editar `includes/footer.html` para:
-  - Dirección on-chain (BTC).
-  - Dirección Lightning (LNURL / Lightning Address).
+  - Dirección on-chain (BTC) en `data-donate-copy`.
+  - Dirección Lightning (LNURL / Lightning Address) en `data-donate-copy`.
+  - URI móvil (wallet) en `data-donate-mobile`:
+    - On-chain: `bitcoin:...`
+    - Lightning: `lightning:...`
   - Enlace PayPal (“invítame a un café”): pendiente hasta tener URL final.
+
+Comportamiento:
+
+- Desktop: el botón copia al portapapeles.
+- Móvil: el botón intenta abrir la wallet.
+- Las direcciones no deben mostrarse como texto visible.
 
 ## Publicidad
 

@@ -1105,6 +1105,82 @@
     smoothScrollBound = true;
   }
 
+  function isProbablyMobile() {
+    if (navigator.userAgentData && typeof navigator.userAgentData.mobile === 'boolean') {
+      return navigator.userAgentData.mobile;
+    }
+
+    const ua = navigator.userAgent || '';
+    return /Android|iPhone|iPad|iPod|IEMobile|Opera Mini|Mobi/i.test(ua);
+  }
+
+  async function copyToClipboard(textToCopy) {
+    const value = String(textToCopy || '').trim();
+    if (!value) return false;
+
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+      try {
+        await navigator.clipboard.writeText(value);
+        return true;
+      } catch (_) {
+        // Fall back to execCommand.
+      }
+    }
+
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = value;
+      ta.setAttribute('readonly', 'true');
+      ta.style.position = 'fixed';
+      ta.style.top = '-1000px';
+      ta.style.left = '-1000px';
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, ta.value.length);
+      const ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      return ok;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  function initFooterDonateButtons() {
+    document.querySelectorAll('[data-donate-copy]').forEach((button) => {
+      if (button.dataset.donateBound === '1') return;
+
+      button.addEventListener('click', async () => {
+        const copyText = button.getAttribute('data-donate-copy');
+        const mobileUri = button.getAttribute('data-donate-mobile');
+
+        if (isProbablyMobile() && mobileUri) {
+          window.location.href = mobileUri;
+          return;
+        }
+
+        const ok = await copyToClipboard(copyText);
+        const original = button.textContent;
+
+        if (ok) {
+          button.classList.add('site-footer__donate-action--copied');
+          button.textContent = 'Copiado';
+          window.setTimeout(() => {
+            button.textContent = original;
+            button.classList.remove('site-footer__donate-action--copied');
+          }, 1300);
+        } else {
+          button.textContent = 'No se pudo copiar';
+          window.setTimeout(() => {
+            button.textContent = original;
+          }, 1600);
+        }
+      });
+
+      button.dataset.donateBound = '1';
+    });
+  }
+
+
   function init() {
     const returnContext = getReturnContext();
 
@@ -1119,6 +1195,7 @@
     initMobileMenu();
     initSearch();
     initSmoothScroll();
+    initFooterDonateButtons();
   }
 
   document.addEventListener('includes:loaded', init);

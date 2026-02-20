@@ -5,7 +5,7 @@
   <div class="site-footer__inner">
     <div class="site-footer__grid">
 
-      <!-- Columna 1: Logo + descripción -->
+      <!-- Columna 1: Logo + enlaces -->
       <div>
         <div class="site-footer__logo">
           <span class="brand-primary">aprende</span><span class="brand-accent">BTC</span>
@@ -13,8 +13,10 @@
         <p class="site-footer__desc">
           La guía educativa más completa sobre Bitcoin en español. Desde tu primera compra hasta criptografía avanzada. Sin tecnicismos innecesarios.
         </p>
-        <a href="https://nostrfacil.com" class="site-footer__link site-footer__link--accent" target="_blank" rel="noopener">
-          🟣 nostrfácil.com →
+
+        <a href="https://nostrfacil.com" class="site-footer__link site-footer__link--accent site-footer__link--with-icon" target="_blank" rel="noopener">
+          <img src="/assets/img/nostrfacil-favicon.svg" class="site-footer__link-icon" width="16" height="16" alt="" loading="lazy" />
+          nostrfácil.com →
         </a>
 
         <div class="site-footer__social">
@@ -23,33 +25,20 @@
           </a>
         </div>
 
-        <a href="https://bitcoincalculadora.com/" class="site-footer__link site-footer__link--accent" target="_blank" rel="noopener">
+        <a href="https://bitcoincalculadora.com/" class="site-footer__link site-footer__link--accent site-footer__link--with-icon" target="_blank" rel="noopener">
+          <img src="/assets/img/bitcoincalculadora-favicon.svg" class="site-footer__link-icon" width="16" height="16" alt="" loading="lazy" />
           bitcoincalculadora.com →
         </a>
 
-        <a href="https://github.com/VoidHashh/aprendebtc.git" class="site-footer__link" target="_blank" rel="noopener">
+        <a href="https://github.com/VoidHashh/aprendebtc.git" class="site-footer__link site-footer__link--accent site-footer__link--with-icon" target="_blank" rel="noopener">
+          <svg class="site-footer__link-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+          </svg>
           GitHub (open source) — aporta conocimiento →
         </a>
       </div>
 
-      <!-- Columna 2: Enlaces rápidos -->
-      <div>
-        <div class="site-footer__col-title">Niveles</div>
-        <a href="/nivel-1/" class="site-footer__link">Nivel 1 — Explorador</a>
-        <a href="/nivel-2/" class="site-footer__link">Nivel 2 — Soberano</a>
-        <a href="/nivel-3/" class="site-footer__link">Nivel 3 — Analista</a>
-        <a href="/nivel-4/" class="site-footer__link">Nivel 4 — En la madriguera</a>
-        <a href="/nivel-5/" class="site-footer__link">Nivel 5 — Mentor</a>
-        <a href="/nivel-6/" class="site-footer__link">Nivel 6 — Satoshi</a>
-        <div class="site-footer__col-title site-footer__col-title--spaced">Pilares</div>
-        <a href="/base/" class="site-footer__link">Base de Conocimiento</a>
-        <a href="/herramientas/" class="site-footer__link">Herramientas</a>
-        <a href="/glosario.html" class="site-footer__link">Glosario</a>
-        <a href="/recursos.html" class="site-footer__link">Recursos</a>
-        <a href="/comunidad/" class="site-footer__link">Comunidad</a>
-      </div>
-
-      <!-- Columna 3: Apoya el proyecto -->
+      <!-- Columna 2: Apoya el proyecto -->
       <div>
         <div class="site-footer__col-title">Apoya el proyecto</div>
         <p class="site-footer__desc">Si te ha sido útil, considera una donación. On-chain, Lightning o un café.</p>
@@ -59,7 +48,7 @@
             <div class="site-footer__donate-badge site-footer__donate-badge--btc" aria-hidden="true">₿</div>
             <div class="site-footer__donate-body">
               <div class="site-footer__donate-label">Bitcoin (on-chain)</div>
-              <code class="site-footer__donate-value">bc1qplaceholderdonationsaddresshere</code>
+              <button type="button" class="btn btn--secondary btn--sm site-footer__donate-action" data-donate-copy="bc1qplaceholderdonationsaddresshere" data-donate-mobile="bitcoin:bc1qplaceholderdonationsaddresshere">Copiar dirección</button>
             </div>
           </div>
 
@@ -67,7 +56,7 @@
             <div class="site-footer__donate-badge site-footer__donate-badge--ln" aria-hidden="true">⚡</div>
             <div class="site-footer__donate-body">
               <div class="site-footer__donate-label">Lightning</div>
-              <code class="site-footer__donate-value">lnurl1placeholderlightningaddresshere</code>
+              <button type="button" class="btn btn--secondary btn--sm site-footer__donate-action" data-donate-copy="lnurl1placeholderlightningaddresshere" data-donate-mobile="lightning:lnurl1placeholderlightningaddresshere">Copiar Lightning</button>
             </div>
           </div>
 
