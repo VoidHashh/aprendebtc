@@ -13,6 +13,26 @@
   // Páginas en /nivel-1/: data-base-path="../"
   const basePath = document.documentElement.dataset.basePath ?? '';
 
+  function ensureFavicon() {
+    const href = `${basePath}assets/img/bitcoincalculadora-favicon.svg`;
+    const icons = Array.from(document.querySelectorAll('link[rel~="icon"]'));
+    if (icons.length > 0) {
+      icons.forEach((el) => {
+        el.setAttribute('href', href);
+        el.setAttribute('type', 'image/svg+xml');
+        el.setAttribute('sizes', 'any');
+      });
+      return;
+    }
+
+    const link = document.createElement('link');
+    link.rel = 'icon';
+    link.type = 'image/svg+xml';
+    link.sizes = 'any';
+    link.href = href;
+    document.head.appendChild(link);
+  }
+
   /**
    * Carga un include HTML y lo inyecta en el elemento destino.
    * @param {HTMLElement} el - Elemento con data-include
@@ -38,6 +58,8 @@
    * y los carga en paralelo. Luego dispara el evento para nav.js.
    */
   async function init() {
+    ensureFavicon();
+
     const includes = document.querySelectorAll('[data-include]');
     if (includes.length === 0) return;
 
