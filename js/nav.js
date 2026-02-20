@@ -175,11 +175,17 @@
         { href: '/herramientas/calculadora-dca.html', text: 'Calculadora DCA' },
         { href: '/herramientas/calculadora-fees.html', text: 'Calculadora de fees' },
         { href: '/herramientas/calculadora-impuestos.html', text: 'Calculadora de impuestos (ES)' },
+        { href: '/herramientas/comparador-exchanges.html', text: 'Comparador de exchanges' },
+        { href: '/herramientas/calculadora-herencia.html', text: 'Calculadora de herencia' },
+        { href: '/herramientas/hash.html', text: 'Calculadora de hash' },
+        { href: '/herramientas/mining-simulator.html', text: 'Simulador de mineria' },
+        { href: '/herramientas/difficulty-converter.html', text: 'Conversor de dificultad y target' },
+        { href: '/herramientas/merkle-tree.html', text: 'Generador de Merkle Tree' },
+        { href: '/herramientas/block-tools.html', text: 'Herramientas de bloques' },
         { href: '/herramientas/claves.html', text: 'Generador de claves y direcciones' },
         { href: '/herramientas/hd-wallet.html', text: 'HD Wallet explorer' },
         { href: '/herramientas/transaccion.html', text: 'Constructor de transacciones' },
         { href: '/herramientas/script.html', text: 'Interprete de Script' },
-        { href: '/herramientas/hash.html', text: 'Calculadora de hash' },
         { href: '/herramientas/firma.html', text: 'ECDSA y Schnorr Sign/Verify' }
       ]
     },
@@ -1188,7 +1194,12 @@
   }
 
 
+  function applyLayoutContextClass() {
+    const hasSidebar = Boolean(document.querySelector('.page-layout__sidebar .sidebar'));
+    document.body.classList.toggle('has-page-sidebar', hasSidebar);
+  }
   function init() {
+    applyLayoutContextClass();
     const returnContext = getReturnContext();
 
     initContextualLinkPropagation(returnContext);
@@ -1213,3 +1224,6 @@
     document.addEventListener('DOMContentLoaded', () => setTimeout(init, 100));
   }
 })();
+
+
+

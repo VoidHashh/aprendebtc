@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Construye un árbol de Merkle visualmente. Introduce transacciones y ve cómo se calcula la Merkle root paso a paso." />
+  <title>Generador de Merkle Tree — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    /* Estilos del árbol de Merkle */
+    .merkle-tree {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 2rem 1rem;
+      overflow-x: auto;
+    }
+
+    .merkle-level {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .merkle-node {
+      background: var(--bg-primary);
+      border: 2px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      padding: 0.5rem 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+      min-width: 100px;
+      max-width: 140px;
+    }
+
+    .merkle-node:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .merkle-node--root {
+      background: rgba(247, 147, 26, 0.15);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .merkle-node--selected {
+      border-color: #58a6ff;
+      background: rgba(88, 166, 255, 0.1);
+    }
+
+    .merkle-node--proof {
+      border-color: #2ea043;
+      background: rgba(46, 160, 67, 0.1);
+    }
+
+    .merkle-node--duplicate {
+      opacity: 0.5;
+      border-style: dashed;
+    }
+
+    .merkle-node--highlight {
+      animation: highlight-pulse 0.5s ease;
+    }
+
+    @keyframes highlight-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .merkle-node__label {
+      font-size: 0.65rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .merkle-node__hash {
+      word-break: break-all;
+    }
+
+    .merkle-connectors {
+      position: relative;
+      height: 30px;
+      width: 100%;
+    }
+
+    /* Líneas conectoras con SVG */
+    .merkle-tree-container {
+      position: relative;
+      min-height: 200px;
+    }
+
+    .node-detail {
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    .node-detail.show {
+      display: block;
+    }
+
+    .node-detail__title {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .node-detail__hash {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      word-break: break-all;
+      background: var(--bg-primary);
+      padding: 0.5rem;
+      border-radius: var(--radius-md);
+      margin-bottom: 0.75rem;
+    }
+
+    .node-detail__operation {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .txid-input-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .txid-input-row input {
+      flex: 1;
+    }
+
+    .txid-input-row .tool-btn {
+      flex-shrink: 0;
+    }
+
+    .proof-info {
+      background: rgba(46, 160, 67, 0.1);
+      border: 1px solid rgba(46, 160, 67, 0.3);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+
+    .proof-info__title {
+      font-weight: 600;
+      color: #2ea043;
+      margin-bottom: 0.5rem;
+    }
+
+    .level-color-0 { border-color: #f7931a; }
+    .level-color-1 { border-color: #58a6ff; }
+    .level-color-2 { border-color: #a371f7; }
+    .level-color-3 { border-color: #2ea043; }
+    .level-color-4 { border-color: #db61a2; }
+    .level-color-5 { border-color: #f0883e; }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+        <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="index.html" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Merkle Tree</span>
+        </nav>
+
+        <article class="article">
+          <h1>Generador de Merkle Tree</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Visualiza cómo se construye el árbol de Merkle que resume todas las transacciones de un bloque.
+          </p>
+
+          <!-- Disclaimer educativo -->
+          <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">Herramienta educativa</div>
+              <p class="callout__text">Esta herramienta es para aprendizaje. NO la uses para generar datos criptográficos para fondos reales.</p>
+            </div>
+          </div>
+
+          <!-- Input de transacciones -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Transacciones</h2>
+            
+            <!-- Toggle modo -->
+            <div class="tool-presets" style="margin-bottom: 1rem;">
+              <button class="tool-preset tool-preset--active" data-mode="text" id="mode-text">Hashear texto como TXIDs</button>
+              <button class="tool-preset" data-mode="hex" id="mode-hex">Usar como TXIDs hex</button>
+            </div>
+
+            <div id="txids-container">
+              <!-- Se llena dinámicamente -->
+            </div>
+
+            <div class="tool-btn-row" style="margin-top: 1rem;">
+              <button class="tool-btn tool-btn--secondary" id="btn-add">+ Añadir TX</button>
+              <button class="tool-btn tool-btn--secondary" id="btn-remove">- Eliminar última</button>
+              <button class="tool-btn tool-btn--secondary" id="btn-example-4">Ejemplo (4 tx)</button>
+              <button class="tool-btn tool-btn--secondary" id="btn-example-7">Ejemplo (7 tx)</button>
+            </div>
+
+            <div class="tool-btn-row" style="margin-top: 0.75rem;">
+              <button class="tool-btn" id="btn-build">🌳 Construir árbol</button>
+              <button class="tool-btn tool-btn--secondary" id="btn-step">▶ Paso a paso</button>
+            </div>
+          </div>
+
+          <!-- Visualización del árbol -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Árbol de Merkle</h2>
+            
+            <div class="merkle-tree-container">
+              <div class="merkle-tree" id="merkle-tree">
+                <p style="color: var(--text-secondary); text-align: center;">
+                  Introduce transacciones y pulsa "Construir árbol"
+                </p>
+              </div>
+            </div>
+
+            <!-- Detalle del nodo seleccionado -->
+            <div class="node-detail" id="node-detail">
+              <div class="node-detail__title" id="detail-title">Nodo seleccionado</div>
+              <div class="node-detail__hash" id="detail-hash">—</div>
+              <div class="node-detail__operation" id="detail-operation">—</div>
+            </div>
+          </div>
+
+          <!-- Merkle Root -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Merkle Root</h2>
+            <div class="tool-output tool-output--large" id="merkle-root" style="text-align: center; font-size: 0.85rem;">
+              —
+            </div>
+            <div class="tool-note" style="margin-top: 0.5rem; text-align: center;">
+              Este hash se incluye en el block header y resume todas las transacciones.
+            </div>
+          </div>
+
+          <!-- Merkle Proof -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Merkle Proof</h2>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+              Selecciona una transacción para ver qué hashes necesitas para demostrar que pertenece al árbol.
+            </p>
+
+            <div class="tool-field">
+              <label class="tool-label" for="proof-select">Transacción a verificar</label>
+              <select id="proof-select" class="tool-select">
+                <option value="">— Selecciona una transacción —</option>
+              </select>
+            </div>
+
+            <div class="proof-info" id="proof-info" style="display: none;">
+              <div class="proof-info__title">📜 Merkle Proof</div>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+                Solo necesitas <strong id="proof-count">X</strong> hashes de <strong id="total-nodes">Y</strong> 
+                totales para verificar esta transacción.
+              </p>
+              <div id="proof-hashes" style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;">
+                <!-- Lista de hashes necesarios -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Explicación -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">¿Cómo funciona?</h2>
+            <p style="color: var(--text-secondary); line-height: 1.7;">
+              El árbol de Merkle combina los hashes de las transacciones en parejas, subiendo nivel por nivel 
+              hasta llegar a un único hash: la <strong>Merkle Root</strong>. Este proceso permite verificar 
+              si una transacción pertenece a un bloque sin necesidad de descargar todas las transacciones.
+            </p>
+            <p style="color: var(--text-secondary); line-height: 1.7; margin-top: 1rem;">
+              En Bitcoin, cada combinación usa <strong>HASH256</strong> (doble SHA-256) sobre la concatenación 
+              de dos hashes, con los bytes invertidos (little-endian). Si hay un número impar de elementos 
+              en un nivel, el último se duplica.
+            </p>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más sobre Merkle Trees</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-5/merkle-tree.html">Árboles de Merkle en detalle →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === ESTADO ===
+    let inputMode = 'text'; // 'text' o 'hex'
+    let txInputs = [];
+    let merkleTree = []; // Array de niveles, cada nivel es array de nodos
+    let selectedTxIndex = null;
+    let animationStep = 0;
+    let isAnimating = false;
+
+    // === ELEMENTOS DEL DOM ===
+    const txidsContainer = document.getElementById('txids-container');
+    const merkleTreeEl = document.getElementById('merkle-tree');
+    const merkleRootEl = document.getElementById('merkle-root');
+    const nodeDetail = document.getElementById('node-detail');
+    const detailTitle = document.getElementById('detail-title');
+    const detailHash = document.getElementById('detail-hash');
+    const detailOperation = document.getElementById('detail-operation');
+    const proofSelect = document.getElementById('proof-select');
+    const proofInfo = document.getElementById('proof-info');
+    const proofCount = document.getElementById('proof-count');
+    const totalNodes = document.getElementById('total-nodes');
+    const proofHashes = document.getElementById('proof-hashes');
+
+    const modeText = document.getElementById('mode-text');
+    const modeHex = document.getElementById('mode-hex');
+    const btnAdd = document.getElementById('btn-add');
+    const btnRemove = document.getElementById('btn-remove');
+    const btnExample4 = document.getElementById('btn-example-4');
+    const btnExample7 = document.getElementById('btn-example-7');
+    const btnBuild = document.getElementById('btn-build');
+    const btnStep = document.getElementById('btn-step');
+
+    // === EJEMPLOS ===
+    const EXAMPLE_4 = [
+      'Transacción de Alice a Bob',
+      'Transacción de Bob a Carol',
+      'Transacción de Carol a Dave',
+      'Transacción de Dave a Eve'
+    ];
+
+    const EXAMPLE_7 = [
+      'TX-001: Coinbase reward',
+      'TX-002: Alice → Bob (0.5 BTC)',
+      'TX-003: Carol → Dave (1.2 BTC)',
+      'TX-004: Eve → Frank (0.8 BTC)',
+      'TX-005: Grace → Henry (2.0 BTC)',
+      'TX-006: Ivan → Julia (0.3 BTC)',
+      'TX-007: Kevin → Laura (1.5 BTC)'
+    ];
+
+    // === FUNCIONES AUXILIARES ===
+
+    function textToBytes(text) {
+      return new TextEncoder().encode(text);
+    }
+
+    function hexToBytes(hex) {
+      hex = hex.replace(/\s/g, '');
+      if (hex.length % 2 !== 0) hex = '0' + hex;
+      const bytes = new Uint8Array(hex.length / 2);
+      for (let i = 0; i < bytes.length; i++) {
+        bytes[i] = parseInt(hex.substr(i * 2, 2), 16);
+      }
+      return bytes;
+    }
+
+    function bytesToHex(bytes) {
+      return Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    function reverseHex(hex) {
+      return hex.match(/.{2}/g).reverse().join('');
+    }
+
+    async function sha256(data) {
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      return new Uint8Array(hashBuffer);
+    }
+
+    async function hash256(data) {
+      const first = await sha256(data);
+      return await sha256(first);
+    }
+
+    /**
+     * Combina dos hashes como en Bitcoin (concatenar, HASH256)
+     * Los hashes se tratan en formato interno (no reversed)
+     */
+    async function combineHashes(hash1Hex, hash2Hex) {
+      // Concatenar los dos hashes (como bytes)
+      const combined = hexToBytes(hash1Hex + hash2Hex);
+      const result = await hash256(combined);
+      return bytesToHex(result);
+    }
+
+    function abbreviateHash(hash) {
+      if (hash.length <= 16) return hash;
+      return hash.substring(0, 8) + '...' + hash.substring(hash.length - 8);
+    }
+
+    // === GESTIÓN DE INPUTS ===
+
+    function renderTxInputs() {
+      txidsContainer.innerHTML = '';
+      
+      txInputs.forEach((value, index) => {
+        const row = document.createElement('div');
+        row.className = 'txid-input-row';
+        row.innerHTML = `
+          <span style="color: var(--text-secondary); font-size: 0.8rem; min-width: 30px;">#${index + 1}</span>
+          <input 
+            type="text" 
+            class="tool-input tx-input" 
+            data-index="${index}"
+            value="${value}"
+            placeholder="${inputMode === 'hex' ? '64 caracteres hex' : 'Texto a hashear'}"
+            style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;"
+          />
+        `;
+        txidsContainer.appendChild(row);
+      });
+
+      // Event listeners para inputs
+      document.querySelectorAll('.tx-input').forEach(input => {
+        input.addEventListener('input', (e) => {
+          txInputs[parseInt(e.target.dataset.index)] = e.target.value;
+        });
+      });
+
+      updateProofSelect();
+    }
+
+    function addTxInput(value = '') {
+      txInputs.push(value);
+      renderTxInputs();
+    }
+
+    function removeTxInput() {
+      if (txInputs.length > 1) {
+        txInputs.pop();
+        renderTxInputs();
+      }
+    }
+
+    function loadExample(example) {
+      txInputs = [...example];
+      renderTxInputs();
+    }
+
+    // === CONSTRUIR ÁRBOL ===
+
+    async function getTxHashes() {
+      const hashes = [];
+      
+      for (const tx of txInputs) {
+        if (!tx.trim()) continue;
+        
+        let hash;
+        if (inputMode === 'hex' && /^[0-9a-fA-F]{64}$/.test(tx.trim())) {
+          // Usar directamente como TXID
+          hash = tx.trim().toLowerCase();
+        } else {
+          // Hashear el texto con SHA-256 (simplificado para educación)
+          const bytes = textToBytes(tx);
+          const hashBytes = await sha256(bytes);
+          hash = bytesToHex(hashBytes);
+        }
+        
+        hashes.push(hash);
+      }
+      
+      return hashes;
+    }
+
+    async function buildMerkleTree() {
+      const txHashes = await getTxHashes();
+      
+      if (txHashes.length === 0) {
+        merkleTreeEl.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">No hay transacciones válidas</p>';
+        return;
+      }
+
+      merkleTree = [];
+      
+      // Nivel 0: las hojas (TXIDs)
+      merkleTree.push(txHashes.map((hash, i) => ({
+        hash,
+        label: `TX ${i + 1}`,
+        isDuplicate: false,
+        leftChild: null,
+        rightChild: null
+      })));
+
+      // Construir niveles superiores
+      let currentLevel = merkleTree[0];
+      
+      while (currentLevel.length > 1) {
+        const nextLevel = [];
+        
+        for (let i = 0; i < currentLevel.length; i += 2) {
+          const left = currentLevel[i];
+          let right = currentLevel[i + 1];
+          let isDuplicate = false;
+          
+          // Si es impar, duplicar el último
+          if (!right) {
+            right = { ...left, isDuplicate: true };
+            isDuplicate = true;
+          }
+          
+          const combinedHash = await combineHashes(left.hash, right.hash);
+          
+          nextLevel.push({
+            hash: combinedHash,
+            label: `Nivel ${merkleTree.length}`,
+            isDuplicate: false,
+            leftChild: i,
+            rightChild: isDuplicate ? i : i + 1,
+            leftHash: left.hash,
+            rightHash: right.hash
+          });
+        }
+        
+        merkleTree.push(nextLevel);
+        currentLevel = nextLevel;
+      }
+
+      renderMerkleTree();
+      updateMerkleRoot();
+      updateProofSelect();
+    }
+
+    async function buildMerkleTreeStepByStep() {
+      if (isAnimating) return;
+      
+      const txHashes = await getTxHashes();
+      if (txHashes.length === 0) return;
+
+      if (animationStep === 0) {
+        // Inicializar
+        merkleTree = [];
+        merkleTree.push(txHashes.map((hash, i) => ({
+          hash,
+          label: `TX ${i + 1}`,
+          isDuplicate: false,
+          leftChild: null,
+          rightChild: null
+        })));
+        renderMerkleTree();
+        animationStep++;
+        btnStep.textContent = '▶ Siguiente nivel';
+        return;
+      }
+
+      // Construir siguiente nivel
+      const currentLevel = merkleTree[merkleTree.length - 1];
+      
+      if (currentLevel.length === 1) {
+        // Ya llegamos a la raíz
+        animationStep = 0;
+        btnStep.textContent = '▶ Paso a paso';
+        updateMerkleRoot();
+        return;
+      }
+
+      isAnimating = true;
+      const nextLevel = [];
+      
+      for (let i = 0; i < currentLevel.length; i += 2) {
+        const left = currentLevel[i];
+        let right = currentLevel[i + 1];
+        let isDuplicate = false;
+        
+        if (!right) {
+          right = { ...left, isDuplicate: true };
+          isDuplicate = true;
+        }
+        
+        const combinedHash = await combineHashes(left.hash, right.hash);
+        
+        nextLevel.push({
+          hash: combinedHash,
+          label: `Nivel ${merkleTree.length}`,
+          isDuplicate: false,
+          leftChild: i,
+          rightChild: isDuplicate ? i : i + 1,
+          leftHash: left.hash,
+          rightHash: right.hash
+        });
+      }
+      
+      merkleTree.push(nextLevel);
+      renderMerkleTree(merkleTree.length - 1); // Resaltar nuevo nivel
+      
+      isAnimating = false;
+      animationStep++;
+      
+      if (merkleTree[merkleTree.length - 1].length === 1) {
+        updateMerkleRoot();
+        animationStep = 0;
+        btnStep.textContent = '▶ Reiniciar';
+      }
+    }
+
+    // === RENDERIZAR ÁRBOL ===
+
+    function renderMerkleTree(highlightLevel = -1) {
+      if (merkleTree.length === 0) {
+        merkleTreeEl.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">Introduce transacciones y pulsa "Construir árbol"</p>';
+        return;
+      }
+
+      let html = '';
+      
+      // Renderizar desde la raíz hacia las hojas (invertido visualmente)
+      for (let levelIndex = merkleTree.length - 1; levelIndex >= 0; levelIndex--) {
+        const level = merkleTree[levelIndex];
+        const isRoot = levelIndex === merkleTree.length - 1;
+        const isHighlighted = levelIndex === highlightLevel;
+        
+        html += `<div class="merkle-level" data-level="${levelIndex}">`;
+        
+        level.forEach((node, nodeIndex) => {
+          const nodeClasses = [
+            'merkle-node',
+            `level-color-${levelIndex % 6}`,
+            isRoot ? 'merkle-node--root' : '',
+            node.isDuplicate ? 'merkle-node--duplicate' : '',
+            isHighlighted ? 'merkle-node--highlight' : ''
+          ].filter(Boolean).join(' ');
+          
+          html += `
+            <div class="${nodeClasses}" 
+                 data-level="${levelIndex}" 
+                 data-index="${nodeIndex}"
+                 title="${node.hash}">
+              <div class="merkle-node__label">${isRoot ? 'Root' : node.label}${node.isDuplicate ? ' (dup)' : ''}</div>
+              <div class="merkle-node__hash">${abbreviateHash(node.hash)}</div>
+            </div>
+          `;
+        });
+        
+        html += '</div>';
+      }
+      
+      merkleTreeEl.innerHTML = html;
+
+      // Event listeners para nodos
+      merkleTreeEl.querySelectorAll('.merkle-node').forEach(nodeEl => {
+        nodeEl.addEventListener('click', () => {
+          const level = parseInt(nodeEl.dataset.level);
+          const index = parseInt(nodeEl.dataset.index);
+          showNodeDetail(level, index);
+        });
+      });
+    }
+
+    function showNodeDetail(level, index) {
+      const node = merkleTree[level][index];
+      
+      detailTitle.textContent = level === merkleTree.length - 1 ? 'Merkle Root' : `${node.label}`;
+      detailHash.textContent = node.hash;
+      
+      if (node.leftChild !== null) {
+        detailOperation.innerHTML = `
+          <strong>Operación:</strong> HASH256(${abbreviateHash(node.leftHash)} + ${abbreviateHash(node.rightHash)})
+        `;
+      } else {
+        detailOperation.innerHTML = `<strong>Hoja:</strong> Hash de la transacción`;
+      }
+      
+      nodeDetail.classList.add('show');
+    }
+
+    function updateMerkleRoot() {
+      if (merkleTree.length > 0) {
+        const root = merkleTree[merkleTree.length - 1][0];
+        merkleRootEl.textContent = root.hash;
+      } else {
+        merkleRootEl.textContent = '—';
+      }
+    }
+
+    // === MERKLE PROOF ===
+
+    function updateProofSelect() {
+      proofSelect.innerHTML = '<option value="">— Selecciona una transacción —</option>';
+      
+      if (merkleTree.length > 0) {
+        merkleTree[0].forEach((node, index) => {
+          proofSelect.innerHTML += `<option value="${index}">TX ${index + 1}: ${abbreviateHash(node.hash)}</option>`;
+        });
+      }
+    }
+
+    function showMerkleProof(txIndex) {
+      if (merkleTree.length === 0 || txIndex === null) {
+        proofInfo.style.display = 'none';
+        clearProofHighlights();
+        return;
+      }
+
+      clearProofHighlights();
+
+      const proofPath = [];
+      let currentIndex = txIndex;
+      
+      // Resaltar la TX seleccionada
+      highlightNode(0, currentIndex, 'selected');
+
+      // Recorrer el árbol hacia arriba
+      for (let level = 0; level < merkleTree.length - 1; level++) {
+        const isLeft = currentIndex % 2 === 0;
+        const siblingIndex = isLeft ? currentIndex + 1 : currentIndex - 1;
+        
+        // El sibling puede no existir si es duplicado
+        if (siblingIndex >= 0 && siblingIndex < merkleTree[level].length) {
+          const sibling = merkleTree[level][siblingIndex];
+          proofPath.push({
+            hash: sibling.hash,
+            position: isLeft ? 'derecha' : 'izquierda'
+          });
+          highlightNode(level, siblingIndex, 'proof');
+        } else if (siblingIndex >= merkleTree[level].length) {
+          // Duplicado del mismo nodo
+          proofPath.push({
+            hash: merkleTree[level][currentIndex].hash,
+            position: 'derecha (duplicado)'
+          });
+        }
+        
+        currentIndex = Math.floor(currentIndex / 2);
+      }
+
+      // Resaltar la raíz
+      highlightNode(merkleTree.length - 1, 0, 'proof');
+
+      // Mostrar info
+      const totalNodeCount = merkleTree.reduce((sum, level) => sum + level.length, 0);
+      proofCount.textContent = proofPath.length;
+      totalNodes.textContent = totalNodeCount;
+
+      proofHashes.innerHTML = proofPath.map((p, i) => `
+        <div style="margin-bottom: 0.5rem; padding: 0.5rem; background: var(--bg-primary); border-radius: var(--radius-md);">
+          <span style="color: var(--text-secondary);">${i + 1}. (${p.position}):</span><br>
+          <span style="color: #2ea043;">${p.hash}</span>
+        </div>
+      `).join('');
+
+      proofInfo.style.display = 'block';
+    }
+
+    function highlightNode(level, index, type) {
+      const nodeEl = merkleTreeEl.querySelector(`[data-level="${level}"][data-index="${index}"]`);
+      if (nodeEl) {
+        nodeEl.classList.add(`merkle-node--${type}`);
+      }
+    }
+
+    function clearProofHighlights() {
+      merkleTreeEl.querySelectorAll('.merkle-node--selected, .merkle-node--proof').forEach(el => {
+        el.classList.remove('merkle-node--selected', 'merkle-node--proof');
+      });
+    }
+
+    // === EVENT LISTENERS ===
+
+    modeText.addEventListener('click', () => {
+      inputMode = 'text';
+      modeText.classList.add('tool-preset--active');
+      modeHex.classList.remove('tool-preset--active');
+    });
+
+    modeHex.addEventListener('click', () => {
+      inputMode = 'hex';
+      modeHex.classList.add('tool-preset--active');
+      modeText.classList.remove('tool-preset--active');
+    });
+
+    btnAdd.addEventListener('click', () => addTxInput());
+    btnRemove.addEventListener('click', removeTxInput);
+    btnExample4.addEventListener('click', () => loadExample(EXAMPLE_4));
+    btnExample7.addEventListener('click', () => loadExample(EXAMPLE_7));
+    
+    btnBuild.addEventListener('click', () => {
+      animationStep = 0;
+      btnStep.textContent = '▶ Paso a paso';
+      buildMerkleTree();
+    });
+    
+    btnStep.addEventListener('click', buildMerkleTreeStepByStep);
+
+    proofSelect.addEventListener('change', (e) => {
+      const value = e.target.value;
+      if (value !== '') {
+        showMerkleProof(parseInt(value));
+      } else {
+        proofInfo.style.display = 'none';
+        clearProofHighlights();
+      }
+    });
+
+    // === INICIALIZACIÓN ===
+
+    // Cargar ejemplo inicial
+    loadExample(EXAMPLE_4);
+
+  })();
+  </script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-/* ============================================
+﻿/* ============================================
    aprendebtc.com — components.css
    Sidebar, cards, breadcrumbs, badges, alertas,
    botones, navegación, ad slots
@@ -2026,3 +2026,12 @@ html[data-ads="on"] .sidebar__ad-wrap {
     font-size: 0.92rem;
   }
 }
+
+@media (min-width: 1024px) {
+  .has-page-sidebar .ad-slot.ad-footer,
+  .has-page-sidebar .site-footer {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+}
+

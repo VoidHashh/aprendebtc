@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Simula el proceso de minería Bitcoin. Busca un nonce que produzca un hash por debajo del target. Visualiza Proof of Work." />
+  <title>Simulador de minería — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    /* Estilos específicos del simulador de minería */
+    .hash-display {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      word-break: break-all;
+      padding: 1rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      line-height: 1.6;
+    }
+
+    .hash-char {
+      transition: color 0.1s;
+    }
+
+    .hash-char--valid {
+      color: #2ea043;
+      font-weight: 600;
+    }
+
+    .hash-char--invalid {
+      color: #da3633;
+    }
+
+    .hash-char--neutral {
+      color: var(--text-secondary);
+    }
+
+    .mining-success {
+      background: rgba(46, 160, 67, 0.1);
+      border-color: #2ea043;
+      animation: pulse-success 0.5s ease;
+    }
+
+    @keyframes pulse-success {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    .nonce-display {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-align: center;
+      padding: 1rem;
+      background: var(--bg-primary);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--bg-border);
+    }
+
+    .difficulty-slider {
+      width: 100%;
+      height: 8px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: var(--bg-border);
+      border-radius: 4px;
+      outline: none;
+    }
+
+    .difficulty-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      background: var(--accent);
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .difficulty-slider::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      background: var(--accent);
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+    }
+
+    .difficulty-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-top: 0.5rem;
+    }
+
+    .mining-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .success-message {
+      text-align: center;
+      padding: 1.5rem;
+      background: rgba(46, 160, 67, 0.1);
+      border: 1px solid #2ea043;
+      border-radius: var(--radius-md);
+      margin-top: 1rem;
+      display: none;
+    }
+
+    .success-message.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .success-message__icon {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .success-message__title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #2ea043;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+        <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="index.html" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Simulador de minería</span>
+        </nav>
+
+        <article class="article">
+          <h1>Simulador de minería</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Experimenta cómo funciona la minería: busca un hash válido cambiando el nonce.
+          </p>
+
+          <!-- Disclaimer educativo -->
+          <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">Herramienta educativa</div>
+              <p class="callout__text">Esta herramienta es para aprendizaje. NO la uses para generar datos criptográficos para fondos reales.</p>
+            </div>
+          </div>
+
+          <!-- Configuración del bloque -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Block header simplificado</h2>
+            
+            <div class="tool-field" style="margin-bottom: 1rem;">
+              <label class="tool-label" for="block-data">Datos del bloque</label>
+              <input 
+                type="text" 
+                id="block-data" 
+                class="tool-input" 
+                value="aprendeBTC - mi primer bloque!"
+              />
+              <span class="tool-note">Simula el contenido del bloque (en Bitcoin real sería el header de 80 bytes)</span>
+            </div>
+
+            <div class="tool-field">
+              <label class="tool-label" for="difficulty-slider">
+                Dificultad: <span id="difficulty-value">4</span> ceros hexadecimales
+              </label>
+              <input 
+                type="range" 
+                id="difficulty-slider" 
+                class="difficulty-slider"
+                min="1"
+                max="8"
+                value="4"
+              />
+              <div class="difficulty-labels">
+                <span>1 (fácil)</span>
+                <span>4</span>
+                <span>8 (difícil)</span>
+              </div>
+              <span class="tool-note" style="margin-top: 0.5rem; display: block;">
+                El hash debe empezar con <strong id="target-zeros">0000</strong> para ser válido
+              </span>
+            </div>
+          </div>
+
+          <!-- Minería -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Minería</h2>
+            
+            <!-- Nonce actual -->
+            <div class="tool-field" style="margin-bottom: 1rem;">
+              <label class="tool-label">Nonce actual</label>
+              <div class="nonce-display" id="nonce-display">0</div>
+            </div>
+
+            <!-- Hash resultante -->
+            <div class="tool-field" style="margin-bottom: 1rem;">
+              <label class="tool-label">Hash resultante (SHA-256)</label>
+              <div class="hash-display" id="hash-display">
+                <span class="hash-char hash-char--neutral">—</span>
+              </div>
+            </div>
+
+            <!-- Controles de minería -->
+            <div class="mining-controls">
+              <button class="tool-btn tool-btn--secondary" id="btn-step">
+                ▶ Paso a paso
+              </button>
+              <button class="tool-btn" id="btn-auto">
+                ⏩ Minar automático
+              </button>
+              <button class="tool-btn tool-btn--secondary" id="btn-fast">
+                🚀 Máxima velocidad
+              </button>
+              <button class="tool-btn tool-btn--secondary" id="btn-reset">
+                ↻ Reset
+              </button>
+            </div>
+
+            <!-- Mensaje de éxito -->
+            <div class="success-message" id="success-message">
+              <div class="success-message__icon">⛏️</div>
+              <div class="success-message__title">¡Bloque encontrado!</div>
+              <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                Has encontrado un hash válido que cumple el target.
+              </p>
+              <div class="stats-grid">
+                <div class="tool-result-card">
+                  <div class="tool-result-card__label">Nonce ganador</div>
+                  <div class="tool-result-card__value tool-result-card__value--accent" id="winning-nonce">—</div>
+                </div>
+                <div class="tool-result-card">
+                  <div class="tool-result-card__label">Intentos</div>
+                  <div class="tool-result-card__value" id="winning-attempts">—</div>
+                </div>
+                <div class="tool-result-card">
+                  <div class="tool-result-card__label">Tiempo</div>
+                  <div class="tool-result-card__value" id="winning-time">—</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Estadísticas -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Estadísticas en tiempo real</h2>
+            
+            <div class="stats-grid">
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">Intentos</div>
+                <div class="tool-result-card__value" id="stat-attempts">0</div>
+              </div>
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">Hash rate</div>
+                <div class="tool-result-card__value" id="stat-hashrate">0 H/s</div>
+              </div>
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">Tiempo</div>
+                <div class="tool-result-card__value" id="stat-time">0.0s</div>
+              </div>
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">Probabilidad</div>
+                <div class="tool-result-card__value" id="stat-probability">—</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Explicación -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">¿Cómo funciona la minería real?</h2>
+            <p style="color: var(--text-secondary); line-height: 1.7;">
+              En Bitcoin real, los mineros hacen exactamente esto pero con <strong>SHA-256 doble</strong> 
+              sobre un block header de <strong>80 bytes</strong>. El target es un número de 256 bits 
+              definido por la dificultad de la red, que se ajusta cada 2016 bloques (~2 semanas) 
+              para mantener un tiempo promedio de 10 minutos entre bloques.
+            </p>
+            <p style="color: var(--text-secondary); line-height: 1.7; margin-top: 1rem;">
+              A fecha de hoy, la red Bitcoin calcula aproximadamente <strong>~600 exahashes por segundo</strong> 
+              (600.000.000.000.000.000.000 hashes/s). Tu navegador puede calcular unos pocos miles por segundo, 
+              ¡millones de billones de veces más lento que la red!
+            </p>
+          </div>
+
+          <!-- Callouts contextuales -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más sobre minería</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-5/proof-of-work.html">Proof of Work en detalle →</a> · 
+              <a href="../base/que-es-la-mineria.html">¿Qué es la minería? →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === ESTADO ===
+    let nonce = 0;
+    let difficulty = 4;
+    let isMining = false;
+    let miningMode = null; // 'step', 'auto', 'fast'
+    let startTime = null;
+    let attempts = 0;
+    let animationFrameId = null;
+    let found = false;
+
+    // === ELEMENTOS DEL DOM ===
+    const blockDataInput = document.getElementById('block-data');
+    const difficultySlider = document.getElementById('difficulty-slider');
+    const difficultyValue = document.getElementById('difficulty-value');
+    const targetZeros = document.getElementById('target-zeros');
+    const nonceDisplay = document.getElementById('nonce-display');
+    const hashDisplay = document.getElementById('hash-display');
+    
+    const btnStep = document.getElementById('btn-step');
+    const btnAuto = document.getElementById('btn-auto');
+    const btnFast = document.getElementById('btn-fast');
+    const btnReset = document.getElementById('btn-reset');
+
+    const successMessage = document.getElementById('success-message');
+    const winningNonce = document.getElementById('winning-nonce');
+    const winningAttempts = document.getElementById('winning-attempts');
+    const winningTime = document.getElementById('winning-time');
+
+    const statAttempts = document.getElementById('stat-attempts');
+    const statHashrate = document.getElementById('stat-hashrate');
+    const statTime = document.getElementById('stat-time');
+    const statProbability = document.getElementById('stat-probability');
+
+    // === FUNCIONES AUXILIARES ===
+
+    /**
+     * Convierte string a Uint8Array (UTF-8)
+     */
+    function textToBytes(text) {
+      return new TextEncoder().encode(text);
+    }
+
+    /**
+     * Convierte Uint8Array a hex string
+     */
+    function bytesToHex(bytes) {
+      return Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    /**
+     * SHA-256 usando Web Crypto API
+     */
+    async function sha256(data) {
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      return new Uint8Array(hashBuffer);
+    }
+
+    /**
+     * Calcula el hash del bloque con el nonce actual
+     */
+    async function calculateBlockHash(blockData, nonce) {
+      const data = blockData + nonce.toString();
+      const bytes = textToBytes(data);
+      const hash = await sha256(bytes);
+      return bytesToHex(hash);
+    }
+
+    /**
+     * Verifica si el hash cumple el target (empieza con N ceros)
+     */
+    function isValidHash(hash, requiredZeros) {
+      const prefix = hash.substring(0, requiredZeros);
+      return prefix === '0'.repeat(requiredZeros);
+    }
+
+    /**
+     * Renderiza el hash con colores
+     */
+    function renderHash(hash, requiredZeros) {
+      let html = '';
+      for (let i = 0; i < hash.length; i++) {
+        const char = hash[i];
+        let className = 'hash-char hash-char--neutral';
+        
+        if (i < requiredZeros) {
+          className = char === '0' ? 'hash-char hash-char--valid' : 'hash-char hash-char--invalid';
+        }
+        
+        html += `<span class="${className}">${char}</span>`;
+      }
+      return html;
+    }
+
+    /**
+     * Formatea tiempo en segundos
+     */
+    function formatTime(ms) {
+      if (ms < 1000) return ms + 'ms';
+      return (ms / 1000).toFixed(2) + 's';
+    }
+
+    /**
+     * Formatea números grandes
+     */
+    function formatNumber(num) {
+      if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+      if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+      return num.toString();
+    }
+
+    // === ACTUALIZAR UI ===
+
+    function updateDifficulty() {
+      difficulty = parseInt(difficultySlider.value);
+      difficultyValue.textContent = difficulty;
+      targetZeros.textContent = '0'.repeat(difficulty);
+      
+      // Actualizar probabilidad
+      const probability = Math.pow(16, difficulty);
+      statProbability.textContent = '1/' + formatNumber(probability);
+      
+      // Reset si se cambia la dificultad
+      if (!isMining) {
+        updateHashDisplay();
+      }
+    }
+
+    async function updateHashDisplay() {
+      const blockData = blockDataInput.value;
+      const hash = await calculateBlockHash(blockData, nonce);
+      const isValid = isValidHash(hash, difficulty);
+      
+      hashDisplay.innerHTML = renderHash(hash, difficulty);
+      hashDisplay.classList.toggle('mining-success', isValid);
+      
+      return { hash, isValid };
+    }
+
+    function updateStats() {
+      statAttempts.textContent = formatNumber(attempts);
+      
+      if (startTime) {
+        const elapsed = Date.now() - startTime;
+        statTime.textContent = formatTime(elapsed);
+        
+        if (elapsed > 0) {
+          const hashrate = Math.round((attempts / elapsed) * 1000);
+          statHashrate.textContent = formatNumber(hashrate) + ' H/s';
+        }
+      }
+    }
+
+    function showSuccess(winningNonceValue, totalAttempts, elapsedTime) {
+      found = true;
+      winningNonce.textContent = winningNonceValue.toLocaleString();
+      winningAttempts.textContent = totalAttempts.toLocaleString();
+      winningTime.textContent = formatTime(elapsedTime);
+      successMessage.classList.add('show');
+    }
+
+    function hideSuccess() {
+      found = false;
+      successMessage.classList.remove('show');
+    }
+
+    // === MINERÍA ===
+
+    async function mineStep() {
+      if (found) return;
+      
+      if (!startTime) startTime = Date.now();
+      
+      const result = await updateHashDisplay();
+      nonceDisplay.textContent = nonce.toLocaleString();
+      attempts++;
+      updateStats();
+      
+      if (result.isValid) {
+        showSuccess(nonce, attempts, Date.now() - startTime);
+        stopMining();
+        return true;
+      }
+      
+      nonce++;
+      return false;
+    }
+
+    async function mineAuto() {
+      if (!isMining || miningMode !== 'auto') return;
+      
+      const foundValid = await mineStep();
+      if (!foundValid && isMining) {
+        // Continuar minando (~100 intentos/segundo visible)
+        setTimeout(() => {
+          requestAnimationFrame(mineAuto);
+        }, 10);
+      }
+    }
+
+    async function mineFast() {
+      if (!startTime) startTime = Date.now();
+      
+      const blockData = blockDataInput.value;
+      const batchSize = 1000;
+      
+      btnFast.disabled = true;
+      btnFast.textContent = '⏳ Calculando...';
+
+      // Procesar en batches para no bloquear UI
+      async function processBatch() {
+        for (let i = 0; i < batchSize; i++) {
+          const hash = await calculateBlockHash(blockData, nonce);
+          attempts++;
+          
+          if (isValidHash(hash, difficulty)) {
+            // ¡Encontrado!
+            nonceDisplay.textContent = nonce.toLocaleString();
+            await updateHashDisplay();
+            updateStats();
+            showSuccess(nonce, attempts, Date.now() - startTime);
+            btnFast.disabled = false;
+            btnFast.textContent = '🚀 Máxima velocidad';
+            return;
+          }
+          
+          nonce++;
+        }
+        
+        // Actualizar UI cada batch
+        nonceDisplay.textContent = nonce.toLocaleString();
+        updateStats();
+        
+        // Continuar si no se ha encontrado
+        if (!found) {
+          requestAnimationFrame(processBatch);
+        }
+      }
+
+      processBatch();
+    }
+
+    function stopMining() {
+      isMining = false;
+      miningMode = null;
+      btnAuto.textContent = '⏩ Minar automático';
+    }
+
+    function reset() {
+      stopMining();
+      nonce = 0;
+      attempts = 0;
+      startTime = null;
+      found = false;
+      
+      nonceDisplay.textContent = '0';
+      statAttempts.textContent = '0';
+      statHashrate.textContent = '0 H/s';
+      statTime.textContent = '0.0s';
+      
+      hideSuccess();
+      updateHashDisplay();
+    }
+
+    // === EVENT LISTENERS ===
+
+    difficultySlider.addEventListener('input', updateDifficulty);
+    blockDataInput.addEventListener('input', () => {
+      if (!isMining) {
+        reset();
+      }
+    });
+
+    btnStep.addEventListener('click', async () => {
+      if (found) reset();
+      await mineStep();
+    });
+
+    btnAuto.addEventListener('click', () => {
+      if (found) reset();
+      
+      if (isMining && miningMode === 'auto') {
+        stopMining();
+      } else {
+        isMining = true;
+        miningMode = 'auto';
+        btnAuto.textContent = '⏸ Pausar';
+        mineAuto();
+      }
+    });
+
+    btnFast.addEventListener('click', () => {
+      if (found) reset();
+      mineFast();
+    });
+
+    btnReset.addEventListener('click', reset);
+
+    // === INICIALIZACIÓN ===
+
+    updateDifficulty();
+    updateHashDisplay();
+
+  })();
+  </script>
+</body>
+</html>

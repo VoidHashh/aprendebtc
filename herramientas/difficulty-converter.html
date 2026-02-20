@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Convierte entre dificultad, target y bits (compact) de Bitcoin. Entiende cómo se codifica la dificultad de minería." />
+  <title>Conversor de dificultad y target — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .target-display {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      word-break: break-all;
+      padding: 1rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      line-height: 1.8;
+    }
+
+    .target-char--zero {
+      color: #2ea043;
+      font-weight: 600;
+    }
+
+    .target-char--nonzero {
+      color: var(--text-secondary);
+    }
+
+    .formula-box {
+      background: var(--bg-primary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      overflow-x: auto;
+    }
+
+    .preset-btn {
+      padding: 0.5rem 0.75rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .preset-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .presets-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+        <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="index.html" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Conversor de dificultad</span>
+        </nav>
+
+        <article class="article">
+          <h1>Conversor de dificultad y target</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Convierte entre los tres formatos que expresan la dificultad de minería en Bitcoin.
+          </p>
+
+          <!-- Disclaimer educativo -->
+          <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">Herramienta educativa</div>
+              <p class="callout__text">Esta herramienta es para aprendizaje. NO la uses para generar datos criptográficos para fondos reales.</p>
+            </div>
+          </div>
+
+          <!-- Presets históricos -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Valores históricos</h2>
+            <div class="presets-row">
+              <button class="preset-btn" data-bits="1d00ffff" data-name="Bloque génesis (2009)">
+                Bloque génesis (2009)
+              </button>
+              <button class="preset-btn" data-bits="1a44b9f2" data-name="Primer halving (2012)">
+                Primer halving (2012)
+              </button>
+              <button class="preset-btn" data-bits="1703255b" data-name="Halving 2024">
+                Halving 2024
+              </button>
+              <button class="preset-btn" data-bits="17034219" data-name="Récord 2024">
+                Récord 2024
+              </button>
+            </div>
+          </div>
+
+          <!-- Conversores interconectados -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Conversión de formatos</h2>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.25rem;">
+              Modifica cualquiera de los tres campos y los demás se actualizarán automáticamente.
+            </p>
+
+            <!-- Bits (compact) -->
+            <div class="tool-field" style="margin-bottom: 1.25rem;">
+              <label class="tool-label" for="input-bits">
+                Bits (compact) — 4 bytes hexadecimales
+              </label>
+              <input 
+                type="text" 
+                id="input-bits" 
+                class="tool-input" 
+                value="1d00ffff"
+                placeholder="Ej: 1d00ffff"
+                maxlength="8"
+                style="font-family: 'JetBrains Mono', monospace;"
+              />
+              <span class="tool-note">Campo "bits" del block header. Formato: exponente (1 byte) + coeficiente (3 bytes)</span>
+            </div>
+
+            <!-- Dificultad -->
+            <div class="tool-field" style="margin-bottom: 1.25rem;">
+              <label class="tool-label" for="input-difficulty">
+                Dificultad — número decimal
+              </label>
+              <input 
+                type="text" 
+                id="input-difficulty" 
+                class="tool-input" 
+                value="1"
+                placeholder="Ej: 1"
+                style="font-family: 'JetBrains Mono', monospace;"
+              />
+              <span class="tool-note">Ratio entre el target máximo (dificultad 1) y el target actual</span>
+            </div>
+
+            <!-- Target -->
+            <div class="tool-field">
+              <label class="tool-label" for="input-target">
+                Target — 256 bits hexadecimales
+              </label>
+              <textarea 
+                id="input-target" 
+                class="tool-input" 
+                rows="2"
+                placeholder="32 bytes en hexadecimal"
+                style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;"
+              ></textarea>
+              <span class="tool-note">El hash del bloque debe ser menor que este valor para ser válido</span>
+            </div>
+          </div>
+
+          <!-- Visualización del target -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Visualización del target</h2>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+              Los ceros iniciales (en verde) indican cuántos ceros debe tener el hash del bloque como mínimo.
+            </p>
+            <div class="target-display" id="target-visual">
+              —
+            </div>
+            <div style="margin-top: 0.75rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+              <div class="tool-result-card" style="flex: 1; min-width: 120px;">
+                <div class="tool-result-card__label">Ceros iniciales</div>
+                <div class="tool-result-card__value tool-result-card__value--accent" id="leading-zeros">—</div>
+              </div>
+              <div class="tool-result-card" style="flex: 1; min-width: 120px;">
+                <div class="tool-result-card__label">Probabilidad</div>
+                <div class="tool-result-card__value" id="probability">—</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fórmulas -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Fórmulas de conversión</h2>
+            
+            <div style="margin-bottom: 1.25rem;">
+              <label class="tool-label">Bits → Target</label>
+              <div class="formula-box">
+                exponente = bits[0]<br>
+                coeficiente = bits[1:4]<br>
+                target = coeficiente × 2^(8 × (exponente - 3))
+              </div>
+              <span class="tool-note" style="display: block; margin-top: 0.5rem;">
+                El primer byte indica el tamaño, los siguientes 3 son el valor significativo.
+              </span>
+            </div>
+
+            <div style="margin-bottom: 1.25rem;">
+              <label class="tool-label">Target → Dificultad</label>
+              <div class="formula-box">
+                target_max = 0x00000000FFFF0000...0000 (dificultad 1)<br>
+                dificultad = target_max / target_actual
+              </div>
+              <span class="tool-note" style="display: block; margin-top: 0.5rem;">
+                Cuanto menor es el target, mayor es la dificultad.
+              </span>
+            </div>
+
+            <div>
+              <label class="tool-label">¿Por qué "compact"?</label>
+              <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+                El target completo ocupa 32 bytes (256 bits), pero el block header solo tiene 80 bytes 
+                y necesita espacio para otros campos. El formato "bits" comprime el target en solo 4 bytes, 
+                sacrificando algo de precisión pero ahorrando 28 bytes en cada bloque.
+              </p>
+            </div>
+          </div>
+
+          <!-- Explicación del ajuste -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">El ajuste de dificultad</h2>
+            <p style="color: var(--text-secondary); line-height: 1.7;">
+              Bitcoin ajusta la dificultad cada <strong>2016 bloques</strong> (~2 semanas). El objetivo es 
+              mantener un tiempo promedio de <strong>10 minutos entre bloques</strong>. Si los 2016 bloques 
+              anteriores se minaron en menos de 2 semanas, la dificultad sube; si tardaron más, baja.
+            </p>
+            <p style="color: var(--text-secondary); line-height: 1.7; margin-top: 1rem;">
+              El ajuste máximo por periodo es ×4 o ÷4, para evitar cambios bruscos. Esto hace que Bitcoin 
+              sea resistente tanto a aumentos como a caídas repentinas del hashrate.
+            </p>
+          </div>
+
+          <!-- Callouts contextuales -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más sobre minería y dificultad</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-5/proof-of-work.html">Proof of Work en detalle →</a> · 
+              <a href="../nivel-3/mineria-en-detalle.html">Minería paso a paso →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === CONSTANTES ===
+    // Target máximo (dificultad 1) — corresponde a bits = 1d00ffff
+    // target_max = 0x00000000FFFF × 2^208
+    const TARGET_MAX_BITS = '1d00ffff';
+
+    // === ELEMENTOS DEL DOM ===
+    const inputBits = document.getElementById('input-bits');
+    const inputDifficulty = document.getElementById('input-difficulty');
+    const inputTarget = document.getElementById('input-target');
+    const targetVisual = document.getElementById('target-visual');
+    const leadingZerosEl = document.getElementById('leading-zeros');
+    const probabilityEl = document.getElementById('probability');
+
+    // Flag para evitar loops infinitos de actualización
+    let updating = false;
+
+    // === FUNCIONES DE CONVERSIÓN CON BIGINT ===
+
+    /**
+     * Convierte bits (compact) a target (BigInt)
+     * bits format: 1 byte exponente + 3 bytes coeficiente (hex string de 8 chars)
+     */
+    function bitsToTarget(bitsHex) {
+      if (!/^[0-9a-fA-F]{8}$/.test(bitsHex)) {
+        throw new Error('Bits debe ser 8 caracteres hexadecimales');
+      }
+
+      const exponent = parseInt(bitsHex.substring(0, 2), 16);
+      const coefficient = BigInt('0x' + bitsHex.substring(2, 8));
+
+      // target = coefficient × 2^(8 × (exponent - 3))
+      const shift = BigInt(8 * (exponent - 3));
+      
+      if (shift < 0n) {
+        return coefficient >> (-shift);
+      }
+      return coefficient << shift;
+    }
+
+    /**
+     * Convierte target (BigInt) a bits (compact)
+     */
+    function targetToBits(target) {
+      if (target <= 0n) {
+        throw new Error('Target debe ser positivo');
+      }
+
+      // Encontrar el tamaño en bytes del target
+      let targetHex = target.toString(16);
+      if (targetHex.length % 2 !== 0) targetHex = '0' + targetHex;
+      
+      let size = targetHex.length / 2;
+      
+      // Obtener los 3 bytes más significativos
+      let coefficientHex;
+      if (targetHex.length <= 6) {
+        coefficientHex = targetHex.padStart(6, '0');
+      } else {
+        coefficientHex = targetHex.substring(0, 6);
+      }
+
+      // Si el bit más alto del coeficiente está activado, necesitamos ajustar
+      // para evitar interpretarlo como negativo
+      let coefficient = parseInt(coefficientHex, 16);
+      if (coefficient & 0x800000) {
+        coefficient >>= 8;
+        size++;
+      }
+
+      const exponent = size.toString(16).padStart(2, '0');
+      const coefHex = coefficient.toString(16).padStart(6, '0');
+
+      return exponent + coefHex;
+    }
+
+    /**
+     * Calcula target_max (dificultad 1)
+     */
+    function getTargetMax() {
+      return bitsToTarget(TARGET_MAX_BITS);
+    }
+
+    /**
+     * Convierte target a dificultad
+     */
+    function targetToDifficulty(target) {
+      const targetMax = getTargetMax();
+      // Usar aritmética de punto flotante para dificultad
+      // ya que puede ser un número muy grande con decimales
+      
+      // Para precisión, multiplicamos por un factor grande y luego dividimos
+      const precision = 1000000000000n; // 10^12
+      const scaledDiff = (targetMax * precision) / target;
+      return Number(scaledDiff) / Number(precision);
+    }
+
+    /**
+     * Convierte dificultad a target
+     */
+    function difficultyToTarget(difficulty) {
+      const targetMax = getTargetMax();
+      // target = target_max / difficulty
+      const precision = 1000000000000n;
+      const diffBigInt = BigInt(Math.round(difficulty * Number(precision)));
+      return (targetMax * precision) / diffBigInt;
+    }
+
+    /**
+     * Convierte target BigInt a string hexadecimal de 64 caracteres (32 bytes)
+     */
+    function targetToHex(target) {
+      return target.toString(16).padStart(64, '0');
+    }
+
+    /**
+     * Cuenta ceros iniciales en hex string
+     */
+    function countLeadingZeros(hexString) {
+      let count = 0;
+      for (const char of hexString) {
+        if (char === '0') count++;
+        else break;
+      }
+      return count;
+    }
+
+    /**
+     * Formatea número con separadores
+     */
+    function formatNumber(num) {
+      if (num >= 1e15) return (num / 1e15).toFixed(2) + ' P';
+      if (num >= 1e12) return (num / 1e12).toFixed(2) + ' T';
+      if (num >= 1e9) return (num / 1e9).toFixed(2) + ' G';
+      if (num >= 1e6) return (num / 1e6).toFixed(2) + ' M';
+      if (num >= 1e3) return (num / 1e3).toFixed(2) + ' K';
+      if (num >= 1) return num.toFixed(2);
+      return num.toExponential(2);
+    }
+
+    // === ACTUALIZAR UI ===
+
+    function renderTargetVisual(targetHex) {
+      let html = '';
+      for (const char of targetHex) {
+        const className = char === '0' ? 'target-char--zero' : 'target-char--nonzero';
+        html += `<span class="${className}">${char}</span>`;
+      }
+      targetVisual.innerHTML = html;
+
+      // Contar ceros
+      const zeros = countLeadingZeros(targetHex);
+      leadingZerosEl.textContent = zeros;
+
+      // Calcular probabilidad aproximada
+      // P ≈ 16^(-zeros) para una aproximación simple
+      // Más preciso: P = target / 2^256
+      try {
+        const target = BigInt('0x' + targetHex);
+        const maxHash = 2n ** 256n;
+        // Probabilidad = target / maxHash
+        const probInverse = maxHash / target;
+        probabilityEl.textContent = '1 / ' + formatNumber(Number(probInverse));
+      } catch {
+        probabilityEl.textContent = '—';
+      }
+    }
+
+    function updateFromBits() {
+      if (updating) return;
+      updating = true;
+
+      try {
+        const bits = inputBits.value.toLowerCase().trim();
+        
+        if (bits.length === 8) {
+          const target = bitsToTarget(bits);
+          const targetHex = targetToHex(target);
+          const difficulty = targetToDifficulty(target);
+
+          inputTarget.value = targetHex;
+          inputDifficulty.value = formatNumber(difficulty);
+          renderTargetVisual(targetHex);
+        }
+      } catch (error) {
+        console.error('Error conversión bits:', error);
+      }
+
+      updating = false;
+    }
+
+    function updateFromDifficulty() {
+      if (updating) return;
+      updating = true;
+
+      try {
+        const diffStr = inputDifficulty.value.trim().replace(/[^\d.e+-]/gi, '');
+        const difficulty = parseFloat(diffStr);
+
+        if (difficulty > 0 && isFinite(difficulty)) {
+          const target = difficultyToTarget(difficulty);
+          const targetHex = targetToHex(target);
+          const bits = targetToBits(target);
+
+          inputBits.value = bits;
+          inputTarget.value = targetHex;
+          renderTargetVisual(targetHex);
+        }
+      } catch (error) {
+        console.error('Error conversión dificultad:', error);
+      }
+
+      updating = false;
+    }
+
+    function updateFromTarget() {
+      if (updating) return;
+      updating = true;
+
+      try {
+        let targetHex = inputTarget.value.toLowerCase().replace(/[^0-9a-f]/g, '');
+        
+        if (targetHex.length > 0 && targetHex.length <= 64) {
+          targetHex = targetHex.padStart(64, '0');
+          const target = BigInt('0x' + targetHex);
+          
+          if (target > 0n) {
+            const bits = targetToBits(target);
+            const difficulty = targetToDifficulty(target);
+
+            inputBits.value = bits;
+            inputDifficulty.value = formatNumber(difficulty);
+            renderTargetVisual(targetHex);
+          }
+        }
+      } catch (error) {
+        console.error('Error conversión target:', error);
+      }
+
+      updating = false;
+    }
+
+    // === EVENT LISTENERS ===
+
+    inputBits.addEventListener('input', updateFromBits);
+    inputDifficulty.addEventListener('input', updateFromDifficulty);
+    inputTarget.addEventListener('input', updateFromTarget);
+
+    // Presets
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        inputBits.value = btn.dataset.bits;
+        updateFromBits();
+      });
+    });
+
+    // === INICIALIZACIÓN ===
+
+    updateFromBits();
+
+  })();
+  </script>
+</body>
+</html>

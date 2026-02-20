@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Compara exchanges de Bitcoin por comisiones, metodos de pago, seguridad y funciones. Filtra y ordena para encontrar el que mejor encaja contigo." />
+  <title>Comparador de exchanges Bitcoin - Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegacion">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="index.html" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Comparador de exchanges</span>
+        </nav>
+
+        <article class="article exchange-comparator">
+          <h1>Comparador de exchanges Bitcoin</h1>
+          <p class="article__subtitle">Compara exchanges segun comisiones, pagos, KYC, app y enfoque Bitcoin-only.</p>
+
+          <div class="tool-container">
+            <h2 class="tool-container__title">Filtros</h2>
+
+            <div class="tool-filters-row">
+              <div class="tool-filter-group">
+                <label class="tool-toggle" for="filter-dca">
+                  <input type="checkbox" class="tool-toggle__input" id="filter-dca" />
+                  <span class="tool-toggle__slider"></span>
+                  <span class="tool-toggle__label">Solo con DCA automatico</span>
+                </label>
+              </div>
+
+              <div class="tool-filter-group">
+                <label class="tool-toggle" for="filter-btconly">
+                  <input type="checkbox" class="tool-toggle__input" id="filter-btconly" />
+                  <span class="tool-toggle__slider"></span>
+                  <span class="tool-toggle__label">Solo Bitcoin-only</span>
+                </label>
+              </div>
+
+              <div class="tool-filter-group">
+                <label class="tool-label" for="filter-payment">Metodo de pago</label>
+                <select id="filter-payment" class="tool-select">
+                  <option value="all">Todos</option>
+                  <option value="sepa">SEPA</option>
+                  <option value="card">Tarjeta</option>
+                </select>
+              </div>
+
+              <div class="tool-filter-group">
+                <label class="tool-label" for="filter-sort">Ordenar por</label>
+                <select id="filter-sort" class="tool-select">
+                  <option value="name">Nombre (A-Z)</option>
+                  <option value="fee-asc">Comision (menor)</option>
+                  <option value="fee-desc">Comision (mayor)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="tool-table-wrapper">
+              <table class="tool-table" id="exchanges-table">
+                <thead>
+                  <tr>
+                    <th>Exchange</th>
+                    <th>Comision</th>
+                    <th>Retiro BTC</th>
+                    <th>DCA</th>
+                    <th>KYC</th>
+                    <th>Pagos</th>
+                    <th>App</th>
+                    <th>BTC-only</th>
+                    <th>Sede</th>
+                  </tr>
+                </thead>
+                <tbody id="exchanges-tbody"></tbody>
+              </table>
+            </div>
+
+            <div class="exchange-cards" id="exchanges-cards"></div>
+
+            <p id="no-results" class="tool-empty" hidden>
+              No hay exchanges que coincidan con los filtros seleccionados.
+            </p>
+          </div>
+
+          <div class="tool-disclaimer">
+            <strong>Nota:</strong> Las comisiones y condiciones cambian con frecuencia. Verifica siempre la informacion en la web oficial de cada plataforma antes de operar.
+          </div>
+
+          <div class="tool-disclaimer tool-disclaimer--compact-top">
+            <strong>Actualizacion:</strong> Datos orientativos de referencia para uso educativo.
+          </div>
+
+          <div class="tool-callout">
+            <div class="tool-callout__title">Como elegir un exchange</div>
+            <p class="tool-callout__text">
+              Evalua comisiones, metodo de pago, seguridad y facilidad de retiro a autocustodia.
+              <a href="../nivel-2/exchanges-comparativa.html">Ver guia de exchanges en Nivel 2 -&gt;</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+
+  <script>
+  (function () {
+    'use strict';
+
+    const EXCHANGES = [
+      {
+        name: 'Kraken',
+        color: '#5741d9',
+        feeMakerTaker: '0,16% / 0,26%',
+        feeNumeric: 0.26,
+        withdrawalBtc: '0,00002 BTC',
+        dca: true,
+        kyc: true,
+        payments: ['SEPA', 'Tarjeta'],
+        app: true,
+        btcOnly: false,
+        country: 'EE.UU.'
+      },
+      {
+        name: 'Binance',
+        color: '#f3ba2f',
+        feeMakerTaker: '0,10% / 0,10%',
+        feeNumeric: 0.10,
+        withdrawalBtc: '0,0000012 BTC',
+        dca: true,
+        kyc: true,
+        payments: ['SEPA', 'Tarjeta'],
+        app: true,
+        btcOnly: false,
+        country: 'Global'
+      },
+      {
+        name: 'Coinbase',
+        color: '#0052ff',
+        feeMakerTaker: '0,40% / 0,60%',
+        feeNumeric: 0.60,
+        withdrawalBtc: 'Variable (red)',
+        dca: true,
+        kyc: true,
+        payments: ['SEPA', 'Tarjeta'],
+        app: true,
+        btcOnly: false,
+        country: 'EE.UU.'
+      },
+      {
+        name: 'Bitstamp',
+        color: '#0a9e4d',
+        feeMakerTaker: '0,30% / 0,40%',
+        feeNumeric: 0.40,
+        withdrawalBtc: '0,0005 BTC',
+        dca: false,
+        kyc: true,
+        payments: ['SEPA', 'Tarjeta'],
+        app: true,
+        btcOnly: false,
+        country: 'Luxemburgo'
+      },
+      {
+        name: 'Bitpanda',
+        color: '#08b288',
+        feeMakerTaker: '1,49%',
+        feeNumeric: 1.49,
+        withdrawalBtc: 'Variable',
+        dca: true,
+        kyc: true,
+        payments: ['SEPA', 'Tarjeta'],
+        app: true,
+        btcOnly: false,
+        country: 'Austria'
+      },
+      {
+        name: 'Bit2Me',
+        color: '#00c389',
+        feeMakerTaker: '0,50% / 0,60%',
+        feeNumeric: 0.60,
+        withdrawalBtc: 'Variable',
+        dca: true,
+        kyc: true,
+        payments: ['SEPA', 'Tarjeta', 'Bizum'],
+        app: true,
+        btcOnly: false,
+        country: 'Espana'
+      },
+      {
+        name: 'Swan Bitcoin',
+        color: '#0066ff',
+        feeMakerTaker: '0,99%',
+        feeNumeric: 0.99,
+        withdrawalBtc: 'Gratis (auto)',
+        dca: true,
+        kyc: true,
+        payments: ['SEPA', 'ACH'],
+        app: true,
+        btcOnly: true,
+        country: 'EE.UU.'
+      },
+      {
+        name: 'Relai',
+        color: '#ff6b35',
+        feeMakerTaker: '1,00%',
+        feeNumeric: 1.00,
+        withdrawalBtc: 'Auto a wallet',
+        dca: true,
+        kyc: false,
+        payments: ['SEPA'],
+        app: true,
+        btcOnly: true,
+        country: 'Suiza'
+      },
+      {
+        name: 'Pocket Bitcoin',
+        color: '#f7931a',
+        feeMakerTaker: '1,50%',
+        feeNumeric: 1.50,
+        withdrawalBtc: 'Auto a wallet',
+        dca: true,
+        kyc: false,
+        payments: ['SEPA'],
+        app: false,
+        btcOnly: true,
+        country: 'Suiza'
+      },
+      {
+        name: 'Strike',
+        color: '#000000',
+        feeMakerTaker: '~0%',
+        feeNumeric: 0,
+        withdrawalBtc: 'Gratis',
+        dca: true,
+        kyc: true,
+        payments: ['ACH', 'Tarjeta'],
+        app: true,
+        btcOnly: true,
+        country: 'EE.UU.'
+      }
+    ];
+
+    const filterDca = document.getElementById('filter-dca');
+    const filterBtcOnly = document.getElementById('filter-btconly');
+    const filterPayment = document.getElementById('filter-payment');
+    const filterSort = document.getElementById('filter-sort');
+    const tableBody = document.getElementById('exchanges-tbody');
+    const cardsContainer = document.getElementById('exchanges-cards');
+    const noResults = document.getElementById('no-results');
+
+    function createBadge(value) {
+      const className = value ? 'tool-table__badge tool-table__badge--yes' : 'tool-table__badge tool-table__badge--no';
+      const text = value ? 'Si' : 'No';
+      return `<span class="${className}">${text}</span>`;
+    }
+
+    function createLogo(exchange) {
+      const initial = exchange.name.charAt(0).toUpperCase();
+      return `<div class="exchange-logo" style="background:${exchange.color}">${initial}</div>`;
+    }
+
+    function renderTable(exchanges) {
+      tableBody.innerHTML = '';
+
+      exchanges.forEach((exchange) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>
+            <div class="exchange-name-cell">
+              ${createLogo(exchange)}
+              <span class="exchange-name">${exchange.name}</span>
+            </div>
+          </td>
+          <td>${exchange.feeMakerTaker}</td>
+          <td>${exchange.withdrawalBtc}</td>
+          <td>${createBadge(exchange.dca)}</td>
+          <td>${createBadge(exchange.kyc)}</td>
+          <td>${exchange.payments.join(', ')}</td>
+          <td>${createBadge(exchange.app)}</td>
+          <td>${createBadge(exchange.btcOnly)}</td>
+          <td>${exchange.country}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    function renderCards(exchanges) {
+      cardsContainer.innerHTML = '';
+
+      exchanges.forEach((exchange) => {
+        const card = document.createElement('div');
+        card.className = 'exchange-card';
+        card.innerHTML = `
+          <div class="exchange-card__header">
+            ${createLogo(exchange)}
+            <span class="exchange-card__name">${exchange.name}</span>
+          </div>
+          <div class="exchange-card__grid">
+            <div class="exchange-card__item">
+              <span class="exchange-card__label">Comision</span>
+              <span class="exchange-card__value">${exchange.feeMakerTaker}</span>
+            </div>
+            <div class="exchange-card__item">
+              <span class="exchange-card__label">Retiro BTC</span>
+              <span class="exchange-card__value">${exchange.withdrawalBtc}</span>
+            </div>
+            <div class="exchange-card__item">
+              <span class="exchange-card__label">DCA</span>
+              <span class="exchange-card__value">${exchange.dca ? 'Si' : 'No'}</span>
+            </div>
+            <div class="exchange-card__item">
+              <span class="exchange-card__label">KYC</span>
+              <span class="exchange-card__value">${exchange.kyc ? 'Si' : 'No'}</span>
+            </div>
+            <div class="exchange-card__item">
+              <span class="exchange-card__label">Pagos</span>
+              <span class="exchange-card__value">${exchange.payments.join(', ')}</span>
+            </div>
+            <div class="exchange-card__item">
+              <span class="exchange-card__label">App</span>
+              <span class="exchange-card__value">${exchange.app ? 'Si' : 'No'}</span>
+            </div>
+            <div class="exchange-card__item">
+              <span class="exchange-card__label">BTC-only</span>
+              <span class="exchange-card__value">${exchange.btcOnly ? 'Si' : 'No'}</span>
+            </div>
+            <div class="exchange-card__item">
+              <span class="exchange-card__label">Sede</span>
+              <span class="exchange-card__value">${exchange.country}</span>
+            </div>
+          </div>
+        `;
+        cardsContainer.appendChild(card);
+      });
+    }
+
+    function filterAndSort() {
+      let filtered = [...EXCHANGES];
+
+      if (filterDca.checked) {
+        filtered = filtered.filter((exchange) => exchange.dca);
+      }
+
+      if (filterBtcOnly.checked) {
+        filtered = filtered.filter((exchange) => exchange.btcOnly);
+      }
+
+      if (filterPayment.value !== 'all') {
+        const paymentMap = {
+          sepa: 'SEPA',
+          card: 'Tarjeta'
+        };
+
+        const paymentName = paymentMap[filterPayment.value];
+        filtered = filtered.filter((exchange) => exchange.payments.includes(paymentName));
+      }
+
+      switch (filterSort.value) {
+        case 'fee-asc':
+          filtered.sort((a, b) => a.feeNumeric - b.feeNumeric);
+          break;
+        case 'fee-desc':
+          filtered.sort((a, b) => b.feeNumeric - a.feeNumeric);
+          break;
+        case 'name':
+        default:
+          filtered.sort((a, b) => a.name.localeCompare(b.name));
+          break;
+      }
+
+      renderTable(filtered);
+      renderCards(filtered);
+      noResults.hidden = filtered.length !== 0;
+    }
+
+    filterDca.addEventListener('change', filterAndSort);
+    filterBtcOnly.addEventListener('change', filterAndSort);
+    filterPayment.addEventListener('change', filterAndSort);
+    filterSort.addEventListener('change', filterAndSort);
+
+    filterAndSort();
+  })();
+  </script>
+</body>
+</html>
+
+

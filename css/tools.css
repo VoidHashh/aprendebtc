@@ -617,6 +617,8 @@
   margin-top: 2px;
   cursor: pointer;
   transition: all 0.2s;
+  background: transparent;
+  padding: 0;
 }
 
 .tool-checklist__checkbox:hover {
@@ -660,4 +662,332 @@
   font-size: 0.85rem;
   color: var(--text-secondary);
 }
+
+
+/* === COMPARADOR DE EXCHANGES === */
+
+.tool-filters-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--bg-border);
+}
+
+.tool-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.tool-filter-group .tool-select {
+  min-width: 150px;
+}
+
+.exchange-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.exchange-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.exchange-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.exchange-cards {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.exchange-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--bg-border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+}
+
+.exchange-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--bg-border);
+}
+
+.exchange-card__name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.exchange-card__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.exchange-card__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.exchange-card__label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+}
+
+.exchange-card__value {
+  font-size: 0.92rem;
+  color: var(--text-primary);
+}
+
+.tool-empty {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 1.25rem;
+}
+
+/* === CALCULADORA DE HERENCIA === */
+
+.heir-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 140px minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: end;
+  margin-bottom: 0.8rem;
+}
+
+.heir-row__remove {
+  height: 42px;
+}
+
+.heir-results {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--bg-border);
+}
+
+.heir-results__title {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+}
+
+.heir-result-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--bg-border);
+}
+
+.heir-result-item:last-child {
+  border-bottom: none;
+}
+
+.heir-result-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.heir-result-values {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2rem;
+}
+
+.heir-result-btc {
+  color: var(--accent);
+  font-weight: 700;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.heir-result-eur {
+  color: var(--text-secondary);
+  font-size: 0.84rem;
+}
+
+.percentage-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border: 1px solid var(--bg-border);
+  border-radius: var(--radius-md);
+  background: var(--bg-primary);
+}
+
+.percentage-total--valid {
+  border-color: rgba(46, 160, 67, 0.7);
+}
+
+.percentage-total--invalid {
+  border-color: rgba(218, 54, 51, 0.7);
+}
+
+.custody-diagram {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.9rem;
+}
+
+.custody-option {
+  background: var(--bg-primary);
+  border: 1px solid var(--bg-border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  cursor: pointer;
+  color: var(--text-primary);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.custody-option:hover {
+  border-color: var(--accent);
+}
+
+.custody-option.selected {
+  border-color: var(--accent);
+  background: rgba(247, 147, 26, 0.08);
+}
+
+.custody-option__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 28px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--accent);
+  border: 1px solid rgba(247, 147, 26, 0.45);
+  background: rgba(247, 147, 26, 0.08);
+}
+
+.custody-option__title {
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.custody-option__desc {
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+}
+
+.custody-info {
+  margin-top: 1rem;
+  border: 1px solid var(--bg-border);
+  border-radius: var(--radius-md);
+  background: var(--bg-primary);
+  padding: 1rem;
+}
+
+.custody-info__title {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-bottom: 0.55rem;
+}
+
+.custody-info__risks {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.custody-info__risks li {
+  margin-bottom: 0.35rem;
+}
+
+@media (max-width: 900px) {
+  .exchange-comparator .tool-table-wrapper {
+    display: none;
+  }
+
+  .exchange-comparator .exchange-cards {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .tool-filter-group {
+    width: 100%;
+  }
+
+  .tool-filter-group .tool-select {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .exchange-card__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .heir-row {
+    grid-template-columns: 1fr;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--bg-border);
+    margin-bottom: 1rem;
+  }
+
+  .heir-row:last-child {
+    border-bottom: none;
+  }
+
+  .heir-result-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .heir-result-values {
+    align-items: flex-start;
+  }
+}
+
+.tool-disclaimer--compact-top {
+  margin-top: 0.75rem;
+}
+
+.tool-price-ticker--tight {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+.tool-btn-row--tight {
+  margin-top: 1.25rem;
+}
+
 

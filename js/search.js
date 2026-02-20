@@ -110,11 +110,17 @@
     { title: 'Calculadora de fees', url: '/herramientas/calculadora-fees.html', tags: ['herramientas', 'fees', 'mempool', 'sat/vb'], section: 'Herramientas' },
     { title: 'Calculadora DCA', url: '/herramientas/calculadora-dca.html', tags: ['herramientas', 'dca', 'compras periodicas'], section: 'Herramientas' },
     { title: 'Calculadora de impuestos (ES)', url: '/herramientas/calculadora-impuestos.html', tags: ['herramientas', 'impuestos', 'irpf', 'espana'], section: 'Herramientas' },
+    { title: 'Comparador de exchanges', url: '/herramientas/comparador-exchanges.html', tags: ['herramientas', 'exchanges', 'comparativa', 'kyc'], section: 'Herramientas' },
+    { title: 'Calculadora de herencia', url: '/herramientas/calculadora-herencia.html', tags: ['herramientas', 'herencia', 'multisig', 'planificacion'], section: 'Herramientas' },
+    { title: 'Calculadora de hash', url: '/herramientas/hash.html', tags: ['herramientas', 'hash', 'sha256', 'hash160', 'ripemd160'], section: 'Herramientas' },
+    { title: 'Simulador de mineria', url: '/herramientas/mining-simulator.html', tags: ['herramientas', 'mineria', 'pow', 'nonce'], section: 'Herramientas' },
+    { title: 'Conversor de dificultad y target', url: '/herramientas/difficulty-converter.html', tags: ['herramientas', 'dificultad', 'target', 'bits'], section: 'Herramientas' },
+    { title: 'Generador de Merkle Tree', url: '/herramientas/merkle-tree.html', tags: ['herramientas', 'merkle', 'txid', 'arbol'], section: 'Herramientas' },
+    { title: 'Herramientas de bloques', url: '/herramientas/block-tools.html', tags: ['herramientas', 'block header', 'bloques', 'hash'], section: 'Herramientas' },
     { title: 'Generador de claves y direcciones', url: '/herramientas/claves.html', tags: ['herramientas', 'claves', 'direcciones'], section: 'Herramientas' },
     { title: 'HD Wallet explorer', url: '/herramientas/hd-wallet.html', tags: ['herramientas', 'hd wallet', 'derivation'], section: 'Herramientas' },
     { title: 'Constructor de transacciones', url: '/herramientas/transaccion.html', tags: ['herramientas', 'transacciones', 'raw'], section: 'Herramientas' },
     { title: 'Interprete de Script', url: '/herramientas/script.html', tags: ['herramientas', 'script'], section: 'Herramientas' },
-    { title: 'Calculadora de hash', url: '/herramientas/hash.html', tags: ['herramientas', 'hash'], section: 'Herramientas' },
     { title: 'ECDSA y Schnorr Sign/Verify', url: '/herramientas/firma.html', tags: ['herramientas', 'firma', 'ecdsa', 'schnorr'], section: 'Herramientas' },
     { title: 'Comunidad', url: '/comunidad/', tags: ['meetups', 'eventos'], section: 'Pilares' }
   ];
@@ -241,3 +247,4 @@
   document.addEventListener('includes:loaded', init);
   document.addEventListener('DOMContentLoaded', () => setTimeout(init, 150));
 })();
+

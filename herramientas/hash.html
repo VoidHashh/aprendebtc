@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Herramienta: Calculadora de hash." />
-  <title>Calculadora de hash | aprendebtc.com</title>
+  <meta name="description" content="Calcula hashes SHA-256, doble SHA-256, RIPEMD-160 y HASH160 de cualquier texto o hexadecimal. Herramienta educativa Bitcoin." />
+  <title>Calculadora de hash — Herramientas | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/components.css" />
   <link rel="stylesheet" href="../css/tools.css" />
@@ -15,7 +16,7 @@
   <div data-include="header"></div>
 
   <div class="page-layout">
-    <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+        <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
       <nav class="sidebar">
         <div class="sidebar__ad-wrap">
           <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
@@ -25,18 +26,206 @@
 
     <main class="page-layout__content" id="main-content">
       <div class="content-inner">
-        <nav class="breadcrumb" aria-label="Ruta de navegacion">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
           <a href="../" class="breadcrumb__item">Inicio</a>
-          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
           <a href="index.html" class="breadcrumb__item">Herramientas</a>
-          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
-          <span class="breadcrumb__current">Calculadora de hash</span>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Hash functions</span>
         </nav>
 
         <article class="article">
           <h1>Calculadora de hash</h1>
-          <p class="article__subtitle">Herramienta en preparacion.</p>
-          <p>Placeholder activo. Esta herramienta se habilitara en una siguiente iteracion.</p>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Calcula los hashes que Bitcoin usa internamente: SHA-256, HASH256, HASH160 y RIPEMD-160.
+          </p>
+
+          <!-- Disclaimer educativo -->
+          <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">Herramienta educativa</div>
+              <p class="callout__text">Esta herramienta es para aprendizaje. NO la uses para generar datos criptográficos para fondos reales.</p>
+            </div>
+          </div>
+
+          <!-- Input principal -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Datos de entrada</h2>
+
+            <!-- Toggle tipo de input -->
+            <div class="tool-presets" style="margin-bottom: 1rem;">
+              <button class="tool-preset tool-preset--active" data-mode="text" id="mode-text">Texto (UTF-8)</button>
+              <button class="tool-preset" data-mode="hex" id="mode-hex">Hexadecimal</button>
+            </div>
+
+            <div class="tool-field">
+              <label class="tool-label" for="input-data">
+                <span id="input-label-text">Texto a hashear</span>
+              </label>
+              <textarea 
+                id="input-data" 
+                class="tool-input" 
+                rows="3" 
+                placeholder="Escribe aquí..."
+                style="font-family: 'JetBrains Mono', monospace; resize: vertical;"
+              >aprendeBTC</textarea>
+              <span class="tool-note" id="input-info">10 bytes de entrada</span>
+            </div>
+          </div>
+
+          <!-- Resultados de hashes -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Hashes calculados</h2>
+
+            <!-- SHA-256 -->
+            <div class="hash-result" style="margin-bottom: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <label class="tool-label" style="margin-bottom: 0;">SHA-256</label>
+                <span class="tool-note">32 bytes (64 hex)</span>
+              </div>
+              <div style="display: flex; gap: 0.5rem;">
+                <div class="tool-output" id="hash-sha256" style="flex: 1; word-break: break-all;">
+                  —
+                </div>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="hash-sha256" aria-label="Copiar SHA-256">
+                  📋
+                </button>
+              </div>
+            </div>
+
+            <!-- HASH256 (doble SHA-256) -->
+            <div class="hash-result" style="margin-bottom: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <label class="tool-label" style="margin-bottom: 0;">HASH256 (SHA-256²)</label>
+                <span class="tool-note">32 bytes — TXIDs, bloques</span>
+              </div>
+              <div style="display: flex; gap: 0.5rem;">
+                <div class="tool-output" id="hash-hash256" style="flex: 1; word-break: break-all;">
+                  —
+                </div>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="hash-hash256" aria-label="Copiar HASH256">
+                  📋
+                </button>
+              </div>
+            </div>
+
+            <!-- HASH256 reversed -->
+            <div class="hash-result" style="margin-bottom: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <label class="tool-label" style="margin-bottom: 0;">HASH256 (reversed bytes)</label>
+                <span class="tool-note">Formato display de TXIDs</span>
+              </div>
+              <div style="display: flex; gap: 0.5rem;">
+                <div class="tool-output" id="hash-hash256-rev" style="flex: 1; word-break: break-all;">
+                  —
+                </div>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="hash-hash256-rev" aria-label="Copiar HASH256 reversed">
+                  📋
+                </button>
+              </div>
+            </div>
+
+            <!-- RIPEMD-160 -->
+            <div class="hash-result" style="margin-bottom: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <label class="tool-label" style="margin-bottom: 0;">RIPEMD-160</label>
+                <span class="tool-note">20 bytes (40 hex)</span>
+              </div>
+              <div style="display: flex; gap: 0.5rem;">
+                <div class="tool-output" id="hash-ripemd160" style="flex: 1; word-break: break-all;">
+                  —
+                </div>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="hash-ripemd160" aria-label="Copiar RIPEMD-160">
+                  📋
+                </button>
+              </div>
+            </div>
+
+            <!-- HASH160 -->
+            <div class="hash-result">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <label class="tool-label" style="margin-bottom: 0;">HASH160 (RIPEMD-160(SHA-256))</label>
+                <span class="tool-note">20 bytes — Direcciones P2PKH</span>
+              </div>
+              <div style="display: flex; gap: 0.5rem;">
+                <div class="tool-output" id="hash-hash160" style="flex: 1; word-break: break-all; color: var(--accent);">
+                  —
+                </div>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="hash-hash160" aria-label="Copiar HASH160">
+                  📋
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Efecto avalancha -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Efecto avalancha</h2>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+              Observa cómo un pequeño cambio en la entrada produce un hash completamente diferente.
+            </p>
+            
+            <div class="tool-result-card" style="text-align: center;">
+              <div class="tool-result-card__label">Caracteres diferentes vs hash anterior (SHA-256)</div>
+              <div class="tool-result-card__value" id="avalanche-count" style="font-size: 1.5rem;">
+                — / 64
+              </div>
+              <div class="tool-note" id="avalanche-percent" style="margin-top: 0.25rem;">—</div>
+            </div>
+
+            <div style="margin-top: 1rem; padding: 0.75rem; background: var(--bg-primary); border-radius: var(--radius-md);">
+              <div class="tool-label" style="margin-bottom: 0.5rem;">Hash anterior</div>
+              <div id="previous-hash" style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-secondary); word-break: break-all;">
+                —
+              </div>
+            </div>
+          </div>
+
+          <!-- Tabla de usos -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">¿Qué hash se usa para qué en Bitcoin?</h2>
+            
+            <div class="tool-table-wrapper">
+              <table class="tool-table">
+                <thead>
+                  <tr>
+                    <th>Hash</th>
+                    <th>Uso en Bitcoin</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>SHA-256</strong></td>
+                    <td>Base de todo. Minería, árboles de Merkle, firmas</td>
+                  </tr>
+                  <tr>
+                    <td><strong>HASH256</strong></td>
+                    <td>TXIDs (identificadores de transacción), block hashes</td>
+                  </tr>
+                  <tr>
+                    <td><strong>RIPEMD-160</strong></td>
+                    <td>Combinado con SHA-256 para acortar hashes de claves públicas</td>
+                  </tr>
+                  <tr>
+                    <td><strong>HASH160</strong></td>
+                    <td>Derivar direcciones P2PKH y P2SH (legacy)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más sobre funciones hash</div>
+            <p class="tool-callout__text">
+              Las funciones hash son fundamentales para la seguridad de Bitcoin. 
+              <a href="../nivel-5/funciones-hash.html">Funciones hash en detalle →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
         </article>
       </div>
     </main>
@@ -46,5 +235,252 @@
   <script src="../js/includes.js"></script>
   <script src="../js/nav.js"></script>
   <script src="../js/search.js"></script>
+  <script src="../js/ripemd160.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === ESTADO ===
+    let inputMode = 'text'; // 'text' o 'hex'
+    let previousSha256 = null;
+
+    // === ELEMENTOS DEL DOM ===
+    const inputData = document.getElementById('input-data');
+    const inputLabelText = document.getElementById('input-label-text');
+    const inputInfo = document.getElementById('input-info');
+    const modeText = document.getElementById('mode-text');
+    const modeHex = document.getElementById('mode-hex');
+
+    const hashSha256 = document.getElementById('hash-sha256');
+    const hashHash256 = document.getElementById('hash-hash256');
+    const hashHash256Rev = document.getElementById('hash-hash256-rev');
+    const hashRipemd160 = document.getElementById('hash-ripemd160');
+    const hashHash160 = document.getElementById('hash-hash160');
+
+    const avalancheCount = document.getElementById('avalanche-count');
+    const avalanchePercent = document.getElementById('avalanche-percent');
+    const previousHashEl = document.getElementById('previous-hash');
+
+    // === FUNCIONES AUXILIARES ===
+
+    /**
+     * Convierte string a Uint8Array (UTF-8)
+     */
+    function textToBytes(text) {
+      return new TextEncoder().encode(text);
+    }
+
+    /**
+     * Convierte hex string a Uint8Array
+     */
+    function hexToBytes(hex) {
+      // Eliminar espacios y validar
+      hex = hex.replace(/\s/g, '');
+      if (!/^[0-9a-fA-F]*$/.test(hex)) {
+        throw new Error('Hexadecimal inválido');
+      }
+      if (hex.length % 2 !== 0) {
+        hex = '0' + hex; // Pad si es impar
+      }
+      const bytes = new Uint8Array(hex.length / 2);
+      for (let i = 0; i < bytes.length; i++) {
+        bytes[i] = parseInt(hex.substr(i * 2, 2), 16);
+      }
+      return bytes;
+    }
+
+    /**
+     * Convierte Uint8Array a hex string
+     */
+    function bytesToHex(bytes) {
+      return Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    /**
+     * Invierte el orden de los bytes (para display de txids)
+     */
+    function reverseBytes(hex) {
+      const bytes = hex.match(/.{2}/g);
+      return bytes.reverse().join('');
+    }
+
+    /**
+     * SHA-256 usando Web Crypto API
+     */
+    async function sha256(data) {
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      return new Uint8Array(hashBuffer);
+    }
+
+    /**
+     * HASH256 = SHA-256(SHA-256(data))
+     */
+    async function hash256(data) {
+      const first = await sha256(data);
+      return await sha256(first);
+    }
+
+    /**
+     * HASH160 = RIPEMD-160(SHA-256(data))
+     */
+    async function hash160(data) {
+      const sha = await sha256(data);
+      return RIPEMD160.hash(sha);
+    }
+
+    /**
+     * Cuenta caracteres diferentes entre dos strings hex
+     */
+    function countDifferentChars(hex1, hex2) {
+      if (!hex1 || !hex2 || hex1.length !== hex2.length) return { count: 0, total: 0 };
+      let count = 0;
+      for (let i = 0; i < hex1.length; i++) {
+        if (hex1[i] !== hex2[i]) count++;
+      }
+      return { count, total: hex1.length };
+    }
+
+    // === CALCULAR HASHES ===
+
+    async function calculateHashes() {
+      const input = inputData.value;
+      let bytes;
+
+      try {
+        if (inputMode === 'hex') {
+          bytes = hexToBytes(input);
+          inputInfo.textContent = `${bytes.length} bytes de entrada`;
+          inputInfo.style.color = 'var(--text-secondary)';
+        } else {
+          bytes = textToBytes(input);
+          inputInfo.textContent = `${bytes.length} bytes de entrada`;
+          inputInfo.style.color = 'var(--text-secondary)';
+        }
+      } catch (error) {
+        inputInfo.textContent = 'Error: ' + error.message;
+        inputInfo.style.color = '#da3633';
+        clearHashes();
+        return;
+      }
+
+      if (bytes.length === 0) {
+        // Hashear datos vacíos también es válido
+        inputInfo.textContent = '0 bytes de entrada';
+      }
+
+      try {
+        // SHA-256
+        const sha256Result = await sha256(bytes);
+        const sha256Hex = bytesToHex(sha256Result);
+        hashSha256.textContent = sha256Hex;
+
+        // HASH256
+        const hash256Result = await hash256(bytes);
+        const hash256Hex = bytesToHex(hash256Result);
+        hashHash256.textContent = hash256Hex;
+
+        // HASH256 reversed
+        hashHash256Rev.textContent = reverseBytes(hash256Hex);
+
+        // RIPEMD-160
+        const ripemd160Hex = RIPEMD160.hashHex(bytes);
+        hashRipemd160.textContent = ripemd160Hex;
+
+        // HASH160
+        const hash160Result = await hash160(bytes);
+        const hash160Hex = bytesToHex(hash160Result);
+        hashHash160.textContent = hash160Hex;
+
+        // Efecto avalancha
+        updateAvalanche(sha256Hex);
+
+      } catch (error) {
+        console.error('Error calculando hashes:', error);
+        clearHashes();
+      }
+    }
+
+    function clearHashes() {
+      hashSha256.textContent = '—';
+      hashHash256.textContent = '—';
+      hashHash256Rev.textContent = '—';
+      hashRipemd160.textContent = '—';
+      hashHash160.textContent = '—';
+    }
+
+    function updateAvalanche(currentSha256) {
+      if (previousSha256) {
+        const diff = countDifferentChars(previousSha256, currentSha256);
+        avalancheCount.textContent = `${diff.count} / ${diff.total}`;
+        
+        const percent = ((diff.count / diff.total) * 100).toFixed(1);
+        avalanchePercent.textContent = `${percent}% de caracteres cambiaron`;
+        
+        // Color según porcentaje (esperamos ~50% en promedio por efecto avalancha)
+        if (diff.count > 0) {
+          avalancheCount.style.color = diff.count > 30 ? '#2ea043' : 'var(--accent)';
+        }
+      } else {
+        avalancheCount.textContent = '— / 64';
+        avalanchePercent.textContent = 'Modifica la entrada para ver el efecto';
+      }
+
+      previousHashEl.textContent = previousSha256 || '(primer hash)';
+      previousSha256 = currentSha256;
+    }
+
+    // === CAMBIAR MODO ===
+
+    function setMode(mode) {
+      inputMode = mode;
+      
+      modeText.classList.toggle('tool-preset--active', mode === 'text');
+      modeHex.classList.toggle('tool-preset--active', mode === 'hex');
+
+      if (mode === 'text') {
+        inputLabelText.textContent = 'Texto a hashear';
+        inputData.placeholder = 'Escribe aquí...';
+      } else {
+        inputLabelText.textContent = 'Hexadecimal a hashear';
+        inputData.placeholder = 'Ej: 48656c6c6f (Hello en hex)';
+      }
+
+      calculateHashes();
+    }
+
+    // === COPIAR AL PORTAPAPELES ===
+
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const targetId = btn.dataset.target;
+        const target = document.getElementById(targetId);
+        const text = target.textContent;
+
+        if (text && text !== '—') {
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.textContent = '✓';
+            setTimeout(() => { btn.textContent = '📋'; }, 1000);
+          } catch (err) {
+            console.error('Error copiando:', err);
+          }
+        }
+      });
+    });
+
+    // === EVENT LISTENERS ===
+
+    inputData.addEventListener('input', calculateHashes);
+
+    modeText.addEventListener('click', () => setMode('text'));
+    modeHex.addEventListener('click', () => setMode('hex'));
+
+    // === INICIALIZACIÓN ===
+
+    calculateHashes();
+
+  })();
+  </script>
 </body>
 </html>

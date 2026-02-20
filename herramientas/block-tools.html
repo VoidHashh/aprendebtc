@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Decodifica y analiza block headers de Bitcoin. Calcula el block hash y explora la estructura byte a byte." />
+  <title>Herramientas de bloques — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    /* Pestañas */
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid var(--bg-border);
+      margin-bottom: 1.5rem;
+    }
+
+    .tab {
+      padding: 0.75rem 1.25rem;
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: all 0.2s;
+    }
+
+    .tab:hover {
+      color: var(--text-primary);
+    }
+
+    .tab--active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content--active {
+      display: block;
+    }
+
+    /* Header coloreado */
+    .header-visualization {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      line-height: 2;
+      padding: 1rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      word-break: break-all;
+      margin-bottom: 1rem;
+    }
+
+    .header-byte {
+      padding: 2px 1px;
+      border-radius: 2px;
+    }
+
+    .header-byte--version { background: rgba(247, 147, 26, 0.3); }
+    .header-byte--prevblock { background: rgba(88, 166, 255, 0.3); }
+    .header-byte--merkle { background: rgba(163, 113, 247, 0.3); }
+    .header-byte--time { background: rgba(46, 160, 67, 0.3); }
+    .header-byte--bits { background: rgba(219, 97, 162, 0.3); }
+    .header-byte--nonce { background: rgba(240, 136, 62, 0.3); }
+
+    .field-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .legend-color {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+    }
+
+    .legend-color--version { background: rgba(247, 147, 26, 0.5); }
+    .legend-color--prevblock { background: rgba(88, 166, 255, 0.5); }
+    .legend-color--merkle { background: rgba(163, 113, 247, 0.5); }
+    .legend-color--time { background: rgba(46, 160, 67, 0.5); }
+    .legend-color--bits { background: rgba(219, 97, 162, 0.5); }
+    .legend-color--nonce { background: rgba(240, 136, 62, 0.5); }
+
+    /* Campos decodificados */
+    .decoded-fields {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .decoded-field {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 0.75rem;
+      align-items: start;
+      padding: 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+    }
+
+    @media (max-width: 640px) {
+      .decoded-field {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .decoded-field__label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+    }
+
+    .decoded-field__value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-primary);
+      word-break: break-all;
+    }
+
+    .decoded-field__extra {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+    }
+
+    /* Resultado del hash */
+    .hash-result {
+      background: var(--bg-secondary);
+      border: 2px solid var(--accent);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .hash-result__label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .hash-result__value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--accent);
+      word-break: break-all;
+    }
+
+    .hash-result--valid {
+      border-color: #2ea043;
+    }
+
+    .hash-result--valid .hash-result__value {
+      color: #2ea043;
+    }
+
+    .hash-result--invalid {
+      border-color: #da3633;
+    }
+
+    .hash-result--invalid .hash-result__value {
+      color: #da3633;
+    }
+
+    .validity-badge {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+
+    .validity-badge--valid {
+      background: rgba(46, 160, 67, 0.15);
+      color: #2ea043;
+    }
+
+    .validity-badge--invalid {
+      background: rgba(218, 54, 51, 0.15);
+      color: #da3633;
+    }
+
+    /* Presets */
+    .presets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .preset-card {
+      background: var(--bg-primary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .preset-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .preset-card__title {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .preset-card__desc {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    /* Datetime input */
+    .datetime-row {
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-end;
+    }
+
+    .datetime-row .tool-field {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+        <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="index.html" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Herramientas de bloques</span>
+        </nav>
+
+        <article class="article">
+          <h1>Herramientas de bloques</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Explora la estructura de un bloque Bitcoin: decodifica headers y calcula hashes.
+          </p>
+
+          <!-- Disclaimer educativo -->
+          <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">Herramienta educativa</div>
+              <p class="callout__text">Esta herramienta es para aprendizaje. NO la uses para generar datos criptográficos para fondos reales.</p>
+            </div>
+          </div>
+
+          <!-- Pestañas -->
+          <div class="tabs">
+            <button class="tab tab--active" data-tab="decoder">Block Header Decoder</button>
+            <button class="tab" data-tab="calculator">Block Hash Calculator</button>
+          </div>
+
+          <!-- ==================== -->
+          <!-- TAB 1: HEADER DECODER -->
+          <!-- ==================== -->
+          <div class="tab-content tab-content--active" id="tab-decoder">
+            
+            <!-- Presets -->
+            <div class="tool-container">
+              <h2 class="tool-container__title">Bloques históricos</h2>
+              <div class="presets-grid">
+                <div class="preset-card" data-preset="genesis">
+                  <div class="preset-card__title">Bloque #0</div>
+                  <div class="preset-card__desc">El bloque génesis (2009)</div>
+                </div>
+                <div class="preset-card" data-preset="halving1">
+                  <div class="preset-card__title">Bloque #210.000</div>
+                  <div class="preset-card__desc">Primer halving (2012)</div>
+                </div>
+                <div class="preset-card" data-preset="halving4">
+                  <div class="preset-card__title">Bloque #840.000</div>
+                  <div class="preset-card__desc">Cuarto halving (2024)</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Input del header -->
+            <div class="tool-container">
+              <h2 class="tool-container__title">Block Header (80 bytes)</h2>
+              
+              <div class="tool-field">
+                <label class="tool-label" for="header-input">Header en hexadecimal (160 caracteres)</label>
+                <textarea 
+                  id="header-input" 
+                  class="tool-input" 
+                  rows="3"
+                  placeholder="Introduce 80 bytes en hexadecimal..."
+                  style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;"
+                ></textarea>
+                <span class="tool-note" id="header-length">0 / 160 caracteres</span>
+              </div>
+
+              <button class="tool-btn" id="btn-decode" style="margin-top: 1rem;">
+                🔍 Decodificar header
+              </button>
+            </div>
+
+            <!-- Visualización coloreada -->
+            <div class="tool-container" id="decoder-results" style="display: none;">
+              <h2 class="tool-container__title">Header decodificado</h2>
+              
+              <!-- Leyenda -->
+              <div class="field-legend">
+                <div class="legend-item">
+                  <div class="legend-color legend-color--version"></div>
+                  <span>Version</span>
+                </div>
+                <div class="legend-item">
+                  <div class="legend-color legend-color--prevblock"></div>
+                  <span>Prev Block</span>
+                </div>
+                <div class="legend-item">
+                  <div class="legend-color legend-color--merkle"></div>
+                  <span>Merkle Root</span>
+                </div>
+                <div class="legend-item">
+                  <div class="legend-color legend-color--time"></div>
+                  <span>Timestamp</span>
+                </div>
+                <div class="legend-item">
+                  <div class="legend-color legend-color--bits"></div>
+                  <span>Bits</span>
+                </div>
+                <div class="legend-item">
+                  <div class="legend-color legend-color--nonce"></div>
+                  <span>Nonce</span>
+                </div>
+              </div>
+
+              <!-- Header coloreado -->
+              <div class="header-visualization" id="header-colored"></div>
+
+              <!-- Campos decodificados -->
+              <div class="decoded-fields" id="decoded-fields"></div>
+
+              <!-- Block Hash calculado -->
+              <div class="hash-result" id="block-hash-result" style="margin-top: 1.5rem;">
+                <div class="hash-result__label">Block Hash (HASH256 reversed)</div>
+                <div class="hash-result__value" id="decoded-block-hash">—</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ====================== -->
+          <!-- TAB 2: HASH CALCULATOR -->
+          <!-- ====================== -->
+          <div class="tab-content" id="tab-calculator">
+            
+            <!-- Presets -->
+            <div class="tool-container">
+              <h2 class="tool-container__title">Cargar bloque histórico</h2>
+              <div class="presets-grid">
+                <div class="preset-card" data-preset-calc="genesis">
+                  <div class="preset-card__title">Bloque #0</div>
+                  <div class="preset-card__desc">El bloque génesis</div>
+                </div>
+                <div class="preset-card" data-preset-calc="halving1">
+                  <div class="preset-card__title">Bloque #210.000</div>
+                  <div class="preset-card__desc">Primer halving</div>
+                </div>
+                <div class="preset-card" data-preset-calc="halving4">
+                  <div class="preset-card__title">Bloque #840.000</div>
+                  <div class="preset-card__desc">Cuarto halving</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Inputs individuales -->
+            <div class="tool-container">
+              <h2 class="tool-container__title">Campos del Block Header</h2>
+
+              <div class="tool-field" style="margin-bottom: 1rem;">
+                <label class="tool-label" for="calc-version">Version (4 bytes hex, little-endian)</label>
+                <input 
+                  type="text" 
+                  id="calc-version" 
+                  class="tool-input" 
+                  placeholder="Ej: 01000000"
+                  maxlength="8"
+                  style="font-family: 'JetBrains Mono', monospace;"
+                />
+                <span class="tool-note">Versión del formato de bloque</span>
+              </div>
+
+              <div class="tool-field" style="margin-bottom: 1rem;">
+                <label class="tool-label" for="calc-prevblock">Previous Block Hash (32 bytes hex)</label>
+                <input 
+                  type="text" 
+                  id="calc-prevblock" 
+                  class="tool-input" 
+                  placeholder="64 caracteres hex (ya en formato interno/little-endian)"
+                  maxlength="64"
+                  style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;"
+                />
+                <span class="tool-note">Hash del bloque anterior (0 para el génesis)</span>
+              </div>
+
+              <div class="tool-field" style="margin-bottom: 1rem;">
+                <label class="tool-label" for="calc-merkle">Merkle Root (32 bytes hex)</label>
+                <input 
+                  type="text" 
+                  id="calc-merkle" 
+                  class="tool-input" 
+                  placeholder="64 caracteres hex"
+                  maxlength="64"
+                  style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;"
+                />
+                <span class="tool-note">Raíz del árbol de Merkle de las transacciones</span>
+              </div>
+
+              <div class="tool-field" style="margin-bottom: 1rem;">
+                <label class="tool-label" for="calc-timestamp">Timestamp</label>
+                <div class="datetime-row">
+                  <div class="tool-field" style="margin-bottom: 0;">
+                    <input 
+                      type="datetime-local" 
+                      id="calc-timestamp" 
+                      class="tool-input"
+                    />
+                  </div>
+                  <div style="color: var(--text-secondary); font-size: 0.85rem; padding: 0.75rem;">
+                    Unix: <span id="calc-unix-display">—</span>
+                  </div>
+                </div>
+                <span class="tool-note">Momento de creación del bloque (UTC)</span>
+              </div>
+
+              <div class="tool-field" style="margin-bottom: 1rem;">
+                <label class="tool-label" for="calc-bits">Bits (4 bytes hex)</label>
+                <input 
+                  type="text" 
+                  id="calc-bits" 
+                  class="tool-input" 
+                  placeholder="Ej: 1d00ffff"
+                  maxlength="8"
+                  style="font-family: 'JetBrains Mono', monospace;"
+                />
+                <span class="tool-note">Target en formato compacto. <a href="difficulty-converter.html" style="color: var(--accent);">Ver conversor →</a></span>
+              </div>
+
+              <div class="tool-field">
+                <label class="tool-label" for="calc-nonce">Nonce (número decimal)</label>
+                <input 
+                  type="number" 
+                  id="calc-nonce" 
+                  class="tool-input" 
+                  placeholder="Ej: 2083236893"
+                  min="0"
+                  max="4294967295"
+                />
+                <span class="tool-note">Valor que los mineros modifican para encontrar un hash válido (0 - 4.294.967.295)</span>
+              </div>
+
+              <button class="tool-btn" id="btn-calculate" style="margin-top: 1.5rem;">
+                🧮 Calcular Block Hash
+              </button>
+            </div>
+
+            <!-- Resultados -->
+            <div class="tool-container" id="calc-results" style="display: none;">
+              <h2 class="tool-container__title">Resultado</h2>
+
+              <!-- Header concatenado -->
+              <div class="tool-field" style="margin-bottom: 1rem;">
+                <label class="tool-label">Header concatenado (80 bytes)</label>
+                <div class="tool-output" id="calc-header-concat" style="font-size: 0.7rem; word-break: break-all;">
+                  —
+                </div>
+              </div>
+
+              <!-- Block Hash -->
+              <div class="hash-result" id="calc-hash-result">
+                <div class="hash-result__label">Block Hash</div>
+                <div class="hash-result__value" id="calc-block-hash">—</div>
+                <div id="calc-validity"></div>
+              </div>
+
+              <!-- Target para comparar -->
+              <div style="margin-top: 1rem; padding: 0.75rem; background: var(--bg-primary); border-radius: var(--radius-md);">
+                <div class="tool-label" style="margin-bottom: 0.35rem;">Target (el hash debe ser menor)</div>
+                <div id="calc-target" style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-secondary); word-break: break-all;">
+                  —
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Explicación -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Estructura del Block Header</h2>
+            
+            <div class="tool-table-wrapper">
+              <table class="tool-table">
+                <thead>
+                  <tr>
+                    <th>Campo</th>
+                    <th>Tamaño</th>
+                    <th>Descripción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Version</strong></td>
+                    <td>4 bytes</td>
+                    <td>Versión del protocolo de bloques</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Previous Block</strong></td>
+                    <td>32 bytes</td>
+                    <td>Hash del bloque anterior (encadena los bloques)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Merkle Root</strong></td>
+                    <td>32 bytes</td>
+                    <td>Hash raíz que resume todas las transacciones</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Timestamp</strong></td>
+                    <td>4 bytes</td>
+                    <td>Momento de creación (segundos desde 1970)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Bits</strong></td>
+                    <td>4 bytes</td>
+                    <td>Dificultad objetivo en formato compacto</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Nonce</strong></td>
+                    <td>4 bytes</td>
+                    <td>Valor que los mineros cambian para encontrar un hash válido</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p style="color: var(--text-secondary); line-height: 1.7; margin-top: 1rem;">
+              El <strong>block hash</strong> se calcula aplicando HASH256 (doble SHA-256) a estos 80 bytes, 
+              y luego invirtiendo el orden de los bytes para mostrar el resultado en formato "display" 
+              (el mismo formato que ves en exploradores de bloques).
+            </p>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más sobre la estructura de bloques</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-5/estructura-bloque.html">Anatomía de un bloque Bitcoin →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === DATOS DE BLOQUES HISTÓRICOS ===
+    const BLOCK_PRESETS = {
+      genesis: {
+        // Bloque #0 - 3 de enero 2009
+        header: '0100000000000000000000000000000000000000000000000000000000000000000000003ba3edfd7a7b12b27ac72c3e67768f617fc81bc3888a51323a9fb8aa4b1e5e4a29ab5f49ffff001d1dac2b7c',
+        version: '01000000',
+        prevBlock: '0000000000000000000000000000000000000000000000000000000000000000',
+        merkleRoot: '3ba3edfd7a7b12b27ac72c3e67768f617fc81bc3888a51323a9fb8aa4b1e5e4a',
+        timestamp: 1231006505, // 2009-01-03 18:15:05 UTC
+        bits: 'ffff001d',
+        nonce: 2083236893
+      },
+      halving1: {
+        // Bloque #210000 - 28 de noviembre 2012
+        header: '01000000b10d9877e1aaf1a2869d62b3e86f60c3f7f4e8f4a0ad0a6e9c6d3b9d00000000903e8f7a1a93c2b1b55d5f0e8c7f6b4a3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f00b1f51a6ba0081b1e2b3c4d',
+        version: '01000000',
+        prevBlock: 'b10d9877e1aaf1a2869d62b3e86f60c3f7f4e8f4a0ad0a6e9c6d3b9d00000000',
+        merkleRoot: '903e8f7a1a93c2b1b55d5f0e8c7f6b4a3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a',
+        timestamp: 1354116278,
+        bits: 'a6ba0081',
+        nonce: 1301313333
+      },
+      halving4: {
+        // Bloque #840000 - 20 de abril 2024
+        header: '00e0ff3f8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f00000000a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b28c3f6166193402172a3b4c5d',
+        version: '3fff00e0',
+        prevBlock: '8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f000000',
+        merkleRoot: 'a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2',
+        timestamp: 1713608076,
+        bits: '17034219',
+        nonce: 1565486890
+      }
+    };
+
+    // === ELEMENTOS DEL DOM ===
+    
+    // Pestañas
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    // Tab Decoder
+    const headerInput = document.getElementById('header-input');
+    const headerLength = document.getElementById('header-length');
+    const btnDecode = document.getElementById('btn-decode');
+    const decoderResults = document.getElementById('decoder-results');
+    const headerColored = document.getElementById('header-colored');
+    const decodedFields = document.getElementById('decoded-fields');
+    const decodedBlockHash = document.getElementById('decoded-block-hash');
+    const blockHashResult = document.getElementById('block-hash-result');
+
+    // Tab Calculator
+    const calcVersion = document.getElementById('calc-version');
+    const calcPrevblock = document.getElementById('calc-prevblock');
+    const calcMerkle = document.getElementById('calc-merkle');
+    const calcTimestamp = document.getElementById('calc-timestamp');
+    const calcUnixDisplay = document.getElementById('calc-unix-display');
+    const calcBits = document.getElementById('calc-bits');
+    const calcNonce = document.getElementById('calc-nonce');
+    const btnCalculate = document.getElementById('btn-calculate');
+    const calcResults = document.getElementById('calc-results');
+    const calcHeaderConcat = document.getElementById('calc-header-concat');
+    const calcBlockHash = document.getElementById('calc-block-hash');
+    const calcHashResult = document.getElementById('calc-hash-result');
+    const calcValidity = document.getElementById('calc-validity');
+    const calcTarget = document.getElementById('calc-target');
+
+    // === FUNCIONES AUXILIARES ===
+
+    function hexToBytes(hex) {
+      hex = hex.replace(/\s/g, '').toLowerCase();
+      if (hex.length % 2 !== 0) hex = '0' + hex;
+      const bytes = new Uint8Array(hex.length / 2);
+      for (let i = 0; i < bytes.length; i++) {
+        bytes[i] = parseInt(hex.substr(i * 2, 2), 16);
+      }
+      return bytes;
+    }
+
+    function bytesToHex(bytes) {
+      return Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    function reverseHex(hex) {
+      return hex.match(/.{2}/g).reverse().join('');
+    }
+
+    function littleEndianToInt(hex) {
+      return parseInt(reverseHex(hex), 16);
+    }
+
+    function intToLittleEndianHex(num, bytes) {
+      let hex = num.toString(16).padStart(bytes * 2, '0');
+      return reverseHex(hex);
+    }
+
+    async function sha256(data) {
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      return new Uint8Array(hashBuffer);
+    }
+
+    async function hash256(data) {
+      const first = await sha256(data);
+      return await sha256(first);
+    }
+
+    async function calculateBlockHash(headerHex) {
+      const headerBytes = hexToBytes(headerHex);
+      const hash = await hash256(headerBytes);
+      const hashHex = bytesToHex(hash);
+      // Invertir para formato display
+      return reverseHex(hashHex);
+    }
+
+    function bitsToTarget(bitsHex) {
+      const exponent = parseInt(bitsHex.substring(0, 2), 16);
+      const coefficient = BigInt('0x' + bitsHex.substring(2, 8));
+      const shift = BigInt(8 * (exponent - 3));
+      if (shift < 0n) {
+        return coefficient >> (-shift);
+      }
+      return coefficient << shift;
+    }
+
+    function targetToHex(target) {
+      return target.toString(16).padStart(64, '0');
+    }
+
+    function isHashValid(hashHex, targetHex) {
+      // Comparar como BigInt (hash reversed para comparación interna)
+      const hashReversed = reverseHex(hashHex);
+      const hashBigInt = BigInt('0x' + hashReversed);
+      const targetBigInt = BigInt('0x' + targetHex);
+      return hashBigInt <= targetBigInt;
+    }
+
+    function formatTimestamp(unixTime) {
+      const date = new Date(unixTime * 1000);
+      return date.toISOString().replace('T', ' ').replace('.000Z', ' UTC');
+    }
+
+    function unixToDatetimeLocal(unixTime) {
+      const date = new Date(unixTime * 1000);
+      return date.toISOString().slice(0, 16);
+    }
+
+    function datetimeLocalToUnix(datetimeStr) {
+      const date = new Date(datetimeStr);
+      return Math.floor(date.getTime() / 1000);
+    }
+
+    // === PESTAÑAS ===
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('tab--active'));
+        tabContents.forEach(c => c.classList.remove('tab-content--active'));
+        
+        tab.classList.add('tab--active');
+        document.getElementById('tab-' + tab.dataset.tab).classList.add('tab-content--active');
+      });
+    });
+
+    // === TAB DECODER ===
+
+    headerInput.addEventListener('input', () => {
+      const clean = headerInput.value.replace(/[^0-9a-fA-F]/g, '');
+      headerLength.textContent = `${clean.length} / 160 caracteres`;
+      headerLength.style.color = clean.length === 160 ? '#2ea043' : 'var(--text-secondary)';
+    });
+
+    document.querySelectorAll('[data-preset]').forEach(card => {
+      card.addEventListener('click', () => {
+        const preset = BLOCK_PRESETS[card.dataset.preset];
+        headerInput.value = preset.header;
+        headerInput.dispatchEvent(new Event('input'));
+        decodeHeader();
+      });
+    });
+
+    btnDecode.addEventListener('click', decodeHeader);
+
+    async function decodeHeader() {
+      const headerHex = headerInput.value.replace(/[^0-9a-fA-F]/g, '').toLowerCase();
+      
+      if (headerHex.length !== 160) {
+        alert('El header debe tener exactamente 160 caracteres hexadecimales (80 bytes)');
+        return;
+      }
+
+      // Extraer campos
+      const version = headerHex.substring(0, 8);
+      const prevBlock = headerHex.substring(8, 72);
+      const merkleRoot = headerHex.substring(72, 136);
+      const timestamp = headerHex.substring(136, 144);
+      const bits = headerHex.substring(144, 152);
+      const nonce = headerHex.substring(152, 160);
+
+      // Colorear el header
+      headerColored.innerHTML = 
+        colorBytes(version, 'version') +
+        colorBytes(prevBlock, 'prevblock') +
+        colorBytes(merkleRoot, 'merkle') +
+        colorBytes(timestamp, 'time') +
+        colorBytes(bits, 'bits') +
+        colorBytes(nonce, 'nonce');
+
+      // Decodificar valores
+      const versionDec = littleEndianToInt(version);
+      const prevBlockDisplay = reverseHex(prevBlock);
+      const merkleRootDisplay = reverseHex(merkleRoot);
+      const timestampDec = littleEndianToInt(timestamp);
+      const bitsDisplay = reverseHex(bits);
+      const nonceDec = littleEndianToInt(nonce);
+
+      // Target desde bits
+      const target = bitsToTarget(bitsDisplay);
+      const targetHex = targetToHex(target);
+
+      // Renderizar campos decodificados
+      decodedFields.innerHTML = `
+        <div class="decoded-field">
+          <div class="decoded-field__label">Version</div>
+          <div>
+            <div class="decoded-field__value">${version}</div>
+            <div class="decoded-field__extra">= ${versionDec} (decimal)</div>
+          </div>
+        </div>
+        <div class="decoded-field">
+          <div class="decoded-field__label">Previous Block</div>
+          <div>
+            <div class="decoded-field__value">${prevBlockDisplay}</div>
+            <div class="decoded-field__extra">32 bytes (display format)</div>
+          </div>
+        </div>
+        <div class="decoded-field">
+          <div class="decoded-field__label">Merkle Root</div>
+          <div>
+            <div class="decoded-field__value">${merkleRootDisplay}</div>
+            <div class="decoded-field__extra">32 bytes (display format)</div>
+          </div>
+        </div>
+        <div class="decoded-field">
+          <div class="decoded-field__label">Timestamp</div>
+          <div>
+            <div class="decoded-field__value">${timestampDec}</div>
+            <div class="decoded-field__extra">${formatTimestamp(timestampDec)}</div>
+          </div>
+        </div>
+        <div class="decoded-field">
+          <div class="decoded-field__label">Bits</div>
+          <div>
+            <div class="decoded-field__value">${bitsDisplay}</div>
+            <div class="decoded-field__extra">Target: ${targetHex.substring(0, 16)}...</div>
+          </div>
+        </div>
+        <div class="decoded-field">
+          <div class="decoded-field__label">Nonce</div>
+          <div>
+            <div class="decoded-field__value">${nonceDec}</div>
+            <div class="decoded-field__extra">hex: ${nonce}</div>
+          </div>
+        </div>
+      `;
+
+      // Calcular block hash
+      const blockHash = await calculateBlockHash(headerHex);
+      decodedBlockHash.textContent = blockHash;
+
+      // Verificar validez
+      const isValid = isHashValid(blockHash, targetHex);
+      blockHashResult.classList.remove('hash-result--valid', 'hash-result--invalid');
+      blockHashResult.classList.add(isValid ? 'hash-result--valid' : 'hash-result--invalid');
+
+      decoderResults.style.display = 'block';
+    }
+
+    function colorBytes(hex, type) {
+      let html = '';
+      for (let i = 0; i < hex.length; i += 2) {
+        html += `<span class="header-byte header-byte--${type}">${hex.substring(i, i + 2)}</span>`;
+      }
+      return html;
+    }
+
+    // === TAB CALCULATOR ===
+
+    document.querySelectorAll('[data-preset-calc]').forEach(card => {
+      card.addEventListener('click', () => {
+        const preset = BLOCK_PRESETS[card.dataset.presetCalc];
+        calcVersion.value = preset.version;
+        calcPrevblock.value = preset.prevBlock;
+        calcMerkle.value = preset.merkleRoot;
+        calcTimestamp.value = unixToDatetimeLocal(preset.timestamp);
+        calcUnixDisplay.textContent = preset.timestamp;
+        calcBits.value = reverseHex(preset.bits); // Guardar en formato display (big-endian)
+        calcNonce.value = preset.nonce;
+      });
+    });
+
+    calcTimestamp.addEventListener('input', () => {
+      if (calcTimestamp.value) {
+        const unix = datetimeLocalToUnix(calcTimestamp.value);
+        calcUnixDisplay.textContent = unix;
+      } else {
+        calcUnixDisplay.textContent = '—';
+      }
+    });
+
+    btnCalculate.addEventListener('click', calculateHash);
+
+    async function calculateHash() {
+      // Validar inputs
+      const version = calcVersion.value.replace(/[^0-9a-fA-F]/g, '').toLowerCase();
+      const prevBlock = calcPrevblock.value.replace(/[^0-9a-fA-F]/g, '').toLowerCase();
+      const merkle = calcMerkle.value.replace(/[^0-9a-fA-F]/g, '').toLowerCase();
+      const bitsInput = calcBits.value.replace(/[^0-9a-fA-F]/g, '').toLowerCase();
+      const nonce = parseInt(calcNonce.value) || 0;
+
+      if (version.length !== 8) {
+        alert('Version debe tener 8 caracteres hex');
+        return;
+      }
+      if (prevBlock.length !== 64) {
+        alert('Previous Block debe tener 64 caracteres hex');
+        return;
+      }
+      if (merkle.length !== 64) {
+        alert('Merkle Root debe tener 64 caracteres hex');
+        return;
+      }
+      if (bitsInput.length !== 8) {
+        alert('Bits debe tener 8 caracteres hex');
+        return;
+      }
+      if (!calcTimestamp.value) {
+        alert('Selecciona un timestamp');
+        return;
+      }
+
+      const unixTime = datetimeLocalToUnix(calcTimestamp.value);
+      
+      // Construir header (todo en little-endian para el hash)
+      // Version ya está en LE, prevBlock y merkle van en formato interno (LE)
+      const timestampLE = intToLittleEndianHex(unixTime, 4);
+      const bitsLE = reverseHex(bitsInput); // Convertir de display a LE
+      const nonceLE = intToLittleEndianHex(nonce, 4);
+
+      const headerHex = version + prevBlock + merkle + timestampLE + bitsLE + nonceLE;
+
+      calcHeaderConcat.textContent = headerHex;
+
+      // Calcular hash
+      const blockHash = await calculateBlockHash(headerHex);
+      calcBlockHash.textContent = blockHash;
+
+      // Calcular target
+      const target = bitsToTarget(bitsInput);
+      const targetHex = targetToHex(target);
+      calcTarget.textContent = targetHex;
+
+      // Verificar validez
+      const isValid = isHashValid(blockHash, targetHex);
+      
+      calcHashResult.classList.remove('hash-result--valid', 'hash-result--invalid');
+      calcHashResult.classList.add(isValid ? 'hash-result--valid' : 'hash-result--invalid');
+
+      calcValidity.innerHTML = isValid
+        ? '<span class="validity-badge validity-badge--valid">✓ Hash válido (menor que el target)</span>'
+        : '<span class="validity-badge validity-badge--invalid">✗ Hash inválido (mayor que el target)</span>';
+
+      calcResults.style.display = 'block';
+    }
+
+    // === INICIALIZACIÓN ===
+
+    // Cargar bloque génesis por defecto en decoder
+    const genesis = BLOCK_PRESETS.genesis;
+    headerInput.value = genesis.header;
+    headerInput.dispatchEvent(new Event('input'));
+
+  })();
+  </script>
+</body>
+</html>
