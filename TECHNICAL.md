@@ -59,7 +59,6 @@ Gestionado en `js/nav.js`:
   - URI móvil (wallet) en `data-donate-mobile`:
     - On-chain: `bitcoin:...`
     - Lightning: `lightning:...`
-  - Enlace PayPal (“invítame a un café”): pendiente hasta tener URL final.
 
 Comportamiento:
 

@@ -1149,29 +1149,33 @@
     document.querySelectorAll('[data-donate-copy]').forEach((button) => {
       if (button.dataset.donateBound === '1') return;
 
-      button.addEventListener('click', async () => {
-        const copyText = button.getAttribute('data-donate-copy');
-        const mobileUri = button.getAttribute('data-donate-mobile');
+      const copyText = button.getAttribute('data-donate-copy');
+      const mobileUri = button.getAttribute('data-donate-mobile');
+      const desktopLabel = button.getAttribute('data-donate-label-desktop') || button.textContent;
+      const mobileLabel = button.getAttribute('data-donate-label-mobile') || button.textContent;
+      const initialLabel = isProbablyMobile() && mobileUri ? mobileLabel : desktopLabel;
 
+      button.textContent = initialLabel;
+
+      button.addEventListener('click', async () => {
         if (isProbablyMobile() && mobileUri) {
           window.location.href = mobileUri;
           return;
         }
 
         const ok = await copyToClipboard(copyText);
-        const original = button.textContent;
 
         if (ok) {
           button.classList.add('site-footer__donate-action--copied');
           button.textContent = 'Copiado';
           window.setTimeout(() => {
-            button.textContent = original;
+            button.textContent = desktopLabel;
             button.classList.remove('site-footer__donate-action--copied');
           }, 1300);
         } else {
           button.textContent = 'No se pudo copiar';
           window.setTimeout(() => {
-            button.textContent = original;
+            button.textContent = desktopLabel;
           }, 1600);
         }
       });
