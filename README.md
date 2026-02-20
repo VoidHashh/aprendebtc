@@ -1,4 +1,4 @@
-﻿# aprendeBTC
+# aprendeBTC
 
 `aprendebtc.com` es una web educativa multipágina sobre Bitcoin en español.
 
@@ -38,6 +38,7 @@ aprendebtc/
 ├── includes/
 ├── css/
 ├── js/
+├── assets/
 ├── base/
 ├── nivel-1/
 ├── nivel-2/
@@ -46,20 +47,8 @@ aprendebtc/
 └── CNAME
 ```
 
-## Marca
+## Open source
 
-- Marca vigente: `aprendeBTC`
-- Dominio vigente: `aprendebtc.com`
+Este proyecto es open source. Si quieres aportar correcciones o contenido, el repo es:
 
-## Estado actual
-
-- Template base y landing: listos.
-- Nivel 1: completo.
-- Nivel 2 y Nivel 3: cargados y operativos.
-- Base de Conocimiento: en progreso.
-- `sitemap.xml`: se completará al cierre del proyecto.
-
-## Documentación relacionada
-
-- Guía técnica y reglas de desarrollo: `TECHNICAL.md`
-- Instrucciones para agentes/automatizaciones: `AGENTS.md`
+- https://github.com/VoidHashh/aprendebtc.git

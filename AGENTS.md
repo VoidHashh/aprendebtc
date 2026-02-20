@@ -19,7 +19,6 @@ Instrucciones operativas para cualquier agente que trabaje en este repositorio.
   - `includes/header.html`
   - `includes/footer.html`
   - `js/includes.js`
-- Respetar `data-base-path` según profundidad.
 
 ## 3) Reglas de marca y naming
 
@@ -28,21 +27,14 @@ Instrucciones operativas para cualquier agente que trabaje en este repositorio.
 
 ## 4) Reglas de navegación
 
-### Sidebar en páginas de nivel (obligatorio)
+- Sidebar y menú móvil usan un árbol global (Niveles + Pilares) inyectado por `js/nav.js`.
+- Todo plegado por defecto.
+- La página actual debe quedar resaltada.
 
-En `nivel-1` a `nivel-6`:
-
-1. Incluir bloque `Nivel actual` al inicio del sidebar.
-2. Enlace del bloque: `index.html` del nivel.
-3. En el índice del nivel, marcar ese enlace con `sidebar__link--active`.
-
-### Botón contextual volver (global)
+Botón contextual volver (global):
 
 - Gestionado por `js/nav.js`.
-- Mostrar `<- Volver` encima del breadcrumb en páginas de Base cuando exista contexto de origen.
-- Comportamiento:
-  - con contexto (`from`/storage) válido -> enlace directo a la página de origen
-  - sin contexto válido -> no mostrar botón contextual
+- En páginas de Base, mostrar “Volver” si existe contexto válido (`from` / `sessionStorage`).
 
 ## 5) Reglas de contenido y estilo
 
@@ -51,7 +43,6 @@ En `nivel-1` a `nivel-6`:
 - Enlazar a `/base/` cuando se menciona un concepto de referencia.
 - Mantener consistencia visual del sistema actual.
 - Evitar nuevos estilos inline; centralizar en CSS.
-- Cuidar contraste en header/sidebar y legibilidad de `page-nav`.
 
 ## 6) Publicidad
 
@@ -62,34 +53,19 @@ En `nivel-1` a `nivel-6`:
 ## 7) Búsqueda
 
 - Actualizar `js/search.js` al crear páginas nuevas de niveles.
-- Actualizar `js/search-index.base.json` para nuevas páginas de base.
-- Verificar que búsquedas clave devuelven resultados esperados.
+- Actualizar `js/search-index.base.json` para nuevas páginas de Base.
 
 ## 8) QA mínimo antes de cerrar cambios
 
 - Ejecutar servidor/pruebas locales en modo oculto siempre que sea posible (sin abrir ventanas visibles de consola).
 
+1. Confirmar carga de includes (`header/footer`).
+2. Confirmar sidebar y menú móvil (árbol plegable + activo).
+3. Confirmar breadcrumb y navegación anterior/siguiente.
+4. Confirmar ausencia de errores JS en consola.
+5. Confirmar UTF-8 correcto (sin mojibake).
 
-1. Levantar servidor local y abrir rutas afectadas.
-2. Confirmar carga de includes (`header/footer`).
-3. Confirmar sidebar y enlace de `Nivel actual`.
-4. Confirmar breadcrumb y navegación anterior/siguiente.
-5. Confirmar ausencia de errores JS en consola.
-6. Confirmar UTF-8 correcto (sin mojibake).
-
-## 9) Flujo de trabajo recomendado
-
-1. Crear estructura de página.
-2. Integrar contenido en template existente.
-3. Asegurar consistencia CSS/JS reusable.
-4. Validar en navegador (ideal: pruebas headless + revisión visual).
-5. Actualizar búsqueda si aplica.
-
-## 10) Notas de alcance
+## 9) Notas de alcance
 
 - El `sitemap.xml` definitivo se cerrará al final del proyecto.
 - No dejar placeholders rotos; si una ruta no existe aún, documentarlo.
-
-
-
-

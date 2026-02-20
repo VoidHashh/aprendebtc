@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Glosario de terminos clave de Bitcoin." />
-  <title>Glosario | aprendebtc.com</title>
+  <meta name="description" content="Glosario completo de Bitcoin en español. Más de 150 términos explicados de forma clara: desde address hasta zero-conf." />
+  <title>Glosario de Bitcoin | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="css/main.css" />
@@ -24,16 +24,374 @@
 
     <main class="page-layout__content" id="main-content">
       <div class="content-inner">
-        <nav class="breadcrumb" aria-label="Ruta de navegacion">
-          <a href="./" class="breadcrumb__item">Inicio</a>
-          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
-          <span class="breadcrumb__current">Glosario</span>
-        </nav>
+        <nav class="breadcrumb" aria-label="Ruta de navegacion"><a href="/" class="breadcrumb__item">Inicio</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><span class="breadcrumb__current">Glosario de Bitcoin</span></nav>
 
         <article class="article">
-          <h1>Glosario</h1>
-          <p class="article__subtitle">Definiciones clave de Bitcoin en una sola pagina.</p>
-          <p>Esta pagina de glosario ya esta habilitada para mantener la navegacion global sin errores.</p><p>El listado completo de terminos se incorporara en la siguiente fase.</p>
+          <h1>Glosario de Bitcoin</h1>
+          <p class="article__subtitle">Todos los términos de Bitcoin explicados en español, de forma clara y concisa.</p>
+
+          <h2>A</h2>
+
+<p><strong>Address (dirección):</strong> Cadena de caracteres alfanuméricos que sirve como destino para recibir bitcoin. Se genera a partir de una clave pública. <a href="/base/que-es-una-direccion.html">/base/que-es-una-direccion.html</a></p>
+
+<p><strong>ASIC (Application-Specific Integrated Circuit):</strong> Chip diseñado específicamente para minar Bitcoin. Miles de veces más eficiente que GPUs o CPUs para el algoritmo SHA-256.</p>
+
+<p><strong>Altcoin:</strong> Cualquier criptomoneda que no es Bitcoin. Del inglés "alternative coin". <a href="/base/bitcoin-vs-altcoins.html">/base/bitcoin-vs-altcoins.html</a></p>
+
+<p><strong>Atomic swap:</strong> Intercambio directo de criptomonedas entre dos partes sin intermediarios, usando contratos inteligentes que garantizan que ambas partes cumplan o ninguna.</p>
+
+<h2>B</h2>
+
+<p><strong>Base58:</strong> Sistema de codificación que usa 58 caracteres (excluyendo 0, O, I, l para evitar confusiones). Usado en direcciones Legacy.</p>
+
+<p><strong>Bear market:</strong> Período prolongado de precios a la baja. Lo opuesto a bull market.</p>
+
+<p><strong>Bech32:</strong> Formato de codificación para direcciones SegWit nativas (bc1q...). Más eficiente y con mejor detección de errores que Base58.</p>
+
+<p><strong>Bech32m:</strong> Variante de Bech32 usada para direcciones Taproot (bc1p...). Introducida con BIP 350.</p>
+
+<p><strong>BIP (Bitcoin Improvement Proposal):</strong> Documento formal que propone cambios o mejoras al protocolo Bitcoin. Sigue un proceso estandarizado de revisión. <a href="/nivel-6/que-es-un-bip.html">/nivel-6/que-es-un-bip.html</a></p>
+
+<p><strong>Bitcoin:</strong> Red y protocolo de dinero digital descentralizado creado por Satoshi Nakamoto en 2009. Con mayúscula se refiere a la red; con minúscula (bitcoin) a la unidad monetaria. <a href="/base/que-es-bitcoin.html">/base/que-es-bitcoin.html</a></p>
+
+<p><strong>Bitcoin Core:</strong> Implementación de referencia del software de nodo Bitcoin. Desarrollada y mantenida por la comunidad open source.</p>
+
+<p><strong>Bloque:</strong> Estructura de datos que contiene un grupo de transacciones y metadatos. Se añade a la blockchain aproximadamente cada 10 minutos.</p>
+
+<p><strong>Blockchain:</strong> Cadena de bloques enlazados criptográficamente. Contiene todo el historial de transacciones de Bitcoin desde 2009. <a href="/base/que-es-blockchain.html">/base/que-es-blockchain.html</a></p>
+
+<p><strong>Block explorer:</strong> Herramienta web para visualizar y buscar bloques, transacciones y direcciones en la blockchain.</p>
+
+<p><strong>Block height:</strong> Número de bloques desde el bloque génesis hasta un bloque específico. El génesis tiene altura 0.</p>
+
+<p><strong>Block reward:</strong> Recompensa total que recibe un minero por crear un bloque válido. Suma del subsidio más las fees de las transacciones incluidas.</p>
+
+<p><strong>Block size:</strong> Tamaño de un bloque en bytes o weight units. Limitado para mantener la descentralización.</p>
+
+<p><strong>BTC:</strong> Símbolo ticker de bitcoin, usado en exchanges y referencias de precio.</p>
+
+<p><strong>Bull market:</strong> Período prolongado de precios al alza. Lo opuesto a bear market.</p>
+
+<h2>C</h2>
+
+<p><strong>Cambio (change):</strong> Output de una transacción que devuelve el "cambio" al remitente. Los UTXOs se gastan completos; lo que sobra vuelve a una dirección del mismo usuario.</p>
+
+<p><strong>Canal (Lightning):</strong> Conexión bilateral entre dos nodos Lightning que permite transacciones instantáneas off-chain. Requiere una transacción on-chain para abrir y otra para cerrar. <a href="/nivel-4/canales-lightning.html">/nivel-4/canales-lightning.html</a></p>
+
+<p><strong>Capacity (Lightning):</strong> Cantidad total de bitcoin bloqueados en un canal Lightning. Determina cuánto se puede enviar/recibir.</p>
+
+<p><strong>Clave privada:</strong> Número secreto (256 bits) que permite gastar los bitcoin asociados a las direcciones derivadas de ella. Quien la conoce, controla los fondos.</p>
+
+<p><strong>Clave pública:</strong> Derivada matemáticamente de la clave privada mediante curva elíptica. Se puede compartir sin riesgo. Las direcciones se derivan de ella.</p>
+
+<p><strong>Coinbase (transacción):</strong> Primera transacción de cada bloque, creada por el minero. Genera los bitcoin nuevos (subsidio) y recoge las fees. No tiene inputs.</p>
+
+<p><strong>CoinJoin:</strong> Técnica de privacidad donde múltiples usuarios combinan sus transacciones en una sola, dificultando el rastreo. <a href="/nivel-4/coinjoin.html">/nivel-4/coinjoin.html</a></p>
+
+<p><strong>Cold wallet:</strong> Wallet cuyas claves privadas nunca han tocado un dispositivo conectado a internet. Más segura para almacenamiento a largo plazo. <a href="/base/tipos-de-wallet.html">/base/tipos-de-wallet.html</a></p>
+
+<p><strong>Confirmación:</strong> Ocurre cuando una transacción se incluye en un bloque. Cada bloque adicional encima añade una confirmación más. <a href="/base/que-es-una-confirmacion.html">/base/que-es-una-confirmacion.html</a></p>
+
+<p><strong>Consenso:</strong> Acuerdo entre los nodos de la red sobre el estado válido de la blockchain. Se logra mediante reglas del protocolo, sin autoridad central.</p>
+
+<p><strong>CPFP (Child Pays for Parent):</strong> Técnica para acelerar una transacción pendiente creando una transacción hija con fee alta que incentiva a los mineros a confirmar ambas.</p>
+
+<p><strong>Custodia/Custodial:</strong> Modelo donde un tercero (exchange, empresa) controla las claves privadas en nombre del usuario. "Not your keys, not your coins."</p>
+
+<h2>D</h2>
+
+<p><strong>DCA (Dollar Cost Averaging):</strong> Estrategia de compra donde se invierte una cantidad fija a intervalos regulares, independientemente del precio. <a href="/base/dca-compras-periodicas.html">/base/dca-compras-periodicas.html</a></p>
+
+<p><strong>Derivation path:</strong> Ruta jerárquica que define cómo derivar claves específicas desde una seed en wallets HD. Ejemplo: m/84'/0'/0'/0/0</p>
+
+<p><strong>Dificultad:</strong> Parámetro que determina qué tan difícil es minar un bloque válido. Se ajusta cada 2016 bloques para mantener ~10 min entre bloques.</p>
+
+<p><strong>Dirección:</strong> Ver "Address".</p>
+
+<p><strong>Doble gasto:</strong> Intento de gastar los mismos bitcoin dos veces. El protocolo Bitcoin lo previene mediante consenso y confirmaciones.</p>
+
+<p><strong>Dust:</strong> UTXOs tan pequeños que gastarlos costaría más en fees de lo que valen. Generalmente menos de ~546 satoshis.</p>
+
+<h2>E</h2>
+
+<p><strong>ECDSA (Elliptic Curve Digital Signature Algorithm):</strong> Algoritmo de firma digital usado en Bitcoin hasta Taproot. Basado en la curva secp256k1. <a href="/nivel-5/ecdsa.html">/nivel-5/ecdsa.html</a></p>
+
+<p><strong>Entropía:</strong> Aleatoriedad usada para generar claves privadas y seed phrases. Mayor entropía = mayor seguridad.</p>
+
+<p><strong>Epoch:</strong> Período de 2016 bloques (~2 semanas) tras el cual se reajusta la dificultad de minería.</p>
+
+<p><strong>Escrow:</strong> Mecanismo donde los fondos se mantienen bloqueados por un tercero o contrato hasta que se cumplen ciertas condiciones. Usado en intercambios P2P.</p>
+
+<p><strong>Exchange:</strong> Plataforma para comprar, vender e intercambiar bitcoin. Puede ser centralizada (CEX) o descentralizada (DEX). <a href="/base/exchange-centralizado-cex.html">/base/exchange-centralizado-cex.html</a></p>
+
+<h2>F</h2>
+
+<p><strong>Fee (comisión):</strong> Pago al minero por incluir una transacción en un bloque. Se mide en sat/vB. Varía según demanda de espacio en bloques. <a href="/base/que-son-las-fees.html">/base/que-son-las-fees.html</a></p>
+
+<p><strong>Fiat:</strong> Dinero emitido por gobiernos sin respaldo en commodity (euros, dólares, pesos). Del latín "hágase".</p>
+
+<p><strong>Firma digital:</strong> Prueba criptográfica de que el poseedor de una clave privada autorizó una transacción. No revela la clave privada.</p>
+
+<p><strong>Fork:</strong> Divergencia en la blockchain. Puede ser temporal (reorganización) o permanente (hard fork). También se refiere a copiar y modificar código.</p>
+
+<p><strong>Full node:</strong> Nodo que descarga, verifica y almacena toda la blockchain. Valida cada transacción y bloque de forma independiente. <a href="/nivel-3/montar-tu-nodo.html">/nivel-3/montar-tu-nodo.html</a></p>
+
+<p><strong>Frase semilla (seed phrase):</strong> Lista de 12 o 24 palabras que representa la clave maestra de una wallet HD. Permite recuperar todos los fondos. <a href="/base/que-es-seed-phrase.html">/base/que-es-seed-phrase.html</a></p>
+
+<h2>G</h2>
+
+<p><strong>Génesis (bloque):</strong> El primer bloque de Bitcoin, minado por Satoshi el 3 de enero de 2009. Contiene el mensaje sobre el rescate bancario del Times.</p>
+
+<p><strong>GPU:</strong> Tarjeta gráfica. Se usaba para minar Bitcoin entre 2010-2013, antes de los ASICs.</p>
+
+<h2>H</h2>
+
+<p><strong>Halving:</strong> Reducción a la mitad del subsidio por bloque, cada 210.000 bloques (~4 años). Mecanismo que limita la oferta a 21 millones.</p>
+
+<p><strong>Hard fork:</strong> Cambio en las reglas del protocolo que no es compatible hacia atrás. Puede causar división permanente de la cadena. <a href="/nivel-6/soft-fork-hard-fork.html">/nivel-6/soft-fork-hard-fork.html</a></p>
+
+<p><strong>Hash:</strong> Resultado de pasar datos por una función hash. En Bitcoin se usa principalmente SHA-256. Huella digital de longitud fija.</p>
+
+<p><strong>Hash rate (hashrate):</strong> Poder computacional de la red, medido en hashes por segundo. Indica seguridad de la red.</p>
+
+<p><strong>HD wallet (Hierarchical Deterministic):</strong> Wallet que deriva todas las claves de una única seed, permitiendo backup con una sola frase semilla. Estándar BIP 32.</p>
+
+<p><strong>HODL:</strong> Término de la comunidad para "mantener" bitcoin a largo plazo sin vender. Originado de un error tipográfico de "hold" en un foro.</p>
+
+<p><strong>Hot wallet:</strong> Wallet conectada a internet. Conveniente para uso frecuente pero más vulnerable a ataques. <a href="/base/tipos-de-wallet.html">/base/tipos-de-wallet.html</a></p>
+
+<p><strong>HTLC (Hash Time Locked Contract):</strong> Contrato que bloquea fondos hasta que se revela un secreto o expira un tiempo. Fundamental para Lightning Network.</p>
+
+<h2>I</h2>
+
+<p><strong>Inflación:</strong> Aumento de la oferta monetaria que diluye el poder adquisitivo. Bitcoin tiene inflación decreciente programada hasta 2140. <a href="/base/inflacion-y-bitcoin.html">/base/inflacion-y-bitcoin.html</a></p>
+
+<p><strong>Input:</strong> Referencia a un UTXO previo que se gasta en una transacción. Cada input consume un UTXO completo.</p>
+
+<p><strong>Invoice (Lightning):</strong> Solicitud de pago en Lightning Network. Contiene monto, hash de pago, y fecha de expiración. Formato BOLT11.</p>
+
+<h2>J</h2>
+
+<p><strong>JSONRPC:</strong> Protocolo usado para comunicarse con nodos Bitcoin mediante línea de comandos o programas.</p>
+
+<h2>K</h2>
+
+<p><strong>Keypool:</strong> Conjunto de direcciones pre-generadas en una wallet para uso futuro.</p>
+
+<p><strong>KYC (Know Your Customer):</strong> Regulación que obliga a verificar identidad de clientes. Exchanges centralizados lo requieren; implica pérdida de privacidad. <a href="/base/kyc-vs-no-kyc.html">/base/kyc-vs-no-kyc.html</a></p>
+
+<h2>L</h2>
+
+<p><strong>Layer 2:</strong> Protocolo construido sobre Bitcoin (capa 1) para escalabilidad. Lightning Network es el principal ejemplo.</p>
+
+<p><strong>Legacy (dirección):</strong> Direcciones del formato original de Bitcoin, empiezan por "1". Formato P2PKH. Menos eficientes que SegWit.</p>
+
+<p><strong>Lightning Address:</strong> Formato user@domain.com para recibir pagos Lightning. Más amigable que invoices tradicionales.</p>
+
+<p><strong>Lightning Network:</strong> Protocolo de capa 2 para pagos instantáneos y de bajo coste sobre Bitcoin. Usa canales de pago y HTLCs. <a href="/nivel-2/que-es-lightning.html">/nivel-2/que-es-lightning.html</a></p>
+
+<p><strong>Liquidez (Lightning):</strong> Capacidad de un nodo o canal para enrutar pagos. Determina cuánto puede fluir a través del canal.</p>
+
+<p><strong>Locktime:</strong> Campo de la transacción que impide que sea válida hasta cierto bloque o timestamp. <a href="/nivel-5/locktime-sequence.html">/nivel-5/locktime-sequence.html</a></p>
+
+<p><strong>Liveness:</strong> Propiedad de que el sistema seguirá funcionando y procesando transacciones.</p>
+
+<h2>M</h2>
+
+<p><strong>Mainnet:</strong> La red Bitcoin real, donde las transacciones tienen valor económico. Opuesto a testnet.</p>
+
+<p><strong>MAST (Merkelized Alternative Script Trees):</strong> Técnica que permite ocultar ramas de scripts no usadas en Taproot, mejorando privacidad y eficiencia.</p>
+
+<p><strong>Mempool:</strong> Conjunto de transacciones pendientes de confirmación que cada nodo mantiene en memoria. Los mineros seleccionan de aquí.</p>
+
+<p><strong>Merkle tree:</strong> Estructura de datos que resume todas las transacciones de un bloque en un único hash (Merkle root). Permite verificación eficiente. <a href="/nivel-5/merkle-tree.html">/nivel-5/merkle-tree.html</a></p>
+
+<p><strong>Minería:</strong> Proceso de crear nuevos bloques mediante proof of work. Crea bitcoin nuevos y procesa transacciones. <a href="/base/que-es-la-mineria.html">/base/que-es-la-mineria.html</a></p>
+
+<p><strong>Mixer:</strong> Servicio que mezcla transacciones de múltiples usuarios para dificultar el rastreo. CoinJoin es una versión sin confianza.</p>
+
+<p><strong>Multisig (multi-signature):</strong> Esquema que requiere múltiples firmas (M de N) para gastar fondos. Usado para seguridad empresarial y compartida. <a href="/nivel-4/que-es-multisig.html">/nivel-4/que-es-multisig.html</a></p>
+
+<p><strong>MuSig2:</strong> Protocolo de firma agregada Schnorr que permite que múltiples partes creen una única firma conjunta indistinguible de una firma individual.</p>
+
+<h2>N</h2>
+
+<p><strong>No-KYC:</strong> Métodos de adquisición de bitcoin sin verificación de identidad, como exchanges P2P. Mayor privacidad.</p>
+
+<p><strong>Nodo:</strong> Ordenador que ejecuta el software Bitcoin y participa en la red verificando y propagando transacciones y bloques.</p>
+
+<p><strong>Nonce:</strong> Número que los mineros varían para intentar encontrar un hash válido. También usado en firmas para evitar reutilización.</p>
+
+<p><strong>Not your keys, not your coins:</strong> Principio fundamental: si no controlas las claves privadas, no controlas realmente los bitcoin.</p>
+
+<h2>O</h2>
+
+<p><strong>Off-chain:</strong> Transacciones que no se registran directamente en la blockchain, como las de Lightning Network.</p>
+
+<p><strong>On-chain:</strong> Transacciones registradas directamente en la blockchain de Bitcoin. <a href="/base/on-chain-vs-lightning.html">/base/on-chain-vs-lightning.html</a></p>
+
+<p><strong>OP_RETURN:</strong> Opcode que permite incrustar datos arbitrarios (hasta 80 bytes) en una transacción de forma no gastable. <a href="/nivel-5/op-return.html">/nivel-5/op-return.html</a></p>
+
+<p><strong>Opcode:</strong> Instrucción del lenguaje Bitcoin Script. Define operaciones como verificar firmas, comprobar timelocks, etc.</p>
+
+<p><strong>Oracle:</strong> Fuente externa de datos que alimenta contratos inteligentes. Punto de confianza en sistemas descentralizados.</p>
+
+<p><strong>Ordinals:</strong> Protocolo que asigna identificadores únicos a satoshis individuales, permitiendo crear NFTs en Bitcoin.</p>
+
+<p><strong>Orphan block:</strong> Bloque válido que no forma parte de la cadena principal. Ocurre cuando dos mineros encuentran bloques casi simultáneamente.</p>
+
+<p><strong>Output:</strong> Destino de bitcoin en una transacción. Especifica cantidad y condiciones para gastar (script). Se convierte en UTXO.</p>
+
+<h2>P</h2>
+
+<p><strong>P2P (Peer-to-Peer):</strong> Arquitectura donde los participantes se conectan directamente sin servidor central. Bitcoin es una red P2P.</p>
+
+<p><strong>P2PKH (Pay to Public Key Hash):</strong> Tipo de script para direcciones Legacy (empiezan por "1"). El estándar original de Bitcoin. <a href="/nivel-5/p2pkh.html">/nivel-5/p2pkh.html</a></p>
+
+<p><strong>P2SH (Pay to Script Hash):</strong> Tipo de script que permite condiciones complejas ocultando el script hasta el gasto. Direcciones empiezan por "3". <a href="/nivel-5/p2sh.html">/nivel-5/p2sh.html</a></p>
+
+<p><strong>P2TR (Pay to Taproot):</strong> Tipo de script para direcciones Taproot (bc1p...). Permite scripts complejos indistinguibles de pagos simples. <a href="/nivel-5/p2tr.html">/nivel-5/p2tr.html</a></p>
+
+<p><strong>P2WPKH (Pay to Witness Public Key Hash):</strong> Tipo de script SegWit nativo para pagos simples. Direcciones bc1q... <a href="/nivel-5/p2wpkh-p2wsh.html">/nivel-5/p2wpkh-p2wsh.html</a></p>
+
+<p><strong>P2WSH (Pay to Witness Script Hash):</strong> Tipo de script SegWit nativo para scripts complejos como multisig.</p>
+
+<p><strong>Paper wallet:</strong> Claves privadas impresas o escritas en papel. Método anticuado y propenso a errores. No recomendado.</p>
+
+<p><strong>Passphrase:</strong> Palabra o frase opcional añadida a la seed phrase. Crea una wallet completamente diferente. También llamada "palabra 25".</p>
+
+<p><strong>PayJoin:</strong> Técnica de privacidad donde el receptor también contribuye inputs a la transacción, rompiendo heurísticas de análisis.</p>
+
+<p><strong>Peer:</strong> Otro nodo conectado directamente al tuyo en la red P2P.</p>
+
+<p><strong>Pool (minería):</strong> Grupo de mineros que combinan su hashrate y reparten recompensas proporcionalmente. Reduce varianza de ingresos.</p>
+
+<p><strong>Proof of Work (PoW):</strong> Mecanismo de consenso que requiere gastar energía computacional para crear bloques válidos. Garantiza seguridad. <a href="/nivel-5/proof-of-work.html">/nivel-5/proof-of-work.html</a></p>
+
+<p><strong>PSBT (Partially Signed Bitcoin Transaction):</strong> Formato estándar para transacciones parcialmente firmadas. Facilita multisig y coordinación entre wallets. <a href="/nivel-5/psbt.html">/nivel-5/psbt.html</a></p>
+
+<p><strong>Pruned node:</strong> Nodo que descarta bloques antiguos después de verificarlos, conservando solo UTXOs. Usa menos espacio.</p>
+
+<h2>Q</h2>
+
+<p><strong>QR code:</strong> Código bidimensional usado para compartir direcciones y invoices Lightning de forma práctica.</p>
+
+<h2>R</h2>
+
+<p><strong>RBF (Replace By Fee):</strong> Función que permite reemplazar una transacción pendiente por otra con fee más alta. BIP 125.</p>
+
+<p><strong>Reorg (reorganización):</strong> Cuando la red cambia de una cadena a otra más larga. Puede "desconfirmar" transacciones brevemente.</p>
+
+<p><strong>Retarget:</strong> Ajuste de dificultad cada 2016 bloques para mantener el intervalo de ~10 minutos entre bloques.</p>
+
+<p><strong>RIPEMD-160:</strong> Función hash que produce 160 bits. Se usa combinada con SHA-256 para crear direcciones Bitcoin.</p>
+
+<p><strong>Routing (Lightning):</strong> Proceso de encontrar un camino a través de múltiples canales para completar un pago Lightning.</p>
+
+<h2>S</h2>
+
+<p><strong>Satoshi (persona):</strong> Pseudónimo del creador de Bitcoin. Identidad desconocida. Desapareció en 2011.</p>
+
+<p><strong>Satoshi (unidad):</strong> La unidad más pequeña de bitcoin. 1 BTC = 100.000.000 satoshis. Abreviado "sat" o "sats". <a href="/base/que-es-un-satoshi.html">/base/que-es-un-satoshi.html</a></p>
+
+<p><strong>Schnorr:</strong> Algoritmo de firma más simple y eficiente que ECDSA. Permite agregación de firmas. Activado con Taproot (BIP 340). <a href="/nivel-5/schnorr.html">/nivel-5/schnorr.html</a></p>
+
+<p><strong>Script (Bitcoin):</strong> Lenguaje de programación basado en pila usado para definir condiciones de gasto en Bitcoin. No es Turing-completo. <a href="/nivel-5/bitcoin-script.html">/nivel-5/bitcoin-script.html</a></p>
+
+<p><strong>Seed phrase:</strong> Ver "Frase semilla".</p>
+
+<p><strong>SegWit (Segregated Witness):</strong> Actualización de 2017 que separa las firmas del cuerpo de la transacción. Reduce tamaño efectivo y soluciona malleability. <a href="/nivel-5/segwit-internals.html">/nivel-5/segwit-internals.html</a></p>
+
+<p><strong>SHA-256:</strong> Función hash criptográfica que produce 256 bits. Usada extensivamente en Bitcoin para minería y derivación de direcciones.</p>
+
+<p><strong>Sidechain:</strong> Blockchain separada anclada a Bitcoin mediante un mecanismo de two-way peg. Ejemplo: Liquid Network.</p>
+
+<p><strong>Signet:</strong> Red de pruebas con bloques firmados por autoridad central. Más predecible que testnet.</p>
+
+<p><strong>SIGHASH:</strong> Flags que determinan qué partes de una transacción cubre una firma (ALL, NONE, SINGLE, ANYONECANPAY).</p>
+
+<p><strong>Soft fork:</strong> Cambio en las reglas compatible hacia atrás. Los nodos antiguos siguen funcionando aunque no validen las nuevas reglas. <a href="/nivel-6/soft-fork-hard-fork.html">/nivel-6/soft-fork-hard-fork.html</a></p>
+
+<p><strong>SPV (Simplified Payment Verification):</strong> Método para verificar transacciones sin descargar toda la blockchain. Usado por wallets ligeras. Menos seguro que full node.</p>
+
+<p><strong>Stack (pila):</strong> Estructura de datos LIFO usada por Bitcoin Script para evaluar transacciones.</p>
+
+<p><strong>Stacking sats:</strong> Expresión de la comunidad para acumular satoshis regularmente, independientemente del precio.</p>
+
+<p><strong>Stock-to-Flow:</strong> Modelo que relaciona el stock existente de un activo con su producción anual. Usado para valorar escasez de Bitcoin.</p>
+
+<p><strong>Submarine swap:</strong> Intercambio atómico entre bitcoin on-chain y Lightning, permitiendo mover fondos entre capas.</p>
+
+<h2>T</h2>
+
+<p><strong>Taproot:</strong> Actualización de 2021 que añade firmas Schnorr, MAST y Tapscript. Mejora privacidad, eficiencia y capacidades de scripting. <a href="/nivel-5/taproot-internals.html">/nivel-5/taproot-internals.html</a></p>
+
+<p><strong>Tapscript:</strong> Versión actualizada de Bitcoin Script para transacciones Taproot. Añade y modifica varios opcodes.</p>
+
+<p><strong>Target:</strong> Valor umbral que el hash de un bloque debe estar por debajo para ser válido. Determina la dificultad.</p>
+
+<p><strong>Testnet:</strong> Red de pruebas donde los bitcoin no tienen valor. Permite experimentar sin riesgo.</p>
+
+<p><strong>Timelock:</strong> Condición que impide gastar fondos hasta cierto momento (timestamp) o altura de bloque.</p>
+
+<p><strong>Tor (The Onion Router):</strong> Red de anonimización que oculta direcciones IP. Recomendada para mayor privacidad en nodos Bitcoin.</p>
+
+<p><strong>Transacción:</strong> Mensaje que transfiere bitcoin de unos UTXOs a otros. Contiene inputs, outputs, y metadatos. <a href="/nivel-5/estructura-transaccion.html">/nivel-5/estructura-transaccion.html</a></p>
+
+<p><strong>txid (Transaction ID):</strong> Identificador único de una transacción, derivado del hash de sus datos. 32 bytes en hexadecimal.</p>
+
+<p><strong>Two-way peg:</strong> Mecanismo para mover bitcoin entre la cadena principal y una sidechain, bloqueándolos en una mientras se usan en otra.</p>
+
+<h2>U</h2>
+
+<p><strong>Unconfirmed:</strong> Estado de una transacción que está en la mempool pero no ha sido incluida en ningún bloque todavía.</p>
+
+<p><strong>UTXO (Unspent Transaction Output):</strong> Output de una transacción que no ha sido gastado. El "saldo" de Bitcoin es la suma de UTXOs controlados. <a href="/nivel-3/modelo-utxo.html">/nivel-3/modelo-utxo.html</a></p>
+
+<h2>V</h2>
+
+<p><strong>Vanity address:</strong> Dirección Bitcoin con un patrón personalizado (ej: 1Bitcoin...). Requiere generar muchas claves hasta encontrar el patrón.</p>
+
+<p><strong>vByte (virtual byte):</strong> Unidad de medida del tamaño de transacción post-SegWit. 4 weight units = 1 vByte. Las fees se calculan en sat/vB.</p>
+
+<h2>W</h2>
+
+<p><strong>Wallet:</strong> Software o dispositivo para gestionar claves privadas, crear transacciones y consultar saldo. <a href="/base/tipos-de-wallet.html">/base/tipos-de-wallet.html</a></p>
+
+<p><strong>Watch-only wallet:</strong> Wallet que solo puede ver saldo y transacciones pero no gastar (no tiene claves privadas). Útil para monitoreo.</p>
+
+<p><strong>Watchtower:</strong> Servicio que vigila la blockchain en nombre de usuarios Lightning offline y puede ejecutar penalizaciones si detectan trampas.</p>
+
+<p><strong>Weight unit (WU):</strong> Unidad de medida introducida por SegWit. Un bloque puede tener hasta 4 millones de WU. Los datos witness pesan menos.</p>
+
+<p><strong>Whitepaper:</strong> Documento técnico de 9 páginas publicado por Satoshi en 2008 describiendo Bitcoin. <a href="/base/que-es-bitcoin.html">/base/que-es-bitcoin.html</a></p>
+
+<p><strong>Witness:</strong> Datos de firma y script en transacciones SegWit. Se separan del cuerpo de la transacción y pesan menos.</p>
+
+<p><strong>Wrapped SegWit:</strong> Dirección SegWit envuelta en P2SH para compatibilidad con wallets antiguas. Empieza por "3".</p>
+
+<p><strong>wtxid:</strong> Identificador de transacción que incluye el witness. Diferente del txid para transacciones SegWit.</p>
+
+<h2>X</h2>
+
+<p><strong>XPub (Extended Public Key):</strong> Clave pública extendida que permite derivar todas las direcciones públicas de una wallet HD sin acceso a fondos.</p>
+
+<h2>Y</h2>
+
+<p><strong>Yield:</strong> Rendimiento generado por prestar o hacer staking de bitcoin. Implica riesgo de contraparte.</p>
+
+<h2>Z</h2>
+
+<p><strong>Zap:</strong> Micropago en satoshis enviado a través de Lightning en la red social Nostr. Forma de interacción y apreciación.</p>
+
+<p><strong>Zero-conf (0-conf):</strong> Transacción que no ha recibido ninguna confirmación aún. Riesgo de doble gasto. No recomendada para montos significativos.</p>
+
+<p><strong>ZKP (Zero Knowledge Proof):</strong> Prueba criptográfica que demuestra conocimiento de algo sin revelar el dato. Usado en algunas soluciones de privacidad.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-pillar" aria-hidden="true"></div>
+
+          <nav class="page-nav" aria-label="Navegacion entre paginas"><a href="/base/" class="page-nav__item"><span class="page-nav__label">&larr; Anterior</span><span class="page-nav__title">Base de Conocimiento</span></a>
+<a href="/recursos.html" class="page-nav__item page-nav__item--next"><span class="page-nav__label">Siguiente &rarr;</span><span class="page-nav__title">Recursos</span></a></nav>
         </article>
       </div>
     </main>

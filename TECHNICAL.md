@@ -27,30 +27,36 @@ Patrón por página:
 <script src="../js/search.js"></script>
 ```
 
-## Reglas de navegación
+## Navegación
 
-### Sidebar de niveles (obligatorio)
+### Sidebar (árbol completo)
 
-En todas las páginas de nivel (`nivel-1` a `nivel-6`):
+- La navegación lateral es un árbol global (Niveles + Pilares) y se inyecta desde `js/nav.js`.
+- Por defecto, todo aparece plegado; el usuario despliega por secciones.
+- La página actual queda resaltada y el grupo contiene un estado activo.
 
-1. Incluir bloque `Nivel actual` al inicio del sidebar.
-2. Ese bloque enlaza a `index.html` del nivel.
-3. En el `index.html` del nivel, ese enlace va activo con `sidebar__link--active`.
+Requisito en todas las páginas HTML:
 
-### Botón contextual volver
+- Incluir un `<nav class="sidebar">` dentro del `<aside>` (puede estar vacío salvo el wrapper del ad-slot).
+- No mantener sidebars estáticas antiguas (secciones y nivel actual); `js/nav.js` las elimina si detecta restos.
 
-Gestionado globalmente en `js/nav.js`:
+### Menú móvil
 
-- Muestra `<- Volver` encima del breadcrumb en páginas de Base cuando hay contexto de origen.
-- El destino se construye con `from` + `from_title` + `from_section` (y respaldo en `sessionStorage`).
-- Si no hay contexto válido, el botón no se muestra.
+- El menú móvil contiene el mismo árbol de navegación (Niveles + Pilares).
 
-## Reglas de estilo y consistencia
+### Botón contextual “Volver”
 
-- Mantener el sistema visual dark con acento naranja Bitcoin.
-- Evitar estilos inline nuevos; centralizar en CSS.
-- Mantener legibilidad (contraste, espaciado y jerarquía).
-- Mantener consistencia en cards, sidebar, breadcrumb y `page-nav`.
+Gestionado en `js/nav.js`:
+
+- Cuando navegas desde un nivel a una página de `/base/`, se propaga `?from=...` (y se guarda en `sessionStorage`).
+- En páginas de Base, si hay contexto válido, aparece un botón de volver junto al breadcrumb.
+
+## Footer (donaciones y enlaces)
+
+- Editar `includes/footer.html` para:
+  - Dirección on-chain (BTC).
+  - Dirección Lightning (LNURL / Lightning Address).
+  - Enlace PayPal (“invítame a un café”): pendiente hasta tener URL final.
 
 ## Publicidad
 
@@ -61,23 +67,20 @@ Gestionado globalmente en `js/nav.js`:
 
 ## Búsqueda
 
-- `js/search.js` mantiene índice estático general.
-- `js/search-index.base.json` alimenta la base de conocimiento.
-- Al crear nuevas páginas, actualizar índice de búsqueda.
+- `js/search.js` mantiene índice general.
+- `js/search-index.base.json` alimenta la Base de Conocimiento.
 
 ## QA mínimo antes de cerrar cambios
 
-1. Cargar rutas afectadas en navegador.
-2. Confirmar includes (`header/footer`).
-3. Confirmar sidebar y enlace de `Nivel actual`.
-4. Confirmar breadcrumb y navegación entre páginas.
-5. Confirmar ausencia de errores JS.
-6. Confirmar codificación UTF-8 (sin mojibake).
+1. Confirmar includes (`header/footer`).
+2. Confirmar sidebar y menú móvil (árbol plegable + activo).
+3. Confirmar breadcrumb y navegación anterior/siguiente.
+4. Confirmar ausencia de errores JS.
+5. Confirmar codificación UTF-8 (sin mojibake).
 
 ## Desarrollo local
 
 - Para QA automatizado, arrancar el servidor en modo oculto para evitar ventanas emergentes de consola.
-
 
 ```bash
 python -m http.server 4173 --bind 127.0.0.1 --directory .
@@ -91,7 +94,3 @@ Abrir:
 
 - Usar siempre `aprendeBTC` y `aprendebtc.com`.
 - No reintroducir `bitcoinfácil` ni variantes anteriores.
-
-
-
-
