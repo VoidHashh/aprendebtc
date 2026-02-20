@@ -230,17 +230,14 @@
   <script src="../js/hex-utils.js"></script>
   <script src="../js/base58.js"></script>
 
-  <script>
+    <script>
   (function() {
     'use strict';
 
-    // === CONSTANTES ===
-    // Orden de la curva secp256k1 (n)
     const SECP256K1_ORDER = BigInt('0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141');
     const WIF_PREFIX_MAINNET = 0x80;
     const COMPRESSION_FLAG = 0x01;
 
-    // === ELEMENTOS DEL DOM ===
     const btnGenerate = document.getElementById('btn-generate');
     const privateKeyInput = document.getElementById('private-key-input');
     const inputLength = document.getElementById('input-length');
@@ -255,31 +252,81 @@
     const outputWifCompressed = document.getElementById('output-wif-compressed');
     const outputWifUncompressed = document.getElementById('output-wif-uncompressed');
 
-    // === FUNCIONES ===
+    function bytesToHex(bytes) {
+      if (window.HexUtils && typeof window.HexUtils.bytesToHex === 'function') {
+        return window.HexUtils.bytesToHex(bytes);
+      }
+      return Array.from(bytes).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
 
-    /**
-     * Genera 32 bytes aleatorios criptográficamente seguros
-     */
+    function hexToBytes(hex) {
+      if (window.HexUtils && typeof window.HexUtils.hexToBytes === 'function') {
+        return window.HexUtils.hexToBytes(hex);
+      }
+      const clean = String(hex).replace(/\s/g, '').toLowerCase();
+      if (!/^[0-9a-f]*$/.test(clean)) {
+        throw new Error('Hex invalido');
+      }
+      const src = clean.length % 2 === 0 ? clean : ('0' + clean);
+      const bytes = new Uint8Array(src.length / 2);
+      for (let i = 0; i < bytes.length; i++) {
+        bytes[i] = parseInt(src.substr(i * 2, 2), 16);
+      }
+      return bytes;
+    }
+
+    async function calculateChecksum(payload) {
+      if (window.Base58 && typeof window.Base58.calculateChecksum === 'function') {
+        return window.Base58.calculateChecksum(payload);
+      }
+      const hash1 = await crypto.subtle.digest('SHA-256', payload);
+      const hash2 = await crypto.subtle.digest('SHA-256', hash1);
+      return new Uint8Array(hash2).slice(0, 4);
+    }
+
+    function base58Encode(bytes) {
+      if (window.Base58 && typeof window.Base58.encode === 'function') {
+        return window.Base58.encode(bytes);
+      }
+
+      const alphabet = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+      let leadingZeros = 0;
+      for (let i = 0; i < bytes.length && bytes[i] === 0; i++) {
+        leadingZeros++;
+      }
+
+      let num = 0n;
+      for (const byte of bytes) {
+        num = (num * 256n) + BigInt(byte);
+      }
+
+      let encoded = '';
+      while (num > 0n) {
+        const rem = Number(num % 58n);
+        encoded = alphabet[rem] + encoded;
+        num = num / 58n;
+      }
+
+      return '1'.repeat(leadingZeros) + encoded;
+    }
+
     function generateRandomPrivateKey() {
       const bytes = new Uint8Array(32);
       crypto.getRandomValues(bytes);
-      return HexUtils.bytesToHex(bytes);
+      return bytesToHex(bytes);
     }
 
-    /**
-     * Valida que la clave privada esté en el rango válido
-     */
     function isValidPrivateKey(hexKey) {
       if (!/^[0-9a-fA-F]{64}$/.test(hexKey)) {
         return { valid: false, reason: 'Debe tener 64 caracteres hexadecimales' };
       }
 
       const keyBigInt = BigInt('0x' + hexKey);
-      
       if (keyBigInt === 0n) {
         return { valid: false, reason: 'La clave no puede ser cero' };
       }
-      
       if (keyBigInt >= SECP256K1_ORDER) {
         return { valid: false, reason: 'La clave excede el orden de la curva (n)' };
       }
@@ -287,25 +334,17 @@
       return { valid: true };
     }
 
-    /**
-     * Convierte hex a binario con espacios cada 8 bits
-     */
     function hexToBinaryFormatted(hex) {
       let binary = '';
       for (let i = 0; i < hex.length; i++) {
         binary += parseInt(hex[i], 16).toString(2).padStart(4, '0');
       }
-      // Añadir espacio cada 8 bits
       return binary.match(/.{8}/g).join(' ');
     }
 
-    /**
-     * Genera WIF desde clave privada hex
-     */
-    async function generateWIF(privateKeyHex, compressed = true) {
-      const keyBytes = HexUtils.hexToBytes(privateKeyHex);
-      
-      // Construir payload: prefix + key + [compression flag]
+    async function generateWIF(privateKeyHex, compressed) {
+      const keyBytes = hexToBytes(privateKeyHex);
+
       let payload;
       if (compressed) {
         payload = new Uint8Array(34);
@@ -318,62 +357,39 @@
         payload.set(keyBytes, 1);
       }
 
-      // Calcular checksum
-      const checksum = await Base58.calculateChecksum(payload);
-
-      // Concatenar payload + checksum
+      const checksum = await calculateChecksum(payload);
       const result = new Uint8Array(payload.length + 4);
       result.set(payload);
       result.set(checksum, payload.length);
-
-      // Codificar en Base58
-      return Base58.encode(result);
+      return base58Encode(result);
     }
 
-    /**
-     * Actualiza todos los outputs con la clave privada
-     */
     async function updateOutputs(privateKeyHex) {
       const validation = isValidPrivateKey(privateKeyHex);
-
-      // Mostrar validación
       validationStatus.style.display = 'block';
-      
-      if (validation.valid) {
-        validationIcon.textContent = '✓';
-        validationIcon.style.color = '#2ea043';
-        validationText.textContent = 'Clave privada válida';
-        validationText.style.color = '#2ea043';
-        outputSection.style.display = 'block';
-      } else {
+
+      if (!validation.valid) {
         validationIcon.textContent = '✗';
         validationIcon.style.color = '#da3633';
-        validationText.textContent = 'Inválida: ' + validation.reason;
+        validationText.textContent = 'Invalida: ' + validation.reason;
         validationText.style.color = '#da3633';
         outputSection.style.display = 'none';
         return;
       }
 
-      // Hexadecimal
+      validationIcon.textContent = '✓';
+      validationIcon.style.color = '#2ea043';
+      validationText.textContent = 'Clave privada valida';
+      validationText.style.color = '#2ea043';
+      outputSection.style.display = 'block';
+
       outputHex.textContent = privateKeyHex.toLowerCase();
-
-      // Decimal
-      const decimalValue = BigInt('0x' + privateKeyHex);
-      outputDecimal.textContent = decimalValue.toString();
-
-      // Binario
+      outputDecimal.textContent = BigInt('0x' + privateKeyHex).toString();
       outputBinary.textContent = hexToBinaryFormatted(privateKeyHex);
-
-      // WIF comprimida
       outputWifCompressed.textContent = await generateWIF(privateKeyHex, true);
-
-      // WIF no comprimida
       outputWifUncompressed.textContent = await generateWIF(privateKeyHex, false);
     }
 
-    /**
-     * Limpia los outputs
-     */
     function clearOutputs() {
       validationStatus.style.display = 'none';
       outputSection.style.display = 'none';
@@ -384,23 +400,28 @@
       outputWifUncompressed.textContent = '—';
     }
 
-    // === EVENT LISTENERS ===
-
-    // Generar clave aleatoria
-    btnGenerate.addEventListener('click', async () => {
-      const privateKey = generateRandomPrivateKey();
-      privateKeyInput.value = privateKey;
-      inputLength.textContent = '64 / 64 caracteres';
-      inputLength.style.color = '#2ea043';
-      await updateOutputs(privateKey);
+    btnGenerate.addEventListener('click', async function() {
+      try {
+        const privateKey = generateRandomPrivateKey();
+        privateKeyInput.value = privateKey;
+        inputLength.textContent = '64 / 64 caracteres';
+        inputLength.style.color = '#2ea043';
+        await updateOutputs(privateKey);
+      } catch (error) {
+        validationStatus.style.display = 'block';
+        validationIcon.textContent = '✗';
+        validationIcon.style.color = '#da3633';
+        validationText.textContent = 'Error generando clave: ' + error.message;
+        validationText.style.color = '#da3633';
+        outputSection.style.display = 'none';
+      }
     });
 
-    // Input manual
-    privateKeyInput.addEventListener('input', async () => {
+    privateKeyInput.addEventListener('input', async function() {
       const value = privateKeyInput.value.replace(/[^0-9a-fA-F]/g, '');
       privateKeyInput.value = value;
-      
-      inputLength.textContent = `${value.length} / 64 caracteres`;
+
+      inputLength.textContent = value.length + ' / 64 caracteres';
       inputLength.style.color = value.length === 64 ? '#2ea043' : 'var(--text-secondary)';
 
       if (value.length === 64) {
@@ -410,9 +431,8 @@
       }
     });
 
-    // Copiar al portapapeles
-    document.querySelectorAll('.copy-btn').forEach(btn => {
-      btn.addEventListener('click', async () => {
+    document.querySelectorAll('.copy-btn').forEach(function(btn) {
+      btn.addEventListener('click', async function() {
         const targetId = btn.dataset.target;
         const target = document.getElementById(targetId);
         const text = target.textContent;
@@ -421,7 +441,7 @@
           try {
             await navigator.clipboard.writeText(text);
             btn.textContent = '✓';
-            setTimeout(() => { btn.textContent = '📋'; }, 1000);
+            setTimeout(function() { btn.textContent = '📋'; }, 1000);
           } catch (err) {
             console.error('Error copiando:', err);
           }

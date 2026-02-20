@@ -12,7 +12,6 @@
   <link rel="stylesheet" href="../css/components.css" />
   <link rel="stylesheet" href="../css/tools.css" />
   <!-- noble-secp256k1 para operaciones de curva elíptica -->
-  <script src="https://unpkg.com/@noble/secp256k1@1.7.1/lib/index.js" defer></script>
 </head>
 <body>
   <div data-include="header"></div>
@@ -263,14 +262,12 @@
   <script src="../js/search.js"></script>
   <script src="../js/hex-utils.js"></script>
 
-  <script>
+    <script>
   (function() {
     'use strict';
 
-    // === CONSTANTES ===
     const SECP256K1_ORDER = BigInt('0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141');
 
-    // === ELEMENTOS DEL DOM ===
     const privateKeyInput = document.getElementById('private-key-input');
     const inputStatus = document.getElementById('input-status');
     const btnGenerate = document.getElementById('btn-generate');
@@ -285,20 +282,23 @@
     const yParity = document.getElementById('y-parity');
     const yParityExplanation = document.getElementById('y-parity-explanation');
 
-    // === FUNCIONES ===
+    let secpLib = null;
 
-    /**
-     * Genera 32 bytes aleatorios
-     */
+    function bytesToHex(bytes) {
+      if (window.HexUtils && typeof window.HexUtils.bytesToHex === 'function') {
+        return window.HexUtils.bytesToHex(bytes);
+      }
+      return Array.from(bytes).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
     function generateRandomPrivateKey() {
       const bytes = new Uint8Array(32);
       crypto.getRandomValues(bytes);
-      return HexUtils.bytesToHex(bytes);
+      return bytesToHex(bytes);
     }
 
-    /**
-     * Valida clave privada
-     */
     function isValidPrivateKey(hexKey) {
       if (!/^[0-9a-fA-F]{64}$/.test(hexKey)) {
         return { valid: false, reason: 'Debe tener 64 caracteres hexadecimales' };
@@ -313,72 +313,68 @@
       return { valid: true };
     }
 
-    /**
-     * Deriva la clave pública usando noble-secp256k1
-     */
-    function derivePublicKey(privateKeyHex) {
-      // noble-secp256k1 expone getPublicKey
-      if (typeof nobleSecp256k1 === 'undefined' && typeof secp256k1 === 'undefined') {
-        throw new Error('Librería secp256k1 no cargada');
+    async function loadSecpLib() {
+      if (secpLib && typeof secpLib.getPublicKey === 'function') {
+        return secpLib;
       }
 
-      const secp = typeof nobleSecp256k1 !== 'undefined' ? nobleSecp256k1 : secp256k1;
-      
-      // Obtener clave pública comprimida (33 bytes)
+      if (window.nobleSecp256k1 && typeof window.nobleSecp256k1.getPublicKey === 'function') {
+        secpLib = window.nobleSecp256k1;
+        return secpLib;
+      }
+
+      if (window.secp256k1 && typeof window.secp256k1.getPublicKey === 'function') {
+        secpLib = window.secp256k1;
+        return secpLib;
+      }
+
+      const mod = await import('https://cdn.jsdelivr.net/npm/@noble/secp256k1@1.7.1/+esm');
+      if (!mod || typeof mod.getPublicKey !== 'function') {
+        throw new Error('No se pudo inicializar secp256k1');
+      }
+
+      window.nobleSecp256k1 = mod;
+      secpLib = mod;
+      return secpLib;
+    }
+
+    async function derivePublicKey(privateKeyHex) {
+      const secp = await loadSecpLib();
       const pubKeyCompressed = secp.getPublicKey(privateKeyHex, true);
-      
-      // Obtener clave pública no comprimida (65 bytes)
       const pubKeyUncompressed = secp.getPublicKey(privateKeyHex, false);
 
       return {
-        compressed: HexUtils.bytesToHex(pubKeyCompressed),
-        uncompressed: HexUtils.bytesToHex(pubKeyUncompressed)
+        compressed: typeof pubKeyCompressed === 'string' ? pubKeyCompressed : bytesToHex(pubKeyCompressed),
+        uncompressed: typeof pubKeyUncompressed === 'string' ? pubKeyUncompressed : bytesToHex(pubKeyUncompressed)
       };
     }
 
-    /**
-     * Extrae coordenadas X e Y de la clave pública no comprimida
-     */
     function extractCoordinates(uncompressedHex) {
-      // Formato: 04 + X (32 bytes) + Y (32 bytes)
       const x = uncompressedHex.substring(2, 66);
       const y = uncompressedHex.substring(66, 130);
-      return { x, y };
+      return { x: x, y: y };
     }
 
-    /**
-     * Determina la paridad de Y
-     */
     function getYParity(yHex) {
       const lastChar = yHex.slice(-1).toLowerCase();
       const lastNibble = parseInt(lastChar, 16);
       return lastNibble % 2 === 0 ? 'par' : 'impar';
     }
 
-    /**
-     * Muestra error
-     */
     function showError(message) {
       errorMessage.textContent = message;
       errorMessage.style.display = 'block';
       outputSection.style.display = 'none';
     }
 
-    /**
-     * Oculta error
-     */
     function hideError() {
       errorMessage.style.display = 'none';
     }
 
-    /**
-     * Deriva y muestra la clave pública
-     */
-    function derive() {
+    async function derive() {
       const privateKey = privateKeyInput.value.replace(/[^0-9a-fA-F]/g, '').toLowerCase();
-      
-      // Validar
       const validation = isValidPrivateKey(privateKey);
+
       if (!validation.valid) {
         showError(validation.reason);
         return;
@@ -387,56 +383,58 @@
       hideError();
 
       try {
-        // Derivar
-        const publicKeys = derivePublicKey(privateKey);
+        const publicKeys = await derivePublicKey(privateKey);
         const coords = extractCoordinates(publicKeys.uncompressed);
         const parity = getYParity(coords.y);
 
-        // Mostrar resultados
         outputCompressed.textContent = publicKeys.compressed;
         outputUncompressed.textContent = publicKeys.uncompressed;
         outputX.textContent = coords.x;
         outputY.textContent = coords.y;
-        
+
         yParity.textContent = parity.toUpperCase();
         yParity.style.color = parity === 'par' ? '#2ea043' : '#58a6ff';
-        
+
         const prefix = publicKeys.compressed.substring(0, 2);
-        yParityExplanation.textContent = `→ prefijo ${prefix} (${prefix === '02' ? 'Y par' : 'Y impar'})`;
+        yParityExplanation.textContent = '-> prefijo ' + prefix + ' (' + (prefix === '02' ? 'Y par' : 'Y impar') + ')';
 
         outputSection.style.display = 'block';
-
       } catch (error) {
-        showError('Error derivando clave pública: ' + error.message);
+        showError('Error derivando clave publica: ' + error.message);
       }
     }
 
-    // === EVENT LISTENERS ===
-
-    privateKeyInput.addEventListener('input', () => {
+    privateKeyInput.addEventListener('input', function() {
       const value = privateKeyInput.value.replace(/[^0-9a-fA-F]/g, '');
       privateKeyInput.value = value;
-      inputStatus.textContent = `${value.length} / 64 caracteres`;
+      inputStatus.textContent = value.length + ' / 64 caracteres';
       inputStatus.style.color = value.length === 64 ? '#2ea043' : 'var(--text-secondary)';
     });
 
-    btnGenerate.addEventListener('click', () => {
-      const privateKey = generateRandomPrivateKey();
-      privateKeyInput.value = privateKey;
-      inputStatus.textContent = '64 / 64 caracteres';
-      inputStatus.style.color = '#2ea043';
+    btnGenerate.addEventListener('click', async function() {
+      try {
+        const privateKey = generateRandomPrivateKey();
+        privateKeyInput.value = privateKey;
+        inputStatus.textContent = '64 / 64 caracteres';
+        inputStatus.style.color = '#2ea043';
+        await derive();
+      } catch (error) {
+        showError('Error generando clave privada: ' + error.message);
+      }
+    });
+
+    btnDerive.addEventListener('click', function() {
       derive();
     });
 
-    btnDerive.addEventListener('click', derive);
-
-    privateKeyInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') derive();
+    privateKeyInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        derive();
+      }
     });
 
-    // Copiar al portapapeles
-    document.querySelectorAll('.copy-btn').forEach(btn => {
-      btn.addEventListener('click', async () => {
+    document.querySelectorAll('.copy-btn').forEach(function(btn) {
+      btn.addEventListener('click', async function() {
         const targetId = btn.dataset.target;
         const target = document.getElementById(targetId);
         const text = target.textContent;
@@ -445,7 +443,7 @@
           try {
             await navigator.clipboard.writeText(text);
             btn.textContent = '✓';
-            setTimeout(() => { btn.textContent = '📋'; }, 1000);
+            setTimeout(function() { btn.textContent = '📋'; }, 1000);
           } catch (err) {
             console.error('Error copiando:', err);
           }
@@ -453,49 +451,14 @@
       });
     });
 
-    // Esperar a que se cargue la librería secp256k1
-    function waitForSecp256k1() {
-      return new Promise((resolve) => {
-        const check = () => {
-          if (typeof nobleSecp256k1 !== 'undefined' || typeof secp256k1 !== 'undefined') {
-            resolve();
-          } else {
-            setTimeout(check, 100);
-          }
-        };
-        check();
-      });
-    }
-
-    // Inicialización
-    waitForSecp256k1().then(() => {
+    btnDerive.disabled = true;
+    loadSecpLib().then(function() {
       btnDerive.disabled = false;
-      btnGenerate.disabled = false;
-    }).catch(() => {
-      showError('No se pudo cargar la librería de criptografía');
+    }).catch(function(error) {
+      showError('No se pudo cargar secp256k1: ' + error.message);
     });
 
   })();
-  </script>
-
-  <!-- Fallback: cargar noble-secp256k1 de forma alternativa -->
-  <script>
-    // Si el módulo ESM no carga, intentar con versión UMD
-    window.addEventListener('load', function() {
-      if (typeof nobleSecp256k1 === 'undefined' && typeof secp256k1 === 'undefined') {
-        // Implementación básica usando Web Crypto para casos simples
-        // En producción, usar una CDN confiable o servir localmente
-        console.warn('Cargando implementación alternativa de secp256k1...');
-        
-        // Cargar desde CDN alternativa
-        const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/npm/@noble/secp256k1@1.7.1/lib/index.js';
-        script.onload = function() {
-          console.log('secp256k1 cargado desde CDN alternativa');
-        };
-        document.head.appendChild(script);
-      }
-    });
   </script>
 </body>
 </html>
