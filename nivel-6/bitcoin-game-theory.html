@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Por qu&#233; Bitcoin funciona sin confianza: incentivos alineados, Nash equilibrium, el ataque del 51%, y el efecto Lindy explicados." />
+  <title>Teor&#237;a de juegos de Bitcoin &#8212; Nivel 6 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegacion del nivel 6">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-auto" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegacion">
+          <a href="/" class="breadcrumb__item">Inicio</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><a href="/nivel-6/" class="breadcrumb__item">Nivel 6</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><span class="breadcrumb__current">Teor&#237;a de juegos de Bitcoin</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--6 article__badge">Nivel 6</div>
+          <h1>Teor&#237;a de juegos de Bitcoin</h1>
+          <p class="article__subtitle">Todos los participantes act&#250;an por inter&#233;s propio. Y eso es exactamente lo que hace que el sistema funcione.</p>
+
+<h2>Dise&#241;o basado en incentivos</h2>
+
+<p>Bitcoin no funciona porque la gente sea buena o altruista. Funciona porque los incentivos est&#225;n dise&#241;ados para que actuar honestamente sea m&#225;s rentable que hacer trampa.</p>
+
+<p>Satoshi no invent&#243; un sistema que requiere confianza. Invent&#243; un sistema donde confiar es innecesario porque los incentivos matem&#225;ticos hacen que la honestidad sea la estrategia &#243;ptima.</p>
+
+<h2>Los mineros</h2>
+
+<p>Los mineros gastan electricidad (dinero real) para intentar encontrar bloques v&#225;lidos. Si encuentran uno, reciben la recompensa: bitcoin nuevos m&#225;s las fees de las transacciones.</p>
+
+<p>&#191;Qu&#233; pasa si un minero intenta hacer trampa?</p>
+
+<p><strong>Incluir transacciones inv&#225;lidas:</strong> Los nodos de la red verifican cada transacci&#243;n. Si un bloque contiene una transacci&#243;n inv&#225;lida, los nodos lo rechazan. El minero gast&#243; electricidad y no recibe nada.</p>
+
+<p><strong>Cambiar las reglas (m&#225;s recompensa, diferente supply):</strong> Los nodos rechazan bloques que violan las reglas de consenso. El minero mina una cadena que nadie acepta.</p>
+
+<p><strong>Doble gasto:</strong> Requiere m&#225;s del 50% del hashrate de forma sostenida, cuesta miles de millones, y destruye la confianza en la red (y el valor del bitcoin que el minero tiene). Econ&#243;micamente irracional.</p>
+
+<p>En todos los casos, intentar hacer trampa cuesta dinero y no produce beneficio. Minar honestamente es la estrategia dominante.</p>
+
+<h2>Los nodos</h2>
+
+<p>Los nodos no reciben recompensas econ&#243;micas directas. &#191;Por qu&#233; alguien ejecutar&#237;a uno?</p>
+
+<ul>
+
+<li><strong>Usuarios:</strong> Para verificar sus propias transacciones sin confiar en terceros</li>
+
+<li><strong>Exchanges:</strong> Para asegurarse de que los dep&#243;sitos son reales</li>
+
+<li><strong>Empresas:</strong> Para participar en la red de forma soberana</li>
+
+<li><strong>Ideolog&#237;a:</strong> Contribuir a la descentralizaci&#243;n</li>
+
+</ul>
+
+<p>Los nodos son la &quot;constituci&#243;n&quot; de Bitcoin. Definen qu&#233; reglas se aplican. Un minero que produce bloques que los nodos no aceptan est&#225; minando en el vac&#237;o.</p>
+
+<p>La relaci&#243;n es simbi&#243;tica: los mineros necesitan que los nodos acepten sus bloques. Los nodos necesitan que los mineros produzcan bloques. Ninguno puede dominar al otro.</p>
+
+<h2>Los usuarios</h2>
+
+<p>Los usuarios tienen el poder &#250;ltimo: deciden qu&#233; software ejecutar.</p>
+
+<p>Si los mineros intentaran cambiar las reglas (por ejemplo, aumentar el supply), los usuarios podr&#237;an:</p>
+
+<ul>
+
+<li>Rechazar esos bloques ejecutando nodos con las reglas originales</li>
+
+<li>Cambiar el algoritmo de miner&#237;a, inutilizando el hardware de los mineros rebeldes</li>
+
+</ul>
+
+<p>Esto ocurri&#243; en la pr&#225;ctica durante las &quot;Blocksize Wars&quot; de 2017: los usuarios amenazaron con UASF (User Activated Soft Fork) para forzar SegWit, y los mineros cedieron.</p>
+
+<h2>Nash equilibrium</h2>
+
+<p>En teor&#237;a de juegos, un equilibrio de Nash es un estado donde ning&#250;n participante puede mejorar su situaci&#243;n cambiando unilateralmente su estrategia.</p>
+
+<p>Bitcoin est&#225; en un equilibrio de Nash:</p>
+
+<ul>
+
+<li>Los mineros no ganan nada haciendo trampa</li>
+
+<li>Los nodos no ganan nada aceptando bloques inv&#225;lidos</li>
+
+<li>Los usuarios no ganan nada usando software que no respeta las reglas</li>
+
+</ul>
+
+<p>Cada participante act&#250;a en su propio inter&#233;s, y el resultado agregado es un sistema que funciona honestamente.</p>
+
+<h2>El ataque del 51%</h2>
+
+<p>El ataque te&#243;rico m&#225;s discutido: &#191;qu&#233; pasa si alguien controla m&#225;s del 50% del hashrate?</p>
+
+<p>Podr&#237;a:</p>
+
+<ul>
+
+<li>Reorganizar bloques recientes (revertir sus propias transacciones)</li>
+
+<li>Censurar transacciones espec&#237;ficas (no incluirlas en bloques)</li>
+
+</ul>
+
+<p>No podr&#237;a:</p>
+
+<ul>
+
+<li>Robar bitcoin de direcciones que no controla</li>
+
+<li>Crear bitcoin de la nada</li>
+
+<li>Cambiar las reglas del protocolo</li>
+
+</ul>
+
+<p>Pero incluso lo que podr&#237;a hacer tiene costes:</p>
+
+<p><strong>Coste de adquisici&#243;n:</strong> Obtener el 51% del hashrate actual requerir&#237;a miles de millones en hardware y acceso a electricidad masiva.</p>
+
+<p><strong>Coste de operaci&#243;n:</strong> Mantener el ataque requiere gastar electricidad continuamente.</p>
+
+<p><strong>Coste de oportunidad:</strong> Ese mismo hardware y electricidad podr&#237;a usarse para minar honestamente y ganar dinero.</p>
+
+<p><strong>Destrucci&#243;n de valor:</strong> Un ataque exitoso destruir&#237;a la confianza en Bitcoin, hundiendo su precio. El atacante tendr&#237;a hardware caro para una moneda sin valor.</p>
+
+<p>La conclusi&#243;n: un ataque del 51% es te&#243;ricamente posible pero econ&#243;micamente irracional para cualquier actor que busque beneficio.</p>
+
+<h2>El efecto Lindy</h2>
+
+<p>El efecto Lindy es una heur&#237;stica: cuanto m&#225;s tiempo ha sobrevivido algo, m&#225;s probable es que siga sobreviviendo.</p>
+
+<p>Bitcoin existe desde 2009. Cada d&#237;a que pasa sin un fallo catastr&#243;fico es evidencia de que el dise&#241;o es robusto.</p>
+
+<p>Los cr&#237;ticos llevan 15+ a&#241;os prediciendo su colapso. No ha ocurrido. Esto no garantiza que nunca ocurrir&#225;, pero la probabilidad de supervivencia aumenta con el tiempo.</p>
+
+<div class="callout callout--info"><span class="callout__icon" aria-hidden="true">&#128161;</span><div class="callout__content"><div class="callout__title">Seguridad emergente</div><p class="callout__text">La seguridad de Bitcoin no viene de una autoridad que la garantice. Emerge de los incentivos. Es un sistema donde ser honesto es m&#225;s rentable que hacer trampa, para todos los participantes, todo el tiempo.</p></div></div>
+
+          <div class="ad-slot ad-content" id="ad-content-auto" aria-hidden="true"></div>
+
+          <nav class="page-nav" aria-label="Navegacion entre paginas">
+            <a href="/nivel-6/bitcoin-y-libertad.html" class="page-nav__item">
+              <span class="page-nav__label">&larr; Anterior</span>
+              <span class="page-nav__title">Bitcoin y libertad financiera</span>
+            </a>
+            <a href="/nivel-6/criticas-a-bitcoin.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente &rarr;</span>
+              <span class="page-nav__title">Las cr&#237;ticas a Bitcoin y las respuestas</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

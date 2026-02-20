@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Aprende on-chain vs lightning en Bitcoin con explicación clara, puntos clave y pasos prácticos." />
-  <title>On-chain vs Lightning — Base de Conocimiento | aprendebtc.com</title>
+  <meta name="description" content="Diferencia entre transacciones on-chain y Lightning Network: velocidad, fees, confirmaciones, casos de uso. Cu&#225;ndo usar cada una." />
+  <title>On-chain vs Lightning &#8212; Base de Conocimiento | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="../css/main.css" />
@@ -14,132 +14,199 @@
   <div data-include="header"></div>
 
   <div class="page-layout">
-    <aside class="page-layout__sidebar" aria-label="Navegación de la Base de Conocimiento">
+    <aside class="page-layout__sidebar" aria-label="Navegacion de la base">
       <nav class="sidebar">
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Base de Conocimiento</div>
-          <a href="index.html" class="sidebar__link">Índice de la base</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Bitcoin: los fundamentos</div>
-          <a href="que-es-bitcoin.html" class="sidebar__link">¿Qué es Bitcoin?</a>
-          <a href="como-funciona-bitcoin.html" class="sidebar__link">¿Cómo funciona Bitcoin?</a>
-          <a href="que-es-blockchain.html" class="sidebar__link">¿Qué es la blockchain?</a>
-          <a href="que-es-la-mineria.html" class="sidebar__link">¿Qué es la minería?</a>
-          <a href="los-21-millones.html" class="sidebar__link">Los 21 millones y la oferta fija</a>
-          <a href="que-es-un-satoshi.html" class="sidebar__link">¿Qué es un satoshi?</a>
-          <a href="historia-bitcoin.html" class="sidebar__link">Historia de Bitcoin</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Dinero y economía</div>
-          <a href="problema-del-dinero-tradicional.html" class="sidebar__link">El problema del dinero tradicional</a>
-          <a href="bitcoin-vs-dinero-tradicional.html" class="sidebar__link">Bitcoin vs dinero tradicional</a>
-          <a href="historia-del-dinero.html" class="sidebar__link">Historia del dinero</a>
-          <a href="inflacion-y-bitcoin.html" class="sidebar__link">Inflación y Bitcoin</a>
-          <a href="austrian-economics.html" class="sidebar__link">Economía Austríaca y Bitcoin</a>
-          <a href="bitcoin-vs-oro.html" class="sidebar__link">Bitcoin vs Oro</a>
-          <a href="bitcoin-reserva-de-valor.html" class="sidebar__link">Bitcoin como reserva de valor</a>
-          <a href="bitcoin-vs-altcoins.html" class="sidebar__link">Bitcoin vs altcoins</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Compra: conceptos</div>
-          <a href="exchange-centralizado-cex.html" class="sidebar__link">Exchange centralizado (CEX)</a>
-          <a href="exchange-descentralizado-dex.html" class="sidebar__link">Exchange descentralizado (DEX)</a>
-          <a href="kyc-vs-no-kyc.html" class="sidebar__link">KYC y no-KYC: qué significan y por qué importan</a>
-          <a href="dca-compras-periodicas.html" class="sidebar__link">DCA: la estrategia de compras periódicas</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Wallets y custodia</div>
-          <a href="tipos-de-wallet.html" class="sidebar__link">Tipos de wallet: custodia, temperatura y formato</a>
-          <a href="que-es-seed-phrase.html" class="sidebar__link">¿Qué es la frase semilla (seed phrase)?</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Red y transacciones</div>
-          <a href="on-chain-vs-lightning.html" class="sidebar__link sidebar__link--active">On-chain vs Lightning</a>
-          <a href="que-es-una-direccion.html" class="sidebar__link">¿Qué es una dirección Bitcoin?</a>
-          <a href="que-es-una-confirmacion.html" class="sidebar__link">¿Qué es una confirmación?</a>
-          <a href="que-son-las-fees.html" class="sidebar__link">¿Qué son las comisiones (fees)?</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Seguridad</div>
-          <a href="seguridad-basica.html" class="sidebar__link">Seguridad básica: las reglas de oro</a>
-          <a href="estafas-comunes.html" class="sidebar__link">Estafas comunes en Bitcoin</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Ruta guiada</div>
-          <a href="../nivel-1/" class="sidebar__link">Nivel 1 — Nocoinero Curioso</a>
-        </div>
         <div class="sidebar__ad-wrap">
-          <div class="ad-slot ad-sidebar" id="ad-sidebar-base" aria-hidden="true"></div>
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-auto" aria-hidden="true"></div>
         </div>
       </nav>
     </aside>
 
     <main class="page-layout__content" id="main-content">
       <div class="content-inner">
-        <nav class="breadcrumb" aria-label="Ruta de navegación">
-          <a href="../" class="breadcrumb__item">Inicio</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
-          <a href="./index.html" class="breadcrumb__item">Base de Conocimiento</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
-          <span class="breadcrumb__current">On-chain vs Lightning</span>
+        <nav class="breadcrumb" aria-label="Ruta de navegacion">
+          <a href="/" class="breadcrumb__item">Inicio</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><a href="/base/" class="breadcrumb__item">Base de Conocimiento</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><span class="breadcrumb__current">On-chain vs Lightning</span>
         </nav>
 
         <article class="article">
           <div class="nivel-badge nivel-badge--base article__badge">Base</div>
           <h1>On-chain vs Lightning</h1>
-          <p class="article__subtitle">Guía práctica sobre on-chain vs lightning dentro de la Base de Conocimiento de aprendeBTC.</p>
+          <p class="article__subtitle">Dos formas de mover bitcoin. Una es la blockchain directa, la otra es una capa encima. Ambas son Bitcoin.</p>
 
-          <h2>Idea clave</h2>
-          <p>Este tema pertenece al bloque <strong>Red y transacciones</strong> y sirve para construir criterio antes de tomar decisiones en compra, custodia o uso diario de Bitcoin.</p>
-          <p>En aprendeBTC el objetivo es que entiendas el concepto, identifiques sus límites y lo conectes con acciones concretas en los niveles de aprendizaje.</p>
+<h2>Dos capas, un bitcoin</h2>
 
-          <h2>Qué debes recordar</h2>
-          <ul>
-            <li>Comprender este concepto mejora tus decisiones técnicas y económicas.</li>
-            <li>La teoría sin práctica crea errores; la práctica sin teoría crea riesgos.</li>
-            <li>Este contenido se debe leer junto a páginas cercanas de la misma sección.</li>
-            <li>Aplicar un proceso repetible reduce fallos por impulso.</li>
-            <li>Si algo no está claro, vuelve al Índice y conecta conceptos.</li>
-          </ul>
+<p>Bitcoin puede moverse de dos formas principales:</p>
 
-          <div class="callout callout--info">
-            <span class="callout__icon" aria-hidden="true">💡</span>
-            <div class="callout__content">
-              <div class="callout__title">Punto de control</div>
-              <p class="callout__text">Si puedes explicar este tema con tus palabras y relacionarlo con una decisión real, estás listo para avanzar.</p>
-            </div>
-          </div>
+<p><strong>On-chain:</strong> Transacciones registradas directamente en la blockchain de Bitcoin.</p>
 
-          <h2>Errores comunes</h2>
-          <ul>
-            <li>Actuar con prisa sin validar pasos ni contexto.</li>
-            <li>Confiar en atajos o en fuentes sin reputación.</li>
-            <li>No definir un procedimiento personal antes de mover fondos.</li>
-          </ul>
+<p><strong>Lightning:</strong> Transacciones en una segunda capa construida sobre Bitcoin.</p>
 
-          <h2>Cómo aplicarlo en la práctica</h2>
-          <p>Define un flujo operativo simple: herramienta, validación, comprobación final y plan de contingencia. Esa estructura evita la mayoría de errores tempranos.</p>
-          <p>Después enlaza con la siguiente página de la ruta para mantener continuidad y profundidad de aprendizaje.</p>
+<p>Ambas mueven los mismos bitcoin. La diferencia est&#225; en c&#243;mo, cu&#225;nto cuesta, y para qu&#233; sirve cada una.</p>
 
-          <div class="callout callout--success">
-            <span class="callout__icon" aria-hidden="true">📚</span>
-            <div class="callout__content">
-              <div class="callout__title">Profundiza en esta sección</div>
-              <p class="callout__text"><a href="que-es-seed-phrase.html">¿Qué es la frase semilla (seed phrase)?</a> · <a href="que-es-una-direccion.html">¿Qué es una dirección Bitcoin?</a> · <a href="index.html">Índice de la base</a></p>
-            </div>
-          </div>
+<h2>Transacciones on-chain</h2>
 
-          <div class="ad-slot ad-content" id="ad-content-base" aria-hidden="true"></div>
+<h3>Caracter&#237;sticas</h3>
 
-          <nav class="page-nav" aria-label="Navegación entre páginas">
-            <a href="que-es-seed-phrase.html" class="page-nav__item">
-              <span class="page-nav__label">← Anterior</span>
-              <span class="page-nav__title">¿Qué es la frase semilla (seed phrase)?</span>
+<ul>
+
+<li>Registradas permanentemente en la blockchain</li>
+
+<li>Confirmaci&#243;n inicial en ~10 minutos (1 bloque)</li>
+
+<li>Fees variables seg&#250;n congesti&#243;n de la red</li>
+
+<li>Ideales para montos grandes y almacenamiento</li>
+
+</ul>
+
+<h3>Proceso</h3>
+
+<ol>
+
+<li>1. Creas una transacci&#243;n</li>
+
+<li>2. La env&#237;as a la red</li>
+
+<li>3. Espera en la mempool hasta que un minero la incluye en un bloque</li>
+
+<li>4. Cada bloque adicional es una confirmaci&#243;n m&#225;s</li>
+
+<li>5. Despu&#233;s de 3-6 confirmaciones, se considera irreversible</li>
+
+</ol>
+
+<h3>Fees</h3>
+
+<p>Las fees on-chain se miden en satoshis por byte virtual (sat/vB). Var&#237;an seg&#250;n la demanda:</p>
+
+<ul>
+
+<li>Mempool vac&#237;a: 1-5 sat/vB (pocos c&#233;ntimos)</li>
+
+<li>Congesti&#243;n normal: 10-50 sat/vB (unos euros)</li>
+
+<li>Alta demanda: 100+ sat/vB (puede ser decenas de euros)</li>
+
+</ul>
+
+<p>Para una transacci&#243;n t&#237;pica (~140 vBytes), a 20 sat/vB ser&#237;an ~2.800 sats de fee.</p>
+
+<h2>Lightning Network</h2>
+
+<h3>Caracter&#237;sticas</h3>
+
+<ul>
+
+<li>Transacciones fuera de la blockchain (off-chain)</li>
+
+<li>Confirmaci&#243;n instant&#225;nea (milisegundos)</li>
+
+<li>Fees de fracciones de c&#233;ntimo</li>
+
+<li>Ideal para pagos peque&#241;os y frecuentes</li>
+
+</ul>
+
+<h3>Proceso</h3>
+
+<ol>
+
+<li>1. Abres un canal con otro nodo (esto s&#237; es on-chain)</li>
+
+<li>2. Haces pagos instant&#225;neos dentro del canal o a trav&#233;s de la red</li>
+
+<li>3. Puedes hacer miles de transacciones sin tocar la blockchain</li>
+
+<li>4. Cuando quieras, cierras el canal (otra transacci&#243;n on-chain)</li>
+
+</ol>
+
+<h3>Fees</h3>
+
+<p>Las fees de Lightning son m&#237;nimas:</p>
+
+<ul>
+
+<li>T&#237;picamente 0-10 sats por pago</li>
+
+<li>Proporcionales al monto (mil&#233;simas de porcentaje)</li>
+
+<li>Independientes de la congesti&#243;n on-chain</li>
+
+</ul>
+
+<h2>Comparativa</h2>
+
+<p>| Aspecto | On-chain | Lightning | |---------|----------|-----------| | Velocidad | ~10 min (1 conf) | Instant&#225;neo | | Fees | Variables, pueden ser altas | Casi cero | | Monto ideal | Grande | Peque&#241;o | | Confirmaciones | Acumulativas | Instant&#225;nea | | Privacidad | P&#250;blico en blockchain | M&#225;s privado | | Complejidad | Simple | M&#225;s compleja |</p>
+
+<h2>Cu&#225;ndo usar cada una</h2>
+
+<h3>Usa on-chain para:</h3>
+
+<ul>
+
+<li>Recibir bitcoin de un exchange</li>
+
+<li>Almacenamiento a largo plazo (cold storage)</li>
+
+<li>Montos significativos donde la seguridad m&#225;xima importa</li>
+
+<li>Cuando el receptor no tiene Lightning</li>
+
+</ul>
+
+<h3>Usa Lightning para:</h3>
+
+<ul>
+
+<li>Compras peque&#241;as (caf&#233;, servicios online)</li>
+
+<li>Pagos frecuentes</li>
+
+<li>Zaps en Nostr</li>
+
+<li>Cuando necesitas confirmaci&#243;n instant&#225;nea</li>
+
+<li>Remesas peque&#241;as</li>
+
+</ul>
+
+<h2>La analog&#237;a</h2>
+
+<p>On-chain es como una transferencia bancaria: segura, definitiva, pero tarda y tiene comisiones fijas que no tienen sentido para cantidades peque&#241;as.</p>
+
+<p>Lightning es como pagar con tarjeta contactless: instant&#225;neo, c&#243;modo para el d&#237;a a d&#237;a, ideal para montos peque&#241;os.</p>
+
+<h2>No son excluyentes</h2>
+
+<p>La mayor&#237;a de usuarios usan ambas:</p>
+
+<ul>
+
+<li>Compran on-chain en exchanges</li>
+
+<li>Mueven a cold storage (on-chain)</li>
+
+<li>Pasan algo a una wallet Lightning para uso diario</li>
+
+<li>Usan Lightning para pagos frecuentes</li>
+
+</ul>
+
+<p>Bitcoin fluye entre las dos capas seg&#250;n la necesidad.</p>
+
+<p>&gt; ENLACE BASE: Qu&#233; son las fees &#8594; <a href="/base/que-son-las-fees.html">/base/que-son-las-fees.html</a></p>
+
+          <div class="ad-slot ad-content" id="ad-content-auto" aria-hidden="true"></div>
+
+          <nav class="page-nav" aria-label="Navegacion entre paginas">
+            <a href="/base/que-es-seed-phrase.html" class="page-nav__item">
+              <span class="page-nav__label">&larr; Anterior</span>
+              <span class="page-nav__title">&#191;Qu&#233; es la frase semilla?</span>
             </a>
-            <a href="que-es-una-direccion.html" class="page-nav__item page-nav__item--next">
-              <span class="page-nav__label">Siguiente →</span>
-              <span class="page-nav__title">¿Qué es una dirección Bitcoin?</span>
+            <a href="/base/que-es-una-direccion.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente &rarr;</span>
+              <span class="page-nav__title">&#191;Qu&#233; es una direcci&#243;n Bitcoin?</span>
             </a>
           </nav>
         </article>

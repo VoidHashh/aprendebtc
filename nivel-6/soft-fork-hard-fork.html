@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Diferencia entre soft fork y hard fork en Bitcoin. Por qu&#233; Bitcoin prefiere soft forks, mecanismos de activaci&#243;n, y el caso Bitcoin Cash." />
+  <title>Soft fork vs Hard fork &#8212; Nivel 6 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegacion del nivel 6">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-auto" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegacion">
+          <a href="/" class="breadcrumb__item">Inicio</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><a href="/nivel-6/" class="breadcrumb__item">Nivel 6</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><span class="breadcrumb__current">Soft fork vs Hard fork</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--6 article__badge">Nivel 6</div>
+          <h1>Soft fork vs Hard fork</h1>
+          <p class="article__subtitle">Dos formas de cambiar las reglas del protocolo. Una mantiene la red unida, la otra la divide.</p>
+
+<h2>Cambios de consenso</h2>
+
+<p>Las reglas de consenso son las que determinan qu&#233; bloques y transacciones son v&#225;lidos. Cambiarlas es el tipo de modificaci&#243;n m&#225;s delicada en Bitcoin.</p>
+
+<p>Hay dos formas de hacer cambios de consenso: soft forks y hard forks.</p>
+
+<h2>Soft fork: endurecer las reglas</h2>
+
+<p>Un soft fork hace las reglas m&#225;s restrictivas. Cosas que antes eran v&#225;lidas dejan de serlo, pero todo lo que era inv&#225;lido sigue siendo inv&#225;lido.</p>
+
+<p><strong>Propiedad clave:</strong> Los nodos que no actualicen siguen aceptando los bloques nuevos (porque son un subconjunto de lo que antes era v&#225;lido).</p>
+
+<p><strong>Ejemplo: SegWit</strong></p>
+
+<p>Antes de SegWit, cualquier output con formato <code>OP_0 &lt;datos&gt;</code> era gastable por cualquiera (era un &quot;anyone-can-spend&quot; t&#233;cnicamente).</p>
+
+<p>SegWit redefini&#243; estos outputs: ahora solo son gastables si se cumplen las reglas de witness.</p>
+
+<p>Un nodo viejo ve una transacci&#243;n SegWit y piensa &quot;este output extra&#241;o ha sido gastado, ok&quot;. No sabe que hay reglas adicionales que un nodo nuevo s&#237; verifica.</p>
+
+<p>El bloque es v&#225;lido para nodos viejos y nuevos, pero por razones diferentes.</p>
+
+<h2>Hard fork: relajar o cambiar las reglas</h2>
+
+<p>Un hard fork hace algo que antes era inv&#225;lido ahora v&#225;lido, o cambia las reglas de forma incompatible.</p>
+
+<p><strong>Propiedad clave:</strong> Los nodos que no actualicen rechazar&#225;n los bloques nuevos. La cadena se divide.</p>
+
+<p><strong>Ejemplo: Bitcoin Cash (2017)</strong></p>
+
+<p>Bitcoin ten&#237;a un l&#237;mite de bloque de 1 MB. Bitcoin Cash aument&#243; ese l&#237;mite a 8 MB.</p>
+
+<p>Un bloque de 2 MB es inv&#225;lido seg&#250;n las reglas de Bitcoin, pero v&#225;lido seg&#250;n Bitcoin Cash. Los nodos de Bitcoin rechazan los bloques de Bitcoin Cash y viceversa.</p>
+
+<p>Resultado: dos cadenas separadas, dos monedas diferentes, dos redes.</p>
+
+<h2>Por qu&#233; Bitcoin evita hard forks</h2>
+
+<p>Un hard fork divide la red:</p>
+
+<ul>
+
+<li>Los usuarios tienen que elegir qu&#233; cadena seguir</li>
+
+<li>Si no hay consenso claro, hay dos monedas compitiendo</li>
+
+<li>El valor se fragmenta</li>
+
+<li>Hay confusi&#243;n y riesgo para usuarios</li>
+
+</ul>
+
+<p>Los soft forks son preferidos porque:</p>
+
+<ul>
+
+<li>Son retrocompatibles: nodos viejos siguen funcionando</li>
+
+<li>No dividen la red involuntariamente</li>
+
+<li>Los usuarios que no actualizan pueden seguir participando (con funcionalidad reducida)</li>
+
+</ul>
+
+<h2>Mecanismos de activaci&#243;n de soft forks</h2>
+
+<h3>BIP 9: Se&#241;alizaci&#243;n de mineros</h3>
+
+<p>Los mineros se&#241;alan en sus bloques si apoyan la actualizaci&#243;n. Si un umbral (t&#237;picamente 95%) se alcanza durante un per&#237;odo, la actualizaci&#243;n se activa.</p>
+
+<p><strong>Problema:</strong> Da poder de veto a los mineros. En 2016-2017, algunos mineros bloquearon SegWit por razones pol&#237;ticas.</p>
+
+<h3>BIP 8: Activaci&#243;n con opci&#243;n de forzado</h3>
+
+<p>Similar a BIP 9, pero con una fecha l&#237;mite. Si los mineros no activan antes de la fecha, los nodos pueden activar de todos modos.</p>
+
+<p>Esto remueve el poder de veto de los mineros.</p>
+
+<h3>UASF (User Activated Soft Fork)</h3>
+
+<p>Los usuarios declaran que a partir de cierta fecha, rechazar&#225;n bloques que no sigan las nuevas reglas. Si suficientes usuarios (nodos, exchanges, empresas) lo hacen, los mineros se ven forzados a cumplir o minar bloques que nadie acepta.</p>
+
+<p>UASF fue la amenaza que finalmente activ&#243; SegWit en 2017.</p>
+
+<h2>Speedy Trial</h2>
+
+<p>Para Taproot se us&#243; &quot;Speedy Trial&quot;: un per&#237;odo corto de se&#241;alizaci&#243;n de mineros. Si se alcanzaba el umbral, se activaba. Si no, se pod&#237;a intentar otra cosa.</p>
+
+<p>El umbral se alcanz&#243; f&#225;cilmente y Taproot se activ&#243; sin drama en noviembre 2021.</p>
+
+<h2>La resistencia al cambio como feature</h2>
+
+<p>Que sea dif&#237;cil cambiar Bitcoin es intencional.</p>
+
+<p>Si fuera f&#225;cil cambiar las reglas, un grupo con poder podr&#237;a modificar la pol&#237;tica monetaria, censurar transacciones, o cambiar propiedades fundamentales.</p>
+
+<p>La dificultad de los cambios de consenso protege a los usuarios de cambios que no quieren.</p>
+
+<div class="callout callout--info"><span class="callout__icon" aria-hidden="true">&#128161;</span><div class="callout__content"><div class="callout__title">Conservadurismo por dise&#241;o</div><p class="callout__text">La resistencia de Bitcoin a hard forks es una de sus propiedades m&#225;s valiosas. Cambiar las reglas del juego es extremadamente dif&#237;cil. Esto protege a los usuarios de cambios arbitrarios y mantiene las promesas del protocolo.</p></div></div>
+
+<h2>Las excepciones necesarias</h2>
+
+<p>Ocasionalmente, cambios son necesarios:</p>
+
+<ul>
+
+<li>Corregir bugs de seguridad</li>
+
+<li>Mejorar la escalabilidad</li>
+
+<li>A&#241;adir funcionalidades importantes</li>
+
+</ul>
+
+<p>El proceso de BIPs y soft forks permite hacer estos cambios de forma que minimiza la disrupci&#243;n y maximiza el consenso.</p>
+
+<p>Bitcoin ha evolucionado significativamente desde 2009 sin necesidad de hard forks. SegWit, Taproot, y docenas de mejoras menores se han implementado manteniendo la red unida.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-auto" aria-hidden="true"></div>
+
+          <nav class="page-nav" aria-label="Navegacion entre paginas">
+            <a href="/nivel-6/que-es-un-bip.html" class="page-nav__item">
+              <span class="page-nav__label">&larr; Anterior</span>
+              <span class="page-nav__title">&#191;Qu&#233; es un BIP?</span>
+            </a>
+            <a href="/nivel-6/contribuir-sin-codigo.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente &rarr;</span>
+              <span class="page-nav__title">Contribuir a Bitcoin sin saber programar</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Aprende qué es una confirmación en Bitcoin con explicación clara, puntos clave y pasos prácticos." />
-  <title>¿Qué es una confirmación? — Base de Conocimiento | aprendebtc.com</title>
+  <meta name="description" content="Confirmaciones en Bitcoin explicadas: qu&#233; significa cada confirmaci&#243;n, cu&#225;ntas necesitas seg&#250;n el monto, y por qu&#233; m&#225;s confirmaciones = m&#225;s seguridad." />
+  <title>&#191;Qu&#233; es una confirmaci&#243;n? &#8212; Base de Conocimiento | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="../css/main.css" />
@@ -14,132 +14,169 @@
   <div data-include="header"></div>
 
   <div class="page-layout">
-    <aside class="page-layout__sidebar" aria-label="Navegación de la Base de Conocimiento">
+    <aside class="page-layout__sidebar" aria-label="Navegacion de la base">
       <nav class="sidebar">
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Base de Conocimiento</div>
-          <a href="index.html" class="sidebar__link">Índice de la base</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Bitcoin: los fundamentos</div>
-          <a href="que-es-bitcoin.html" class="sidebar__link">¿Qué es Bitcoin?</a>
-          <a href="como-funciona-bitcoin.html" class="sidebar__link">¿Cómo funciona Bitcoin?</a>
-          <a href="que-es-blockchain.html" class="sidebar__link">¿Qué es la blockchain?</a>
-          <a href="que-es-la-mineria.html" class="sidebar__link">¿Qué es la minería?</a>
-          <a href="los-21-millones.html" class="sidebar__link">Los 21 millones y la oferta fija</a>
-          <a href="que-es-un-satoshi.html" class="sidebar__link">¿Qué es un satoshi?</a>
-          <a href="historia-bitcoin.html" class="sidebar__link">Historia de Bitcoin</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Dinero y economía</div>
-          <a href="problema-del-dinero-tradicional.html" class="sidebar__link">El problema del dinero tradicional</a>
-          <a href="bitcoin-vs-dinero-tradicional.html" class="sidebar__link">Bitcoin vs dinero tradicional</a>
-          <a href="historia-del-dinero.html" class="sidebar__link">Historia del dinero</a>
-          <a href="inflacion-y-bitcoin.html" class="sidebar__link">Inflación y Bitcoin</a>
-          <a href="austrian-economics.html" class="sidebar__link">Economía Austríaca y Bitcoin</a>
-          <a href="bitcoin-vs-oro.html" class="sidebar__link">Bitcoin vs Oro</a>
-          <a href="bitcoin-reserva-de-valor.html" class="sidebar__link">Bitcoin como reserva de valor</a>
-          <a href="bitcoin-vs-altcoins.html" class="sidebar__link">Bitcoin vs altcoins</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Compra: conceptos</div>
-          <a href="exchange-centralizado-cex.html" class="sidebar__link">Exchange centralizado (CEX)</a>
-          <a href="exchange-descentralizado-dex.html" class="sidebar__link">Exchange descentralizado (DEX)</a>
-          <a href="kyc-vs-no-kyc.html" class="sidebar__link">KYC y no-KYC: qué significan y por qué importan</a>
-          <a href="dca-compras-periodicas.html" class="sidebar__link">DCA: la estrategia de compras periódicas</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Wallets y custodia</div>
-          <a href="tipos-de-wallet.html" class="sidebar__link">Tipos de wallet: custodia, temperatura y formato</a>
-          <a href="que-es-seed-phrase.html" class="sidebar__link">¿Qué es la frase semilla (seed phrase)?</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Red y transacciones</div>
-          <a href="on-chain-vs-lightning.html" class="sidebar__link">On-chain vs Lightning</a>
-          <a href="que-es-una-direccion.html" class="sidebar__link">¿Qué es una dirección Bitcoin?</a>
-          <a href="que-es-una-confirmacion.html" class="sidebar__link sidebar__link--active">¿Qué es una confirmación?</a>
-          <a href="que-son-las-fees.html" class="sidebar__link">¿Qué son las comisiones (fees)?</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Seguridad</div>
-          <a href="seguridad-basica.html" class="sidebar__link">Seguridad básica: las reglas de oro</a>
-          <a href="estafas-comunes.html" class="sidebar__link">Estafas comunes en Bitcoin</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Ruta guiada</div>
-          <a href="../nivel-1/" class="sidebar__link">Nivel 1 — Nocoinero Curioso</a>
-        </div>
         <div class="sidebar__ad-wrap">
-          <div class="ad-slot ad-sidebar" id="ad-sidebar-base" aria-hidden="true"></div>
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-auto" aria-hidden="true"></div>
         </div>
       </nav>
     </aside>
 
     <main class="page-layout__content" id="main-content">
       <div class="content-inner">
-        <nav class="breadcrumb" aria-label="Ruta de navegación">
-          <a href="../" class="breadcrumb__item">Inicio</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
-          <a href="./index.html" class="breadcrumb__item">Base de Conocimiento</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
-          <span class="breadcrumb__current">¿Qué es una confirmación?</span>
+        <nav class="breadcrumb" aria-label="Ruta de navegacion">
+          <a href="/" class="breadcrumb__item">Inicio</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><a href="/base/" class="breadcrumb__item">Base de Conocimiento</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><span class="breadcrumb__current">&#191;Qu&#233; es una confirmaci&#243;n?</span>
         </nav>
 
         <article class="article">
           <div class="nivel-badge nivel-badge--base article__badge">Base</div>
-          <h1>¿Qué es una confirmación?</h1>
-          <p class="article__subtitle">Guía práctica sobre qué es una confirmación dentro de la Base de Conocimiento de aprendeBTC.</p>
+          <h1>&#191;Qu&#233; es una confirmaci&#243;n?</h1>
+          <p class="article__subtitle">Cada bloque que se a&#241;ade encima de tu transacci&#243;n hace m&#225;s dif&#237;cil revertirla. M&#225;s confirmaciones = m&#225;s seguridad.</p>
 
-          <h2>Idea clave</h2>
-          <p>Este tema pertenece al bloque <strong>Red y transacciones</strong> y sirve para construir criterio antes de tomar decisiones en compra, custodia o uso diario de Bitcoin.</p>
-          <p>En aprendeBTC el objetivo es que entiendas el concepto, identifiques sus límites y lo conectes con acciones concretas en los niveles de aprendizaje.</p>
+<h2>Definici&#243;n</h2>
 
-          <h2>Qué debes recordar</h2>
-          <ul>
-            <li>Comprender este concepto mejora tus decisiones técnicas y económicas.</li>
-            <li>La teoría sin práctica crea errores; la práctica sin teoría crea riesgos.</li>
-            <li>Este contenido se debe leer junto a páginas cercanas de la misma sección.</li>
-            <li>Aplicar un proceso repetible reduce fallos por impulso.</li>
-            <li>Si algo no está claro, vuelve al Índice y conecta conceptos.</li>
-          </ul>
+<p>Una confirmaci&#243;n ocurre cuando tu transacci&#243;n se incluye en un bloque que se a&#241;ade a la blockchain. Cada bloque adicional que se a&#241;ade encima cuenta como una confirmaci&#243;n m&#225;s.</p>
 
-          <div class="callout callout--info">
-            <span class="callout__icon" aria-hidden="true">💡</span>
-            <div class="callout__content">
-              <div class="callout__title">Punto de control</div>
-              <p class="callout__text">Si puedes explicar este tema con tus palabras y relacionarlo con una decisión real, estás listo para avanzar.</p>
-            </div>
-          </div>
+<ul>
 
-          <h2>Errores comunes</h2>
-          <ul>
-            <li>Actuar con prisa sin validar pasos ni contexto.</li>
-            <li>Confiar en atajos o en fuentes sin reputación.</li>
-            <li>No definir un procedimiento personal antes de mover fondos.</li>
-          </ul>
+<li>0 confirmaciones: la transacci&#243;n est&#225; en la mempool, pendiente</li>
 
-          <h2>Cómo aplicarlo en la práctica</h2>
-          <p>Define un flujo operativo simple: herramienta, validación, comprobación final y plan de contingencia. Esa estructura evita la mayoría de errores tempranos.</p>
-          <p>Después enlaza con la siguiente página de la ruta para mantener continuidad y profundidad de aprendizaje.</p>
+<li>1 confirmaci&#243;n: incluida en un bloque</li>
 
-          <div class="callout callout--success">
-            <span class="callout__icon" aria-hidden="true">📚</span>
-            <div class="callout__content">
-              <div class="callout__title">Profundiza en esta sección</div>
-              <p class="callout__text"><a href="que-es-una-direccion.html">¿Qué es una dirección Bitcoin?</a> · <a href="que-son-las-fees.html">¿Qué son las comisiones (fees)?</a> · <a href="index.html">Índice de la base</a></p>
-            </div>
-          </div>
+<li>2 confirmaciones: hay un bloque encima del que contiene tu transacci&#243;n</li>
 
-          <div class="ad-slot ad-content" id="ad-content-base" aria-hidden="true"></div>
+<li>Y as&#237; sucesivamente...</li>
 
-          <nav class="page-nav" aria-label="Navegación entre páginas">
-            <a href="que-es-una-direccion.html" class="page-nav__item">
-              <span class="page-nav__label">← Anterior</span>
-              <span class="page-nav__title">¿Qué es una dirección Bitcoin?</span>
+</ul>
+
+<h2>Por qu&#233; importan</h2>
+
+<p>Cada confirmaci&#243;n hace exponencialmente m&#225;s dif&#237;cil revertir tu transacci&#243;n.</p>
+
+<p>Para modificar una transacci&#243;n con 1 confirmaci&#243;n, un atacante necesitar&#237;a:</p>
+
+<ul>
+
+<li>Recalcular ese bloque</li>
+
+<li>Y minar m&#225;s r&#225;pido que el resto de la red para que su cadena sea la m&#225;s larga</li>
+
+</ul>
+
+<p>Para modificar una transacci&#243;n con 6 confirmaciones, necesitar&#237;a:</p>
+
+<ul>
+
+<li>Recalcular 6 bloques</li>
+
+<li>Mantener m&#225;s del 50% del hashrate durante ~1 hora</li>
+
+<li>Lo que es pr&#225;cticamente imposible y econ&#243;micamente irracional</li>
+
+</ul>
+
+<h2>Cu&#225;ntas confirmaciones necesitas</h2>
+
+<p>Depende del monto y el contexto:</p>
+
+<h3>0 confirmaciones</h3>
+
+<ul>
+
+<li>Riesgo: la transacci&#243;n podr&#237;a no confirmarse nunca o ser reemplazada</li>
+
+<li>Aceptable para: nada importante (quiz&#225;s micropagos entre conocidos)</li>
+
+</ul>
+
+<h3>1 confirmaci&#243;n</h3>
+
+<ul>
+
+<li>La transacci&#243;n est&#225; en la blockchain</li>
+
+<li>Aceptable para: montos peque&#241;os (~100&#8364; o menos)</li>
+
+<li>Tiempo: ~10 minutos</li>
+
+</ul>
+
+<h3>3 confirmaciones</h3>
+
+<ul>
+
+<li>Seguridad razonable</li>
+
+<li>Aceptable para: montos moderados</li>
+
+<li>Tiempo: ~30 minutos</li>
+
+</ul>
+
+<h3>6 confirmaciones</h3>
+
+<ul>
+
+<li>El est&#225;ndar hist&#243;rico de &quot;irreversible&quot;</li>
+
+<li>Recomendado para: montos grandes</li>
+
+<li>Tiempo: ~1 hora</li>
+
+</ul>
+
+<h3>M&#225;s de 6</h3>
+
+<ul>
+
+<li>Para montos muy grandes o m&#225;xima paranoia</li>
+
+<li>Algunos exchanges esperan 3-6 para dep&#243;sitos</li>
+
+<li>El n&#250;mero exacto depende de tu tolerancia al riesgo</li>
+
+</ul>
+
+<h2>La regla pr&#225;ctica</h2>
+
+<p>| Monto | Confirmaciones recomendadas | Tiempo aprox. | |-------|----------------------------|---------------| | &lt; 50&#8364; | 1 | 10 min | | 50-500&#8364; | 2-3 | 20-30 min | | 500-5000&#8364; | 3-4 | 30-40 min | | &gt; 5000&#8364; | 6+ | 1+ hora |</p>
+
+<p>Estos son orientativos. Ajusta seg&#250;n tu situaci&#243;n y tolerancia al riesgo.</p>
+
+<h2>El caso de 0 confirmaciones</h2>
+
+<p>Las transacciones sin confirmar (0 conf) son riesgosas porque:</p>
+
+<ul>
+
+<li>No est&#225;n en la blockchain todav&#237;a</li>
+
+<li>Podr&#237;an no ser minadas nunca (fee muy baja)</li>
+
+<li>El emisor podr&#237;a intentar un doble gasto (enviar los mismos fondos a otra direcci&#243;n con fee m&#225;s alta)</li>
+
+</ul>
+
+<p>Algunos comercios aceptan 0 conf para compras peque&#241;as donde el riesgo es aceptable, especialmente si la transacci&#243;n tiene fee adecuada y se&#241;ala RBF desactivado.</p>
+
+<h2>Lightning: confirmaci&#243;n instant&#225;nea</h2>
+
+<p>En Lightning Network, las transacciones se confirman en milisegundos. No hay que esperar bloques porque la seguridad viene de los contratos criptogr&#225;ficos de los canales, no del proof of work.</p>
+
+<p>Esta es una de las principales ventajas de Lightning para pagos del d&#237;a a d&#237;a.</p>
+
+<p>&gt; ENLACE BASE: On-chain vs Lightning &#8594; <a href="/base/on-chain-vs-lightning.html">/base/on-chain-vs-lightning.html</a></p>
+
+          <div class="ad-slot ad-content" id="ad-content-auto" aria-hidden="true"></div>
+
+          <nav class="page-nav" aria-label="Navegacion entre paginas">
+            <a href="/base/que-es-una-direccion.html" class="page-nav__item">
+              <span class="page-nav__label">&larr; Anterior</span>
+              <span class="page-nav__title">&#191;Qu&#233; es una direcci&#243;n Bitcoin?</span>
             </a>
-            <a href="que-son-las-fees.html" class="page-nav__item page-nav__item--next">
-              <span class="page-nav__label">Siguiente →</span>
-              <span class="page-nav__title">¿Qué son las comisiones (fees)?</span>
+            <a href="/base/que-son-las-fees.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente &rarr;</span>
+              <span class="page-nav__title">&#191;Qu&#233; son las comisiones (fees)?</span>
             </a>
           </nav>
         </article>

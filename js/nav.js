@@ -115,7 +115,22 @@
         { href: '/nivel-5/protocolo-p2p.html', text: 'Protocolo P2P' }
       ]
     },
-    { title: 'Nivel 6 - Satoshi', index: '/nivel-6/', pages: [] }
+    {
+      title: 'Nivel 6 - Satoshi',
+      index: '/nivel-6/',
+      pages: [
+        { href: '/nivel-6/por-que-bitcoin-importa.html', text: 'Por que Bitcoin importa de verdad' },
+        { href: '/nivel-6/bitcoin-y-libertad.html', text: 'Bitcoin y libertad financiera' },
+        { href: '/nivel-6/bitcoin-game-theory.html', text: 'Teoria de juegos de Bitcoin' },
+        { href: '/nivel-6/criticas-a-bitcoin.html', text: 'Las criticas a Bitcoin y las respuestas' },
+        { href: '/nivel-6/contribuir-bitcoin-core.html', text: 'Como contribuir a Bitcoin Core' },
+        { href: '/nivel-6/que-es-un-bip.html', text: 'Que es un BIP' },
+        { href: '/nivel-6/soft-fork-hard-fork.html', text: 'Soft fork vs Hard fork' },
+        { href: '/nivel-6/contribuir-sin-codigo.html', text: 'Contribuir sin saber programar' },
+        { href: '/nivel-6/como-explicar-bitcoin.html', text: 'Como explicar Bitcoin sin que te miren raro' },
+        { href: '/nivel-6/bitcoinizar-tu-entorno.html', text: 'Como bitcoinizar tu entorno' }
+      ]
+    }
   ];
 
   const PILLAR_TREE = [

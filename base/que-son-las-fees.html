@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Aprende qué son las comisiones (fees) en Bitcoin con explicación clara, puntos clave y pasos prácticos." />
-  <title>¿Qué son las comisiones (fees)? — Base de Conocimiento | aprendebtc.com</title>
+  <meta name="description" content="Fees de Bitcoin explicadas: c&#243;mo funcionan, qu&#233; determina el coste, c&#243;mo estimarlas con mempool.space, y consejos para pagar menos." />
+  <title>&#191;Qu&#233; son las comisiones (fees)? &#8212; Base de Conocimiento | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="../css/main.css" />
@@ -14,132 +14,175 @@
   <div data-include="header"></div>
 
   <div class="page-layout">
-    <aside class="page-layout__sidebar" aria-label="Navegación de la Base de Conocimiento">
+    <aside class="page-layout__sidebar" aria-label="Navegacion de la base">
       <nav class="sidebar">
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Base de Conocimiento</div>
-          <a href="index.html" class="sidebar__link">Índice de la base</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Bitcoin: los fundamentos</div>
-          <a href="que-es-bitcoin.html" class="sidebar__link">¿Qué es Bitcoin?</a>
-          <a href="como-funciona-bitcoin.html" class="sidebar__link">¿Cómo funciona Bitcoin?</a>
-          <a href="que-es-blockchain.html" class="sidebar__link">¿Qué es la blockchain?</a>
-          <a href="que-es-la-mineria.html" class="sidebar__link">¿Qué es la minería?</a>
-          <a href="los-21-millones.html" class="sidebar__link">Los 21 millones y la oferta fija</a>
-          <a href="que-es-un-satoshi.html" class="sidebar__link">¿Qué es un satoshi?</a>
-          <a href="historia-bitcoin.html" class="sidebar__link">Historia de Bitcoin</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Dinero y economía</div>
-          <a href="problema-del-dinero-tradicional.html" class="sidebar__link">El problema del dinero tradicional</a>
-          <a href="bitcoin-vs-dinero-tradicional.html" class="sidebar__link">Bitcoin vs dinero tradicional</a>
-          <a href="historia-del-dinero.html" class="sidebar__link">Historia del dinero</a>
-          <a href="inflacion-y-bitcoin.html" class="sidebar__link">Inflación y Bitcoin</a>
-          <a href="austrian-economics.html" class="sidebar__link">Economía Austríaca y Bitcoin</a>
-          <a href="bitcoin-vs-oro.html" class="sidebar__link">Bitcoin vs Oro</a>
-          <a href="bitcoin-reserva-de-valor.html" class="sidebar__link">Bitcoin como reserva de valor</a>
-          <a href="bitcoin-vs-altcoins.html" class="sidebar__link">Bitcoin vs altcoins</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Compra: conceptos</div>
-          <a href="exchange-centralizado-cex.html" class="sidebar__link">Exchange centralizado (CEX)</a>
-          <a href="exchange-descentralizado-dex.html" class="sidebar__link">Exchange descentralizado (DEX)</a>
-          <a href="kyc-vs-no-kyc.html" class="sidebar__link">KYC y no-KYC: qué significan y por qué importan</a>
-          <a href="dca-compras-periodicas.html" class="sidebar__link">DCA: la estrategia de compras periódicas</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Wallets y custodia</div>
-          <a href="tipos-de-wallet.html" class="sidebar__link">Tipos de wallet: custodia, temperatura y formato</a>
-          <a href="que-es-seed-phrase.html" class="sidebar__link">¿Qué es la frase semilla (seed phrase)?</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Red y transacciones</div>
-          <a href="on-chain-vs-lightning.html" class="sidebar__link">On-chain vs Lightning</a>
-          <a href="que-es-una-direccion.html" class="sidebar__link">¿Qué es una dirección Bitcoin?</a>
-          <a href="que-es-una-confirmacion.html" class="sidebar__link">¿Qué es una confirmación?</a>
-          <a href="que-son-las-fees.html" class="sidebar__link sidebar__link--active">¿Qué son las comisiones (fees)?</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Seguridad</div>
-          <a href="seguridad-basica.html" class="sidebar__link">Seguridad básica: las reglas de oro</a>
-          <a href="estafas-comunes.html" class="sidebar__link">Estafas comunes en Bitcoin</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Ruta guiada</div>
-          <a href="../nivel-1/" class="sidebar__link">Nivel 1 — Nocoinero Curioso</a>
-        </div>
         <div class="sidebar__ad-wrap">
-          <div class="ad-slot ad-sidebar" id="ad-sidebar-base" aria-hidden="true"></div>
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-auto" aria-hidden="true"></div>
         </div>
       </nav>
     </aside>
 
     <main class="page-layout__content" id="main-content">
       <div class="content-inner">
-        <nav class="breadcrumb" aria-label="Ruta de navegación">
-          <a href="../" class="breadcrumb__item">Inicio</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
-          <a href="./index.html" class="breadcrumb__item">Base de Conocimiento</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
-          <span class="breadcrumb__current">¿Qué son las comisiones (fees)?</span>
+        <nav class="breadcrumb" aria-label="Ruta de navegacion">
+          <a href="/" class="breadcrumb__item">Inicio</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><a href="/base/" class="breadcrumb__item">Base de Conocimiento</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><span class="breadcrumb__current">&#191;Qu&#233; son las comisiones (fees)?</span>
         </nav>
 
         <article class="article">
           <div class="nivel-badge nivel-badge--base article__badge">Base</div>
-          <h1>¿Qué son las comisiones (fees)?</h1>
-          <p class="article__subtitle">Guía práctica sobre qué son las comisiones (fees) dentro de la Base de Conocimiento de aprendeBTC.</p>
+          <h1>&#191;Qu&#233; son las comisiones (fees)?</h1>
+          <p class="article__subtitle">El pago al minero que incluye tu transacci&#243;n en un bloque. Un mercado que sube y baja seg&#250;n la demanda.</p>
 
-          <h2>Idea clave</h2>
-          <p>Este tema pertenece al bloque <strong>Red y transacciones</strong> y sirve para construir criterio antes de tomar decisiones en compra, custodia o uso diario de Bitcoin.</p>
-          <p>En aprendeBTC el objetivo es que entiendas el concepto, identifiques sus límites y lo conectes con acciones concretas en los niveles de aprendizaje.</p>
+<h2>Definici&#243;n</h2>
 
-          <h2>Qué debes recordar</h2>
-          <ul>
-            <li>Comprender este concepto mejora tus decisiones técnicas y económicas.</li>
-            <li>La teoría sin práctica crea errores; la práctica sin teoría crea riesgos.</li>
-            <li>Este contenido se debe leer junto a páginas cercanas de la misma sección.</li>
-            <li>Aplicar un proceso repetible reduce fallos por impulso.</li>
-            <li>Si algo no está claro, vuelve al Índice y conecta conceptos.</li>
-          </ul>
+<p>Las fees (comisiones) de Bitcoin son la cantidad que el emisor de una transacci&#243;n paga para que un minero la incluya en un bloque.</p>
 
-          <div class="callout callout--info">
-            <span class="callout__icon" aria-hidden="true">💡</span>
-            <div class="callout__content">
-              <div class="callout__title">Punto de control</div>
-              <p class="callout__text">Si puedes explicar este tema con tus palabras y relacionarlo con una decisión real, estás listo para avanzar.</p>
-            </div>
-          </div>
+<p>No son un porcentaje del monto enviado. Son un pago por el &quot;espacio&quot; que tu transacci&#243;n ocupa en el bloque.</p>
 
-          <h2>Errores comunes</h2>
-          <ul>
-            <li>Actuar con prisa sin validar pasos ni contexto.</li>
-            <li>Confiar en atajos o en fuentes sin reputación.</li>
-            <li>No definir un procedimiento personal antes de mover fondos.</li>
-          </ul>
+<h2>C&#243;mo funcionan</h2>
 
-          <h2>Cómo aplicarlo en la práctica</h2>
-          <p>Define un flujo operativo simple: herramienta, validación, comprobación final y plan de contingencia. Esa estructura evita la mayoría de errores tempranos.</p>
-          <p>Después enlaza con la siguiente página de la ruta para mantener continuidad y profundidad de aprendizaje.</p>
+<ol>
 
-          <div class="callout callout--success">
-            <span class="callout__icon" aria-hidden="true">📚</span>
-            <div class="callout__content">
-              <div class="callout__title">Profundiza en esta sección</div>
-              <p class="callout__text"><a href="que-es-una-confirmacion.html">¿Qué es una confirmación?</a> · <a href="seguridad-basica.html">Seguridad básica: las reglas de oro</a> · <a href="index.html">Índice de la base</a></p>
-            </div>
-          </div>
+<li>1. Creas una transacci&#243;n que ocupa X bytes (o vBytes en SegWit)</li>
 
-          <div class="ad-slot ad-content" id="ad-content-base" aria-hidden="true"></div>
+<li>2. Decides cu&#225;ntos satoshis por byte ofrecer</li>
 
-          <nav class="page-nav" aria-label="Navegación entre páginas">
-            <a href="que-es-una-confirmacion.html" class="page-nav__item">
-              <span class="page-nav__label">← Anterior</span>
-              <span class="page-nav__title">¿Qué es una confirmación?</span>
+<li>3. Los mineros priorizan las transacciones que pagan m&#225;s por byte</li>
+
+<li>4. Tu transacci&#243;n se confirma m&#225;s r&#225;pido si pagas m&#225;s</li>
+
+</ol>
+
+<p>Es un mercado: cuando hay mucha demanda (mempool llena), las fees suben. Cuando hay poca demanda, bajan.</p>
+
+<h2>C&#243;mo se miden</h2>
+
+<p><strong>sat/vB (satoshis por virtual byte):</strong> La unidad est&#225;ndar.</p>
+
+<p>Una transacci&#243;n t&#237;pica ocupa 140-250 vBytes dependiendo del tipo y n&#250;mero de inputs/outputs.</p>
+
+<p>Ejemplo:</p>
+
+<ul>
+
+<li>Transacci&#243;n de 200 vBytes</li>
+
+<li>Fee de 20 sat/vB</li>
+
+<li>Total: 200 &#215; 20 = 4.000 sats</li>
+
+</ul>
+
+<p>A precio actual de bitcoin, calcula cu&#225;nto es en euros.</p>
+
+<h2>Qu&#233; afecta el tama&#241;o</h2>
+
+<p>El tama&#241;o de tu transacci&#243;n depende de:</p>
+
+<p><strong>N&#250;mero de inputs:</strong> Cada UTXO que gastas a&#241;ade bytes. Consolidar muchos UTXOs peque&#241;os es m&#225;s caro.</p>
+
+<p><strong>N&#250;mero de outputs:</strong> Normalmente 2 (el pago y el cambio). M&#225;s outputs = m&#225;s bytes.</p>
+
+<p><strong>Tipo de direcci&#243;n:</strong> SegWit y Taproot son m&#225;s eficientes que Legacy.</p>
+
+<p><strong>Tipo de script:</strong> Multisig ocupa m&#225;s que single-sig.</p>
+
+<h2>C&#243;mo saber cu&#225;nto pagar</h2>
+
+<h3>mempool.space</h3>
+
+<p>El recurso est&#225;ndar para ver el estado de la mempool y fees recomendadas:</p>
+
+<ul>
+
+<li>Muestra transacciones pendientes</li>
+
+<li>Estima cu&#225;nto pagar para diferentes velocidades</li>
+
+<li>Visualiza la congesti&#243;n actual</li>
+
+</ul>
+
+<h3>Tu wallet</h3>
+
+<p>La mayor&#237;a de wallets estiman la fee autom&#225;ticamente. Suelen ofrecer opciones:</p>
+
+<ul>
+
+<li>Alta prioridad (siguiente bloque)</li>
+
+<li>Media (1-3 bloques)</li>
+
+<li>Baja (cuando pueda)</li>
+
+</ul>
+
+<h3>Regla pr&#225;ctica</h3>
+
+<ul>
+
+<li>Urgente: fee alta, confirma en el siguiente bloque</li>
+
+<li>Normal: fee media, confirma en 1-3 horas</li>
+
+<li>No urgente: fee baja, puede tardar horas o d&#237;as</li>
+
+</ul>
+
+<h2>Consejos para pagar menos</h2>
+
+<h3>Esperar momentos de baja demanda</h3>
+
+<ul>
+
+<li>Fines de semana suelen tener menos actividad</li>
+
+<li>Madrugada en EE.UU. (principal zona horaria de actividad)</li>
+
+<li>Despu&#233;s de per&#237;odos de alta congesti&#243;n</li>
+
+</ul>
+
+<h3>Usar SegWit o Taproot</h3>
+
+<p>Direcciones bc1q y bc1p tienen descuento efectivo porque el witness paga menos por byte.</p>
+
+<h3>Consolidar UTXOs cuando las fees son bajas</h3>
+
+<p>Si tienes muchos UTXOs peque&#241;os, comb&#237;nalos en uno cuando las fees est&#233;n muy bajas. As&#237; cuando necesites gastar, tendr&#225;s menos inputs.</p>
+
+<h3>Usar Lightning</h3>
+
+<p>Para pagos peque&#241;os y frecuentes, Lightning tiene fees de fracciones de c&#233;ntimo, independientes de la congesti&#243;n on-chain.</p>
+
+<h2>Las fees y la seguridad</h2>
+
+<p>Las fees son parte del modelo de seguridad de Bitcoin:</p>
+
+<ul>
+
+<li>Hoy, los mineros ganan principalmente del subsidio del bloque (3.125 BTC)</li>
+
+<li>A medida que el subsidio disminuye con cada halving, las fees ser&#225;n una proporci&#243;n mayor</li>
+
+<li>Eventualmente, las fees ser&#225;n el &#250;nico incentivo para los mineros</li>
+
+</ul>
+
+<p>El mercado de fees determinar&#225; si hay suficiente incentivo para mantener la seguridad de la red a largo plazo.</p>
+
+<p>&gt; ENLACE BASE: On-chain vs Lightning &#8594; <a href="/base/on-chain-vs-lightning.html">/base/on-chain-vs-lightning.html</a></p>
+
+          <div class="ad-slot ad-content" id="ad-content-auto" aria-hidden="true"></div>
+
+          <nav class="page-nav" aria-label="Navegacion entre paginas">
+            <a href="/base/que-es-una-confirmacion.html" class="page-nav__item">
+              <span class="page-nav__label">&larr; Anterior</span>
+              <span class="page-nav__title">&#191;Qu&#233; es una confirmaci&#243;n?</span>
             </a>
-            <a href="seguridad-basica.html" class="page-nav__item page-nav__item--next">
-              <span class="page-nav__label">Siguiente →</span>
-              <span class="page-nav__title">Seguridad básica: las reglas de oro</span>
+            <a href="/base/seguridad-basica.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente &rarr;</span>
+              <span class="page-nav__title">Seguridad b&#225;sica</span>
             </a>
           </nav>
         </article>

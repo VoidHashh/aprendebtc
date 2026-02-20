@@ -69,6 +69,19 @@
     { title: 'Bitcoin como calefaccion', url: '/nivel-4/calefaccion-bitcoin.html', tags: ['nivel 4', 'mineria', 'calefaccion'], section: 'Nivel 4', nivel: 4 },
 
     { title: 'Nivel 5 - El Arquitecto', url: '/nivel-5/', tags: ['nivel 5', 'criptografia', 'script', 'protocolo'], section: 'Niveles', nivel: 5 },
+
+    { title: 'Nivel 6 - Satoshi', url: '/nivel-6/', tags: ['nivel 6', 'filosofia', 'contribucion', 'educacion'], section: 'Niveles', nivel: 6 },
+    { title: 'Por que Bitcoin importa de verdad', url: '/nivel-6/por-que-bitcoin-importa.html', tags: ['nivel 6', 'filosofia'], section: 'Nivel 6', nivel: 6 },
+    { title: 'Bitcoin y libertad financiera', url: '/nivel-6/bitcoin-y-libertad.html', tags: ['nivel 6', 'libertad', 'soberania'], section: 'Nivel 6', nivel: 6 },
+    { title: 'Teoria de juegos de Bitcoin', url: '/nivel-6/bitcoin-game-theory.html', tags: ['nivel 6', 'game theory', 'incentivos'], section: 'Nivel 6', nivel: 6 },
+    { title: 'Las criticas a Bitcoin y las respuestas', url: '/nivel-6/criticas-a-bitcoin.html', tags: ['nivel 6', 'criticas', 'objeciones'], section: 'Nivel 6', nivel: 6 },
+    { title: 'Como contribuir a Bitcoin Core', url: '/nivel-6/contribuir-bitcoin-core.html', tags: ['nivel 6', 'bitcoin core', 'contribuir'], section: 'Nivel 6', nivel: 6 },
+    { title: 'Que es un BIP', url: '/nivel-6/que-es-un-bip.html', tags: ['nivel 6', 'bip', 'protocolo'], section: 'Nivel 6', nivel: 6 },
+    { title: 'Soft fork vs Hard fork', url: '/nivel-6/soft-fork-hard-fork.html', tags: ['nivel 6', 'fork', 'consenso'], section: 'Nivel 6', nivel: 6 },
+    { title: 'Contribuir a Bitcoin sin saber programar', url: '/nivel-6/contribuir-sin-codigo.html', tags: ['nivel 6', 'contribuir', 'comunidad'], section: 'Nivel 6', nivel: 6 },
+    { title: 'Como explicar Bitcoin sin que te miren raro', url: '/nivel-6/como-explicar-bitcoin.html', tags: ['nivel 6', 'educacion', 'comunicacion'], section: 'Nivel 6', nivel: 6 },
+    { title: 'Como bitcoinizar tu entorno', url: '/nivel-6/bitcoinizar-tu-entorno.html', tags: ['nivel 6', 'adopcion', 'educacion'], section: 'Nivel 6', nivel: 6 },
+
     { title: 'Funciones hash', url: '/nivel-5/funciones-hash.html', tags: ['nivel 5', 'hash', 'sha-256'], section: 'Nivel 5', nivel: 5 },
     { title: 'Criptografia de curva eliptica', url: '/nivel-5/curva-eliptica.html', tags: ['nivel 5', 'criptografia', 'secp256k1'], section: 'Nivel 5', nivel: 5 },
     { title: 'ECDSA', url: '/nivel-5/ecdsa.html', tags: ['nivel 5', 'ecdsa', 'firmas'], section: 'Nivel 5', nivel: 5 },

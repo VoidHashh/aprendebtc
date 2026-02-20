@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Aprende qué es la frase semilla (seed phrase) en Bitcoin con explicación clara, puntos clave y pasos prácticos." />
-  <title>¿Qué es la frase semilla (seed phrase)? — Base de Conocimiento | aprendebtc.com</title>
+  <meta name="description" content="La seed phrase explicada: 12 o 24 palabras que representan tu clave maestra. BIP 39, seguridad, passphrase opcional, y reglas de protecci&#243;n." />
+  <title>&#191;Qu&#233; es la frase semilla (seed phrase)? &#8212; Base de Conocimiento | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="../css/main.css" />
@@ -14,131 +14,180 @@
   <div data-include="header"></div>
 
   <div class="page-layout">
-    <aside class="page-layout__sidebar" aria-label="Navegación de la Base de Conocimiento">
+    <aside class="page-layout__sidebar" aria-label="Navegacion de la base">
       <nav class="sidebar">
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Base de Conocimiento</div>
-          <a href="index.html" class="sidebar__link">Índice de la base</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Bitcoin: los fundamentos</div>
-          <a href="que-es-bitcoin.html" class="sidebar__link">¿Qué es Bitcoin?</a>
-          <a href="como-funciona-bitcoin.html" class="sidebar__link">¿Cómo funciona Bitcoin?</a>
-          <a href="que-es-blockchain.html" class="sidebar__link">¿Qué es la blockchain?</a>
-          <a href="que-es-la-mineria.html" class="sidebar__link">¿Qué es la minería?</a>
-          <a href="los-21-millones.html" class="sidebar__link">Los 21 millones y la oferta fija</a>
-          <a href="que-es-un-satoshi.html" class="sidebar__link">¿Qué es un satoshi?</a>
-          <a href="historia-bitcoin.html" class="sidebar__link">Historia de Bitcoin</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Dinero y economía</div>
-          <a href="problema-del-dinero-tradicional.html" class="sidebar__link">El problema del dinero tradicional</a>
-          <a href="bitcoin-vs-dinero-tradicional.html" class="sidebar__link">Bitcoin vs dinero tradicional</a>
-          <a href="historia-del-dinero.html" class="sidebar__link">Historia del dinero</a>
-          <a href="inflacion-y-bitcoin.html" class="sidebar__link">Inflación y Bitcoin</a>
-          <a href="austrian-economics.html" class="sidebar__link">Economía Austríaca y Bitcoin</a>
-          <a href="bitcoin-vs-oro.html" class="sidebar__link">Bitcoin vs Oro</a>
-          <a href="bitcoin-reserva-de-valor.html" class="sidebar__link">Bitcoin como reserva de valor</a>
-          <a href="bitcoin-vs-altcoins.html" class="sidebar__link">Bitcoin vs altcoins</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Compra: conceptos</div>
-          <a href="exchange-centralizado-cex.html" class="sidebar__link">Exchange centralizado (CEX)</a>
-          <a href="exchange-descentralizado-dex.html" class="sidebar__link">Exchange descentralizado (DEX)</a>
-          <a href="kyc-vs-no-kyc.html" class="sidebar__link">KYC y no-KYC: qué significan y por qué importan</a>
-          <a href="dca-compras-periodicas.html" class="sidebar__link">DCA: la estrategia de compras periódicas</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Wallets y custodia</div>
-          <a href="tipos-de-wallet.html" class="sidebar__link">Tipos de wallet: custodia, temperatura y formato</a>
-          <a href="que-es-seed-phrase.html" class="sidebar__link sidebar__link--active">¿Qué es la frase semilla (seed phrase)?</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Red y transacciones</div>
-          <a href="on-chain-vs-lightning.html" class="sidebar__link">On-chain vs Lightning</a>
-          <a href="que-es-una-direccion.html" class="sidebar__link">¿Qué es una dirección Bitcoin?</a>
-          <a href="que-es-una-confirmacion.html" class="sidebar__link">¿Qué es una confirmación?</a>
-          <a href="que-son-las-fees.html" class="sidebar__link">¿Qué son las comisiones (fees)?</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Seguridad</div>
-          <a href="seguridad-basica.html" class="sidebar__link">Seguridad básica: las reglas de oro</a>
-          <a href="estafas-comunes.html" class="sidebar__link">Estafas comunes en Bitcoin</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Ruta guiada</div>
-          <a href="../nivel-1/" class="sidebar__link">Nivel 1 — Nocoinero Curioso</a>
-        </div>
         <div class="sidebar__ad-wrap">
-          <div class="ad-slot ad-sidebar" id="ad-sidebar-base" aria-hidden="true"></div>
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-auto" aria-hidden="true"></div>
         </div>
       </nav>
     </aside>
 
     <main class="page-layout__content" id="main-content">
       <div class="content-inner">
-        <nav class="breadcrumb" aria-label="Ruta de navegación">
-          <a href="../" class="breadcrumb__item">Inicio</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
-          <a href="./index.html" class="breadcrumb__item">Base de Conocimiento</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
-          <span class="breadcrumb__current">¿Qué es la frase semilla (seed phrase)?</span>
+        <nav class="breadcrumb" aria-label="Ruta de navegacion">
+          <a href="/" class="breadcrumb__item">Inicio</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><a href="/base/" class="breadcrumb__item">Base de Conocimiento</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><span class="breadcrumb__current">&#191;Qu&#233; es la frase semilla (seed phrase)?</span>
         </nav>
 
         <article class="article">
           <div class="nivel-badge nivel-badge--base article__badge">Base</div>
-          <h1>¿Qué es la frase semilla (seed phrase)?</h1>
-          <p class="article__subtitle">Guía práctica sobre qué es la frase semilla (seed phrase) dentro de la Base de Conocimiento de aprendeBTC.</p>
+          <h1>&#191;Qu&#233; es la frase semilla (seed phrase)?</h1>
+          <p class="article__subtitle">Las 12 o 24 palabras que son tu bitcoin. Pi&#233;rdelas y pierdes todo. Prot&#233;gelas como el activo que representan.</p>
 
-          <h2>Idea clave</h2>
-          <p>Este tema pertenece al bloque <strong>Wallets y custodia</strong> y sirve para construir criterio antes de tomar decisiones en compra, custodia o uso diario de Bitcoin.</p>
-          <p>En aprendeBTC el objetivo es que entiendas el concepto, identifiques sus límites y lo conectes con acciones concretas en los niveles de aprendizaje.</p>
+<h2>Definici&#243;n</h2>
 
-          <h2>Qué debes recordar</h2>
-          <ul>
-            <li>Comprender este concepto mejora tus decisiones técnicas y económicas.</li>
-            <li>La teoría sin práctica crea errores; la práctica sin teoría crea riesgos.</li>
-            <li>Este contenido se debe leer junto a páginas cercanas de la misma sección.</li>
-            <li>Aplicar un proceso repetible reduce fallos por impulso.</li>
-            <li>Si algo no está claro, vuelve al Índice y conecta conceptos.</li>
-          </ul>
+<p>La frase semilla (seed phrase, tambi&#233;n llamada mnemonic o frase de recuperaci&#243;n) es una lista de 12 o 24 palabras que representa la clave maestra de tu wallet.</p>
 
-          <div class="callout callout--info">
-            <span class="callout__icon" aria-hidden="true">💡</span>
-            <div class="callout__content">
-              <div class="callout__title">Punto de control</div>
-              <p class="callout__text">Si puedes explicar este tema con tus palabras y relacionarlo con una decisión real, estás listo para avanzar.</p>
-            </div>
-          </div>
+<p>Con estas palabras, puedes regenerar todas las claves privadas, todas las direcciones, y acceder a todos los bitcoin de esa wallet, en cualquier momento, desde cualquier dispositivo compatible.</p>
 
-          <h2>Errores comunes</h2>
-          <ul>
-            <li>Actuar con prisa sin validar pasos ni contexto.</li>
-            <li>Confiar en atajos o en fuentes sin reputación.</li>
-            <li>No definir un procedimiento personal antes de mover fondos.</li>
-          </ul>
+<h2>C&#243;mo funciona</h2>
 
-          <h2>Cómo aplicarlo en la práctica</h2>
-          <p>Define un flujo operativo simple: herramienta, validación, comprobación final y plan de contingencia. Esa estructura evita la mayoría de errores tempranos.</p>
-          <p>Después enlaza con la siguiente página de la ruta para mantener continuidad y profundidad de aprendizaje.</p>
+<p>La seed phrase es una representaci&#243;n legible de un n&#250;mero muy grande (la entrop&#237;a). El est&#225;ndar BIP 39 define:</p>
 
-          <div class="callout callout--success">
-            <span class="callout__icon" aria-hidden="true">📚</span>
-            <div class="callout__content">
-              <div class="callout__title">Profundiza en esta sección</div>
-              <p class="callout__text"><a href="tipos-de-wallet.html">Tipos de wallet: custodia, temperatura y formato</a> · <a href="on-chain-vs-lightning.html">On-chain vs Lightning</a> · <a href="index.html">Índice de la base</a></p>
-            </div>
-          </div>
+<ul>
 
-          <div class="ad-slot ad-content" id="ad-content-base" aria-hidden="true"></div>
+<li>Una lista de 2048 palabras en ingl&#233;s (y otros idiomas)</li>
 
-          <nav class="page-nav" aria-label="Navegación entre páginas">
-            <a href="tipos-de-wallet.html" class="page-nav__item">
-              <span class="page-nav__label">← Anterior</span>
-              <span class="page-nav__title">Tipos de wallet: custodia, temperatura y formato</span>
+<li>Cada palabra representa 11 bits de informaci&#243;n</li>
+
+<li>12 palabras = 128 bits de entrop&#237;a</li>
+
+<li>24 palabras = 256 bits de entrop&#237;a</li>
+
+<li>La &#250;ltima palabra incluye un checksum para detectar errores</li>
+
+</ul>
+
+<p>De este n&#250;mero se deriva una clave maestra, y de ella se derivan todas las claves de tu wallet de forma determin&#237;stica.</p>
+
+<h2>La regla absoluta</h2>
+
+<p>Quien tiene la seed phrase, tiene los bitcoin.</p>
+
+<p><strong>Si alguien m&#225;s la obtiene:</strong> Puede vaciar tu wallet.</p>
+
+<p><strong>Si la pierdes:</strong> No hay forma de recuperar tus bitcoin. No hay soporte t&#233;cnico. No hay &quot;olvid&#233; mi contrase&#241;a&quot;.</p>
+
+<h2>C&#243;mo protegerla</h2>
+
+<h3>Escribir correctamente</h3>
+
+<ol>
+
+<li>1. Escribe las palabras a mano, en el orden correcto</li>
+
+<li>2. Usa letra clara y legible</li>
+
+<li>3. Numera las palabras (1. palabra, 2. palabra...)</li>
+
+<li>4. Verifica cada palabra contra la lista BIP 39</li>
+
+</ol>
+
+<h3>Almacenamiento</h3>
+
+<p><strong>Hacer:</strong></p>
+
+<ul>
+
+<li>Guardar en lugar f&#237;sico seguro (caja fuerte, ubicaci&#243;n secreta)</li>
+
+<li>Considerar grabar en metal (resistente a fuego y agua)</li>
+
+<li>Hacer m&#250;ltiples copias en ubicaciones diferentes</li>
+
+<li>Verificar peri&#243;dicamente que los backups son legibles</li>
+
+</ul>
+
+<p><strong>No hacer:</strong></p>
+
+<ul>
+
+<li>Guardar en un archivo digital (puede ser hackeado)</li>
+
+<li>Fotografiar con el m&#243;vil (se sube a la nube)</li>
+
+<li>Enviar por email o mensaje</li>
+
+<li>Guardar en un gestor de contrase&#241;as online</li>
+
+<li>Decirla a nadie</li>
+
+</ul>
+
+<h3>Verificaci&#243;n</h3>
+
+<p>Antes de enviar bitcoin significativos a una nueva wallet:</p>
+
+<ol>
+
+<li>1. Haz backup de la seed</li>
+
+<li>2. Borra/resetea la wallet</li>
+
+<li>3. Restaura desde la seed</li>
+
+<li>4. Verifica que genera las mismas direcciones</li>
+
+<li>5. Ahora conf&#237;a en que puedes restaurar si es necesario</li>
+
+</ol>
+
+<h2>Passphrase (25a palabra)</h2>
+
+<p>Algunas wallets permiten a&#241;adir una passphrase adicional a la seed. Esto crea una wallet completamente diferente.</p>
+
+<p><strong>Ventajas:</strong></p>
+
+<ul>
+
+<li>Protecci&#243;n extra si alguien encuentra tu seed</li>
+
+<li>Puedes tener una wallet &quot;se&#241;uelo&quot; (sin passphrase) y una real (con passphrase)</li>
+
+</ul>
+
+<p><strong>Riesgos:</strong></p>
+
+<ul>
+
+<li>Si olvidas la passphrase, pierdes acceso para siempre</li>
+
+<li>Otro elemento que guardar y recordar</li>
+
+</ul>
+
+<p>La passphrase es para usuarios avanzados. Si est&#225;s empezando, una seed phrase bien protegida es suficiente.</p>
+
+<h2>Nunca la compartas</h2>
+
+<p>Ning&#250;n servicio leg&#237;timo te pedir&#225; tu seed phrase:</p>
+
+<ul>
+
+<li>El &quot;soporte t&#233;cnico&quot; que la pide es un estafador</li>
+
+<li>La web que la pide es phishing</li>
+
+<li>El &quot;t&#233;cnico&quot; que te ayuda y la pide es un ladr&#243;n</li>
+
+</ul>
+
+<p>La seed phrase solo se introduce al restaurar una wallet en software que t&#250; descargaste de fuentes oficiales. Nunca en webs, nunca por tel&#233;fono, nunca a personas.</p>
+
+<div class="callout callout--warning"><span class="callout__icon" aria-hidden="true">&#9888;&#65039;</span><div class="callout__content"><div class="callout__title">La &#250;nica regla que importa</div><p class="callout__text">Tu seed phrase es tu bitcoin. Tr&#225;tala como tratar&#237;as dinero en efectivo por ese valor. No la compartas con nadie, nunca, bajo ninguna circunstancia.</p></div></div>
+
+<p>&gt; ENLACE BASE: Seguridad b&#225;sica &#8594; <a href="/base/seguridad-basica.html">/base/seguridad-basica.html</a></p>
+
+          <div class="ad-slot ad-content" id="ad-content-auto" aria-hidden="true"></div>
+
+          <nav class="page-nav" aria-label="Navegacion entre paginas">
+            <a href="/base/tipos-de-wallet.html" class="page-nav__item">
+              <span class="page-nav__label">&larr; Anterior</span>
+              <span class="page-nav__title">Tipos de wallet</span>
             </a>
-            <a href="on-chain-vs-lightning.html" class="page-nav__item page-nav__item--next">
-              <span class="page-nav__label">Siguiente →</span>
+            <a href="/base/on-chain-vs-lightning.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente &rarr;</span>
               <span class="page-nav__title">On-chain vs Lightning</span>
             </a>
           </nav>

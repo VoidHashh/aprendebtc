@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bitcoin Improvement Proposals explicados: el proceso formal para proponer cambios al protocolo. Tipos de BIP, proceso, y BIPs importantes." />
+  <title>&#191;Qu&#233; es un BIP? &#8212; Nivel 6 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegacion del nivel 6">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-auto" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegacion">
+          <a href="/" class="breadcrumb__item">Inicio</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><a href="/nivel-6/" class="breadcrumb__item">Nivel 6</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><span class="breadcrumb__current">&#191;Qu&#233; es un BIP?</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--6 article__badge">Nivel 6</div>
+          <h1>&#191;Qu&#233; es un BIP?</h1>
+          <p class="article__subtitle">El mecanismo para proponer cambios a Bitcoin. Abierto a cualquiera, decidido por la comunidad.</p>
+
+<h2>El concepto</h2>
+
+<p>BIP significa Bitcoin Improvement Proposal (Propuesta de Mejora de Bitcoin). Es el mecanismo formal para proponer cambios al protocolo, nuevos est&#225;ndares, o documentar informaci&#243;n relevante.</p>
+
+<p>El sistema de BIPs est&#225; inspirado en los PEPs de Python y los RFCs de internet. La idea es tener un proceso estructurado y documentado para evolucionar el protocolo.</p>
+
+<p>Repositorio de BIPs: github.com/bitcoin/bips</p>
+
+<h2>Tipos de BIP</h2>
+
+<h3>Standards Track</h3>
+
+<p>Cambios que afectan al protocolo o a la interoperabilidad entre implementaciones:</p>
+
+<ul>
+
+<li>Cambios de consenso (soft forks, hard forks)</li>
+
+<li>Nuevos formatos de transacci&#243;n</li>
+
+<li>Protocolos de comunicaci&#243;n entre nodos</li>
+
+<li>Formatos de wallet</li>
+
+</ul>
+
+<p>Estos son los BIPs m&#225;s importantes y los que requieren m&#225;s consenso.</p>
+
+<h3>Informational</h3>
+
+<p>Documentan gu&#237;as, informaci&#243;n general, o mejores pr&#225;cticas. No proponen cambios, sino que explican cosas.</p>
+
+<h3>Process</h3>
+
+<p>Cambios al proceso de toma de decisiones de Bitcoin (c&#243;mo se aprueban BIPs, c&#243;mo se activan cambios, etc.).</p>
+
+<h2>Anatom&#237;a de un BIP</h2>
+
+<p>Cada BIP tiene una estructura est&#225;ndar:</p>
+
+<ul>
+
+<li><strong>Preamble:</strong> Metadatos (n&#250;mero, t&#237;tulo, autor, estado)</li>
+
+<li><strong>Abstract:</strong> Resumen breve</li>
+
+<li><strong>Motivation:</strong> Por qu&#233; se necesita este cambio</li>
+
+<li><strong>Specification:</strong> Detalles t&#233;cnicos exactos</li>
+
+<li><strong>Rationale:</strong> Por qu&#233; se tomaron ciertas decisiones de dise&#241;o</li>
+
+<li><strong>Backwards Compatibility:</strong> C&#243;mo afecta a implementaciones existentes</li>
+
+<li><strong>Reference Implementation:</strong> C&#243;digo de ejemplo</li>
+
+</ul>
+
+<h2>El proceso</h2>
+
+<ol>
+
+<li>1. <strong>Idea:</strong> Alguien tiene una idea para mejorar Bitcoin</li>
+
+</ol>
+
+<ol>
+
+<li>2. <strong>Discusi&#243;n informal:</strong> Se discute en la mailing list bitcoin-dev, IRC, o foros</li>
+
+</ol>
+
+<ol>
+
+<li>3. <strong>Borrador:</strong> Si hay inter&#233;s, se escribe un BIP formal como borrador</li>
+
+</ol>
+
+<ol>
+
+<li>4. <strong>Review:</strong> La comunidad revisa, critica, sugiere mejoras</li>
+
+</ol>
+
+<ol>
+
+<li>5. <strong>Iteraci&#243;n:</strong> El autor ajusta seg&#250;n feedback</li>
+
+</ol>
+
+<ol>
+
+<li>6. <strong>Aceptaci&#243;n del BIP:</strong> El BIP se acepta como documento (no significa que se implemente)</li>
+
+</ol>
+
+<ol>
+
+<li>7. <strong>Implementaci&#243;n:</strong> Alguien escribe el c&#243;digo</li>
+
+</ol>
+
+<ol>
+
+<li>8. <strong>Activaci&#243;n:</strong> Si es un cambio de consenso, se define un mecanismo de activaci&#243;n</li>
+
+</ol>
+
+<p>No hay comit&#233; de aprobaci&#243;n formal. Un BIP se considera aceptado si la comunidad lo adopta. Si nadie implementa o usa un BIP, est&#225; muerto en la pr&#225;ctica aunque exista como documento.</p>
+
+<h2>BIPs importantes</h2>
+
+<p>Algunos BIPs que deber&#237;as conocer:</p>
+
+<p><strong>BIP 32:</strong> HD wallets (derivaci&#243;n jer&#225;rquica de claves). La base de c&#243;mo funcionan las wallets modernas.</p>
+
+<p><strong>BIP 39:</strong> Mnemonic seed phrases. Las 12/24 palabras que usas para hacer backup.</p>
+
+<p><strong>BIP 44/49/84/86:</strong> Derivation paths para diferentes tipos de direcciones.</p>
+
+<p><strong>BIP 141/143:</strong> Segregated Witness. La actualizaci&#243;n que habilit&#243; Lightning.</p>
+
+<p><strong>BIP 174:</strong> PSBT. El formato para transacciones parcialmente firmadas.</p>
+
+<p><strong>BIP 340/341/342:</strong> Taproot y Schnorr. La actualizaci&#243;n m&#225;s reciente del protocolo.</p>
+
+<h2>Cualquiera puede escribir un BIP</h2>
+
+<p>No hay barrera de entrada formal. Cualquiera puede escribir un BIP y enviarlo.</p>
+
+<p>Pero eso no significa que se adopte. Un BIP necesita:</p>
+
+<ul>
+
+<li>M&#233;rito t&#233;cnico</li>
+
+<li>Apoyo de la comunidad</li>
+
+<li>Implementaci&#243;n de calidad</li>
+
+<li>Para cambios de consenso: un proceso de activaci&#243;n exitoso</li>
+
+</ul>
+
+<p>Escribir un BIP que sea ignorado es trivial. Escribir un BIP que cambie Bitcoin es muy dif&#237;cil.</p>
+
+<h2>El sistema funciona</h2>
+
+<p>El proceso de BIPs ha permitido que Bitcoin evolucione durante 15+ a&#241;os sin autoridad central:</p>
+
+<ul>
+
+<li>SegWit se propuso, debati&#243;, implement&#243; y activ&#243; via BIPs</li>
+
+<li>Taproot sigui&#243; el mismo proceso</li>
+
+<li>Mejoras menores se incorporan continuamente</li>
+
+</ul>
+
+<p>Es lento. Es dif&#237;cil. A veces es frustrante. Pero funciona.</p>
+
+<p>La lentitud es intencional. Cambiar las reglas del dinero de millones de personas no deber&#237;a ser f&#225;cil. El conservadurismo del proceso de BIPs protege a los usuarios de cambios precipitados.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-auto" aria-hidden="true"></div>
+
+          <nav class="page-nav" aria-label="Navegacion entre paginas">
+            <a href="/nivel-6/contribuir-bitcoin-core.html" class="page-nav__item">
+              <span class="page-nav__label">&larr; Anterior</span>
+              <span class="page-nav__title">C&#243;mo contribuir a Bitcoin Core</span>
+            </a>
+            <a href="/nivel-6/soft-fork-hard-fork.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente &rarr;</span>
+              <span class="page-nav__title">Soft fork vs Hard fork</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

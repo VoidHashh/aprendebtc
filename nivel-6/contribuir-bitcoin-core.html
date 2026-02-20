@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Gu&#237;a para contribuir a Bitcoin Core: code review, documentaci&#243;n, testing, traducciones. No necesitas ser un genio criptogr&#225;fico." />
+  <title>C&#243;mo contribuir a Bitcoin Core &#8212; Nivel 6 | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegacion del nivel 6">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-auto" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegacion">
+          <a href="/" class="breadcrumb__item">Inicio</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><a href="/nivel-6/" class="breadcrumb__item">Nivel 6</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><span class="breadcrumb__current">C&#243;mo contribuir a Bitcoin Core</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--6 article__badge">Nivel 6</div>
+          <h1>C&#243;mo contribuir a Bitcoin Core</h1>
+          <p class="article__subtitle">El software que define las reglas de Bitcoin. C&#243;digo abierto, desarrollado por voluntarios, financiado por donaciones.</p>
+
+<h2>Qu&#233; es Bitcoin Core</h2>
+
+<p>Bitcoin Core es la implementaci&#243;n de referencia del protocolo Bitcoin. Es el software que ejecutan la mayor&#237;a de los nodos de la red. Define las reglas de consenso y el comportamiento est&#225;ndar del protocolo.</p>
+
+<p>No es &quot;el Bitcoin oficial&quot; (no hay tal cosa), pero es la implementaci&#243;n m&#225;s probada, m&#225;s revisada y m&#225;s utilizada.</p>
+
+<p>Repositorio: github.com/bitcoin/bitcoin</p>
+
+<h2>Qui&#233;n lo desarrolla</h2>
+
+<p>Bitcoin Core es desarrollado por cientos de contribuidores de todo el mundo. No hay empresa detr&#225;s. No hay CEO. No hay empleados.</p>
+
+<p>Los contribuidores principales son financiados por:</p>
+
+<ul>
+
+<li>Brink (organizaci&#243;n sin &#225;nimo de lucro)</li>
+
+<li>Chaincode Labs</li>
+
+<li>Spiral (subsidiaria de Block/Square)</li>
+
+<li>MIT DCI</li>
+
+<li>Donaciones individuales</li>
+
+</ul>
+
+<p>Cualquiera puede contribuir. El c&#243;digo es abierto. Las discusiones son p&#250;blicas.</p>
+
+<h2>No necesitas ser cript&#243;grafo</h2>
+
+<p>El estereotipo es que contribuir a Bitcoin Core requiere ser un genio de la criptograf&#237;a. La realidad es diferente.</p>
+
+<h3>Code review</h3>
+
+<p>Probablemente la contribuci&#243;n m&#225;s valiosa y m&#225;s necesitada. Cada cambio al c&#243;digo (pull request) necesita revisi&#243;n de m&#250;ltiples personas antes de ser aceptado.</p>
+
+<p>Revisar c&#243;digo significa:</p>
+
+<ul>
+
+<li>Leer los cambios propuestos</li>
+
+<li>Entender qu&#233; intentan hacer</li>
+
+<li>Verificar que lo hacen correctamente</li>
+
+<li>Buscar bugs, edge cases, problemas de seguridad</li>
+
+<li>Comentar con feedback constructivo</li>
+
+</ul>
+
+<p>No necesitas ser experto en todo el codebase. Puedes revisar cambios en &#225;reas que entiendas.</p>
+
+<h3>Testing</h3>
+
+<p>Ejecutar el software, especialmente versiones Release Candidate antes de lanzamientos oficiales. Reportar bugs que encuentres. Escribir o mejorar tests automatizados.</p>
+
+<h3>Documentaci&#243;n</h3>
+
+<p>La documentaci&#243;n siempre puede mejorarse:</p>
+
+<ul>
+
+<li>Comentarios en el c&#243;digo</li>
+
+<li>Gu&#237;as de usuario</li>
+
+<li>Documentaci&#243;n t&#233;cnica</li>
+
+<li>READMEs y archivos de ayuda</li>
+
+</ul>
+
+<h3>Traducciones</h3>
+
+<p>La interfaz gr&#225;fica de Bitcoin Core est&#225; traducida a decenas de idiomas. Las traducciones necesitan mantenimiento y mejora.</p>
+
+<p>Plataforma: transifex.com/bitcoin/bitcoin</p>
+
+<h3>C&#243;digo</h3>
+
+<p>Por supuesto, tambi&#233;n puedes contribuir c&#243;digo:</p>
+
+<ul>
+
+<li>Corregir bugs</li>
+
+<li>Optimizar rendimiento</li>
+
+<li>Implementar BIPs aprobados</li>
+
+<li>Mejorar la arquitectura</li>
+
+</ul>
+
+<p>Pero el c&#243;digo nuevo es solo una parte. El review del c&#243;digo de otros es igual o m&#225;s importante.</p>
+
+<h2>El proceso</h2>
+
+<ol>
+
+<li>1. <strong>Fork:</strong> Crea una copia del repositorio en tu cuenta de GitHub</li>
+
+</ol>
+
+<ol>
+
+<li>2. <strong>Branch:</strong> Crea una rama para tu cambio espec&#237;fico</li>
+
+</ol>
+
+<ol>
+
+<li>3. <strong>Cambios:</strong> Implementa tu mejora o correcci&#243;n</li>
+
+</ol>
+
+<ol>
+
+<li>4. <strong>Commit:</strong> Haz commits con mensajes claros y at&#243;micos</li>
+
+</ol>
+
+<ol>
+
+<li>5. <strong>Pull Request:</strong> Abre un PR describiendo qu&#233; hace tu cambio y por qu&#233;</li>
+
+</ol>
+
+<ol>
+
+<li>6. <strong>Review:</strong> Otros contribuidores revisar&#225;n tu c&#243;digo. Habr&#225; feedback, preguntas, sugerencias</li>
+
+</ol>
+
+<ol>
+
+<li>7. <strong>Iteraci&#243;n:</strong> Ajusta seg&#250;n el feedback hasta que los reviewers est&#233;n satisfechos</li>
+
+</ol>
+
+<ol>
+
+<li>8. <strong>Merge:</strong> Si se acepta, un maintainer mergear&#225; tu cambio</li>
+
+</ol>
+
+<p>Este proceso puede tardar desde d&#237;as hasta meses dependiendo de la complejidad y sensibilidad del cambio.</p>
+
+<div class="callout callout--info"><span class="callout__icon" aria-hidden="true">&#128161;</span><div class="callout__content"><div class="callout__title">Exigencia extrema</div><p class="callout__text">Bitcoin Core tiene uno de los procesos de review m&#225;s exigentes del software libre. Un cambio de una l&#237;nea puede tardar meses en ser mergeado. Esto es una feature, no un bug: estamos hablando del software que protege cientos de miles de millones de d&#243;lares.</p></div></div>
+
+<h2>Empezar</h2>
+
+<p>Si quieres empezar a contribuir:</p>
+
+<ol>
+
+<li>1. Clona el repositorio y compila el software</li>
+
+<li>2. Lee la documentaci&#243;n de contribuci&#243;n (CONTRIBUTING.md)</li>
+
+<li>3. Familiar&#237;zate con el c&#243;digo leyendo y ejecutando</li>
+
+<li>4. Empieza revisando PRs sencillos (etiquetados como &quot;good first issue&quot;)</li>
+
+<li>5. &#218;nete al IRC (#bitcoin-core-dev en Libera.chat) o a las reuniones de desarrolladores</li>
+
+</ol>
+
+<p>La curva de aprendizaje es real, pero la comunidad es receptiva con quienes muestran esfuerzo genuino.</p>
+
+<h2>Por qu&#233; importa</h2>
+
+<p>Contribuir a Bitcoin Core es contribuir directamente a la infraestructura monetaria del futuro. Es trabajo dif&#237;cil, no remunerado directamente, y a menudo ingrato.</p>
+
+<p>Pero es tambi&#233;n una de las formas m&#225;s impactantes de contribuir al ecosistema. El c&#243;digo que escribas o revises puede estar funcionando durante d&#233;cadas, protegiendo el dinero de millones de personas.</p>
+
+          <div class="ad-slot ad-content" id="ad-content-auto" aria-hidden="true"></div>
+
+          <nav class="page-nav" aria-label="Navegacion entre paginas">
+            <a href="/nivel-6/criticas-a-bitcoin.html" class="page-nav__item">
+              <span class="page-nav__label">&larr; Anterior</span>
+              <span class="page-nav__title">Las cr&#237;ticas a Bitcoin y las respuestas</span>
+            </a>
+            <a href="/nivel-6/que-es-un-bip.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente &rarr;</span>
+              <span class="page-nav__title">&#191;Qu&#233; es un BIP?</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

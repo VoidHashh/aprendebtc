@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Aprende cómo funciona bitcoin en Bitcoin con explicación clara, puntos clave y pasos prácticos." />
-  <title>¿Cómo funciona Bitcoin? — Base de Conocimiento | aprendebtc.com</title>
+  <meta name="description" content="Visi&#243;n general del funcionamiento de Bitcoin: transacciones, propagaci&#243;n, miner&#237;a, bloques, blockchain y consenso. Sin autoridad central." />
+  <title>&#191;C&#243;mo funciona Bitcoin? &#8212; Base de Conocimiento | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="../css/main.css" />
@@ -14,132 +14,151 @@
   <div data-include="header"></div>
 
   <div class="page-layout">
-    <aside class="page-layout__sidebar" aria-label="Navegación de la Base de Conocimiento">
+    <aside class="page-layout__sidebar" aria-label="Navegacion de la base">
       <nav class="sidebar">
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Base de Conocimiento</div>
-          <a href="index.html" class="sidebar__link">Índice de la base</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Bitcoin: los fundamentos</div>
-          <a href="que-es-bitcoin.html" class="sidebar__link">¿Qué es Bitcoin?</a>
-          <a href="como-funciona-bitcoin.html" class="sidebar__link sidebar__link--active">¿Cómo funciona Bitcoin?</a>
-          <a href="que-es-blockchain.html" class="sidebar__link">¿Qué es la blockchain?</a>
-          <a href="que-es-la-mineria.html" class="sidebar__link">¿Qué es la minería?</a>
-          <a href="los-21-millones.html" class="sidebar__link">Los 21 millones y la oferta fija</a>
-          <a href="que-es-un-satoshi.html" class="sidebar__link">¿Qué es un satoshi?</a>
-          <a href="historia-bitcoin.html" class="sidebar__link">Historia de Bitcoin</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Dinero y economía</div>
-          <a href="problema-del-dinero-tradicional.html" class="sidebar__link">El problema del dinero tradicional</a>
-          <a href="bitcoin-vs-dinero-tradicional.html" class="sidebar__link">Bitcoin vs dinero tradicional</a>
-          <a href="historia-del-dinero.html" class="sidebar__link">Historia del dinero</a>
-          <a href="inflacion-y-bitcoin.html" class="sidebar__link">Inflación y Bitcoin</a>
-          <a href="austrian-economics.html" class="sidebar__link">Economía Austríaca y Bitcoin</a>
-          <a href="bitcoin-vs-oro.html" class="sidebar__link">Bitcoin vs Oro</a>
-          <a href="bitcoin-reserva-de-valor.html" class="sidebar__link">Bitcoin como reserva de valor</a>
-          <a href="bitcoin-vs-altcoins.html" class="sidebar__link">Bitcoin vs altcoins</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Compra: conceptos</div>
-          <a href="exchange-centralizado-cex.html" class="sidebar__link">Exchange centralizado (CEX)</a>
-          <a href="exchange-descentralizado-dex.html" class="sidebar__link">Exchange descentralizado (DEX)</a>
-          <a href="kyc-vs-no-kyc.html" class="sidebar__link">KYC y no-KYC: qué significan y por qué importan</a>
-          <a href="dca-compras-periodicas.html" class="sidebar__link">DCA: la estrategia de compras periódicas</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Wallets y custodia</div>
-          <a href="tipos-de-wallet.html" class="sidebar__link">Tipos de wallet: custodia, temperatura y formato</a>
-          <a href="que-es-seed-phrase.html" class="sidebar__link">¿Qué es la frase semilla (seed phrase)?</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Red y transacciones</div>
-          <a href="on-chain-vs-lightning.html" class="sidebar__link">On-chain vs Lightning</a>
-          <a href="que-es-una-direccion.html" class="sidebar__link">¿Qué es una dirección Bitcoin?</a>
-          <a href="que-es-una-confirmacion.html" class="sidebar__link">¿Qué es una confirmación?</a>
-          <a href="que-son-las-fees.html" class="sidebar__link">¿Qué son las comisiones (fees)?</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Seguridad</div>
-          <a href="seguridad-basica.html" class="sidebar__link">Seguridad básica: las reglas de oro</a>
-          <a href="estafas-comunes.html" class="sidebar__link">Estafas comunes en Bitcoin</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Ruta guiada</div>
-          <a href="../nivel-1/" class="sidebar__link">Nivel 1 — Nocoinero Curioso</a>
-        </div>
         <div class="sidebar__ad-wrap">
-          <div class="ad-slot ad-sidebar" id="ad-sidebar-base" aria-hidden="true"></div>
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-auto" aria-hidden="true"></div>
         </div>
       </nav>
     </aside>
 
     <main class="page-layout__content" id="main-content">
       <div class="content-inner">
-        <nav class="breadcrumb" aria-label="Ruta de navegación">
-          <a href="../" class="breadcrumb__item">Inicio</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
-          <a href="./index.html" class="breadcrumb__item">Base de Conocimiento</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
-          <span class="breadcrumb__current">¿Cómo funciona Bitcoin?</span>
+        <nav class="breadcrumb" aria-label="Ruta de navegacion">
+          <a href="/" class="breadcrumb__item">Inicio</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><a href="/base/" class="breadcrumb__item">Base de Conocimiento</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><span class="breadcrumb__current">&#191;C&#243;mo funciona Bitcoin?</span>
         </nav>
 
         <article class="article">
           <div class="nivel-badge nivel-badge--base article__badge">Base</div>
-          <h1>¿Cómo funciona Bitcoin?</h1>
-          <p class="article__subtitle">Guía práctica sobre cómo funciona bitcoin dentro de la Base de Conocimiento de aprendeBTC.</p>
+          <h1>&#191;C&#243;mo funciona Bitcoin?</h1>
+          <p class="article__subtitle">De enviar una transacci&#243;n a ver confirmaciones. El flujo completo en t&#233;rminos simples.</p>
 
-          <h2>Idea clave</h2>
-          <p>Este tema pertenece al bloque <strong>Bitcoin: los fundamentos</strong> y sirve para construir criterio antes de tomar decisiones en compra, custodia o uso diario de Bitcoin.</p>
-          <p>En aprendeBTC el objetivo es que entiendas el concepto, identifiques sus límites y lo conectes con acciones concretas en los niveles de aprendizaje.</p>
+<h2>Visi&#243;n general</h2>
 
-          <h2>Qué debes recordar</h2>
-          <ul>
-            <li>Comprender este concepto mejora tus decisiones técnicas y económicas.</li>
-            <li>La teoría sin práctica crea errores; la práctica sin teoría crea riesgos.</li>
-            <li>Este contenido se debe leer junto a páginas cercanas de la misma sección.</li>
-            <li>Aplicar un proceso repetible reduce fallos por impulso.</li>
-            <li>Si algo no está claro, vuelve al Índice y conecta conceptos.</li>
-          </ul>
+<p>Bitcoin funciona como un libro contable distribuido que registra qui&#233;n tiene cu&#225;nto. Este libro (la blockchain) es mantenido por miles de ordenadores (nodos) que verifican cada transacci&#243;n de forma independiente.</p>
 
-          <div class="callout callout--info">
-            <span class="callout__icon" aria-hidden="true">💡</span>
-            <div class="callout__content">
-              <div class="callout__title">Punto de control</div>
-              <p class="callout__text">Si puedes explicar este tema con tus palabras y relacionarlo con una decisión real, estás listo para avanzar.</p>
-            </div>
-          </div>
+<p>No hay un servidor central. No hay una empresa que procese los pagos. El sistema se auto-organiza mediante reglas matem&#225;ticas que todos los participantes siguen.</p>
 
-          <h2>Errores comunes</h2>
-          <ul>
-            <li>Actuar con prisa sin validar pasos ni contexto.</li>
-            <li>Confiar en atajos o en fuentes sin reputación.</li>
-            <li>No definir un procedimiento personal antes de mover fondos.</li>
-          </ul>
+<h2>El flujo de una transacci&#243;n</h2>
 
-          <h2>Cómo aplicarlo en la práctica</h2>
-          <p>Define un flujo operativo simple: herramienta, validación, comprobación final y plan de contingencia. Esa estructura evita la mayoría de errores tempranos.</p>
-          <p>Después enlaza con la siguiente página de la ruta para mantener continuidad y profundidad de aprendizaje.</p>
+<h3>1. Crear la transacci&#243;n</h3>
 
-          <div class="callout callout--success">
-            <span class="callout__icon" aria-hidden="true">📚</span>
-            <div class="callout__content">
-              <div class="callout__title">Profundiza en esta sección</div>
-              <p class="callout__text"><a href="que-es-bitcoin.html">¿Qué es Bitcoin?</a> · <a href="que-es-blockchain.html">¿Qué es la blockchain?</a> · <a href="index.html">Índice de la base</a></p>
-            </div>
-          </div>
+<p>Abres tu wallet y decides enviar bitcoin. Indicas:</p>
 
-          <div class="ad-slot ad-content" id="ad-content-base" aria-hidden="true"></div>
+<ul>
 
-          <nav class="page-nav" aria-label="Navegación entre páginas">
-            <a href="que-es-bitcoin.html" class="page-nav__item">
-              <span class="page-nav__label">← Anterior</span>
-              <span class="page-nav__title">¿Qué es Bitcoin?</span>
+<li>A qu&#233; direcci&#243;n enviar</li>
+
+<li>Qu&#233; cantidad</li>
+
+<li>Qu&#233; comisi&#243;n pagar (para incentivar a los mineros)</li>
+
+</ul>
+
+<p>Tu wallet construye una transacci&#243;n: un mensaje que dice &quot;los bitcoin en mi direcci&#243;n X ahora pertenecen a la direcci&#243;n Y&quot;.</p>
+
+<h3>2. Firmar</h3>
+
+<p>Tu wallet firma la transacci&#243;n con tu clave privada. Esta firma prueba que controlas la direcci&#243;n de origen sin revelar tu clave privada.</p>
+
+<p>Es como firmar un cheque, pero verificable matem&#225;ticamente por cualquiera.</p>
+
+<h3>3. Propagar</h3>
+
+<p>Tu wallet env&#237;a la transacci&#243;n a la red. Los nodos la reciben, verifican que es v&#225;lida (la firma es correcta, los fondos existen, no se gastan dos veces), y la propagan a otros nodos.</p>
+
+<p>En segundos, la transacci&#243;n llega a toda la red.</p>
+
+<h3>4. Mempool</h3>
+
+<p>Las transacciones pendientes esperan en la &quot;mempool&quot; (memory pool) de cada nodo. Los mineros eligen transacciones de la mempool para incluir en el siguiente bloque.</p>
+
+<p>Generalmente eligen las que pagan m&#225;s comisiones, maximizando sus ingresos.</p>
+
+<h3>5. Miner&#237;a</h3>
+
+<p>Los mineros compiten por crear el siguiente bloque. Cada uno:</p>
+
+<ul>
+
+<li>Agrupa transacciones de la mempool</li>
+
+<li>Intenta resolver un puzzle criptogr&#225;fico (proof of work)</li>
+
+<li>El primero en resolverlo gana el derecho a a&#241;adir su bloque</li>
+
+</ul>
+
+<p>El puzzle requiere gastar energ&#237;a computacional. No hay atajos.</p>
+
+<h3>6. Bloque a&#241;adido</h3>
+
+<p>Cuando un minero encuentra la soluci&#243;n, anuncia su bloque a la red. Los dem&#225;s nodos:</p>
+
+<ul>
+
+<li>Verifican que el bloque es v&#225;lido</li>
+
+<li>Verifican que todas las transacciones son v&#225;lidas</li>
+
+<li>A&#241;aden el bloque a su copia de la blockchain</li>
+
+</ul>
+
+<p>Tu transacci&#243;n ahora tiene una confirmaci&#243;n.</p>
+
+<h3>7. Confirmaciones</h3>
+
+<p>Cada bloque nuevo que se a&#241;ade encima aumenta las confirmaciones de tu transacci&#243;n:</p>
+
+<ul>
+
+<li>1 confirmaci&#243;n: incluida en un bloque</li>
+
+<li>3 confirmaciones: razonablemente segura</li>
+
+<li>6 confirmaciones: pr&#225;cticamente irreversible</li>
+
+</ul>
+
+<p>Con cada confirmaci&#243;n, revertir tu transacci&#243;n requerir&#237;a m&#225;s trabajo computacional, haci&#233;ndolo progresivamente m&#225;s imposible.</p>
+
+<h2>Consenso sin autoridad</h2>
+
+<p>&#191;C&#243;mo se ponen de acuerdo miles de ordenadores sin coordinaci&#243;n central?</p>
+
+<p><strong>Las reglas del protocolo:</strong> Todos los nodos siguen las mismas reglas. Si un bloque viola las reglas, se rechaza autom&#225;ticamente.</p>
+
+<p><strong>La cadena m&#225;s larga:</strong> Si hay versiones conflictivas de la blockchain, los nodos siguen la que tiene m&#225;s trabajo acumulado (m&#225;s bloques de proof of work).</p>
+
+<p><strong>Incentivos:</strong> Los mineros ganan dinero siguiendo las reglas. Hacer trampa significa perder la electricidad gastada.</p>
+
+<p>El resultado es consenso emergente: todos acuerdan el estado del libro contable sin necesidad de votaciones, l&#237;deres, ni confianza.</p>
+
+<h2>La blockchain</h2>
+
+<p>La blockchain es la cadena de bloques que contiene todo el historial de transacciones desde el inicio (3 de enero de 2009).</p>
+
+<p>Cada bloque referencia al anterior mediante su hash (huella digital criptogr&#225;fica). Cambiar cualquier dato antiguo cambiar&#237;a su hash, rompiendo la cadena.</p>
+
+<p>Para falsificar el historial, habr&#237;a que recalcular todos los bloques posteriores con m&#225;s poder computacional que el resto de la red. Es econ&#243;micamente inviable.</p>
+
+<p>&gt; ENLACE BASE: Qu&#233; es la blockchain &#8594; <a href="/base/que-es-blockchain.html">/base/que-es-blockchain.html</a></p>
+
+<p>&gt; ENLACE BASE: Qu&#233; es la miner&#237;a &#8594; <a href="/base/que-es-la-mineria.html">/base/que-es-la-mineria.html</a></p>
+
+<p>&gt; ENLACE BASE: Qu&#233; es una confirmaci&#243;n &#8594; <a href="/base/que-es-una-confirmacion.html">/base/que-es-una-confirmacion.html</a></p>
+
+          <div class="ad-slot ad-content" id="ad-content-auto" aria-hidden="true"></div>
+
+          <nav class="page-nav" aria-label="Navegacion entre paginas">
+            <a href="/base/que-es-bitcoin.html" class="page-nav__item">
+              <span class="page-nav__label">&larr; Anterior</span>
+              <span class="page-nav__title">&#191;Qu&#233; es Bitcoin?</span>
             </a>
-            <a href="que-es-blockchain.html" class="page-nav__item page-nav__item--next">
-              <span class="page-nav__label">Siguiente →</span>
-              <span class="page-nav__title">¿Qué es la blockchain?</span>
+            <a href="/base/que-es-blockchain.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente &rarr;</span>
+              <span class="page-nav__title">&#191;Qu&#233; es la blockchain?</span>
             </a>
           </nav>
         </article>
