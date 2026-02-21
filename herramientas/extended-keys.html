@@ -468,18 +468,35 @@
 
     // === FUNCIONES ===
 
+    function getWebCrypto() {
+      const webCrypto = globalThis.crypto || (typeof window !== 'undefined' ? window.crypto : null);
+      if (!webCrypto || !webCrypto.subtle) {
+        throw new Error('Web Crypto API no está disponible en este navegador/contexto.');
+      }
+      return webCrypto;
+    }
+
+    function getSecp() {
+      const secpLib = globalThis.nobleSecp256k1 || globalThis.secp256k1 || null;
+      if (!secpLib) {
+        throw new Error('Librería secp256k1 no cargada. Recarga la página e inténtalo de nuevo.');
+      }
+      return secpLib;
+    }
+
     /**
      * HMAC-SHA512
      */
     async function hmacSha512(key, data) {
-      const cryptoKey = await crypto.subtle.importKey(
+      const webCrypto = getWebCrypto();
+      const cryptoKey = await webCrypto.subtle.importKey(
         'raw',
         key,
         { name: 'HMAC', hash: 'SHA-512' },
         false,
         ['sign']
       );
-      const signature = await crypto.subtle.sign('HMAC', cryptoKey, data);
+      const signature = await webCrypto.subtle.sign('HMAC', cryptoKey, data);
       return new Uint8Array(signature);
     }
 
@@ -496,7 +513,7 @@
       const masterChainCode = hmacResult.slice(32);
 
       // Derivar public key
-      const secp = typeof nobleSecp256k1 !== 'undefined' ? nobleSecp256k1 : secp256k1;
+      const secp = getSecp();
       const masterPublicKey = secp.getPublicKey(masterPrivateKey, true);
 
       return {
@@ -792,6 +809,8 @@
   </script>
 </body>
 </html>
+
+
 
 
 

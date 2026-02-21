@@ -203,6 +203,23 @@
   background: rgba(247, 147, 26, 0.08);
 }
 
+/* Botones de ejemplo: destacar visualmente para accion rapida */
+.tool-btn--example,
+.tool-btn[id*="example"],
+.tool-btn[id*="ejemplo"] {
+  background: linear-gradient(180deg, rgba(88, 166, 255, 0.2), rgba(56, 139, 253, 0.12));
+  border: 1px solid rgba(88, 166, 255, 0.55);
+  color: #d2e8ff;
+}
+
+.tool-btn--example:hover,
+.tool-btn[id*="example"]:hover,
+.tool-btn[id*="ejemplo"]:hover {
+  background: linear-gradient(180deg, rgba(88, 166, 255, 0.3), rgba(56, 139, 253, 0.18));
+  border-color: #58a6ff;
+  color: #ffffff;
+}
+
 .tool-btn--small {
   min-height: 2rem;
   padding: 0.4rem 0.75rem;

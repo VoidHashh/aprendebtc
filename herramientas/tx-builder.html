@@ -424,13 +424,50 @@
 
       return card;
     }
+    // === GESTION DE INPUTS/OUTPUTS ===
 
-    // === GESTIÓN DE INPUTS/OUTPUTS ===
+    const SAMPLE_ADDRESSES = [
+      '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',
+      '1BoatSLRHtKNngkdXEeobR76b53LETtpyT',
+      '3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy'
+    ];
+
+    function randomHex(bytes) {
+      return HexUtils.bytesToHex(HexUtils.randomBytes(bytes));
+    }
+
+    function randomTxid() {
+      return randomHex(32);
+    }
+
+    function randomVout() {
+      return Math.floor(Math.random() * 4);
+    }
+
+    function randomAmount() {
+      return 1000 + Math.floor(Math.random() * 900000);
+    }
+
+    function randomAddress() {
+      return SAMPLE_ADDRESSES[Math.floor(Math.random() * SAMPLE_ADDRESSES.length)];
+    }
+
+    function populateInputCard(card) {
+      card.querySelector('.input-txid').value = randomTxid();
+      card.querySelector('.input-vout').value = String(randomVout());
+    }
+
+    function populateOutputCard(card) {
+      card.querySelector('.output-address').value = randomAddress();
+      card.querySelector('.output-amount').value = String(randomAmount());
+    }
 
     function addInput() {
       const id = inputIdCounter++;
       inputs.push(id);
-      inputsContainer.appendChild(createInputCard(id));
+      const card = createInputCard(id);
+      inputsContainer.appendChild(card);
+      populateInputCard(card);
       updateCounts();
     }
 
@@ -446,7 +483,9 @@
     function addOutput() {
       const id = outputIdCounter++;
       outputs.push(id);
-      outputsContainer.appendChild(createOutputCard(id));
+      const card = createOutputCard(id);
+      outputsContainer.appendChild(card);
+      populateOutputCard(card);
       updateCounts();
     }
 
@@ -750,4 +789,5 @@
   </script>
 </body>
 </html>
+
 

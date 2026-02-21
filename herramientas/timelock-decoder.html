@@ -255,6 +255,10 @@
               />
             </div>
 
+            <div class="tool-btn-row" style="margin-top: 0.5rem;">
+              <button class="tool-btn tool-btn--secondary" id="btn-rbf-example">Ejemplo aleatorio</button>
+            </div>
+
             <div id="rbf-result" style="display: none;"></div>
           </div>
 
@@ -337,6 +341,7 @@
     const sequenceResult = document.getElementById('sequence-result');
     const rbfInput = document.getElementById('rbf-input');
     const rbfResult = document.getElementById('rbf-result');
+    const btnRbfExample = document.getElementById('btn-rbf-example');
 
     function parseValue(str) {
       str = str.trim().toLowerCase();
@@ -582,7 +587,20 @@
       rbfResult.style.display = 'block';
     }
 
+    function generateRandomRbfSequence() {
+      const mode = Math.random() < 0.7 ? 'rbf' : 'no-rbf';
+      if (mode === 'rbf') {
+        const value = Math.floor(Math.random() * 0xFFFFFFFE);
+        return value.toString(16).padStart(8, '0');
+      }
+      return Math.random() < 0.5 ? 'fffffffe' : 'ffffffff';
+    }
+
     rbfInput.addEventListener('input', checkRBF);
+    btnRbfExample.addEventListener('click', () => {
+      rbfInput.value = generateRandomRbfSequence();
+      checkRBF();
+    });
 
   })();
   </script>

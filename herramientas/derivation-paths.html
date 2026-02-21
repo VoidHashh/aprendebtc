@@ -384,7 +384,7 @@
     const SECP256K1_ORDER = BigInt('0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141');
 
     // xprv de ejemplo (generada desde mnemonic "abandon abandon..." de test)
-    const EXAMPLE_XPRV = 'xprv9s21ZrQH143K3GJpoapnV8SFfuZcESnU9dfrEfRAvuwaS7DEgUmMCB7gjVqMSvE5BKXRP6XpDh1aRdc6DZdBcpSxNHrS4NOvKhmkqLR5Hqp';
+    const EXAMPLE_XPRV = 'xprv9s21ZrQH143K3GJpoapnV8SFfuZcESnU9dfrEfRAvuwaS7DEgUmMCB7gjVqMSvE5BKXRP6XpDh1aRdc6DZdBcpSxNHrS4NovKhmkqLR5Hqp';
 
     const VERSION_BYTES = {
       '0488ade4': { prefix: 'xprv', type: 'private', network: 'mainnet' },
@@ -410,15 +410,24 @@
     // === FUNCIONES CRYPTO ===
 
     async function hmacSha512(key, data) {
-      const cryptoKey = await crypto.subtle.importKey(
+      const webCrypto = getWebCrypto();
+      const cryptoKey = await webCrypto.subtle.importKey(
         'raw', key, { name: 'HMAC', hash: 'SHA-512' }, false, ['sign']
       );
-      const sig = await crypto.subtle.sign('HMAC', cryptoKey, data);
+      const sig = await webCrypto.subtle.sign('HMAC', cryptoKey, data);
       return new Uint8Array(sig);
     }
 
+    function getWebCrypto() {
+      const webCrypto = globalThis.crypto || (typeof window !== 'undefined' ? window.crypto : null);
+      if (!webCrypto || !webCrypto.subtle) throw new Error('Web Crypto API no está disponible.');
+      return webCrypto;
+    }
+
     function getSecp() {
-      return typeof nobleSecp256k1 !== 'undefined' ? nobleSecp256k1 : secp256k1;
+      const secpLib = globalThis.nobleSecp256k1 || globalThis.secp256k1 || null;
+      if (!secpLib) throw new Error('Librería secp256k1 no cargada.');
+      return secpLib;
     }
 
     // === DECODIFICAR EXTENDED KEY ===
@@ -756,5 +765,6 @@
   </script>
 </body>
 </html>
+
 
 
