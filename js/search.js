@@ -124,10 +124,18 @@
     { title: 'Direccion Bitcoin (Bech32)', url: '/herramientas/address-bech32.html', tags: ['herramientas', 'direccion', 'bech32', 'bech32m', 'segwit', 'taproot'], section: 'Herramientas' },
     { title: 'Base58Check y checksum', url: '/herramientas/checksum-base58.html', tags: ['herramientas', 'base58', 'base58check', 'checksum'], section: 'Herramientas' },
     { title: 'Generador de direccion multisig', url: '/herramientas/multisig-address.html', tags: ['herramientas', 'multisig', 'p2sh', 'p2wsh', 'n-de-m'], section: 'Herramientas' },
+    { title: 'Mnemonic y seed (BIP39)', url: '/herramientas/mnemonic-seed.html', tags: ['herramientas', 'mnemonic', 'seed', 'bip39'], section: 'Herramientas' },
+    { title: 'Extended keys (xpub/xprv)', url: '/herramientas/extended-keys.html', tags: ['herramientas', 'xpub', 'xprv', 'bip32'], section: 'Herramientas' },
+    { title: 'Derivation paths (BIP32)', url: '/herramientas/derivation-paths.html', tags: ['herramientas', 'derivation path', 'bip32'], section: 'Herramientas' },
+    { title: 'Direcciones desde xpub', url: '/herramientas/address-from-xpub.html', tags: ['herramientas', 'xpub', 'direcciones', 'wallet'], section: 'Herramientas' },
     { title: 'HD Wallet explorer', url: '/herramientas/hd-wallet.html', tags: ['herramientas', 'hd wallet', 'derivation'], section: 'Herramientas' },
-    { title: 'Constructor de transacciones', url: '/herramientas/transaccion.html', tags: ['herramientas', 'transacciones', 'raw'], section: 'Herramientas' },
-    { title: 'Interprete de Script', url: '/herramientas/script.html', tags: ['herramientas', 'script'], section: 'Herramientas' },
-    { title: 'ECDSA y Schnorr Sign/Verify', url: '/herramientas/firma.html', tags: ['herramientas', 'firma', 'ecdsa', 'schnorr'], section: 'Herramientas' },
+    { title: 'Decodificador de transacciones', url: '/herramientas/tx-decoder.html', tags: ['herramientas', 'transacciones', 'raw', 'tx'], section: 'Herramientas' },
+    { title: 'TX splitter (byte a byte)', url: '/herramientas/tx-splitter.html', tags: ['herramientas', 'tx', 'byte', 'varint'], section: 'Herramientas' },
+    { title: 'Constructor de transacciones (raw)', url: '/herramientas/tx-builder.html', tags: ['herramientas', 'transacciones', 'raw', 'builder'], section: 'Herramientas' },
+    { title: 'Interprete de Bitcoin Script', url: '/herramientas/script-interpreter.html', tags: ['herramientas', 'script', 'stack', 'opcodes'], section: 'Herramientas' },
+    { title: 'Decodificador PSBT (BIP174)', url: '/herramientas/psbt-decoder.html', tags: ['herramientas', 'psbt', 'bip174', 'wallet'], section: 'Herramientas' },
+    { title: 'Firma digital: ECDSA y Schnorr', url: '/herramientas/ecdsa-schnorr.html', tags: ['herramientas', 'firma', 'ecdsa', 'schnorr'], section: 'Herramientas' },
+    { title: 'Calculadora de curva eliptica', url: '/herramientas/ec-calculator.html', tags: ['herramientas', 'secp256k1', 'curva', 'modular'], section: 'Herramientas' },
     { title: 'Comunidad', url: '/comunidad/', tags: ['meetups', 'eventos'], section: 'Pilares' }
   ];
 

@@ -163,7 +163,10 @@
                 </div>
               </div>
 
-              <button class="tool-btn" id="btn-encode">🔐 Codificar a WIF</button>
+              <div class="tool-btn-row">
+                <button class="tool-btn tool-btn--secondary" id="btn-generate-privkey">🎲 Generar clave privada</button>
+                <button class="tool-btn" id="btn-encode">🔐 Codificar a WIF</button>
+              </div>
             </div>
 
             <!-- Error -->
@@ -333,6 +336,7 @@
     const encodeStatus = document.getElementById('encode-status');
     const encodeCompressed = document.getElementById('encode-compressed');
     const encodeMainnet = document.getElementById('encode-mainnet');
+    const btnGeneratePrivkey = document.getElementById('btn-generate-privkey');
     const btnEncode = document.getElementById('btn-encode');
     const encodeError = document.getElementById('encode-error');
     const encodeResult = document.getElementById('encode-result');
@@ -368,6 +372,22 @@
       encodePrivkey.value = value;
       encodeStatus.textContent = `${value.length} / 64 caracteres`;
       encodeStatus.style.color = value.length === 64 ? '#2ea043' : 'var(--text-secondary)';
+    });
+
+    function generateRandomPrivateKeyHex() {
+      let randomBytes;
+      do {
+        randomBytes = HexUtils.randomBytes(32);
+      } while (randomBytes.every(byte => byte === 0));
+      return HexUtils.bytesToHex(randomBytes);
+    }
+
+    btnGeneratePrivkey.addEventListener('click', () => {
+      encodePrivkey.value = generateRandomPrivateKeyHex();
+      encodePrivkey.dispatchEvent(new Event('input'));
+      encodeError.style.display = 'none';
+      encodeResult.style.display = 'none';
+      encodePrivkey.focus();
     });
 
     btnEncode.addEventListener('click', encodeToWif);

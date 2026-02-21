@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Genera frases semilla BIP39 de 12 o 24 palabras. Verifica checksums y convierte a seed hexadecimal." />
+  <title>Generador de Mnemonic Seed (BIP39) — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .mnemonic-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    @media (max-width: 640px) {
+      .mnemonic-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .mnemonic-word {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+    }
+    .mnemonic-word__number {
+      color: var(--text-secondary);
+      font-size: 0.7rem;
+      min-width: 20px;
+    }
+    .mnemonic-word__text {
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .mnemonic-word--invalid {
+      border-color: #da3633;
+      background: rgba(218, 54, 51, 0.1);
+    }
+    .mnemonic-word--invalid .mnemonic-word__text {
+      color: #da3633;
+    }
+
+    .binary-display {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      line-height: 2;
+      word-break: break-all;
+      padding: 1rem;
+      background: var(--bg-primary);
+      border-radius: var(--radius-md);
+    }
+    .binary-group {
+      padding: 2px 4px;
+      border-radius: 3px;
+      margin: 1px;
+      display: inline-block;
+    }
+    .binary-group:nth-child(odd) { background: rgba(247, 147, 26, 0.2); }
+    .binary-group:nth-child(even) { background: rgba(88, 166, 255, 0.2); }
+
+    .process-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 0.75rem;
+      background: var(--bg-primary);
+      border-radius: var(--radius-md);
+      margin-bottom: 0.5rem;
+    }
+    .process-step__number {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.75rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .process-step__content {
+      flex: 1;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Herramientas">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Herramientas prácticas</div>
+          <a href="conversor.html" class="sidebar__link">Conversor BTC / EUR / sats</a>
+          <a href="calculadora-dca.html" class="sidebar__link">Calculadora DCA</a>
+          <a href="calculadora-fees.html" class="sidebar__link">Calculadora de fees</a>
+          <a href="calculadora-impuestos.html" class="sidebar__link">Calculadora de impuestos</a>
+          <a href="comparador-exchanges.html" class="sidebar__link">Comparador de exchanges</a>
+          <a href="calculadora-herencia.html" class="sidebar__link">Calculadora de herencia</a>
+        </div>
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Herramientas técnicas</div>
+          <a href="hash.html" class="sidebar__link">Hash functions</a>
+          <a href="private-key.html" class="sidebar__link">Claves y direcciones</a>
+          <a href="mnemonic-seed.html" class="sidebar__link sidebar__link--active">HD Wallet / BIP39</a>
+          <a href="transaccion.html" class="sidebar__link">Transacciones</a>
+          <a href="script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="block-tools.html" class="sidebar__link">Bloques</a>
+          <a href="firma.html" class="sidebar__link">Criptografía</a>
+          <a href="index.html" class="sidebar__link">Utilidades</a>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Mnemonic Seed</span>
+        </nav>
+
+        <article class="article">
+          <h1>Generador de Mnemonic Seed (BIP39)</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Genera y verifica frases semilla (mnemonic) según el estándar BIP39.
+          </p>
+
+          <!-- Disclaimer educativo -->
+          <div class="callout callout--danger" style="margin-bottom: 1.5rem;">
+            <span class="callout__icon" aria-hidden="true">🚨</span>
+            <div class="callout__content">
+              <div class="callout__title">Herramienta educativa — NO para fondos reales</div>
+              <p class="callout__text">NUNCA uses una seed generada en una web para fondos reales. Para seeds reales, usa un hardware wallet o software offline.</p>
+            </div>
+          </div>
+
+          <!-- Generación -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Generar nueva frase semilla</h2>
+            
+            <div class="tool-btn-row">
+              <button class="tool-btn" id="btn-generate-12">🎲 Generar 12 palabras</button>
+              <button class="tool-btn tool-btn--secondary" id="btn-generate-24">🎲 Generar 24 palabras</button>
+            </div>
+
+            <div style="margin-top: 1rem;">
+              <label class="tool-label" for="mnemonic-input">O introduce una frase existente para verificar</label>
+              <textarea 
+                id="mnemonic-input" 
+                class="tool-input" 
+                rows="2"
+                placeholder="abandon ability able about above absent absorb abstract absurd abuse access accident"
+                style="font-family: 'JetBrains Mono', monospace;"
+              ></textarea>
+              <button class="tool-btn tool-btn--secondary" id="btn-verify" style="margin-top: 0.5rem;">✓ Verificar frase</button>
+            </div>
+          </div>
+
+          <!-- Verificación -->
+          <div class="tool-container" id="validation-section" style="display: none;">
+            <h2 class="tool-container__title">Verificación</h2>
+            <div id="validation-result"></div>
+          </div>
+
+          <!-- Mnemonic display -->
+          <div class="tool-container" id="mnemonic-section" style="display: none;">
+            <h2 class="tool-container__title">Frase semilla (<span id="word-count">12</span> palabras)</h2>
+            <div class="mnemonic-grid" id="mnemonic-grid"></div>
+            <button class="tool-btn tool-btn--secondary tool-btn--small" id="btn-copy-mnemonic">📋 Copiar frase</button>
+          </div>
+
+          <!-- Datos técnicos -->
+          <div class="tool-container" id="technical-section" style="display: none;">
+            <h2 class="tool-container__title">Datos técnicos</h2>
+
+            <!-- Entropía -->
+            <div class="tool-field" style="margin-bottom: 1rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <label class="tool-label" style="margin-bottom: 0;">Entropía (<span id="entropy-bits">128</span> bits)</label>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-entropy">📋</button>
+              </div>
+              <div class="tool-output" id="output-entropy" style="font-size: 0.75rem;">—</div>
+            </div>
+
+            <!-- Checksum -->
+            <div class="tool-field" style="margin-bottom: 1rem;">
+              <label class="tool-label">Checksum (<span id="checksum-bits">4</span> bits)</label>
+              <div class="tool-output" id="output-checksum" style="font-family: 'JetBrains Mono', monospace;">—</div>
+              <span class="tool-note">Primeros <span id="checksum-bits2">4</span> bits de SHA-256(entropía)</span>
+            </div>
+
+            <!-- Binario con grupos -->
+            <div class="tool-field">
+              <label class="tool-label">Entropía + Checksum en binario (grupos de 11 bits = 1 palabra)</label>
+              <div class="binary-display" id="output-binary">—</div>
+            </div>
+          </div>
+
+          <!-- Seed derivation -->
+          <div class="tool-container" id="seed-section" style="display: none;">
+            <h2 class="tool-container__title">Seed (512 bits)</h2>
+
+            <div class="tool-field" style="margin-bottom: 1rem;">
+              <label class="tool-label" for="passphrase-input">Passphrase opcional (25ª palabra)</label>
+              <input 
+                type="text" 
+                id="passphrase-input" 
+                class="tool-input" 
+                placeholder="Deja vacío para seed sin passphrase"
+              />
+              <span class="tool-note">La passphrase cambia completamente la seed resultante</span>
+            </div>
+
+            <div class="tool-field">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <label class="tool-label" style="margin-bottom: 0;">Seed (64 bytes hex)</label>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-seed">📋</button>
+              </div>
+              <div class="tool-output" id="output-seed" style="font-size: 0.7rem; word-break: break-all; color: var(--accent);">—</div>
+              <span class="tool-note">PBKDF2(mnemonic, "mnemonic" + passphrase, 2048 iteraciones, 512 bits)</span>
+            </div>
+
+            <div class="tool-loading" id="seed-loading" style="display: none;">
+              <div class="tool-spinner"></div>
+              <span>Calculando seed (2048 iteraciones PBKDF2)...</span>
+            </div>
+          </div>
+
+          <!-- Proceso visual -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Proceso BIP39</h2>
+            
+            <div class="process-step">
+              <div class="process-step__number">1</div>
+              <div class="process-step__content">
+                <strong>Generar entropía aleatoria</strong><br>
+                128 bits (12 palabras) o 256 bits (24 palabras) usando <code>crypto.getRandomValues()</code>
+              </div>
+            </div>
+            
+            <div class="process-step">
+              <div class="process-step__number">2</div>
+              <div class="process-step__content">
+                <strong>Calcular checksum</strong><br>
+                SHA-256(entropía) → tomar los primeros 4 bits (12 palabras) u 8 bits (24 palabras)
+              </div>
+            </div>
+            
+            <div class="process-step">
+              <div class="process-step__number">3</div>
+              <div class="process-step__content">
+                <strong>Concatenar entropía + checksum</strong><br>
+                128 + 4 = 132 bits (12 palabras) o 256 + 8 = 264 bits (24 palabras)
+              </div>
+            </div>
+            
+            <div class="process-step">
+              <div class="process-step__number">4</div>
+              <div class="process-step__content">
+                <strong>Dividir en grupos de 11 bits</strong><br>
+                132 / 11 = 12 grupos o 264 / 11 = 24 grupos. Cada grupo es un índice (0-2047).
+              </div>
+            </div>
+            
+            <div class="process-step">
+              <div class="process-step__number">5</div>
+              <div class="process-step__content">
+                <strong>Buscar cada índice en la wordlist</strong><br>
+                2048 palabras en inglés ordenadas alfabéticamente. Índice 0 = "abandon", índice 2047 = "zoo".
+              </div>
+            </div>
+            
+            <div class="process-step">
+              <div class="process-step__number">6</div>
+              <div class="process-step__content">
+                <strong>Derivar seed con PBKDF2</strong><br>
+                PBKDF2-HMAC-SHA512(mnemonic, "mnemonic" + passphrase, 2048 iteraciones) → 512 bits (64 bytes)
+              </div>
+            </div>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más sobre frases semilla</div>
+            <p class="tool-callout__text">
+              <a href="../base/que-es-seed-phrase.html">¿Qué es una seed phrase? →</a> · 
+              <a href="../nivel-3/hd-wallets.html">HD Wallets en detalle →</a> ·
+              <a href="extended-keys.html">Extended Keys (xpub/xprv) →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+  <script src="../js/hex-utils.js"></script>
+  <script src="../js/bip39-wordlist.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === ELEMENTOS DEL DOM ===
+    const btnGenerate12 = document.getElementById('btn-generate-12');
+    const btnGenerate24 = document.getElementById('btn-generate-24');
+    const mnemonicInput = document.getElementById('mnemonic-input');
+    const btnVerify = document.getElementById('btn-verify');
+    const passphraseInput = document.getElementById('passphrase-input');
+
+    const validationSection = document.getElementById('validation-section');
+    const validationResult = document.getElementById('validation-result');
+    const mnemonicSection = document.getElementById('mnemonic-section');
+    const mnemonicGrid = document.getElementById('mnemonic-grid');
+    const wordCountEl = document.getElementById('word-count');
+    const btnCopyMnemonic = document.getElementById('btn-copy-mnemonic');
+
+    const technicalSection = document.getElementById('technical-section');
+    const entropyBitsEl = document.getElementById('entropy-bits');
+    const checksumBitsEl = document.getElementById('checksum-bits');
+    const checksumBits2El = document.getElementById('checksum-bits2');
+    const outputEntropy = document.getElementById('output-entropy');
+    const outputChecksum = document.getElementById('output-checksum');
+    const outputBinary = document.getElementById('output-binary');
+
+    const seedSection = document.getElementById('seed-section');
+    const outputSeed = document.getElementById('output-seed');
+    const seedLoading = document.getElementById('seed-loading');
+
+    let currentMnemonic = '';
+    let currentEntropy = null;
+
+    // === FUNCIONES BIP39 ===
+
+    /**
+     * Genera entropía aleatoria
+     */
+    function generateEntropy(bits) {
+      const bytes = new Uint8Array(bits / 8);
+      crypto.getRandomValues(bytes);
+      return bytes;
+    }
+
+    /**
+     * Convierte bytes a string binario
+     */
+    function bytesToBinary(bytes) {
+      return Array.from(bytes)
+        .map(b => b.toString(2).padStart(8, '0'))
+        .join('');
+    }
+
+    /**
+     * Calcula el checksum (primeros N bits de SHA-256)
+     */
+    async function calculateChecksum(entropyBytes) {
+      const hash = await HexUtils.sha256(entropyBytes);
+      const checksumBits = entropyBytes.length / 4; // 4 bits por cada 32 bits de entropía
+      const hashBinary = bytesToBinary(hash);
+      return hashBinary.substring(0, checksumBits);
+    }
+
+    /**
+     * Convierte entropía a mnemonic
+     */
+    async function entropyToMnemonic(entropyBytes) {
+      const entropyBinary = bytesToBinary(entropyBytes);
+      const checksum = await calculateChecksum(entropyBytes);
+      const combined = entropyBinary + checksum;
+
+      // Dividir en grupos de 11 bits
+      const words = [];
+      for (let i = 0; i < combined.length; i += 11) {
+        const bits = combined.substring(i, i + 11);
+        const index = parseInt(bits, 2);
+        words.push(BIP39.getWord(index));
+      }
+
+      return {
+        words,
+        entropy: HexUtils.bytesToHex(entropyBytes),
+        checksum,
+        binary: combined
+      };
+    }
+
+    /**
+     * Convierte mnemonic a entropía (y verifica)
+     */
+    async function mnemonicToEntropy(words) {
+      // Verificar todas las palabras
+      const invalidWords = [];
+      const indices = [];
+      
+      for (let i = 0; i < words.length; i++) {
+        const index = BIP39.getWordIndex(words[i]);
+        if (index === -1) {
+          invalidWords.push({ word: words[i], position: i + 1 });
+        } else {
+          indices.push(index);
+        }
+      }
+
+      if (invalidWords.length > 0) {
+        return { valid: false, invalidWords };
+      }
+
+      // Convertir índices a binario
+      let binary = '';
+      for (const index of indices) {
+        binary += index.toString(2).padStart(11, '0');
+      }
+
+      // Separar entropía y checksum
+      const checksumBits = words.length / 3; // 4 bits para 12 palabras, 8 para 24
+      const entropyBits = binary.length - checksumBits;
+      const entropyBinary = binary.substring(0, entropyBits);
+      const checksumFromMnemonic = binary.substring(entropyBits);
+
+      // Convertir entropía binaria a bytes
+      const entropyBytes = new Uint8Array(entropyBits / 8);
+      for (let i = 0; i < entropyBytes.length; i++) {
+        entropyBytes[i] = parseInt(entropyBinary.substring(i * 8, (i + 1) * 8), 2);
+      }
+
+      // Calcular checksum esperado
+      const expectedChecksum = await calculateChecksum(entropyBytes);
+
+      const checksumValid = checksumFromMnemonic === expectedChecksum;
+
+      return {
+        valid: checksumValid,
+        entropy: HexUtils.bytesToHex(entropyBytes),
+        checksum: checksumFromMnemonic,
+        expectedChecksum,
+        binary,
+        entropyBytes
+      };
+    }
+
+    /**
+     * Deriva seed usando PBKDF2
+     */
+    async function deriveSeed(mnemonic, passphrase = '') {
+      const encoder = new TextEncoder();
+      const mnemonicBytes = encoder.encode(mnemonic.normalize('NFKD'));
+      const salt = encoder.encode(('mnemonic' + passphrase).normalize('NFKD'));
+
+      // Importar la clave
+      const key = await crypto.subtle.importKey(
+        'raw',
+        mnemonicBytes,
+        { name: 'PBKDF2' },
+        false,
+        ['deriveBits']
+      );
+
+      // Derivar 512 bits
+      const derivedBits = await crypto.subtle.deriveBits(
+        {
+          name: 'PBKDF2',
+          salt: salt,
+          iterations: 2048,
+          hash: 'SHA-512'
+        },
+        key,
+        512
+      );
+
+      return new Uint8Array(derivedBits);
+    }
+
+    // === FUNCIONES DE UI ===
+
+    function displayMnemonic(words, invalidIndices = []) {
+      mnemonicGrid.innerHTML = '';
+      
+      words.forEach((word, i) => {
+        const isInvalid = invalidIndices.includes(i);
+        const div = document.createElement('div');
+        div.className = 'mnemonic-word' + (isInvalid ? ' mnemonic-word--invalid' : '');
+        div.innerHTML = `
+          <span class="mnemonic-word__number">${i + 1}.</span>
+          <span class="mnemonic-word__text">${word}</span>
+        `;
+        mnemonicGrid.appendChild(div);
+      });
+
+      wordCountEl.textContent = words.length;
+      mnemonicSection.style.display = 'block';
+    }
+
+    function displayTechnical(data) {
+      const entropyBits = data.entropy.length * 4;
+      const checksumBits = data.checksum.length;
+
+      entropyBitsEl.textContent = entropyBits;
+      checksumBitsEl.textContent = checksumBits;
+      checksumBits2El.textContent = checksumBits;
+
+      outputEntropy.textContent = data.entropy;
+      outputChecksum.textContent = data.checksum;
+
+      // Mostrar binario con grupos coloreados
+      let binaryHtml = '';
+      for (let i = 0; i < data.binary.length; i += 11) {
+        const group = data.binary.substring(i, i + 11);
+        binaryHtml += `<span class="binary-group">${group}</span>`;
+      }
+      outputBinary.innerHTML = binaryHtml;
+
+      technicalSection.style.display = 'block';
+    }
+
+    function displayValidation(isValid, message) {
+      validationResult.innerHTML = isValid
+        ? `<div style="color: #2ea043; font-weight: 600;">✓ ${message}</div>`
+        : `<div style="color: #da3633; font-weight: 600;">✗ ${message}</div>`;
+      validationSection.style.display = 'block';
+    }
+
+    async function updateSeed() {
+      if (!currentMnemonic) return;
+
+      seedLoading.style.display = 'flex';
+      outputSeed.textContent = 'Calculando...';
+
+      try {
+        const passphrase = passphraseInput.value;
+        const seed = await deriveSeed(currentMnemonic, passphrase);
+        outputSeed.textContent = HexUtils.bytesToHex(seed);
+      } catch (error) {
+        outputSeed.textContent = 'Error: ' + error.message;
+      }
+
+      seedLoading.style.display = 'none';
+    }
+
+    // === GENERACIÓN ===
+
+    async function generateMnemonic(wordCount) {
+      const entropyBits = wordCount === 12 ? 128 : 256;
+      const entropyBytes = generateEntropy(entropyBits);
+      
+      const data = await entropyToMnemonic(entropyBytes);
+      currentMnemonic = data.words.join(' ');
+      currentEntropy = entropyBytes;
+
+      mnemonicInput.value = currentMnemonic;
+      
+      displayMnemonic(data.words);
+      displayTechnical(data);
+      displayValidation(true, 'Checksum válido');
+      
+      seedSection.style.display = 'block';
+      await updateSeed();
+    }
+
+    // === VERIFICACIÓN ===
+
+    async function verifyMnemonic() {
+      const input = mnemonicInput.value.trim().toLowerCase();
+      const words = input.split(/\s+/).filter(w => w);
+
+      if (![12, 15, 18, 21, 24].includes(words.length)) {
+        displayValidation(false, `Número de palabras inválido: ${words.length}. Debe ser 12, 15, 18, 21 o 24.`);
+        mnemonicSection.style.display = 'none';
+        technicalSection.style.display = 'none';
+        seedSection.style.display = 'none';
+        return;
+      }
+
+      const result = await mnemonicToEntropy(words);
+
+      if (result.invalidWords && result.invalidWords.length > 0) {
+        const invalidList = result.invalidWords
+          .map(w => `"${w.word}" (posición ${w.position})`)
+          .join(', ');
+        displayValidation(false, `Palabras desconocidas: ${invalidList}`);
+        
+        const invalidIndices = result.invalidWords.map(w => w.position - 1);
+        displayMnemonic(words, invalidIndices);
+        
+        technicalSection.style.display = 'none';
+        seedSection.style.display = 'none';
+        return;
+      }
+
+      displayMnemonic(words);
+
+      if (result.valid) {
+        displayValidation(true, 'Checksum válido');
+        displayTechnical({
+          entropy: result.entropy,
+          checksum: result.checksum,
+          binary: result.binary
+        });
+        
+        currentMnemonic = words.join(' ');
+        currentEntropy = result.entropyBytes;
+        
+        seedSection.style.display = 'block';
+        await updateSeed();
+      } else {
+        displayValidation(false, `Checksum inválido. Esperado: ${result.expectedChecksum}, encontrado: ${result.checksum}`);
+        displayTechnical({
+          entropy: result.entropy,
+          checksum: result.checksum,
+          binary: result.binary
+        });
+        seedSection.style.display = 'none';
+      }
+    }
+
+    // === EVENT LISTENERS ===
+
+    btnGenerate12.addEventListener('click', () => generateMnemonic(12));
+    btnGenerate24.addEventListener('click', () => generateMnemonic(24));
+    btnVerify.addEventListener('click', verifyMnemonic);
+
+    passphraseInput.addEventListener('input', () => {
+      clearTimeout(passphraseInput._debounce);
+      passphraseInput._debounce = setTimeout(updateSeed, 500);
+    });
+
+    btnCopyMnemonic.addEventListener('click', async () => {
+      if (currentMnemonic) {
+        await navigator.clipboard.writeText(currentMnemonic);
+        btnCopyMnemonic.textContent = '✓ Copiado';
+        setTimeout(() => { btnCopyMnemonic.textContent = '📋 Copiar frase'; }, 1500);
+      }
+    });
+
+    // Copiar otros campos
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const targetId = btn.dataset.target;
+        const target = document.getElementById(targetId);
+        const text = target.textContent;
+
+        if (text && text !== '—' && !text.startsWith('Calculando')) {
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.textContent = '✓';
+            setTimeout(() => { btn.textContent = '📋'; }, 1000);
+          } catch (err) {
+            console.error('Error copiando:', err);
+          }
+        }
+      });
+    });
+
+  })();
+  </script>
+</body>
+</html>
+

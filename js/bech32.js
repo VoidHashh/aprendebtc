@@ -1,5 +1,5 @@
 /**
- * BECH32.JS â€” Bech32 y Bech32m encoding/decoding
+ * BECH32.JS — Bech32 y Bech32m encoding/decoding
  * Proyecto: aprendebtc.com
  * 
  * Bech32 (BIP 173): usado para direcciones SegWit v0 (P2WPKH, P2WSH)
@@ -31,7 +31,7 @@
   // === FUNCIONES INTERNAS ===
 
   /**
-   * Expande el HRP para el cÃ¡lculo del checksum
+   * Expande el HRP para el cálculo del checksum
    */
   function hrpExpand(hrp) {
     const result = [];
@@ -110,7 +110,7 @@
         result.push((acc << (toBits - bits)) & maxv);
       }
     } else if (bits >= fromBits || ((acc << (toBits - bits)) & maxv)) {
-      throw new Error('Bits sobrantes invÃ¡lidos');
+      throw new Error('Bits sobrantes inválidos');
     }
     
     return result;
@@ -121,13 +121,13 @@
   /**
    * Codifica en Bech32 o Bech32m
    * @param {string} hrp - Human Readable Part (ej: "bc" para mainnet)
-   * @param {number} witnessVersion - VersiÃ³n del witness (0 para SegWit, 1 para Taproot)
+   * @param {number} witnessVersion - Versión del witness (0 para SegWit, 1 para Taproot)
    * @param {Uint8Array} program - Witness program (20 o 32 bytes)
    * @param {string} spec - 'bech32' o 'bech32m'
    * @returns {string}
    */
   function encode(hrp, witnessVersion, program, spec = 'bech32') {
-    // Validar versiÃ³n
+    // Validar versión
     if (witnessVersion < 0 || witnessVersion > 16) {
       throw new Error('Witness version debe ser 0-16');
     }
@@ -137,12 +137,12 @@
       throw new Error('Witness program debe tener 2-40 bytes');
     }
 
-    // Validar especificaciÃ³n segÃºn versiÃ³n
+    // Validar especificación según versión
     if (witnessVersion === 0 && spec !== 'bech32') {
-      console.warn('Witness version 0 deberÃ­a usar bech32, no bech32m');
+      console.warn('Witness version 0 debería usar bech32, no bech32m');
     }
     if (witnessVersion > 0 && spec !== 'bech32m') {
-      console.warn('Witness version > 0 deberÃ­a usar bech32m');
+      console.warn('Witness version > 0 debería usar bech32m');
     }
 
     // Convertir programa de 8 bits a 5 bits
@@ -169,12 +169,12 @@
    * @returns {{hrp: string, version: number, program: Uint8Array, spec: string}}
    */
   function decode(str) {
-    // Convertir a minÃºsculas (Bech32 es case-insensitive, pero no mezcla)
+    // Convertir a minúsculas (Bech32 es case-insensitive, pero no mezcla)
     const lower = str.toLowerCase();
     const upper = str.toUpperCase();
     
     if (str !== lower && str !== upper) {
-      throw new Error('Mezcla de mayÃºsculas y minÃºsculas no permitida');
+      throw new Error('Mezcla de mayúsculas y minúsculas no permitida');
     }
     
     str = lower;
@@ -182,7 +182,7 @@
     // Encontrar el separador '1'
     const sepPos = str.lastIndexOf('1');
     if (sepPos < 1 || sepPos + 7 > str.length) {
-      throw new Error('Formato Bech32 invÃ¡lido');
+      throw new Error('Formato Bech32 inválido');
     }
 
     const hrp = str.slice(0, sepPos);
@@ -192,34 +192,34 @@
     const data = [];
     for (const char of dataStr) {
       if (!(char in CHARSET_MAP)) {
-        throw new Error(`CarÃ¡cter invÃ¡lido: '${char}'`);
+        throw new Error(`Carácter inválido: '${char}'`);
       }
       data.push(CHARSET_MAP[char]);
     }
 
-    // Determinar especificaciÃ³n verificando con ambas constantes
+    // Determinar especificación verificando con ambas constantes
     let spec = null;
     if (verifyChecksum(hrp, data, 'bech32')) {
       spec = 'bech32';
     } else if (verifyChecksum(hrp, data, 'bech32m')) {
       spec = 'bech32m';
     } else {
-      throw new Error('Checksum invÃ¡lido');
+      throw new Error('Checksum inválido');
     }
 
     // Separar version y programa (quitar checksum de 6 chars)
     const version = data[0];
     const programBits = data.slice(1, -6);
 
-    // Validar versiÃ³n
+    // Validar versión
     if (version > 16) {
-      throw new Error('Witness version invÃ¡lida');
+      throw new Error('Witness version inválida');
     }
 
     // Convertir de 5 bits a 8 bits
     const program = convertBits(programBits, 5, 8, false);
 
-    // Validar longitud segÃºn versiÃ³n
+    // Validar longitud según versión
     if (version === 0 && program.length !== 20 && program.length !== 32) {
       throw new Error('Witness version 0 requiere programa de 20 o 32 bytes');
     }
@@ -232,10 +232,10 @@
     };
   }
 
-  // === FUNCIONES ESPECÃFICAS PARA BITCOIN ===
+  // === FUNCIONES ESPECÍFICAS PARA BITCOIN ===
 
   /**
-   * Codifica direcciÃ³n P2WPKH (Native SegWit)
+   * Codifica dirección P2WPKH (Native SegWit)
    * @param {Uint8Array} pubkeyHash - HASH160 de la public key (20 bytes)
    * @param {string} network - 'mainnet' o 'testnet'
    * @returns {string}
@@ -249,7 +249,7 @@
   }
 
   /**
-   * Codifica direcciÃ³n P2WSH (Native SegWit Script Hash)
+   * Codifica dirección P2WSH (Native SegWit Script Hash)
    * @param {Uint8Array} scriptHash - SHA-256 del witness script (32 bytes)
    * @param {string} network - 'mainnet' o 'testnet'
    * @returns {string}
@@ -263,7 +263,7 @@
   }
 
   /**
-   * Codifica direcciÃ³n P2TR (Taproot)
+   * Codifica dirección P2TR (Taproot)
    * @param {Uint8Array} xOnlyPubkey - Coordenada X de la public key (32 bytes)
    * @param {string} network - 'mainnet' o 'testnet'
    * @returns {string}
@@ -289,3 +289,4 @@
   };
 
 })(typeof window !== 'undefined' ? window : global);
+

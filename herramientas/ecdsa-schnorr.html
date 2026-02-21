@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Firma y verifica mensajes con ECDSA y Schnorr sobre secp256k1. Decodifica firmas DER. Herramienta educativa Bitcoin." />
+  <title>Firma digital: ECDSA y Schnorr — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--bg-border);
+      margin-bottom: 1.5rem;
+      gap: 0.25rem;
+    }
+    .tab {
+      padding: 0.6rem 1rem;
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .tab:hover { color: var(--text-primary); }
+    .tab--active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .tab-content { display: none; }
+    .tab-content--active { display: block; }
+
+    .sig-result {
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      margin-top: 1rem;
+    }
+    .sig-result--valid {
+      background: rgba(46, 160, 67, 0.15);
+      border: 1px solid #2ea043;
+    }
+    .sig-result--invalid {
+      background: rgba(218, 54, 51, 0.15);
+      border: 1px solid #da3633;
+    }
+    .sig-result__icon {
+      font-size: 1.5rem;
+      margin-right: 0.5rem;
+    }
+    .sig-result__text {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .der-breakdown {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      line-height: 2;
+      padding: 1rem;
+      background: var(--bg-primary);
+      border-radius: var(--radius-md);
+      word-break: break-all;
+    }
+    .der-sequence { color: #58a6ff; }
+    .der-length { color: #8b949e; }
+    .der-int { color: #d29922; }
+    .der-r { color: #3fb950; }
+    .der-s { color: #f78166; }
+    .der-sighash { color: #a371f7; }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 768px) {
+      .field-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+        <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">ECDSA y Schnorr</span>
+        </nav>
+
+        <article class="article">
+          <h1>Firma digital: ECDSA y Schnorr</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Firma, verifica y analiza firmas digitales ECDSA y Schnorr sobre la curva secp256k1.
+          </p>
+
+          <!-- Disclaimer -->
+          <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">Herramienta educativa</div>
+              <p class="callout__text">Esta herramienta es para aprendizaje. NO uses claves privadas reales con fondos.</p>
+            </div>
+          </div>
+
+          <!-- Tabs -->
+          <div class="tabs">
+            <button class="tab tab--active" data-tab="ecdsa-sign">ECDSA Sign</button>
+            <button class="tab" data-tab="ecdsa-verify">ECDSA Verify</button>
+            <button class="tab" data-tab="schnorr-sign">Schnorr Sign</button>
+            <button class="tab" data-tab="schnorr-verify">Schnorr Verify</button>
+            <button class="tab" data-tab="der-decoder">DER Decoder</button>
+          </div>
+
+          <!-- ==================== -->
+          <!-- TAB 1: ECDSA SIGN -->
+          <!-- ==================== -->
+          <div class="tab-content tab-content--active" id="tab-ecdsa-sign">
+            <div class="tool-container">
+              <h2 class="tool-container__title">Firmar con ECDSA</h2>
+
+              <div class="tool-field" style="margin-bottom: 1rem;">
+                <label class="tool-label" for="ecdsa-sign-msg">Mensaje</label>
+                <textarea 
+                  id="ecdsa-sign-msg" 
+                  class="tool-input" 
+                  rows="2"
+                  placeholder="Escribe un mensaje para firmar..."
+                >Hello Bitcoin!</textarea>
+              </div>
+
+              <div class="tool-field" style="margin-bottom: 1rem;">
+                <label class="tool-toggle">
+                  <input type="checkbox" class="tool-toggle__input" id="ecdsa-sign-ishex" />
+                  <span class="tool-toggle__slider"></span>
+                  <span class="tool-toggle__label">El mensaje ya es un hash de 32 bytes (hex)</span>
+                </label>
+              </div>
+
+              <div class="tool-field" style="margin-bottom: 1rem;">
+                <label class="tool-label" for="ecdsa-sign-privkey">Clave privada (hex, 32 bytes)</label>
+                <input 
+                  type="text" 
+                  id="ecdsa-sign-privkey" 
+                  class="tool-input" 
+                  placeholder="0x... o hex sin prefijo"
+                  style="font-family: 'JetBrains Mono', monospace;"
+                />
+                <button class="tool-btn tool-btn--secondary tool-btn--small" id="btn-random-privkey" style="margin-top: 0.5rem;">🎲 Generar aleatoria</button>
+              </div>
+
+              <button class="tool-btn" id="btn-ecdsa-sign">✍️ Firmar</button>
+
+              <!-- Error -->
+              <div class="tool-error" id="ecdsa-sign-error" style="display: none;"></div>
+
+              <!-- Resultado -->
+              <div id="ecdsa-sign-result" style="display: none; margin-top: 1.5rem;">
+                <div class="field-grid">
+                  <div class="tool-field">
+                    <label class="tool-label">Message Hash (SHA-256)</label>
+                    <div class="tool-output" id="ecdsa-sign-msghash" style="font-size: 0.7rem;">—</div>
+                  </div>
+                  <div class="tool-field">
+                    <label class="tool-label">Clave pública derivada</label>
+                    <div class="tool-output" id="ecdsa-sign-pubkey" style="font-size: 0.7rem;">—</div>
+                  </div>
+                </div>
+
+                <div class="tool-field" style="margin-top: 1rem;">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label class="tool-label" style="margin: 0;">Firma r (32 bytes)</label>
+                    <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="ecdsa-sign-r">📋</button>
+                  </div>
+                  <div class="tool-output" id="ecdsa-sign-r" style="font-size: 0.75rem; color: #3fb950;">—</div>
+                </div>
+
+                <div class="tool-field">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label class="tool-label" style="margin: 0;">Firma s (32 bytes)</label>
+                    <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="ecdsa-sign-s">📋</button>
+                  </div>
+                  <div class="tool-output" id="ecdsa-sign-s" style="font-size: 0.75rem; color: #f78166;">—</div>
+                </div>
+
+                <div class="tool-field">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label class="tool-label" style="margin: 0;">Firma DER encoded</label>
+                    <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="ecdsa-sign-der">📋</button>
+                  </div>
+                  <div class="tool-output" id="ecdsa-sign-der" style="font-size: 0.7rem;">—</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ==================== -->
+          <!-- TAB 2: ECDSA VERIFY -->
+          <!-- ==================== -->
+          <div class="tab-content" id="tab-ecdsa-verify">
+            <div class="tool-container">
+              <h2 class="tool-container__title">Verificar firma ECDSA</h2>
+
+              <div class="tool-field" style="margin-bottom: 1rem;">
+                <label class="tool-label" for="ecdsa-verify-msg">Mensaje</label>
+                <textarea 
+                  id="ecdsa-verify-msg" 
+                  class="tool-input" 
+                  rows="2"
+                  placeholder="El mensaje original que se firmó..."
+                ></textarea>
+              </div>
+
+              <div class="tool-field" style="margin-bottom: 1rem;">
+                <label class="tool-toggle">
+                  <input type="checkbox" class="tool-toggle__input" id="ecdsa-verify-ishex" />
+                  <span class="tool-toggle__slider"></span>
+                  <span class="tool-toggle__label">El mensaje ya es un hash de 32 bytes (hex)</span>
+                </label>
+              </div>
+
+              <div class="tool-field" style="margin-bottom: 1rem;">
+                <label class="tool-label" for="ecdsa-verify-sig">Firma (DER o r,s hex separados por coma)</label>
+                <input 
+                  type="text" 
+                  id="ecdsa-verify-sig" 
+                  class="tool-input" 
+                  placeholder="3044022... o r,s"
+                  style="font-family: 'JetBrains Mono', monospace;"
+                />
+              </div>
+
+              <div class="tool-field" style="margin-bottom: 1rem;">
+                <label class="tool-label" for="ecdsa-verify-pubkey">Clave pública (hex, comprimida o sin comprimir)</label>
+                <input 
+                  type="text" 
+                  id="ecdsa-verify-pubkey" 
+                  class="tool-input" 
+                  placeholder="02... o 04..."
+                  style="font-family: 'JetBrains Mono', monospace;"
+                />
+              </div>
+
+              <button class="tool-btn" id="btn-ecdsa-verify">✓ Verificar</button>
+
+              <!-- Error -->
+              <div class="tool-error" id="ecdsa-verify-error" style="display: none;"></div>
+
+              <!-- Resultado -->
+              <div id="ecdsa-verify-result" style="display: none;"></div>
+            </div>
+          </div>
+
+          <!-- ==================== -->
+          <!-- TAB 3: SCHNORR SIGN -->
+          <!-- ==================== -->
+          <div class="tab-content" id="tab-schnorr-sign">
+            <div class="tool-container">
+              <h2 class="tool-container__title">Firmar con Schnorr (BIP340)</h2>
+
+              <div class="callout callout--info" style="margin-bottom: 1rem;">
+                <span class="callout__icon">ℹ️</span>
+                <div class="callout__content">
+                  <p class="callout__text">BIP340 (Schnorr para Bitcoin) requiere un mensaje de exactamente 32 bytes y usa x-only public keys.</p>
+                </div>
+              </div>
+
+              <div class="tool-field" style="margin-bottom: 1rem;">
+                <label class="tool-label" for="schnorr-sign-msg">Mensaje (32 bytes hex)</label>
+                <input 
+                  type="text" 
+                  id="schnorr-sign-msg" 
+                  class="tool-input" 
+                  placeholder="64 caracteres hex..."
+                  style="font-family: 'JetBrains Mono', monospace;"
+                />
+                <button class="tool-btn tool-btn--secondary tool-btn--small" id="btn-random-msg32" style="margin-top: 0.5rem;">🎲 Generar mensaje aleatorio</button>
+              </div>
+
+              <div class="tool-field" style="margin-bottom: 1rem;">
+                <label class="tool-label" for="schnorr-sign-privkey">Clave privada (hex, 32 bytes)</label>
+                <input 
+                  type="text" 
+                  id="schnorr-sign-privkey" 
+                  class="tool-input" 
+                  placeholder="0x... o hex sin prefijo"
+                  style="font-family: 'JetBrains Mono', monospace;"
+                />
+                <button class="tool-btn tool-btn--secondary tool-btn--small" id="btn-random-schnorr-privkey" style="margin-top: 0.5rem;">🎲 Generar aleatoria</button>
+              </div>
+
+              <button class="tool-btn" id="btn-schnorr-sign">✍️ Firmar</button>
+
+              <!-- Error -->
+              <div class="tool-error" id="schnorr-sign-error" style="display: none;"></div>
+
+              <!-- Resultado -->
+              <div id="schnorr-sign-result" style="display: none; margin-top: 1.5rem;">
+                <div class="tool-field">
+                  <label class="tool-label">X-only Public Key (32 bytes)</label>
+                  <div class="tool-output" id="schnorr-sign-pubkey" style="font-size: 0.75rem;">—</div>
+                </div>
+
+                <div class="tool-field">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label class="tool-label" style="margin: 0;">Firma Schnorr (64 bytes: R.x || s)</label>
+                    <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="schnorr-sign-sig">📋</button>
+                  </div>
+                  <div class="tool-output" id="schnorr-sign-sig" style="font-size: 0.7rem; color: var(--accent);">—</div>
+                </div>
+
+                <div class="field-grid" style="margin-top: 1rem;">
+                  <div class="tool-field">
+                    <label class="tool-label">R.x (32 bytes)</label>
+                    <div class="tool-output" id="schnorr-sign-rx" style="font-size: 0.7rem; color: #3fb950;">—</div>
+                  </div>
+                  <div class="tool-field">
+                    <label class="tool-label">s (32 bytes)</label>
+                    <div class="tool-output" id="schnorr-sign-s" style="font-size: 0.7rem; color: #f78166;">—</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ==================== -->
+          <!-- TAB 4: SCHNORR VERIFY -->
+          <!-- ==================== -->
+          <div class="tab-content" id="tab-schnorr-verify">
+            <div class="tool-container">
+              <h2 class="tool-container__title">Verificar firma Schnorr</h2>
+
+              <div class="tool-field" style="margin-bottom: 1rem;">
+                <label class="tool-label" for="schnorr-verify-msg">Mensaje (32 bytes hex)</label>
+                <input 
+                  type="text" 
+                  id="schnorr-verify-msg" 
+                  class="tool-input" 
+                  placeholder="64 caracteres hex..."
+                  style="font-family: 'JetBrains Mono', monospace;"
+                />
+              </div>
+
+              <div class="tool-field" style="margin-bottom: 1rem;">
+                <label class="tool-label" for="schnorr-verify-sig">Firma Schnorr (64 bytes hex)</label>
+                <input 
+                  type="text" 
+                  id="schnorr-verify-sig" 
+                  class="tool-input" 
+                  placeholder="128 caracteres hex..."
+                  style="font-family: 'JetBrains Mono', monospace;"
+                />
+              </div>
+
+              <div class="tool-field" style="margin-bottom: 1rem;">
+                <label class="tool-label" for="schnorr-verify-pubkey">X-only Public Key (32 bytes hex)</label>
+                <input 
+                  type="text" 
+                  id="schnorr-verify-pubkey" 
+                  class="tool-input" 
+                  placeholder="64 caracteres hex..."
+                  style="font-family: 'JetBrains Mono', monospace;"
+                />
+              </div>
+
+              <button class="tool-btn" id="btn-schnorr-verify">✓ Verificar</button>
+
+              <!-- Error -->
+              <div class="tool-error" id="schnorr-verify-error" style="display: none;"></div>
+
+              <!-- Resultado -->
+              <div id="schnorr-verify-result" style="display: none;"></div>
+            </div>
+          </div>
+
+          <!-- ==================== -->
+          <!-- TAB 5: DER DECODER -->
+          <!-- ==================== -->
+          <div class="tab-content" id="tab-der-decoder">
+            <div class="tool-container">
+              <h2 class="tool-container__title">Decodificar firma DER</h2>
+
+              <div class="tool-field" style="margin-bottom: 1rem;">
+                <label class="tool-label" for="der-input">Firma DER (hex)</label>
+                <input 
+                  type="text" 
+                  id="der-input" 
+                  class="tool-input" 
+                  placeholder="3044022... o 304402..."
+                  style="font-family: 'JetBrains Mono', monospace;"
+                />
+                <button class="tool-btn tool-btn--secondary tool-btn--small" id="btn-der-example" style="margin-top: 0.5rem;">📋 Ejemplo</button>
+              </div>
+
+              <button class="tool-btn" id="btn-der-decode">🔍 Decodificar</button>
+
+              <!-- Error -->
+              <div class="tool-error" id="der-error" style="display: none;"></div>
+
+              <!-- Resultado -->
+              <div id="der-result" style="display: none; margin-top: 1.5rem;">
+                <h3 style="font-size: 0.95rem; margin-bottom: 0.75rem;">Firma coloreada</h3>
+                <div class="der-breakdown" id="der-colored"></div>
+
+                <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 0.75rem 0; font-size: 0.75rem;">
+                  <span><span class="der-sequence">■</span> Sequence</span>
+                  <span><span class="der-length">■</span> Length</span>
+                  <span><span class="der-int">■</span> Integer marker</span>
+                  <span><span class="der-r">■</span> r value</span>
+                  <span><span class="der-s">■</span> s value</span>
+                  <span><span class="der-sighash">■</span> Sighash</span>
+                </div>
+
+                <div class="field-grid">
+                  <div class="tool-field">
+                    <label class="tool-label">r (hex)</label>
+                    <div class="tool-output" id="der-r" style="font-size: 0.7rem; color: #3fb950;">—</div>
+                  </div>
+                  <div class="tool-field">
+                    <label class="tool-label">s (hex)</label>
+                    <div class="tool-output" id="der-s" style="font-size: 0.7rem; color: #f78166;">—</div>
+                  </div>
+                </div>
+
+                <div class="tool-field" style="margin-top: 0.75rem;">
+                  <label class="tool-label">Sighash type</label>
+                  <div class="tool-output" id="der-sighash">—</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Referencia DER -->
+            <div class="tool-container">
+              <h2 class="tool-container__title">Estructura DER</h2>
+              <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; line-height: 1.8;">
+                <span class="der-sequence">30</span> <span class="der-length">[total_len]</span>
+                <span class="der-int">02</span> <span class="der-length">[r_len]</span> <span class="der-r">[r_value]</span>
+                <span class="der-int">02</span> <span class="der-length">[s_len]</span> <span class="der-s">[s_value]</span>
+                <span class="der-sighash">[sighash]</span>
+              </div>
+              <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.75rem;">
+                <strong>30</strong> = SEQUENCE, <strong>02</strong> = INTEGER. Si r o s empiezan con un byte ≥ 0x80, se añade un 0x00 delante (para indicar que es positivo).
+              </p>
+            </div>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más sobre firmas digitales</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-5/ecdsa.html">ECDSA en detalle →</a> · 
+              <a href="../nivel-5/schnorr.html">Schnorr (BIP340) →</a> ·
+              <a href="ec-calculator.html">Calculadora de curva elíptica →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+  <script src="../js/hex-utils.js"></script>
+  <script src="https://unpkg.com/@noble/secp256k1@1.7.1/lib/index.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === UTILIDADES ===
+    function getSecp() {
+      return typeof nobleSecp256k1 !== 'undefined' ? nobleSecp256k1 : secp256k1;
+    }
+
+    function cleanHex(hex) {
+      return hex.replace(/^0x/i, '').replace(/\s/g, '').toLowerCase();
+    }
+
+    function randomBytes(length) {
+      const bytes = new Uint8Array(length);
+      crypto.getRandomValues(bytes);
+      return bytes;
+    }
+
+    // === TABS ===
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('tab--active'));
+        tabContents.forEach(c => c.classList.remove('tab-content--active'));
+        tab.classList.add('tab--active');
+        document.getElementById('tab-' + tab.dataset.tab).classList.add('tab-content--active');
+      });
+    });
+
+    // === ECDSA SIGN ===
+    const btnRandomPrivkey = document.getElementById('btn-random-privkey');
+    const btnEcdsaSign = document.getElementById('btn-ecdsa-sign');
+
+    btnRandomPrivkey.addEventListener('click', () => {
+      const privkey = randomBytes(32);
+      document.getElementById('ecdsa-sign-privkey').value = HexUtils.bytesToHex(privkey);
+    });
+
+    btnEcdsaSign.addEventListener('click', async () => {
+      const errorEl = document.getElementById('ecdsa-sign-error');
+      const resultEl = document.getElementById('ecdsa-sign-result');
+      errorEl.style.display = 'none';
+      resultEl.style.display = 'none';
+
+      try {
+        const secp = getSecp();
+        const msg = document.getElementById('ecdsa-sign-msg').value;
+        const isHex = document.getElementById('ecdsa-sign-ishex').checked;
+        const privkeyHex = cleanHex(document.getElementById('ecdsa-sign-privkey').value);
+
+        if (!privkeyHex || privkeyHex.length !== 64) {
+          throw new Error('La clave privada debe ser 32 bytes (64 hex)');
+        }
+
+        // Hash del mensaje
+        let msgHash;
+        if (isHex) {
+          if (msg.length !== 64) throw new Error('El hash debe ser 32 bytes (64 hex)');
+          msgHash = HexUtils.hexToBytes(cleanHex(msg));
+        } else {
+          const encoder = new TextEncoder();
+          msgHash = await HexUtils.sha256(encoder.encode(msg));
+        }
+
+        const privkey = HexUtils.hexToBytes(privkeyHex);
+        
+        // Firmar
+        const signature = await secp.sign(msgHash, privkey, { der: false, recovered: false });
+        const signatureDer = await secp.sign(msgHash, privkey, { der: true });
+        
+        // Public key
+        const pubkey = secp.getPublicKey(privkey, true);
+
+        // Extraer r y s
+        const r = HexUtils.bytesToHex(signature.slice(0, 32));
+        const s = HexUtils.bytesToHex(signature.slice(32, 64));
+
+        // Mostrar
+        document.getElementById('ecdsa-sign-msghash').textContent = HexUtils.bytesToHex(msgHash);
+        document.getElementById('ecdsa-sign-pubkey').textContent = HexUtils.bytesToHex(pubkey);
+        document.getElementById('ecdsa-sign-r').textContent = r;
+        document.getElementById('ecdsa-sign-s').textContent = s;
+        document.getElementById('ecdsa-sign-der').textContent = HexUtils.bytesToHex(signatureDer);
+
+        resultEl.style.display = 'block';
+
+      } catch (error) {
+        errorEl.textContent = 'Error: ' + error.message;
+        errorEl.style.display = 'block';
+      }
+    });
+
+    // === ECDSA VERIFY ===
+    const btnEcdsaVerify = document.getElementById('btn-ecdsa-verify');
+
+    btnEcdsaVerify.addEventListener('click', async () => {
+      const errorEl = document.getElementById('ecdsa-verify-error');
+      const resultEl = document.getElementById('ecdsa-verify-result');
+      errorEl.style.display = 'none';
+      resultEl.style.display = 'none';
+
+      try {
+        const secp = getSecp();
+        const msg = document.getElementById('ecdsa-verify-msg').value;
+        const isHex = document.getElementById('ecdsa-verify-ishex').checked;
+        let sigInput = cleanHex(document.getElementById('ecdsa-verify-sig').value);
+        const pubkeyHex = cleanHex(document.getElementById('ecdsa-verify-pubkey').value);
+
+        // Hash del mensaje
+        let msgHash;
+        if (isHex) {
+          msgHash = HexUtils.hexToBytes(cleanHex(msg));
+        } else {
+          const encoder = new TextEncoder();
+          msgHash = await HexUtils.sha256(encoder.encode(msg));
+        }
+
+        // Parsear firma
+        let signature;
+        if (sigInput.includes(',')) {
+          // r,s format
+          const parts = sigInput.split(',').map(s => cleanHex(s.trim()));
+          signature = HexUtils.hexToBytes(parts[0] + parts[1]);
+        } else if (sigInput.startsWith('30')) {
+          // DER format - decode
+          signature = decodeDerSignature(sigInput);
+        } else {
+          // Raw r||s
+          signature = HexUtils.hexToBytes(sigInput);
+        }
+
+        const pubkey = HexUtils.hexToBytes(pubkeyHex);
+
+        // Verificar
+        const isValid = secp.verify(signature, msgHash, pubkey);
+
+        if (isValid) {
+          resultEl.innerHTML = `
+            <div class="sig-result sig-result--valid">
+              <span class="sig-result__icon">✓</span>
+              <span class="sig-result__text">Firma válida</span>
+            </div>
+          `;
+        } else {
+          resultEl.innerHTML = `
+            <div class="sig-result sig-result--invalid">
+              <span class="sig-result__icon">✗</span>
+              <span class="sig-result__text">Firma inválida</span>
+            </div>
+          `;
+        }
+
+        resultEl.style.display = 'block';
+
+      } catch (error) {
+        errorEl.textContent = 'Error: ' + error.message;
+        errorEl.style.display = 'block';
+      }
+    });
+
+    // === SCHNORR SIGN ===
+    const btnRandomMsg32 = document.getElementById('btn-random-msg32');
+    const btnRandomSchnorrPrivkey = document.getElementById('btn-random-schnorr-privkey');
+    const btnSchnorrSign = document.getElementById('btn-schnorr-sign');
+
+    btnRandomMsg32.addEventListener('click', () => {
+      const msg = randomBytes(32);
+      document.getElementById('schnorr-sign-msg').value = HexUtils.bytesToHex(msg);
+    });
+
+    btnRandomSchnorrPrivkey.addEventListener('click', () => {
+      const privkey = randomBytes(32);
+      document.getElementById('schnorr-sign-privkey').value = HexUtils.bytesToHex(privkey);
+    });
+
+    btnSchnorrSign.addEventListener('click', async () => {
+      const errorEl = document.getElementById('schnorr-sign-error');
+      const resultEl = document.getElementById('schnorr-sign-result');
+      errorEl.style.display = 'none';
+      resultEl.style.display = 'none';
+
+      try {
+        const secp = getSecp();
+        const msgHex = cleanHex(document.getElementById('schnorr-sign-msg').value);
+        const privkeyHex = cleanHex(document.getElementById('schnorr-sign-privkey').value);
+
+        if (msgHex.length !== 64) throw new Error('El mensaje debe ser 32 bytes (64 hex)');
+        if (privkeyHex.length !== 64) throw new Error('La clave privada debe ser 32 bytes (64 hex)');
+
+        const msg = HexUtils.hexToBytes(msgHex);
+        const privkey = HexUtils.hexToBytes(privkeyHex);
+
+        // Schnorr signature (BIP340)
+        const signature = await secp.schnorr.sign(msg, privkey);
+        
+        // x-only pubkey
+        const fullPubkey = secp.getPublicKey(privkey, true);
+        const xOnlyPubkey = fullPubkey.slice(1); // Remove prefix byte
+
+        const sigHex = HexUtils.bytesToHex(signature);
+        const rx = sigHex.substring(0, 64);
+        const s = sigHex.substring(64);
+
+        document.getElementById('schnorr-sign-pubkey').textContent = HexUtils.bytesToHex(xOnlyPubkey);
+        document.getElementById('schnorr-sign-sig').textContent = sigHex;
+        document.getElementById('schnorr-sign-rx').textContent = rx;
+        document.getElementById('schnorr-sign-s').textContent = s;
+
+        resultEl.style.display = 'block';
+
+      } catch (error) {
+        errorEl.textContent = 'Error: ' + error.message;
+        errorEl.style.display = 'block';
+      }
+    });
+
+    // === SCHNORR VERIFY ===
+    const btnSchnorrVerify = document.getElementById('btn-schnorr-verify');
+
+    btnSchnorrVerify.addEventListener('click', async () => {
+      const errorEl = document.getElementById('schnorr-verify-error');
+      const resultEl = document.getElementById('schnorr-verify-result');
+      errorEl.style.display = 'none';
+      resultEl.style.display = 'none';
+
+      try {
+        const secp = getSecp();
+        const msgHex = cleanHex(document.getElementById('schnorr-verify-msg').value);
+        const sigHex = cleanHex(document.getElementById('schnorr-verify-sig').value);
+        const pubkeyHex = cleanHex(document.getElementById('schnorr-verify-pubkey').value);
+
+        if (msgHex.length !== 64) throw new Error('El mensaje debe ser 32 bytes (64 hex)');
+        if (sigHex.length !== 128) throw new Error('La firma debe ser 64 bytes (128 hex)');
+        if (pubkeyHex.length !== 64) throw new Error('La pubkey debe ser 32 bytes (64 hex)');
+
+        const msg = HexUtils.hexToBytes(msgHex);
+        const sig = HexUtils.hexToBytes(sigHex);
+        const pubkey = HexUtils.hexToBytes(pubkeyHex);
+
+        const isValid = await secp.schnorr.verify(sig, msg, pubkey);
+
+        if (isValid) {
+          resultEl.innerHTML = `
+            <div class="sig-result sig-result--valid">
+              <span class="sig-result__icon">✓</span>
+              <span class="sig-result__text">Firma Schnorr válida</span>
+            </div>
+          `;
+        } else {
+          resultEl.innerHTML = `
+            <div class="sig-result sig-result--invalid">
+              <span class="sig-result__icon">✗</span>
+              <span class="sig-result__text">Firma Schnorr inválida</span>
+            </div>
+          `;
+        }
+
+        resultEl.style.display = 'block';
+
+      } catch (error) {
+        errorEl.textContent = 'Error: ' + error.message;
+        errorEl.style.display = 'block';
+      }
+    });
+
+    // === DER DECODER ===
+    const btnDerExample = document.getElementById('btn-der-example');
+    const btnDerDecode = document.getElementById('btn-der-decode');
+
+    const EXAMPLE_DER = '3044022020f8a1f8e8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f802201f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f801';
+
+    btnDerExample.addEventListener('click', () => {
+      document.getElementById('der-input').value = EXAMPLE_DER;
+    });
+
+    function decodeDerSignature(derHex) {
+      const bytes = HexUtils.hexToBytes(derHex);
+      let pos = 0;
+
+      // Sequence marker
+      if (bytes[pos++] !== 0x30) throw new Error('No es una firma DER válida (falta 0x30)');
+
+      // Total length
+      let totalLen = bytes[pos++];
+      if (totalLen > 127) {
+        // Long form - not expected in signatures
+        throw new Error('Longitud no soportada');
+      }
+
+      // R integer
+      if (bytes[pos++] !== 0x02) throw new Error('Falta marker de integer para R');
+      let rLen = bytes[pos++];
+      let r = bytes.slice(pos, pos + rLen);
+      pos += rLen;
+
+      // S integer
+      if (bytes[pos++] !== 0x02) throw new Error('Falta marker de integer para S');
+      let sLen = bytes[pos++];
+      let s = bytes.slice(pos, pos + sLen);
+      pos += sLen;
+
+      // Remove leading zeros if present (for 33-byte values)
+      if (r.length === 33 && r[0] === 0x00) r = r.slice(1);
+      if (s.length === 33 && s[0] === 0x00) s = s.slice(1);
+
+      // Pad to 32 bytes if needed
+      if (r.length < 32) {
+        const padded = new Uint8Array(32);
+        padded.set(r, 32 - r.length);
+        r = padded;
+      }
+      if (s.length < 32) {
+        const padded = new Uint8Array(32);
+        padded.set(s, 32 - s.length);
+        s = padded;
+      }
+
+      // Combine
+      const combined = new Uint8Array(64);
+      combined.set(r, 0);
+      combined.set(s, 32);
+
+      return combined;
+    }
+
+    btnDerDecode.addEventListener('click', () => {
+      const errorEl = document.getElementById('der-error');
+      const resultEl = document.getElementById('der-result');
+      errorEl.style.display = 'none';
+      resultEl.style.display = 'none';
+
+      try {
+        const derHex = cleanHex(document.getElementById('der-input').value);
+        const bytes = HexUtils.hexToBytes(derHex);
+
+        if (bytes[0] !== 0x30) throw new Error('No empieza con 0x30 (SEQUENCE)');
+
+        let pos = 0;
+        let coloredHtml = '';
+
+        // Sequence
+        coloredHtml += `<span class="der-sequence">${derHex.substring(0, 2)}</span>`;
+        pos = 1;
+
+        // Total length
+        coloredHtml += `<span class="der-length">${derHex.substring(2, 4)}</span>`;
+        const totalLen = bytes[pos++];
+
+        // R marker
+        coloredHtml += `<span class="der-int">${derHex.substring(pos * 2, pos * 2 + 2)}</span>`;
+        pos++;
+
+        // R length
+        coloredHtml += `<span class="der-length">${derHex.substring(pos * 2, pos * 2 + 2)}</span>`;
+        const rLen = bytes[pos++];
+
+        // R value
+        coloredHtml += `<span class="der-r">${derHex.substring(pos * 2, pos * 2 + rLen * 2)}</span>`;
+        const rHex = derHex.substring(pos * 2, pos * 2 + rLen * 2);
+        pos += rLen;
+
+        // S marker
+        coloredHtml += `<span class="der-int">${derHex.substring(pos * 2, pos * 2 + 2)}</span>`;
+        pos++;
+
+        // S length
+        coloredHtml += `<span class="der-length">${derHex.substring(pos * 2, pos * 2 + 2)}</span>`;
+        const sLen = bytes[pos++];
+
+        // S value
+        coloredHtml += `<span class="der-s">${derHex.substring(pos * 2, pos * 2 + sLen * 2)}</span>`;
+        const sHex = derHex.substring(pos * 2, pos * 2 + sLen * 2);
+        pos += sLen;
+
+        // Sighash (si existe)
+        let sighashText = '(no presente)';
+        if (pos < bytes.length) {
+          const sighash = bytes[pos];
+          coloredHtml += `<span class="der-sighash">${derHex.substring(pos * 2)}</span>`;
+          
+          const sighashTypes = {
+            0x01: 'SIGHASH_ALL',
+            0x02: 'SIGHASH_NONE',
+            0x03: 'SIGHASH_SINGLE',
+            0x81: 'SIGHASH_ALL | ANYONECANPAY',
+            0x82: 'SIGHASH_NONE | ANYONECANPAY',
+            0x83: 'SIGHASH_SINGLE | ANYONECANPAY'
+          };
+          sighashText = sighashTypes[sighash] || `0x${sighash.toString(16).padStart(2, '0')}`;
+        }
+
+        document.getElementById('der-colored').innerHTML = coloredHtml;
+        
+        // Clean r and s (remove leading 00 if present)
+        let rClean = rHex;
+        let sClean = sHex;
+        if (rClean.startsWith('00') && rClean.length > 64) rClean = rClean.substring(2);
+        if (sClean.startsWith('00') && sClean.length > 64) sClean = sClean.substring(2);
+        
+        document.getElementById('der-r').textContent = rClean;
+        document.getElementById('der-s').textContent = sClean;
+        document.getElementById('der-sighash').textContent = sighashText;
+
+        resultEl.style.display = 'block';
+
+      } catch (error) {
+        errorEl.textContent = 'Error: ' + error.message;
+        errorEl.style.display = 'block';
+      }
+    });
+
+    // === COPY BUTTONS ===
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const targetId = btn.dataset.target;
+        const target = document.getElementById(targetId);
+        const text = target.textContent;
+
+        if (text && text !== '—') {
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.textContent = '✓';
+            setTimeout(() => { btn.textContent = '📋'; }, 1000);
+          } catch (err) {
+            console.error('Error copiando:', err);
+          }
+        }
+      });
+    });
+
+  })();
+  </script>
+</body>
+</html>

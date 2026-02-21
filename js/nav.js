@@ -189,10 +189,18 @@
         { href: '/herramientas/address-bech32.html', text: 'Direccion Bitcoin (Bech32)' },
         { href: '/herramientas/checksum-base58.html', text: 'Base58Check y checksum' },
         { href: '/herramientas/multisig-address.html', text: 'Generador de direccion multisig' },
+        { href: '/herramientas/mnemonic-seed.html', text: 'Mnemonic y seed (BIP39)' },
+        { href: '/herramientas/extended-keys.html', text: 'Extended keys (xpub/xprv)' },
+        { href: '/herramientas/derivation-paths.html', text: 'Derivation paths (BIP32)' },
+        { href: '/herramientas/address-from-xpub.html', text: 'Direcciones desde xpub' },
         { href: '/herramientas/hd-wallet.html', text: 'HD Wallet explorer' },
-        { href: '/herramientas/transaccion.html', text: 'Constructor de transacciones' },
-        { href: '/herramientas/script.html', text: 'Interprete de Script' },
-        { href: '/herramientas/firma.html', text: 'ECDSA y Schnorr Sign/Verify' }
+        { href: '/herramientas/tx-decoder.html', text: 'Decodificador de transacciones' },
+        { href: '/herramientas/tx-splitter.html', text: 'TX splitter (byte a byte)' },
+        { href: '/herramientas/tx-builder.html', text: 'Constructor de transacciones (raw)' },
+        { href: '/herramientas/script-interpreter.html', text: 'Interprete de Bitcoin Script' },
+        { href: '/herramientas/psbt-decoder.html', text: 'Decodificador PSBT (BIP174)' },
+        { href: '/herramientas/ecdsa-schnorr.html', text: 'Firma digital: ECDSA y Schnorr' },
+        { href: '/herramientas/ec-calculator.html', text: 'Calculadora de curva eliptica' },
       ]
     },
     {

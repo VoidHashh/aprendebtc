@@ -229,9 +229,10 @@
               />
             </div>
 
-            <button class="tool-btn tool-btn--secondary" id="btn-decode" style="margin-top: 0.75rem;">
-              🔍 Decodificar
-            </button>
+            <div class="tool-btn-row" style="margin-top: 0.75rem;">
+              <button class="tool-btn tool-btn--secondary" id="btn-decode-random">🎲 Generar ejemplo</button>
+              <button class="tool-btn tool-btn--secondary" id="btn-decode">🔍 Decodificar</button>
+            </div>
 
             <div id="decode-results" style="display: none; margin-top: 1rem;">
               <div class="decoded-fields" style="display: flex; flex-direction: column; gap: 0.5rem;">
@@ -369,6 +370,7 @@
 
     const inputDecode = document.getElementById('input-decode');
     const btnDecode = document.getElementById('btn-decode');
+    const btnDecodeRandom = document.getElementById('btn-decode-random');
     const decodeResults = document.getElementById('decode-results');
     const decodeHrp = document.getElementById('decode-hrp');
     const decodeVersion = document.getElementById('decode-version');
@@ -450,8 +452,20 @@
     }
 
     /**
-     * Decodifica dirección Bech32/Bech32m
+     * Genera una dirección Bech32 aleatoria para pruebas de decodificación.
      */
+    function generateRandomDecodeAddress() {
+      const randomType = HexUtils.randomBytes(1)[0] % 2;
+
+      if (randomType === 0) {
+        const witnessProgramV0 = HexUtils.randomBytes(20);
+        return Bech32.encodeP2WPKH(witnessProgramV0, 'mainnet');
+      }
+
+      const witnessProgramV1 = HexUtils.randomBytes(32);
+      return Bech32.encodeP2TR(witnessProgramV1, 'mainnet');
+    }
+
     function decodeAddress() {
       const address = inputDecode.value.trim();
       
@@ -517,6 +531,12 @@
 
     inputPubkey.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') generate();
+    });
+
+    btnDecodeRandom.addEventListener('click', () => {
+      inputDecode.value = generateRandomDecodeAddress();
+      decodeAddress();
+      inputDecode.focus();
     });
 
     btnDecode.addEventListener('click', decodeAddress);

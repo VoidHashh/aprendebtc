@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ejecuta Bitcoin Script paso a paso. Visualiza la pila (stack) y entiende cómo se validan las transacciones." />
+  <title>Intérprete de Bitcoin Script — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .script-editor {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      min-height: 100px;
+      line-height: 1.6;
+    }
+
+    .stack-container {
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 0.35rem;
+      min-height: 150px;
+      padding: 1rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+    }
+    .stack-item {
+      padding: 0.5rem 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      word-break: break-all;
+      animation: stackPush 0.2s ease-out;
+    }
+    .stack-item--new {
+      border-color: var(--accent);
+      background: rgba(247, 147, 26, 0.1);
+    }
+    .stack-item--top {
+      border-color: var(--accent);
+    }
+    .stack-empty {
+      color: var(--text-secondary);
+      font-style: italic;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    @keyframes stackPush {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .token {
+      display: inline-block;
+      padding: 2px 6px;
+      margin: 2px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+    }
+    .token--opcode {
+      background: rgba(88, 166, 255, 0.2);
+      color: #58a6ff;
+    }
+    .token--data {
+      background: rgba(247, 147, 26, 0.2);
+      color: var(--accent);
+    }
+    .token--current {
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+    }
+    .token--executed {
+      opacity: 0.5;
+    }
+
+    .result-banner {
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .result-banner--success {
+      background: rgba(46, 160, 67, 0.2);
+      border: 2px solid #2ea043;
+      color: #2ea043;
+    }
+    .result-banner--failure {
+      background: rgba(218, 54, 51, 0.2);
+      border: 2px solid #da3633;
+      color: #da3633;
+    }
+
+    .control-buttons {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .opcode-ref {
+      font-size: 0.8rem;
+    }
+    .opcode-ref summary {
+      cursor: pointer;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .opcode-ref table {
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+        <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Int&eacute;rprete de Bitcoin Script</span>
+        </nav>
+
+        <article class="article">
+          <h1>Intérprete de Bitcoin Script</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Escribe o carga un script y ejecútalo paso a paso viendo cómo evoluciona la pila.
+          </p>
+
+          <!-- Input -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Script</h2>
+            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.75rem;">
+              Escribe opcodes en mayúsculas y datos hex entre <code>&lt; &gt;</code>. Ejemplo: <code>&lt;02&gt; &lt;03&gt; OP_ADD &lt;05&gt; OP_EQUAL</code>
+            </p>
+
+            <textarea 
+              id="script-input" 
+              class="tool-input script-editor" 
+              placeholder="OP_2 OP_3 OP_ADD OP_5 OP_EQUAL"
+            >OP_2 OP_3 OP_ADD OP_5 OP_EQUAL</textarea>
+
+            <div class="tool-presets" style="margin: 0.75rem 0;">
+              <button class="tool-preset" data-script="OP_2 OP_3 OP_ADD OP_5 OP_EQUAL">Matemático simple</button>
+              <button class="tool-preset" data-script="<abcd1234> OP_DUP OP_HASH160 <hash160_placeholder> OP_EQUALVERIFY OP_CHECKSIG">P2PKH (simplificado)</button>
+              <button class="tool-preset" data-script="OP_2 <pubkey1> <pubkey2> <pubkey3> OP_3 OP_CHECKMULTISIG">Multisig 2-de-3</button>
+              <button class="tool-preset" data-script="<data> OP_SHA256 <expected_hash> OP_EQUAL">Hash preimage</button>
+              <button class="tool-preset" data-script="OP_1 OP_IF OP_2 OP_ELSE OP_3 OP_ENDIF">IF/ELSE</button>
+            </div>
+
+            <div class="control-buttons">
+              <button class="tool-btn tool-btn--secondary" id="btn-reset">Reiniciar</button>
+              <button class="tool-btn tool-btn--secondary" id="btn-step">Paso siguiente</button>
+              <button class="tool-btn" id="btn-run">▶️ Ejecutar todo</button>
+            </div>
+          </div>
+
+          <!-- Error -->
+          <div class="tool-error" id="error-message" style="display: none;"></div>
+
+          <!-- Script tokens -->
+          <div class="tool-container" id="tokens-section" style="display: none;">
+            <h2 class="tool-container__title">Script tokenizado</h2>
+            <div id="tokens-display" style="padding: 0.75rem; background: var(--bg-primary); border-radius: var(--radius-md); min-height: 40px;"></div>
+          </div>
+
+          <!-- Stack -->
+          <div class="tool-container" id="stack-section" style="display: none;">
+            <h2 class="tool-container__title">Pila (Stack) <span id="stack-count" style="font-size: 0.8rem; color: var(--text-secondary);">(0 items)</span></h2>
+            <div class="stack-container" id="stack-display">
+              <div class="stack-empty">La pila está vacía</div>
+            </div>
+          </div>
+
+          <!-- Result -->
+          <div id="result-section" style="display: none; margin-bottom: 1.5rem;">
+            <div class="result-banner" id="result-banner"></div>
+          </div>
+
+          <!-- Opcode reference -->
+          <div class="tool-container">
+            <details class="opcode-ref">
+              <summary>Referencia de opcodes soportados</summary>
+              <div class="tool-table-wrapper" style="margin-top: 0.75rem;">
+                <table class="tool-table">
+                  <thead>
+                    <tr>
+                      <th>Opcode</th>
+                      <th>Descripción</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><code>OP_0</code> - <code>OP_16</code></td><td>Push números 0-16</td></tr>
+                    <tr><td><code>OP_1NEGATE</code></td><td>Push -1</td></tr>
+                    <tr><td><code>OP_DUP</code></td><td>Duplica el top</td></tr>
+                    <tr><td><code>OP_DROP</code></td><td>Elimina el top</td></tr>
+                    <tr><td><code>OP_SWAP</code></td><td>Intercambia los 2 superiores</td></tr>
+                    <tr><td><code>OP_OVER</code></td><td>Copia el segundo al top</td></tr>
+                    <tr><td><code>OP_ROT</code></td><td>Rota los 3 superiores</td></tr>
+                    <tr><td><code>OP_2DUP</code></td><td>Duplica los 2 superiores</td></tr>
+                    <tr><td><code>OP_ADD</code></td><td>Suma los 2 superiores</td></tr>
+                    <tr><td><code>OP_SUB</code></td><td>Resta: segundo - primero</td></tr>
+                    <tr><td><code>OP_1ADD</code></td><td>Suma 1 al top</td></tr>
+                    <tr><td><code>OP_1SUB</code></td><td>Resta 1 al top</td></tr>
+                    <tr><td><code>OP_NEGATE</code></td><td>Invierte signo</td></tr>
+                    <tr><td><code>OP_ABS</code></td><td>Valor absoluto</td></tr>
+                    <tr><td><code>OP_EQUAL</code></td><td>¿Iguales? → 1 o 0</td></tr>
+                    <tr><td><code>OP_EQUALVERIFY</code></td><td>EQUAL + falla si falso</td></tr>
+                    <tr><td><code>OP_VERIFY</code></td><td>Falla si top es falso</td></tr>
+                    <tr><td><code>OP_NOT</code></td><td>NOT lógico</td></tr>
+                    <tr><td><code>OP_SHA256</code></td><td>SHA-256 del top</td></tr>
+                    <tr><td><code>OP_HASH160</code></td><td>RIPEMD160(SHA256(top))</td></tr>
+                    <tr><td><code>OP_HASH256</code></td><td>SHA256(SHA256(top))</td></tr>
+                    <tr><td><code>OP_CHECKSIG</code></td><td>Verifica firma (simulado: siempre OK)</td></tr>
+                    <tr><td><code>OP_CHECKMULTISIG</code></td><td>Multisig (simulado)</td></tr>
+                    <tr><td><code>OP_IF/ELSE/ENDIF</code></td><td>Control de flujo</td></tr>
+                    <tr><td><code>OP_RETURN</code></td><td>Script inválido inmediatamente</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </details>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más sobre Bitcoin Script</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-5/bitcoin-script.html">Bitcoin Script en detalle →</a> · 
+              <a href="tx-decoder.html">Decodificador de TX →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+  <script src="../js/hex-utils.js"></script>
+  <script src="../js/ripemd160.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === ESTADO ===
+    let tokens = [];
+    let stack = [];
+    let currentTokenIndex = 0;
+    let isRunning = false;
+    let executionFinished = false;
+    let ifStack = []; // Para manejar IF/ELSE/ENDIF
+
+    // === ELEMENTOS DEL DOM ===
+    const scriptInput = document.getElementById('script-input');
+    const btnReset = document.getElementById('btn-reset');
+    const btnStep = document.getElementById('btn-step');
+    const btnRun = document.getElementById('btn-run');
+    const errorMessage = document.getElementById('error-message');
+    const tokensSection = document.getElementById('tokens-section');
+    const tokensDisplay = document.getElementById('tokens-display');
+    const stackSection = document.getElementById('stack-section');
+    const stackDisplay = document.getElementById('stack-display');
+    const stackCount = document.getElementById('stack-count');
+    const resultSection = document.getElementById('result-section');
+    const resultBanner = document.getElementById('result-banner');
+
+    // === TOKENIZER ===
+
+    function tokenize(scriptText) {
+      const result = [];
+      const regex = /<([^>]+)>|(\S+)/g;
+      let match;
+
+      while ((match = regex.exec(scriptText)) !== null) {
+        if (match[1] !== undefined) {
+          // Dato hex entre < >
+          result.push({ type: 'data', value: match[1].toLowerCase().replace(/\s/g, '') });
+        } else if (match[2] !== undefined) {
+          const word = match[2].toUpperCase();
+          if (word.startsWith('OP_')) {
+            result.push({ type: 'opcode', value: word });
+          } else {
+            // Intentar como número
+            const num = parseInt(word);
+            if (!isNaN(num)) {
+              result.push({ type: 'data', value: numToHex(num) });
+            } else {
+              throw new Error('Token no reconocido: ' + match[2]);
+            }
+          }
+        }
+      }
+
+      return result;
+    }
+
+    function numToHex(n) {
+      if (n === 0) return '';
+      const hex = Math.abs(n).toString(16);
+      return hex.length % 2 ? '0' + hex : hex;
+    }
+
+    function hexToNum(hex) {
+      if (!hex || hex === '') return 0;
+      return parseInt(hex, 16);
+    }
+
+    // === STACK OPERATIONS ===
+
+    function push(value) {
+      stack.push(value);
+    }
+
+    function pop() {
+      if (stack.length === 0) throw new Error('Stack underflow');
+      return stack.pop();
+    }
+
+    function peek(n = 0) {
+      if (stack.length <= n) throw new Error('Stack underflow');
+      return stack[stack.length - 1 - n];
+    }
+
+    function isTruthy(value) {
+      if (!value || value === '' || value === '00' || value === '0') return false;
+      // Negative zero check
+      if (/^80+$/.test(value)) return false;
+      return true;
+    }
+
+    // === OPCODE EXECUTION ===
+
+    async function executeOpcode(token) {
+      const op = token.value;
+
+      // Constantes
+      if (op === 'OP_0' || op === 'OP_FALSE') { push(''); return; }
+      if (op === 'OP_1NEGATE') { push('81'); return; } // -1 en script encoding
+      if (/^OP_([1-9]|1[0-6])$/.test(op)) {
+        const num = parseInt(op.substring(3));
+        push(numToHex(num));
+        return;
+      }
+      if (op === 'OP_TRUE') { push('01'); return; }
+
+      // Stack
+      if (op === 'OP_DUP') { push(peek()); return; }
+      if (op === 'OP_DROP') { pop(); return; }
+      if (op === 'OP_SWAP') {
+        const a = pop(), b = pop();
+        push(a); push(b);
+        return;
+      }
+      if (op === 'OP_OVER') { push(peek(1)); return; }
+      if (op === 'OP_ROT') {
+        const a = pop(), b = pop(), c = pop();
+        push(b); push(a); push(c);
+        return;
+      }
+      if (op === 'OP_2DUP') {
+        const a = peek(0), b = peek(1);
+        push(b); push(a);
+        return;
+      }
+      if (op === 'OP_NIP') {
+        const a = pop(); pop(); push(a);
+        return;
+      }
+      if (op === 'OP_TUCK') {
+        const a = pop(), b = pop();
+        push(a); push(b); push(a);
+        return;
+      }
+
+      // Aritmética
+      if (op === 'OP_ADD') {
+        const a = hexToNum(pop()), b = hexToNum(pop());
+        push(numToHex(a + b));
+        return;
+      }
+      if (op === 'OP_SUB') {
+        const a = hexToNum(pop()), b = hexToNum(pop());
+        push(numToHex(b - a));
+        return;
+      }
+      if (op === 'OP_1ADD') {
+        push(numToHex(hexToNum(pop()) + 1));
+        return;
+      }
+      if (op === 'OP_1SUB') {
+        push(numToHex(hexToNum(pop()) - 1));
+        return;
+      }
+      if (op === 'OP_NEGATE') {
+        const a = hexToNum(pop());
+        push(numToHex(-a));
+        return;
+      }
+      if (op === 'OP_ABS') {
+        const a = hexToNum(pop());
+        push(numToHex(Math.abs(a)));
+        return;
+      }
+
+      // Lógica
+      if (op === 'OP_EQUAL') {
+        const a = pop(), b = pop();
+        push(a === b ? '01' : '');
+        return;
+      }
+      if (op === 'OP_EQUALVERIFY') {
+        const a = pop(), b = pop();
+        if (a !== b) throw new Error('OP_EQUALVERIFY failed');
+        return;
+      }
+      if (op === 'OP_VERIFY') {
+        if (!isTruthy(pop())) throw new Error('OP_VERIFY failed');
+        return;
+      }
+      if (op === 'OP_NOT') {
+        push(isTruthy(pop()) ? '' : '01');
+        return;
+      }
+      if (op === 'OP_0NOTEQUAL') {
+        push(isTruthy(pop()) ? '01' : '');
+        return;
+      }
+      if (op === 'OP_BOOLAND') {
+        const a = isTruthy(pop()), b = isTruthy(pop());
+        push((a && b) ? '01' : '');
+        return;
+      }
+      if (op === 'OP_BOOLOR') {
+        const a = isTruthy(pop()), b = isTruthy(pop());
+        push((a || b) ? '01' : '');
+        return;
+      }
+
+      // Crypto
+      if (op === 'OP_SHA256') {
+        const data = pop();
+        const bytes = data ? HexUtils.hexToBytes(data) : new Uint8Array(0);
+        const hash = await HexUtils.sha256(bytes);
+        push(HexUtils.bytesToHex(hash));
+        return;
+      }
+      if (op === 'OP_HASH160') {
+        const data = pop();
+        const bytes = data ? HexUtils.hexToBytes(data) : new Uint8Array(0);
+        const hash = await HexUtils.hash160(bytes);
+        push(HexUtils.bytesToHex(hash));
+        return;
+      }
+      if (op === 'OP_HASH256') {
+        const data = pop();
+        const bytes = data ? HexUtils.hexToBytes(data) : new Uint8Array(0);
+        const hash = await HexUtils.hash256(bytes);
+        push(HexUtils.bytesToHex(hash));
+        return;
+      }
+      if (op === 'OP_RIPEMD160') {
+        const data = pop();
+        const bytes = data ? HexUtils.hexToBytes(data) : new Uint8Array(0);
+        const hash = RIPEMD160.hash(bytes);
+        push(HexUtils.bytesToHex(hash));
+        return;
+      }
+
+      // Signature (simulado)
+      if (op === 'OP_CHECKSIG') {
+        pop(); pop(); // pubkey, sig
+        // Simulamos que siempre es válido
+        push('01');
+        return;
+      }
+      if (op === 'OP_CHECKMULTISIG') {
+        // Simplificado: pop n pubkeys, m sigs, dummy
+        const n = hexToNum(pop());
+        for (let i = 0; i < n; i++) pop();
+        const m = hexToNum(pop());
+        for (let i = 0; i < m; i++) pop();
+        pop(); // dummy bug
+        push('01');
+        return;
+      }
+      if (op === 'OP_CHECKSIGVERIFY') {
+        pop(); pop();
+        // Simulado OK
+        return;
+      }
+
+      // Control de flujo
+      if (op === 'OP_IF') {
+        const condition = isTruthy(pop());
+        ifStack.push({ condition, inElse: false });
+        return;
+      }
+      if (op === 'OP_NOTIF') {
+        const condition = !isTruthy(pop());
+        ifStack.push({ condition, inElse: false });
+        return;
+      }
+      if (op === 'OP_ELSE') {
+        if (ifStack.length === 0) throw new Error('OP_ELSE without OP_IF');
+        const current = ifStack[ifStack.length - 1];
+        current.condition = !current.condition;
+        current.inElse = true;
+        return;
+      }
+      if (op === 'OP_ENDIF') {
+        if (ifStack.length === 0) throw new Error('OP_ENDIF without OP_IF');
+        ifStack.pop();
+        return;
+      }
+
+      if (op === 'OP_RETURN') {
+        throw new Error('OP_RETURN: Script inválido');
+      }
+
+      if (op === 'OP_NOP') {
+        return;
+      }
+
+      // Comparación
+      if (op === 'OP_LESSTHAN') {
+        const a = hexToNum(pop()), b = hexToNum(pop());
+        push(b < a ? '01' : '');
+        return;
+      }
+      if (op === 'OP_GREATERTHAN') {
+        const a = hexToNum(pop()), b = hexToNum(pop());
+        push(b > a ? '01' : '');
+        return;
+      }
+
+      throw new Error('Opcode no soportado: ' + op);
+    }
+
+    // === EXECUTION ===
+
+    function shouldSkip() {
+      if (ifStack.length === 0) return false;
+      return !ifStack[ifStack.length - 1].condition;
+    }
+
+    async function step() {
+      if (executionFinished || currentTokenIndex >= tokens.length) {
+        finishExecution();
+        return false;
+      }
+
+      const token = tokens[currentTokenIndex];
+
+      // Control de flujo: siempre procesar IF/ELSE/ENDIF
+      if (token.type === 'opcode' && ['OP_IF', 'OP_NOTIF', 'OP_ELSE', 'OP_ENDIF'].includes(token.value)) {
+        try {
+          await executeOpcode(token);
+        } catch (error) {
+          showError(error.message);
+          showFailure(error.message);
+          executionFinished = true;
+          return false;
+        }
+      } else if (!shouldSkip()) {
+        try {
+          if (token.type === 'data') {
+            push(token.value);
+          } else {
+            await executeOpcode(token);
+          }
+        } catch (error) {
+          showError(error.message);
+          showFailure(error.message);
+          executionFinished = true;
+          return false;
+        }
+      }
+
+      currentTokenIndex++;
+      updateDisplay();
+
+      if (currentTokenIndex >= tokens.length) {
+        finishExecution();
+        return false;
+      }
+
+      return true;
+    }
+
+    async function runAll() {
+      if (isRunning) return;
+      isRunning = true;
+
+      while (currentTokenIndex < tokens.length && !executionFinished) {
+        const continued = await step();
+        if (!continued) break;
+        await new Promise(r => setTimeout(r, 100));
+      }
+
+      isRunning = false;
+    }
+
+    function finishExecution() {
+      executionFinished = true;
+
+      if (stack.length === 0) {
+        showFailure('Script inválido: pila vacía');
+      } else if (!isTruthy(stack[stack.length - 1])) {
+        showFailure('Script inválido: top de la pila es falso');
+      } else {
+        showSuccess();
+      }
+    }
+
+    function reset() {
+      errorMessage.style.display = 'none';
+      resultSection.style.display = 'none';
+      
+      stack = [];
+      currentTokenIndex = 0;
+      isRunning = false;
+      executionFinished = false;
+      ifStack = [];
+
+      try {
+        tokens = tokenize(scriptInput.value);
+        tokensSection.style.display = 'block';
+        stackSection.style.display = 'block';
+        updateDisplay();
+      } catch (error) {
+        showError(error.message);
+        tokensSection.style.display = 'none';
+        stackSection.style.display = 'none';
+      }
+    }
+
+    // === DISPLAY ===
+
+    function updateDisplay() {
+      // Tokens
+      let tokensHtml = tokens.map((token, i) => {
+        let className = token.type === 'opcode' ? 'token--opcode' : 'token--data';
+        if (i < currentTokenIndex) className += ' token--executed';
+        if (i === currentTokenIndex) className = 'token--current';
+        const display = token.type === 'data' ? `<${token.value || '∅'}>` : token.value;
+        return `<span class="token ${className}">${display}</span>`;
+      }).join('');
+      tokensDisplay.innerHTML = tokensHtml;
+
+      // Stack
+      if (stack.length === 0) {
+        stackDisplay.innerHTML = '<div class="stack-empty">La pila está vacía</div>';
+      } else {
+        stackDisplay.innerHTML = stack.map((item, i) => {
+          const isTop = i === stack.length - 1;
+          const display = item || '∅ (vacío)';
+          const num = hexToNum(item);
+          const numDisplay = item && item.length <= 8 ? ` = ${num}` : '';
+          return `<div class="stack-item ${isTop ? 'stack-item--top' : ''}">${display}${numDisplay}</div>`;
+        }).join('');
+      }
+      stackCount.textContent = `(${stack.length} items)`;
+    }
+
+    function showError(msg) {
+      errorMessage.textContent = msg;
+      errorMessage.style.display = 'block';
+    }
+
+    function showSuccess() {
+      resultBanner.textContent = '✓ SCRIPT VÁLIDO';
+      resultBanner.className = 'result-banner result-banner--success';
+      resultSection.style.display = 'block';
+    }
+
+    function showFailure(msg) {
+      resultBanner.textContent = '✗ ' + (msg || 'SCRIPT INVÁLIDO');
+      resultBanner.className = 'result-banner result-banner--failure';
+      resultSection.style.display = 'block';
+    }
+
+    // === EVENT LISTENERS ===
+
+    document.querySelectorAll('[data-script]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        scriptInput.value = btn.dataset.script;
+        reset();
+      });
+    });
+
+    btnReset.addEventListener('click', reset);
+    btnStep.addEventListener('click', step);
+    btnRun.addEventListener('click', runAll);
+
+    // Init
+    reset();
+
+  })();
+  </script>
+</body>
+</html>

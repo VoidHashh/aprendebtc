@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Genera listas de direcciones Bitcoin desde una xpub, ypub o zpub. Visualiza las direcciones de tu wallet sin exponer claves privadas." />
+  <title>Direcciones desde Extended Key — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .address-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+    .address-table th,
+    .address-table td {
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid var(--bg-border);
+    }
+    .address-table th {
+      background: var(--bg-primary);
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      position: sticky;
+      top: 0;
+    }
+    .address-table tr:hover {
+      background: var(--bg-primary);
+    }
+    .address-table__index {
+      color: var(--text-secondary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+    }
+    .address-table__path {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+    }
+    .address-table__address {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      cursor: pointer;
+    }
+    .address-table__address:hover {
+      text-decoration: underline;
+    }
+    .address-table__key {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-secondary);
+      max-width: 150px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .table-wrapper {
+      max-height: 400px;
+      overflow-y: auto;
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+    }
+
+    .key-type-badge {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .key-type-badge--xpub {
+      background: rgba(88, 166, 255, 0.2);
+      color: #58a6ff;
+    }
+    .key-type-badge--ypub {
+      background: rgba(163, 113, 247, 0.2);
+      color: #a371f7;
+    }
+    .key-type-badge--zpub {
+      background: rgba(247, 147, 26, 0.2);
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Herramientas">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Herramientas prácticas</div>
+          <a href="conversor.html" class="sidebar__link">Conversor BTC / EUR / sats</a>
+          <a href="calculadora-dca.html" class="sidebar__link">Calculadora DCA</a>
+          <a href="calculadora-fees.html" class="sidebar__link">Calculadora de fees</a>
+          <a href="calculadora-impuestos.html" class="sidebar__link">Calculadora de impuestos</a>
+          <a href="comparador-exchanges.html" class="sidebar__link">Comparador de exchanges</a>
+          <a href="calculadora-herencia.html" class="sidebar__link">Calculadora de herencia</a>
+        </div>
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Herramientas técnicas</div>
+          <a href="hash.html" class="sidebar__link">Hash functions</a>
+          <a href="private-key.html" class="sidebar__link">Claves y direcciones</a>
+          <a href="mnemonic-seed.html" class="sidebar__link sidebar__link--active">HD Wallet / BIP39</a>
+          <a href="transaccion.html" class="sidebar__link">Transacciones</a>
+          <a href="script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="block-tools.html" class="sidebar__link">Bloques</a>
+          <a href="firma.html" class="sidebar__link">Criptografía</a>
+          <a href="index.html" class="sidebar__link">Utilidades</a>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Direcciones desde xpub</span>
+        </nav>
+
+        <article class="article">
+          <h1>Direcciones desde Extended Key</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Genera las direcciones de una wallet a partir de su extended public key.
+          </p>
+
+          <!-- Disclaimer educativo -->
+          <div class="callout callout--danger" style="margin-bottom: 1.5rem;">
+            <span class="callout__icon" aria-hidden="true">🚨</span>
+            <div class="callout__content">
+              <div class="callout__title">Precaución con extended keys</div>
+              <p class="callout__text">Si introduces una xprv, esta herramienta puede mostrar tus claves privadas. NO uses extended keys de wallets con fondos reales en una web.</p>
+            </div>
+          </div>
+
+          <!-- Input -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Extended Key</h2>
+
+            <div class="tool-field" style="margin-bottom: 1rem;">
+              <label class="tool-label" for="xkey-input">xpub, ypub, zpub (o sus equivalentes privados)</label>
+              <textarea 
+                id="xkey-input" 
+                class="tool-input" 
+                rows="2"
+                placeholder="zpub6rFR7y4Q2AijBEqTUqoBKg7zp..."
+                style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;"
+              ></textarea>
+            </div>
+
+            <div id="key-info" style="display: none; margin-bottom: 1rem;">
+              <span class="key-type-badge" id="key-type-badge">—</span>
+              <span id="key-type-desc" style="color: var(--text-secondary); font-size: 0.85rem; margin-left: 0.5rem;">—</span>
+            </div>
+
+            <div class="tool-row" style="margin-bottom: 1rem;">
+              <div class="tool-field">
+                <label class="tool-label">Tipo de direcciones</label>
+                <div class="tool-presets">
+                  <button class="tool-preset tool-preset--active" data-change="0" id="btn-receive">Recepción (change=0)</button>
+                  <button class="tool-preset" data-change="1" id="btn-change">Cambio (change=1)</button>
+                </div>
+              </div>
+              <div class="tool-field" style="max-width: 150px;">
+                <label class="tool-label" for="count-input">Cantidad</label>
+                <input 
+                  type="number" 
+                  id="count-input" 
+                  class="tool-input" 
+                  value="10"
+                  min="1"
+                  max="50"
+                />
+              </div>
+            </div>
+
+            <div class="tool-btn-row">
+              <button class="tool-btn tool-btn--secondary" id="btn-example">📋 Cargar ejemplo</button>
+              <button class="tool-btn" id="btn-generate">🏠 Generar direcciones</button>
+            </div>
+          </div>
+
+          <!-- Error -->
+          <div class="tool-error" id="error-message" style="display: none;"></div>
+
+          <!-- Loading -->
+          <div class="tool-loading" id="loading" style="display: none;">
+            <div class="tool-spinner"></div>
+            <span>Derivando direcciones...</span>
+          </div>
+
+          <!-- Resultados -->
+          <div class="tool-container" id="results-section" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <h2 class="tool-container__title" style="margin: 0;">Direcciones generadas</h2>
+              <button class="tool-btn tool-btn--secondary tool-btn--small" id="btn-export">📥 Exportar CSV</button>
+            </div>
+
+            <div class="table-wrapper">
+              <table class="address-table" id="address-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Path</th>
+                    <th>Dirección</th>
+                    <th>Public Key</th>
+                    <th id="col-privkey" style="display: none;">Private Key</th>
+                  </tr>
+                </thead>
+                <tbody id="address-tbody">
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Info sobre tipos -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Tipos de Extended Keys</h2>
+            
+            <div class="tool-table-wrapper">
+              <table class="tool-table">
+                <thead>
+                  <tr>
+                    <th>Prefijo</th>
+                    <th>BIP</th>
+                    <th>Tipo de dirección</th>
+                    <th>Empieza por</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>xpub / xprv</strong></td>
+                    <td>BIP44</td>
+                    <td>P2PKH (Legacy)</td>
+                    <td>1...</td>
+                  </tr>
+                  <tr>
+                    <td><strong>ypub / yprv</strong></td>
+                    <td>BIP49</td>
+                    <td>P2SH-P2WPKH (SegWit wrapped)</td>
+                    <td>3...</td>
+                  </tr>
+                  <tr>
+                    <td><strong>zpub / zprv</strong></td>
+                    <td>BIP84</td>
+                    <td>P2WPKH (Native SegWit)</td>
+                    <td>bc1q...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más sobre HD Wallets</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-3/hd-wallets.html">HD Wallets en detalle →</a> · 
+              <a href="derivation-paths.html">Derivation Paths →</a> ·
+              <a href="extended-keys.html">Extended Keys →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+  <script src="../js/hex-utils.js"></script>
+  <script src="../js/base58.js"></script>
+  <script src="../js/bech32.js"></script>
+  <script src="../js/ripemd160.js"></script>
+  <script src="https://unpkg.com/@noble/secp256k1@1.7.1/lib/index.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === CONSTANTES ===
+    const HARDENED_OFFSET = 0x80000000;
+    const SECP256K1_ORDER = BigInt('0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141');
+
+    // zpub de ejemplo (derivada de mnemonic "abandon abandon..." de test en m/84'/0'/0')
+    const EXAMPLE_ZPUB = 'zpub6rFR7y4Q2AijBEqTUqoBKjVdYPCqJq3Rry2oXm4FvzNp9Jz9S3mEPWZPgZxFUGTVdmYKpyTrH8ypQeNKLrewgKkFqqqZDPbCiJ4HbAZMtKF';
+
+    const VERSION_INFO = {
+      '0488b21e': { prefix: 'xpub', type: 'public', bip: '44', addrType: 'P2PKH' },
+      '0488ade4': { prefix: 'xprv', type: 'private', bip: '44', addrType: 'P2PKH' },
+      '049d7cb2': { prefix: 'ypub', type: 'public', bip: '49', addrType: 'P2SH-P2WPKH' },
+      '049d7878': { prefix: 'yprv', type: 'private', bip: '49', addrType: 'P2SH-P2WPKH' },
+      '04b24746': { prefix: 'zpub', type: 'public', bip: '84', addrType: 'P2WPKH' },
+      '04b2430c': { prefix: 'zprv', type: 'private', bip: '84', addrType: 'P2WPKH' }
+    };
+
+    // === ELEMENTOS DEL DOM ===
+    const xkeyInput = document.getElementById('xkey-input');
+    const keyInfo = document.getElementById('key-info');
+    const keyTypeBadge = document.getElementById('key-type-badge');
+    const keyTypeDesc = document.getElementById('key-type-desc');
+    const btnReceive = document.getElementById('btn-receive');
+    const btnChange = document.getElementById('btn-change');
+    const countInput = document.getElementById('count-input');
+    const btnExample = document.getElementById('btn-example');
+    const btnGenerate = document.getElementById('btn-generate');
+    const errorMessage = document.getElementById('error-message');
+    const loading = document.getElementById('loading');
+    const resultsSection = document.getElementById('results-section');
+    const addressTbody = document.getElementById('address-tbody');
+    const btnExport = document.getElementById('btn-export');
+    const colPrivkey = document.getElementById('col-privkey');
+
+    let changeIndex = 0;
+    let generatedAddresses = [];
+    let currentKeyInfo = null;
+
+    // === FUNCIONES CRYPTO ===
+
+    async function hmacSha512(key, data) {
+      const cryptoKey = await crypto.subtle.importKey(
+        'raw', key, { name: 'HMAC', hash: 'SHA-512' }, false, ['sign']
+      );
+      const sig = await crypto.subtle.sign('HMAC', cryptoKey, data);
+      return new Uint8Array(sig);
+    }
+
+    function getSecp() {
+      return typeof nobleSecp256k1 !== 'undefined' ? nobleSecp256k1 : secp256k1;
+    }
+
+    // === DECODIFICAR EXTENDED KEY ===
+
+    async function decodeExtendedKey(xkeyString) {
+      const decoded = Base58.decode(xkeyString.trim());
+      if (decoded.length !== 82) throw new Error('Longitud inválida');
+
+      const payload = decoded.slice(0, 78);
+      const versionHex = HexUtils.bytesToHex(payload.slice(0, 4));
+      const versionInfo = VERSION_INFO[versionHex.toLowerCase()];
+
+      if (!versionInfo) throw new Error('Tipo de extended key no soportado: ' + versionHex);
+
+      const depth = payload[4];
+      const chainCode = payload.slice(13, 45);
+      const keyData = payload.slice(45, 78);
+
+      let privateKey = null;
+      let publicKey = null;
+
+      if (versionInfo.type === 'private') {
+        privateKey = keyData.slice(1);
+        publicKey = getSecp().getPublicKey(privateKey, true);
+      } else {
+        publicKey = keyData;
+      }
+
+      return {
+        versionInfo,
+        depth,
+        chainCode,
+        privateKey,
+        publicKey
+      };
+    }
+
+    // === CHILD KEY DERIVATION (solo normal, no hardened) ===
+
+    async function deriveChildNormal(parentKey, index) {
+      const secp = getSecp();
+      
+      // publicKey (33 bytes) + index (4 bytes)
+      const data = new Uint8Array(37);
+      data.set(parentKey.publicKey, 0);
+      data[33] = (index >> 24) & 0xFF;
+      data[34] = (index >> 16) & 0xFF;
+      data[35] = (index >> 8) & 0xFF;
+      data[36] = index & 0xFF;
+
+      const hmacResult = await hmacSha512(parentKey.chainCode, data);
+      const il = hmacResult.slice(0, 32);
+      const ir = hmacResult.slice(32);
+
+      let newPrivateKey = null;
+      let newPublicKey = null;
+
+      if (parentKey.privateKey) {
+        const ilBigInt = BigInt('0x' + HexUtils.bytesToHex(il));
+        const parentKeyBigInt = BigInt('0x' + HexUtils.bytesToHex(parentKey.privateKey));
+        const newKeyBigInt = (ilBigInt + parentKeyBigInt) % SECP256K1_ORDER;
+        const newKeyHex = newKeyBigInt.toString(16).padStart(64, '0');
+        newPrivateKey = HexUtils.hexToBytes(newKeyHex);
+        newPublicKey = secp.getPublicKey(newPrivateKey, true);
+      } else {
+        const ilPoint = secp.Point.fromPrivateKey(il);
+        const parentPoint = secp.Point.fromHex(parentKey.publicKey);
+        const newPoint = parentPoint.add(ilPoint);
+        newPublicKey = newPoint.toRawBytes(true);
+      }
+
+      return {
+        privateKey: newPrivateKey,
+        publicKey: newPublicKey,
+        chainCode: ir
+      };
+    }
+
+    // === GENERAR DIRECCIÓN ===
+
+    async function generateAddress(publicKey, bip) {
+      const hash160 = await HexUtils.hash160(publicKey);
+
+      switch (bip) {
+        case '44':
+          return await Base58.checkEncode(0x00, hash160);
+        case '49':
+          const redeemScript = new Uint8Array(22);
+          redeemScript[0] = 0x00;
+          redeemScript[1] = 0x14;
+          redeemScript.set(hash160, 2);
+          const scriptHash = await HexUtils.hash160(redeemScript);
+          return await Base58.checkEncode(0x05, scriptHash);
+        case '84':
+        default:
+          return Bech32.encodeP2WPKH(hash160, 'mainnet');
+      }
+    }
+
+    // === GENERAR LISTA DE DIRECCIONES ===
+
+    async function generateAddresses() {
+      errorMessage.style.display = 'none';
+      resultsSection.style.display = 'none';
+      loading.style.display = 'flex';
+      generatedAddresses = [];
+
+      const xkeyString = xkeyInput.value.trim();
+      const count = Math.min(Math.max(parseInt(countInput.value) || 10, 1), 50);
+
+      if (!xkeyString) {
+        showError('Introduce una extended key.');
+        loading.style.display = 'none';
+        return;
+      }
+
+      try {
+        const parentKey = await decodeExtendedKey(xkeyString);
+        currentKeyInfo = parentKey.versionInfo;
+
+        // Primero derivamos al nivel change (0 o 1)
+        let changeKey = await deriveChildNormal(parentKey, changeIndex);
+
+        // Luego derivamos cada índice de dirección
+        const addresses = [];
+        
+        for (let i = 0; i < count; i++) {
+          const childKey = await deriveChildNormal(changeKey, i);
+          const address = await generateAddress(childKey.publicKey, currentKeyInfo.bip);
+          
+          const entry = {
+            index: i,
+            path: `.../${changeIndex}/${i}`,
+            address,
+            publicKey: HexUtils.bytesToHex(childKey.publicKey),
+            privateKey: childKey.privateKey ? HexUtils.bytesToHex(childKey.privateKey) : null
+          };
+          
+          addresses.push(entry);
+        }
+
+        generatedAddresses = addresses;
+        displayAddresses(addresses, currentKeyInfo.type === 'private');
+
+      } catch (error) {
+        showError('Error: ' + error.message);
+      }
+
+      loading.style.display = 'none';
+    }
+
+    function displayAddresses(addresses, showPrivate) {
+      colPrivkey.style.display = showPrivate ? '' : 'none';
+      
+      addressTbody.innerHTML = '';
+      
+      addresses.forEach(entry => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td class="address-table__index">${entry.index}</td>
+          <td class="address-table__path">${entry.path}</td>
+          <td class="address-table__address" title="Click para copiar" data-address="${entry.address}">${entry.address}</td>
+          <td class="address-table__key" title="${entry.publicKey}">${entry.publicKey.substring(0, 20)}...</td>
+          ${showPrivate ? `<td class="address-table__key" title="${entry.privateKey}">${entry.privateKey ? entry.privateKey.substring(0, 16) + '...' : '—'}</td>` : ''}
+        `;
+        addressTbody.appendChild(row);
+      });
+
+      // Click para copiar direcciones
+      addressTbody.querySelectorAll('.address-table__address').forEach(td => {
+        td.addEventListener('click', async () => {
+          const address = td.dataset.address;
+          try {
+            await navigator.clipboard.writeText(address);
+            const original = td.textContent;
+            td.textContent = '✓ Copiado';
+            td.style.color = '#2ea043';
+            setTimeout(() => {
+              td.textContent = original;
+              td.style.color = '';
+            }, 1000);
+          } catch (err) {
+            console.error('Error copiando:', err);
+          }
+        });
+      });
+
+      resultsSection.style.display = 'block';
+    }
+
+    function showError(msg) {
+      errorMessage.textContent = msg;
+      errorMessage.style.display = 'block';
+    }
+
+    // === EXPORTAR CSV ===
+
+    function exportCSV() {
+      if (generatedAddresses.length === 0) return;
+
+      const showPrivate = currentKeyInfo && currentKeyInfo.type === 'private';
+      let csv = showPrivate
+        ? 'Index,Path,Address,Public Key,Private Key\n'
+        : 'Index,Path,Address,Public Key\n';
+
+      generatedAddresses.forEach(entry => {
+        if (showPrivate) {
+          csv += `${entry.index},"${entry.path}","${entry.address}","${entry.publicKey}","${entry.privateKey || ''}"\n`;
+        } else {
+          csv += `${entry.index},"${entry.path}","${entry.address}","${entry.publicKey}"\n`;
+        }
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `addresses-${changeIndex === 0 ? 'receive' : 'change'}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // === EVENT LISTENERS ===
+
+    xkeyInput.addEventListener('input', () => {
+      const value = xkeyInput.value.trim().toLowerCase();
+      let detected = null;
+
+      for (const [version, info] of Object.entries(VERSION_INFO)) {
+        if (value.startsWith(info.prefix)) {
+          detected = info;
+          break;
+        }
+      }
+
+      if (detected) {
+        keyInfo.style.display = 'block';
+        keyTypeBadge.textContent = detected.prefix;
+        keyTypeBadge.className = 'key-type-badge key-type-badge--' + detected.prefix.substring(0, 4);
+        keyTypeDesc.textContent = `${detected.addrType} · ${detected.type === 'private' ? 'Private (⚠️ expone claves)' : 'Public'}`;
+      } else {
+        keyInfo.style.display = 'none';
+      }
+    });
+
+    btnReceive.addEventListener('click', () => {
+      changeIndex = 0;
+      btnReceive.classList.add('tool-preset--active');
+      btnChange.classList.remove('tool-preset--active');
+    });
+
+    btnChange.addEventListener('click', () => {
+      changeIndex = 1;
+      btnChange.classList.add('tool-preset--active');
+      btnReceive.classList.remove('tool-preset--active');
+    });
+
+    btnExample.addEventListener('click', () => {
+      xkeyInput.value = EXAMPLE_ZPUB;
+      xkeyInput.dispatchEvent(new Event('input'));
+    });
+
+    btnGenerate.addEventListener('click', generateAddresses);
+
+    btnExport.addEventListener('click', exportCSV);
+
+  })();
+  </script>
+</body>
+</html>
+

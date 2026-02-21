@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Genera y decodifica extended keys (xpub, xprv, ypub, zpub, tpub). Entiende las master keys BIP32." />
+  <title>Extended Keys (xpub / xprv) — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid var(--bg-border);
+      margin-bottom: 1.5rem;
+    }
+    .tab {
+      padding: 0.75rem 1.25rem;
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: all 0.2s;
+    }
+    .tab:hover { color: var(--text-primary); }
+    .tab--active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .tab-content { display: none; }
+    .tab-content--active { display: block; }
+
+    .xkey-field {
+      background: var(--bg-primary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      padding: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .xkey-field__label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 0.35rem;
+    }
+    .xkey-field__value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      word-break: break-all;
+      color: var(--text-primary);
+    }
+    .xkey-field__value--accent {
+      color: var(--accent);
+    }
+
+    .decoded-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Herramientas">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Herramientas prácticas</div>
+          <a href="conversor.html" class="sidebar__link">Conversor BTC / EUR / sats</a>
+          <a href="calculadora-dca.html" class="sidebar__link">Calculadora DCA</a>
+          <a href="calculadora-fees.html" class="sidebar__link">Calculadora de fees</a>
+          <a href="calculadora-impuestos.html" class="sidebar__link">Calculadora de impuestos</a>
+          <a href="comparador-exchanges.html" class="sidebar__link">Comparador de exchanges</a>
+          <a href="calculadora-herencia.html" class="sidebar__link">Calculadora de herencia</a>
+        </div>
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Herramientas técnicas</div>
+          <a href="hash.html" class="sidebar__link">Hash functions</a>
+          <a href="private-key.html" class="sidebar__link">Claves y direcciones</a>
+          <a href="mnemonic-seed.html" class="sidebar__link sidebar__link--active">HD Wallet / BIP39</a>
+          <a href="transaccion.html" class="sidebar__link">Transacciones</a>
+          <a href="script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="block-tools.html" class="sidebar__link">Bloques</a>
+          <a href="firma.html" class="sidebar__link">Criptografía</a>
+          <a href="index.html" class="sidebar__link">Utilidades</a>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Extended Keys</span>
+        </nav>
+
+        <article class="article">
+          <h1>Extended Keys (xpub / xprv)</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Deriva master keys desde la seed y explora el formato de extended keys BIP32.
+          </p>
+
+          <!-- Disclaimer educativo -->
+          <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">Herramienta educativa</div>
+              <p class="callout__text">Esta herramienta es para aprendizaje. NO uses seeds de wallets con fondos reales.</p>
+            </div>
+          </div>
+
+          <!-- Pestañas -->
+          <div class="tabs">
+            <button class="tab tab--active" data-tab="derive">Derivar desde Seed</button>
+            <button class="tab" data-tab="decode">Decodificar xkey</button>
+          </div>
+
+          <!-- ==================== -->
+          <!-- TAB 1: DERIVE -->
+          <!-- ==================== -->
+          <div class="tab-content tab-content--active" id="tab-derive">
+            <div class="tool-container">
+              <h2 class="tool-container__title">Seed hexadecimal</h2>
+
+              <div class="tool-field">
+                <label class="tool-label" for="seed-input">Seed (64 bytes / 128 hex chars)</label>
+                <textarea 
+                  id="seed-input" 
+                  class="tool-input" 
+                  rows="2"
+                  placeholder="Pega aquí la seed hex de mnemonic-seed.html"
+                  style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;"
+                ></textarea>
+                <span class="tool-note" id="seed-status">0 / 128 caracteres</span>
+              </div>
+
+              <div class="tool-btn-row">
+                <button class="tool-btn tool-btn--secondary" id="btn-example-seed">📋 Cargar ejemplo</button>
+                <button class="tool-btn tool-btn--secondary" id="btn-generate-seed">🎲 Generar seed aleatoria</button>
+                <button class="tool-btn" id="btn-derive">🔑 Derivar claves maestras</button>
+              </div>
+            </div>
+
+            <!-- Error -->
+            <div class="tool-error" id="derive-error" style="display: none;"></div>
+
+            <!-- Resultados -->
+            <div class="tool-container" id="derive-results" style="display: none;">
+              <h2 class="tool-container__title">Master Keys (depth 0)</h2>
+
+              <div class="xkey-field">
+                <div class="xkey-field__label">Master Private Key (32 bytes)</div>
+                <div class="xkey-field__value" id="output-master-priv">—</div>
+              </div>
+
+              <div class="xkey-field">
+                <div class="xkey-field__label">Master Chain Code (32 bytes)</div>
+                <div class="xkey-field__value" id="output-chain-code">—</div>
+              </div>
+
+              <div class="xkey-field">
+                <div class="xkey-field__label">Master Public Key (33 bytes, comprimida)</div>
+                <div class="xkey-field__value" id="output-master-pub">—</div>
+              </div>
+
+              <div style="margin-top: 1.5rem;">
+                <h3 style="font-size: 1rem; margin-bottom: 0.75rem;">Extended Keys serializadas</h3>
+
+                <div class="xkey-field">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="xkey-field__label">xprv (BIP32 mainnet)</div>
+                    <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-xprv">📋</button>
+                  </div>
+                  <div class="xkey-field__value xkey-field__value--accent" id="output-xprv">—</div>
+                </div>
+
+                <div class="xkey-field">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="xkey-field__label">xpub (BIP32 mainnet)</div>
+                    <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-xpub">📋</button>
+                  </div>
+                  <div class="xkey-field__value" id="output-xpub">—</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ==================== -->
+          <!-- TAB 2: DECODE -->
+          <!-- ==================== -->
+          <div class="tab-content" id="tab-decode">
+            <div class="tool-container">
+              <h2 class="tool-container__title">Decodificar Extended Key</h2>
+
+              <div class="tool-field">
+                <label class="tool-label" for="xkey-input">Extended Key (xpub, xprv, ypub, zpub, etc.)</label>
+                <textarea 
+                  id="xkey-input" 
+                  class="tool-input" 
+                  rows="2"
+                  placeholder="xpub661MyMwAqRbcF..."
+                  style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;"
+                ></textarea>
+              </div>
+
+              <button class="tool-btn" id="btn-decode-xkey">🔍 Decodificar</button>
+            </div>
+
+            <!-- Error -->
+            <div class="tool-error" id="decode-error" style="display: none;"></div>
+
+            <!-- Resultados decode -->
+            <div class="tool-container" id="decode-results" style="display: none;">
+              <h2 class="tool-container__title">Campos decodificados</h2>
+
+              <div class="decoded-grid">
+                <div class="tool-result-card">
+                  <div class="tool-result-card__label">Version</div>
+                  <div class="tool-result-card__value" id="dec-version">—</div>
+                </div>
+                <div class="tool-result-card">
+                  <div class="tool-result-card__label">Tipo</div>
+                  <div class="tool-result-card__value" id="dec-type">—</div>
+                </div>
+                <div class="tool-result-card">
+                  <div class="tool-result-card__label">Red</div>
+                  <div class="tool-result-card__value" id="dec-network">—</div>
+                </div>
+                <div class="tool-result-card">
+                  <div class="tool-result-card__label">Depth</div>
+                  <div class="tool-result-card__value" id="dec-depth">—</div>
+                </div>
+                <div class="tool-result-card">
+                  <div class="tool-result-card__label">Child Index</div>
+                  <div class="tool-result-card__value" id="dec-index">—</div>
+                </div>
+              </div>
+
+              <div class="xkey-field" style="margin-top: 1rem;">
+                <div class="xkey-field__label">Fingerprint (parent)</div>
+                <div class="xkey-field__value" id="dec-fingerprint">—</div>
+              </div>
+
+              <div class="xkey-field">
+                <div class="xkey-field__label">Chain Code (32 bytes)</div>
+                <div class="xkey-field__value" id="dec-chaincode">—</div>
+              </div>
+
+              <div class="xkey-field">
+                <div class="xkey-field__label">Key (33 bytes)</div>
+                <div class="xkey-field__value" id="dec-key">—</div>
+              </div>
+
+              <div id="dec-checksum-status" style="margin-top: 0.75rem; font-weight: 600;"></div>
+            </div>
+          </div>
+
+          <!-- Tabla de versiones -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Version Bytes para Extended Keys</h2>
+            
+            <div class="tool-table-wrapper">
+              <table class="tool-table">
+                <thead>
+                  <tr>
+                    <th>Version (hex)</th>
+                    <th>Prefix</th>
+                    <th>Tipo</th>
+                    <th>Red</th>
+                    <th>BIP</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>0488ADE4</code></td>
+                    <td><strong>xprv</strong></td>
+                    <td>Private</td>
+                    <td>Mainnet</td>
+                    <td>BIP44</td>
+                  </tr>
+                  <tr>
+                    <td><code>0488B21E</code></td>
+                    <td><strong>xpub</strong></td>
+                    <td>Public</td>
+                    <td>Mainnet</td>
+                    <td>BIP44</td>
+                  </tr>
+                  <tr>
+                    <td><code>049D7878</code></td>
+                    <td><strong>yprv</strong></td>
+                    <td>Private</td>
+                    <td>Mainnet</td>
+                    <td>BIP49</td>
+                  </tr>
+                  <tr>
+                    <td><code>049D7CB2</code></td>
+                    <td><strong>ypub</strong></td>
+                    <td>Public</td>
+                    <td>Mainnet</td>
+                    <td>BIP49</td>
+                  </tr>
+                  <tr>
+                    <td><code>04B2430C</code></td>
+                    <td><strong>zprv</strong></td>
+                    <td>Private</td>
+                    <td>Mainnet</td>
+                    <td>BIP84</td>
+                  </tr>
+                  <tr>
+                    <td><code>04B24746</code></td>
+                    <td><strong>zpub</strong></td>
+                    <td>Public</td>
+                    <td>Mainnet</td>
+                    <td>BIP84</td>
+                  </tr>
+                  <tr>
+                    <td><code>045F18BC</code></td>
+                    <td><strong>tprv</strong></td>
+                    <td>Private</td>
+                    <td>Testnet</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td><code>045F1CF6</code></td>
+                    <td><strong>tpub</strong></td>
+                    <td>Public</td>
+                    <td>Testnet</td>
+                    <td>—</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Proceso BIP32 -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Derivación de Master Key (BIP32)</h2>
+            <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md); font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">
+              <code>HMAC-SHA512(key = "Bitcoin seed", data = seed)</code><br><br>
+              → Primeros 32 bytes = <strong>Master Private Key</strong><br>
+              → Últimos 32 bytes = <strong>Master Chain Code</strong><br>
+              → Master Public Key = Master Private Key × G
+            </div>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más sobre HD Wallets</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-3/hd-wallets.html">HD Wallets en detalle →</a> · 
+              <a href="mnemonic-seed.html">Generar mnemonic seed →</a> ·
+              <a href="derivation-paths.html">Derivation paths →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+  <script src="../js/hex-utils.js"></script>
+  <script src="../js/base58.js"></script>
+  <script src="https://unpkg.com/@noble/secp256k1@1.7.1/lib/index.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === CONSTANTES ===
+    const VERSION_BYTES = {
+      '0488ade4': { prefix: 'xprv', type: 'private', network: 'mainnet', bip: 'BIP44' },
+      '0488b21e': { prefix: 'xpub', type: 'public', network: 'mainnet', bip: 'BIP44' },
+      '049d7878': { prefix: 'yprv', type: 'private', network: 'mainnet', bip: 'BIP49' },
+      '049d7cb2': { prefix: 'ypub', type: 'public', network: 'mainnet', bip: 'BIP49' },
+      '04b2430c': { prefix: 'zprv', type: 'private', network: 'mainnet', bip: 'BIP84' },
+      '04b24746': { prefix: 'zpub', type: 'public', network: 'mainnet', bip: 'BIP84' },
+      '045f18bc': { prefix: 'tprv', type: 'private', network: 'testnet', bip: '—' },
+      '045f1cf6': { prefix: 'tpub', type: 'public', network: 'testnet', bip: '—' }
+    };
+
+    const EXAMPLE_SEED = '5eb00bbddcf069084889a8ab9155568165f5c453ccb85e70811aaed6f6da5fc19a5ac40b389cd370d086206dec8aa6c43daea6690f20ad3d8d48b2d2ce9e38e4';
+
+    // === ELEMENTOS DEL DOM ===
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    // Derive tab
+    const seedInput = document.getElementById('seed-input');
+    const seedStatus = document.getElementById('seed-status');
+    const btnExampleSeed = document.getElementById('btn-example-seed');
+    const btnGenerateSeed = document.getElementById('btn-generate-seed');
+    const btnDerive = document.getElementById('btn-derive');
+    const deriveError = document.getElementById('derive-error');
+    const deriveResults = document.getElementById('derive-results');
+
+    const outputMasterPriv = document.getElementById('output-master-priv');
+    const outputChainCode = document.getElementById('output-chain-code');
+    const outputMasterPub = document.getElementById('output-master-pub');
+    const outputXprv = document.getElementById('output-xprv');
+    const outputXpub = document.getElementById('output-xpub');
+
+    // Decode tab
+    const xkeyInput = document.getElementById('xkey-input');
+    const btnDecodeXkey = document.getElementById('btn-decode-xkey');
+    const decodeError = document.getElementById('decode-error');
+    const decodeResults = document.getElementById('decode-results');
+
+    // === FUNCIONES ===
+
+    /**
+     * HMAC-SHA512
+     */
+    async function hmacSha512(key, data) {
+      const cryptoKey = await crypto.subtle.importKey(
+        'raw',
+        key,
+        { name: 'HMAC', hash: 'SHA-512' },
+        false,
+        ['sign']
+      );
+      const signature = await crypto.subtle.sign('HMAC', cryptoKey, data);
+      return new Uint8Array(signature);
+    }
+
+    /**
+     * Deriva master keys desde seed
+     */
+    async function deriveMasterKeys(seedHex) {
+      const seedBytes = HexUtils.hexToBytes(seedHex);
+      const key = new TextEncoder().encode('Bitcoin seed');
+      
+      const hmacResult = await hmacSha512(key, seedBytes);
+      
+      const masterPrivateKey = hmacResult.slice(0, 32);
+      const masterChainCode = hmacResult.slice(32);
+
+      // Derivar public key
+      const secp = typeof nobleSecp256k1 !== 'undefined' ? nobleSecp256k1 : secp256k1;
+      const masterPublicKey = secp.getPublicKey(masterPrivateKey, true);
+
+      return {
+        privateKey: masterPrivateKey,
+        chainCode: masterChainCode,
+        publicKey: masterPublicKey
+      };
+    }
+
+    /**
+     * Serializa extended key (xprv o xpub)
+     */
+    async function serializeExtendedKey(version, depth, fingerprint, childIndex, chainCode, keyData) {
+      // version(4) + depth(1) + fingerprint(4) + childIndex(4) + chainCode(32) + key(33) = 78 bytes
+      const data = new Uint8Array(78);
+      
+      // Version (4 bytes, big-endian)
+      const versionBytes = HexUtils.hexToBytes(version);
+      data.set(versionBytes, 0);
+      
+      // Depth (1 byte)
+      data[4] = depth;
+      
+      // Fingerprint (4 bytes)
+      data.set(fingerprint, 5);
+      
+      // Child index (4 bytes, big-endian)
+      data[9] = (childIndex >> 24) & 0xFF;
+      data[10] = (childIndex >> 16) & 0xFF;
+      data[11] = (childIndex >> 8) & 0xFF;
+      data[12] = childIndex & 0xFF;
+      
+      // Chain code (32 bytes)
+      data.set(chainCode, 13);
+      
+      // Key data (33 bytes)
+      data.set(keyData, 45);
+
+      // Base58Check encode
+      return await Base58.checkEncode(data[0], data.slice(1));
+    }
+
+    /**
+     * Crea xprv desde master keys
+     */
+    async function createXprv(masterKeys) {
+      // Para private key: prepend 0x00
+      const keyData = new Uint8Array(33);
+      keyData[0] = 0x00;
+      keyData.set(masterKeys.privateKey, 1);
+
+      const fingerprint = new Uint8Array(4); // Master key tiene fingerprint 00000000
+      
+      // Serializar manualmente para tener el version completo
+      const data = new Uint8Array(78);
+      const version = HexUtils.hexToBytes('0488ade4');
+      data.set(version, 0);
+      data[4] = 0; // depth
+      data.set(fingerprint, 5);
+      // child index = 0
+      data.set(masterKeys.chainCode, 13);
+      data.set(keyData, 45);
+
+      const checksum = await Base58.calculateChecksum(data);
+      const full = new Uint8Array(82);
+      full.set(data);
+      full.set(checksum, 78);
+
+      return Base58.encode(full);
+    }
+
+    /**
+     * Crea xpub desde master keys
+     */
+    async function createXpub(masterKeys) {
+      const fingerprint = new Uint8Array(4);
+      
+      const data = new Uint8Array(78);
+      const version = HexUtils.hexToBytes('0488b21e');
+      data.set(version, 0);
+      data[4] = 0; // depth
+      data.set(fingerprint, 5);
+      // child index = 0
+      data.set(masterKeys.chainCode, 13);
+      data.set(masterKeys.publicKey, 45);
+
+      const checksum = await Base58.calculateChecksum(data);
+      const full = new Uint8Array(82);
+      full.set(data);
+      full.set(checksum, 78);
+
+      return Base58.encode(full);
+    }
+
+    /**
+     * Decodifica extended key
+     */
+    async function decodeExtendedKey(xkeyString) {
+      const decoded = Base58.decode(xkeyString.trim());
+      
+      if (decoded.length !== 82) {
+        throw new Error('Longitud inválida: ' + decoded.length + ' bytes (esperados 82)');
+      }
+
+      // Verificar checksum
+      const payload = decoded.slice(0, 78);
+      const checksumProvided = decoded.slice(78);
+      const checksumCalculated = await Base58.calculateChecksum(payload);
+      
+      let checksumValid = true;
+      for (let i = 0; i < 4; i++) {
+        if (checksumProvided[i] !== checksumCalculated[i]) {
+          checksumValid = false;
+          break;
+        }
+      }
+
+      // Extraer campos
+      const versionHex = HexUtils.bytesToHex(payload.slice(0, 4));
+      const depth = payload[4];
+      const fingerprint = HexUtils.bytesToHex(payload.slice(5, 9));
+      const childIndex = (payload[9] << 24) | (payload[10] << 16) | (payload[11] << 8) | payload[12];
+      const chainCode = HexUtils.bytesToHex(payload.slice(13, 45));
+      const keyData = HexUtils.bytesToHex(payload.slice(45, 78));
+
+      // Determinar tipo
+      const versionInfo = VERSION_BYTES[versionHex.toLowerCase()] || {
+        prefix: 'desconocido',
+        type: 'unknown',
+        network: 'unknown',
+        bip: '—'
+      };
+
+      // Determinar si es hardened
+      const isHardened = childIndex >= 0x80000000;
+      const displayIndex = isHardened 
+        ? (childIndex - 0x80000000) + "'" 
+        : childIndex.toString();
+
+      return {
+        version: versionHex,
+        versionInfo,
+        depth,
+        fingerprint,
+        childIndex,
+        displayIndex,
+        chainCode,
+        keyData,
+        checksumValid,
+        checksumProvided: HexUtils.bytesToHex(checksumProvided),
+        checksumCalculated: HexUtils.bytesToHex(checksumCalculated)
+      };
+    }
+
+    // === TABS ===
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('tab--active'));
+        tabContents.forEach(c => c.classList.remove('tab-content--active'));
+        tab.classList.add('tab--active');
+        document.getElementById('tab-' + tab.dataset.tab).classList.add('tab-content--active');
+      });
+    });
+
+    // === DERIVE TAB ===
+
+    seedInput.addEventListener('input', () => {
+      const value = seedInput.value.replace(/[^0-9a-fA-F]/g, '');
+      seedStatus.textContent = `${value.length} / 128 caracteres`;
+      seedStatus.style.color = value.length === 128 ? '#2ea043' : 'var(--text-secondary)';
+    });
+
+    btnExampleSeed.addEventListener('click', () => {
+      seedInput.value = EXAMPLE_SEED;
+      seedInput.dispatchEvent(new Event('input'));
+    });
+
+    btnGenerateSeed.addEventListener('click', () => {
+      const randomSeed = HexUtils.bytesToHex(HexUtils.randomBytes(64));
+      seedInput.value = randomSeed;
+      seedInput.dispatchEvent(new Event('input'));
+      deriveError.style.display = 'none';
+      deriveResults.style.display = 'none';
+      seedInput.focus();
+    });
+
+    btnDerive.addEventListener('click', async () => {
+      deriveError.style.display = 'none';
+      
+      const seedHex = seedInput.value.replace(/\s/g, '').toLowerCase();
+      
+      if (seedHex.length !== 128) {
+        deriveError.textContent = 'La seed debe tener 128 caracteres hexadecimales (64 bytes).';
+        deriveError.style.display = 'block';
+        deriveResults.style.display = 'none';
+        return;
+      }
+
+      if (!/^[0-9a-f]+$/.test(seedHex)) {
+        deriveError.textContent = 'La seed debe contener solo caracteres hexadecimales.';
+        deriveError.style.display = 'block';
+        deriveResults.style.display = 'none';
+        return;
+      }
+
+      try {
+        const masterKeys = await deriveMasterKeys(seedHex);
+
+        outputMasterPriv.textContent = HexUtils.bytesToHex(masterKeys.privateKey);
+        outputChainCode.textContent = HexUtils.bytesToHex(masterKeys.chainCode);
+        outputMasterPub.textContent = HexUtils.bytesToHex(masterKeys.publicKey);
+
+        const xprv = await createXprv(masterKeys);
+        const xpub = await createXpub(masterKeys);
+
+        outputXprv.textContent = xprv;
+        outputXpub.textContent = xpub;
+
+        deriveResults.style.display = 'block';
+
+      } catch (error) {
+        deriveError.textContent = 'Error: ' + error.message;
+        deriveError.style.display = 'block';
+        deriveResults.style.display = 'none';
+      }
+    });
+
+    // === DECODE TAB ===
+
+    btnDecodeXkey.addEventListener('click', async () => {
+      decodeError.style.display = 'none';
+
+      const xkeyString = xkeyInput.value.trim();
+
+      if (!xkeyString) {
+        decodeError.textContent = 'Introduce una extended key.';
+        decodeError.style.display = 'block';
+        decodeResults.style.display = 'none';
+        return;
+      }
+
+      try {
+        const decoded = await decodeExtendedKey(xkeyString);
+
+        document.getElementById('dec-version').textContent = decoded.version.toUpperCase();
+        document.getElementById('dec-type').textContent = decoded.versionInfo.prefix + ' (' + decoded.versionInfo.type + ')';
+        document.getElementById('dec-type').style.color = decoded.versionInfo.type === 'private' ? '#da3633' : '#2ea043';
+        document.getElementById('dec-network').textContent = decoded.versionInfo.network;
+        document.getElementById('dec-depth').textContent = decoded.depth;
+        document.getElementById('dec-index').textContent = decoded.displayIndex;
+        document.getElementById('dec-fingerprint').textContent = decoded.fingerprint;
+        document.getElementById('dec-chaincode').textContent = decoded.chainCode;
+        document.getElementById('dec-key').textContent = decoded.keyData;
+
+        const checksumStatus = document.getElementById('dec-checksum-status');
+        if (decoded.checksumValid) {
+          checksumStatus.textContent = '✓ Checksum válido';
+          checksumStatus.style.color = '#2ea043';
+        } else {
+          checksumStatus.textContent = '✗ Checksum inválido (esperado: ' + decoded.checksumCalculated + ')';
+          checksumStatus.style.color = '#da3633';
+        }
+
+        decodeResults.style.display = 'block';
+
+      } catch (error) {
+        decodeError.textContent = 'Error: ' + error.message;
+        decodeError.style.display = 'block';
+        decodeResults.style.display = 'none';
+      }
+    });
+
+    // === COPIAR ===
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const targetId = btn.dataset.target;
+        const target = document.getElementById(targetId);
+        const text = target.textContent;
+
+        if (text && text !== '—') {
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.textContent = '✓';
+            setTimeout(() => { btn.textContent = '📋'; }, 1000);
+          } catch (err) {
+            console.error('Error copiando:', err);
+          }
+        }
+      });
+    });
+
+  })();
+  </script>
+</body>
+</html>
+
+

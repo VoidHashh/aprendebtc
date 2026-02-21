@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Decodifica PSBTs (BIP174). Analiza transacciones parcialmente firmadas, inputs, outputs, firmas y metadata." />
+  <title>Decodificador PSBT (BIP174) — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .psbt-section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+    .psbt-section__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      background: var(--bg-primary);
+      border-bottom: 1px solid var(--bg-border);
+      cursor: pointer;
+    }
+    .psbt-section__header:hover {
+      background: rgba(247, 147, 26, 0.05);
+    }
+    .psbt-section__title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .psbt-section__badge {
+      font-size: 0.7rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .psbt-section__badge--global {
+      background: rgba(88, 166, 255, 0.2);
+      color: #58a6ff;
+    }
+    .psbt-section__badge--input {
+      background: rgba(46, 160, 67, 0.2);
+      color: #2ea043;
+    }
+    .psbt-section__badge--output {
+      background: rgba(247, 147, 26, 0.2);
+      color: var(--accent);
+    }
+    .psbt-section__toggle {
+      color: var(--text-secondary);
+      transition: transform 0.2s;
+    }
+    .psbt-section__toggle--open {
+      transform: rotate(180deg);
+    }
+    .psbt-section__content {
+      padding: 1rem;
+      display: none;
+    }
+    .psbt-section__content--open {
+      display: block;
+    }
+
+    .psbt-field {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--bg-border);
+      gap: 1rem;
+    }
+    .psbt-field:last-child {
+      border-bottom: none;
+    }
+    .psbt-field__key {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      flex-shrink: 0;
+      max-width: 40%;
+    }
+    .psbt-field__key code {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      display: block;
+      margin-top: 0.25rem;
+    }
+    .psbt-field__value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      word-break: break-all;
+      text-align: right;
+      flex: 1;
+    }
+
+    .status-banner {
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .status-banner--complete {
+      background: rgba(46, 160, 67, 0.15);
+      border: 1px solid #2ea043;
+    }
+    .status-banner--incomplete {
+      background: rgba(210, 153, 34, 0.15);
+      border: 1px solid #d29922;
+    }
+    .status-banner__icon {
+      font-size: 1.5rem;
+    }
+    .status-banner__text {
+      font-weight: 600;
+    }
+    .status-banner__detail {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .key-type-badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+        <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Decodificador PSBT</span>
+        </nav>
+
+        <article class="article">
+          <h1>Decodificador PSBT (BIP174)</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Analiza transacciones parcialmente firmadas (Partially Signed Bitcoin Transactions).
+          </p>
+
+          <!-- Info -->
+          <div class="callout callout--info" style="margin-bottom: 1.5rem;">
+            <span class="callout__icon" aria-hidden="true">ℹ️</span>
+            <div class="callout__content">
+              <div class="callout__title">¿Qué es un PSBT?</div>
+              <p class="callout__text">Un formato estándar (BIP174) para intercambiar transacciones sin firmar o parcialmente firmadas entre wallets, hardware wallets y coordinadores multisig.</p>
+            </div>
+          </div>
+
+          <!-- Input -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">PSBT</h2>
+
+            <div class="tool-field">
+              <label class="tool-label" for="psbt-input">Base64 o Hexadecimal</label>
+              <textarea 
+                id="psbt-input" 
+                class="tool-input" 
+                rows="4"
+                placeholder="cHNidP8B... (Base64) o 70736274ff... (Hex)"
+                style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;"
+              ></textarea>
+            </div>
+
+            <div class="tool-btn-row">
+              <button class="tool-btn tool-btn--secondary" id="btn-example">📋 PSBT de ejemplo</button>
+              <button class="tool-btn" id="btn-decode">🔍 Decodificar</button>
+            </div>
+          </div>
+
+          <!-- Error -->
+          <div class="tool-error" id="error-message" style="display: none;"></div>
+
+          <!-- Status -->
+          <div id="status-section" style="display: none;"></div>
+
+          <!-- Results -->
+          <div id="results-section" style="display: none;">
+            <!-- Global -->
+            <div id="global-section"></div>
+            
+            <!-- Inputs -->
+            <div id="inputs-section"></div>
+            
+            <!-- Outputs -->
+            <div id="outputs-section"></div>
+          </div>
+
+          <!-- Estructura PSBT -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Estructura de un PSBT</h2>
+            
+            <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; line-height: 1.8;">
+              <div><span style="color: #58a6ff;">70736274ff</span> — Magic bytes "psbt" + separator</div>
+              <div style="margin-top: 0.5rem;"><strong>Global Map</strong></div>
+              <div style="padding-left: 1rem; color: var(--text-secondary);">
+                key_len + key + value_len + value<br>
+                ... más pares key-value ...<br>
+                <span style="color: #da3633;">00</span> — separador
+              </div>
+              <div style="margin-top: 0.5rem;"><strong>Input Maps</strong> (uno por cada input)</div>
+              <div style="padding-left: 1rem; color: var(--text-secondary);">
+                key_len + key + value_len + value<br>
+                ...<br>
+                <span style="color: #da3633;">00</span> — separador
+              </div>
+              <div style="margin-top: 0.5rem;"><strong>Output Maps</strong> (uno por cada output)</div>
+              <div style="padding-left: 1rem; color: var(--text-secondary);">
+                key_len + key + value_len + value<br>
+                ...<br>
+                <span style="color: #da3633;">00</span> — separador
+              </div>
+            </div>
+          </div>
+
+          <!-- Key types -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Tipos de claves PSBT</h2>
+            <div class="tool-table-wrapper">
+              <table class="tool-table">
+                <thead>
+                  <tr>
+                    <th>Tipo</th>
+                    <th>Ámbito</th>
+                    <th>Descripción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>0x00</code></td><td>Global</td><td>Unsigned TX</td></tr>
+                  <tr><td><code>0x01</code></td><td>Global</td><td>Extended public key (xpub)</td></tr>
+                  <tr><td><code>0xfb</code></td><td>Global</td><td>PSBT version</td></tr>
+                  <tr><td><code>0x00</code></td><td>Input</td><td>Non-witness UTXO (tx completa)</td></tr>
+                  <tr><td><code>0x01</code></td><td>Input</td><td>Witness UTXO (output previo)</td></tr>
+                  <tr><td><code>0x02</code></td><td>Input</td><td>Partial signature</td></tr>
+                  <tr><td><code>0x03</code></td><td>Input</td><td>Sighash type</td></tr>
+                  <tr><td><code>0x04</code></td><td>Input</td><td>Redeem script</td></tr>
+                  <tr><td><code>0x05</code></td><td>Input</td><td>Witness script</td></tr>
+                  <tr><td><code>0x06</code></td><td>Input</td><td>BIP32 derivation</td></tr>
+                  <tr><td><code>0x07</code></td><td>Input</td><td>Final scriptSig</td></tr>
+                  <tr><td><code>0x08</code></td><td>Input</td><td>Final scriptWitness</td></tr>
+                  <tr><td><code>0x00</code></td><td>Output</td><td>Redeem script</td></tr>
+                  <tr><td><code>0x01</code></td><td>Output</td><td>Witness script</td></tr>
+                  <tr><td><code>0x02</code></td><td>Output</td><td>BIP32 derivation</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más sobre PSBT</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-5/psbt.html">PSBT en detalle →</a> · 
+              <a href="tx-decoder.html">Decodificador de TX →</a> ·
+              <a href="tx-builder.html">Constructor de TX →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+  <script src="../js/hex-utils.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === EJEMPLO PSBT ===
+    // PSBT simple con una transacción sin firmar
+    const EXAMPLE_PSBT = 'cHNidP8BAHUCAAAAASaBcTce3/KF6Tig7cez/r6jrjl3dcY9Wn/M+mkPAAAAA/////8CgckFAAAAAAAZdqkUOlY4V/kq7DsQFFoMGIJFHe4AV5aIrACUNQAAAAAAGXapFLBCa/nWL8D4xrOmz1/DmJ7jABfaiKwAAAAAAAAAAAA=';
+
+    // === CONSTANTES ===
+    const PSBT_MAGIC = '70736274ff'; // "psbt" + 0xff
+
+    const GLOBAL_TYPES = {
+      0x00: 'Unsigned TX',
+      0x01: 'Extended Public Key',
+      0xfb: 'PSBT Version'
+    };
+
+    const INPUT_TYPES = {
+      0x00: 'Non-Witness UTXO',
+      0x01: 'Witness UTXO',
+      0x02: 'Partial Signature',
+      0x03: 'Sighash Type',
+      0x04: 'Redeem Script',
+      0x05: 'Witness Script',
+      0x06: 'BIP32 Derivation',
+      0x07: 'Final ScriptSig',
+      0x08: 'Final ScriptWitness',
+      0x09: 'POR Commitment',
+      0x0a: 'RIPEMD160 Preimage',
+      0x0b: 'SHA256 Preimage',
+      0x0c: 'HASH160 Preimage',
+      0x0d: 'HASH256 Preimage',
+      0x0e: 'Previous TXID',
+      0x0f: 'Output Index',
+      0x10: 'Sequence',
+      0x11: 'Required Time Locktime',
+      0x12: 'Required Height Locktime',
+      0x13: 'Taproot Key Spend Sig',
+      0x14: 'Taproot Script Spend Sig',
+      0x15: 'Taproot Leaf Script',
+      0x16: 'Taproot BIP32 Derivation',
+      0x17: 'Taproot Internal Key',
+      0x18: 'Taproot Merkle Root'
+    };
+
+    const OUTPUT_TYPES = {
+      0x00: 'Redeem Script',
+      0x01: 'Witness Script',
+      0x02: 'BIP32 Derivation',
+      0x03: 'Taproot Internal Key',
+      0x04: 'Taproot Tree',
+      0x05: 'Taproot BIP32 Derivation'
+    };
+
+    // === ELEMENTOS DEL DOM ===
+    const psbtInput = document.getElementById('psbt-input');
+    const btnExample = document.getElementById('btn-example');
+    const btnDecode = document.getElementById('btn-decode');
+    const errorMessage = document.getElementById('error-message');
+    const statusSection = document.getElementById('status-section');
+    const resultsSection = document.getElementById('results-section');
+    const globalSection = document.getElementById('global-section');
+    const inputsSection = document.getElementById('inputs-section');
+    const outputsSection = document.getElementById('outputs-section');
+
+    // === PARSER ===
+
+    class PSBTParser {
+      constructor(hex) {
+        this.hex = hex.toLowerCase();
+        this.bytes = HexUtils.hexToBytes(this.hex);
+        this.pos = 0;
+      }
+
+      readByte() {
+        return this.bytes[this.pos++];
+      }
+
+      readBytes(len) {
+        const data = this.bytes.slice(this.pos, this.pos + len);
+        this.pos += len;
+        return data;
+      }
+
+      readVarInt() {
+        const first = this.readByte();
+        if (first < 0xfd) return first;
+        if (first === 0xfd) {
+          return this.readByte() | (this.readByte() << 8);
+        }
+        if (first === 0xfe) {
+          return this.readByte() | (this.readByte() << 8) | 
+                 (this.readByte() << 16) | (this.readByte() << 24);
+        }
+        // 0xff - 8 bytes (simplificado)
+        let val = 0;
+        for (let i = 0; i < 8; i++) {
+          val |= this.readByte() << (i * 8);
+        }
+        return val;
+      }
+
+      readKeyValue() {
+        const keyLen = this.readVarInt();
+        if (keyLen === 0) return null; // Separator
+
+        const key = this.readBytes(keyLen);
+        const valueLen = this.readVarInt();
+        const value = this.readBytes(valueLen);
+
+        return { key, value };
+      }
+
+      readMap() {
+        const entries = [];
+        let kv;
+        while ((kv = this.readKeyValue()) !== null) {
+          entries.push(kv);
+        }
+        return entries;
+      }
+
+      parse() {
+        // Verificar magic
+        const magic = HexUtils.bytesToHex(this.readBytes(5));
+        if (magic !== PSBT_MAGIC) {
+          throw new Error('Magic bytes inválidos. No es un PSBT válido.');
+        }
+
+        // Global map
+        const globalMap = this.readMap();
+
+        // Encontrar el número de inputs/outputs desde la unsigned TX
+        let inputCount = 0;
+        let outputCount = 0;
+        let unsignedTx = null;
+
+        for (const entry of globalMap) {
+          if (entry.key[0] === 0x00 && entry.key.length === 1) {
+            unsignedTx = entry.value;
+            // Parsear la tx para contar inputs/outputs
+            const txCounts = this.countTxIO(entry.value);
+            inputCount = txCounts.inputs;
+            outputCount = txCounts.outputs;
+          }
+        }
+
+        // Input maps
+        const inputMaps = [];
+        for (let i = 0; i < inputCount; i++) {
+          inputMaps.push(this.readMap());
+        }
+
+        // Output maps
+        const outputMaps = [];
+        for (let i = 0; i < outputCount; i++) {
+          outputMaps.push(this.readMap());
+        }
+
+        return {
+          globalMap,
+          inputMaps,
+          outputMaps,
+          inputCount,
+          outputCount,
+          unsignedTx
+        };
+      }
+
+      countTxIO(txBytes) {
+        // Parseo simplificado de la TX para contar inputs/outputs
+        let pos = 4; // Skip version
+        
+        // Check SegWit marker
+        if (txBytes[pos] === 0x00 && txBytes[pos + 1] !== 0x00) {
+          pos += 2;
+        }
+
+        // Input count (varint simplificado)
+        let inputCount = txBytes[pos++];
+        if (inputCount === 0xfd) {
+          inputCount = txBytes[pos] | (txBytes[pos + 1] << 8);
+          pos += 2;
+        }
+
+        // Skip inputs
+        for (let i = 0; i < inputCount; i++) {
+          pos += 36; // txid + vout
+          const scriptLen = txBytes[pos++];
+          pos += scriptLen;
+          pos += 4; // sequence
+        }
+
+        // Output count
+        let outputCount = txBytes[pos++];
+        if (outputCount === 0xfd) {
+          outputCount = txBytes[pos] | (txBytes[pos + 1] << 8);
+          pos += 2;
+        }
+
+        return { inputs: inputCount, outputs: outputCount };
+      }
+    }
+
+    // === DECODE & DISPLAY ===
+
+    function decode() {
+      errorMessage.style.display = 'none';
+      statusSection.style.display = 'none';
+      resultsSection.style.display = 'none';
+
+      let input = psbtInput.value.trim();
+
+      if (!input) {
+        showError('Introduce un PSBT en Base64 o hexadecimal.');
+        return;
+      }
+
+      // Detectar formato y convertir a hex
+      let hex;
+      if (/^[0-9a-fA-F]+$/.test(input)) {
+        hex = input.toLowerCase();
+      } else {
+        // Intentar Base64
+        try {
+          const binary = atob(input);
+          hex = Array.from(binary, c => c.charCodeAt(0).toString(16).padStart(2, '0')).join('');
+        } catch (e) {
+          showError('Formato no reconocido. Debe ser Base64 o hexadecimal.');
+          return;
+        }
+      }
+
+      try {
+        const parser = new PSBTParser(hex);
+        const psbt = parser.parse();
+
+        displayResults(psbt);
+
+      } catch (error) {
+        showError('Error al decodificar: ' + error.message);
+      }
+    }
+
+    function displayResults(psbt) {
+      // Status
+      const isComplete = checkCompleteness(psbt);
+      statusSection.innerHTML = isComplete
+        ? `<div class="status-banner status-banner--complete">
+             <span class="status-banner__icon">✓</span>
+             <div>
+               <div class="status-banner__text">PSBT Completo</div>
+               <div class="status-banner__detail">Listo para extraer y emitir</div>
+             </div>
+           </div>`
+        : `<div class="status-banner status-banner--incomplete">
+             <span class="status-banner__icon">⏳</span>
+             <div>
+               <div class="status-banner__text">PSBT Incompleto</div>
+               <div class="status-banner__detail">Faltan firmas o datos</div>
+             </div>
+           </div>`;
+      statusSection.style.display = 'block';
+
+      // Global
+      globalSection.innerHTML = createSection('Global', 'global', psbt.globalMap, GLOBAL_TYPES, true);
+
+      // Inputs
+      let inputsHtml = '';
+      psbt.inputMaps.forEach((map, i) => {
+        inputsHtml += createSection(`Input #${i}`, 'input', map, INPUT_TYPES, i === 0);
+      });
+      inputsSection.innerHTML = inputsHtml;
+
+      // Outputs
+      let outputsHtml = '';
+      psbt.outputMaps.forEach((map, i) => {
+        outputsHtml += createSection(`Output #${i}`, 'output', map, OUTPUT_TYPES, i === 0);
+      });
+      outputsSection.innerHTML = outputsHtml;
+
+      resultsSection.style.display = 'block';
+
+      // Setup toggles
+      setupToggles();
+    }
+
+    function createSection(title, type, entries, typeMap, openByDefault = false) {
+      const badgeClass = `psbt-section__badge--${type}`;
+      const badgeText = type.charAt(0).toUpperCase() + type.slice(1);
+
+      let fieldsHtml = '';
+      if (entries.length === 0) {
+        fieldsHtml = '<div style="color: var(--text-secondary); font-style: italic;">Sin datos</div>';
+      } else {
+        entries.forEach(entry => {
+          const keyType = entry.key[0];
+          const keyName = typeMap[keyType] || `Unknown (0x${keyType.toString(16).padStart(2, '0')})`;
+          const keyHex = HexUtils.bytesToHex(entry.key);
+          const valueHex = HexUtils.bytesToHex(entry.value);
+
+          // Truncar valores largos
+          const displayValue = valueHex.length > 100 
+            ? valueHex.substring(0, 100) + '...' 
+            : valueHex;
+
+          fieldsHtml += `
+            <div class="psbt-field">
+              <div class="psbt-field__key">
+                ${keyName}
+                <code>key: ${keyHex}</code>
+              </div>
+              <div class="psbt-field__value" title="${valueHex}">${displayValue || '(vacío)'}</div>
+            </div>
+          `;
+        });
+      }
+
+      return `
+        <div class="psbt-section">
+          <div class="psbt-section__header" data-toggle>
+            <div class="psbt-section__title">
+              ${title}
+              <span class="psbt-section__badge ${badgeClass}">${entries.length} campos</span>
+            </div>
+            <span class="psbt-section__toggle ${openByDefault ? 'psbt-section__toggle--open' : ''}">▼</span>
+          </div>
+          <div class="psbt-section__content ${openByDefault ? 'psbt-section__content--open' : ''}">
+            ${fieldsHtml}
+          </div>
+        </div>
+      `;
+    }
+
+    function checkCompleteness(psbt) {
+      // Verificar si hay final_scriptsig o final_witness en todos los inputs
+      for (const inputMap of psbt.inputMaps) {
+        let hasFinal = false;
+        for (const entry of inputMap) {
+          if (entry.key[0] === 0x07 || entry.key[0] === 0x08) {
+            hasFinal = true;
+            break;
+          }
+        }
+        if (!hasFinal) return false;
+      }
+      return true;
+    }
+
+    function setupToggles() {
+      document.querySelectorAll('[data-toggle]').forEach(header => {
+        header.addEventListener('click', () => {
+          const content = header.nextElementSibling;
+          const toggle = header.querySelector('.psbt-section__toggle');
+          
+          content.classList.toggle('psbt-section__content--open');
+          toggle.classList.toggle('psbt-section__toggle--open');
+        });
+      });
+    }
+
+    function showError(msg) {
+      errorMessage.textContent = msg;
+      errorMessage.style.display = 'block';
+    }
+
+    // === EVENT LISTENERS ===
+
+    btnExample.addEventListener('click', () => {
+      psbtInput.value = EXAMPLE_PSBT;
+      decode();
+    });
+
+    btnDecode.addEventListener('click', decode);
+
+    psbtInput.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.key === 'Enter') decode();
+    });
+
+  })();
+  </script>
+</body>
+</html>

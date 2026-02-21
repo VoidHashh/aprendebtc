@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Explora la derivación de claves BIP32. Navega el árbol de claves hijo paso a paso con child key derivation." />
+  <title>Derivation Paths (BIP32) — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .path-level {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      margin-bottom: 0.5rem;
+      transition: all 0.2s;
+    }
+    .path-level:hover {
+      border-color: var(--accent);
+    }
+    .path-level--active {
+      border-color: var(--accent);
+      background: rgba(247, 147, 26, 0.1);
+    }
+    .path-level__index {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--accent);
+      min-width: 60px;
+    }
+    .path-level__info {
+      flex: 1;
+      min-width: 0;
+    }
+    .path-level__type {
+      font-size: 0.7rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .path-level__type--hardened {
+      background: rgba(218, 54, 51, 0.2);
+      color: #da3633;
+    }
+    .path-level__type--normal {
+      background: rgba(46, 160, 67, 0.2);
+      color: #2ea043;
+    }
+    .path-level__key {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+      word-break: break-all;
+    }
+
+    .path-arrow {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 1.25rem;
+      margin: 0.25rem 0;
+    }
+
+    .path-presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .path-preset {
+      padding: 0.5rem 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .path-preset:hover {
+      border-color: var(--accent);
+    }
+    .path-preset__name {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .path-preset__path {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      margin-top: 0.15rem;
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Herramientas">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Herramientas prácticas</div>
+          <a href="conversor.html" class="sidebar__link">Conversor BTC / EUR / sats</a>
+          <a href="calculadora-dca.html" class="sidebar__link">Calculadora DCA</a>
+          <a href="calculadora-fees.html" class="sidebar__link">Calculadora de fees</a>
+          <a href="calculadora-impuestos.html" class="sidebar__link">Calculadora de impuestos</a>
+          <a href="comparador-exchanges.html" class="sidebar__link">Comparador de exchanges</a>
+          <a href="calculadora-herencia.html" class="sidebar__link">Calculadora de herencia</a>
+        </div>
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Herramientas técnicas</div>
+          <a href="hash.html" class="sidebar__link">Hash functions</a>
+          <a href="private-key.html" class="sidebar__link">Claves y direcciones</a>
+          <a href="mnemonic-seed.html" class="sidebar__link sidebar__link--active">HD Wallet / BIP39</a>
+          <a href="transaccion.html" class="sidebar__link">Transacciones</a>
+          <a href="script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="block-tools.html" class="sidebar__link">Bloques</a>
+          <a href="firma.html" class="sidebar__link">Criptografía</a>
+          <a href="index.html" class="sidebar__link">Utilidades</a>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Derivation Paths</span>
+        </nav>
+
+        <article class="article">
+          <h1>Derivation Paths (BIP32)</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Navega el árbol jerárquico de claves BIP32 y entiende la derivación de child keys.
+          </p>
+
+          <!-- Disclaimer educativo -->
+          <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">Herramienta educativa</div>
+              <p class="callout__text">Esta herramienta es para aprendizaje. NO uses extended keys de wallets con fondos reales.</p>
+            </div>
+          </div>
+
+          <!-- Input -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Extended Key de partida</h2>
+
+            <div class="tool-field" style="margin-bottom: 1rem;">
+              <label class="tool-label" for="xkey-input">Extended Key (xprv o xpub)</label>
+              <textarea 
+                id="xkey-input" 
+                class="tool-input" 
+                rows="2"
+                placeholder="xprv9s21ZrQH143K... o xpub661MyMwAqRbc..."
+                style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;"
+              ></textarea>
+              <span class="tool-note" id="xkey-type">Introduce una extended key</span>
+            </div>
+
+            <div class="tool-field">
+              <label class="tool-label" for="path-input">Derivation Path</label>
+              <input 
+                type="text" 
+                id="path-input" 
+                class="tool-input" 
+                value="m/44'/0'/0'/0/0"
+                placeholder="m/44'/0'/0'/0/0"
+                style="font-family: 'JetBrains Mono', monospace;"
+              />
+            </div>
+
+            <div class="path-presets">
+              <div class="path-preset" data-path="m/44'/0'/0'" data-bip="44">
+                <div class="path-preset__name">BIP44 (Legacy)</div>
+                <div class="path-preset__path">m/44'/0'/0'</div>
+              </div>
+              <div class="path-preset" data-path="m/49'/0'/0'" data-bip="49">
+                <div class="path-preset__name">BIP49 (P2SH-SegWit)</div>
+                <div class="path-preset__path">m/49'/0'/0'</div>
+              </div>
+              <div class="path-preset" data-path="m/84'/0'/0'" data-bip="84">
+                <div class="path-preset__name">BIP84 (Native SegWit)</div>
+                <div class="path-preset__path">m/84'/0'/0'</div>
+              </div>
+              <div class="path-preset" data-path="m/86'/0'/0'" data-bip="86">
+                <div class="path-preset__name">BIP86 (Taproot)</div>
+                <div class="path-preset__path">m/86'/0'/0'</div>
+              </div>
+            </div>
+
+            <div class="tool-btn-row">
+              <button class="tool-btn tool-btn--secondary" id="btn-example">📋 Cargar ejemplo</button>
+              <button class="tool-btn" id="btn-derive">🔑 Derivar</button>
+            </div>
+          </div>
+
+          <!-- Error -->
+          <div class="tool-error" id="error-message" style="display: none;"></div>
+
+          <!-- Proceso de derivación -->
+          <div class="tool-container" id="derivation-section" style="display: none;">
+            <h2 class="tool-container__title">Proceso de derivación</h2>
+            <div id="derivation-steps"></div>
+          </div>
+
+          <!-- Resultado final -->
+          <div class="tool-container" id="result-section" style="display: none;">
+            <h2 class="tool-container__title">Clave derivada en <code id="result-path"></code></h2>
+
+            <div class="tool-row" style="margin-bottom: 1rem;">
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">Depth</div>
+                <div class="tool-result-card__value" id="result-depth">—</div>
+              </div>
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">Tipo dirección</div>
+                <div class="tool-result-card__value" id="result-addr-type">—</div>
+              </div>
+            </div>
+
+            <div class="tool-field" style="margin-bottom: 1rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <label class="tool-label" style="margin-bottom: 0;">Private Key (si disponible)</label>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="result-privkey">📋</button>
+              </div>
+              <div class="tool-output" id="result-privkey" style="font-size: 0.75rem;">—</div>
+            </div>
+
+            <div class="tool-field" style="margin-bottom: 1rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <label class="tool-label" style="margin-bottom: 0;">Public Key (comprimida)</label>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="result-pubkey">📋</button>
+              </div>
+              <div class="tool-output" id="result-pubkey" style="font-size: 0.75rem;">—</div>
+            </div>
+
+            <div class="tool-field">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <label class="tool-label" style="margin-bottom: 0;">Dirección</label>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="result-address">📋</button>
+              </div>
+              <div class="tool-output" id="result-address" style="font-size: 0.9rem; color: var(--accent);">—</div>
+            </div>
+          </div>
+
+          <!-- Hardened vs Normal -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Hardened vs Normal</h2>
+            
+            <div class="tool-row">
+              <div style="flex: 1; background: rgba(218, 54, 51, 0.1); padding: 1rem; border-radius: var(--radius-md); border: 1px solid rgba(218, 54, 51, 0.3);">
+                <div style="font-weight: 700; color: #da3633; margin-bottom: 0.5rem;">Hardened (índice ≥ 2³¹)</div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary);">
+                  Notación: <code>44'</code> o <code>44h</code><br>
+                  Usa la <strong>private key</strong> para derivar<br>
+                  ❌ No se puede hacer desde una xpub
+                </div>
+              </div>
+              <div style="flex: 1; background: rgba(46, 160, 67, 0.1); padding: 1rem; border-radius: var(--radius-md); border: 1px solid rgba(46, 160, 67, 0.3);">
+                <div style="font-weight: 700; color: #2ea043; margin-bottom: 0.5rem;">Normal (índice < 2³¹)</div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary);">
+                  Notación: <code>0</code><br>
+                  Usa la <strong>public key</strong> para derivar<br>
+                  ✓ Se puede hacer desde una xpub
+                </div>
+              </div>
+            </div>
+
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem;">
+              Por eso las <strong>xpub solo pueden derivar children a partir del nivel no-hardened</strong>. 
+              En <code>m/44'/0'/0'/0/0</code>, los tres primeros niveles son hardened (requieren xprv) 
+              y los dos últimos son normales (se pueden derivar desde la xpub de <code>m/44'/0'/0'</code>).
+            </p>
+          </div>
+
+          <!-- Fórmula CKD -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Child Key Derivation (CKD)</h2>
+            
+            <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; margin-bottom: 1rem;">
+              <div style="margin-bottom: 0.75rem;">
+                <strong style="color: #da3633;">Hardened:</strong><br>
+                <code>HMAC-SHA512(chaincode, 0x00 + privateKey + index)</code>
+              </div>
+              <div>
+                <strong style="color: #2ea043;">Normal:</strong><br>
+                <code>HMAC-SHA512(chaincode, publicKey + index)</code>
+              </div>
+            </div>
+            
+            <p style="color: var(--text-secondary); font-size: 0.85rem;">
+              El resultado de 64 bytes se divide: primeros 32 bytes se suman a la clave padre (mod n), 
+              últimos 32 bytes son el nuevo chain code.
+            </p>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más sobre HD Wallets</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-3/hd-wallets.html">HD Wallets en detalle →</a> · 
+              <a href="extended-keys.html">Extended Keys →</a> ·
+              <a href="address-from-xpub.html">Direcciones desde xpub →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+  <script src="../js/hex-utils.js"></script>
+  <script src="../js/base58.js"></script>
+  <script src="../js/bech32.js"></script>
+  <script src="../js/ripemd160.js"></script>
+  <script src="https://unpkg.com/@noble/secp256k1@1.7.1/lib/index.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === CONSTANTES ===
+    const HARDENED_OFFSET = 0x80000000;
+    const SECP256K1_ORDER = BigInt('0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141');
+
+    // xprv de ejemplo (generada desde mnemonic "abandon abandon..." de test)
+    const EXAMPLE_XPRV = 'xprv9s21ZrQH143K3GJpoapnV8SFfuZcESnU9dfrEfRAvuwaS7DEgUmMCB7gjVqMSvE5BKXRP6XpDh1aRdc6DZdBcpSxNHrS4NOvKhmkqLR5Hqp';
+
+    const VERSION_BYTES = {
+      '0488ade4': { prefix: 'xprv', type: 'private', network: 'mainnet' },
+      '0488b21e': { prefix: 'xpub', type: 'public', network: 'mainnet' },
+      '049d7878': { prefix: 'yprv', type: 'private', network: 'mainnet' },
+      '049d7cb2': { prefix: 'ypub', type: 'public', network: 'mainnet' },
+      '04b2430c': { prefix: 'zprv', type: 'private', network: 'mainnet' },
+      '04b24746': { prefix: 'zpub', type: 'public', network: 'mainnet' }
+    };
+
+    // === ELEMENTOS DEL DOM ===
+    const xkeyInput = document.getElementById('xkey-input');
+    const xkeyType = document.getElementById('xkey-type');
+    const pathInput = document.getElementById('path-input');
+    const btnExample = document.getElementById('btn-example');
+    const btnDerive = document.getElementById('btn-derive');
+    const errorMessage = document.getElementById('error-message');
+
+    const derivationSection = document.getElementById('derivation-section');
+    const derivationSteps = document.getElementById('derivation-steps');
+    const resultSection = document.getElementById('result-section');
+
+    // === FUNCIONES CRYPTO ===
+
+    async function hmacSha512(key, data) {
+      const cryptoKey = await crypto.subtle.importKey(
+        'raw', key, { name: 'HMAC', hash: 'SHA-512' }, false, ['sign']
+      );
+      const sig = await crypto.subtle.sign('HMAC', cryptoKey, data);
+      return new Uint8Array(sig);
+    }
+
+    function getSecp() {
+      return typeof nobleSecp256k1 !== 'undefined' ? nobleSecp256k1 : secp256k1;
+    }
+
+    // === DECODIFICAR EXTENDED KEY ===
+
+    async function decodeExtendedKey(xkeyString) {
+      const decoded = Base58.decode(xkeyString.trim());
+      if (decoded.length !== 82) throw new Error('Longitud inválida');
+
+      const payload = decoded.slice(0, 78);
+      const versionHex = HexUtils.bytesToHex(payload.slice(0, 4));
+      const versionInfo = VERSION_BYTES[versionHex.toLowerCase()];
+
+      if (!versionInfo) throw new Error('Version desconocida: ' + versionHex);
+
+      const depth = payload[4];
+      const fingerprint = payload.slice(5, 9);
+      const childIndex = (payload[9] << 24) | (payload[10] << 16) | (payload[11] << 8) | payload[12];
+      const chainCode = payload.slice(13, 45);
+      const keyData = payload.slice(45, 78);
+
+      let privateKey = null;
+      let publicKey = null;
+
+      if (versionInfo.type === 'private') {
+        privateKey = keyData.slice(1); // Quitar el 0x00 prefix
+        publicKey = getSecp().getPublicKey(privateKey, true);
+      } else {
+        publicKey = keyData;
+      }
+
+      return {
+        version: versionHex,
+        versionInfo,
+        depth,
+        fingerprint,
+        childIndex,
+        chainCode,
+        privateKey,
+        publicKey
+      };
+    }
+
+    // === CHILD KEY DERIVATION ===
+
+    async function deriveChild(parentKey, index, hardened) {
+      const secp = getSecp();
+      const actualIndex = hardened ? index + HARDENED_OFFSET : index;
+
+      let data;
+      if (hardened) {
+        if (!parentKey.privateKey) {
+          throw new Error('Derivación hardened requiere private key');
+        }
+        // 0x00 + privateKey (32 bytes) + index (4 bytes)
+        data = new Uint8Array(37);
+        data[0] = 0x00;
+        data.set(parentKey.privateKey, 1);
+        data[33] = (actualIndex >> 24) & 0xFF;
+        data[34] = (actualIndex >> 16) & 0xFF;
+        data[35] = (actualIndex >> 8) & 0xFF;
+        data[36] = actualIndex & 0xFF;
+      } else {
+        // publicKey (33 bytes) + index (4 bytes)
+        data = new Uint8Array(37);
+        data.set(parentKey.publicKey, 0);
+        data[33] = (actualIndex >> 24) & 0xFF;
+        data[34] = (actualIndex >> 16) & 0xFF;
+        data[35] = (actualIndex >> 8) & 0xFF;
+        data[36] = actualIndex & 0xFF;
+      }
+
+      const hmacResult = await hmacSha512(parentKey.chainCode, data);
+      const il = hmacResult.slice(0, 32);
+      const ir = hmacResult.slice(32);
+
+      // Nueva chain code
+      const newChainCode = ir;
+
+      // Nueva clave
+      let newPrivateKey = null;
+      let newPublicKey = null;
+
+      if (parentKey.privateKey) {
+        // Sumar il a la private key padre (mod n)
+        const ilBigInt = BigInt('0x' + HexUtils.bytesToHex(il));
+        const parentKeyBigInt = BigInt('0x' + HexUtils.bytesToHex(parentKey.privateKey));
+        const newKeyBigInt = (ilBigInt + parentKeyBigInt) % SECP256K1_ORDER;
+        
+        const newKeyHex = newKeyBigInt.toString(16).padStart(64, '0');
+        newPrivateKey = HexUtils.hexToBytes(newKeyHex);
+        newPublicKey = secp.getPublicKey(newPrivateKey, true);
+      } else {
+        // Sumar il*G a la public key padre
+        const ilPoint = secp.Point.fromPrivateKey(il);
+        const parentPoint = secp.Point.fromHex(parentKey.publicKey);
+        const newPoint = parentPoint.add(ilPoint);
+        newPublicKey = newPoint.toRawBytes(true);
+      }
+
+      // Fingerprint del padre (primeros 4 bytes de HASH160 de la pubkey padre)
+      const parentHash160 = await HexUtils.hash160(parentKey.publicKey);
+      const fingerprint = parentHash160.slice(0, 4);
+
+      return {
+        privateKey: newPrivateKey,
+        publicKey: newPublicKey,
+        chainCode: newChainCode,
+        depth: parentKey.depth + 1,
+        fingerprint,
+        childIndex: actualIndex
+      };
+    }
+
+    // === PARSEAR PATH ===
+
+    function parsePath(pathString) {
+      const parts = pathString.trim().toLowerCase().split('/');
+      if (parts[0] !== 'm') throw new Error('El path debe empezar con "m"');
+
+      const levels = [];
+      for (let i = 1; i < parts.length; i++) {
+        const part = parts[i];
+        const hardened = part.endsWith("'") || part.endsWith('h');
+        const indexStr = hardened ? part.slice(0, -1) : part;
+        const index = parseInt(indexStr, 10);
+
+        if (isNaN(index) || index < 0) {
+          throw new Error('Índice inválido: ' + part);
+        }
+
+        levels.push({ index, hardened, original: parts[i] });
+      }
+
+      return levels;
+    }
+
+    // === GENERAR DIRECCIÓN ===
+
+    async function generateAddress(publicKey, bip) {
+      const hash160 = await HexUtils.hash160(publicKey);
+
+      switch (bip) {
+        case '44':
+          // P2PKH
+          return await Base58.checkEncode(0x00, hash160);
+        case '49':
+          // P2SH-P2WPKH: HASH160(0x0014 + hash160)
+          const redeemScript = new Uint8Array(22);
+          redeemScript[0] = 0x00;
+          redeemScript[1] = 0x14;
+          redeemScript.set(hash160, 2);
+          const scriptHash = await HexUtils.hash160(redeemScript);
+          return await Base58.checkEncode(0x05, scriptHash);
+        case '84':
+          // P2WPKH
+          return Bech32.encodeP2WPKH(hash160, 'mainnet');
+        case '86':
+          // P2TR (x-only pubkey)
+          const xOnly = publicKey.slice(1); // Quitar prefijo 02/03
+          return Bech32.encodeP2TR(xOnly, 'mainnet');
+        default:
+          return Bech32.encodeP2WPKH(hash160, 'mainnet');
+      }
+    }
+
+    // === DETECTAR BIP DESDE PATH ===
+
+    function detectBipFromPath(pathLevels) {
+      if (pathLevels.length >= 1) {
+        const purpose = pathLevels[0].index;
+        if (purpose === 44) return '44';
+        if (purpose === 49) return '49';
+        if (purpose === 84) return '84';
+        if (purpose === 86) return '86';
+      }
+      return '84'; // Default a Native SegWit
+    }
+
+    // === DERIVAR COMPLETO ===
+
+    async function derive() {
+      errorMessage.style.display = 'none';
+      derivationSection.style.display = 'none';
+      resultSection.style.display = 'none';
+
+      const xkeyString = xkeyInput.value.trim();
+      const pathString = pathInput.value.trim();
+
+      if (!xkeyString) {
+        showError('Introduce una extended key.');
+        return;
+      }
+
+      try {
+        // Decodificar la extended key
+        let currentKey = await decodeExtendedKey(xkeyString);
+        const pathLevels = parsePath(pathString);
+
+        // Verificar si podemos hacer derivaciones hardened
+        const hasHardened = pathLevels.some(l => l.hardened);
+        if (hasHardened && !currentKey.privateKey) {
+          showError('Las derivaciones hardened requieren una extended private key (xprv).');
+          return;
+        }
+
+        // Mostrar pasos de derivación
+        let stepsHtml = `
+          <div class="path-level path-level--active">
+            <div class="path-level__index">m</div>
+            <div class="path-level__info">
+              <span class="path-level__type path-level__type--normal">Master</span>
+              <div class="path-level__key">depth ${currentKey.depth}</div>
+            </div>
+          </div>
+        `;
+
+        // Derivar cada nivel
+        for (let i = 0; i < pathLevels.length; i++) {
+          const level = pathLevels[i];
+          
+          stepsHtml += `<div class="path-arrow">↓</div>`;
+          
+          currentKey = await deriveChild(currentKey, level.index, level.hardened);
+          
+          const typeClass = level.hardened ? 'path-level__type--hardened' : 'path-level__type--normal';
+          const typeText = level.hardened ? 'Hardened' : 'Normal';
+          
+          stepsHtml += `
+            <div class="path-level ${i === pathLevels.length - 1 ? 'path-level--active' : ''}">
+              <div class="path-level__index">${level.original}</div>
+              <div class="path-level__info">
+                <span class="path-level__type ${typeClass}">${typeText}</span>
+                <div class="path-level__key">depth ${currentKey.depth} · pubkey ${HexUtils.bytesToHex(currentKey.publicKey).substring(0, 16)}...</div>
+              </div>
+            </div>
+          `;
+        }
+
+        derivationSteps.innerHTML = stepsHtml;
+        derivationSection.style.display = 'block';
+
+        // Resultado final
+        const bip = detectBipFromPath(pathLevels);
+        const address = await generateAddress(currentKey.publicKey, bip);
+
+        document.getElementById('result-path').textContent = pathString;
+        document.getElementById('result-depth').textContent = currentKey.depth;
+        
+        const addrTypes = {
+          '44': 'P2PKH (1...)',
+          '49': 'P2SH-P2WPKH (3...)',
+          '84': 'P2WPKH (bc1q...)',
+          '86': 'P2TR (bc1p...)'
+        };
+        document.getElementById('result-addr-type').textContent = addrTypes[bip] || 'P2WPKH';
+
+        if (currentKey.privateKey) {
+          document.getElementById('result-privkey').textContent = HexUtils.bytesToHex(currentKey.privateKey);
+        } else {
+          document.getElementById('result-privkey').textContent = '(no disponible desde xpub)';
+          document.getElementById('result-privkey').style.color = 'var(--text-secondary)';
+        }
+
+        document.getElementById('result-pubkey').textContent = HexUtils.bytesToHex(currentKey.publicKey);
+        document.getElementById('result-address').textContent = address;
+
+        resultSection.style.display = 'block';
+
+      } catch (error) {
+        showError('Error: ' + error.message);
+      }
+    }
+
+    function showError(msg) {
+      errorMessage.textContent = msg;
+      errorMessage.style.display = 'block';
+    }
+
+    // === EVENT LISTENERS ===
+
+    xkeyInput.addEventListener('input', () => {
+      const value = xkeyInput.value.trim();
+      if (value.startsWith('xprv') || value.startsWith('yprv') || value.startsWith('zprv')) {
+        xkeyType.textContent = '✓ Extended private key detectada';
+        xkeyType.style.color = '#2ea043';
+      } else if (value.startsWith('xpub') || value.startsWith('ypub') || value.startsWith('zpub')) {
+        xkeyType.textContent = '✓ Extended public key detectada (solo derivación normal)';
+        xkeyType.style.color = '#58a6ff';
+      } else if (value.length > 0) {
+        xkeyType.textContent = 'Formato no reconocido';
+        xkeyType.style.color = 'var(--text-secondary)';
+      } else {
+        xkeyType.textContent = 'Introduce una extended key';
+        xkeyType.style.color = 'var(--text-secondary)';
+      }
+    });
+
+    document.querySelectorAll('.path-preset').forEach(preset => {
+      preset.addEventListener('click', () => {
+        pathInput.value = preset.dataset.path;
+      });
+    });
+
+    btnExample.addEventListener('click', () => {
+      xkeyInput.value = EXAMPLE_XPRV;
+      xkeyInput.dispatchEvent(new Event('input'));
+    });
+
+    btnDerive.addEventListener('click', derive);
+
+    pathInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') derive();
+    });
+
+    // Copiar
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const targetId = btn.dataset.target;
+        const target = document.getElementById(targetId);
+        const text = target.textContent;
+
+        if (text && !text.startsWith('(no disponible')) {
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.textContent = '✓';
+            setTimeout(() => { btn.textContent = '📋'; }, 1000);
+          } catch (err) {
+            console.error('Error copiando:', err);
+          }
+        }
+      });
+    });
+
+  })();
+  </script>
+</body>
+</html>
+

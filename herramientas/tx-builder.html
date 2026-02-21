@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Construye transacciones Bitcoin sin firmar (PSBT conceptual). Define inputs, outputs y visualiza el raw hex resultante." />
+  <title>Constructor de transacciones — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .io-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      position: relative;
+    }
+    .io-card__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+    .io-card__title {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .io-card__remove {
+      background: transparent;
+      border: none;
+      color: #da3633;
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 0.25rem;
+      line-height: 1;
+    }
+    .io-card__remove:hover {
+      background: rgba(218, 54, 51, 0.1);
+      border-radius: 4px;
+    }
+
+    .io-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    @media (max-width: 640px) {
+      .io-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .add-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--bg-primary);
+      border: 2px dashed var(--bg-border);
+      border-radius: var(--radius-md);
+      color: var(--text-secondary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .add-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .result-hex {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      line-height: 1.8;
+      word-break: break-all;
+      padding: 1rem;
+      background: var(--bg-primary);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--bg-border);
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .result-hex .version { color: #58a6ff; }
+    .result-hex .input-count { color: #d29922; }
+    .result-hex .input { color: #3fb950; }
+    .result-hex .output-count { color: #d29922; }
+    .result-hex .output { color: #f78166; }
+    .result-hex .locktime { color: #f85149; }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+        <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Constructor de transacciones (raw)</span>
+        </nav>
+
+        <article class="article">
+          <h1>Constructor de transacciones</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Construye una transacción Bitcoin campo a campo y genera el hex resultante (sin firma).
+          </p>
+
+          <!-- Warning -->
+          <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">Transacción sin firmar</div>
+              <p class="callout__text">Esta herramienta construye transacciones SIN FIRMA. No se pueden emitir a la red. Es para entender la estructura.</p>
+            </div>
+          </div>
+
+          <!-- Metadata -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Metadatos</h2>
+            <div class="tool-row">
+              <div class="tool-field">
+                <label class="tool-label" for="tx-version">Version</label>
+                <input type="number" id="tx-version" class="tool-input" value="2" min="1" max="2" />
+                <span class="tool-note">1 = legacy, 2 = permite OP_CSV</span>
+              </div>
+              <div class="tool-field">
+                <label class="tool-label" for="tx-locktime">Locktime</label>
+                <input type="number" id="tx-locktime" class="tool-input" value="0" min="0" />
+                <span class="tool-note">0 = sin restricción</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Inputs -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Inputs <span id="input-count-badge" style="font-size: 0.8rem; color: var(--text-secondary);">(1)</span></h2>
+            <div id="inputs-container"></div>
+            <button class="add-btn" id="btn-add-input">
+              <span>+</span> Añadir input
+            </button>
+          </div>
+
+          <!-- Outputs -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Outputs <span id="output-count-badge" style="font-size: 0.8rem; color: var(--text-secondary);">(1)</span></h2>
+            <div id="outputs-container"></div>
+            <button class="add-btn" id="btn-add-output">
+              <span>+</span> Añadir output
+            </button>
+          </div>
+
+          <!-- Build -->
+          <div class="tool-container">
+            <button class="tool-btn" id="btn-build" style="width: 100%;">🔨 Construir transacción</button>
+          </div>
+
+          <!-- Error -->
+          <div class="tool-error" id="error-message" style="display: none;"></div>
+
+          <!-- Result -->
+          <div class="tool-container" id="result-section" style="display: none;">
+            <h2 class="tool-container__title">Transacción raw (sin firma)</h2>
+            
+            <div class="tool-row" style="margin-bottom: 1rem;">
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">Size estimado</div>
+                <div class="tool-result-card__value" id="result-size">—</div>
+              </div>
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">vSize estimado</div>
+                <div class="tool-result-card__value" id="result-vsize">—</div>
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <label class="tool-label" style="margin: 0;">Raw hex</label>
+              <button class="tool-btn tool-btn--secondary tool-btn--small" id="btn-copy-hex">📋 Copiar</button>
+            </div>
+            <div class="result-hex" id="result-hex"></div>
+
+            <div style="margin-top: 1rem;">
+              <a href="tx-decoder.html" class="tool-btn tool-btn--secondary" id="btn-open-decoder" style="text-decoration: none;">
+                🔍 Abrir en decodificador
+              </a>
+            </div>
+          </div>
+
+          <!-- Referencia direcciones → scripts -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Conversión de direcciones a ScriptPubKey</h2>
+            <div class="tool-table-wrapper">
+              <table class="tool-table">
+                <thead>
+                  <tr>
+                    <th>Tipo</th>
+                    <th>Dirección empieza</th>
+                    <th>ScriptPubKey</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>P2PKH</td>
+                    <td><code>1...</code></td>
+                    <td><code>76a914{hash}88ac</code></td>
+                  </tr>
+                  <tr>
+                    <td>P2SH</td>
+                    <td><code>3...</code></td>
+                    <td><code>a914{hash}87</code></td>
+                  </tr>
+                  <tr>
+                    <td>P2WPKH</td>
+                    <td><code>bc1q...</code></td>
+                    <td><code>0014{program}</code></td>
+                  </tr>
+                  <tr>
+                    <td>P2WSH</td>
+                    <td><code>bc1q...</code> (largo)</td>
+                    <td><code>0020{program}</code></td>
+                  </tr>
+                  <tr>
+                    <td>P2TR</td>
+                    <td><code>bc1p...</code></td>
+                    <td><code>5120{program}</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más sobre transacciones</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-5/estructura-transaccion.html">Estructura de transacciones →</a> · 
+              <a href="tx-decoder.html">Decodificador →</a> ·
+              <a href="psbt-decoder.html">PSBT decoder →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+  <script src="../js/hex-utils.js"></script>
+  <script src="../js/base58.js"></script>
+  <script src="../js/bech32.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === ESTADO ===
+    let inputs = [];
+    let outputs = [];
+    let inputIdCounter = 0;
+    let outputIdCounter = 0;
+
+    // === ELEMENTOS DEL DOM ===
+    const inputsContainer = document.getElementById('inputs-container');
+    const outputsContainer = document.getElementById('outputs-container');
+    const btnAddInput = document.getElementById('btn-add-input');
+    const btnAddOutput = document.getElementById('btn-add-output');
+    const btnBuild = document.getElementById('btn-build');
+    const errorMessage = document.getElementById('error-message');
+    const resultSection = document.getElementById('result-section');
+    const resultHex = document.getElementById('result-hex');
+    const resultSize = document.getElementById('result-size');
+    const resultVsize = document.getElementById('result-vsize');
+    const btnCopyHex = document.getElementById('btn-copy-hex');
+    const btnOpenDecoder = document.getElementById('btn-open-decoder');
+
+    // === TEMPLATES ===
+
+    function createInputCard(id) {
+      const card = document.createElement('div');
+      card.className = 'io-card';
+      card.dataset.id = id;
+      card.innerHTML = `
+        <div class="io-card__header">
+          <span class="io-card__title">Input #${inputs.length}</span>
+          <button class="io-card__remove" data-id="${id}" title="Eliminar">×</button>
+        </div>
+        <div class="io-row">
+          <div class="tool-field">
+            <label class="tool-label">TXID (64 hex, display order)</label>
+            <input type="text" class="tool-input input-txid" maxlength="64" placeholder="abcd1234..." style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;" />
+          </div>
+          <div class="tool-field">
+            <label class="tool-label">Vout (índice)</label>
+            <input type="number" class="tool-input input-vout" value="0" min="0" />
+          </div>
+        </div>
+        <div class="tool-field">
+          <label class="tool-label">Sequence</label>
+          <select class="tool-select input-sequence">
+            <option value="ffffffff">0xFFFFFFFF (final)</option>
+            <option value="fffffffe">0xFFFFFFFE (RBF señalado)</option>
+            <option value="custom">Custom...</option>
+          </select>
+          <input type="text" class="tool-input input-sequence-custom" placeholder="Hex 4 bytes" style="display: none; margin-top: 0.5rem; font-family: 'JetBrains Mono', monospace;" maxlength="8" />
+        </div>
+      `;
+
+      // Sequence custom toggle
+      const seqSelect = card.querySelector('.input-sequence');
+      const seqCustom = card.querySelector('.input-sequence-custom');
+      seqSelect.addEventListener('change', () => {
+        seqCustom.style.display = seqSelect.value === 'custom' ? 'block' : 'none';
+      });
+
+      // Remove button
+      card.querySelector('.io-card__remove').addEventListener('click', () => {
+        removeInput(id);
+      });
+
+      return card;
+    }
+
+    function createOutputCard(id) {
+      const card = document.createElement('div');
+      card.className = 'io-card';
+      card.dataset.id = id;
+      card.innerHTML = `
+        <div class="io-card__header">
+          <span class="io-card__title">Output #${outputs.length}</span>
+          <button class="io-card__remove" data-id="${id}" title="Eliminar">×</button>
+        </div>
+        <div class="io-row">
+          <div class="tool-field">
+            <label class="tool-label">Dirección destino</label>
+            <input type="text" class="tool-input output-address" placeholder="bc1q..., 1..., 3..." style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;" />
+          </div>
+          <div class="tool-field">
+            <label class="tool-label">Cantidad (sats)</label>
+            <input type="number" class="tool-input output-amount" value="10000" min="546" />
+          </div>
+        </div>
+        <div class="tool-field">
+          <label class="tool-toggle">
+            <input type="checkbox" class="tool-toggle__input output-raw-toggle" />
+            <span class="tool-toggle__slider"></span>
+            <span class="tool-toggle__label">Usar raw ScriptPubKey</span>
+          </label>
+          <input type="text" class="tool-input output-raw-script" placeholder="Hex script (ej: 0014...)" style="display: none; margin-top: 0.5rem; font-family: 'JetBrains Mono', monospace;" />
+        </div>
+      `;
+
+      // Raw script toggle
+      const rawToggle = card.querySelector('.output-raw-toggle');
+      const addressInput = card.querySelector('.output-address');
+      const rawScript = card.querySelector('.output-raw-script');
+      
+      rawToggle.addEventListener('change', () => {
+        if (rawToggle.checked) {
+          addressInput.style.display = 'none';
+          rawScript.style.display = 'block';
+        } else {
+          addressInput.style.display = 'block';
+          rawScript.style.display = 'none';
+        }
+      });
+
+      // Remove button
+      card.querySelector('.io-card__remove').addEventListener('click', () => {
+        removeOutput(id);
+      });
+
+      return card;
+    }
+
+    // === GESTIÓN DE INPUTS/OUTPUTS ===
+
+    function addInput() {
+      const id = inputIdCounter++;
+      inputs.push(id);
+      inputsContainer.appendChild(createInputCard(id));
+      updateCounts();
+    }
+
+    function removeInput(id) {
+      if (inputs.length <= 1) return;
+      inputs = inputs.filter(i => i !== id);
+      const card = inputsContainer.querySelector(`[data-id="${id}"]`);
+      if (card) card.remove();
+      renumberInputs();
+      updateCounts();
+    }
+
+    function addOutput() {
+      const id = outputIdCounter++;
+      outputs.push(id);
+      outputsContainer.appendChild(createOutputCard(id));
+      updateCounts();
+    }
+
+    function removeOutput(id) {
+      if (outputs.length <= 1) return;
+      outputs = outputs.filter(i => i !== id);
+      const card = outputsContainer.querySelector(`[data-id="${id}"]`);
+      if (card) card.remove();
+      renumberOutputs();
+      updateCounts();
+    }
+
+    function renumberInputs() {
+      inputsContainer.querySelectorAll('.io-card').forEach((card, i) => {
+        card.querySelector('.io-card__title').textContent = `Input #${i}`;
+      });
+    }
+
+    function renumberOutputs() {
+      outputsContainer.querySelectorAll('.io-card').forEach((card, i) => {
+        card.querySelector('.io-card__title').textContent = `Output #${i}`;
+      });
+    }
+
+    function updateCounts() {
+      document.getElementById('input-count-badge').textContent = `(${inputs.length})`;
+      document.getElementById('output-count-badge').textContent = `(${outputs.length})`;
+    }
+
+    // === CONSTRUCCIÓN DE TX ===
+
+    function addressToScriptPubKey(address) {
+      address = address.trim();
+
+      // P2PKH (1...)
+      if (address.startsWith('1')) {
+        const decoded = Base58.decode(address);
+        const hash = decoded.slice(1, 21);
+        // OP_DUP OP_HASH160 <20> <hash> OP_EQUALVERIFY OP_CHECKSIG
+        return '76a914' + HexUtils.bytesToHex(hash) + '88ac';
+      }
+
+      // P2SH (3...)
+      if (address.startsWith('3')) {
+        const decoded = Base58.decode(address);
+        const hash = decoded.slice(1, 21);
+        // OP_HASH160 <20> <hash> OP_EQUAL
+        return 'a914' + HexUtils.bytesToHex(hash) + '87';
+      }
+
+      // Bech32 (bc1...)
+      if (address.toLowerCase().startsWith('bc1')) {
+        const decoded = Bech32.decode(address);
+        const program = HexUtils.bytesToHex(decoded.program);
+        
+        if (decoded.version === 0) {
+          if (decoded.program.length === 20) {
+            // P2WPKH
+            return '0014' + program;
+          } else if (decoded.program.length === 32) {
+            // P2WSH
+            return '0020' + program;
+          }
+        } else if (decoded.version === 1 && decoded.program.length === 32) {
+          // P2TR
+          return '5120' + program;
+        }
+      }
+
+      throw new Error('Formato de dirección no reconocido: ' + address);
+    }
+
+    function encodeVarInt(n) {
+      if (n < 0xfd) {
+        return [n];
+      } else if (n <= 0xffff) {
+        return [0xfd, n & 0xff, (n >> 8) & 0xff];
+      } else if (n <= 0xffffffff) {
+        return [0xfe, n & 0xff, (n >> 8) & 0xff, (n >> 16) & 0xff, (n >> 24) & 0xff];
+      } else {
+        // Simplificado para valores pequeños
+        return [0xff, n & 0xff, (n >> 8) & 0xff, (n >> 16) & 0xff, (n >> 24) & 0xff, 0, 0, 0, 0];
+      }
+    }
+
+    function encodeUint32LE(n) {
+      return [n & 0xff, (n >> 8) & 0xff, (n >> 16) & 0xff, (n >> 24) & 0xff];
+    }
+
+    function encodeUint64LE(n) {
+      const bytes = [];
+      for (let i = 0; i < 8; i++) {
+        bytes.push(Number(BigInt(n) >> BigInt(i * 8) & 0xFFn));
+      }
+      return bytes;
+    }
+
+    function buildTransaction() {
+      errorMessage.style.display = 'none';
+      resultSection.style.display = 'none';
+
+      try {
+        const version = parseInt(document.getElementById('tx-version').value) || 2;
+        const locktime = parseInt(document.getElementById('tx-locktime').value) || 0;
+
+        const txBytes = [];
+
+        // Version (4 bytes LE)
+        txBytes.push(...encodeUint32LE(version));
+
+        // Input count
+        const inputCards = inputsContainer.querySelectorAll('.io-card');
+        txBytes.push(...encodeVarInt(inputCards.length));
+
+        // Inputs
+        inputCards.forEach((card, idx) => {
+          // TXID (reversed)
+          const txidHex = card.querySelector('.input-txid').value.trim().toLowerCase();
+          if (!/^[0-9a-f]{64}$/.test(txidHex)) {
+            throw new Error(`Input ${idx}: TXID debe ser 64 caracteres hex`);
+          }
+          const txidBytes = HexUtils.hexToBytes(txidHex).reverse();
+          txBytes.push(...txidBytes);
+
+          // Vout
+          const vout = parseInt(card.querySelector('.input-vout').value) || 0;
+          txBytes.push(...encodeUint32LE(vout));
+
+          // ScriptSig (vacío para tx sin firma)
+          txBytes.push(0x00);
+
+          // Sequence
+          const seqSelect = card.querySelector('.input-sequence').value;
+          let sequence;
+          if (seqSelect === 'custom') {
+            const customHex = card.querySelector('.input-sequence-custom').value.trim();
+            if (!/^[0-9a-f]{8}$/i.test(customHex)) {
+              throw new Error(`Input ${idx}: Sequence custom debe ser 8 caracteres hex`);
+            }
+            sequence = parseInt(customHex, 16);
+          } else {
+            sequence = parseInt(seqSelect, 16);
+          }
+          txBytes.push(...encodeUint32LE(sequence));
+        });
+
+        // Output count
+        const outputCards = outputsContainer.querySelectorAll('.io-card');
+        txBytes.push(...encodeVarInt(outputCards.length));
+
+        // Outputs
+        outputCards.forEach((card, idx) => {
+          // Value
+          const amount = parseInt(card.querySelector('.output-amount').value) || 0;
+          if (amount < 0) {
+            throw new Error(`Output ${idx}: Cantidad inválida`);
+          }
+          txBytes.push(...encodeUint64LE(amount));
+
+          // ScriptPubKey
+          let scriptHex;
+          const useRaw = card.querySelector('.output-raw-toggle').checked;
+          
+          if (useRaw) {
+            scriptHex = card.querySelector('.output-raw-script').value.trim().toLowerCase();
+            if (!/^[0-9a-f]+$/.test(scriptHex)) {
+              throw new Error(`Output ${idx}: Script hex inválido`);
+            }
+          } else {
+            const address = card.querySelector('.output-address').value.trim();
+            if (!address) {
+              throw new Error(`Output ${idx}: Dirección requerida`);
+            }
+            scriptHex = addressToScriptPubKey(address);
+          }
+
+          const scriptBytes = HexUtils.hexToBytes(scriptHex);
+          txBytes.push(...encodeVarInt(scriptBytes.length));
+          txBytes.push(...scriptBytes);
+        });
+
+        // Locktime (4 bytes LE)
+        txBytes.push(...encodeUint32LE(locktime));
+
+        // Resultado
+        const rawHex = HexUtils.bytesToHex(new Uint8Array(txBytes));
+        
+        // Colorear
+        let coloredHex = colorizeTransaction(rawHex, inputCards.length, outputCards.length);
+        resultHex.innerHTML = coloredHex;
+
+        // Tamaños
+        const size = txBytes.length;
+        resultSize.textContent = size + ' bytes';
+        resultVsize.textContent = size + ' vB (sin witness)';
+
+        // Guardar para abrir en decoder
+        btnOpenDecoder.href = 'tx-decoder.html?tx=' + encodeURIComponent(rawHex);
+
+        resultSection.style.display = 'block';
+
+      } catch (error) {
+        showError(error.message);
+      }
+    }
+
+    function colorizeTransaction(hex, inputCount, outputCount) {
+      // Simplificado: colorear las partes principales
+      let result = '';
+      let pos = 0;
+
+      // Version (8 chars)
+      result += `<span class="version">${hex.substring(pos, pos + 8)}</span>`;
+      pos += 8;
+
+      // Input count (varint, simplificado a 2 chars)
+      result += `<span class="input-count">${hex.substring(pos, pos + 2)}</span>`;
+      pos += 2;
+
+      // Inputs (aproximado)
+      for (let i = 0; i < inputCount; i++) {
+        // TXID (64) + vout (8) + scriptLen (2) + sequence (8) = 82
+        const inputLen = 64 + 8 + 2 + 8;
+        result += `<span class="input">${hex.substring(pos, pos + inputLen)}</span>`;
+        pos += inputLen;
+      }
+
+      // Output count
+      result += `<span class="output-count">${hex.substring(pos, pos + 2)}</span>`;
+      pos += 2;
+
+      // Outputs (el resto menos locktime)
+      const locktimeStart = hex.length - 8;
+      result += `<span class="output">${hex.substring(pos, locktimeStart)}</span>`;
+
+      // Locktime
+      result += `<span class="locktime">${hex.substring(locktimeStart)}</span>`;
+
+      return result;
+    }
+
+    function showError(msg) {
+      errorMessage.textContent = msg;
+      errorMessage.style.display = 'block';
+    }
+
+    // === EVENT LISTENERS ===
+
+    btnAddInput.addEventListener('click', addInput);
+    btnAddOutput.addEventListener('click', addOutput);
+    btnBuild.addEventListener('click', buildTransaction);
+
+    btnCopyHex.addEventListener('click', async () => {
+      const hex = resultHex.textContent;
+      if (hex) {
+        await navigator.clipboard.writeText(hex);
+        btnCopyHex.textContent = '✓ Copiado';
+        setTimeout(() => { btnCopyHex.textContent = '📋 Copiar'; }, 1500);
+      }
+    });
+
+    // === INIT ===
+    addInput();
+    addOutput();
+
+  })();
+  </script>
+</body>
+</html>

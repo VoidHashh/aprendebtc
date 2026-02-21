@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Descompón una transacción Bitcoin byte a byte. Cada campo identificado, coloreado y explicado." />
+  <title>Transaction Splitter (byte a byte) — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .hex-display {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      line-height: 1.8;
+      word-break: break-all;
+      padding: 1rem;
+      background: var(--bg-primary);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--bg-border);
+      cursor: pointer;
+    }
+    
+    .hex-span {
+      padding: 2px 0;
+      border-radius: 2px;
+      transition: all 0.15s;
+    }
+    .hex-span:hover {
+      background: rgba(247, 147, 26, 0.3);
+    }
+    .hex-span.highlighted {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .byte-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+    .byte-table th,
+    .byte-table td {
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid var(--bg-border);
+    }
+    .byte-table th {
+      background: var(--bg-primary);
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    .byte-table tr {
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .byte-table tr:hover {
+      background: var(--bg-primary);
+    }
+    .byte-table tr.highlighted {
+      background: rgba(247, 147, 26, 0.2);
+    }
+    .byte-table__offset {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+    .byte-table__bytes {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+    }
+    .byte-table__field {
+      font-weight: 500;
+    }
+    .byte-table__value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .byte-table__notes {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .field-color {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      margin-right: 0.5rem;
+    }
+    .field-color--version { background: #58a6ff; }
+    .field-color--marker { background: #8b949e; }
+    .field-color--count { background: #d29922; }
+    .field-color--input { background: #3fb950; }
+    .field-color--output { background: #f78166; }
+    .field-color--witness { background: #a371f7; }
+    .field-color--locktime { background: #f85149; }
+
+    .table-wrapper {
+      max-height: 500px;
+      overflow-y: auto;
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+        <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">TX splitter (byte a byte)</span>
+        </nav>
+
+        <article class="article">
+          <h1>Transaction Splitter (byte a byte)</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Explora cada byte de una transacción Bitcoin con explicaciones detalladas.
+          </p>
+
+          <!-- Input -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Transacción raw (hex)</h2>
+
+            <div class="tool-field">
+              <textarea 
+                id="tx-input" 
+                class="tool-input" 
+                rows="3"
+                placeholder="Pega aquí una transacción en hexadecimal..."
+                style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;"
+              ></textarea>
+            </div>
+
+            <div class="tool-presets" style="margin: 0.75rem 0;">
+              <button class="tool-preset" data-example="simple">Transacción simple</button>
+              <button class="tool-preset" data-example="segwit">SegWit</button>
+            </div>
+
+            <button class="tool-btn" id="btn-split">🔬 Analizar byte a byte</button>
+          </div>
+
+          <!-- Error -->
+          <div class="tool-error" id="error-message" style="display: none;"></div>
+
+          <!-- Hex interactivo -->
+          <div class="tool-container" id="hex-section" style="display: none;">
+            <h2 class="tool-container__title">Hex interactivo</h2>
+            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.75rem;">
+              Haz clic en cualquier byte para resaltarlo en la tabla, o en cualquier fila de la tabla para resaltarlo aquí.
+            </p>
+            <div class="hex-display" id="hex-display"></div>
+          </div>
+
+          <!-- Tabla de bytes -->
+          <div class="tool-container" id="table-section" style="display: none;">
+            <h2 class="tool-container__title">Desglose por campos</h2>
+            <div class="table-wrapper">
+              <table class="byte-table">
+                <thead>
+                  <tr>
+                    <th>Offset</th>
+                    <th>Bytes (hex)</th>
+                    <th>Campo</th>
+                    <th>Valor</th>
+                    <th>Notas</th>
+                  </tr>
+                </thead>
+                <tbody id="byte-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Leyenda -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Leyenda de colores</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; font-size: 0.85rem;">
+              <span><span class="field-color field-color--version"></span>Version</span>
+              <span><span class="field-color field-color--marker"></span>Marker/Flag</span>
+              <span><span class="field-color field-color--count"></span>Counts</span>
+              <span><span class="field-color field-color--input"></span>Inputs</span>
+              <span><span class="field-color field-color--output"></span>Outputs</span>
+              <span><span class="field-color field-color--witness"></span>Witness</span>
+              <span><span class="field-color field-color--locktime"></span>Locktime</span>
+            </div>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más sobre transacciones</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-5/estructura-transaccion.html">Estructura de transacciones →</a> · 
+              <a href="tx-decoder.html">Decodificador visual →</a> ·
+              <a href="../nivel-5/segwit-internals.html">SegWit internals →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+  <script src="../js/hex-utils.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === EJEMPLOS ===
+    const EXAMPLES = {
+      simple: '0100000001c997a5e56e104102fa209c6a852dd90660a20b2d9c352423edce25857fcd3704000000004847304402204e45e16932b8af514961a1d3a1a25fdf3f4f7732e9d624c6c61548ab5fb8cd410220181522ec8eca07de4860a4acdd12909d831cc56cbbac4622082221a8768d1d0901ffffffff0200ca9a3b00000000434104ae1a62fe09c5f51b13905f07f06b99a2f7159b2225f374cd378d71302fa28414e7aab37397f554a7df5f142c21c1b7303b8a0626f1baded5c72a704f7e6cd84cac00286bee0000000043410411db93e1dcdb8a016b49840f8c53bc1eb68a382e97b1482ecad7b148a6909a5cb2e0eaddfb84ccf9744464f82e160bfa9b8b64f9d4c03f999b8643f656b412a3ac00000000',
+      segwit: '02000000000101d1b18d3eb3db2ee3c732a1cb7b2854dc0e70fd6ad35e9fcd1c5f3f9f5c5c5c5c0000000000fdffffff0240420f0000000000160014d85c2b71d0060b09c9886aeb815e50991dda124d00e1f50500000000160014851a33a5ef0d4279bd5854949174e2c65b1d450247304402203b36f8f2b10c5dca3c8d5b7cc1c7bfcd73af9f8c5f8e8a5e5a5e5a5e5a5e5a5e022054321abcd1234567890abcdef1234567890abcdef1234567890abcdef12340121039b3b694b8fc5b5e07fb069c783cac754f5d38c3e08bed1960e31fdb1dda35c2400000000'
+    };
+
+    // === ELEMENTOS DEL DOM ===
+    const txInput = document.getElementById('tx-input');
+    const btnSplit = document.getElementById('btn-split');
+    const errorMessage = document.getElementById('error-message');
+    const hexSection = document.getElementById('hex-section');
+    const hexDisplay = document.getElementById('hex-display');
+    const tableSection = document.getElementById('table-section');
+    const byteTbody = document.getElementById('byte-tbody');
+
+    let fieldRanges = [];
+
+    // === PARSER ===
+
+    class ByteParser {
+      constructor(hex) {
+        this.hex = hex.toLowerCase().replace(/\s/g, '');
+        this.bytes = HexUtils.hexToBytes(this.hex);
+        this.pos = 0;
+        this.fields = [];
+      }
+
+      read(length) {
+        const data = this.bytes.slice(this.pos, this.pos + length);
+        this.pos += length;
+        return data;
+      }
+
+      readVarInt() {
+        const startPos = this.pos;
+        const first = this.bytes[this.pos++];
+        
+        if (first < 0xfd) {
+          return { value: first, length: 1 };
+        }
+        if (first === 0xfd) {
+          const val = this.bytes[this.pos] | (this.bytes[this.pos + 1] << 8);
+          this.pos += 2;
+          return { value: val, length: 3 };
+        }
+        if (first === 0xfe) {
+          const val = this.bytes[this.pos] | (this.bytes[this.pos + 1] << 8) | 
+                      (this.bytes[this.pos + 2] << 16) | (this.bytes[this.pos + 3] << 24);
+          this.pos += 4;
+          return { value: val, length: 5 };
+        }
+        const val = this.bytes[this.pos] | (this.bytes[this.pos + 1] << 8) | 
+                    (this.bytes[this.pos + 2] << 16) | (this.bytes[this.pos + 3] << 24);
+        this.pos += 8;
+        return { value: val, length: 9 };
+      }
+
+      readUint32LE() {
+        const val = this.bytes[this.pos] | (this.bytes[this.pos + 1] << 8) | 
+                    (this.bytes[this.pos + 2] << 16) | (this.bytes[this.pos + 3] << 24);
+        this.pos += 4;
+        return val >>> 0;
+      }
+
+      readUint64LE() {
+        let val = 0n;
+        for (let i = 0; i < 8; i++) {
+          val |= BigInt(this.bytes[this.pos + i]) << BigInt(i * 8);
+        }
+        this.pos += 8;
+        return val;
+      }
+
+      addField(start, length, field, value, notes, colorClass) {
+        this.fields.push({
+          offset: start,
+          length,
+          bytes: this.hex.substring(start * 2, (start + length) * 2),
+          field,
+          value,
+          notes,
+          colorClass
+        });
+      }
+
+      parse() {
+        let startPos = 0;
+
+        // Version (4 bytes)
+        startPos = this.pos;
+        const version = this.readUint32LE();
+        this.addField(startPos, 4, 'Version', version.toString(), 'Little-endian', 'version');
+
+        // Check for SegWit
+        let isSegWit = false;
+        if (this.bytes[this.pos] === 0x00 && this.bytes[this.pos + 1] !== 0x00) {
+          isSegWit = true;
+          
+          startPos = this.pos;
+          this.pos++;
+          this.addField(startPos, 1, 'Marker', '0', 'Indica SegWit', 'marker');
+          
+          startPos = this.pos;
+          const flag = this.bytes[this.pos++];
+          this.addField(startPos, 1, 'Flag', flag.toString(), 'Siempre 1 para SegWit', 'marker');
+        }
+
+        // Input count
+        startPos = this.pos;
+        const inputCount = this.readVarInt();
+        this.addField(startPos, inputCount.length, 'Input Count', inputCount.value.toString(), 'Compact size', 'count');
+
+        // Inputs
+        for (let i = 0; i < inputCount.value; i++) {
+          // TXID
+          startPos = this.pos;
+          const txid = this.read(32);
+          this.addField(startPos, 32, `Input ${i}: TXID`, HexUtils.bytesToHex(txid.reverse()), 'Internal byte order (reversed)', 'input');
+
+          // Vout
+          startPos = this.pos;
+          const vout = this.readUint32LE();
+          this.addField(startPos, 4, `Input ${i}: Vout`, vout.toString(), 'Output index', 'input');
+
+          // ScriptSig length
+          startPos = this.pos;
+          const scriptLen = this.readVarInt();
+          this.addField(startPos, scriptLen.length, `Input ${i}: ScriptSig Len`, scriptLen.value.toString(), 'Compact size', 'input');
+
+          // ScriptSig
+          if (scriptLen.value > 0) {
+            startPos = this.pos;
+            const script = this.read(scriptLen.value);
+            this.addField(startPos, scriptLen.value, `Input ${i}: ScriptSig`, HexUtils.bytesToHex(script).substring(0, 32) + '...', 'Unlocking script', 'input');
+          }
+
+          // Sequence
+          startPos = this.pos;
+          const sequence = this.readUint32LE();
+          const seqNote = sequence === 0xffffffff ? 'Final' : sequence === 0xfffffffe ? 'RBF' : 'Custom';
+          this.addField(startPos, 4, `Input ${i}: Sequence`, '0x' + sequence.toString(16).padStart(8, '0'), seqNote, 'input');
+        }
+
+        // Output count
+        startPos = this.pos;
+        const outputCount = this.readVarInt();
+        this.addField(startPos, outputCount.length, 'Output Count', outputCount.value.toString(), 'Compact size', 'count');
+
+        // Outputs
+        for (let i = 0; i < outputCount.value; i++) {
+          // Value
+          startPos = this.pos;
+          const value = this.readUint64LE();
+          const sats = Number(value);
+          this.addField(startPos, 8, `Output ${i}: Value`, `${sats.toLocaleString('es-ES')} sats`, 'Little-endian', 'output');
+
+          // ScriptPubKey length
+          startPos = this.pos;
+          const scriptLen = this.readVarInt();
+          this.addField(startPos, scriptLen.length, `Output ${i}: Script Len`, scriptLen.value.toString(), 'Compact size', 'output');
+
+          // ScriptPubKey
+          startPos = this.pos;
+          const script = this.read(scriptLen.value);
+          const scriptType = this.detectScriptType(HexUtils.bytesToHex(script));
+          this.addField(startPos, scriptLen.value, `Output ${i}: ScriptPubKey`, scriptType, 'Locking script', 'output');
+        }
+
+        // Witness (if SegWit)
+        if (isSegWit) {
+          for (let i = 0; i < inputCount.value; i++) {
+            startPos = this.pos;
+            const itemCount = this.readVarInt();
+            this.addField(startPos, itemCount.length, `Witness ${i}: Items`, itemCount.value.toString(), 'Compact size', 'witness');
+
+            for (let j = 0; j < itemCount.value; j++) {
+              startPos = this.pos;
+              const itemLen = this.readVarInt();
+              this.addField(startPos, itemLen.length, `Witness ${i}.${j}: Len`, itemLen.value.toString(), '', 'witness');
+
+              if (itemLen.value > 0) {
+                startPos = this.pos;
+                const item = this.read(itemLen.value);
+                const truncated = itemLen.value > 20 
+                  ? HexUtils.bytesToHex(item).substring(0, 32) + '...'
+                  : HexUtils.bytesToHex(item);
+                this.addField(startPos, itemLen.value, `Witness ${i}.${j}: Data`, truncated, `${itemLen.value} bytes`, 'witness');
+              }
+            }
+          }
+        }
+
+        // Locktime
+        startPos = this.pos;
+        const locktime = this.readUint32LE();
+        const locktimeNote = locktime === 0 
+          ? 'Sin restricción'
+          : locktime < 500000000 
+            ? `Bloque ${locktime}` 
+            : `Timestamp`;
+        this.addField(startPos, 4, 'Locktime', locktime.toString(), locktimeNote, 'locktime');
+
+        return this.fields;
+      }
+
+      detectScriptType(scriptHex) {
+        const len = scriptHex.length / 2;
+        if (len === 25 && scriptHex.startsWith('76a914')) return 'P2PKH';
+        if (len === 23 && scriptHex.startsWith('a914')) return 'P2SH';
+        if (len === 22 && scriptHex.startsWith('0014')) return 'P2WPKH';
+        if (len === 34 && scriptHex.startsWith('0020')) return 'P2WSH';
+        if (len === 34 && scriptHex.startsWith('5120')) return 'P2TR';
+        if (scriptHex.startsWith('6a')) return 'OP_RETURN';
+        return scriptHex.substring(0, 20) + '...';
+      }
+    }
+
+    // === MOSTRAR RESULTADOS ===
+
+    function split() {
+      errorMessage.style.display = 'none';
+      hexSection.style.display = 'none';
+      tableSection.style.display = 'none';
+
+      const hex = txInput.value.trim().replace(/\s/g, '');
+
+      if (!hex || !/^[0-9a-fA-F]+$/.test(hex)) {
+        showError('Introduce una transacción hexadecimal válida.');
+        return;
+      }
+
+      try {
+        const parser = new ByteParser(hex);
+        fieldRanges = parser.parse();
+
+        // Construir hex interactivo
+        let htmlHex = '';
+        let lastEnd = 0;
+        
+        fieldRanges.forEach((field, idx) => {
+          const start = field.offset * 2;
+          const end = start + (field.length * 2);
+          
+          if (start > lastEnd) {
+            htmlHex += hex.substring(lastEnd, start);
+          }
+          
+          htmlHex += `<span class="hex-span" data-idx="${idx}">${hex.substring(start, end)}</span>`;
+          lastEnd = end;
+        });
+        
+        if (lastEnd < hex.length) {
+          htmlHex += hex.substring(lastEnd);
+        }
+        
+        hexDisplay.innerHTML = htmlHex;
+        hexSection.style.display = 'block';
+
+        // Construir tabla
+        byteTbody.innerHTML = '';
+        
+        fieldRanges.forEach((field, idx) => {
+          const row = document.createElement('tr');
+          row.dataset.idx = idx;
+          
+          const colorClass = `field-color--${field.colorClass}`;
+          
+          row.innerHTML = `
+            <td class="byte-table__offset">${field.offset}</td>
+            <td class="byte-table__bytes"><span class="field-color ${colorClass}"></span>${field.bytes.substring(0, 24)}${field.bytes.length > 24 ? '...' : ''}</td>
+            <td class="byte-table__field">${field.field}</td>
+            <td class="byte-table__value" title="${field.value}">${field.value}</td>
+            <td class="byte-table__notes">${field.notes}</td>
+          `;
+          
+          byteTbody.appendChild(row);
+        });
+        
+        tableSection.style.display = 'block';
+
+        // Interactividad
+        setupInteractivity();
+
+      } catch (error) {
+        showError('Error al analizar: ' + error.message);
+      }
+    }
+
+    function setupInteractivity() {
+      // Click en hex -> resaltar fila
+      hexDisplay.querySelectorAll('.hex-span').forEach(span => {
+        span.addEventListener('click', () => {
+          const idx = span.dataset.idx;
+          highlightField(idx);
+        });
+        span.addEventListener('mouseenter', () => {
+          highlightField(span.dataset.idx, true);
+        });
+        span.addEventListener('mouseleave', () => {
+          clearHighlights();
+        });
+      });
+
+      // Click en fila -> resaltar hex
+      byteTbody.querySelectorAll('tr').forEach(row => {
+        row.addEventListener('click', () => {
+          const idx = row.dataset.idx;
+          highlightField(idx);
+          // Scroll to hex
+          const hexSpan = hexDisplay.querySelector(`[data-idx="${idx}"]`);
+          if (hexSpan) {
+            hexSpan.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        });
+        row.addEventListener('mouseenter', () => {
+          highlightField(row.dataset.idx, true);
+        });
+        row.addEventListener('mouseleave', () => {
+          clearHighlights();
+        });
+      });
+    }
+
+    function highlightField(idx, temporary = false) {
+      clearHighlights();
+      
+      const hexSpan = hexDisplay.querySelector(`[data-idx="${idx}"]`);
+      const tableRow = byteTbody.querySelector(`tr[data-idx="${idx}"]`);
+      
+      if (hexSpan) hexSpan.classList.add('highlighted');
+      if (tableRow) tableRow.classList.add('highlighted');
+    }
+
+    function clearHighlights() {
+      hexDisplay.querySelectorAll('.highlighted').forEach(el => el.classList.remove('highlighted'));
+      byteTbody.querySelectorAll('.highlighted').forEach(el => el.classList.remove('highlighted'));
+    }
+
+    function showError(msg) {
+      errorMessage.textContent = msg;
+      errorMessage.style.display = 'block';
+    }
+
+    // === EVENT LISTENERS ===
+
+    document.querySelectorAll('[data-example]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        txInput.value = EXAMPLES[btn.dataset.example];
+        split();
+      });
+    });
+
+    btnSplit.addEventListener('click', split);
+
+    txInput.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.key === 'Enter') split();
+    });
+
+  })();
+  </script>
+</body>
+</html>

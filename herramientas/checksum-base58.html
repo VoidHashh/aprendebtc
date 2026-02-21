@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" data-base-path="../">
 <head>
   <meta charset="UTF-8" />
@@ -106,8 +106,9 @@
             </div>
             
             <div class="tool-btn-row" style="margin-top: 0.75rem;">
-              <button class="tool-btn tool-btn--secondary" id="btn-b58-encode">Hex → Base58</button>
-              <button class="tool-btn tool-btn--secondary" id="btn-b58-decode">Base58 → Hex</button>
+              <button class="tool-btn tool-btn--secondary" id="btn-b58-example">📋 Cargar ejemplo</button>
+              <button class="tool-btn tool-btn--secondary" id="btn-b58-encode">🔐 Codificar Base58</button>
+              <button class="tool-btn tool-btn--secondary" id="btn-b58-decode">🔓 Decodificar Base58</button>
             </div>
           </div>
 
@@ -147,7 +148,10 @@
               <button class="tool-preset" data-version="6f">0x6F Testnet</button>
             </div>
 
-            <button class="tool-btn" id="btn-b58c-encode" style="margin-top: 0.5rem;">🔐 Codificar Base58Check</button>
+            <div class="tool-btn-row" style="margin-top: 0.5rem;">
+              <button class="tool-btn tool-btn--secondary" id="btn-b58c-example">📋 Cargar ejemplo</button>
+              <button class="tool-btn" id="btn-b58c-encode">🔐 Codificar Base58Check</button>
+            </div>
 
             <!-- Resultado encoder -->
             <div id="b58c-encode-result" style="display: none; margin-top: 1rem;">
@@ -186,7 +190,12 @@
               />
             </div>
 
-            <button class="tool-btn" id="btn-b58c-decode" style="margin-top: 0.75rem;">🔓 Decodificar</button>
+            <div class="tool-btn-row" style="margin-top: 0.75rem;">
+              <button class="tool-btn tool-btn--secondary" id="btn-b58c-decode-example">📋 Cargar ejemplo</button>
+              <button class="tool-btn" id="btn-b58c-decode">
+              Decodificar Base58Check
+            </button>
+            </div>
 
             <!-- Resultado decoder -->
             <div id="b58c-decode-result" style="display: none; margin-top: 1rem;">
@@ -297,12 +306,14 @@
     // Base58 simple
     const b58Hex = document.getElementById('b58-hex');
     const b58Result = document.getElementById('b58-result');
+    const btnB58Example = document.getElementById('btn-b58-example');
     const btnB58Encode = document.getElementById('btn-b58-encode');
     const btnB58Decode = document.getElementById('btn-b58-decode');
 
     // Base58Check encoder
     const b58cVersion = document.getElementById('b58c-version');
     const b58cData = document.getElementById('b58c-data');
+    const btnB58cExample = document.getElementById('btn-b58c-example');
     const btnB58cEncode = document.getElementById('btn-b58c-encode');
     const b58cEncodeResult = document.getElementById('b58c-encode-result');
     const b58cPayload = document.getElementById('b58c-payload');
@@ -311,11 +322,16 @@
 
     // Base58Check decoder
     const b58cDecodeInput = document.getElementById('b58c-decode-input');
+    const btnB58cDecodeExample = document.getElementById('btn-b58c-decode-example');
     const btnB58cDecode = document.getElementById('btn-b58c-decode');
     const b58cDecodeResult = document.getElementById('b58c-decode-result');
     const b58cDecVersion = document.getElementById('b58c-dec-version');
     const b58cDecValid = document.getElementById('b58c-dec-valid');
     const b58cDecData = document.getElementById('b58c-dec-data');
+
+    const EXAMPLE_BASE58_HEX = '48656c6c6f';
+    const EXAMPLE_B58CHECK_VERSION = '00';
+    const EXAMPLE_B58CHECK_DATA = '751e76e8199196d454941c45d1b3a323f1433bd6';
 
     // === BASE58 SIMPLE ===
 
@@ -343,6 +359,12 @@
       }
     });
 
+
+    btnB58Example.addEventListener('click', () => {
+      b58Hex.value = EXAMPLE_BASE58_HEX;
+      btnB58Encode.click();
+    });
+
     // === BASE58CHECK ENCODER ===
 
     // Presets
@@ -350,6 +372,12 @@
       btn.addEventListener('click', () => {
         b58cVersion.value = btn.dataset.version;
       });
+    });
+
+    btnB58cExample.addEventListener('click', () => {
+      b58cVersion.value = EXAMPLE_B58CHECK_VERSION;
+      b58cData.value = EXAMPLE_B58CHECK_DATA;
+      btnB58cEncode.click();
     });
 
     btnB58cEncode.addEventListener('click', async () => {
@@ -392,6 +420,17 @@
     });
 
     // === BASE58CHECK DECODER ===
+
+    btnB58cDecodeExample.addEventListener('click', async () => {
+      try {
+        const exampleDataBytes = HexUtils.hexToBytes(EXAMPLE_B58CHECK_DATA);
+        const exampleBase58Check = await Base58.checkEncode(parseInt(EXAMPLE_B58CHECK_VERSION, 16), exampleDataBytes);
+        b58cDecodeInput.value = exampleBase58Check;
+        btnB58cDecode.click();
+      } catch (error) {
+        b58cDecodeInput.value = '';
+      }
+    });
 
     btnB58cDecode.addEventListener('click', async () => {
       try {
@@ -445,3 +484,6 @@
   </script>
 </body>
 </html>
+
+
+

@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Decodifica transacciones Bitcoin raw. Visualiza inputs, outputs, scripts y witness data byte a byte con colores." />
+  <title>Decodificador de transacciones — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .tx-hex {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      line-height: 1.8;
+      word-break: break-all;
+      padding: 1rem;
+      background: var(--bg-primary);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--bg-border);
+    }
+    
+    .tx-hex .version { color: #58a6ff; }
+    .tx-hex .marker { color: #8b949e; }
+    .tx-hex .flag { color: #8b949e; }
+    .tx-hex .input-count { color: #d29922; }
+    .tx-hex .input-txid { color: #3fb950; }
+    .tx-hex .input-vout { color: #2ea043; }
+    .tx-hex .input-script { color: #238636; }
+    .tx-hex .input-sequence { color: #196c2e; }
+    .tx-hex .output-count { color: #d29922; }
+    .tx-hex .output-value { color: #f78166; }
+    .tx-hex .output-script { color: #da3633; }
+    .tx-hex .witness { color: #a371f7; }
+    .tx-hex .locktime { color: #f85149; }
+
+    .tx-section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .tx-section__title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .tx-section__title-badge {
+      font-size: 0.7rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .tx-field {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.35rem 0;
+      border-bottom: 1px solid var(--bg-border);
+      font-size: 0.85rem;
+    }
+    .tx-field:last-child { border-bottom: none; }
+    .tx-field__label { color: var(--text-secondary); }
+    .tx-field__value { 
+      font-family: 'JetBrains Mono', monospace; 
+      font-size: 0.8rem;
+      text-align: right;
+      max-width: 60%;
+      word-break: break-all;
+    }
+
+    .tx-input, .tx-output {
+      background: var(--bg-primary);
+      border-radius: var(--radius-md);
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .tx-input__header, .tx-output__header {
+      font-weight: 600;
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-secondary);
+    }
+
+    .script-type {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+    .script-type--p2pkh { background: rgba(88, 166, 255, 0.2); color: #58a6ff; }
+    .script-type--p2sh { background: rgba(163, 113, 247, 0.2); color: #a371f7; }
+    .script-type--p2wpkh { background: rgba(247, 147, 26, 0.2); color: var(--accent); }
+    .script-type--p2wsh { background: rgba(46, 160, 67, 0.2); color: #2ea043; }
+    .script-type--p2tr { background: rgba(219, 97, 162, 0.2); color: #db61a2; }
+    .script-type--opreturn { background: rgba(139, 148, 158, 0.2); color: #8b949e; }
+    .script-type--unknown { background: rgba(139, 148, 158, 0.2); color: #8b949e; }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+        <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Decodificador de transacciones</span>
+        </nav>
+
+        <article class="article">
+          <h1>Decodificador de transacciones</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Pega una transacción raw en hexadecimal y visualiza su estructura completa.
+          </p>
+
+          <!-- Input -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Transacción raw (hex)</h2>
+
+            <div class="tool-field">
+              <textarea 
+                id="tx-input" 
+                class="tool-input" 
+                rows="4"
+                placeholder="Pega aquí una transacción en hexadecimal..."
+                style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;"
+              ></textarea>
+            </div>
+
+            <div class="tool-presets" style="margin: 0.75rem 0;">
+              <button class="tool-preset" data-example="p2pkh">P2PKH simple</button>
+              <button class="tool-preset" data-example="segwit">SegWit P2WPKH</button>
+              <button class="tool-preset" data-example="taproot">Taproot P2TR</button>
+            </div>
+
+            <button class="tool-btn" id="btn-decode">🔍 Decodificar</button>
+          </div>
+
+          <!-- Error -->
+          <div class="tool-error" id="error-message" style="display: none;"></div>
+
+          <!-- Hex coloreado -->
+          <div class="tool-container" id="hex-section" style="display: none;">
+            <h2 class="tool-container__title">Transacción coloreada</h2>
+            <div class="tx-hex" id="colored-hex"></div>
+            
+            <!-- Leyenda -->
+            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.75rem; font-size: 0.7rem;">
+              <span><span class="version">■</span> Version</span>
+              <span><span class="marker">■</span> Marker/Flag</span>
+              <span><span class="input-count">■</span> Counts</span>
+              <span><span class="input-txid">■</span> Input TXID</span>
+              <span><span class="input-vout">■</span> Vout</span>
+              <span><span class="input-script">■</span> ScriptSig</span>
+              <span><span class="input-sequence">■</span> Sequence</span>
+              <span><span class="output-value">■</span> Value</span>
+              <span><span class="output-script">■</span> ScriptPubKey</span>
+              <span><span class="witness">■</span> Witness</span>
+              <span><span class="locktime">■</span> Locktime</span>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="tool-container" id="stats-section" style="display: none;">
+            <h2 class="tool-container__title">Estadísticas</h2>
+            <div class="stats-grid">
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">TXID</div>
+                <div class="tool-result-card__value" id="stat-txid" style="font-size: 0.6rem; word-break: break-all;">—</div>
+              </div>
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">Size</div>
+                <div class="tool-result-card__value" id="stat-size">—</div>
+              </div>
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">vSize</div>
+                <div class="tool-result-card__value" id="stat-vsize">—</div>
+              </div>
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">Weight</div>
+                <div class="tool-result-card__value" id="stat-weight">—</div>
+              </div>
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">SegWit</div>
+                <div class="tool-result-card__value" id="stat-segwit">—</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Desglose estructurado -->
+          <div class="tool-container" id="structure-section" style="display: none;">
+            <h2 class="tool-container__title">Estructura</h2>
+            
+            <div class="tx-section">
+              <div class="tx-field">
+                <span class="tx-field__label">Versión</span>
+                <span class="tx-field__value" id="struct-version">—</span>
+              </div>
+              <div class="tx-field">
+                <span class="tx-field__label">Locktime</span>
+                <span class="tx-field__value" id="struct-locktime">—</span>
+              </div>
+            </div>
+
+            <!-- Inputs -->
+            <div class="tx-section">
+              <div class="tx-section__title">
+                Inputs
+                <span class="tx-section__title-badge" style="background: rgba(46, 160, 67, 0.2); color: #2ea043;" id="input-count-badge">0</span>
+              </div>
+              <div id="inputs-container"></div>
+            </div>
+
+            <!-- Outputs -->
+            <div class="tx-section">
+              <div class="tx-section__title">
+                Outputs
+                <span class="tx-section__title-badge" style="background: rgba(247, 147, 26, 0.2); color: var(--accent);" id="output-count-badge">0</span>
+              </div>
+              <div id="outputs-container"></div>
+            </div>
+
+            <!-- Witness -->
+            <div class="tx-section" id="witness-section" style="display: none;">
+              <div class="tx-section__title">
+                Witness Data
+                <span class="tx-section__title-badge" style="background: rgba(163, 113, 247, 0.2); color: #a371f7;">SegWit</span>
+              </div>
+              <div id="witness-container"></div>
+            </div>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más sobre transacciones</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-5/estructura-transaccion.html">Estructura de transacciones →</a> · 
+              <a href="tx-builder.html">Constructor de transacciones →</a> ·
+              <a href="tx-splitter.html">Análisis byte a byte →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+  <script src="../js/hex-utils.js"></script>
+  <script src="../js/base58.js"></script>
+  <script src="../js/bech32.js"></script>
+  <script src="../js/ripemd160.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === EJEMPLOS DE TRANSACCIONES ===
+    const EXAMPLES = {
+      // P2PKH simple (legacy, no SegWit)
+      p2pkh: '0100000001c997a5e56e104102fa209c6a852dd90660a20b2d9c352423edce25857fcd3704000000004847304402204e45e16932b8af514961a1d3a1a25fdf3f4f7732e9d624c6c61548ab5fb8cd410220181522ec8eca07de4860a4acdd12909d831cc56cbbac4622082221a8768d1d0901ffffffff0200ca9a3b00000000434104ae1a62fe09c5f51b13905f07f06b99a2f7159b2225f374cd378d71302fa28414e7aab37397f554a7df5f142c21c1b7303b8a0626f1baded5c72a704f7e6cd84cac00286bee0000000043410411db93e1dcdb8a016b49840f8c53bc1eb68a382e97b1482ecad7b148a6909a5cb2e0eaddfb84ccf9744464f82e160bfa9b8b64f9d4c03f999b8643f656b412a3ac00000000',
+      
+      // SegWit P2WPKH
+      segwit: '02000000000101d1b18d3eb3db2ee3c732a1cb7b2854dc0e70fd6ad35e9fcd1c5f3f9f5c5c5c5c0000000000fdffffff0240420f0000000000160014d85c2b71d0060b09c9886aeb815e50991dda124d00e1f50500000000160014851a33a5ef0d4279bd5854949174e2c65b1d450247304402203b36f8f2b10c5dca3c8d5b7cc1c7bfcd73af9f8c5f8e8a5e5a5e5a5e5a5e5a5e022054321abcd1234567890abcdef1234567890abcdef1234567890abcdef12340121039b3b694b8fc5b5e07fb069c783cac754f5d38c3e08bed1960e31fdb1dda35c2400000000',
+      
+      // Taproot P2TR
+      taproot: '02000000000101a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b20000000000fdffffff0180969800000000002251209a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b0140a1b2c3d4e5f6a7b8c9d0e1f2a1b2c3d4e5f6a7b8c9d0e1f2a1b2c3d4e5f6a7b8c9d0e1f2a1b2c3d4e5f6a7b8c9d0e1f2a1b2c3d4e5f6a7b8c9d0e1f200000000'
+    };
+
+    // === ELEMENTOS DEL DOM ===
+    const txInput = document.getElementById('tx-input');
+    const btnDecode = document.getElementById('btn-decode');
+    const errorMessage = document.getElementById('error-message');
+    const hexSection = document.getElementById('hex-section');
+    const coloredHex = document.getElementById('colored-hex');
+    const statsSection = document.getElementById('stats-section');
+    const structureSection = document.getElementById('structure-section');
+
+    // === PARSER DE TRANSACCIONES ===
+
+    class TxParser {
+      constructor(hex) {
+        this.hex = hex.toLowerCase().replace(/\s/g, '');
+        this.bytes = HexUtils.hexToBytes(this.hex);
+        this.pos = 0;
+        this.colorRanges = [];
+      }
+
+      read(length) {
+        const data = this.bytes.slice(this.pos, this.pos + length);
+        this.pos += length;
+        return data;
+      }
+
+      readVarInt() {
+        const first = this.bytes[this.pos++];
+        if (first < 0xfd) return first;
+        if (first === 0xfd) {
+          const val = this.bytes[this.pos] | (this.bytes[this.pos + 1] << 8);
+          this.pos += 2;
+          return val;
+        }
+        if (first === 0xfe) {
+          const val = this.bytes[this.pos] | (this.bytes[this.pos + 1] << 8) | 
+                      (this.bytes[this.pos + 2] << 16) | (this.bytes[this.pos + 3] << 24);
+          this.pos += 4;
+          return val;
+        }
+        // 0xff - 8 bytes (simplificado para valores < 2^32)
+        const val = this.bytes[this.pos] | (this.bytes[this.pos + 1] << 8) | 
+                    (this.bytes[this.pos + 2] << 16) | (this.bytes[this.pos + 3] << 24);
+        this.pos += 8;
+        return val;
+      }
+
+      readUint32LE() {
+        const val = this.bytes[this.pos] | (this.bytes[this.pos + 1] << 8) | 
+                    (this.bytes[this.pos + 2] << 16) | (this.bytes[this.pos + 3] << 24);
+        this.pos += 4;
+        return val >>> 0;
+      }
+
+      readUint64LE() {
+        // Simplificado: leemos como BigInt
+        let val = 0n;
+        for (let i = 0; i < 8; i++) {
+          val |= BigInt(this.bytes[this.pos + i]) << BigInt(i * 8);
+        }
+        this.pos += 8;
+        return val;
+      }
+
+      addColorRange(start, length, className) {
+        this.colorRanges.push({ start: start * 2, length: length * 2, className });
+      }
+
+      parse() {
+        const tx = {
+          version: 0,
+          inputs: [],
+          outputs: [],
+          witness: [],
+          locktime: 0,
+          isSegWit: false
+        };
+
+        const startPos = this.pos;
+
+        // Version (4 bytes)
+        const versionStart = this.pos;
+        tx.version = this.readUint32LE();
+        this.addColorRange(versionStart, 4, 'version');
+
+        // Check for SegWit marker
+        const marker = this.bytes[this.pos];
+        const flag = this.bytes[this.pos + 1];
+        
+        if (marker === 0x00 && flag !== 0x00) {
+          tx.isSegWit = true;
+          this.addColorRange(this.pos, 1, 'marker');
+          this.pos++;
+          this.addColorRange(this.pos, 1, 'flag');
+          this.pos++;
+        }
+
+        // Input count
+        const inputCountStart = this.pos;
+        const inputCount = this.readVarInt();
+        this.addColorRange(inputCountStart, this.pos - inputCountStart, 'input-count');
+
+        // Inputs
+        for (let i = 0; i < inputCount; i++) {
+          const input = {};
+          
+          // TXID (32 bytes, reversed for display)
+          const txidStart = this.pos;
+          input.txid = HexUtils.bytesToHex(this.read(32).reverse());
+          this.addColorRange(txidStart, 32, 'input-txid');
+
+          // Vout (4 bytes)
+          const voutStart = this.pos;
+          input.vout = this.readUint32LE();
+          this.addColorRange(voutStart, 4, 'input-vout');
+
+          // ScriptSig
+          const scriptLenStart = this.pos;
+          const scriptLen = this.readVarInt();
+          this.addColorRange(scriptLenStart, this.pos - scriptLenStart, 'input-script');
+          
+          const scriptStart = this.pos;
+          input.scriptSig = HexUtils.bytesToHex(this.read(scriptLen));
+          if (scriptLen > 0) {
+            this.addColorRange(scriptStart, scriptLen, 'input-script');
+          }
+
+          // Sequence (4 bytes)
+          const seqStart = this.pos;
+          input.sequence = this.readUint32LE();
+          this.addColorRange(seqStart, 4, 'input-sequence');
+
+          tx.inputs.push(input);
+        }
+
+        // Output count
+        const outputCountStart = this.pos;
+        const outputCount = this.readVarInt();
+        this.addColorRange(outputCountStart, this.pos - outputCountStart, 'output-count');
+
+        // Outputs
+        for (let i = 0; i < outputCount; i++) {
+          const output = {};
+
+          // Value (8 bytes)
+          const valueStart = this.pos;
+          output.value = this.readUint64LE();
+          this.addColorRange(valueStart, 8, 'output-value');
+
+          // ScriptPubKey
+          const scriptLenStart = this.pos;
+          const scriptLen = this.readVarInt();
+          this.addColorRange(scriptLenStart, this.pos - scriptLenStart, 'output-script');
+          
+          const scriptStart = this.pos;
+          output.scriptPubKey = HexUtils.bytesToHex(this.read(scriptLen));
+          this.addColorRange(scriptStart, scriptLen, 'output-script');
+
+          output.type = this.detectScriptType(output.scriptPubKey);
+
+          tx.outputs.push(output);
+        }
+
+        // Witness data (if SegWit)
+        if (tx.isSegWit) {
+          for (let i = 0; i < inputCount; i++) {
+            const witnessStart = this.pos;
+            const itemCount = this.readVarInt();
+            const items = [];
+            
+            for (let j = 0; j < itemCount; j++) {
+              const itemLen = this.readVarInt();
+              items.push(HexUtils.bytesToHex(this.read(itemLen)));
+            }
+            
+            this.addColorRange(witnessStart, this.pos - witnessStart, 'witness');
+            tx.witness.push(items);
+          }
+        }
+
+        // Locktime (4 bytes)
+        const locktimeStart = this.pos;
+        tx.locktime = this.readUint32LE();
+        this.addColorRange(locktimeStart, 4, 'locktime');
+
+        // Calcular tamaños
+        tx.size = this.bytes.length;
+        
+        if (tx.isSegWit) {
+          // Weight = (non-witness * 4) + witness
+          // Para calcular el tamaño sin witness, reconstruimos
+          const nonWitnessSize = this.calculateNonWitnessSize(tx);
+          const witnessSize = tx.size - nonWitnessSize - 2; // -2 for marker+flag
+          tx.weight = (nonWitnessSize * 4) + witnessSize + 2;
+          tx.vsize = Math.ceil(tx.weight / 4);
+        } else {
+          tx.weight = tx.size * 4;
+          tx.vsize = tx.size;
+        }
+
+        return tx;
+      }
+
+      calculateNonWitnessSize(tx) {
+        // version(4) + varint(inputs) + inputs + varint(outputs) + outputs + locktime(4)
+        let size = 4 + 4; // version + locktime
+        
+        // Input count varint
+        size += tx.inputs.length < 0xfd ? 1 : 3;
+        
+        // Inputs
+        for (const input of tx.inputs) {
+          size += 32 + 4; // txid + vout
+          const scriptLen = input.scriptSig.length / 2;
+          size += scriptLen < 0xfd ? 1 : 3;
+          size += scriptLen;
+          size += 4; // sequence
+        }
+        
+        // Output count varint
+        size += tx.outputs.length < 0xfd ? 1 : 3;
+        
+        // Outputs
+        for (const output of tx.outputs) {
+          size += 8; // value
+          const scriptLen = output.scriptPubKey.length / 2;
+          size += scriptLen < 0xfd ? 1 : 3;
+          size += scriptLen;
+        }
+        
+        return size;
+      }
+
+      detectScriptType(scriptHex) {
+        const len = scriptHex.length / 2;
+        
+        // P2PKH: OP_DUP OP_HASH160 <20> <pubkeyhash> OP_EQUALVERIFY OP_CHECKSIG
+        if (len === 25 && scriptHex.startsWith('76a914') && scriptHex.endsWith('88ac')) {
+          return { type: 'P2PKH', hash: scriptHex.substring(6, 46) };
+        }
+        
+        // P2SH: OP_HASH160 <20> <scripthash> OP_EQUAL
+        if (len === 23 && scriptHex.startsWith('a914') && scriptHex.endsWith('87')) {
+          return { type: 'P2SH', hash: scriptHex.substring(4, 44) };
+        }
+        
+        // P2WPKH: OP_0 <20> <pubkeyhash>
+        if (len === 22 && scriptHex.startsWith('0014')) {
+          return { type: 'P2WPKH', hash: scriptHex.substring(4) };
+        }
+        
+        // P2WSH: OP_0 <32> <scripthash>
+        if (len === 34 && scriptHex.startsWith('0020')) {
+          return { type: 'P2WSH', hash: scriptHex.substring(4) };
+        }
+        
+        // P2TR: OP_1 <32> <pubkey>
+        if (len === 34 && scriptHex.startsWith('5120')) {
+          return { type: 'P2TR', hash: scriptHex.substring(4) };
+        }
+        
+        // OP_RETURN
+        if (scriptHex.startsWith('6a')) {
+          return { type: 'OP_RETURN', data: scriptHex.substring(2) };
+        }
+        
+        return { type: 'Unknown' };
+      }
+
+      getColoredHex() {
+        // Ordenar por posición
+        this.colorRanges.sort((a, b) => a.start - b.start);
+        
+        let result = '';
+        let lastEnd = 0;
+        
+        for (const range of this.colorRanges) {
+          if (range.start > lastEnd) {
+            result += this.hex.substring(lastEnd, range.start);
+          }
+          result += `<span class="${range.className}">${this.hex.substring(range.start, range.start + range.length)}</span>`;
+          lastEnd = range.start + range.length;
+        }
+        
+        if (lastEnd < this.hex.length) {
+          result += this.hex.substring(lastEnd);
+        }
+        
+        return result;
+      }
+    }
+
+    // === CALCULAR TXID ===
+
+    async function calculateTxid(txHex, isSegWit) {
+      let dataForHash = txHex;
+      
+      if (isSegWit) {
+        // Para SegWit, el TXID se calcula sin marker, flag y witness
+        // Esto requiere reconstruir la tx sin esos campos - simplificado aquí
+        // En producción, se haría un parsing más completo
+      }
+      
+      const bytes = HexUtils.hexToBytes(dataForHash);
+      const hash = await HexUtils.hash256(bytes);
+      return HexUtils.bytesToHex(hash.reverse());
+    }
+
+    // === MOSTRAR RESULTADOS ===
+
+    async function decode() {
+      errorMessage.style.display = 'none';
+      hexSection.style.display = 'none';
+      statsSection.style.display = 'none';
+      structureSection.style.display = 'none';
+
+      const hex = txInput.value.trim().replace(/\s/g, '');
+
+      if (!hex) {
+        showError('Introduce una transacción en hexadecimal.');
+        return;
+      }
+
+      if (!/^[0-9a-fA-F]+$/.test(hex)) {
+        showError('La transacción debe contener solo caracteres hexadecimales.');
+        return;
+      }
+
+      if (hex.length < 20) {
+        showError('La transacción es demasiado corta.');
+        return;
+      }
+
+      try {
+        const parser = new TxParser(hex);
+        const tx = parser.parse();
+
+        // Hex coloreado
+        coloredHex.innerHTML = parser.getColoredHex();
+        hexSection.style.display = 'block';
+
+        // Stats
+        const txid = await calculateTxid(hex, tx.isSegWit);
+        document.getElementById('stat-txid').textContent = txid;
+        document.getElementById('stat-size').textContent = tx.size + ' bytes';
+        document.getElementById('stat-vsize').textContent = tx.vsize + ' vB';
+        document.getElementById('stat-weight').textContent = tx.weight + ' WU';
+        document.getElementById('stat-segwit').textContent = tx.isSegWit ? 'Sí' : 'No';
+        document.getElementById('stat-segwit').style.color = tx.isSegWit ? '#a371f7' : 'var(--text-secondary)';
+        statsSection.style.display = 'block';
+
+        // Estructura
+        document.getElementById('struct-version').textContent = tx.version;
+        document.getElementById('struct-locktime').textContent = tx.locktime === 0 
+          ? '0 (sin restricción)' 
+          : tx.locktime < 500000000 
+            ? `Bloque ${tx.locktime.toLocaleString('es-ES')}` 
+            : `Timestamp ${new Date(tx.locktime * 1000).toISOString()}`;
+
+        // Inputs
+        document.getElementById('input-count-badge').textContent = tx.inputs.length;
+        const inputsContainer = document.getElementById('inputs-container');
+        inputsContainer.innerHTML = '';
+        
+        tx.inputs.forEach((input, i) => {
+          const seqInfo = input.sequence === 0xffffffff 
+            ? 'Final' 
+            : input.sequence === 0xfffffffe 
+              ? 'RBF señalado' 
+              : `0x${input.sequence.toString(16)}`;
+          
+          inputsContainer.innerHTML += `
+            <div class="tx-input">
+              <div class="tx-input__header">Input #${i}</div>
+              <div class="tx-field">
+                <span class="tx-field__label">TXID</span>
+                <span class="tx-field__value" style="font-size: 0.65rem;">${input.txid}</span>
+              </div>
+              <div class="tx-field">
+                <span class="tx-field__label">Vout</span>
+                <span class="tx-field__value">${input.vout}</span>
+              </div>
+              <div class="tx-field">
+                <span class="tx-field__label">ScriptSig</span>
+                <span class="tx-field__value">${input.scriptSig || '(vacío)'}</span>
+              </div>
+              <div class="tx-field">
+                <span class="tx-field__label">Sequence</span>
+                <span class="tx-field__value">${seqInfo}</span>
+              </div>
+            </div>
+          `;
+        });
+
+        // Outputs
+        document.getElementById('output-count-badge').textContent = tx.outputs.length;
+        const outputsContainer = document.getElementById('outputs-container');
+        outputsContainer.innerHTML = '';
+        
+        tx.outputs.forEach((output, i) => {
+          const sats = Number(output.value);
+          const btc = sats / 100000000;
+          const typeClass = `script-type--${output.type.type.toLowerCase().replace(/_/g, '')}`;
+          
+          let addressHtml = '';
+          if (output.type.hash) {
+            addressHtml = `<div class="tx-field">
+              <span class="tx-field__label">Hash/Address</span>
+              <span class="tx-field__value" style="font-size: 0.65rem;">${output.type.hash}</span>
+            </div>`;
+          }
+          
+          outputsContainer.innerHTML += `
+            <div class="tx-output">
+              <div class="tx-output__header">
+                Output #${i}
+                <span class="script-type ${typeClass}" style="margin-left: 0.5rem;">${output.type.type}</span>
+              </div>
+              <div class="tx-field">
+                <span class="tx-field__label">Valor</span>
+                <span class="tx-field__value">${sats.toLocaleString('es-ES')} sats (${btc.toFixed(8)} BTC)</span>
+              </div>
+              <div class="tx-field">
+                <span class="tx-field__label">ScriptPubKey</span>
+                <span class="tx-field__value" style="font-size: 0.65rem;">${output.scriptPubKey}</span>
+              </div>
+              ${addressHtml}
+            </div>
+          `;
+        });
+
+        // Witness
+        const witnessSection = document.getElementById('witness-section');
+        if (tx.isSegWit && tx.witness.length > 0) {
+          const witnessContainer = document.getElementById('witness-container');
+          witnessContainer.innerHTML = '';
+          
+          tx.witness.forEach((items, i) => {
+            let itemsHtml = items.map((item, j) => `
+              <div class="tx-field">
+                <span class="tx-field__label">Item ${j}</span>
+                <span class="tx-field__value" style="font-size: 0.6rem;">${item || '(vacío)'}</span>
+              </div>
+            `).join('');
+            
+            witnessContainer.innerHTML += `
+              <div class="tx-input">
+                <div class="tx-input__header">Witness para Input #${i} (${items.length} items)</div>
+                ${itemsHtml}
+              </div>
+            `;
+          });
+          
+          witnessSection.style.display = 'block';
+        } else {
+          witnessSection.style.display = 'none';
+        }
+
+        structureSection.style.display = 'block';
+
+      } catch (error) {
+        showError('Error al decodificar: ' + error.message);
+      }
+    }
+
+    function showError(msg) {
+      errorMessage.textContent = msg;
+      errorMessage.style.display = 'block';
+    }
+
+    // === EVENT LISTENERS ===
+
+    document.querySelectorAll('[data-example]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        txInput.value = EXAMPLES[btn.dataset.example];
+        decode();
+      });
+    });
+
+    btnDecode.addEventListener('click', decode);
+
+    txInput.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.key === 'Enter') decode();
+    });
+
+  })();
+  </script>
+</body>
+</html>

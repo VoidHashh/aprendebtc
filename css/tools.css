@@ -162,6 +162,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  min-height: 2.625rem;
   padding: 0.65rem 1.25rem;
   background: var(--accent);
   color: #fff;
@@ -170,8 +171,11 @@
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 0.9rem;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  text-align: center;
   cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.1s;
 }
 
 .tool-btn:hover {
@@ -188,20 +192,22 @@
 }
 
 .tool-btn--secondary {
-  background: transparent;
+  background: linear-gradient(180deg, rgba(22, 27, 34, 0.9), rgba(13, 17, 23, 0.9));
   border: 1px solid var(--bg-border);
-  color: var(--text-secondary);
+  color: var(--text-primary);
 }
 
 .tool-btn--secondary:hover {
   border-color: var(--accent);
   color: var(--accent);
-  background: transparent;
+  background: rgba(247, 147, 26, 0.08);
 }
 
 .tool-btn--small {
+  min-height: 2rem;
   padding: 0.4rem 0.75rem;
   font-size: 0.8rem;
+  line-height: 1;
 }
 
 .tool-btn-row {
@@ -989,5 +995,6 @@
 .tool-btn-row--tight {
   margin-top: 1.25rem;
 }
+
 
 

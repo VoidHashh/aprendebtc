@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Opera sobre la curva secp256k1: suma, multiplicación de puntos e inverso modular. Visualiza las matemáticas de Bitcoin." />
+  <title>Calculadora de curva elíptica — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--bg-border);
+      margin: 2rem 0;
+    }
+
+    .point-input {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    @media (max-width: 640px) {
+      .point-input {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .point-output {
+      background: var(--bg-primary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+    }
+    .point-output__label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .point-output__value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      word-break: break-all;
+      color: var(--accent);
+    }
+
+    .params-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .params-table td {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--bg-border);
+      vertical-align: top;
+    }
+    .params-table td:first-child {
+      font-weight: 600;
+      color: var(--text-secondary);
+      width: 80px;
+    }
+    .params-table td:last-child {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      word-break: break-all;
+    }
+
+    .formula-box {
+      background: var(--bg-primary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      text-align: center;
+      margin: 1rem 0;
+    }
+    .formula-box code {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+        <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Calculadora de curva el&iacute;ptica</span>
+        </nav>
+
+        <article class="article">
+          <h1>Calculadora de curva elíptica</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Realiza operaciones sobre la curva elíptica secp256k1: las matemáticas que aseguran Bitcoin.
+          </p>
+
+          <!-- Disclaimer -->
+          <div class="callout callout--info" style="margin-bottom: 1.5rem;">
+            <span class="callout__icon" aria-hidden="true">ℹ️</span>
+            <div class="callout__content">
+              <div class="callout__title">Herramienta educativa</div>
+              <p class="callout__text">Explora las operaciones fundamentales de la criptografía de curva elíptica usada en Bitcoin.</p>
+            </div>
+          </div>
+
+          <!-- ==================== -->
+          <!-- SECTION 1: EC MULTIPLY -->
+          <!-- ==================== -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">1. Multiplicación escalar (k × P)</h2>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+              Multiplica un escalar por un punto de la curva. Así es como se deriva una clave pública: <code>k × G = P</code>
+            </p>
+
+            <div class="formula-box">
+              Clave pública = <code>private_key</code> × <code>G</code>
+            </div>
+
+            <div class="tool-field" style="margin-bottom: 1rem;">
+              <label class="tool-label" for="mult-scalar">Escalar k (hex o decimal)</label>
+              <input 
+                type="text" 
+                id="mult-scalar" 
+                class="tool-input" 
+                placeholder="Ej: 2 o 0x02 o un valor de 32 bytes"
+                style="font-family: 'JetBrains Mono', monospace;"
+              />
+            </div>
+
+            <div class="tool-field" style="margin-bottom: 1rem;">
+              <label class="tool-label">Punto P (x, y en hex)</label>
+              <div class="point-input">
+                <input 
+                  type="text" 
+                  id="mult-px" 
+                  class="tool-input" 
+                  placeholder="x (hex)"
+                  style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;"
+                />
+                <input 
+                  type="text" 
+                  id="mult-py" 
+                  class="tool-input" 
+                  placeholder="y (hex)"
+                  style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;"
+                />
+              </div>
+              <button class="tool-btn tool-btn--secondary tool-btn--small" id="btn-mult-use-g" style="margin-top: 0.5rem;">
+                🎯 Usar punto generador G
+              </button>
+            </div>
+
+            <button class="tool-btn" id="btn-mult">✖️ Multiplicar</button>
+
+            <div class="tool-error" id="mult-error" style="display: none;"></div>
+
+            <div id="mult-result" style="display: none; margin-top: 1rem;">
+              <div class="point-output">
+                <div class="point-output__label">Resultado: k × P</div>
+                <div><strong>x:</strong> <span class="point-output__value" id="mult-result-x">—</span></div>
+                <div style="margin-top: 0.5rem;"><strong>y:</strong> <span class="point-output__value" id="mult-result-y">—</span></div>
+              </div>
+              <div style="margin-top: 0.75rem;">
+                <label class="tool-label">Punto comprimido (33 bytes)</label>
+                <div class="tool-output" id="mult-result-compressed" style="font-size: 0.75rem;">—</div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="section-divider" />
+
+          <!-- ==================== -->
+          <!-- SECTION 2: EC ADD -->
+          <!-- ==================== -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">2. Suma de puntos (P₁ + P₂)</h2>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+              Suma dos puntos de la curva. Geométricamente: traza una línea entre P₁ y P₂, encuentra la tercera intersección con la curva, y refleja sobre el eje x.
+            </p>
+
+            <div class="tool-field" style="margin-bottom: 1rem;">
+              <label class="tool-label">Punto P₁ (x, y en hex)</label>
+              <div class="point-input">
+                <input 
+                  type="text" 
+                  id="add-p1x" 
+                  class="tool-input" 
+                  placeholder="x₁ (hex)"
+                  style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;"
+                />
+                <input 
+                  type="text" 
+                  id="add-p1y" 
+                  class="tool-input" 
+                  placeholder="y₁ (hex)"
+                  style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;"
+                />
+              </div>
+              <button class="tool-btn tool-btn--secondary tool-btn--small" id="btn-add-p1-g" style="margin-top: 0.5rem;">
+                🎯 Usar G
+              </button>
+            </div>
+
+            <div class="tool-field" style="margin-bottom: 1rem;">
+              <label class="tool-label">Punto P₂ (x, y en hex)</label>
+              <div class="point-input">
+                <input 
+                  type="text" 
+                  id="add-p2x" 
+                  class="tool-input" 
+                  placeholder="x₂ (hex)"
+                  style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;"
+                />
+                <input 
+                  type="text" 
+                  id="add-p2y" 
+                  class="tool-input" 
+                  placeholder="y₂ (hex)"
+                  style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;"
+                />
+              </div>
+              <button class="tool-btn tool-btn--secondary tool-btn--small" id="btn-add-p2-g" style="margin-top: 0.5rem;">
+                🎯 Usar G
+              </button>
+            </div>
+
+            <button class="tool-btn" id="btn-add">➕ Sumar</button>
+
+            <div class="tool-error" id="add-error" style="display: none;"></div>
+
+            <div id="add-result" style="display: none; margin-top: 1rem;">
+              <div class="point-output">
+                <div class="point-output__label">Resultado: P₁ + P₂</div>
+                <div><strong>x:</strong> <span class="point-output__value" id="add-result-x">—</span></div>
+                <div style="margin-top: 0.5rem;"><strong>y:</strong> <span class="point-output__value" id="add-result-y">—</span></div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="section-divider" />
+
+          <!-- ==================== -->
+          <!-- SECTION 3: EC DOUBLE -->
+          <!-- ==================== -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">3. Duplicación de punto (2P)</h2>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+              Caso especial de la suma cuando P₁ = P₂. La fórmula usa la tangente en lugar de la secante.
+            </p>
+
+            <div class="tool-field" style="margin-bottom: 1rem;">
+              <label class="tool-label">Punto P (x, y en hex)</label>
+              <div class="point-input">
+                <input 
+                  type="text" 
+                  id="double-px" 
+                  class="tool-input" 
+                  placeholder="x (hex)"
+                  style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;"
+                />
+                <input 
+                  type="text" 
+                  id="double-py" 
+                  class="tool-input" 
+                  placeholder="y (hex)"
+                  style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;"
+                />
+              </div>
+              <button class="tool-btn tool-btn--secondary tool-btn--small" id="btn-double-use-g" style="margin-top: 0.5rem;">
+                🎯 Usar G
+              </button>
+            </div>
+
+            <button class="tool-btn" id="btn-double">×2 Duplicar</button>
+
+            <div class="tool-error" id="double-error" style="display: none;"></div>
+
+            <div id="double-result" style="display: none; margin-top: 1rem;">
+              <div class="point-output">
+                <div class="point-output__label">Resultado: 2P</div>
+                <div><strong>x:</strong> <span class="point-output__value" id="double-result-x">—</span></div>
+                <div style="margin-top: 0.5rem;"><strong>y:</strong> <span class="point-output__value" id="double-result-y">—</span></div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="section-divider" />
+
+          <!-- ==================== -->
+          <!-- SECTION 4: MODULAR INVERSE -->
+          <!-- ==================== -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">4. Inverso modular (a⁻¹ mod m)</h2>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+              Encuentra el número que multiplicado por <code>a</code> da 1 módulo <code>m</code>. Esencial para la división en aritmética modular.
+            </p>
+
+            <div class="formula-box">
+              a × a⁻¹ ≡ 1 (mod m)
+            </div>
+
+            <div class="tool-field" style="margin-bottom: 1rem;">
+              <label class="tool-label" for="inv-a">Número a (hex o decimal)</label>
+              <input 
+                type="text" 
+                id="inv-a" 
+                class="tool-input" 
+                placeholder="Ej: 7 o 0x07"
+                style="font-family: 'JetBrains Mono', monospace;"
+              />
+            </div>
+
+            <div class="tool-field" style="margin-bottom: 1rem;">
+              <label class="tool-label" for="inv-m">Módulo m (hex o decimal)</label>
+              <input 
+                type="text" 
+                id="inv-m" 
+                class="tool-input" 
+                placeholder="Ej: 11 o usar preset"
+                style="font-family: 'JetBrains Mono', monospace;"
+              />
+              <div style="margin-top: 0.5rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <button class="tool-btn tool-btn--secondary tool-btn--small" id="btn-inv-use-n">
+                  Usar orden n
+                </button>
+                <button class="tool-btn tool-btn--secondary tool-btn--small" id="btn-inv-use-p">
+                  Usar campo p
+                </button>
+              </div>
+            </div>
+
+            <button class="tool-btn" id="btn-inv">🔄 Calcular inverso</button>
+
+            <div class="tool-error" id="inv-error" style="display: none;"></div>
+
+            <div id="inv-result" style="display: none; margin-top: 1rem;">
+              <div class="tool-field">
+                <label class="tool-label">a⁻¹ mod m</label>
+                <div class="tool-output" id="inv-result-value" style="font-size: 0.75rem; color: var(--accent);">—</div>
+              </div>
+              <div class="tool-field" style="margin-top: 0.75rem;">
+                <label class="tool-label">Verificación: a × a⁻¹ mod m</label>
+                <div class="tool-output" id="inv-result-verify" style="font-size: 0.85rem;">—</div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="section-divider" />
+
+          <!-- ==================== -->
+          <!-- SECTION 5: SECP256K1 PARAMS -->
+          <!-- ==================== -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">5. Parámetros secp256k1</h2>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+              Constantes de la curva elíptica usada en Bitcoin. Ecuación: <code>y² = x³ + 7</code> (mod p)
+            </p>
+
+            <table class="params-table">
+              <tr>
+                <td>p</td>
+                <td id="param-p">—</td>
+              </tr>
+              <tr>
+                <td>a</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>b</td>
+                <td>7</td>
+              </tr>
+              <tr>
+                <td>G.x</td>
+                <td id="param-gx">—</td>
+              </tr>
+              <tr>
+                <td>G.y</td>
+                <td id="param-gy">—</td>
+              </tr>
+              <tr>
+                <td>n</td>
+                <td id="param-n">—</td>
+              </tr>
+              <tr>
+                <td>h</td>
+                <td>1</td>
+              </tr>
+            </table>
+
+            <div style="margin-top: 1rem; padding: 0.75rem; background: var(--bg-primary); border-radius: var(--radius-md);">
+              <div style="font-size: 0.85rem; color: var(--text-secondary);">
+                <strong>p</strong> = campo primo (todos los cálculos son mod p)<br>
+                <strong>a, b</strong> = coeficientes de la curva (y² = x³ + ax + b)<br>
+                <strong>G</strong> = punto generador (base point)<br>
+                <strong>n</strong> = orden del grupo (número de puntos en la curva)<br>
+                <strong>h</strong> = cofactor
+              </div>
+            </div>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más sobre curvas elípticas</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-5/curva-eliptica.html">Curvas elípticas en detalle →</a> · 
+              <a href="ecdsa-schnorr.html">Firmas ECDSA y Schnorr →</a> ·
+              <a href="../nivel-3/clave-publica.html">Derivación de clave pública →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+  <script src="../js/hex-utils.js"></script>
+  <script src="https://unpkg.com/@noble/secp256k1@1.7.1/lib/index.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === CONSTANTES SECP256K1 ===
+    const SECP256K1 = {
+      p: BigInt('0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F'),
+      n: BigInt('0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141'),
+      Gx: BigInt('0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798'),
+      Gy: BigInt('0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8')
+    };
+
+    // === UTILIDADES ===
+    function getSecp() {
+      return typeof nobleSecp256k1 !== 'undefined' ? nobleSecp256k1 : secp256k1;
+    }
+
+    function cleanHex(hex) {
+      return hex.replace(/^0x/i, '').replace(/\s/g, '').toLowerCase();
+    }
+
+    function parseNumber(str) {
+      str = str.trim();
+      if (str.startsWith('0x') || str.startsWith('0X')) {
+        return BigInt(str);
+      }
+      if (/^[0-9a-fA-F]+$/.test(str) && str.length > 10) {
+        // Probablemente hex
+        return BigInt('0x' + str);
+      }
+      if (/^[0-9]+$/.test(str)) {
+        return BigInt(str);
+      }
+      // Default: intentar como hex
+      return BigInt('0x' + cleanHex(str));
+    }
+
+    function bigintToHex(n, padBytes = 32) {
+      let hex = n.toString(16);
+      if (hex.length % 2) hex = '0' + hex;
+      while (hex.length < padBytes * 2) hex = '0' + hex;
+      return hex;
+    }
+
+    // Inverso modular usando el algoritmo extendido de Euclides
+    function modInverse(a, m) {
+      a = ((a % m) + m) % m;
+      if (a === 0n) throw new Error('No existe inverso modular para 0');
+
+      let [old_r, r] = [a, m];
+      let [old_s, s] = [1n, 0n];
+
+      while (r !== 0n) {
+        const quotient = old_r / r;
+        [old_r, r] = [r, old_r - quotient * r];
+        [old_s, s] = [s, old_s - quotient * s];
+      }
+
+      if (old_r !== 1n) throw new Error('No existe inverso modular (gcd ≠ 1)');
+
+      return ((old_s % m) + m) % m;
+    }
+
+    // === INICIALIZAR PARÁMETROS ===
+    document.getElementById('param-p').textContent = bigintToHex(SECP256K1.p);
+    document.getElementById('param-gx').textContent = bigintToHex(SECP256K1.Gx);
+    document.getElementById('param-gy').textContent = bigintToHex(SECP256K1.Gy);
+    document.getElementById('param-n').textContent = bigintToHex(SECP256K1.n);
+
+    // === FUNCIONES PARA RELLENAR CON G ===
+    function fillWithG(xId, yId) {
+      document.getElementById(xId).value = bigintToHex(SECP256K1.Gx);
+      document.getElementById(yId).value = bigintToHex(SECP256K1.Gy);
+    }
+
+    document.getElementById('btn-mult-use-g').addEventListener('click', () => fillWithG('mult-px', 'mult-py'));
+    document.getElementById('btn-add-p1-g').addEventListener('click', () => fillWithG('add-p1x', 'add-p1y'));
+    document.getElementById('btn-add-p2-g').addEventListener('click', () => fillWithG('add-p2x', 'add-p2y'));
+    document.getElementById('btn-double-use-g').addEventListener('click', () => fillWithG('double-px', 'double-py'));
+
+    document.getElementById('btn-inv-use-n').addEventListener('click', () => {
+      document.getElementById('inv-m').value = bigintToHex(SECP256K1.n);
+    });
+    document.getElementById('btn-inv-use-p').addEventListener('click', () => {
+      document.getElementById('inv-m').value = bigintToHex(SECP256K1.p);
+    });
+
+    // === EC MULTIPLY ===
+    document.getElementById('btn-mult').addEventListener('click', () => {
+      const errorEl = document.getElementById('mult-error');
+      const resultEl = document.getElementById('mult-result');
+      errorEl.style.display = 'none';
+      resultEl.style.display = 'none';
+
+      try {
+        const secp = getSecp();
+        const scalarStr = document.getElementById('mult-scalar').value.trim();
+        const pxStr = document.getElementById('mult-px').value.trim();
+        const pyStr = document.getElementById('mult-py').value.trim();
+
+        if (!scalarStr) throw new Error('Introduce un escalar k');
+        if (!pxStr || !pyStr) throw new Error('Introduce las coordenadas del punto P');
+
+        const scalar = parseNumber(scalarStr);
+        const px = parseNumber(pxStr);
+        const py = parseNumber(pyStr);
+
+        // Crear punto y multiplicar
+        const point = new secp.Point(px, py);
+        const result = point.multiply(scalar);
+
+        document.getElementById('mult-result-x').textContent = bigintToHex(result.x);
+        document.getElementById('mult-result-y').textContent = bigintToHex(result.y);
+
+        // Punto comprimido
+        const compressed = result.toRawBytes(true);
+        document.getElementById('mult-result-compressed').textContent = HexUtils.bytesToHex(compressed);
+
+        resultEl.style.display = 'block';
+
+      } catch (error) {
+        errorEl.textContent = 'Error: ' + error.message;
+        errorEl.style.display = 'block';
+      }
+    });
+
+    // === EC ADD ===
+    document.getElementById('btn-add').addEventListener('click', () => {
+      const errorEl = document.getElementById('add-error');
+      const resultEl = document.getElementById('add-result');
+      errorEl.style.display = 'none';
+      resultEl.style.display = 'none';
+
+      try {
+        const secp = getSecp();
+        const p1x = parseNumber(document.getElementById('add-p1x').value.trim());
+        const p1y = parseNumber(document.getElementById('add-p1y').value.trim());
+        const p2x = parseNumber(document.getElementById('add-p2x').value.trim());
+        const p2y = parseNumber(document.getElementById('add-p2y').value.trim());
+
+        const point1 = new secp.Point(p1x, p1y);
+        const point2 = new secp.Point(p2x, p2y);
+        const result = point1.add(point2);
+
+        document.getElementById('add-result-x').textContent = bigintToHex(result.x);
+        document.getElementById('add-result-y').textContent = bigintToHex(result.y);
+
+        resultEl.style.display = 'block';
+
+      } catch (error) {
+        errorEl.textContent = 'Error: ' + error.message;
+        errorEl.style.display = 'block';
+      }
+    });
+
+    // === EC DOUBLE ===
+    document.getElementById('btn-double').addEventListener('click', () => {
+      const errorEl = document.getElementById('double-error');
+      const resultEl = document.getElementById('double-result');
+      errorEl.style.display = 'none';
+      resultEl.style.display = 'none';
+
+      try {
+        const secp = getSecp();
+        const px = parseNumber(document.getElementById('double-px').value.trim());
+        const py = parseNumber(document.getElementById('double-py').value.trim());
+
+        const point = new secp.Point(px, py);
+        const result = point.double();
+
+        document.getElementById('double-result-x').textContent = bigintToHex(result.x);
+        document.getElementById('double-result-y').textContent = bigintToHex(result.y);
+
+        resultEl.style.display = 'block';
+
+      } catch (error) {
+        errorEl.textContent = 'Error: ' + error.message;
+        errorEl.style.display = 'block';
+      }
+    });
+
+    // === MODULAR INVERSE ===
+    document.getElementById('btn-inv').addEventListener('click', () => {
+      const errorEl = document.getElementById('inv-error');
+      const resultEl = document.getElementById('inv-result');
+      errorEl.style.display = 'none';
+      resultEl.style.display = 'none';
+
+      try {
+        const aStr = document.getElementById('inv-a').value.trim();
+        const mStr = document.getElementById('inv-m').value.trim();
+
+        if (!aStr) throw new Error('Introduce el número a');
+        if (!mStr) throw new Error('Introduce el módulo m');
+
+        const a = parseNumber(aStr);
+        const m = parseNumber(mStr);
+
+        if (m <= 0n) throw new Error('El módulo debe ser positivo');
+
+        const inverse = modInverse(a, m);
+
+        // Verificación
+        const verification = (a * inverse) % m;
+
+        document.getElementById('inv-result-value').textContent = bigintToHex(inverse);
+        document.getElementById('inv-result-verify').textContent = verification.toString() + (verification === 1n ? ' ✓' : ' ✗');
+        document.getElementById('inv-result-verify').style.color = verification === 1n ? '#2ea043' : '#da3633';
+
+        resultEl.style.display = 'block';
+
+      } catch (error) {
+        errorEl.textContent = 'Error: ' + error.message;
+        errorEl.style.display = 'block';
+      }
+    });
+
+  })();
+  </script>
+</body>
+</html>
