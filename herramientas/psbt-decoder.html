@@ -4,7 +4,32 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Decodifica PSBTs (BIP174). Analiza transacciones parcialmente firmadas, inputs, outputs, firmas y metadata." />
-  <title>Decodificador PSBT (BIP174) — Herramientas | aprendebtc.com</title>
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aprendebtc.com/herramientas/psbt-decoder.html" />
+  <meta property="og:title" content="Decodificador PSBT (BIP174) — Herramientas | aprendebtc.com" />
+  <meta property="og:description" content="Decodifica PSBTs (BIP174). Analiza transacciones parcialmente firmadas, inputs, outputs, firmas y metadata." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Decodificador PSBT (BIP174) — Herramientas | aprendebtc.com" />
+  <meta name="twitter:description" content="Decodifica PSBTs (BIP174). Analiza transacciones parcialmente firmadas, inputs, outputs, firmas y metadata." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://aprendebtc.com/herramientas/psbt-decoder.html" />
+  <link rel="alternate" hreflang="es" href="https://aprendebtc.com/herramientas/psbt-decoder.html" />
+  <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/psbt-decoder.html" />
+<meta property="og:url" content="https://aprendebtc.com/herramientas/psbt-decoder.html" />
+<meta property="og:description" content="Decodifica PSBTs (BIP174). Analiza transacciones parcialmente firmadas, inputs, outputs, firmas y metadata." />
+<meta property="og:site_name" content="aprendeBTC" />
+<meta name="twitter:title" content="Decodificador PSBT (BIP174) — Herramientas | aprendebtc.com" />
+<meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+<link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/psbt-decoder.html" />
+<title>Decodificador PSBT (BIP174) — Herramientas | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -117,6 +142,10 @@
     .status-banner--incomplete {
       background: rgba(210, 153, 34, 0.15);
       border: 1px solid #d29922;
+    }
+    .status-banner--unsigned {
+      background: rgba(88, 166, 255, 0.14);
+      border: 1px solid #58a6ff;
     }
     .status-banner__icon {
       font-size: 1.5rem;
@@ -543,22 +572,32 @@
 
     function displayResults(psbt) {
       // Status
-      const isComplete = checkCompleteness(psbt);
-      statusSection.innerHTML = isComplete
-        ? `<div class="status-banner status-banner--complete">
-             <span class="status-banner__icon">✓</span>
+      const status = analyzeStatus(psbt);
+      if (status.state === 'complete') {
+        statusSection.innerHTML = `<div class="status-banner status-banner--complete">
+             <span class="status-banner__icon">OK</span>
              <div>
-               <div class="status-banner__text">PSBT Completo</div>
+               <div class="status-banner__text">PSBT completo</div>
                <div class="status-banner__detail">Listo para extraer y emitir</div>
              </div>
-           </div>`
-        : `<div class="status-banner status-banner--incomplete">
-             <span class="status-banner__icon">⏳</span>
+           </div>`;
+      } else if (status.state === 'partial') {
+        statusSection.innerHTML = `<div class="status-banner status-banner--incomplete">
+             <span class="status-banner__icon">...</span>
              <div>
-               <div class="status-banner__text">PSBT Incompleto</div>
-               <div class="status-banner__detail">Faltan firmas o datos</div>
+               <div class="status-banner__text">PSBT parcialmente firmado</div>
+               <div class="status-banner__detail">Hay firmas parciales, pero faltan datos finales</div>
              </div>
            </div>`;
+      } else {
+        statusSection.innerHTML = `<div class="status-banner status-banner--unsigned">
+             <span class="status-banner__icon">i</span>
+             <div>
+               <div class="status-banner__text">PSBT valido sin firmar</div>
+               <div class="status-banner__detail">Normal para una plantilla de firma: aun no contiene firmas finales</div>
+             </div>
+           </div>`;
+      }
       statusSection.style.display = 'block';
 
       // Global
@@ -631,19 +670,31 @@
       `;
     }
 
-    function checkCompleteness(psbt) {
-      // Verificar si hay final_scriptsig o final_witness en todos los inputs
+    function analyzeStatus(psbt) {
+      let finalizedInputs = 0;
+      let partialSignedInputs = 0;
+
       for (const inputMap of psbt.inputMaps) {
         let hasFinal = false;
+        let hasPartial = false;
+
         for (const entry of inputMap) {
-          if (entry.key[0] === 0x07 || entry.key[0] === 0x08) {
-            hasFinal = true;
-            break;
-          }
+          const t = entry.key[0];
+          if (t === 0x07 || t === 0x08) hasFinal = true;
+          if (t === 0x02 || t === 0x13 || t === 0x14) hasPartial = true;
         }
-        if (!hasFinal) return false;
+
+        if (hasFinal) finalizedInputs++;
+        if (hasPartial) partialSignedInputs++;
       }
-      return true;
+
+      if (psbt.inputMaps.length > 0 && finalizedInputs === psbt.inputMaps.length) {
+        return { state: 'complete' };
+      }
+      if (partialSignedInputs > 0) {
+        return { state: 'partial' };
+      }
+      return { state: 'unsigned' };
     }
 
     function setupToggles() {

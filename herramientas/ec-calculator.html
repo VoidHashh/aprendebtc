@@ -1,10 +1,35 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" data-base-path="../">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Opera sobre la curva secp256k1: suma, multiplicación de puntos e inverso modular. Visualiza las matemáticas de Bitcoin." />
-  <title>Calculadora de curva elíptica — Herramientas | aprendebtc.com</title>
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aprendebtc.com/herramientas/ec-calculator.html" />
+  <meta property="og:title" content="Calculadora de curva elíptica — Herramientas | aprendebtc.com" />
+  <meta property="og:description" content="Opera sobre la curva secp256k1: suma, multiplicación de puntos e inverso modular. Visualiza las matemáticas de Bitcoin." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Calculadora de curva elíptica — Herramientas | aprendebtc.com" />
+  <meta name="twitter:description" content="Opera sobre la curva secp256k1: suma, multiplicación de puntos e inverso modular. Visualiza las matemáticas de Bitcoin." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://aprendebtc.com/herramientas/ec-calculator.html" />
+  <link rel="alternate" hreflang="es" href="https://aprendebtc.com/herramientas/ec-calculator.html" />
+  <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/ec-calculator.html" />
+<meta property="og:url" content="https://aprendebtc.com/herramientas/ec-calculator.html" />
+<meta property="og:description" content="Opera sobre la curva secp256k1: suma, multiplicación de puntos e inverso modular. Visualiza las matemáticas de Bitcoin." />
+<meta property="og:site_name" content="aprendeBTC" />
+<meta name="twitter:title" content="Calculadora de curva elíptica — Herramientas | aprendebtc.com" />
+<meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+<link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/ec-calculator.html" />
+<title>Calculadora de curva elíptica — Herramientas | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -166,6 +191,7 @@
               <button class="tool-btn tool-btn--secondary tool-btn--small" id="btn-mult-use-g" style="margin-top: 0.5rem;">
                 🎯 Usar punto generador G
               </button>
+              <button class="tool-btn tool-btn--secondary tool-btn--small" id="btn-mult-example" style="margin-top: 0.5rem; margin-left: 0.5rem;">📋 Cargar ejemplo</button>
             </div>
 
             <button class="tool-btn" id="btn-mult">✖️ Multiplicar</button>
@@ -240,6 +266,7 @@
               <button class="tool-btn tool-btn--secondary tool-btn--small" id="btn-add-p2-g" style="margin-top: 0.5rem;">
                 🎯 Usar G
               </button>
+              <button class="tool-btn tool-btn--secondary tool-btn--small" id="btn-add-example" style="margin-top: 0.5rem; margin-left: 0.5rem;">📋 Cargar ejemplo</button>
             </div>
 
             <button class="tool-btn" id="btn-add">➕ Sumar</button>
@@ -287,6 +314,7 @@
               <button class="tool-btn tool-btn--secondary tool-btn--small" id="btn-double-use-g" style="margin-top: 0.5rem;">
                 🎯 Usar G
               </button>
+              <button class="tool-btn tool-btn--secondary tool-btn--small" id="btn-double-example" style="margin-top: 0.5rem; margin-left: 0.5rem;">📋 Cargar ejemplo</button>
             </div>
 
             <button class="tool-btn" id="btn-double">×2 Duplicar</button>
@@ -344,6 +372,7 @@
                 <button class="tool-btn tool-btn--secondary tool-btn--small" id="btn-inv-use-p">
                   Usar campo p
                 </button>
+                <button class="tool-btn tool-btn--secondary tool-btn--small" id="btn-inv-example">📋 Cargar ejemplo</button>
               </div>
             </div>
 
@@ -437,13 +466,12 @@
   <script src="../js/nav.js"></script>
   <script src="../js/search.js"></script>
   <script src="../js/hex-utils.js"></script>
-  <script src="https://unpkg.com/@noble/secp256k1@1.7.1/lib/index.js"></script>
+  
 
   <script>
   (function() {
     'use strict';
 
-    // === CONSTANTES SECP256K1 ===
     const SECP256K1 = {
       p: BigInt('0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F'),
       n: BigInt('0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141'),
@@ -451,29 +479,51 @@
       Gy: BigInt('0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8')
     };
 
-    // === UTILIDADES ===
-    function getSecp() {
-      return typeof nobleSecp256k1 !== 'undefined' ? nobleSecp256k1 : secp256k1;
+    let secpCache = null;
+    let secpLoadPromise = null;
+
+    function getGlobalSecp() {
+      if (window.nobleSecp256k1 && typeof window.nobleSecp256k1.getPublicKey === 'function') return window.nobleSecp256k1;
+      if (window.secp256k1 && typeof window.secp256k1.getPublicKey === 'function') return window.secp256k1;
+      return null;
+    }
+
+    async function ensureSecp() {
+      if (secpCache) return secpCache;
+      const existing = getGlobalSecp();
+      if (existing) {
+        secpCache = existing;
+        return secpCache;
+      }
+
+      if (!secpLoadPromise) {
+        secpLoadPromise = (async () => {
+          let mod;
+          try {
+            mod = await import('https://cdn.jsdelivr.net/npm/@noble/secp256k1@1.7.1/+esm');
+          } catch (_) {
+            mod = await import('https://unpkg.com/@noble/secp256k1@1.7.1/+esm');
+          }
+          secpCache = mod.default && typeof mod.default.getPublicKey === 'function' ? mod.default : mod;
+          window.nobleSecp256k1 = secpCache;
+          return secpCache;
+        })();
+      }
+
+      return secpLoadPromise;
     }
 
     function cleanHex(hex) {
-      return hex.replace(/^0x/i, '').replace(/\s/g, '').toLowerCase();
+      return String(hex || '').replace(/^0x/i, '').replace(/\s+/g, '').toLowerCase();
     }
 
     function parseNumber(str) {
-      str = str.trim();
-      if (str.startsWith('0x') || str.startsWith('0X')) {
-        return BigInt(str);
-      }
-      if (/^[0-9a-fA-F]+$/.test(str) && str.length > 10) {
-        // Probablemente hex
-        return BigInt('0x' + str);
-      }
-      if (/^[0-9]+$/.test(str)) {
-        return BigInt(str);
-      }
-      // Default: intentar como hex
-      return BigInt('0x' + cleanHex(str));
+      const s = String(str || '').trim();
+      if (!s) throw new Error('Valor vacío');
+      if (s.startsWith('0x') || s.startsWith('0X')) return BigInt(s);
+      if (/^[0-9]+$/.test(s)) return BigInt(s);
+      if (/^[0-9a-fA-F]+$/.test(s)) return BigInt('0x' + s);
+      throw new Error('Formato numérico inválido: ' + s);
     }
 
     function bigintToHex(n, padBytes = 32) {
@@ -483,180 +533,241 @@
       return hex;
     }
 
-    // Inverso modular usando el algoritmo extendido de Euclides
-    function modInverse(a, m) {
-      a = ((a % m) + m) % m;
-      if (a === 0n) throw new Error('No existe inverso modular para 0');
+    function createPointFromXY(secp, x, y) {
+      const PointClass = secp.ProjectivePoint || secp.Point;
+      const uncompressed = '04' + bigintToHex(x) + bigintToHex(y);
 
-      let [old_r, r] = [a, m];
-      let [old_s, s] = [1n, 0n];
-
-      while (r !== 0n) {
-        const quotient = old_r / r;
-        [old_r, r] = [r, old_r - quotient * r];
-        [old_s, s] = [s, old_s - quotient * s];
+      if (PointClass && typeof PointClass.fromHex === 'function') {
+        return PointClass.fromHex(uncompressed);
       }
-
-      if (old_r !== 1n) throw new Error('No existe inverso modular (gcd ≠ 1)');
-
-      return ((old_s % m) + m) % m;
+      if (secp.Point && typeof secp.Point.fromHex === 'function') {
+        return secp.Point.fromHex(uncompressed);
+      }
+      if (secp.Point) {
+        return new secp.Point(x, y);
+      }
+      throw new Error('No se pudo crear el punto con la librería secp256k1');
     }
 
-    // === INICIALIZAR PARÁMETROS ===
-    document.getElementById('param-p').textContent = bigintToHex(SECP256K1.p);
-    document.getElementById('param-gx').textContent = bigintToHex(SECP256K1.Gx);
-    document.getElementById('param-gy').textContent = bigintToHex(SECP256K1.Gy);
-    document.getElementById('param-n').textContent = bigintToHex(SECP256K1.n);
+    function pointToAffine(point) {
+      if (typeof point.toAffine === 'function') return point.toAffine();
+      if (typeof point.x === 'bigint' && typeof point.y === 'bigint') return { x: point.x, y: point.y };
+      throw new Error('No se pudo leer el punto resultante');
+    }
 
-    // === FUNCIONES PARA RELLENAR CON G ===
+    function pointToCompressedHex(point) {
+      if (typeof point.toRawBytes === 'function') {
+        return HexUtils.bytesToHex(point.toRawBytes(true));
+      }
+      if (typeof point.toHex === 'function') {
+        return point.toHex(true);
+      }
+      const affine = pointToAffine(point);
+      const prefix = (affine.y % 2n === 0n) ? '02' : '03';
+      return prefix + bigintToHex(affine.x);
+    }
+
     function fillWithG(xId, yId) {
       document.getElementById(xId).value = bigintToHex(SECP256K1.Gx);
       document.getElementById(yId).value = bigintToHex(SECP256K1.Gy);
     }
 
+    function setError(id, msg) {
+      const el = document.getElementById(id);
+      el.textContent = 'Error: ' + msg;
+      el.style.display = 'block';
+    }
+
+    function clearError(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    function setVisible(id, visible) {
+      document.getElementById(id).style.display = visible ? 'block' : 'none';
+    }
+
+    // Parámetros fijos
+    document.getElementById('param-p').textContent = bigintToHex(SECP256K1.p);
+    document.getElementById('param-gx').textContent = bigintToHex(SECP256K1.Gx);
+    document.getElementById('param-gy').textContent = bigintToHex(SECP256K1.Gy);
+    document.getElementById('param-n').textContent = bigintToHex(SECP256K1.n);
+
+    // Prefill y ejemplos
     document.getElementById('btn-mult-use-g').addEventListener('click', () => fillWithG('mult-px', 'mult-py'));
     document.getElementById('btn-add-p1-g').addEventListener('click', () => fillWithG('add-p1x', 'add-p1y'));
     document.getElementById('btn-add-p2-g').addEventListener('click', () => fillWithG('add-p2x', 'add-p2y'));
     document.getElementById('btn-double-use-g').addEventListener('click', () => fillWithG('double-px', 'double-py'));
 
+    document.getElementById('btn-mult-example').addEventListener('click', () => {
+      document.getElementById('mult-scalar').value = '2';
+      fillWithG('mult-px', 'mult-py');
+      clearError('mult-error');
+      setVisible('mult-result', false);
+    });
+
+    document.getElementById('btn-add-example').addEventListener('click', () => {
+      fillWithG('add-p1x', 'add-p1y');
+      fillWithG('add-p2x', 'add-p2y');
+      clearError('add-error');
+      setVisible('add-result', false);
+    });
+
+    document.getElementById('btn-double-example').addEventListener('click', () => {
+      fillWithG('double-px', 'double-py');
+      clearError('double-error');
+      setVisible('double-result', false);
+    });
+
     document.getElementById('btn-inv-use-n').addEventListener('click', () => {
       document.getElementById('inv-m').value = bigintToHex(SECP256K1.n);
     });
+
     document.getElementById('btn-inv-use-p').addEventListener('click', () => {
       document.getElementById('inv-m').value = bigintToHex(SECP256K1.p);
     });
 
-    // === EC MULTIPLY ===
-    document.getElementById('btn-mult').addEventListener('click', () => {
-      const errorEl = document.getElementById('mult-error');
-      const resultEl = document.getElementById('mult-result');
-      errorEl.style.display = 'none';
-      resultEl.style.display = 'none';
+    document.getElementById('btn-inv-example').addEventListener('click', () => {
+      document.getElementById('inv-a').value = '7';
+      document.getElementById('inv-m').value = '11';
+      clearError('inv-error');
+      setVisible('inv-result', false);
+    });
+
+    // Inverso modular (algoritmo extendido de Euclides)
+    function modInverse(a, m) {
+      a = ((a % m) + m) % m;
+      if (a === 0n) throw new Error('No existe inverso modular para 0');
+
+      let oldR = a;
+      let r = m;
+      let oldS = 1n;
+      let s = 0n;
+
+      while (r !== 0n) {
+        const q = oldR / r;
+        [oldR, r] = [r, oldR - q * r];
+        [oldS, s] = [s, oldS - q * s];
+      }
+
+      if (oldR !== 1n) throw new Error('No existe inverso modular (gcd ≠ 1)');
+      return ((oldS % m) + m) % m;
+    }
+
+    // 1) Multiplicación escalar
+    document.getElementById('btn-mult').addEventListener('click', async () => {
+      clearError('mult-error');
+      setVisible('mult-result', false);
 
       try {
-        const secp = getSecp();
-        const scalarStr = document.getElementById('mult-scalar').value.trim();
-        const pxStr = document.getElementById('mult-px').value.trim();
-        const pyStr = document.getElementById('mult-py').value.trim();
+        const secp = await ensureSecp();
+        const k = parseNumber(document.getElementById('mult-scalar').value.trim());
+        const px = parseNumber(document.getElementById('mult-px').value.trim());
+        const py = parseNumber(document.getElementById('mult-py').value.trim());
 
-        if (!scalarStr) throw new Error('Introduce un escalar k');
-        if (!pxStr || !pyStr) throw new Error('Introduce las coordenadas del punto P');
+        if (k <= 0n) throw new Error('El escalar k debe ser mayor que 0');
 
-        const scalar = parseNumber(scalarStr);
-        const px = parseNumber(pxStr);
-        const py = parseNumber(pyStr);
+        const point = createPointFromXY(secp, px, py);
+        const resultPoint = point.multiply(k);
+        const affine = pointToAffine(resultPoint);
 
-        // Crear punto y multiplicar
-        const point = new secp.Point(px, py);
-        const result = point.multiply(scalar);
+        document.getElementById('mult-result-x').textContent = bigintToHex(affine.x);
+        document.getElementById('mult-result-y').textContent = bigintToHex(affine.y);
+        document.getElementById('mult-result-compressed').textContent = pointToCompressedHex(resultPoint);
 
-        document.getElementById('mult-result-x').textContent = bigintToHex(result.x);
-        document.getElementById('mult-result-y').textContent = bigintToHex(result.y);
-
-        // Punto comprimido
-        const compressed = result.toRawBytes(true);
-        document.getElementById('mult-result-compressed').textContent = HexUtils.bytesToHex(compressed);
-
-        resultEl.style.display = 'block';
-
+        setVisible('mult-result', true);
       } catch (error) {
-        errorEl.textContent = 'Error: ' + error.message;
-        errorEl.style.display = 'block';
+        setError('mult-error', error.message);
       }
     });
 
-    // === EC ADD ===
-    document.getElementById('btn-add').addEventListener('click', () => {
-      const errorEl = document.getElementById('add-error');
-      const resultEl = document.getElementById('add-result');
-      errorEl.style.display = 'none';
-      resultEl.style.display = 'none';
+    // 2) Suma de puntos
+    document.getElementById('btn-add').addEventListener('click', async () => {
+      clearError('add-error');
+      setVisible('add-result', false);
 
       try {
-        const secp = getSecp();
+        const secp = await ensureSecp();
         const p1x = parseNumber(document.getElementById('add-p1x').value.trim());
         const p1y = parseNumber(document.getElementById('add-p1y').value.trim());
         const p2x = parseNumber(document.getElementById('add-p2x').value.trim());
         const p2y = parseNumber(document.getElementById('add-p2y').value.trim());
 
-        const point1 = new secp.Point(p1x, p1y);
-        const point2 = new secp.Point(p2x, p2y);
-        const result = point1.add(point2);
+        const point1 = createPointFromXY(secp, p1x, p1y);
+        const point2 = createPointFromXY(secp, p2x, p2y);
+        const resultPoint = point1.add(point2);
+        const affine = pointToAffine(resultPoint);
 
-        document.getElementById('add-result-x').textContent = bigintToHex(result.x);
-        document.getElementById('add-result-y').textContent = bigintToHex(result.y);
+        document.getElementById('add-result-x').textContent = bigintToHex(affine.x);
+        document.getElementById('add-result-y').textContent = bigintToHex(affine.y);
 
-        resultEl.style.display = 'block';
-
+        setVisible('add-result', true);
       } catch (error) {
-        errorEl.textContent = 'Error: ' + error.message;
-        errorEl.style.display = 'block';
+        setError('add-error', error.message);
       }
     });
 
-    // === EC DOUBLE ===
-    document.getElementById('btn-double').addEventListener('click', () => {
-      const errorEl = document.getElementById('double-error');
-      const resultEl = document.getElementById('double-result');
-      errorEl.style.display = 'none';
-      resultEl.style.display = 'none';
+    // 3) Duplicación
+    document.getElementById('btn-double').addEventListener('click', async () => {
+      clearError('double-error');
+      setVisible('double-result', false);
 
       try {
-        const secp = getSecp();
+        const secp = await ensureSecp();
         const px = parseNumber(document.getElementById('double-px').value.trim());
         const py = parseNumber(document.getElementById('double-py').value.trim());
 
-        const point = new secp.Point(px, py);
-        const result = point.double();
+        const point = createPointFromXY(secp, px, py);
+        const resultPoint = point.double();
+        const affine = pointToAffine(resultPoint);
 
-        document.getElementById('double-result-x').textContent = bigintToHex(result.x);
-        document.getElementById('double-result-y').textContent = bigintToHex(result.y);
+        document.getElementById('double-result-x').textContent = bigintToHex(affine.x);
+        document.getElementById('double-result-y').textContent = bigintToHex(affine.y);
 
-        resultEl.style.display = 'block';
-
+        setVisible('double-result', true);
       } catch (error) {
-        errorEl.textContent = 'Error: ' + error.message;
-        errorEl.style.display = 'block';
+        setError('double-error', error.message);
       }
     });
 
-    // === MODULAR INVERSE ===
+    // 4) Inverso modular
     document.getElementById('btn-inv').addEventListener('click', () => {
-      const errorEl = document.getElementById('inv-error');
-      const resultEl = document.getElementById('inv-result');
-      errorEl.style.display = 'none';
-      resultEl.style.display = 'none';
+      clearError('inv-error');
+      setVisible('inv-result', false);
 
       try {
-        const aStr = document.getElementById('inv-a').value.trim();
-        const mStr = document.getElementById('inv-m').value.trim();
-
-        if (!aStr) throw new Error('Introduce el número a');
-        if (!mStr) throw new Error('Introduce el módulo m');
-
-        const a = parseNumber(aStr);
-        const m = parseNumber(mStr);
+        const a = parseNumber(document.getElementById('inv-a').value.trim());
+        const m = parseNumber(document.getElementById('inv-m').value.trim());
 
         if (m <= 0n) throw new Error('El módulo debe ser positivo');
 
-        const inverse = modInverse(a, m);
+        const inv = modInverse(a, m);
+        const check = (a * inv) % m;
 
-        // Verificación
-        const verification = (a * inverse) % m;
+        document.getElementById('inv-result-value').textContent = bigintToHex(inv);
+        const verifyEl = document.getElementById('inv-result-verify');
+        verifyEl.textContent = `${check.toString()} ${check === 1n ? '✓' : '✗'}`;
+        verifyEl.style.color = check === 1n ? '#2ea043' : '#da3633';
 
-        document.getElementById('inv-result-value').textContent = bigintToHex(inverse);
-        document.getElementById('inv-result-verify').textContent = verification.toString() + (verification === 1n ? ' ✓' : ' ✗');
-        document.getElementById('inv-result-verify').style.color = verification === 1n ? '#2ea043' : '#da3633';
-
-        resultEl.style.display = 'block';
-
+        setVisible('inv-result', true);
       } catch (error) {
-        errorEl.textContent = 'Error: ' + error.message;
-        errorEl.style.display = 'block';
+        setError('inv-error', error.message);
       }
     });
 
+    // Estado inicial útil
+    document.getElementById('mult-scalar').value = '2';
+    fillWithG('mult-px', 'mult-py');
+    fillWithG('add-p1x', 'add-p1y');
+    fillWithG('double-px', 'double-py');
+    document.getElementById('inv-a').value = '7';
+    document.getElementById('inv-m').value = '11';
   })();
   </script>
 </body>
 </html>
+
+
+
+
+
+

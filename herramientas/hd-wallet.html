@@ -1,15 +1,126 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" data-base-path="../">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Herramienta: HD wallet explorer." />
-  <title>HD wallet explorer | aprendebtc.com</title>
+  <meta name="description" content="Explora extended keys (xpub/xprv/ypub/zpub). Analiza versión, red, profundidad y validez de checksum Base58Check." />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aprendebtc.com/herramientas/hd-wallet.html" />
+  <meta property="og:title" content="HD Wallet explorer — Herramientas | aprendebtc.com" />
+  <meta property="og:description" content="Explora extended keys (xpub/xprv/ypub/zpub). Analiza versión, red, profundidad y validez de checksum Base58Check." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="HD Wallet explorer — Herramientas | aprendebtc.com" />
+  <meta name="twitter:description" content="Explora extended keys (xpub/xprv/ypub/zpub). Analiza versión, red, profundidad y validez de checksum Base58Check." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://aprendebtc.com/herramientas/hd-wallet.html" />
+  <link rel="alternate" hreflang="es" href="https://aprendebtc.com/herramientas/hd-wallet.html" />
+  <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/hd-wallet.html" />
+<meta property="og:url" content="https://aprendebtc.com/herramientas/hd-wallet.html" />
+<meta property="og:description" content="Explora extended keys (xpub/xprv/ypub/zpub). Analiza versión, red, profundidad y validez de checksum Base58Check." />
+<meta property="og:site_name" content="aprendeBTC" />
+<meta name="twitter:title" content="HD Wallet explorer — Herramientas | aprendebtc.com" />
+<meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+<link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/hd-wallet.html" />
+<title>HD Wallet explorer — Herramientas | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/components.css" />
   <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .quick-links {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+    @media (max-width: 900px) {
+      .quick-links {
+        grid-template-columns: 1fr;
+      }
+    }
+    .quick-link {
+      display: block;
+      padding: 0.85rem;
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: border-color .2s ease, transform .2s ease;
+    }
+    .quick-link:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .quick-link__title {
+      font-weight: 600;
+      font-size: 0.92rem;
+      margin-bottom: 0.2rem;
+    }
+    .quick-link__desc {
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+    @media (max-width: 768px) {
+      .result-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .result-item {
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      background: var(--bg-primary);
+      padding: 0.75rem;
+    }
+    .result-item__label {
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.35rem;
+    }
+    .result-item__value {
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      font-family: 'JetBrains Mono', monospace;
+      word-break: break-all;
+    }
+    .state-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.25rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border: 1px solid transparent;
+    }
+    .state-pill--ok {
+      color: #2ea043;
+      background: rgba(46, 160, 67, 0.14);
+      border-color: rgba(46, 160, 67, 0.35);
+    }
+    .state-pill--warn {
+      color: #d29922;
+      background: rgba(210, 153, 34, 0.14);
+      border-color: rgba(210, 153, 34, 0.35);
+    }
+  </style>
 </head>
 <body>
   <div data-include="header"></div>
@@ -25,18 +136,77 @@
 
     <main class="page-layout__content" id="main-content">
       <div class="content-inner">
-        <nav class="breadcrumb" aria-label="Ruta de navegacion">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
           <a href="../" class="breadcrumb__item">Inicio</a>
-          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
-          <a href="index.html" class="breadcrumb__item">Herramientas</a>
-          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
-          <span class="breadcrumb__current">HD wallet explorer</span>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">HD Wallet explorer</span>
         </nav>
 
         <article class="article">
-          <h1>HD wallet explorer</h1>
-          <p class="article__subtitle">Herramienta en preparacion.</p>
-          <p>Placeholder activo. Esta herramienta se habilitara en una siguiente iteracion.</p>
+          <h1>HD Wallet explorer</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.25rem;">
+            Centro de trabajo para extended keys y derivación HD (BIP32/BIP44/BIP84).
+          </p>
+
+          <div class="tool-container">
+            <h2 class="tool-container__title">Flujo recomendado</h2>
+            <div class="quick-links">
+              <a class="quick-link" href="extended-keys.html">
+                <div class="quick-link__title">Extended Keys</div>
+                <div class="quick-link__desc">Genera y decodifica xpub/xprv, ypub/zpub y versiones testnet.</div>
+              </a>
+              <a class="quick-link" href="derivation-paths.html">
+                <div class="quick-link__title">Derivation Paths</div>
+                <div class="quick-link__desc">Prueba rutas m/.. y entiende hardened vs no-hardened.</div>
+              </a>
+              <a class="quick-link" href="address-from-xpub.html">
+                <div class="quick-link__title">Direcciones desde xpub</div>
+                <div class="quick-link__desc">Deriva direcciones de forma segura sin exponer claves privadas.</div>
+              </a>
+            </div>
+          </div>
+
+          <div class="tool-container">
+            <h2 class="tool-container__title">Analizador rápido de extended key</h2>
+            <div class="tool-field" style="margin-bottom: 0.75rem;">
+              <label class="tool-label" for="xkey-input">Extended key (xpub/xprv/ypub/yprv/zpub/zprv/tpub/tprv)</label>
+              <textarea id="xkey-input" class="tool-input" rows="3" placeholder="xpub661MyMwAqRbc..." style="font-family: 'JetBrains Mono', monospace;"></textarea>
+            </div>
+            <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.75rem;">
+              <button class="tool-btn tool-btn--secondary" id="btn-xkey-example">📋 Cargar ejemplo</button>
+              <button class="tool-btn" id="btn-xkey-analyze">🔍 Analizar</button>
+            </div>
+            <div class="tool-error" id="xkey-error" style="display:none;"></div>
+            <div id="xkey-result" style="display:none;">
+              <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom: 0.75rem;">
+                <span class="state-pill state-pill--ok" id="xkey-checksum">Checksum válido</span>
+                <span class="state-pill state-pill--warn" id="xkey-type">—</span>
+              </div>
+              <div class="result-grid">
+                <div class="result-item"><div class="result-item__label">Versión (hex)</div><div class="result-item__value" id="xkey-version">—</div></div>
+                <div class="result-item"><div class="result-item__label">Formato</div><div class="result-item__value" id="xkey-format">—</div></div>
+                <div class="result-item"><div class="result-item__label">Red</div><div class="result-item__value" id="xkey-network">—</div></div>
+                <div class="result-item"><div class="result-item__label">Profundidad</div><div class="result-item__value" id="xkey-depth">—</div></div>
+                <div class="result-item"><div class="result-item__label">Fingerprint padre</div><div class="result-item__value" id="xkey-parent-fp">—</div></div>
+                <div class="result-item"><div class="result-item__label">Child number</div><div class="result-item__value" id="xkey-child">—</div></div>
+                <div class="result-item"><div class="result-item__label">Chain code</div><div class="result-item__value" id="xkey-chaincode">—</div></div>
+                <div class="result-item"><div class="result-item__label">Key data</div><div class="result-item__value" id="xkey-keydata">—</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-callout">
+            <div class="tool-callout__title">Relacionado</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-3/hd-wallets.html">HD Wallets en detalle →</a> ·
+              <a href="extended-keys.html">Extended keys →</a> ·
+              <a href="address-from-xpub.html">Direcciones desde xpub →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
         </article>
       </div>
     </main>
@@ -46,5 +216,153 @@
   <script src="../js/includes.js"></script>
   <script src="../js/nav.js"></script>
   <script src="../js/search.js"></script>
+  <script src="../js/hex-utils.js"></script>
+  <script src="../js/base58.js"></script>
+  <script>
+  (function () {
+    'use strict';
+
+    const VERSION_MAP = {
+      '0488b21e': { prefix: 'xpub', type: 'Public', network: 'Mainnet', bip: 'BIP44' },
+      '0488ade4': { prefix: 'xprv', type: 'Private', network: 'Mainnet', bip: 'BIP44' },
+      '049d7cb2': { prefix: 'ypub', type: 'Public', network: 'Mainnet', bip: 'BIP49' },
+      '049d7878': { prefix: 'yprv', type: 'Private', network: 'Mainnet', bip: 'BIP49' },
+      '04b24746': { prefix: 'zpub', type: 'Public', network: 'Mainnet', bip: 'BIP84' },
+      '04b2430c': { prefix: 'zprv', type: 'Private', network: 'Mainnet', bip: 'BIP84' },
+      '043587cf': { prefix: 'tpub', type: 'Public', network: 'Testnet', bip: 'BIP44' },
+      '04358394': { prefix: 'tprv', type: 'Private', network: 'Testnet', bip: 'BIP44' }
+    };
+
+    const EXAMPLE_XPUB = null;
+
+    const xkeyInput = document.getElementById('xkey-input');
+    const btnExample = document.getElementById('btn-xkey-example');
+    const btnAnalyze = document.getElementById('btn-xkey-analyze');
+    const errorEl = document.getElementById('xkey-error');
+    const resultEl = document.getElementById('xkey-result');
+    const checksumEl = document.getElementById('xkey-checksum');
+    const typeEl = document.getElementById('xkey-type');
+
+    
+    async function buildExampleXpub() {
+      const payload = new Uint8Array(78);
+      // version xpub mainnet (0x0488B21E)
+      payload.set([0x04, 0x88, 0xB2, 0x1E], 0);
+      payload[4] = 0x00; // depth
+      payload.set([0x00, 0x00, 0x00, 0x00], 5); // parent fingerprint
+      payload.set([0x00, 0x00, 0x00, 0x00], 9); // child number
+      payload.set(new Uint8Array(32).fill(0x11), 13); // chain code demo
+      payload[45] = 0x02; // compressed key prefix
+      payload.set(new Uint8Array(32).fill(0x22), 46); // public key x demo
+
+      const h1 = await HexUtils.sha256(payload);
+      const h2 = await HexUtils.sha256(h1);
+      const checksum = h2.slice(0, 4);
+
+      const full = new Uint8Array(82);
+      full.set(payload, 0);
+      full.set(checksum, 78);
+
+      return Base58.encode(full);
+    }
+    function setError(msg) {
+      errorEl.textContent = msg;
+      errorEl.style.display = 'block';
+      resultEl.style.display = 'none';
+    }
+
+    function setResult(data) {
+      errorEl.style.display = 'none';
+      resultEl.style.display = 'block';
+
+      checksumEl.textContent = data.checksumOk ? 'Checksum válido' : 'Checksum inválido';
+      checksumEl.className = `state-pill ${data.checksumOk ? 'state-pill--ok' : 'state-pill--warn'}`;
+
+      typeEl.textContent = `${data.versionInfo.type} ${data.versionInfo.prefix}`;
+
+      document.getElementById('xkey-version').textContent = data.versionHex;
+      document.getElementById('xkey-format').textContent = data.versionInfo.bip;
+      document.getElementById('xkey-network').textContent = data.versionInfo.network;
+      document.getElementById('xkey-depth').textContent = String(data.depth);
+      document.getElementById('xkey-parent-fp').textContent = data.parentFingerprint;
+      document.getElementById('xkey-child').textContent = String(data.childNumber);
+      document.getElementById('xkey-chaincode').textContent = data.chainCode;
+      document.getElementById('xkey-keydata').textContent = data.keyData;
+    }
+
+    async function isChecksumValid(payload, checksum) {
+      const h1 = await HexUtils.sha256(payload);
+      const h2 = await HexUtils.sha256(h1);
+      for (let i = 0; i < 4; i++) {
+        if (h2[i] !== checksum[i]) return false;
+      }
+      return true;
+    }
+
+    async function analyze() {
+      const value = (xkeyInput.value || '').trim();
+      if (!value) {
+        setError('Introduce una extended key.');
+        return;
+      }
+
+      try {
+        const decoded = Base58.decode(value);
+        if (!decoded || decoded.length !== 82) {
+          throw new Error('Longitud inválida: una extended key debe ser de 82 bytes decodificados.');
+        }
+
+        const payload = decoded.slice(0, 78);
+        const checksum = decoded.slice(78);
+
+        const versionHex = HexUtils.bytesToHex(payload.slice(0, 4));
+        const versionInfo = VERSION_MAP[versionHex] || {
+          prefix: 'desconocido',
+          type: 'Tipo',
+          network: 'Red desconocida',
+          bip: 'Formato no estándar'
+        };
+
+        const depth = payload[4];
+        const parentFingerprint = HexUtils.bytesToHex(payload.slice(5, 9));
+        const childNumber =
+          (payload[9] << 24) | (payload[10] << 16) | (payload[11] << 8) | payload[12];
+        const chainCode = HexUtils.bytesToHex(payload.slice(13, 45));
+        const keyData = HexUtils.bytesToHex(payload.slice(45, 78));
+
+        const checksumOk = await isChecksumValid(payload, checksum);
+
+        setResult({
+          versionHex,
+          versionInfo,
+          depth,
+          parentFingerprint,
+          childNumber: childNumber >>> 0,
+          chainCode,
+          keyData,
+          checksumOk
+        });
+      } catch (error) {
+        setError('Error: ' + error.message);
+      }
+    }
+
+    btnExample.addEventListener('click', async () => {
+      xkeyInput.value = await buildExampleXpub();
+      errorEl.style.display = 'none';
+      resultEl.style.display = 'none';
+    });
+
+    btnAnalyze.addEventListener('click', analyze);
+    xkeyInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' && (event.ctrlKey || event.metaKey)) analyze();
+    });
+  })();
+  </script>
 </body>
 </html>
+
+
+
+
+

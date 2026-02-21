@@ -1,10 +1,35 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" data-base-path="../">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Construye transacciones Bitcoin sin firmar (PSBT conceptual). Define inputs, outputs y visualiza el raw hex resultante." />
-  <title>Constructor de transacciones — Herramientas | aprendebtc.com</title>
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aprendebtc.com/herramientas/tx-builder.html" />
+  <meta property="og:title" content="Constructor de transacciones — Herramientas | aprendebtc.com" />
+  <meta property="og:description" content="Construye transacciones Bitcoin sin firmar (PSBT conceptual). Define inputs, outputs y visualiza el raw hex resultante." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Constructor de transacciones — Herramientas | aprendebtc.com" />
+  <meta name="twitter:description" content="Construye transacciones Bitcoin sin firmar (PSBT conceptual). Define inputs, outputs y visualiza el raw hex resultante." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://aprendebtc.com/herramientas/tx-builder.html" />
+  <link rel="alternate" hreflang="es" href="https://aprendebtc.com/herramientas/tx-builder.html" />
+  <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/tx-builder.html" />
+<meta property="og:url" content="https://aprendebtc.com/herramientas/tx-builder.html" />
+<meta property="og:description" content="Construye transacciones Bitcoin sin firmar (PSBT conceptual). Define inputs, outputs y visualiza el raw hex resultante." />
+<meta property="og:site_name" content="aprendeBTC" />
+<meta name="twitter:title" content="Constructor de transacciones — Herramientas | aprendebtc.com" />
+<meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+<link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/tx-builder.html" />
+<title>Constructor de transacciones — Herramientas | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -172,7 +197,10 @@
 
           <!-- Build -->
           <div class="tool-container">
-            <button class="tool-btn" id="btn-build" style="width: 100%;">🔨 Construir transacción</button>
+            <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+              <button class="tool-btn tool-btn--secondary" id="btn-load-example">Generar ejemplo</button>
+              <button class="tool-btn" id="btn-build" style="flex: 1; min-width: 220px;">Construir transaccion</button>
+            </div>
           </div>
 
           <!-- Error -->
@@ -289,6 +317,7 @@
     const btnAddInput = document.getElementById('btn-add-input');
     const btnAddOutput = document.getElementById('btn-add-output');
     const btnBuild = document.getElementById('btn-build');
+    const btnLoadExample = document.getElementById('btn-load-example');
     const errorMessage = document.getElementById('error-message');
     const resultSection = document.getElementById('result-section');
     const resultHex = document.getElementById('result-hex');
@@ -446,6 +475,40 @@
       document.getElementById('input-count-badge').textContent = `(${inputs.length})`;
       document.getElementById('output-count-badge').textContent = `(${outputs.length})`;
     }
+
+    function resetBuilder() {
+      inputs = [];
+      outputs = [];
+      inputIdCounter = 0;
+      outputIdCounter = 0;
+      inputsContainer.innerHTML = '';
+      outputsContainer.innerHTML = '';
+      addInput();
+      addOutput();
+    }
+
+    function loadExample() {
+      resetBuilder();
+      document.getElementById('tx-version').value = '2';
+      document.getElementById('tx-locktime').value = '0';
+
+      const inputCard = inputsContainer.querySelector('.io-card');
+      const outputCard = outputsContainer.querySelector('.io-card');
+      if (!inputCard || !outputCard) return;
+
+      inputCard.querySelector('.input-txid').value = '4d3f2a5c8193e4d71b1f0aab3498f43c2d1d4f8b6f0e2b0ca77f63e76c92431a';
+      inputCard.querySelector('.input-vout').value = '1';
+      inputCard.querySelector('.input-sequence').value = 'custom';
+      inputCard.querySelector('.input-sequence-custom').style.display = 'block';
+      inputCard.querySelector('.input-sequence-custom').value = 'fffffffd';
+
+      outputCard.querySelector('.output-address').value = '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa';
+      outputCard.querySelector('.output-amount').value = '25000';
+
+      errorMessage.style.display = 'none';
+      resultSection.style.display = 'none';
+    }
+
 
     // === CONSTRUCCIÓN DE TX ===
 
@@ -669,6 +732,7 @@
     btnAddInput.addEventListener('click', addInput);
     btnAddOutput.addEventListener('click', addOutput);
     btnBuild.addEventListener('click', buildTransaction);
+    btnLoadExample.addEventListener('click', loadExample);
 
     btnCopyHex.addEventListener('click', async () => {
       const hex = resultHex.textContent;
@@ -680,10 +744,10 @@
     });
 
     // === INIT ===
-    addInput();
-    addOutput();
+    loadExample();
 
   })();
   </script>
 </body>
 </html>
+

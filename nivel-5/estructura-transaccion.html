@@ -1,14 +1,59 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" data-base-path="../">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Anatomía byte a byte de una transacción Bitcoin: version, inputs, outputs, witness, locktime. Cómo se calcula el txid y wtxid." />
-  <title>Estructura de una transacción &mdash; Nivel 5 | aprendebtc.com</title>
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aprendebtc.com/nivel-5/estructura-transaccion.html" />
+  <meta property="og:title" content="Estructura de una transacción &amp;mdash; Nivel 5 | aprendebtc.com" />
+  <meta property="og:description" content="Anatomía byte a byte de una transacción Bitcoin: version, inputs, outputs, witness, locktime. Cómo se calcula el txid y wtxid." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Estructura de una transacción &amp;mdash; Nivel 5 | aprendebtc.com" />
+  <meta name="twitter:description" content="Anatomía byte a byte de una transacción Bitcoin: version, inputs, outputs, witness, locktime. Cómo se calcula el txid y wtxid." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://aprendebtc.com/nivel-5/estructura-transaccion.html" />
+  <link rel="alternate" hreflang="es" href="https://aprendebtc.com/nivel-5/estructura-transaccion.html" />
+  <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/nivel-5/estructura-transaccion.html" />
+<meta property="og:url" content="https://aprendebtc.com/nivel-5/estructura-transaccion.html" />
+<meta property="og:description" content="Anatomía byte a byte de una transacción Bitcoin: version, inputs, outputs, witness, locktime. Cómo se calcula el txid y wtxid." />
+<meta property="og:site_name" content="aprendeBTC" />
+<meta name="twitter:title" content="Estructura de una transacción &amp;mdash; Nivel 5 | aprendebtc.com" />
+<meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+<link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/nivel-5/estructura-transaccion.html" />
+<title>Estructura de una transacción &mdash; Nivel 5 | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/components.css" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Estructura de una transacción",
+  "description": "Anatomía byte a byte de una transacción Bitcoin: version, inputs, outputs, witness, locktime. Cómo se calcula el txid y wtxid.",
+  "url": "https://aprendebtc.com/nivel-5/estructura-transaccion.html",
+  "inLanguage": "es",
+  "publisher": {
+    "@type": "Organization",
+    "name": "aprendeBTC",
+    "url": "https://aprendebtc.com"
+  },
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "aprendeBTC",
+    "url": "https://aprendebtc.com"
+  }
+}
+  </script>
 </head>
 <body>
   <div data-include="header"></div>
@@ -193,7 +238,7 @@
 
 <p>La separación del witness del cálculo del txid es precisamente lo que resolvió el problema de maleabilidad que impedía Lightning Network.</p>
 
-<div class="callout callout--info"><span class="callout__icon" aria-hidden="true">&#128161;</span><div class="callout__content"><div class="callout__title">Herramienta de decodificación</div><p class="callout__text">Puedes decodificar transacciones raw en <a href="../herramientas/transaccion.html">/herramientas/transaccion</a>. Pega el hexadecimal y verás cada campo anotado.</p></div></div>
+<div class="callout callout--info"><span class="callout__icon" aria-hidden="true">&#128161;</span><div class="callout__content"><div class="callout__title">Herramienta de decodificación</div><p class="callout__text">Puedes decodificar transacciones raw en <a href="../herramientas/tx-decoder.html">/herramientas/tx-decoder</a>. Pega el hexadecimal y verás cada campo anotado.</p></div></div>
 
           <div class="ad-slot ad-content" id="ad-content-5" aria-hidden="true"></div>
 
@@ -218,3 +263,4 @@
   <script src="../js/search.js"></script>
 </body>
 </html>
+

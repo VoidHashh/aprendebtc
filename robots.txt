@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /js/
+Disallow: /css/
+Disallow: /includes/
+
+Sitemap: https://aprendebtc.com/sitemap.xml

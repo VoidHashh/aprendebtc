@@ -1,10 +1,35 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" data-base-path="../">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Firma y verifica mensajes con ECDSA y Schnorr sobre secp256k1. Decodifica firmas DER. Herramienta educativa Bitcoin." />
-  <title>Firma digital: ECDSA y Schnorr — Herramientas | aprendebtc.com</title>
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aprendebtc.com/herramientas/ecdsa-schnorr.html" />
+  <meta property="og:title" content="Firma digital: ECDSA y Schnorr — Herramientas | aprendebtc.com" />
+  <meta property="og:description" content="Firma y verifica mensajes con ECDSA y Schnorr sobre secp256k1. Decodifica firmas DER. Herramienta educativa Bitcoin." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Firma digital: ECDSA y Schnorr — Herramientas | aprendebtc.com" />
+  <meta name="twitter:description" content="Firma y verifica mensajes con ECDSA y Schnorr sobre secp256k1. Decodifica firmas DER. Herramienta educativa Bitcoin." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://aprendebtc.com/herramientas/ecdsa-schnorr.html" />
+  <link rel="alternate" hreflang="es" href="https://aprendebtc.com/herramientas/ecdsa-schnorr.html" />
+  <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/ecdsa-schnorr.html" />
+<meta property="og:url" content="https://aprendebtc.com/herramientas/ecdsa-schnorr.html" />
+<meta property="og:description" content="Firma y verifica mensajes con ECDSA y Schnorr sobre secp256k1. Decodifica firmas DER. Herramienta educativa Bitcoin." />
+<meta property="og:site_name" content="aprendeBTC" />
+<meta name="twitter:title" content="Firma digital: ECDSA y Schnorr — Herramientas | aprendebtc.com" />
+<meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+<link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/ecdsa-schnorr.html" />
+<title>Firma digital: ECDSA y Schnorr — Herramientas | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -266,7 +291,10 @@
                 />
               </div>
 
-              <button class="tool-btn" id="btn-ecdsa-verify">✓ Verificar</button>
+              <div class="tool-btn-row">
+                <button class="tool-btn tool-btn--secondary" id="btn-ecdsa-verify-example">📋 Cargar ejemplo</button>
+                <button class="tool-btn" id="btn-ecdsa-verify">✓ Verificar</button>
+              </div>
 
               <!-- Error -->
               <div class="tool-error" id="ecdsa-verify-error" style="display: none;"></div>
@@ -388,7 +416,10 @@
                 />
               </div>
 
-              <button class="tool-btn" id="btn-schnorr-verify">✓ Verificar</button>
+              <div class="tool-btn-row">
+                <button class="tool-btn tool-btn--secondary" id="btn-schnorr-verify-example">📋 Cargar ejemplo</button>
+                <button class="tool-btn" id="btn-schnorr-verify">✓ Verificar</button>
+              </div>
 
               <!-- Error -->
               <div class="tool-error" id="schnorr-verify-error" style="display: none;"></div>
@@ -490,25 +521,63 @@
   <script src="../js/nav.js"></script>
   <script src="../js/search.js"></script>
   <script src="../js/hex-utils.js"></script>
-  <script src="https://unpkg.com/@noble/secp256k1@1.7.1/lib/index.js"></script>
+  
 
   <script>
   (function() {
     'use strict';
 
     // === UTILIDADES ===
-    function getSecp() {
-      return typeof nobleSecp256k1 !== 'undefined' ? nobleSecp256k1 : secp256k1;
+    let secpCache = null;
+    let secpLoadPromise = null;
+
+    function getGlobalSecp() {
+      if (window.nobleSecp256k1 && typeof window.nobleSecp256k1.getPublicKey === 'function') return window.nobleSecp256k1;
+      if (window.secp256k1 && typeof window.secp256k1.getPublicKey === 'function') return window.secp256k1;
+      return null;
     }
 
-    function cleanHex(hex) {
-      return hex.replace(/^0x/i, '').replace(/\s/g, '').toLowerCase();
+    async function ensureSecp() {
+      if (secpCache) return secpCache;
+      const existing = getGlobalSecp();
+      if (existing) {
+        secpCache = existing;
+        return secpCache;
+      }
+      if (!secpLoadPromise) {
+        secpLoadPromise = (async () => {
+          let mod = null;
+          try {
+            mod = await import('https://cdn.jsdelivr.net/npm/@noble/secp256k1@1.7.1/+esm');
+          } catch (_) {
+            mod = await import('https://unpkg.com/@noble/secp256k1@1.7.1/+esm');
+          }
+          secpCache = mod.default && typeof mod.default.getPublicKey === 'function' ? mod.default : mod;
+          window.nobleSecp256k1 = secpCache;
+          return secpCache;
+        })();
+      }
+      return secpLoadPromise;
+    }
+
+    function cleanHex(value) {
+      return String(value || '').replace(/^0x/i, '').replace(/\s+/g, '').toLowerCase();
+    }
+
+    function onlyHex(value) {
+      return cleanHex(value).replace(/[^0-9a-f]/g, '');
     }
 
     function randomBytes(length) {
       const bytes = new Uint8Array(length);
-      crypto.getRandomValues(bytes);
+      window.crypto.getRandomValues(bytes);
       return bytes;
+    }
+
+    function randomPrivateKey(secp) {
+      if (secp?.utils?.randomPrivateKey) return secp.utils.randomPrivateKey();
+      if (secp?.utils?.randomSecretKey) return secp.utils.randomSecretKey();
+      return randomBytes(32);
     }
 
     // === TABS ===
@@ -528,8 +597,9 @@
     const btnRandomPrivkey = document.getElementById('btn-random-privkey');
     const btnEcdsaSign = document.getElementById('btn-ecdsa-sign');
 
-    btnRandomPrivkey.addEventListener('click', () => {
-      const privkey = randomBytes(32);
+    btnRandomPrivkey.addEventListener('click', async () => {
+      const secp = await ensureSecp();
+      const privkey = randomPrivateKey(secp);
       document.getElementById('ecdsa-sign-privkey').value = HexUtils.bytesToHex(privkey);
     });
 
@@ -540,10 +610,10 @@
       resultEl.style.display = 'none';
 
       try {
-        const secp = getSecp();
+        const secp = await ensureSecp();
         const msg = document.getElementById('ecdsa-sign-msg').value;
         const isHex = document.getElementById('ecdsa-sign-ishex').checked;
-        const privkeyHex = cleanHex(document.getElementById('ecdsa-sign-privkey').value);
+        const privkeyHex = onlyHex(document.getElementById('ecdsa-sign-privkey').value);
 
         if (!privkeyHex || privkeyHex.length !== 64) {
           throw new Error('La clave privada debe ser 32 bytes (64 hex)');
@@ -553,7 +623,7 @@
         let msgHash;
         if (isHex) {
           if (msg.length !== 64) throw new Error('El hash debe ser 32 bytes (64 hex)');
-          msgHash = HexUtils.hexToBytes(cleanHex(msg));
+          msgHash = HexUtils.hexToBytes(onlyHex(msg));
         } else {
           const encoder = new TextEncoder();
           msgHash = await HexUtils.sha256(encoder.encode(msg));
@@ -589,6 +659,7 @@
 
     // === ECDSA VERIFY ===
     const btnEcdsaVerify = document.getElementById('btn-ecdsa-verify');
+    const btnEcdsaVerifyExample = document.getElementById('btn-ecdsa-verify-example');
 
     btnEcdsaVerify.addEventListener('click', async () => {
       const errorEl = document.getElementById('ecdsa-verify-error');
@@ -597,39 +668,50 @@
       resultEl.style.display = 'none';
 
       try {
-        const secp = getSecp();
+        const secp = await ensureSecp();
         const msg = document.getElementById('ecdsa-verify-msg').value;
         const isHex = document.getElementById('ecdsa-verify-ishex').checked;
-        let sigInput = cleanHex(document.getElementById('ecdsa-verify-sig').value);
-        const pubkeyHex = cleanHex(document.getElementById('ecdsa-verify-pubkey').value);
 
         // Hash del mensaje
         let msgHash;
         if (isHex) {
-          msgHash = HexUtils.hexToBytes(cleanHex(msg));
+          const msgHex = onlyHex(msg);
+          if (msgHex.length !== 64) throw new Error('El hash del mensaje debe ser de 32 bytes (64 hex).');
+          msgHash = HexUtils.hexToBytes(msgHex);
         } else {
           const encoder = new TextEncoder();
           msgHash = await HexUtils.sha256(encoder.encode(msg));
         }
 
         // Parsear firma
+        const sigRawInput = document.getElementById('ecdsa-verify-sig').value.trim();
         let signature;
-        if (sigInput.includes(',')) {
-          // r,s format
-          const parts = sigInput.split(',').map(s => cleanHex(s.trim()));
+
+        if (sigRawInput.includes(',')) {
+          const parts = sigRawInput.split(',').map(part => onlyHex(part.trim()));
+          if (parts.length !== 2 || parts[0].length !== 64 || parts[1].length !== 64) {
+            throw new Error('Formato r,s inválido. Deben ser 32 bytes por componente.');
+          }
           signature = HexUtils.hexToBytes(parts[0] + parts[1]);
-        } else if (sigInput.startsWith('30')) {
-          // DER format - decode
-          signature = decodeDerSignature(sigInput);
         } else {
-          // Raw r||s
-          signature = HexUtils.hexToBytes(sigInput);
+          const sigHex = onlyHex(sigRawInput);
+          if (!sigHex) throw new Error('Introduce una firma.');
+          if (sigHex.startsWith('30')) {
+            signature = decodeDerSignature(sigHex);
+          } else {
+            if (sigHex.length !== 128) throw new Error('Firma raw inválida: deben ser 64 bytes (128 hex).');
+            signature = HexUtils.hexToBytes(sigHex);
+          }
         }
 
+        const pubkeyHex = onlyHex(document.getElementById('ecdsa-verify-pubkey').value);
+        if (![66, 130].includes(pubkeyHex.length)) {
+          throw new Error('Pubkey inválida: usa formato comprimido (33 bytes) o sin comprimir (65 bytes).');
+        }
         const pubkey = HexUtils.hexToBytes(pubkeyHex);
 
         // Verificar
-        const isValid = secp.verify(signature, msgHash, pubkey);
+        const isValid = await secp.verify(signature, msgHash, pubkey);
 
         if (isValid) {
           resultEl.innerHTML = `
@@ -655,6 +737,24 @@
       }
     });
 
+    if (btnEcdsaVerifyExample) {
+      btnEcdsaVerifyExample.addEventListener('click', async () => {
+        const secp = await ensureSecp();
+        const msg = 'Hello Bitcoin!';
+        const msgHash = await HexUtils.sha256(new TextEncoder().encode(msg));
+        const privkey = randomPrivateKey(secp);
+        const signatureDer = await secp.sign(msgHash, privkey, { der: true });
+        const pubkey = secp.getPublicKey(privkey, true);
+
+        document.getElementById('ecdsa-verify-msg').value = msg;
+        document.getElementById('ecdsa-verify-ishex').checked = false;
+        document.getElementById('ecdsa-verify-sig').value = HexUtils.bytesToHex(signatureDer);
+        document.getElementById('ecdsa-verify-pubkey').value = HexUtils.bytesToHex(pubkey);
+        document.getElementById('ecdsa-verify-error').style.display = 'none';
+        document.getElementById('ecdsa-verify-result').style.display = 'none';
+      });
+    }
+
     // === SCHNORR SIGN ===
     const btnRandomMsg32 = document.getElementById('btn-random-msg32');
     const btnRandomSchnorrPrivkey = document.getElementById('btn-random-schnorr-privkey');
@@ -665,8 +765,9 @@
       document.getElementById('schnorr-sign-msg').value = HexUtils.bytesToHex(msg);
     });
 
-    btnRandomSchnorrPrivkey.addEventListener('click', () => {
-      const privkey = randomBytes(32);
+    btnRandomSchnorrPrivkey.addEventListener('click', async () => {
+      const secp = await ensureSecp();
+      const privkey = randomPrivateKey(secp);
       document.getElementById('schnorr-sign-privkey').value = HexUtils.bytesToHex(privkey);
     });
 
@@ -677,9 +778,9 @@
       resultEl.style.display = 'none';
 
       try {
-        const secp = getSecp();
-        const msgHex = cleanHex(document.getElementById('schnorr-sign-msg').value);
-        const privkeyHex = cleanHex(document.getElementById('schnorr-sign-privkey').value);
+        const secp = await ensureSecp();
+        const msgHex = onlyHex(document.getElementById('schnorr-sign-msg').value);
+        const privkeyHex = onlyHex(document.getElementById('schnorr-sign-privkey').value);
 
         if (msgHex.length !== 64) throw new Error('El mensaje debe ser 32 bytes (64 hex)');
         if (privkeyHex.length !== 64) throw new Error('La clave privada debe ser 32 bytes (64 hex)');
@@ -713,6 +814,7 @@
 
     // === SCHNORR VERIFY ===
     const btnSchnorrVerify = document.getElementById('btn-schnorr-verify');
+    const btnSchnorrVerifyExample = document.getElementById('btn-schnorr-verify-example');
 
     btnSchnorrVerify.addEventListener('click', async () => {
       const errorEl = document.getElementById('schnorr-verify-error');
@@ -721,10 +823,10 @@
       resultEl.style.display = 'none';
 
       try {
-        const secp = getSecp();
-        const msgHex = cleanHex(document.getElementById('schnorr-verify-msg').value);
-        const sigHex = cleanHex(document.getElementById('schnorr-verify-sig').value);
-        const pubkeyHex = cleanHex(document.getElementById('schnorr-verify-pubkey').value);
+        const secp = await ensureSecp();
+        const msgHex = onlyHex(document.getElementById('schnorr-verify-msg').value);
+        const sigHex = onlyHex(document.getElementById('schnorr-verify-sig').value);
+        const pubkeyHex = onlyHex(document.getElementById('schnorr-verify-pubkey').value);
 
         if (msgHex.length !== 64) throw new Error('El mensaje debe ser 32 bytes (64 hex)');
         if (sigHex.length !== 128) throw new Error('La firma debe ser 64 bytes (128 hex)');
@@ -760,14 +862,32 @@
       }
     });
 
+    btnSchnorrVerifyExample.addEventListener('click', async () => {
+      const secp = await ensureSecp();
+      const msg = randomBytes(32);
+      const privkey = randomPrivateKey(secp);
+      const signature = await secp.schnorr.sign(msg, privkey);
+      const pubkey = secp.getPublicKey(privkey, true).slice(1);
+
+      document.getElementById('schnorr-verify-msg').value = HexUtils.bytesToHex(msg);
+      document.getElementById('schnorr-verify-sig').value = HexUtils.bytesToHex(signature);
+      document.getElementById('schnorr-verify-pubkey').value = HexUtils.bytesToHex(pubkey);
+      document.getElementById('schnorr-verify-error').style.display = 'none';
+      document.getElementById('schnorr-verify-result').style.display = 'none';
+    });
+
     // === DER DECODER ===
     const btnDerExample = document.getElementById('btn-der-example');
     const btnDerDecode = document.getElementById('btn-der-decode');
 
-    const EXAMPLE_DER = '3044022020f8a1f8e8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f802201f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f801';
-
-    btnDerExample.addEventListener('click', () => {
-      document.getElementById('der-input').value = EXAMPLE_DER;
+    btnDerExample.addEventListener('click', async () => {
+      const secp = await ensureSecp();
+      const msgHash = await HexUtils.sha256(new TextEncoder().encode('DER example for aprendebtc'));
+      const privkey = randomPrivateKey(secp);
+      const der = await secp.sign(msgHash, privkey, { der: true });
+      document.getElementById('der-input').value = HexUtils.bytesToHex(der) + '01';
+      document.getElementById('der-error').style.display = 'none';
+      document.getElementById('der-result').style.display = 'none';
     });
 
     function decodeDerSignature(derHex) {
@@ -827,7 +947,7 @@
       resultEl.style.display = 'none';
 
       try {
-        const derHex = cleanHex(document.getElementById('der-input').value);
+        const derHex = onlyHex(document.getElementById('der-input').value);
         const bytes = HexUtils.hexToBytes(derHex);
 
         if (bytes[0] !== 0x30) throw new Error('No empieza con 0x30 (SEQUENCE)');
@@ -929,3 +1049,9 @@
   </script>
 </body>
 </html>
+
+
+
+
+
+
