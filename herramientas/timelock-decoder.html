@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Decodifica nLocktime y nSequence de transacciones Bitcoin. Entiende timelocks absolutos y relativos." />
+  <title>Decodificador de Timelocks — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .decoder-section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .decoder-section__title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .decoder-section__subtitle {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .interpretation-box {
+      background: var(--bg-primary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+    .interpretation-box--block {
+      border-left: 3px solid #3fb950;
+    }
+    .interpretation-box--time {
+      border-left: 3px solid #58a6ff;
+    }
+    .interpretation-box--disabled {
+      border-left: 3px solid #8b949e;
+    }
+    .interpretation-box--rbf {
+      border-left: 3px solid var(--accent);
+    }
+
+    .interpretation-box__type {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+    .interpretation-box__type--block { color: #3fb950; }
+    .interpretation-box__type--time { color: #58a6ff; }
+    .interpretation-box__type--disabled { color: #8b949e; }
+    .interpretation-box__type--rbf { color: var(--accent); }
+
+    .interpretation-box__value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .interpretation-box__detail {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .bits-diagram {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      margin-top: 1rem;
+    }
+    .bit {
+      width: 20px;
+      height: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-primary);
+      border: 1px solid var(--bg-border);
+      border-radius: 2px;
+    }
+    .bit__value {
+      font-weight: 700;
+    }
+    .bit__index {
+      font-size: 0.55rem;
+      color: var(--text-secondary);
+    }
+    .bit--flag-disable { background: rgba(139, 148, 158, 0.2); border-color: #8b949e; }
+    .bit--flag-type { background: rgba(88, 166, 255, 0.2); border-color: #58a6ff; }
+    .bit--value { background: rgba(46, 160, 67, 0.2); border-color: #3fb950; }
+    .bit--reserved { background: var(--bg-secondary); }
+
+    .result-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    @media (max-width: 640px) {
+      .result-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+        <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Decodificador de timelocks</span>
+        </nav>
+
+        <article class="article">
+          <h1>Decodificador de Timelocks</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Interpreta los campos nLocktime y nSequence que controlan cuándo se puede gastar una transacción.
+          </p>
+
+          <!-- Section 1: nLocktime -->
+          <div class="decoder-section">
+            <div class="decoder-section__title">
+              <span>🔒</span> nLocktime (Timelock absoluto)
+            </div>
+            <div class="decoder-section__subtitle">
+              Campo de 4 bytes al final de cada transacción. Define cuándo la TX puede ser incluida en un bloque.
+            </div>
+
+            <div class="tool-field">
+              <label class="tool-label" for="locktime-input">Valor nLocktime (decimal o hex)</label>
+              <input 
+                type="text" 
+                id="locktime-input" 
+                class="tool-input" 
+                placeholder="Ej: 0, 700000, 1700000000, o 0x000000"
+                style="font-family: 'JetBrains Mono', monospace;"
+              />
+            </div>
+
+            <div class="tool-presets" style="margin-top: 0.5rem;">
+              <button class="tool-preset" data-locktime="0">0 (sin restricción)</button>
+              <button class="tool-preset" data-locktime="500000">Bloque 500.000</button>
+              <button class="tool-preset" data-locktime="499999999">499.999.999 (máx bloque)</button>
+              <button class="tool-preset" data-locktime="500000000">500.000.000 (mín timestamp)</button>
+              <button class="tool-preset" data-locktime="1700000000">Timestamp 2023</button>
+            </div>
+
+            <div id="locktime-result" style="display: none;"></div>
+          </div>
+
+          <!-- Section 2: nSequence (BIP68) -->
+          <div class="decoder-section">
+            <div class="decoder-section__title">
+              <span>⏱️</span> nSequence (BIP68 - Timelock relativo)
+            </div>
+            <div class="decoder-section__subtitle">
+              Campo de 4 bytes en cada input. Si el bit 31 = 0, activa timelock relativo desde la confirmación del output previo.
+            </div>
+
+            <div class="tool-field">
+              <label class="tool-label" for="sequence-input">Valor nSequence (hex, 4 bytes)</label>
+              <input 
+                type="text" 
+                id="sequence-input" 
+                class="tool-input" 
+                placeholder="Ej: ffffffff, fffffffe, 00000010"
+                style="font-family: 'JetBrains Mono', monospace;"
+              />
+            </div>
+
+            <div class="tool-presets" style="margin-top: 0.5rem;">
+              <button class="tool-preset" data-sequence="ffffffff">0xFFFFFFFF (final)</button>
+              <button class="tool-preset" data-sequence="fffffffe">0xFFFFFFFE (RBF)</button>
+              <button class="tool-preset" data-sequence="00000001">1 bloque relativo</button>
+              <button class="tool-preset" data-sequence="00000090">144 bloques (~1 día)</button>
+              <button class="tool-preset" data-sequence="00400001">1 unidad de tiempo (512s)</button>
+              <button class="tool-preset" data-sequence="004000b0">176 × 512s (~1 día)</button>
+            </div>
+
+            <div id="sequence-result" style="display: none;"></div>
+          </div>
+
+          <!-- Section 3: RBF Detection -->
+          <div class="decoder-section">
+            <div class="decoder-section__title">
+              <span>🔄</span> Detección RBF (Replace-By-Fee)
+            </div>
+            <div class="decoder-section__subtitle">
+              Una transacción señala RBF si al menos un input tiene sequence &lt; 0xFFFFFFFE (BIP125).
+            </div>
+
+            <div class="tool-field">
+              <label class="tool-label" for="rbf-input">Valor nSequence (hex)</label>
+              <input 
+                type="text" 
+                id="rbf-input" 
+                class="tool-input" 
+                placeholder="Ej: ffffffff, fffffffe, fffffffd"
+                style="font-family: 'JetBrains Mono', monospace;"
+              />
+            </div>
+
+            <div id="rbf-result" style="display: none;"></div>
+          </div>
+
+          <!-- Reference -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Referencia rápida</h2>
+            <div class="tool-table-wrapper">
+              <table class="tool-table">
+                <thead>
+                  <tr>
+                    <th>Campo</th>
+                    <th>Valor</th>
+                    <th>Significado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>nLocktime</td>
+                    <td><code>0</code></td>
+                    <td>Sin restricción temporal</td>
+                  </tr>
+                  <tr>
+                    <td>nLocktime</td>
+                    <td><code>1 – 499.999.999</code></td>
+                    <td>Altura de bloque mínima</td>
+                  </tr>
+                  <tr>
+                    <td>nLocktime</td>
+                    <td><code>≥ 500.000.000</code></td>
+                    <td>Unix timestamp mínimo</td>
+                  </tr>
+                  <tr>
+                    <td>nSequence</td>
+                    <td><code>0xFFFFFFFF</code></td>
+                    <td>Final (sin RBF, sin timelock relativo)</td>
+                  </tr>
+                  <tr>
+                    <td>nSequence</td>
+                    <td><code>0xFFFFFFFE</code></td>
+                    <td>No-RBF pero permite nLocktime</td>
+                  </tr>
+                  <tr>
+                    <td>nSequence</td>
+                    <td><code>&lt; 0xFFFFFFFE</code></td>
+                    <td>RBF señalado + posible timelock relativo</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-5/locktime-sequence.html">Locktime y Sequence en detalle →</a> · 
+              <a href="tx-decoder.html">Decodificador de transacciones →</a> ·
+              <a href="unix-time.html">Unix timestamp →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    const locktimeInput = document.getElementById('locktime-input');
+    const locktimeResult = document.getElementById('locktime-result');
+    const sequenceInput = document.getElementById('sequence-input');
+    const sequenceResult = document.getElementById('sequence-result');
+    const rbfInput = document.getElementById('rbf-input');
+    const rbfResult = document.getElementById('rbf-result');
+
+    function parseValue(str) {
+      str = str.trim().toLowerCase();
+      if (str.startsWith('0x')) {
+        return parseInt(str, 16);
+      }
+      if (/^[0-9a-f]+$/.test(str) && str.length === 8) {
+        // Probablemente hex
+        return parseInt(str, 16);
+      }
+      return parseInt(str, 10);
+    }
+
+    // === nLocktime ===
+    function decodeLocktime() {
+      const value = parseValue(locktimeInput.value);
+      
+      if (isNaN(value) || value < 0) {
+        locktimeResult.style.display = 'none';
+        return;
+      }
+
+      let html = '';
+
+      if (value === 0) {
+        html = `
+          <div class="interpretation-box interpretation-box--disabled">
+            <div class="interpretation-box__type interpretation-box__type--disabled">Sin restricción</div>
+            <div class="interpretation-box__value">0</div>
+            <div class="interpretation-box__detail">
+              La transacción puede incluirse en cualquier bloque inmediatamente.
+            </div>
+          </div>
+        `;
+      } else if (value < 500000000) {
+        html = `
+          <div class="interpretation-box interpretation-box--block">
+            <div class="interpretation-box__type interpretation-box__type--block">Altura de bloque</div>
+            <div class="interpretation-box__value">Bloque ${value.toLocaleString('es-ES')}</div>
+            <div class="interpretation-box__detail">
+              La transacción no puede incluirse hasta que la blockchain alcance esta altura.
+            </div>
+          </div>
+        `;
+      } else {
+        const date = new Date(value * 1000);
+        const now = Date.now();
+        const isPast = value * 1000 < now;
+        
+        html = `
+          <div class="interpretation-box interpretation-box--time">
+            <div class="interpretation-box__type interpretation-box__type--time">Unix timestamp</div>
+            <div class="interpretation-box__value">${date.toUTCString()}</div>
+            <div class="interpretation-box__detail">
+              Timestamp: ${value.toLocaleString('es-ES')}<br>
+              Estado: ${isPast ? '✓ Ya pasado (válido ahora)' : '⏳ En el futuro (no válido aún)'}
+            </div>
+          </div>
+        `;
+      }
+
+      locktimeResult.innerHTML = html;
+      locktimeResult.style.display = 'block';
+    }
+
+    locktimeInput.addEventListener('input', decodeLocktime);
+
+    document.querySelectorAll('[data-locktime]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        locktimeInput.value = btn.dataset.locktime;
+        decodeLocktime();
+      });
+    });
+
+    // === nSequence (BIP68) ===
+    function decodeSequence() {
+      let hex = sequenceInput.value.trim().toLowerCase().replace(/^0x/, '');
+      
+      if (!/^[0-9a-f]{1,8}$/.test(hex)) {
+        sequenceResult.style.display = 'none';
+        return;
+      }
+
+      hex = hex.padStart(8, '0');
+      const value = parseInt(hex, 16);
+
+      // Crear diagrama de bits
+      const binary = value.toString(2).padStart(32, '0');
+      let bitsHtml = '<div class="bits-diagram">';
+      
+      for (let i = 0; i < 32; i++) {
+        const bitIndex = 31 - i;
+        const bitValue = binary[i];
+        let bitClass = 'bit--reserved';
+        
+        if (bitIndex === 31) bitClass = 'bit--flag-disable';
+        else if (bitIndex === 22) bitClass = 'bit--flag-type';
+        else if (bitIndex < 16) bitClass = 'bit--value';
+        
+        bitsHtml += `
+          <div class="bit ${bitClass}">
+            <span class="bit__value">${bitValue}</span>
+            <span class="bit__index">${bitIndex}</span>
+          </div>
+        `;
+      }
+      bitsHtml += '</div>';
+
+      // Interpretar
+      const bit31 = (value >> 31) & 1;
+      const bit22 = (value >> 22) & 1;
+      const lockValue = value & 0xFFFF;
+
+      let interpretation = '';
+
+      if (value === 0xFFFFFFFF) {
+        interpretation = `
+          <div class="interpretation-box interpretation-box--disabled">
+            <div class="interpretation-box__type interpretation-box__type--disabled">Final (máximo)</div>
+            <div class="interpretation-box__value">0xFFFFFFFF</div>
+            <div class="interpretation-box__detail">
+              Sin RBF. Sin timelock relativo. Ignora nLocktime.
+            </div>
+          </div>
+        `;
+      } else if (value === 0xFFFFFFFE) {
+        interpretation = `
+          <div class="interpretation-box interpretation-box--rbf">
+            <div class="interpretation-box__type interpretation-box__type--rbf">Casi final</div>
+            <div class="interpretation-box__value">0xFFFFFFFE</div>
+            <div class="interpretation-box__detail">
+              Sin RBF (BIP125). Sin timelock relativo. Permite nLocktime.
+            </div>
+          </div>
+        `;
+      } else if (bit31 === 1) {
+        interpretation = `
+          <div class="interpretation-box interpretation-box--disabled">
+            <div class="interpretation-box__type interpretation-box__type--disabled">Timelock relativo desactivado</div>
+            <div class="interpretation-box__value">Bit 31 = 1</div>
+            <div class="interpretation-box__detail">
+              RBF señalado (sequence &lt; 0xFFFFFFFE).<br>
+              Timelock relativo BIP68 desactivado.
+            </div>
+          </div>
+        `;
+      } else {
+        // BIP68 activo
+        if (bit22 === 0) {
+          // Bloques
+          interpretation = `
+            <div class="interpretation-box interpretation-box--block">
+              <div class="interpretation-box__type interpretation-box__type--block">Timelock relativo: bloques</div>
+              <div class="interpretation-box__value">${lockValue.toLocaleString('es-ES')} bloques</div>
+              <div class="interpretation-box__detail">
+                RBF señalado.<br>
+                Debe esperar ${lockValue} bloques desde la confirmación del output previo.<br>
+                ≈ ${Math.round(lockValue * 10 / 60)} horas / ${(lockValue * 10 / 60 / 24).toFixed(1)} días
+              </div>
+            </div>
+          `;
+        } else {
+          // Tiempo (unidades de 512 segundos)
+          const seconds = lockValue * 512;
+          const hours = seconds / 3600;
+          const days = hours / 24;
+          
+          interpretation = `
+            <div class="interpretation-box interpretation-box--time">
+              <div class="interpretation-box__type interpretation-box__type--time">Timelock relativo: tiempo</div>
+              <div class="interpretation-box__value">${lockValue} × 512 segundos = ${seconds.toLocaleString('es-ES')} s</div>
+              <div class="interpretation-box__detail">
+                RBF señalado.<br>
+                Debe esperar ${hours.toFixed(1)} horas (${days.toFixed(2)} días) desde la confirmación.
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      // Leyenda de bits
+      const legend = `
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.75rem; font-size: 0.75rem;">
+          <span><span class="bit bit--flag-disable" style="display: inline-block; width: 16px; height: 16px; vertical-align: middle;"></span> Bit 31: Disable</span>
+          <span><span class="bit bit--flag-type" style="display: inline-block; width: 16px; height: 16px; vertical-align: middle;"></span> Bit 22: Type (0=bloques, 1=tiempo)</span>
+          <span><span class="bit bit--value" style="display: inline-block; width: 16px; height: 16px; vertical-align: middle;"></span> Bits 0-15: Valor</span>
+        </div>
+      `;
+
+      sequenceResult.innerHTML = interpretation + bitsHtml + legend;
+      sequenceResult.style.display = 'block';
+    }
+
+    sequenceInput.addEventListener('input', decodeSequence);
+
+    document.querySelectorAll('[data-sequence]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        sequenceInput.value = btn.dataset.sequence;
+        decodeSequence();
+      });
+    });
+
+    // === RBF Detection ===
+    function checkRBF() {
+      let hex = rbfInput.value.trim().toLowerCase().replace(/^0x/, '');
+      
+      if (!/^[0-9a-f]{1,8}$/.test(hex)) {
+        rbfResult.style.display = 'none';
+        return;
+      }
+
+      hex = hex.padStart(8, '0');
+      const value = parseInt(hex, 16);
+
+      const isRBF = value < 0xFFFFFFFE;
+
+      let html;
+      if (isRBF) {
+        html = `
+          <div class="interpretation-box interpretation-box--rbf">
+            <div class="interpretation-box__type interpretation-box__type--rbf">RBF señalado</div>
+            <div class="interpretation-box__value">✓ Sí</div>
+            <div class="interpretation-box__detail">
+              Sequence 0x${hex.toUpperCase()} &lt; 0xFFFFFFFE<br>
+              Esta transacción puede ser reemplazada por otra con mayor fee (BIP125).
+            </div>
+          </div>
+        `;
+      } else {
+        html = `
+          <div class="interpretation-box interpretation-box--disabled">
+            <div class="interpretation-box__type interpretation-box__type--disabled">RBF no señalado</div>
+            <div class="interpretation-box__value">✗ No</div>
+            <div class="interpretation-box__detail">
+              Sequence 0x${hex.toUpperCase()} ≥ 0xFFFFFFFE<br>
+              Esta transacción indica que no debe ser reemplazada (aunque los mineros pueden ignorarlo).
+            </div>
+          </div>
+        `;
+      }
+
+      rbfResult.innerHTML = html;
+      rbfResult.style.display = 'block';
+    }
+
+    rbfInput.addEventListener('input', checkRBF);
+
+  })();
+  </script>
+</body>
+</html>

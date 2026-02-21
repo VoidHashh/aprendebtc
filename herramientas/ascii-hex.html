@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Convierte entre texto ASCII y hexadecimal. Útil para decodificar OP_RETURN y mensajes en la blockchain." />
+  <title>ASCII ↔ Hexadecimal — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .converter-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .converter-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .converter-panel {
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+    }
+    .converter-panel__title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .arrow-column {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 0;
+      color: var(--accent);
+      font-size: 1.5rem;
+    }
+    @media (max-width: 768px) {
+      .arrow-column {
+        transform: rotate(90deg);
+        padding: 1rem 0;
+      }
+    }
+
+    .char-display {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      padding: 0.75rem;
+      background: var(--bg-primary);
+      border-radius: var(--radius-md);
+      min-height: 50px;
+    }
+    .char-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 4px 6px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-border);
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .char-box__char {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+    .char-box__hex {
+      font-size: 0.65rem;
+      color: var(--text-secondary);
+    }
+    .char-box--nonprint .char-box__char {
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+        <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">ASCII y hexadecimal</span>
+        </nav>
+
+        <article class="article">
+          <h1>ASCII ↔ Hexadecimal</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Convierte texto a hexadecimal y viceversa. Útil para leer datos OP_RETURN.
+          </p>
+
+          <!-- Converter -->
+          <div class="tool-container">
+            <div class="converter-grid">
+              <!-- ASCII Panel -->
+              <div class="converter-panel">
+                <div class="converter-panel__title">
+                  <span>📝</span> Texto ASCII
+                </div>
+                <textarea 
+                  id="input-ascii" 
+                  class="tool-input" 
+                  rows="4"
+                  placeholder="Escribe texto aquí..."
+                ></textarea>
+              </div>
+
+              <!-- Arrows -->
+              <div class="arrow-column">
+                <span>↔</span>
+              </div>
+
+              <!-- Hex Panel -->
+              <div class="converter-panel">
+                <div class="converter-panel__title">
+                  <span>🔢</span> Hexadecimal
+                </div>
+                <textarea 
+                  id="input-hex" 
+                  class="tool-input" 
+                  rows="4"
+                  placeholder="O pega hex aquí..."
+                  style="font-family: 'JetBrains Mono', monospace;"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Character breakdown -->
+          <div class="tool-container" id="breakdown-section" style="display: none;">
+            <h2 class="tool-container__title">Desglose carácter a carácter</h2>
+            <div class="char-display" id="char-display"></div>
+          </div>
+
+          <!-- Stats -->
+          <div class="tool-container" id="stats-section" style="display: none;">
+            <div class="tool-row">
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">Caracteres</div>
+                <div class="tool-result-card__value" id="stat-chars">0</div>
+              </div>
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">Bytes</div>
+                <div class="tool-result-card__value" id="stat-bytes">0</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Presets -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Ejemplos famosos</h2>
+            <div class="tool-presets">
+              <button class="tool-preset" data-ascii="The Times 03/Jan/2009 Chancellor on brink of second bailout for banks">
+                Mensaje del bloque génesis
+              </button>
+              <button class="tool-preset" data-hex="48656c6c6f20426974636f696e21">
+                "Hello Bitcoin!" (hex)
+              </button>
+              <button class="tool-preset" data-ascii="OMNI">
+                Prefijo OMNI Layer
+              </button>
+            </div>
+          </div>
+
+          <!-- OP_RETURN info -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">OP_RETURN y datos en la blockchain</h2>
+            <div style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7;">
+              <p>
+                <strong>OP_RETURN</strong> permite almacenar hasta 80 bytes de datos arbitrarios en una transacción Bitcoin. 
+                Estos datos se codifican en hexadecimal y pueden contener:
+              </p>
+              <ul style="margin-top: 0.75rem; padding-left: 1.25rem;">
+                <li>Mensajes de texto (como el mensaje del bloque génesis)</li>
+                <li>Hashes de documentos (proof of existence)</li>
+                <li>Metadata de protocolos (Ordinals, OMNI, etc.)</li>
+                <li>Identificadores de timestamping</li>
+              </ul>
+
+              <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md); margin-top: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">
+                <div style="color: var(--text-secondary);">ScriptPubKey con OP_RETURN:</div>
+                <div style="margin-top: 0.5rem;">
+                  <span style="color: #da3633;">6a</span>
+                  <span style="color: var(--text-secondary);">28</span>
+                  <span style="color: var(--accent);">5468652054696d65732030332f...</span>
+                </div>
+                <div style="font-size: 0.7rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                  6a = OP_RETURN, 28 = 40 bytes de datos, resto = mensaje en hex
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Relacionado</div>
+            <p class="tool-callout__text">
+              <a href="tx-decoder.html">Decodificador de transacciones →</a> · 
+              <a href="compact-size.html">Compact Size (VarInt) →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    const inputAscii = document.getElementById('input-ascii');
+    const inputHex = document.getElementById('input-hex');
+    const breakdownSection = document.getElementById('breakdown-section');
+    const charDisplay = document.getElementById('char-display');
+    const statsSection = document.getElementById('stats-section');
+    const statChars = document.getElementById('stat-chars');
+    const statBytes = document.getElementById('stat-bytes');
+
+    let isUpdating = false;
+
+    function asciiToHex(str) {
+      let hex = '';
+      for (let i = 0; i < str.length; i++) {
+        const code = str.charCodeAt(i);
+        hex += code.toString(16).padStart(2, '0');
+      }
+      return hex;
+    }
+
+    function hexToAscii(hex) {
+      hex = hex.replace(/\s/g, '').toLowerCase();
+      if (hex.length % 2 !== 0) hex = '0' + hex;
+      
+      let str = '';
+      for (let i = 0; i < hex.length; i += 2) {
+        const code = parseInt(hex.substring(i, i + 2), 16);
+        // Reemplazar caracteres no imprimibles con ·
+        if (code >= 32 && code <= 126) {
+          str += String.fromCharCode(code);
+        } else {
+          str += '·';
+        }
+      }
+      return str;
+    }
+
+    function updateCharDisplay(text, hex) {
+      if (!text && !hex) {
+        breakdownSection.style.display = 'none';
+        statsSection.style.display = 'none';
+        return;
+      }
+
+      // Si no tenemos texto pero sí hex, derivar
+      if (!text && hex) {
+        hex = hex.replace(/\s/g, '').toLowerCase();
+        text = '';
+        for (let i = 0; i < hex.length; i += 2) {
+          const code = parseInt(hex.substring(i, i + 2), 16);
+          text += String.fromCharCode(code);
+        }
+      }
+
+      let html = '';
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        const code = text.charCodeAt(i);
+        const hexCode = code.toString(16).padStart(2, '0');
+        const isPrintable = code >= 32 && code <= 126;
+        const displayChar = isPrintable ? char : '·';
+        
+        html += `
+          <div class="char-box ${isPrintable ? '' : 'char-box--nonprint'}">
+            <span class="char-box__char">${displayChar === '<' ? '&lt;' : displayChar === '>' ? '&gt;' : displayChar}</span>
+            <span class="char-box__hex">${hexCode}</span>
+          </div>
+        `;
+      }
+
+      charDisplay.innerHTML = html;
+      breakdownSection.style.display = 'block';
+
+      // Stats
+      statChars.textContent = text.length;
+      statBytes.textContent = text.length;
+      statsSection.style.display = 'block';
+    }
+
+    inputAscii.addEventListener('input', () => {
+      if (isUpdating) return;
+      isUpdating = true;
+
+      const text = inputAscii.value;
+      const hex = asciiToHex(text);
+      inputHex.value = hex;
+      updateCharDisplay(text, hex);
+
+      isUpdating = false;
+    });
+
+    inputHex.addEventListener('input', () => {
+      if (isUpdating) return;
+      isUpdating = true;
+
+      let hex = inputHex.value.replace(/[^0-9a-fA-F]/g, '');
+      const text = hexToAscii(hex);
+      inputAscii.value = text;
+      updateCharDisplay(text, hex);
+
+      isUpdating = false;
+    });
+
+    // Presets
+    document.querySelectorAll('[data-ascii]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        inputAscii.value = btn.dataset.ascii;
+        inputAscii.dispatchEvent(new Event('input'));
+      });
+    });
+
+    document.querySelectorAll('[data-hex]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        inputHex.value = btn.dataset.hex;
+        inputHex.dispatchEvent(new Event('input'));
+      });
+    });
+
+  })();
+  </script>
+</body>
+</html>
+

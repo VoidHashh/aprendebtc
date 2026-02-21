@@ -135,7 +135,17 @@
     { title: 'Interprete de Bitcoin Script', url: '/herramientas/script-interpreter.html', tags: ['herramientas', 'script', 'stack', 'opcodes'], section: 'Herramientas' },
     { title: 'Decodificador PSBT (BIP174)', url: '/herramientas/psbt-decoder.html', tags: ['herramientas', 'psbt', 'bip174', 'wallet'], section: 'Herramientas' },
     { title: 'Firma digital: ECDSA y Schnorr', url: '/herramientas/ecdsa-schnorr.html', tags: ['herramientas', 'firma', 'ecdsa', 'schnorr'], section: 'Herramientas' },
-    { title: 'Calculadora de curva eliptica', url: '/herramientas/ec-calculator.html', tags: ['herramientas', 'secp256k1', 'curva', 'modular'], section: 'Herramientas' },
+    { title: 'Calculadora de curva eliptica', url: '/herramientas/ec-calculator.html', tags: ['herramientas', 'secp256k1', 'curva', 'modular'], section: 'Herramientas' },
+    { title: 'Compact Size (VarInt)', url: '/herramientas/compact-size.html', tags: ['herramientas', 'varint', 'compact size', 'transacciones'], section: 'Herramientas' },
+    { title: 'ASCII y hexadecimal', url: '/herramientas/ascii-hex.html', tags: ['herramientas', 'ascii', 'hex', 'bytes'], section: 'Herramientas' },
+    { title: 'Tiempo Unix', url: '/herramientas/unix-time.html', tags: ['herramientas', 'timestamp', 'unix', 'bloques'], section: 'Herramientas' },
+    { title: 'Decodificador de timelocks', url: '/herramientas/timelock-decoder.html', tags: ['herramientas', 'timelock', 'locktime', 'sequence'], section: 'Herramientas' },
+    { title: 'Decodificador de factura Lightning', url: '/herramientas/lightning-invoice.html', tags: ['herramientas', 'lightning', 'bolt11', 'invoice'], section: 'Herramientas' },
+    { title: 'Analizador de entropía', url: '/herramientas/entropy-analyzer.html', tags: ['herramientas', 'entropia', 'entropía', 'aleatoriedad', 'seguridad'], section: 'Herramientas' },
+    { title: 'Validador de seed phrase', url: '/herramientas/seed-validator.html', tags: ['herramientas', 'seed', 'bip39', 'mnemonic'], section: 'Herramientas' },
+
+
+
     { title: 'Comunidad', url: '/comunidad/', tags: ['meetups', 'eventos'], section: 'Pilares' }
   ];
 

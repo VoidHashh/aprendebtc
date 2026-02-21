@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Codifica y decodifica integers en formato Compact Size (VarInt) usado en transacciones Bitcoin." />
+  <title>Compact Size (VarInt) — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .converter-section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .converter-section__title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .converter-section__icon {
+      font-size: 1.25rem;
+    }
+
+    .result-box {
+      background: var(--bg-primary);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+    .result-box__label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+    .result-box__value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.1rem;
+      color: var(--accent);
+      word-break: break-all;
+    }
+    .result-box__note {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+        <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Compact Size (VarInt)</span>
+        </nav>
+
+        <article class="article">
+          <h1>Compact Size (VarInt)</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Convierte entre integers y el formato Compact Size que Bitcoin usa en transacciones.
+          </p>
+
+          <!-- Encode -->
+          <div class="converter-section">
+            <div class="converter-section__title">
+              <span class="converter-section__icon">📥</span>
+              Integer → Compact Size
+            </div>
+
+            <div class="tool-field">
+              <label class="tool-label" for="encode-input">Número decimal</label>
+              <input 
+                type="text" 
+                id="encode-input" 
+                class="tool-input" 
+                placeholder="Ej: 253, 65535, 70000..."
+                inputmode="numeric"
+              />
+            </div>
+
+            <button class="tool-btn" id="btn-encode">Codificar →</button>
+
+            <div class="tool-error" id="encode-error" style="display: none;"></div>
+
+            <div class="result-box" id="encode-result" style="display: none;">
+              <div class="result-box__label">Compact Size (hex)</div>
+              <div class="result-box__value" id="encode-output">—</div>
+              <div class="result-box__note" id="encode-note">—</div>
+            </div>
+          </div>
+
+          <!-- Decode -->
+          <div class="converter-section">
+            <div class="converter-section__title">
+              <span class="converter-section__icon">📤</span>
+              Compact Size → Integer
+            </div>
+
+            <div class="tool-field">
+              <label class="tool-label" for="decode-input">Compact Size (hex)</label>
+              <input 
+                type="text" 
+                id="decode-input" 
+                class="tool-input" 
+                placeholder="Ej: fc, fdfd00, fe00000100..."
+                style="font-family: 'JetBrains Mono', monospace;"
+              />
+            </div>
+
+            <button class="tool-btn" id="btn-decode">← Decodificar</button>
+
+            <div class="tool-error" id="decode-error" style="display: none;"></div>
+
+            <div class="result-box" id="decode-result" style="display: none;">
+              <div class="result-box__label">Número decimal</div>
+              <div class="result-box__value" id="decode-output">—</div>
+              <div class="result-box__note" id="decode-note">—</div>
+            </div>
+          </div>
+
+          <!-- Reglas -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Reglas de codificación</h2>
+            <div class="tool-table-wrapper">
+              <table class="tool-table">
+                <thead>
+                  <tr>
+                    <th>Rango</th>
+                    <th>Prefijo</th>
+                    <th>Tamaño total</th>
+                    <th>Formato</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>0 – 252</td>
+                    <td>—</td>
+                    <td>1 byte</td>
+                    <td>Valor directo</td>
+                  </tr>
+                  <tr>
+                    <td>253 – 65.535</td>
+                    <td><code>fd</code></td>
+                    <td>3 bytes</td>
+                    <td><code>fd</code> + 2 bytes LE</td>
+                  </tr>
+                  <tr>
+                    <td>65.536 – 4.294.967.295</td>
+                    <td><code>fe</code></td>
+                    <td>5 bytes</td>
+                    <td><code>fe</code> + 4 bytes LE</td>
+                  </tr>
+                  <tr>
+                    <td>> 4.294.967.295</td>
+                    <td><code>ff</code></td>
+                    <td>9 bytes</td>
+                    <td><code>ff</code> + 8 bytes LE</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout callout--info" style="margin-top: 1rem;">
+              <span class="callout__icon">ℹ️</span>
+              <div class="callout__content">
+                <p class="callout__text"><strong>LE = Little-Endian:</strong> el byte menos significativo va primero. Por ejemplo, 253 (0x00FD) se codifica como <code>fd fd00</code>.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ejemplos -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Ejemplos</h2>
+            <div class="tool-presets">
+              <button class="tool-preset" data-encode="1">1</button>
+              <button class="tool-preset" data-encode="252">252 (máx 1 byte)</button>
+              <button class="tool-preset" data-encode="253">253 (mín 3 bytes)</button>
+              <button class="tool-preset" data-encode="255">255</button>
+              <button class="tool-preset" data-encode="65535">65.535 (máx 3 bytes)</button>
+              <button class="tool-preset" data-encode="65536">65.536 (mín 5 bytes)</button>
+              <button class="tool-preset" data-encode="70000">70.000</button>
+              <button class="tool-preset" data-encode="4294967295">4.294.967.295 (máx 5 bytes)</button>
+            </div>
+          </div>
+
+          <!-- Uso en Bitcoin -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">¿Dónde se usa?</h2>
+            <div style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7;">
+              <p>Compact Size se usa en muchos lugares dentro de las transacciones Bitcoin:</p>
+              <ul style="margin-top: 0.75rem; padding-left: 1.25rem;">
+                <li><strong>Input count</strong> — número de inputs en la transacción</li>
+                <li><strong>Output count</strong> — número de outputs</li>
+                <li><strong>Script length</strong> — longitud del scriptSig o scriptPubKey</li>
+                <li><strong>Witness item count</strong> — número de elementos en el witness</li>
+                <li><strong>Witness item length</strong> — longitud de cada elemento witness</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Relacionado</div>
+            <p class="tool-callout__text">
+              <a href="tx-decoder.html">Decodificador de transacciones →</a> · 
+              <a href="tx-splitter.html">TX splitter (byte a byte) →</a> ·
+              <a href="ascii-hex.html">ASCII y hexadecimal →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    const encodeInput = document.getElementById('encode-input');
+    const btnEncode = document.getElementById('btn-encode');
+    const encodeError = document.getElementById('encode-error');
+    const encodeResult = document.getElementById('encode-result');
+    const encodeOutput = document.getElementById('encode-output');
+    const encodeNote = document.getElementById('encode-note');
+
+    const decodeInput = document.getElementById('decode-input');
+    const btnDecode = document.getElementById('btn-decode');
+    const decodeError = document.getElementById('decode-error');
+    const decodeResult = document.getElementById('decode-result');
+    const decodeOutput = document.getElementById('decode-output');
+    const decodeNote = document.getElementById('decode-note');
+
+    function toHex(n, bytes) {
+      let hex = n.toString(16);
+      while (hex.length < bytes * 2) hex = '0' + hex;
+      return hex;
+    }
+
+    function toLittleEndian(hex) {
+      // Dividir en bytes y revertir
+      const bytes = [];
+      for (let i = 0; i < hex.length; i += 2) {
+        bytes.push(hex.substring(i, i + 2));
+      }
+      return bytes.reverse().join('');
+    }
+
+    function encodeCompactSize(n) {
+      if (n < 0) throw new Error('El número debe ser positivo');
+      
+      if (n <= 252) {
+        return {
+          hex: toHex(n, 1),
+          bytes: 1,
+          note: 'Valor directo (1 byte)'
+        };
+      }
+      
+      if (n <= 65535) {
+        const valueHex = toLittleEndian(toHex(n, 2));
+        return {
+          hex: 'fd' + valueHex,
+          bytes: 3,
+          note: 'Prefijo fd + 2 bytes little-endian'
+        };
+      }
+      
+      if (n <= 4294967295) {
+        const valueHex = toLittleEndian(toHex(n, 4));
+        return {
+          hex: 'fe' + valueHex,
+          bytes: 5,
+          note: 'Prefijo fe + 4 bytes little-endian'
+        };
+      }
+      
+      // > 4294967295
+      const valueHex = toLittleEndian(toHex(n, 8));
+      return {
+        hex: 'ff' + valueHex,
+        bytes: 9,
+        note: 'Prefijo ff + 8 bytes little-endian'
+      };
+    }
+
+    function decodeCompactSize(hex) {
+      hex = hex.toLowerCase().replace(/\s/g, '');
+      if (!/^[0-9a-f]+$/.test(hex)) {
+        throw new Error('Formato hexadecimal inválido');
+      }
+
+      const firstByte = parseInt(hex.substring(0, 2), 16);
+
+      if (firstByte <= 252) {
+        return {
+          value: firstByte,
+          bytesUsed: 1,
+          note: 'Valor directo (1 byte)'
+        };
+      }
+
+      if (firstByte === 0xfd) {
+        if (hex.length < 6) throw new Error('Faltan bytes (se esperan 3 total)');
+        const valueHex = hex.substring(2, 6);
+        const value = parseInt(toLittleEndian(valueHex), 16);
+        return {
+          value,
+          bytesUsed: 3,
+          note: 'Prefijo fd + 2 bytes little-endian'
+        };
+      }
+
+      if (firstByte === 0xfe) {
+        if (hex.length < 10) throw new Error('Faltan bytes (se esperan 5 total)');
+        const valueHex = hex.substring(2, 10);
+        const value = parseInt(toLittleEndian(valueHex), 16);
+        return {
+          value,
+          bytesUsed: 5,
+          note: 'Prefijo fe + 4 bytes little-endian'
+        };
+      }
+
+      if (firstByte === 0xff) {
+        if (hex.length < 18) throw new Error('Faltan bytes (se esperan 9 total)');
+        const valueHex = hex.substring(2, 18);
+        // Usar BigInt para valores grandes
+        const value = BigInt('0x' + toLittleEndian(valueHex));
+        return {
+          value: value.toString(),
+          bytesUsed: 9,
+          note: 'Prefijo ff + 8 bytes little-endian'
+        };
+      }
+
+      throw new Error('Formato no reconocido');
+    }
+
+    function encode() {
+      encodeError.style.display = 'none';
+      encodeResult.style.display = 'none';
+
+      const input = encodeInput.value.trim().replace(/\./g, '').replace(/,/g, '');
+      
+      if (!input) {
+        showError(encodeError, 'Introduce un número.');
+        return;
+      }
+
+      const n = parseInt(input);
+      if (isNaN(n) || n < 0) {
+        showError(encodeError, 'Introduce un número entero positivo.');
+        return;
+      }
+
+      try {
+        const result = encodeCompactSize(n);
+        encodeOutput.textContent = result.hex;
+        encodeNote.textContent = `${result.bytes} byte${result.bytes > 1 ? 's' : ''} — ${result.note}`;
+        encodeResult.style.display = 'block';
+      } catch (error) {
+        showError(encodeError, error.message);
+      }
+    }
+
+    function decode() {
+      decodeError.style.display = 'none';
+      decodeResult.style.display = 'none';
+
+      const input = decodeInput.value.trim();
+      
+      if (!input) {
+        showError(decodeError, 'Introduce un valor hexadecimal.');
+        return;
+      }
+
+      try {
+        const result = decodeCompactSize(input);
+        decodeOutput.textContent = typeof result.value === 'string' 
+          ? result.value 
+          : result.value.toLocaleString('es-ES');
+        decodeNote.textContent = `${result.bytesUsed} byte${result.bytesUsed > 1 ? 's' : ''} leídos — ${result.note}`;
+        decodeResult.style.display = 'block';
+      } catch (error) {
+        showError(decodeError, error.message);
+      }
+    }
+
+    function showError(el, msg) {
+      el.textContent = msg;
+      el.style.display = 'block';
+    }
+
+    btnEncode.addEventListener('click', encode);
+    btnDecode.addEventListener('click', decode);
+
+    encodeInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') encode();
+    });
+
+    decodeInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') decode();
+    });
+
+    // Auto-encode on input
+    encodeInput.addEventListener('input', () => {
+      if (encodeInput.value.trim()) encode();
+    });
+
+    // Auto-decode on input
+    decodeInput.addEventListener('input', () => {
+      if (decodeInput.value.trim()) decode();
+    });
+
+    // Presets
+    document.querySelectorAll('[data-encode]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        encodeInput.value = btn.dataset.encode;
+        encode();
+      });
+    });
+
+  })();
+  </script>
+</body>
+</html>
+

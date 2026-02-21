@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Verifica el checksum de una frase semilla BIP39. Comprueba si tu seed phrase es válida sin revelar información." />
+  <title>Validador de seed phrase — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .word-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .word-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+    }
+    .word-item__index {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      min-width: 20px;
+    }
+    .word-item__word {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+    }
+    .word-item__status {
+      margin-left: auto;
+      font-size: 0.9rem;
+    }
+    .word-item--valid {
+      border-color: #2ea043;
+      background: rgba(46, 160, 67, 0.1);
+    }
+    .word-item--invalid {
+      border-color: #da3633;
+      background: rgba(218, 54, 51, 0.1);
+    }
+
+    .validation-result {
+      padding: 1.25rem;
+      border-radius: var(--radius-md);
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+    .validation-result--valid {
+      background: rgba(46, 160, 67, 0.15);
+      border: 2px solid #2ea043;
+    }
+    .validation-result--invalid {
+      background: rgba(218, 54, 51, 0.15);
+      border: 2px solid #da3633;
+    }
+    .validation-result__icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .validation-result__title {
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    .validation-result__detail {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-top: 0.5rem;
+    }
+
+    .autocomplete-container {
+      position: relative;
+    }
+    .autocomplete-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      max-height: 200px;
+      overflow-y: auto;
+      z-index: 100;
+      display: none;
+    }
+    .autocomplete-dropdown--visible {
+      display: block;
+    }
+    .autocomplete-item {
+      padding: 0.5rem 0.75rem;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+    }
+    .autocomplete-item:hover,
+    .autocomplete-item--selected {
+      background: rgba(247, 147, 26, 0.2);
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--bg-border);
+    }
+    .check-item:last-child {
+      border-bottom: none;
+    }
+    .check-item__icon {
+      font-size: 1.25rem;
+    }
+    .check-item__icon--pass { color: #2ea043; }
+    .check-item__icon--fail { color: #da3633; }
+    .check-item__text {
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+        <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Validador de seed phrase</span>
+        </nav>
+
+        <article class="article">
+          <h1>Validador de seed phrase</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Comprueba si una frase semilla BIP39 tiene un checksum válido y todas las palabras son correctas.
+          </p>
+
+          <!-- Danger warning -->
+          <div class="callout callout--danger" style="margin-bottom: 1.5rem;">
+            <span class="callout__icon" aria-hidden="true">🚨</span>
+            <div class="callout__content">
+              <div class="callout__title">¡Atención!</div>
+              <p class="callout__text">NUNCA introduzcas tu seed phrase real en una web. Esta herramienta es para verificar seeds de prueba o educación. Para seeds reales, usa tu hardware wallet.</p>
+            </div>
+          </div>
+
+          <!-- Input -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Frase semilla</h2>
+
+            <div class="autocomplete-container">
+              <div class="tool-field">
+                <label class="tool-label" for="seed-input">Escribe 12, 15, 18, 21 o 24 palabras separadas por espacios</label>
+                <textarea 
+                  id="seed-input" 
+                  class="tool-input" 
+                  rows="3"
+                  placeholder="abandon ability able about above absent absorb abstract absurd abuse access accident..."
+                  style="font-family: 'JetBrains Mono', monospace;"
+                ></textarea>
+              </div>
+              <div class="autocomplete-dropdown" id="autocomplete-dropdown"></div>
+            </div>
+
+            <div class="tool-btn-row" style="margin-top: 0.75rem;">
+              <button class="tool-btn tool-btn--secondary" id="btn-example-valid">✓ Ejemplo válido</button>
+              <button class="tool-btn tool-btn--secondary" id="btn-example-invalid">✗ Ejemplo inválido</button>
+              <button class="tool-btn" id="btn-validate">🔍 Validar</button>
+            </div>
+          </div>
+
+          <!-- Result -->
+          <div id="result-section" style="display: none;">
+            <div class="validation-result" id="validation-result">
+              <div class="validation-result__icon" id="result-icon">—</div>
+              <div class="validation-result__title" id="result-title">—</div>
+              <div class="validation-result__detail" id="result-detail">—</div>
+            </div>
+
+            <!-- Checks -->
+            <div class="tool-container">
+              <h2 class="tool-container__title">Verificaciones</h2>
+              <div id="checks-container"></div>
+            </div>
+
+            <!-- Word grid -->
+            <div class="tool-container">
+              <h2 class="tool-container__title">Palabras</h2>
+              <div class="word-grid" id="word-grid"></div>
+            </div>
+          </div>
+
+          <!-- Info -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">¿Qué valida esta herramienta?</h2>
+            <div style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7;">
+              <p>Esta herramienta verifica:</p>
+              <ul style="margin-top: 0.5rem; padding-left: 1.25rem;">
+                <li><strong>Número de palabras:</strong> Debe ser 12, 15, 18, 21 o 24</li>
+                <li><strong>Wordlist:</strong> Cada palabra debe existir en la wordlist BIP39 inglés</li>
+                <li><strong>Checksum:</strong> Los últimos bits deben coincidir con el hash SHA-256 de la entropía</li>
+              </ul>
+
+              <p style="margin-top: 0.75rem;">
+                <strong>No deriva seeds ni claves.</strong> Solo valida la estructura de la frase semilla.
+              </p>
+
+              <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md); margin-top: 1rem; font-size: 0.8rem;">
+                <div style="color: var(--text-secondary);">Longitudes válidas:</div>
+                <div style="margin-top: 0.5rem; font-family: 'JetBrains Mono', monospace;">
+                  12 palabras = 128 bits entropía + 4 bits checksum<br>
+                  15 palabras = 160 bits entropía + 5 bits checksum<br>
+                  18 palabras = 192 bits entropía + 6 bits checksum<br>
+                  21 palabras = 224 bits entropía + 7 bits checksum<br>
+                  24 palabras = 256 bits entropía + 8 bits checksum
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Relacionado</div>
+            <p class="tool-callout__text">
+              <a href="mnemonic-seed.html">Generador de mnemonic →</a> · 
+              <a href="entropy-analyzer.html">Analizador de entropía →</a> ·
+              <a href="../base/que-es-seed-phrase.html">¿Qué es una seed phrase? →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+  <script src="../js/bip39-wordlist.js"></script>
+  <script src="../js/hex-utils.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // Ejemplos
+    const VALID_SEED = 'abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about';
+    const INVALID_SEED = 'abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon';
+
+    const seedInput = document.getElementById('seed-input');
+    const autocompleteDropdown = document.getElementById('autocomplete-dropdown');
+    const btnExampleValid = document.getElementById('btn-example-valid');
+    const btnExampleInvalid = document.getElementById('btn-example-invalid');
+    const btnValidate = document.getElementById('btn-validate');
+    const resultSection = document.getElementById('result-section');
+
+    const VALID_LENGTHS = [12, 15, 18, 21, 24];
+
+    // Autocompletado
+    let selectedIndex = -1;
+
+    function updateAutocomplete() {
+      const text = seedInput.value;
+      const cursorPos = seedInput.selectionStart;
+      
+      // Encontrar la palabra actual
+      const beforeCursor = text.substring(0, cursorPos);
+      const words = beforeCursor.split(/\s+/);
+      const currentWord = words[words.length - 1].toLowerCase();
+
+      if (currentWord.length < 2) {
+        autocompleteDropdown.classList.remove('autocomplete-dropdown--visible');
+        return;
+      }
+
+      // Buscar coincidencias
+      const matches = BIP39_WORDLIST_EN.filter(w => w.startsWith(currentWord)).slice(0, 8);
+
+      if (matches.length === 0 || (matches.length === 1 && matches[0] === currentWord)) {
+        autocompleteDropdown.classList.remove('autocomplete-dropdown--visible');
+        return;
+      }
+
+      autocompleteDropdown.innerHTML = matches.map((word, i) => `
+        <div class="autocomplete-item ${i === selectedIndex ? 'autocomplete-item--selected' : ''}" data-word="${word}">
+          ${word}
+        </div>
+      `).join('');
+
+      autocompleteDropdown.classList.add('autocomplete-dropdown--visible');
+    }
+
+    function selectAutocomplete(word) {
+      const text = seedInput.value;
+      const cursorPos = seedInput.selectionStart;
+      
+      const beforeCursor = text.substring(0, cursorPos);
+      const afterCursor = text.substring(cursorPos);
+      
+      const words = beforeCursor.split(/\s+/);
+      words[words.length - 1] = word;
+      
+      seedInput.value = words.join(' ') + ' ' + afterCursor.trimStart();
+      seedInput.focus();
+      
+      autocompleteDropdown.classList.remove('autocomplete-dropdown--visible');
+      selectedIndex = -1;
+    }
+
+    seedInput.addEventListener('input', updateAutocomplete);
+
+    seedInput.addEventListener('keydown', (e) => {
+      const items = autocompleteDropdown.querySelectorAll('.autocomplete-item');
+      
+      if (!autocompleteDropdown.classList.contains('autocomplete-dropdown--visible')) {
+        return;
+      }
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
+        updateAutocomplete();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        selectedIndex = Math.max(selectedIndex - 1, 0);
+        updateAutocomplete();
+      } else if (e.key === 'Enter' || e.key === 'Tab') {
+        if (selectedIndex >= 0 && items[selectedIndex]) {
+          e.preventDefault();
+          selectAutocomplete(items[selectedIndex].dataset.word);
+        }
+      } else if (e.key === 'Escape') {
+        autocompleteDropdown.classList.remove('autocomplete-dropdown--visible');
+      }
+    });
+
+    autocompleteDropdown.addEventListener('click', (e) => {
+      if (e.target.classList.contains('autocomplete-item')) {
+        selectAutocomplete(e.target.dataset.word);
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!seedInput.contains(e.target) && !autocompleteDropdown.contains(e.target)) {
+        autocompleteDropdown.classList.remove('autocomplete-dropdown--visible');
+      }
+    });
+
+    // Validación
+    async function validate() {
+      const words = seedInput.value.trim().toLowerCase().split(/\s+/).filter(w => w);
+      
+      const checks = [];
+      const wordStatuses = [];
+      let isValid = true;
+
+      // Check 1: Número de palabras
+      const wordCountValid = VALID_LENGTHS.includes(words.length);
+      checks.push({
+        pass: wordCountValid,
+        text: wordCountValid 
+          ? `${words.length} palabras (válido)`
+          : `${words.length} palabras (debe ser 12, 15, 18, 21 o 24)`
+      });
+      if (!wordCountValid) isValid = false;
+
+      // Check 2: Palabras en wordlist
+      let invalidWords = [];
+      words.forEach((word, i) => {
+        const inList = BIP39_WORDLIST_EN.includes(word);
+        wordStatuses.push({ word, index: i + 1, valid: inList });
+        if (!inList) invalidWords.push(word);
+      });
+
+      const allWordsValid = invalidWords.length === 0;
+      checks.push({
+        pass: allWordsValid,
+        text: allWordsValid
+          ? 'Todas las palabras están en la wordlist BIP39'
+          : `Palabras no reconocidas: ${invalidWords.join(', ')}`
+      });
+      if (!allWordsValid) isValid = false;
+
+      // Check 3: Checksum (solo si los checks anteriores pasan)
+      let checksumValid = false;
+      if (wordCountValid && allWordsValid) {
+        checksumValid = await verifyChecksum(words);
+        checks.push({
+          pass: checksumValid,
+          text: checksumValid
+            ? 'Checksum válido'
+            : 'Checksum inválido (la última palabra no coincide con la entropía)'
+        });
+        if (!checksumValid) isValid = false;
+      } else {
+        checks.push({
+          pass: false,
+          text: 'No se puede verificar checksum (corrige los errores anteriores)'
+        });
+      }
+
+      // Mostrar resultados
+      displayResults(isValid, checks, wordStatuses);
+    }
+
+    async function verifyChecksum(words) {
+      try {
+        // Convertir palabras a índices (11 bits cada uno)
+        const indices = words.map(w => BIP39_WORDLIST_EN.indexOf(w));
+        
+        // Convertir a binario
+        let binary = '';
+        indices.forEach(idx => {
+          binary += idx.toString(2).padStart(11, '0');
+        });
+
+        // Separar entropía y checksum
+        const checksumBits = words.length / 3; // 4 bits para 12 palabras, 8 para 24, etc.
+        const entropyBits = binary.length - checksumBits;
+        
+        const entropyBinary = binary.substring(0, entropyBits);
+        const checksumBinary = binary.substring(entropyBits);
+
+        // Convertir entropía a bytes
+        const entropyBytes = [];
+        for (let i = 0; i < entropyBinary.length; i += 8) {
+          entropyBytes.push(parseInt(entropyBinary.substring(i, i + 8), 2));
+        }
+
+        // Calcular hash y extraer checksum esperado
+        const hash = await HexUtils.sha256(new Uint8Array(entropyBytes));
+        const hashBinary = Array.from(hash).map(b => b.toString(2).padStart(8, '0')).join('');
+        const expectedChecksum = hashBinary.substring(0, checksumBits);
+
+        return checksumBinary === expectedChecksum;
+      } catch (e) {
+        console.error('Error verifying checksum:', e);
+        return false;
+      }
+    }
+
+    function displayResults(isValid, checks, wordStatuses) {
+      // Result banner
+      const result = document.getElementById('validation-result');
+      const icon = document.getElementById('result-icon');
+      const title = document.getElementById('result-title');
+      const detail = document.getElementById('result-detail');
+
+      if (isValid) {
+        result.className = 'validation-result validation-result--valid';
+        icon.textContent = '✓';
+        title.textContent = 'Seed phrase válida';
+        detail.textContent = 'El checksum es correcto y todas las palabras son válidas.';
+      } else {
+        result.className = 'validation-result validation-result--invalid';
+        icon.textContent = '✗';
+        title.textContent = 'Seed phrase inválida';
+        detail.textContent = 'Se encontraron errores. Revisa los detalles abajo.';
+      }
+
+      // Checks
+      const checksContainer = document.getElementById('checks-container');
+      checksContainer.innerHTML = checks.map(check => `
+        <div class="check-item">
+          <span class="check-item__icon check-item__icon--${check.pass ? 'pass' : 'fail'}">
+            ${check.pass ? '✓' : '✗'}
+          </span>
+          <span class="check-item__text">${check.text}</span>
+        </div>
+      `).join('');
+
+      // Word grid
+      const wordGrid = document.getElementById('word-grid');
+      wordGrid.innerHTML = wordStatuses.map(ws => `
+        <div class="word-item ${ws.valid ? 'word-item--valid' : 'word-item--invalid'}">
+          <span class="word-item__index">${ws.index}.</span>
+          <span class="word-item__word">${ws.word}</span>
+          <span class="word-item__status">${ws.valid ? '✓' : '✗'}</span>
+        </div>
+      `).join('');
+
+      resultSection.style.display = 'block';
+    }
+
+    btnExampleValid.addEventListener('click', () => {
+      seedInput.value = VALID_SEED;
+      validate();
+    });
+
+    btnExampleInvalid.addEventListener('click', () => {
+      seedInput.value = INVALID_SEED;
+      validate();
+    });
+
+    btnValidate.addEventListener('click', validate);
+
+    seedInput.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.key === 'Enter') validate();
+    });
+
+  })();
+  </script>
+</body>
+</html>

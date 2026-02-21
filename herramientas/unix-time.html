@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Convierte entre Unix timestamp y fecha legible. Los block headers y timelocks de Bitcoin usan timestamps Unix." />
+  <title>Tiempo Unix — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .time-section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .time-section__title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .datetime-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    @media (max-width: 640px) {
+      .datetime-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .result-item {
+      background: var(--bg-primary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      padding: 0.75rem;
+    }
+    .result-item__label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+    .result-item__value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--accent);
+      word-break: break-all;
+    }
+
+    .current-time {
+      background: linear-gradient(135deg, rgba(247, 147, 26, 0.1), rgba(247, 147, 26, 0.05));
+      border: 1px solid var(--accent);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .current-time__label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.25rem;
+    }
+    .current-time__value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.5rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+        <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Tiempo Unix</span>
+        </nav>
+
+        <article class="article">
+          <h1>Tiempo Unix</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Convierte entre timestamps Unix (como los que usa Bitcoin) y fechas legibles.
+          </p>
+
+          <!-- Current time -->
+          <div class="current-time">
+            <div class="current-time__label">Timestamp actual</div>
+            <div class="current-time__value" id="current-timestamp">—</div>
+          </div>
+
+          <!-- Timestamp to Date -->
+          <div class="time-section">
+            <div class="time-section__title">
+              <span>📅</span> Timestamp → Fecha
+            </div>
+
+            <div class="tool-field">
+              <label class="tool-label" for="ts-input">Unix timestamp (segundos)</label>
+              <input 
+                type="text" 
+                id="ts-input" 
+                class="tool-input" 
+                placeholder="Ej: 1231006505"
+                inputmode="numeric"
+                style="font-family: 'JetBrains Mono', monospace;"
+              />
+              <button class="tool-btn tool-btn--secondary tool-btn--small" id="btn-now" style="margin-top: 0.5rem;">
+                ⏱️ Usar ahora
+              </button>
+            </div>
+
+            <div class="result-grid" id="ts-result" style="display: none;">
+              <div class="result-item">
+                <div class="result-item__label">UTC</div>
+                <div class="result-item__value" id="ts-utc">—</div>
+              </div>
+              <div class="result-item">
+                <div class="result-item__label">Hora local</div>
+                <div class="result-item__value" id="ts-local">—</div>
+              </div>
+              <div class="result-item">
+                <div class="result-item__label">ISO 8601</div>
+                <div class="result-item__value" id="ts-iso">—</div>
+              </div>
+              <div class="result-item">
+                <div class="result-item__label">Hex (4 bytes LE)</div>
+                <div class="result-item__value" id="ts-hex">—</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Date to Timestamp -->
+          <div class="time-section">
+            <div class="time-section__title">
+              <span>🔢</span> Fecha → Timestamp
+            </div>
+
+            <div class="datetime-row">
+              <div class="tool-field">
+                <label class="tool-label" for="date-input">Fecha</label>
+                <input type="date" id="date-input" class="tool-input" />
+              </div>
+              <div class="tool-field">
+                <label class="tool-label" for="time-input">Hora (UTC)</label>
+                <input type="time" id="time-input" class="tool-input" value="00:00" />
+              </div>
+            </div>
+
+            <div class="result-grid" id="date-result" style="display: none; margin-top: 1rem;">
+              <div class="result-item">
+                <div class="result-item__label">Unix timestamp</div>
+                <div class="result-item__value" id="date-ts">—</div>
+              </div>
+              <div class="result-item">
+                <div class="result-item__label">Hex (4 bytes LE)</div>
+                <div class="result-item__value" id="date-hex">—</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Presets -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Momentos históricos de Bitcoin</h2>
+            <div class="tool-presets">
+              <button class="tool-preset" data-ts="1231006505">Bloque génesis (3 Ene 2009)</button>
+              <button class="tool-preset" data-ts="1354116278">Primer halving (28 Nov 2012)</button>
+              <button class="tool-preset" data-ts="1468082773">Segundo halving (9 Jul 2016)</button>
+              <button class="tool-preset" data-ts="1589225023">Tercer halving (11 May 2020)</button>
+              <button class="tool-preset" data-ts="1713918028">Cuarto halving (20 Abr 2024)</button>
+              <button class="tool-preset" data-ts="1636070400">Taproot activation (14 Nov 2021)</button>
+            </div>
+          </div>
+
+          <!-- Info -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Unix timestamp en Bitcoin</h2>
+            <div style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7;">
+              <p>
+                El <strong>Unix timestamp</strong> es el número de segundos desde el 1 de enero de 1970 00:00:00 UTC (la "época Unix").
+              </p>
+              
+              <p style="margin-top: 0.75rem;">En Bitcoin se usa en varios lugares:</p>
+              <ul style="margin-top: 0.5rem; padding-left: 1.25rem;">
+                <li><strong>Block header</strong> — campo <code>time</code> (4 bytes, little-endian)</li>
+                <li><strong>nLocktime</strong> — si ≥ 500.000.000, se interpreta como timestamp</li>
+                <li><strong>OP_CHECKLOCKTIMEVERIFY</strong> — para timelocks absolutos</li>
+              </ul>
+
+              <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md); margin-top: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">
+                <div style="color: var(--text-secondary);">Ejemplo: timestamp del bloque génesis</div>
+                <div style="margin-top: 0.5rem;">
+                  Decimal: <span style="color: var(--accent);">1231006505</span>
+                </div>
+                <div>
+                  Hex: <span style="color: var(--accent);">495fab29</span>
+                </div>
+                <div>
+                  Little-endian: <span style="color: var(--accent);">29ab5f49</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Relacionado</div>
+            <p class="tool-callout__text">
+              <a href="timelock-decoder.html">Decodificador de timelocks →</a> · 
+              <a href="tx-decoder.html">Decodificador de transacciones →</a> ·
+              <a href="compact-size.html">Compact Size (VarInt) →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    const currentTimestamp = document.getElementById('current-timestamp');
+    const tsInput = document.getElementById('ts-input');
+    const btnNow = document.getElementById('btn-now');
+    const tsResult = document.getElementById('ts-result');
+    const tsUtc = document.getElementById('ts-utc');
+    const tsLocal = document.getElementById('ts-local');
+    const tsIso = document.getElementById('ts-iso');
+    const tsHex = document.getElementById('ts-hex');
+
+    const dateInput = document.getElementById('date-input');
+    const timeInput = document.getElementById('time-input');
+    const dateResult = document.getElementById('date-result');
+    const dateTs = document.getElementById('date-ts');
+    const dateHex = document.getElementById('date-hex');
+
+    // Actualizar timestamp actual cada segundo
+    function updateCurrentTime() {
+      const now = Math.floor(Date.now() / 1000);
+      currentTimestamp.textContent = now.toLocaleString('es-ES');
+    }
+    updateCurrentTime();
+    setInterval(updateCurrentTime, 1000);
+
+    // Convertir timestamp a hex little-endian (4 bytes)
+    function timestampToHexLE(ts) {
+      const hex = ts.toString(16).padStart(8, '0');
+      // Revertir bytes
+      const bytes = [];
+      for (let i = 0; i < hex.length; i += 2) {
+        bytes.push(hex.substring(i, i + 2));
+      }
+      return bytes.reverse().join('');
+    }
+
+    // Timestamp → Fecha
+    function convertTimestamp() {
+      const ts = parseInt(tsInput.value.trim().replace(/\./g, '').replace(/,/g, ''));
+      
+      if (isNaN(ts) || ts < 0) {
+        tsResult.style.display = 'none';
+        return;
+      }
+
+      const date = new Date(ts * 1000);
+
+      tsUtc.textContent = date.toUTCString();
+      tsLocal.textContent = date.toLocaleString('es-ES', { 
+        dateStyle: 'full', 
+        timeStyle: 'long' 
+      });
+      tsIso.textContent = date.toISOString();
+      tsHex.textContent = timestampToHexLE(ts);
+
+      tsResult.style.display = 'grid';
+    }
+
+    tsInput.addEventListener('input', convertTimestamp);
+
+    btnNow.addEventListener('click', () => {
+      tsInput.value = Math.floor(Date.now() / 1000);
+      convertTimestamp();
+    });
+
+    // Fecha → Timestamp
+    function convertDate() {
+      const dateVal = dateInput.value;
+      const timeVal = timeInput.value || '00:00';
+
+      if (!dateVal) {
+        dateResult.style.display = 'none';
+        return;
+      }
+
+      const dateStr = `${dateVal}T${timeVal}:00Z`;
+      const date = new Date(dateStr);
+      const ts = Math.floor(date.getTime() / 1000);
+
+      dateTs.textContent = ts.toLocaleString('es-ES');
+      dateHex.textContent = timestampToHexLE(ts);
+
+      dateResult.style.display = 'grid';
+    }
+
+    dateInput.addEventListener('input', convertDate);
+    timeInput.addEventListener('input', convertDate);
+
+    // Presets
+    document.querySelectorAll('[data-ts]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        tsInput.value = btn.dataset.ts;
+        convertTimestamp();
+      });
+    });
+
+    // Init: establecer fecha actual en el date picker
+    const today = new Date();
+    dateInput.value = today.toISOString().split('T')[0];
+
+  })();
+  </script>
+</body>
+</html>

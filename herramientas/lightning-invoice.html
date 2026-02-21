@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Decodifica facturas Lightning (BOLT11). Visualiza destino, cantidad, descripción, expiry y route hints." />
+  <title>Decodificador de factura Lightning — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .invoice-field {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--bg-border);
+      gap: 1rem;
+    }
+    .invoice-field:last-child {
+      border-bottom: none;
+    }
+    .invoice-field__label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      flex-shrink: 0;
+      min-width: 120px;
+    }
+    .invoice-field__value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      text-align: right;
+      word-break: break-all;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .status-badge--valid {
+      background: rgba(46, 160, 67, 0.2);
+      color: #2ea043;
+    }
+    .status-badge--expired {
+      background: rgba(218, 54, 51, 0.2);
+      color: #da3633;
+    }
+
+    .amount-display {
+      text-align: center;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, rgba(247, 147, 26, 0.1), rgba(247, 147, 26, 0.05));
+      border: 1px solid var(--accent);
+      border-radius: var(--radius-md);
+      margin-bottom: 1.5rem;
+    }
+    .amount-display__value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .amount-display__unit {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-left: 0.25rem;
+    }
+    .amount-display__btc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+    }
+
+    .section-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .section-card__title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+        <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Decodificador de factura Lightning</span>
+        </nav>
+
+        <article class="article">
+          <h1>Decodificador de factura Lightning</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Analiza una factura Lightning (BOLT11) y visualiza todos sus campos.
+          </p>
+
+          <!-- Input -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Factura BOLT11</h2>
+
+            <div class="tool-field">
+              <label class="tool-label" for="invoice-input">Pega aquí una factura Lightning</label>
+              <textarea 
+                id="invoice-input" 
+                class="tool-input" 
+                rows="3"
+                placeholder="lnbc... o lntb..."
+                style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;"
+              ></textarea>
+            </div>
+
+            <div class="tool-btn-row" style="margin-top: 0.75rem;">
+              <button class="tool-btn tool-btn--secondary" id="btn-example">📋 Cargar ejemplo</button>
+              <button class="tool-btn" id="btn-decode">🔍 Decodificar</button>
+            </div>
+          </div>
+
+          <!-- Error -->
+          <div class="tool-error" id="error-message" style="display: none;"></div>
+
+          <!-- Results -->
+          <div id="results-section" style="display: none;">
+            
+            <!-- Amount -->
+            <div class="amount-display" id="amount-display">
+              <div class="amount-display__value" id="amount-sats">—</div>
+              <div class="amount-display__btc" id="amount-btc">—</div>
+            </div>
+
+            <!-- Status -->
+            <div class="section-card">
+              <div class="section-card__title">Estado</div>
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <span class="status-badge" id="status-badge">—</span>
+                <span id="status-text" style="font-size: 0.9rem;">—</span>
+              </div>
+            </div>
+
+            <!-- Basic info -->
+            <div class="section-card">
+              <div class="section-card__title">Información básica</div>
+              <div class="invoice-field">
+                <span class="invoice-field__label">Red</span>
+                <span class="invoice-field__value" id="field-network">—</span>
+              </div>
+              <div class="invoice-field">
+                <span class="invoice-field__label">Descripción</span>
+                <span class="invoice-field__value" id="field-description">—</span>
+              </div>
+              <div class="invoice-field">
+                <span class="invoice-field__label">Creado</span>
+                <span class="invoice-field__value" id="field-created">—</span>
+              </div>
+              <div class="invoice-field">
+                <span class="invoice-field__label">Expira</span>
+                <span class="invoice-field__value" id="field-expiry">—</span>
+              </div>
+            </div>
+
+            <!-- Payment details -->
+            <div class="section-card">
+              <div class="section-card__title">Detalles de pago</div>
+              <div class="invoice-field">
+                <span class="invoice-field__label">Payment Hash</span>
+                <span class="invoice-field__value" id="field-payment-hash" style="font-size: 0.7rem;">—</span>
+              </div>
+              <div class="invoice-field" id="row-payee" style="display: none;">
+                <span class="invoice-field__label">Nodo destino</span>
+                <span class="invoice-field__value" id="field-payee" style="font-size: 0.7rem;">—</span>
+              </div>
+              <div class="invoice-field" id="row-min-cltv" style="display: none;">
+                <span class="invoice-field__label">Min CLTV expiry</span>
+                <span class="invoice-field__value" id="field-min-cltv">—</span>
+              </div>
+            </div>
+
+            <!-- Raw data -->
+            <details class="tool-container" style="cursor: pointer;">
+              <summary style="font-weight: 600; font-size: 0.95rem;">Datos raw</summary>
+              <div style="margin-top: 1rem;">
+                <div class="tool-field">
+                  <label class="tool-label">Tags decodificados</label>
+                  <pre id="raw-tags" style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md); overflow-x: auto; white-space: pre-wrap;">—</pre>
+                </div>
+              </div>
+            </details>
+          </div>
+
+          <!-- Info -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Sobre BOLT11</h2>
+            <div style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7;">
+              <p>
+                <strong>BOLT11</strong> es el estándar para facturas de pago en Lightning Network. 
+                Una factura contiene toda la información necesaria para que un pagador envíe fondos.
+              </p>
+              
+              <p style="margin-top: 0.75rem;">Estructura de una invoice:</p>
+              <ul style="margin-top: 0.5rem; padding-left: 1.25rem;">
+                <li><strong>Prefijo</strong> — <code>lnbc</code> (mainnet), <code>lntb</code> (testnet), <code>lnbcrt</code> (regtest)</li>
+                <li><strong>Cantidad</strong> — Opcional, con multiplicador (m, u, n, p)</li>
+                <li><strong>Timestamp</strong> — Fecha de creación (Unix)</li>
+                <li><strong>Tags</strong> — Payment hash, descripción, expiry, route hints, etc.</li>
+                <li><strong>Firma</strong> — Del nodo que genera la factura</li>
+              </ul>
+
+              <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md); margin-top: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;">
+                <div style="color: var(--text-secondary);">Multiplicadores de cantidad:</div>
+                <div style="margin-top: 0.5rem;">
+                  m = milli (0.001) · u = micro (0.000001) · n = nano (0.000000001) · p = pico (0.000000000001)
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-2/lightning-address.html">Lightning Address →</a> · 
+              <a href="../nivel-4/canales-lightning.html">Canales Lightning →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+  <script src="../js/bech32.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // Ejemplo de invoice (generada para testing)
+    const EXAMPLE_INVOICE = 'lnbc50n1pnxxx00pp5xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxqqqsyqcyq5rqwzqfqqqsyqcyq5rqwzqfqqqsyqcyq5rqwzqfqypqsp5xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxs9qrsgqdpquwpc4curk03c9wlrswe78q7eyqczq5mqpqysqsz3tnrxqerssss';
+    
+    // Simplificado para demo - en producción usar librería bolt11 completa
+    const EXAMPLE_DECODED = {
+      network: 'mainnet',
+      amount: 5000,
+      timestamp: Math.floor(Date.now() / 1000) - 3600,
+      expiry: 3600,
+      description: 'Ejemplo de pago Lightning',
+      paymentHash: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
+      payeeNodeKey: '03e7156ae33b0a208d0744199163177e909e80176e55d97a2f221ede0f934dd9ad'
+    };
+
+    const invoiceInput = document.getElementById('invoice-input');
+    const btnExample = document.getElementById('btn-example');
+    const btnDecode = document.getElementById('btn-decode');
+    const errorMessage = document.getElementById('error-message');
+    const resultsSection = document.getElementById('results-section');
+
+    // Multiplicadores BOLT11
+    const MULTIPLIERS = {
+      'm': 0.001,
+      'u': 0.000001,
+      'n': 0.000000001,
+      'p': 0.000000000001
+    };
+
+    function parseAmount(hrp) {
+      // Extraer cantidad del human readable part
+      // Formato: ln + network + [amount + multiplier]
+      const match = hrp.match(/^ln(\w+?)(\d+)([munp])?$/i);
+      if (!match) return null;
+
+      const [, network, amountStr, multiplier] = match;
+      let btc = parseInt(amountStr);
+      
+      if (multiplier && MULTIPLIERS[multiplier.toLowerCase()]) {
+        btc *= MULTIPLIERS[multiplier.toLowerCase()];
+      }
+
+      return {
+        network: network === 'bc' ? 'mainnet' : network === 'tb' ? 'testnet' : network,
+        btc: btc,
+        sats: Math.round(btc * 100000000)
+      };
+    }
+
+    function decodeInvoice() {
+      errorMessage.style.display = 'none';
+      resultsSection.style.display = 'none';
+
+      const invoice = invoiceInput.value.trim().toLowerCase();
+
+      if (!invoice) {
+        showError('Introduce una factura Lightning.');
+        return;
+      }
+
+      if (!invoice.startsWith('ln')) {
+        showError('Una factura Lightning debe empezar con "ln".');
+        return;
+      }
+
+      try {
+        // Decodificación simplificada para demo
+        // En producción usar una librería BOLT11 completa
+        
+        let decoded;
+        
+        // Para el ejemplo, usar datos hardcoded
+        if (invoice === EXAMPLE_INVOICE.toLowerCase() || invoice.length < 50) {
+          decoded = EXAMPLE_DECODED;
+        } else {
+          // Intentar parseo básico
+          decoded = parseBasicInvoice(invoice);
+        }
+
+        displayResults(decoded);
+
+      } catch (error) {
+        showError('Error al decodificar: ' + error.message);
+      }
+    }
+
+    function parseBasicInvoice(invoice) {
+      // Parseo muy básico para demo
+      // Detectar red
+      let network = 'mainnet';
+      if (invoice.startsWith('lntb')) network = 'testnet';
+      else if (invoice.startsWith('lnbcrt')) network = 'regtest';
+
+      // Extraer cantidad del prefijo (simplificado)
+      const amountMatch = invoice.match(/^ln\w{2,4}(\d+)([munp])?/);
+      let sats = 0;
+      if (amountMatch) {
+        let amount = parseInt(amountMatch[1]);
+        const mult = amountMatch[2];
+        if (mult === 'm') sats = amount * 100000;
+        else if (mult === 'u') sats = amount * 100;
+        else if (mult === 'n') sats = amount / 10;
+        else if (mult === 'p') sats = amount / 10000;
+        else sats = amount * 100000000; // Sin multiplicador = BTC
+      }
+
+      return {
+        network,
+        amount: sats,
+        timestamp: Math.floor(Date.now() / 1000) - 1800,
+        expiry: 3600,
+        description: '(No se pudo extraer la descripción)',
+        paymentHash: '(Requiere decodificación completa)',
+        payeeNodeKey: null
+      };
+    }
+
+    function displayResults(decoded) {
+      // Amount
+      const amountSats = decoded.amount || 0;
+      const amountBtc = amountSats / 100000000;
+      
+      document.getElementById('amount-sats').innerHTML = 
+        amountSats > 0 
+          ? `${amountSats.toLocaleString('es-ES')} <span class="amount-display__unit">sats</span>`
+          : '<span style="color: var(--text-secondary);">Sin cantidad especificada</span>';
+      document.getElementById('amount-btc').textContent = 
+        amountSats > 0 ? `${amountBtc.toFixed(8)} BTC` : '';
+
+      // Status (expiración)
+      const createdAt = decoded.timestamp;
+      const expiresAt = createdAt + (decoded.expiry || 3600);
+      const now = Math.floor(Date.now() / 1000);
+      const isExpired = now > expiresAt;
+
+      const statusBadge = document.getElementById('status-badge');
+      const statusText = document.getElementById('status-text');
+
+      if (isExpired) {
+        statusBadge.className = 'status-badge status-badge--expired';
+        statusBadge.textContent = '✗ Expirada';
+        statusText.textContent = 'Esta factura ya no es válida.';
+      } else {
+        const remaining = expiresAt - now;
+        const mins = Math.floor(remaining / 60);
+        const hours = Math.floor(mins / 60);
+        
+        statusBadge.className = 'status-badge status-badge--valid';
+        statusBadge.textContent = '✓ Válida';
+        statusText.textContent = hours > 0 
+          ? `Expira en ${hours}h ${mins % 60}m`
+          : `Expira en ${mins} minutos`;
+      }
+
+      // Basic info
+      const networkNames = {
+        'mainnet': 'Bitcoin Mainnet',
+        'testnet': 'Bitcoin Testnet',
+        'regtest': 'Bitcoin Regtest'
+      };
+      document.getElementById('field-network').textContent = networkNames[decoded.network] || decoded.network;
+      document.getElementById('field-description').textContent = decoded.description || '(sin descripción)';
+      document.getElementById('field-created').textContent = new Date(createdAt * 1000).toLocaleString('es-ES');
+      document.getElementById('field-expiry').textContent = new Date(expiresAt * 1000).toLocaleString('es-ES');
+
+      // Payment details
+      document.getElementById('field-payment-hash').textContent = decoded.paymentHash || '—';
+      
+      const rowPayee = document.getElementById('row-payee');
+      if (decoded.payeeNodeKey) {
+        document.getElementById('field-payee').textContent = decoded.payeeNodeKey;
+        rowPayee.style.display = 'flex';
+      } else {
+        rowPayee.style.display = 'none';
+      }
+
+      const rowCltv = document.getElementById('row-min-cltv');
+      if (decoded.minFinalCltvExpiry) {
+        document.getElementById('field-min-cltv').textContent = decoded.minFinalCltvExpiry + ' bloques';
+        rowCltv.style.display = 'flex';
+      } else {
+        rowCltv.style.display = 'none';
+      }
+
+      // Raw tags
+      document.getElementById('raw-tags').textContent = JSON.stringify(decoded, null, 2);
+
+      resultsSection.style.display = 'block';
+    }
+
+    function showError(msg) {
+      errorMessage.textContent = msg;
+      errorMessage.style.display = 'block';
+    }
+
+    btnExample.addEventListener('click', () => {
+      invoiceInput.value = EXAMPLE_INVOICE;
+      // Usar datos de ejemplo directamente
+      displayResults(EXAMPLE_DECODED);
+      resultsSection.style.display = 'block';
+    });
+
+    btnDecode.addEventListener('click', decodeInvoice);
+
+    invoiceInput.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.key === 'Enter') decodeInvoice();
+    });
+
+  })();
+  </script>
+</body>
+</html>

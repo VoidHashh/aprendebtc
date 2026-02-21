@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Analiza la calidad de la entropía de datos hexadecimales. Evalúa aleatoriedad para claves privadas y seeds." />
+  <title>Analizador de entropía — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .verdict-banner {
+      padding: 1.25rem;
+      border-radius: var(--radius-md);
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .verdict-banner--good {
+      background: rgba(46, 160, 67, 0.15);
+      border: 2px solid #2ea043;
+    }
+    .verdict-banner--suspicious {
+      background: rgba(210, 153, 34, 0.15);
+      border: 2px solid #d29922;
+    }
+    .verdict-banner--poor {
+      background: rgba(218, 54, 51, 0.15);
+      border: 2px solid #da3633;
+    }
+    .verdict-banner__icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .verdict-banner__title {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .verdict-banner__detail {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+    }
+
+    .metric-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .metric-card__title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .metric-card__value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .metric-card__detail {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: var(--bg-primary);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 0.75rem;
+    }
+    .progress-bar__fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.3s;
+    }
+    .progress-bar__fill--good { background: #2ea043; }
+    .progress-bar__fill--medium { background: #d29922; }
+    .progress-bar__fill--poor { background: #da3633; }
+
+    .histogram {
+      display: flex;
+      align-items: flex-end;
+      gap: 1px;
+      height: 80px;
+      padding: 0.5rem 0;
+    }
+    .histogram__bar {
+      flex: 1;
+      background: var(--accent);
+      border-radius: 2px 2px 0 0;
+      min-width: 4px;
+      transition: height 0.3s;
+    }
+    .histogram__labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.65rem;
+      color: var(--text-secondary);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .issue-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .issue-list__item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--bg-border);
+      font-size: 0.85rem;
+    }
+    .issue-list__item:last-child {
+      border-bottom: none;
+    }
+    .issue-list__icon--warning { color: #d29922; }
+    .issue-list__icon--error { color: #da3633; }
+    .issue-list__icon--ok { color: #2ea043; }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+        <aside class="page-layout__sidebar" aria-label="Navegacion lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Analizador de entrop&iacute;a</span>
+        </nav>
+
+        <article class="article">
+          <h1>Analizador de entropía</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Evalúa la calidad de la aleatoriedad de datos criptográficos.
+          </p>
+
+          <!-- Warning -->
+          <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">Limitaciones</div>
+              <p class="callout__text">Esta herramienta realiza tests estadísticos básicos. NO es un reemplazo de un test de aleatoriedad criptográfico profesional (como NIST SP 800-22). Úsala como referencia educativa.</p>
+            </div>
+          </div>
+
+          <!-- Input -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Datos a analizar</h2>
+
+            <div class="tool-field">
+              <label class="tool-label" for="entropy-input">Hexadecimal (típicamente 32 bytes para clave privada, 16-32 bytes para entropía BIP39)</label>
+              <textarea 
+                id="entropy-input" 
+                class="tool-input" 
+                rows="2"
+                placeholder="Pega aquí datos hexadecimales..."
+                style="font-family: 'JetBrains Mono', monospace;"
+              ></textarea>
+            </div>
+
+            <div class="tool-btn-row" style="margin-top: 0.75rem;">
+              <button class="tool-btn tool-btn--secondary" id="btn-random">🎲 Generar aleatoria</button>
+              <button class="tool-btn tool-btn--secondary" id="btn-bad-example">⚠️ Ejemplo malo</button>
+              <button class="tool-btn" id="btn-analyze">🔬 Analizar</button>
+            </div>
+          </div>
+
+          <!-- Results -->
+          <div id="results-section" style="display: none;">
+            
+            <!-- Verdict -->
+            <div class="verdict-banner" id="verdict-banner">
+              <div class="verdict-banner__icon" id="verdict-icon">—</div>
+              <div class="verdict-banner__title" id="verdict-title">—</div>
+              <div class="verdict-banner__detail" id="verdict-detail">—</div>
+            </div>
+
+            <!-- Shannon Entropy -->
+            <div class="metric-card">
+              <div class="metric-card__title">
+                <span>📊</span> Entropía Shannon
+              </div>
+              <div class="metric-card__value" id="shannon-value">—</div>
+              <div class="metric-card__detail">Máximo teórico: 8 bits/byte para datos aleatorios perfectos</div>
+              <div class="progress-bar">
+                <div class="progress-bar__fill" id="shannon-bar" style="width: 0%;"></div>
+              </div>
+            </div>
+
+            <!-- Byte distribution -->
+            <div class="metric-card">
+              <div class="metric-card__title">
+                <span>📈</span> Distribución de bytes (0x00 - 0xFF)
+              </div>
+              <div class="metric-card__detail">Una distribución plana indica buena aleatoriedad</div>
+              <div class="histogram" id="byte-histogram"></div>
+              <div class="histogram__labels">
+                <span>0x00</span>
+                <span>0x80</span>
+                <span>0xFF</span>
+              </div>
+            </div>
+
+            <!-- Nibble distribution -->
+            <div class="metric-card">
+              <div class="metric-card__title">
+                <span>📉</span> Distribución de nibbles (0-F)
+              </div>
+              <div class="metric-card__detail">Cada dígito hex debería aparecer ~6.25% de las veces</div>
+              <div class="histogram" id="nibble-histogram"></div>
+              <div class="histogram__labels">
+                <span>0</span>
+                <span>8</span>
+                <span>F</span>
+              </div>
+            </div>
+
+            <!-- Issues -->
+            <div class="metric-card">
+              <div class="metric-card__title">
+                <span>🔍</span> Análisis detallado
+              </div>
+              <ul class="issue-list" id="issue-list"></ul>
+            </div>
+
+            <!-- Stats -->
+            <div class="tool-row">
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">Bytes</div>
+                <div class="tool-result-card__value" id="stat-bytes">—</div>
+              </div>
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">Bits</div>
+                <div class="tool-result-card__value" id="stat-bits">—</div>
+              </div>
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">Bytes únicos</div>
+                <div class="tool-result-card__value" id="stat-unique">—</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Info -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">¿Por qué importa la entropía?</h2>
+            <div style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7;">
+              <p>
+                La <strong>entropía</strong> mide la imprevisibilidad de los datos. En criptografía, 
+                una entropía alta es esencial porque significa que un atacante no puede predecir los valores.
+              </p>
+              
+              <p style="margin-top: 0.75rem;">Ejemplos de mala entropía:</p>
+              <ul style="margin-top: 0.5rem; padding-left: 1.25rem;">
+                <li>Claves privadas derivadas de frases simples ("password123")</li>
+                <li>Números con muchos ceros (0x00000...0001)</li>
+                <li>Patrones repetitivos (0xABABABAB...)</li>
+                <li>Números secuenciales (0x0102030405...)</li>
+              </ul>
+
+              <p style="margin-top: 0.75rem;">
+                Bitcoin usa <code>crypto.getRandomValues()</code> (o equivalente del sistema operativo) 
+                para generar entropía criptográficamente segura.
+              </p>
+            </div>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Relacionado</div>
+            <p class="tool-callout__text">
+              <a href="mnemonic-seed.html">Generador de mnemónico →</a> · 
+              <a href="seed-validator.html">Validador de seed phrase →</a> ·
+              <a href="../nivel-3/clave-privada.html">Claves privadas →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    const entropyInput = document.getElementById('entropy-input');
+    const btnRandom = document.getElementById('btn-random');
+    const btnBadExample = document.getElementById('btn-bad-example');
+    const btnAnalyze = document.getElementById('btn-analyze');
+    const resultsSection = document.getElementById('results-section');
+
+    function cleanHex(hex) {
+      return hex.replace(/^0x/i, '').replace(/\s/g, '').toLowerCase();
+    }
+
+    function hexToBytes(hex) {
+      const bytes = [];
+      for (let i = 0; i < hex.length; i += 2) {
+        bytes.push(parseInt(hex.substring(i, i + 2), 16));
+      }
+      return new Uint8Array(bytes);
+    }
+
+    function generateRandom(bytes) {
+      const arr = new Uint8Array(bytes);
+      crypto.getRandomValues(arr);
+      return Array.from(arr).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // Calcular entropía Shannon (bits por byte)
+    function calculateShannonEntropy(bytes) {
+      const freq = new Array(256).fill(0);
+      bytes.forEach(b => freq[b]++);
+      
+      let entropy = 0;
+      const len = bytes.length;
+      
+      for (let i = 0; i < 256; i++) {
+        if (freq[i] > 0) {
+          const p = freq[i] / len;
+          entropy -= p * Math.log2(p);
+        }
+      }
+      
+      return entropy;
+    }
+
+    // Contar frecuencia de bytes
+    function getByteDistribution(bytes) {
+      const freq = new Array(256).fill(0);
+      bytes.forEach(b => freq[b]++);
+      return freq;
+    }
+
+    // Contar frecuencia de nibbles (0-F)
+    function getNibbleDistribution(hex) {
+      const freq = new Array(16).fill(0);
+      for (const char of hex) {
+        freq[parseInt(char, 16)]++;
+      }
+      return freq;
+    }
+
+    // Detectar runs (secuencias del mismo bit)
+    function analyzeBitRuns(bytes) {
+      let binary = '';
+      bytes.forEach(b => binary += b.toString(2).padStart(8, '0'));
+      
+      let maxRun = 0;
+      let currentRun = 1;
+      
+      for (let i = 1; i < binary.length; i++) {
+        if (binary[i] === binary[i-1]) {
+          currentRun++;
+        } else {
+          maxRun = Math.max(maxRun, currentRun);
+          currentRun = 1;
+        }
+      }
+      maxRun = Math.max(maxRun, currentRun);
+      
+      return maxRun;
+    }
+
+    // Contar bytes cero al inicio
+    function countLeadingZeros(bytes) {
+      let count = 0;
+      for (const b of bytes) {
+        if (b === 0) count++;
+        else break;
+      }
+      return count;
+    }
+
+    function analyze() {
+      const hex = cleanHex(entropyInput.value);
+      
+      if (!hex || !/^[0-9a-f]+$/.test(hex)) {
+        alert('Introduce datos hexadecimales válidos.');
+        return;
+      }
+
+      if (hex.length % 2 !== 0) {
+        alert('La longitud debe ser par (bytes completos).');
+        return;
+      }
+
+      const bytes = hexToBytes(hex);
+      const issues = [];
+
+      // Estadísticas básicas
+      document.getElementById('stat-bytes').textContent = bytes.length;
+      document.getElementById('stat-bits').textContent = bytes.length * 8;
+      document.getElementById('stat-unique').textContent = new Set(bytes).size + ' / 256';
+
+      // Entropía Shannon
+      const shannon = calculateShannonEntropy(bytes);
+      document.getElementById('shannon-value').textContent = shannon.toFixed(4) + ' bits/byte';
+      
+      const shannonPercent = (shannon / 8) * 100;
+      const shannonBar = document.getElementById('shannon-bar');
+      shannonBar.style.width = shannonPercent + '%';
+      
+      if (shannon >= 7.5) {
+        shannonBar.className = 'progress-bar__fill progress-bar__fill--good';
+      } else if (shannon >= 6) {
+        shannonBar.className = 'progress-bar__fill progress-bar__fill--medium';
+      } else {
+        shannonBar.className = 'progress-bar__fill progress-bar__fill--poor';
+      }
+
+      // Histograma de bytes
+      const byteFreq = getByteDistribution(bytes);
+      const maxByteFreq = Math.max(...byteFreq);
+      const byteHistogram = document.getElementById('byte-histogram');
+      byteHistogram.innerHTML = '';
+      
+      // Agrupar en 32 barras para mejor visualización
+      for (let i = 0; i < 32; i++) {
+        const startByte = i * 8;
+        let sum = 0;
+        for (let j = 0; j < 8; j++) {
+          sum += byteFreq[startByte + j];
+        }
+        const height = maxByteFreq > 0 ? (sum / (maxByteFreq * 8)) * 100 : 0;
+        const bar = document.createElement('div');
+        bar.className = 'histogram__bar';
+        bar.style.height = Math.max(2, height) + '%';
+        byteHistogram.appendChild(bar);
+      }
+
+      // Histograma de nibbles
+      const nibbleFreq = getNibbleDistribution(hex);
+      const maxNibbleFreq = Math.max(...nibbleFreq);
+      const nibbleHistogram = document.getElementById('nibble-histogram');
+      nibbleHistogram.innerHTML = '';
+      
+      for (let i = 0; i < 16; i++) {
+        const height = maxNibbleFreq > 0 ? (nibbleFreq[i] / maxNibbleFreq) * 100 : 0;
+        const bar = document.createElement('div');
+        bar.className = 'histogram__bar';
+        bar.style.height = Math.max(2, height) + '%';
+        nibbleHistogram.appendChild(bar);
+      }
+
+      // Análisis de problemas
+      
+      // 1. Entropía baja
+      if (shannon < 6) {
+        issues.push({ type: 'error', text: `Entropía muy baja (${shannon.toFixed(2)} bits/byte). Los datos son predecibles.` });
+      } else if (shannon < 7.5) {
+        issues.push({ type: 'warning', text: `Entropía moderada (${shannon.toFixed(2)} bits/byte). Podría ser mejorable.` });
+      } else {
+        issues.push({ type: 'ok', text: `Entropía alta (${shannon.toFixed(2)} bits/byte). Buena aleatoriedad.` });
+      }
+
+      // 2. Bytes únicos
+      const uniqueBytes = new Set(bytes).size;
+      const expectedUnique = Math.min(bytes.length, 256);
+      if (uniqueBytes < expectedUnique * 0.5 && bytes.length >= 16) {
+        issues.push({ type: 'warning', text: `Pocos bytes únicos (${uniqueBytes}). Posible patrón repetitivo.` });
+      }
+
+      // 3. Leading zeros
+      const leadingZeros = countLeadingZeros(bytes);
+      if (leadingZeros > 2) {
+        issues.push({ type: 'warning', text: `${leadingZeros} bytes cero al inicio. Valor numérico muy bajo.` });
+      }
+
+      // 4. Bit runs
+      const maxRun = analyzeBitRuns(bytes);
+      if (maxRun > 16) {
+        issues.push({ type: 'warning', text: `Run de ${maxRun} bits idénticos consecutivos.` });
+      }
+
+      // 5. All zeros o all ones
+      if (bytes.every(b => b === 0)) {
+        issues.push({ type: 'error', text: 'Todos los bytes son cero. ¡Esto es extremadamente inseguro!' });
+      } else if (bytes.every(b => b === 255)) {
+        issues.push({ type: 'error', text: 'Todos los bytes son 0xFF. ¡Esto es extremadamente inseguro!' });
+      }
+
+      // 6. Distribución de nibbles
+      const expectedNibbleFreq = hex.length / 16;
+      const nibbleDeviation = nibbleFreq.reduce((sum, f) => sum + Math.abs(f - expectedNibbleFreq), 0) / hex.length;
+      if (nibbleDeviation > 0.3) {
+        issues.push({ type: 'warning', text: 'Distribución de nibbles desigual. Algunos dígitos hex dominan.' });
+      }
+
+      // Mostrar issues
+      const issueList = document.getElementById('issue-list');
+      issueList.innerHTML = issues.map(issue => `
+        <li class="issue-list__item">
+          <span class="issue-list__icon--${issue.type}">
+            ${issue.type === 'ok' ? '✓' : issue.type === 'warning' ? '⚠️' : '✗'}
+          </span>
+          <span>${issue.text}</span>
+        </li>
+      `).join('');
+
+      // Veredicto final
+      const hasErrors = issues.some(i => i.type === 'error');
+      const hasWarnings = issues.some(i => i.type === 'warning');
+
+      const verdictBanner = document.getElementById('verdict-banner');
+      const verdictIcon = document.getElementById('verdict-icon');
+      const verdictTitle = document.getElementById('verdict-title');
+      const verdictDetail = document.getElementById('verdict-detail');
+
+      if (hasErrors) {
+        verdictBanner.className = 'verdict-banner verdict-banner--poor';
+        verdictIcon.textContent = '✗';
+        verdictTitle.textContent = 'Entropía pobre';
+        verdictDetail.textContent = 'Estos datos NO deben usarse para criptografía.';
+      } else if (hasWarnings) {
+        verdictBanner.className = 'verdict-banner verdict-banner--suspicious';
+        verdictIcon.textContent = '⚠️';
+        verdictTitle.textContent = 'Entropía sospechosa';
+        verdictDetail.textContent = 'Se detectaron algunas anomalías. Revisar con precaución.';
+      } else {
+        verdictBanner.className = 'verdict-banner verdict-banner--good';
+        verdictIcon.textContent = '✓';
+        verdictTitle.textContent = 'Entropía aparentemente buena';
+        verdictDetail.textContent = 'Los tests básicos no detectaron problemas obvios.';
+      }
+
+      resultsSection.style.display = 'block';
+    }
+
+    btnRandom.addEventListener('click', () => {
+      entropyInput.value = generateRandom(32);
+      analyze();
+    });
+
+    btnBadExample.addEventListener('click', () => {
+      // Ejemplo malo: número muy bajo con muchos ceros
+      entropyInput.value = '0000000000000000000000000000000000000000000000000000000000000001';
+      analyze();
+    });
+
+    btnAnalyze.addEventListener('click', analyze);
+
+    entropyInput.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.key === 'Enter') analyze();
+    });
+
+  })();
+  </script>
+</body>
+</html>
+

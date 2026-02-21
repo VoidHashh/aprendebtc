@@ -200,7 +200,17 @@
         { href: '/herramientas/script-interpreter.html', text: 'Interprete de Bitcoin Script' },
         { href: '/herramientas/psbt-decoder.html', text: 'Decodificador PSBT (BIP174)' },
         { href: '/herramientas/ecdsa-schnorr.html', text: 'Firma digital: ECDSA y Schnorr' },
-        { href: '/herramientas/ec-calculator.html', text: 'Calculadora de curva eliptica' },
+        { href: '/herramientas/ec-calculator.html', text: 'Calculadora de curva eliptica' },
+        { href: '/herramientas/compact-size.html', text: 'Compact Size (VarInt)' },
+        { href: '/herramientas/ascii-hex.html', text: 'ASCII y hexadecimal' },
+        { href: '/herramientas/unix-time.html', text: 'Tiempo Unix' },
+        { href: '/herramientas/timelock-decoder.html', text: 'Decodificador de timelocks' },
+        { href: '/herramientas/lightning-invoice.html', text: 'Decodificador de factura Lightning' },
+        { href: '/herramientas/entropy-analyzer.html', text: 'Analizador de entropía' },
+        { href: '/herramientas/seed-validator.html', text: 'Validador de seed phrase' },
+
+
+
       ]
     },
     {
