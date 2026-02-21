@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Genera direcciones Bitcoin multisig (P2SH y P2WSH). Configura esquemas N-de-M con múltiples claves públicas." />
+  <title>Generador de dirección multisig — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .pubkey-input-row {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    .pubkey-input-row__number {
+      min-width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-border);
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 50%;
+    }
+    .pubkey-input-row input {
+      flex: 1;
+    }
+    .pubkey-input-row__status {
+      font-size: 0.8rem;
+      min-width: 20px;
+    }
+
+    .scheme-card {
+      background: var(--bg-primary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    .scheme-card:hover {
+      border-color: var(--accent);
+    }
+    .scheme-card__title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent);
+    }
+    .scheme-card__desc {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+    }
+
+    .script-display {
+      background: var(--bg-primary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      line-height: 1.8;
+      word-break: break-all;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Herramientas">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Herramientas prácticas</div>
+          <a href="conversor.html" class="sidebar__link">Conversor BTC / EUR / sats</a>
+          <a href="calculadora-dca.html" class="sidebar__link">Calculadora DCA</a>
+          <a href="calculadora-fees.html" class="sidebar__link">Calculadora de fees</a>
+          <a href="calculadora-impuestos.html" class="sidebar__link">Calculadora de impuestos</a>
+          <a href="comparador-exchanges.html" class="sidebar__link">Comparador de exchanges</a>
+          <a href="calculadora-herencia.html" class="sidebar__link">Calculadora de herencia</a>
+        </div>
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Herramientas técnicas</div>
+          <a href="hash.html" class="sidebar__link">Hash functions</a>
+          <a href="private-key.html" class="sidebar__link sidebar__link--active">Claves y direcciones</a>
+          <a href="hd-wallet.html" class="sidebar__link">HD Wallet explorer</a>
+          <a href="transaccion.html" class="sidebar__link">Transacciones</a>
+          <a href="script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="block-tools.html" class="sidebar__link">Bloques</a>
+          <a href="firma.html" class="sidebar__link">Criptografía</a>
+          <a href="index.html" class="sidebar__link">Utilidades</a>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Multisig</span>
+        </nav>
+
+        <article class="article">
+          <h1>Generador de dirección multisig</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Crea una dirección multisig N-de-M a partir de varias claves públicas.
+          </p>
+
+          <!-- Disclaimer educativo -->
+          <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">Herramienta educativa</div>
+              <p class="callout__text">Esta herramienta es para aprendizaje. NO la uses para generar direcciones para fondos reales.</p>
+            </div>
+          </div>
+
+          <!-- Esquemas comunes -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Esquemas comunes</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.75rem;">
+              <div class="scheme-card" data-n="1" data-m="2">
+                <div class="scheme-card__title">1-de-2</div>
+                <div class="scheme-card__desc">Acceso compartido</div>
+              </div>
+              <div class="scheme-card" data-n="2" data-m="3">
+                <div class="scheme-card__title">2-de-3</div>
+                <div class="scheme-card__desc">El más popular</div>
+              </div>
+              <div class="scheme-card" data-n="3" data-m="5">
+                <div class="scheme-card__title">3-de-5</div>
+                <div class="scheme-card__desc">Empresas</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Configuración -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Configuración</h2>
+
+            <div class="tool-row" style="margin-bottom: 1rem;">
+              <div class="tool-field">
+                <label class="tool-label" for="input-n">N (firmas requeridas)</label>
+                <select id="input-n" class="tool-select">
+                  <option value="1">1</option>
+                  <option value="2" selected>2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+              <div class="tool-field">
+                <label class="tool-label" for="input-m">M (claves totales)</label>
+                <select id="input-m" class="tool-select">
+                  <option value="2">2</option>
+                  <option value="3" selected>3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="tool-field">
+              <label class="tool-label">Claves públicas (comprimidas, 66 hex cada una)</label>
+              <div id="pubkeys-container">
+                <!-- Se llena dinámicamente -->
+              </div>
+            </div>
+
+            <div class="tool-btn-row" style="margin-top: 1rem;">
+              <button class="tool-btn tool-btn--secondary" id="btn-generate-keys">
+                🎲 Generar claves aleatorias
+              </button>
+              <button class="tool-btn" id="btn-generate-address">
+                🏠 Generar dirección multisig
+              </button>
+            </div>
+          </div>
+
+          <!-- Error -->
+          <div class="tool-error" id="error-message" style="display: none;"></div>
+
+          <!-- Resultados -->
+          <div class="tool-container" id="output-section" style="display: none;">
+            <h2 class="tool-container__title">Direcciones multisig <span id="output-scheme" style="color: var(--accent);"></span></h2>
+
+            <!-- P2SH -->
+            <div style="margin-bottom: 1.5rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <label class="tool-label" style="margin-bottom: 0;">Dirección P2SH — empieza por 3</label>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-p2sh">📋</button>
+              </div>
+              <div class="tool-output" id="output-p2sh" style="font-size: 0.95rem; color: var(--accent);">—</div>
+            </div>
+
+            <!-- P2WSH -->
+            <div style="margin-bottom: 1.5rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <label class="tool-label" style="margin-bottom: 0;">Dirección P2WSH — empieza por bc1q</label>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-p2wsh">📋</button>
+              </div>
+              <div class="tool-output" id="output-p2wsh" style="font-size: 0.95rem;">—</div>
+            </div>
+
+            <!-- Script Hash P2SH -->
+            <div class="tool-row" style="margin-bottom: 1rem;">
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">Script Hash (P2SH)</div>
+                <div class="tool-result-card__value" id="output-script-hash" style="font-size: 0.65rem;">—</div>
+              </div>
+              <div class="tool-result-card">
+                <div class="tool-result-card__label">Witness Script Hash (P2WSH)</div>
+                <div class="tool-result-card__value" id="output-witness-hash" style="font-size: 0.65rem;">—</div>
+              </div>
+            </div>
+
+            <!-- Redeem Script -->
+            <div style="margin-bottom: 1rem;">
+              <div class="tool-label">Redeem Script (legible)</div>
+              <div class="script-display" id="output-script-readable">—</div>
+            </div>
+
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <label class="tool-label" style="margin-bottom: 0;">Redeem Script (hex)</label>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-script-hex">📋</button>
+              </div>
+              <div class="script-display" id="output-script-hex" style="color: var(--text-secondary);">—</div>
+            </div>
+          </div>
+
+          <!-- Por qué multisig -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">¿Por qué multisig?</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+              <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md);">
+                <div style="font-weight: 600; margin-bottom: 0.5rem;">🔒 Seguridad</div>
+                <p style="font-size: 0.85rem; color: var(--text-secondary);">
+                  Un atacante necesita comprometer múltiples llaves en múltiples ubicaciones.
+                </p>
+              </div>
+              <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md);">
+                <div style="font-weight: 600; margin-bottom: 0.5rem;">💾 Redundancia</div>
+                <p style="font-size: 0.85rem; color: var(--text-secondary);">
+                  Puedes perder una llave y seguir accediendo a tus fondos.
+                </p>
+              </div>
+              <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md);">
+                <div style="font-weight: 600; margin-bottom: 0.5rem;">👨‍👩‍👧 Herencia</div>
+                <p style="font-size: 0.85rem; color: var(--text-secondary);">
+                  Distribuye llaves entre herederos y personas de confianza.
+                </p>
+              </div>
+              <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md);">
+                <div style="font-weight: 600; margin-bottom: 0.5rem;">🏢 Governance</div>
+                <p style="font-size: 0.85rem; color: var(--text-secondary);">
+                  Decisiones colectivas sobre fondos compartidos de empresas o DAOs.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más sobre multisig</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-4/que-es-multisig.html">¿Qué es multisig? →</a> · 
+              <a href="../nivel-4/configurar-multisig.html">Configurar multisig paso a paso →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/hex-utils.js"></script>
+  <script src="../js/ripemd160.js"></script>
+  <script src="../js/base58.js"></script>
+  <script src="../js/bech32.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === CONSTANTES ===
+    const VERSION_P2SH = 0x05;
+
+    // Claves de ejemplo para generación rápida
+    const EXAMPLE_PUBKEYS = [
+      '0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798',
+      '02f9308a019258c31049344f85f89d5229b531c845836f99b08601f113bce036f9',
+      '03fff97bd5755eeea420453a14355235d382f6472f8568a18b2f057a1460297556',
+      '02d0de0aaeaefad02b8bdc8a01a1b8b11c696bd3d66a2c5f10780d95b7df42645c',
+      '0361cd8bd1f5f6fc8e8cc7c90e5da40d6a8c7c3e1b1c1e3c0c5d3f2e1a0b9c8d7e'
+    ];
+
+    // === ELEMENTOS DEL DOM ===
+    const inputN = document.getElementById('input-n');
+    const inputM = document.getElementById('input-m');
+    const pubkeysContainer = document.getElementById('pubkeys-container');
+    const btnGenerateKeys = document.getElementById('btn-generate-keys');
+    const btnGenerateAddress = document.getElementById('btn-generate-address');
+    const errorMessage = document.getElementById('error-message');
+    const outputSection = document.getElementById('output-section');
+
+    const outputScheme = document.getElementById('output-scheme');
+    const outputP2sh = document.getElementById('output-p2sh');
+    const outputP2wsh = document.getElementById('output-p2wsh');
+    const outputScriptHash = document.getElementById('output-script-hash');
+    const outputWitnessHash = document.getElementById('output-witness-hash');
+    const outputScriptReadable = document.getElementById('output-script-readable');
+    const outputScriptHex = document.getElementById('output-script-hex');
+
+    // === FUNCIONES ===
+
+    /**
+     * Genera los inputs para las claves públicas
+     */
+    function generatePubkeyInputs() {
+      const m = parseInt(inputM.value);
+      pubkeysContainer.innerHTML = '';
+
+      for (let i = 0; i < m; i++) {
+        const row = document.createElement('div');
+        row.className = 'pubkey-input-row';
+        row.innerHTML = `
+          <div class="pubkey-input-row__number">${i + 1}</div>
+          <input 
+            type="text" 
+            class="tool-input pubkey-input" 
+            data-index="${i}"
+            placeholder="Clave pública ${i + 1} (66 hex)"
+            maxlength="66"
+            style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;"
+          />
+          <span class="pubkey-input-row__status" data-status="${i}"></span>
+        `;
+        pubkeysContainer.appendChild(row);
+      }
+
+      // Validar mientras se escribe
+      document.querySelectorAll('.pubkey-input').forEach(input => {
+        input.addEventListener('input', () => {
+          const value = input.value.replace(/[^0-9a-fA-F]/g, '').toLowerCase();
+          input.value = value;
+          const statusEl = document.querySelector(`[data-status="${input.dataset.index}"]`);
+          
+          if (isValidPubkey(value)) {
+            statusEl.textContent = '✓';
+            statusEl.style.color = '#2ea043';
+          } else if (value.length > 0) {
+            statusEl.textContent = '?';
+            statusEl.style.color = 'var(--text-secondary)';
+          } else {
+            statusEl.textContent = '';
+          }
+        });
+      });
+    }
+
+    /**
+     * Valida una clave pública comprimida
+     */
+    function isValidPubkey(hex) {
+      return /^0[23][0-9a-f]{64}$/.test(hex);
+    }
+
+    /**
+     * Obtiene todas las claves públicas de los inputs
+     */
+    function getPubkeys() {
+      const inputs = document.querySelectorAll('.pubkey-input');
+      return Array.from(inputs).map(input => input.value.toLowerCase());
+    }
+
+    /**
+     * Genera el redeem script para multisig
+     * Formato: OP_N <pubkey1> <pubkey2> ... <pubkeyM> OP_M OP_CHECKMULTISIG
+     */
+    function buildRedeemScript(n, pubkeys) {
+      const script = [];
+      
+      // OP_N (OP_1 = 0x51, OP_2 = 0x52, etc.)
+      script.push(0x50 + n);
+
+      // Cada pubkey con su longitud
+      for (const pubkey of pubkeys) {
+        script.push(0x21); // 33 bytes
+        const pubkeyBytes = HexUtils.hexToBytes(pubkey);
+        script.push(...pubkeyBytes);
+      }
+
+      // OP_M
+      script.push(0x50 + pubkeys.length);
+
+      // OP_CHECKMULTISIG
+      script.push(0xae);
+
+      return new Uint8Array(script);
+    }
+
+    /**
+     * Convierte opcode a texto legible
+     */
+    function opcodeToText(opcode) {
+      if (opcode >= 0x51 && opcode <= 0x60) {
+        return 'OP_' + (opcode - 0x50);
+      }
+      if (opcode === 0xae) return 'OP_CHECKMULTISIG';
+      if (opcode === 0x21) return 'PUSH_33';
+      return opcode.toString(16).padStart(2, '0');
+    }
+
+    /**
+     * Genera script legible
+     */
+    function scriptToReadable(scriptHex, pubkeys) {
+      const n = parseInt(scriptHex.substring(0, 2), 16) - 0x50;
+      const m = pubkeys.length;
+      
+      let readable = `OP_${n}\n`;
+      
+      for (let i = 0; i < pubkeys.length; i++) {
+        readable += `<pubkey${i + 1}> ${pubkeys[i].substring(0, 8)}...${pubkeys[i].substring(58)}\n`;
+      }
+      
+      readable += `OP_${m}\n`;
+      readable += 'OP_CHECKMULTISIG';
+      
+      return readable;
+    }
+
+    /**
+     * Genera la dirección multisig
+     */
+    async function generateMultisigAddress() {
+      hideError();
+      
+      const n = parseInt(inputN.value);
+      const m = parseInt(inputM.value);
+      const pubkeys = getPubkeys();
+
+      // Validaciones
+      if (n > m) {
+        showError('N no puede ser mayor que M');
+        return;
+      }
+
+      for (let i = 0; i < pubkeys.length; i++) {
+        if (!isValidPubkey(pubkeys[i])) {
+          showError(`Clave pública ${i + 1} inválida. Debe ser 66 caracteres hex empezando por 02 o 03.`);
+          return;
+        }
+      }
+
+      try {
+        // Ordenar pubkeys lexicográficamente (estándar BIP67)
+        const sortedPubkeys = [...pubkeys].sort();
+
+        // Construir redeem script
+        const redeemScript = buildRedeemScript(n, sortedPubkeys);
+        const redeemScriptHex = HexUtils.bytesToHex(redeemScript);
+
+        // P2SH: HASH160(redeemScript)
+        const scriptHash = await HexUtils.hash160(redeemScript);
+        const scriptHashHex = HexUtils.bytesToHex(scriptHash);
+        const p2shAddress = await Base58.checkEncode(VERSION_P2SH, scriptHash);
+
+        // P2WSH: SHA256(witnessScript)
+        const witnessHash = await HexUtils.sha256(redeemScript);
+        const witnessHashHex = HexUtils.bytesToHex(witnessHash);
+        const p2wshAddress = Bech32.encodeP2WSH(witnessHash, 'mainnet');
+
+        // Mostrar resultados
+        outputScheme.textContent = `(${n}-de-${m})`;
+        outputP2sh.textContent = p2shAddress;
+        outputP2wsh.textContent = p2wshAddress;
+        outputScriptHash.textContent = scriptHashHex;
+        outputWitnessHash.textContent = witnessHashHex;
+        outputScriptReadable.textContent = scriptToReadable(redeemScriptHex, sortedPubkeys);
+        outputScriptHex.textContent = redeemScriptHex;
+
+        outputSection.style.display = 'block';
+
+      } catch (error) {
+        showError('Error: ' + error.message);
+      }
+    }
+
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.style.display = 'block';
+      outputSection.style.display = 'none';
+    }
+
+    function hideError() {
+      errorMessage.style.display = 'none';
+    }
+
+    // === EVENT LISTENERS ===
+
+    // Actualizar N cuando cambia M
+    inputM.addEventListener('change', () => {
+      const m = parseInt(inputM.value);
+      const n = parseInt(inputN.value);
+      
+      // Ajustar N si es mayor que M
+      if (n > m) {
+        inputN.value = m;
+      }
+      
+      generatePubkeyInputs();
+    });
+
+    inputN.addEventListener('change', () => {
+      const m = parseInt(inputM.value);
+      const n = parseInt(inputN.value);
+      
+      if (n > m) {
+        inputN.value = m;
+      }
+    });
+
+    // Esquemas predefinidos
+    document.querySelectorAll('.scheme-card').forEach(card => {
+      card.addEventListener('click', () => {
+        inputN.value = card.dataset.n;
+        inputM.value = card.dataset.m;
+        generatePubkeyInputs();
+      });
+    });
+
+    // Generar claves aleatorias (de ejemplo)
+    btnGenerateKeys.addEventListener('click', () => {
+      const inputs = document.querySelectorAll('.pubkey-input');
+      inputs.forEach((input, i) => {
+        if (i < EXAMPLE_PUBKEYS.length) {
+          input.value = EXAMPLE_PUBKEYS[i];
+          input.dispatchEvent(new Event('input'));
+        }
+      });
+    });
+
+    // Generar dirección
+    btnGenerateAddress.addEventListener('click', generateMultisigAddress);
+
+    // Copiar
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const targetId = btn.dataset.target;
+        const target = document.getElementById(targetId);
+        const text = target.textContent;
+
+        if (text && text !== '—') {
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.textContent = '✓';
+            setTimeout(() => { btn.textContent = '📋'; }, 1000);
+          } catch (err) {
+            console.error('Error copiando:', err);
+          }
+        }
+      });
+    });
+
+    // === INICIALIZACIÓN ===
+    generatePubkeyInputs();
+
+  })();
+  </script>
+</body>
+</html>

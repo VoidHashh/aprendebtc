@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Genera direcciones Bitcoin P2PKH y P2SH desde una clave pública. Entiende el proceso de hashing y Base58Check." />
+  <title>Dirección Bitcoin (Base58) — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .pipeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    
+    .pipeline-step {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      transition: all 0.2s;
+    }
+    
+    .pipeline-step:hover {
+      border-color: var(--accent);
+    }
+    
+    .pipeline-step__number {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.8rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    
+    .pipeline-step__content {
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .pipeline-step__label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.25rem;
+    }
+    
+    .pipeline-step__value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-primary);
+      word-break: break-all;
+      line-height: 1.5;
+    }
+    
+    .pipeline-step__value--accent {
+      color: var(--accent);
+      font-weight: 600;
+    }
+    
+    .pipeline-arrow {
+      display: flex;
+      justify-content: center;
+      color: var(--text-secondary);
+      font-size: 1.25rem;
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Herramientas">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Herramientas prácticas</div>
+          <a href="conversor.html" class="sidebar__link">Conversor BTC / EUR / sats</a>
+          <a href="calculadora-dca.html" class="sidebar__link">Calculadora DCA</a>
+          <a href="calculadora-fees.html" class="sidebar__link">Calculadora de fees</a>
+          <a href="calculadora-impuestos.html" class="sidebar__link">Calculadora de impuestos</a>
+          <a href="comparador-exchanges.html" class="sidebar__link">Comparador de exchanges</a>
+          <a href="calculadora-herencia.html" class="sidebar__link">Calculadora de herencia</a>
+        </div>
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Herramientas técnicas</div>
+          <a href="hash.html" class="sidebar__link">Hash functions</a>
+          <a href="private-key.html" class="sidebar__link sidebar__link--active">Claves y direcciones</a>
+          <a href="hd-wallet.html" class="sidebar__link">HD Wallet explorer</a>
+          <a href="transaccion.html" class="sidebar__link">Transacciones</a>
+          <a href="script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="block-tools.html" class="sidebar__link">Bloques</a>
+          <a href="firma.html" class="sidebar__link">Criptografía</a>
+          <a href="index.html" class="sidebar__link">Utilidades</a>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Dirección Base58</span>
+        </nav>
+
+        <article class="article">
+          <h1>Dirección Bitcoin (Base58)</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Convierte una clave pública en una dirección Bitcoin legacy (Base58Check).
+          </p>
+
+          <!-- Disclaimer educativo -->
+          <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">Herramienta educativa</div>
+              <p class="callout__text">Esta herramienta es para aprendizaje. NO la uses para generar direcciones para fondos reales.</p>
+            </div>
+          </div>
+
+          <!-- Input -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Entrada</h2>
+            
+            <!-- Toggle tipo de input -->
+            <div class="tool-presets" style="margin-bottom: 1rem;">
+              <button class="tool-preset tool-preset--active" data-mode="pubkey" id="mode-pubkey">Clave pública (hex)</button>
+              <button class="tool-preset" data-mode="hash" id="mode-hash">Public Key Hash (20 bytes)</button>
+            </div>
+
+            <div class="tool-field" id="input-pubkey-field">
+              <label class="tool-label" for="input-pubkey">Clave pública (comprimida 66 o no comprimida 130 hex)</label>
+              <input 
+                type="text" 
+                id="input-pubkey" 
+                class="tool-input" 
+                placeholder="02 o 03 + 64 chars (comprimida) ó 04 + 128 chars (no comprimida)"
+                style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;"
+              />
+              <span class="tool-note" id="pubkey-status">Introduce una clave pública</span>
+            </div>
+
+            <div class="tool-field" id="input-hash-field" style="display: none;">
+              <label class="tool-label" for="input-hash">Public Key Hash (40 hex = 20 bytes)</label>
+              <input 
+                type="text" 
+                id="input-hash" 
+                class="tool-input" 
+                placeholder="HASH160 de la clave pública (40 caracteres hex)"
+                maxlength="40"
+                style="font-family: 'JetBrains Mono', monospace;"
+              />
+              <span class="tool-note" id="hash-status">0 / 40 caracteres</span>
+            </div>
+
+            <div class="tool-btn-row">
+              <button class="tool-btn tool-btn--secondary" id="btn-example">
+                📋 Cargar ejemplo
+              </button>
+              <button class="tool-btn" id="btn-generate">
+                🏠 Generar direcciones
+              </button>
+            </div>
+          </div>
+
+          <!-- Error -->
+          <div class="tool-error" id="error-message" style="display: none;"></div>
+
+          <!-- Outputs -->
+          <div class="tool-container" id="output-section" style="display: none;">
+            <h2 class="tool-container__title">Direcciones generadas</h2>
+
+            <!-- Public Key Hash -->
+            <div class="output-row" style="margin-bottom: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <label class="tool-label" style="margin-bottom: 0;">Public Key Hash (HASH160) — 20 bytes</label>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-pkh">📋</button>
+              </div>
+              <div class="tool-output" id="output-pkh" style="word-break: break-all;">—</div>
+            </div>
+
+            <!-- P2PKH -->
+            <div class="output-row" style="margin-bottom: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <label class="tool-label" style="margin-bottom: 0;">Dirección P2PKH — empieza por 1</label>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-p2pkh">📋</button>
+              </div>
+              <div class="tool-output" id="output-p2pkh" style="word-break: break-all; color: var(--accent); font-size: 1rem;">—</div>
+              <span class="tool-note">Pay-to-Public-Key-Hash (legacy)</span>
+            </div>
+
+            <!-- P2SH-P2WPKH -->
+            <div class="output-row">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <label class="tool-label" style="margin-bottom: 0;">Dirección P2SH-P2WPKH — empieza por 3</label>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-p2sh">📋</button>
+              </div>
+              <div class="tool-output" id="output-p2sh" style="word-break: break-all; font-size: 1rem;">—</div>
+              <span class="tool-note">SegWit envuelto en P2SH (compatibilidad)</span>
+            </div>
+          </div>
+
+          <!-- Proceso paso a paso -->
+          <div class="tool-container" id="pipeline-section" style="display: none;">
+            <h2 class="tool-container__title">Proceso paso a paso (P2PKH)</h2>
+            
+            <div class="pipeline" id="pipeline">
+              <!-- Se llena dinámicamente -->
+            </div>
+          </div>
+
+          <!-- Explicación -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">¿Cómo funciona?</h2>
+            
+            <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1rem;">
+              Una dirección Bitcoin <strong>no es</strong> la clave pública directamente. Es un hash de la clave pública, 
+              codificado con Base58Check para ser más corto y detectar errores de copia.
+            </p>
+
+            <div class="tool-table-wrapper">
+              <table class="tool-table">
+                <thead>
+                  <tr>
+                    <th>Tipo</th>
+                    <th>Prefijo</th>
+                    <th>Empieza por</th>
+                    <th>Uso</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>P2PKH</strong></td>
+                    <td>0x00</td>
+                    <td>1</td>
+                    <td>Direcciones legacy originales</td>
+                  </tr>
+                  <tr>
+                    <td><strong>P2SH</strong></td>
+                    <td>0x05</td>
+                    <td>3</td>
+                    <td>Scripts (multisig, SegWit wrapped)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem;">
+              El checksum (últimos 4 bytes) permite detectar errores tipográficos antes de enviar fondos 
+              a una dirección incorrecta.
+            </p>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más sobre direcciones Bitcoin</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-3/tipos-de-direcciones.html">Tipos de direcciones →</a> · 
+              <a href="address-bech32.html">Direcciones Bech32 (SegWit nativo) →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/hex-utils.js"></script>
+  <script src="../js/ripemd160.js"></script>
+  <script src="../js/base58.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === CONSTANTES ===
+    const VERSION_P2PKH = 0x00; // Mainnet P2PKH
+    const VERSION_P2SH = 0x05;  // Mainnet P2SH
+
+    // Ejemplo: clave pública comprimida conocida
+    const EXAMPLE_PUBKEY = '0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798';
+
+    // === ELEMENTOS DEL DOM ===
+    const modePubkey = document.getElementById('mode-pubkey');
+    const modeHash = document.getElementById('mode-hash');
+    const inputPubkeyField = document.getElementById('input-pubkey-field');
+    const inputHashField = document.getElementById('input-hash-field');
+    const inputPubkey = document.getElementById('input-pubkey');
+    const inputHash = document.getElementById('input-hash');
+    const pubkeyStatus = document.getElementById('pubkey-status');
+    const hashStatus = document.getElementById('hash-status');
+    const btnExample = document.getElementById('btn-example');
+    const btnGenerate = document.getElementById('btn-generate');
+    const errorMessage = document.getElementById('error-message');
+    const outputSection = document.getElementById('output-section');
+    const pipelineSection = document.getElementById('pipeline-section');
+    const pipeline = document.getElementById('pipeline');
+
+    const outputPkh = document.getElementById('output-pkh');
+    const outputP2pkh = document.getElementById('output-p2pkh');
+    const outputP2sh = document.getElementById('output-p2sh');
+
+    let currentMode = 'pubkey';
+
+    // === FUNCIONES ===
+
+    /**
+     * Valida formato de clave pública
+     */
+    function validatePubkey(hex) {
+      hex = hex.toLowerCase();
+      
+      // Comprimida: 02/03 + 32 bytes = 66 chars
+      if (/^0[23][0-9a-f]{64}$/.test(hex)) {
+        return { valid: true, type: 'compressed' };
+      }
+      
+      // No comprimida: 04 + 64 bytes = 130 chars
+      if (/^04[0-9a-f]{128}$/.test(hex)) {
+        return { valid: true, type: 'uncompressed' };
+      }
+
+      return { valid: false };
+    }
+
+    /**
+     * Calcula HASH160 de la clave pública
+     */
+    async function calculateHash160(pubkeyHex) {
+      const pubkeyBytes = HexUtils.hexToBytes(pubkeyHex);
+      const hash160 = await HexUtils.hash160(pubkeyBytes);
+      return HexUtils.bytesToHex(hash160);
+    }
+
+    /**
+     * Genera dirección P2PKH desde pubkey hash
+     */
+    async function generateP2PKH(pubkeyHashHex) {
+      const hashBytes = HexUtils.hexToBytes(pubkeyHashHex);
+      return await Base58.checkEncode(VERSION_P2PKH, hashBytes);
+    }
+
+    /**
+     * Genera dirección P2SH-P2WPKH desde pubkey hash
+     * Script: 0x0014 + pubkeyHash (redeemScript para P2WPKH)
+     */
+    async function generateP2SH_P2WPKH(pubkeyHashHex) {
+      // RedeemScript: OP_0 (0x00) + PUSH_20 (0x14) + pubkeyHash
+      const redeemScript = HexUtils.hexToBytes('0014' + pubkeyHashHex);
+      
+      // HASH160 del redeemScript
+      const scriptHash = await HexUtils.hash160(redeemScript);
+      
+      // Base58Check con version 0x05
+      return await Base58.checkEncode(VERSION_P2SH, scriptHash);
+    }
+
+    /**
+     * Muestra el pipeline paso a paso
+     */
+    async function showPipeline(pubkeyHex, pubkeyHashHex) {
+      const pubkeyBytes = HexUtils.hexToBytes(pubkeyHex);
+      
+      // SHA-256
+      const sha256Result = await HexUtils.sha256(pubkeyBytes);
+      const sha256Hex = HexUtils.bytesToHex(sha256Result);
+      
+      // RIPEMD-160
+      const ripemd160Result = RIPEMD160.hash(sha256Result);
+      const ripemd160Hex = HexUtils.bytesToHex(ripemd160Result);
+      
+      // Payload con version
+      const payloadHex = '00' + ripemd160Hex;
+      
+      // Checksum
+      const payloadBytes = HexUtils.hexToBytes(payloadHex);
+      const checksum = await Base58.calculateChecksum(payloadBytes);
+      const checksumHex = HexUtils.bytesToHex(checksum);
+      
+      // Dirección final
+      const address = await generateP2PKH(pubkeyHashHex);
+
+      pipeline.innerHTML = `
+        <div class="pipeline-step">
+          <div class="pipeline-step__number">1</div>
+          <div class="pipeline-step__content">
+            <div class="pipeline-step__label">Clave pública</div>
+            <div class="pipeline-step__value">${pubkeyHex}</div>
+          </div>
+        </div>
+        
+        <div class="pipeline-arrow">↓</div>
+        
+        <div class="pipeline-step">
+          <div class="pipeline-step__number">2</div>
+          <div class="pipeline-step__content">
+            <div class="pipeline-step__label">SHA-256</div>
+            <div class="pipeline-step__value">${sha256Hex}</div>
+          </div>
+        </div>
+        
+        <div class="pipeline-arrow">↓</div>
+        
+        <div class="pipeline-step">
+          <div class="pipeline-step__number">3</div>
+          <div class="pipeline-step__content">
+            <div class="pipeline-step__label">RIPEMD-160 → Public Key Hash</div>
+            <div class="pipeline-step__value">${ripemd160Hex}</div>
+          </div>
+        </div>
+        
+        <div class="pipeline-arrow">↓</div>
+        
+        <div class="pipeline-step">
+          <div class="pipeline-step__number">4</div>
+          <div class="pipeline-step__content">
+            <div class="pipeline-step__label">Añadir prefix 0x00 (mainnet P2PKH)</div>
+            <div class="pipeline-step__value"><span style="color: var(--accent);">00</span>${ripemd160Hex}</div>
+          </div>
+        </div>
+        
+        <div class="pipeline-arrow">↓</div>
+        
+        <div class="pipeline-step">
+          <div class="pipeline-step__number">5</div>
+          <div class="pipeline-step__content">
+            <div class="pipeline-step__label">Doble SHA-256 → Checksum (primeros 4 bytes)</div>
+            <div class="pipeline-step__value">${checksumHex}</div>
+          </div>
+        </div>
+        
+        <div class="pipeline-arrow">↓</div>
+        
+        <div class="pipeline-step">
+          <div class="pipeline-step__number">6</div>
+          <div class="pipeline-step__content">
+            <div class="pipeline-step__label">Base58(payload + checksum) → Dirección</div>
+            <div class="pipeline-step__value pipeline-step__value--accent">${address}</div>
+          </div>
+        </div>
+      `;
+
+      pipelineSection.style.display = 'block';
+    }
+
+    /**
+     * Genera direcciones
+     */
+    async function generate() {
+      hideError();
+      
+      let pubkeyHashHex;
+      let pubkeyHex = null;
+
+      if (currentMode === 'pubkey') {
+        const pubkey = inputPubkey.value.replace(/\s/g, '').toLowerCase();
+        const validation = validatePubkey(pubkey);
+        
+        if (!validation.valid) {
+          showError('Clave pública inválida. Debe ser 66 chars (comprimida) o 130 chars (no comprimida).');
+          return;
+        }
+
+        pubkeyHex = pubkey;
+        pubkeyHashHex = await calculateHash160(pubkey);
+        
+      } else {
+        const hash = inputHash.value.replace(/\s/g, '').toLowerCase();
+        
+        if (!/^[0-9a-f]{40}$/.test(hash)) {
+          showError('El hash debe tener exactamente 40 caracteres hexadecimales.');
+          return;
+        }
+
+        pubkeyHashHex = hash;
+      }
+
+      try {
+        // Generar direcciones
+        const p2pkhAddress = await generateP2PKH(pubkeyHashHex);
+        const p2shAddress = await generateP2SH_P2WPKH(pubkeyHashHex);
+
+        // Mostrar resultados
+        outputPkh.textContent = pubkeyHashHex;
+        outputP2pkh.textContent = p2pkhAddress;
+        outputP2sh.textContent = p2shAddress;
+
+        outputSection.style.display = 'block';
+
+        // Mostrar pipeline solo si tenemos la pubkey original
+        if (pubkeyHex) {
+          await showPipeline(pubkeyHex, pubkeyHashHex);
+        } else {
+          pipelineSection.style.display = 'none';
+        }
+
+      } catch (error) {
+        showError('Error generando direcciones: ' + error.message);
+      }
+    }
+
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.style.display = 'block';
+      outputSection.style.display = 'none';
+      pipelineSection.style.display = 'none';
+    }
+
+    function hideError() {
+      errorMessage.style.display = 'none';
+    }
+
+    // === EVENT LISTENERS ===
+
+    // Toggle modo
+    modePubkey.addEventListener('click', () => {
+      currentMode = 'pubkey';
+      modePubkey.classList.add('tool-preset--active');
+      modeHash.classList.remove('tool-preset--active');
+      inputPubkeyField.style.display = 'block';
+      inputHashField.style.display = 'none';
+      hideError();
+      outputSection.style.display = 'none';
+      pipelineSection.style.display = 'none';
+    });
+
+    modeHash.addEventListener('click', () => {
+      currentMode = 'hash';
+      modeHash.classList.add('tool-preset--active');
+      modePubkey.classList.remove('tool-preset--active');
+      inputPubkeyField.style.display = 'none';
+      inputHashField.style.display = 'block';
+      hideError();
+      outputSection.style.display = 'none';
+      pipelineSection.style.display = 'none';
+    });
+
+    // Input status
+    inputPubkey.addEventListener('input', () => {
+      const value = inputPubkey.value.replace(/\s/g, '');
+      const validation = validatePubkey(value);
+      
+      if (validation.valid) {
+        pubkeyStatus.textContent = `✓ Clave ${validation.type === 'compressed' ? 'comprimida' : 'no comprimida'} válida`;
+        pubkeyStatus.style.color = '#2ea043';
+      } else if (value.length > 0) {
+        pubkeyStatus.textContent = `${value.length} caracteres (necesitas 66 o 130)`;
+        pubkeyStatus.style.color = 'var(--text-secondary)';
+      } else {
+        pubkeyStatus.textContent = 'Introduce una clave pública';
+        pubkeyStatus.style.color = 'var(--text-secondary)';
+      }
+    });
+
+    inputHash.addEventListener('input', () => {
+      const value = inputHash.value.replace(/[^0-9a-fA-F]/g, '');
+      inputHash.value = value;
+      hashStatus.textContent = `${value.length} / 40 caracteres`;
+      hashStatus.style.color = value.length === 40 ? '#2ea043' : 'var(--text-secondary)';
+    });
+
+    // Cargar ejemplo
+    btnExample.addEventListener('click', () => {
+      if (currentMode === 'pubkey') {
+        inputPubkey.value = EXAMPLE_PUBKEY;
+        inputPubkey.dispatchEvent(new Event('input'));
+      } else {
+        // Ejemplo de hash conocido
+        inputHash.value = '751e76e8199196d454941c45d1b3a323f1433bd6';
+        inputHash.dispatchEvent(new Event('input'));
+      }
+    });
+
+    // Generar
+    btnGenerate.addEventListener('click', generate);
+
+    // Enter para generar
+    inputPubkey.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') generate();
+    });
+    inputHash.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') generate();
+    });
+
+    // Copiar
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const targetId = btn.dataset.target;
+        const target = document.getElementById(targetId);
+        const text = target.textContent;
+
+        if (text && text !== '—') {
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.textContent = '✓';
+            setTimeout(() => { btn.textContent = '📋'; }, 1000);
+          } catch (err) {
+            console.error('Error copiando:', err);
+          }
+        }
+      });
+    });
+
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Codifica y decodifica claves privadas Bitcoin en formato WIF (Wallet Import Format). Base58Check encoding." />
+  <title>WIF Private Key — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid var(--bg-border);
+      margin-bottom: 1.5rem;
+    }
+    .tab {
+      padding: 0.75rem 1.25rem;
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: all 0.2s;
+    }
+    .tab:hover { color: var(--text-primary); }
+    .tab--active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .tab-content { display: none; }
+    .tab-content--active { display: block; }
+
+    .wif-step {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0;
+      font-size: 0.85rem;
+    }
+    .wif-step__label {
+      min-width: 120px;
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+    .wif-step__value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      word-break: break-all;
+      flex: 1;
+    }
+    .wif-step__bytes {
+      background: var(--bg-primary);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Herramientas">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Herramientas prácticas</div>
+          <a href="conversor.html" class="sidebar__link">Conversor BTC / EUR / sats</a>
+          <a href="calculadora-dca.html" class="sidebar__link">Calculadora DCA</a>
+          <a href="calculadora-fees.html" class="sidebar__link">Calculadora de fees</a>
+          <a href="calculadora-impuestos.html" class="sidebar__link">Calculadora de impuestos</a>
+          <a href="comparador-exchanges.html" class="sidebar__link">Comparador de exchanges</a>
+          <a href="calculadora-herencia.html" class="sidebar__link">Calculadora de herencia</a>
+        </div>
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Herramientas técnicas</div>
+          <a href="hash.html" class="sidebar__link">Hash functions</a>
+          <a href="private-key.html" class="sidebar__link sidebar__link--active">Claves y direcciones</a>
+          <a href="hd-wallet.html" class="sidebar__link">HD Wallet explorer</a>
+          <a href="transaccion.html" class="sidebar__link">Transacciones</a>
+          <a href="script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="block-tools.html" class="sidebar__link">Bloques</a>
+          <a href="firma.html" class="sidebar__link">Criptografía</a>
+          <a href="index.html" class="sidebar__link">Utilidades</a>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">WIF</span>
+        </nav>
+
+        <article class="article">
+          <h1>WIF Private Key</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Convierte entre clave privada hexadecimal y formato WIF (Wallet Import Format).
+          </p>
+
+          <!-- Disclaimer educativo -->
+          <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">Herramienta educativa</div>
+              <p class="callout__text">Esta herramienta es para aprendizaje. NO la uses para claves de fondos reales.</p>
+            </div>
+          </div>
+
+          <!-- Pestañas -->
+          <div class="tabs">
+            <button class="tab tab--active" data-tab="encode">Codificar (Hex → WIF)</button>
+            <button class="tab" data-tab="decode">Decodificar (WIF → Hex)</button>
+          </div>
+
+          <!-- ==================== -->
+          <!-- TAB 1: ENCODE -->
+          <!-- ==================== -->
+          <div class="tab-content tab-content--active" id="tab-encode">
+            <div class="tool-container">
+              <h2 class="tool-container__title">Clave privada hexadecimal</h2>
+
+              <div class="tool-field" style="margin-bottom: 1rem;">
+                <label class="tool-label" for="encode-privkey">Clave privada (64 hex)</label>
+                <input 
+                  type="text" 
+                  id="encode-privkey" 
+                  class="tool-input" 
+                  placeholder="Introduce 64 caracteres hexadecimales"
+                  maxlength="64"
+                  style="font-family: 'JetBrains Mono', monospace;"
+                />
+                <span class="tool-note" id="encode-status">0 / 64 caracteres</span>
+              </div>
+
+              <div class="tool-row" style="margin-bottom: 1rem;">
+                <div class="tool-field">
+                  <label class="tool-toggle">
+                    <input type="checkbox" class="tool-toggle__input" id="encode-compressed" checked />
+                    <span class="tool-toggle__slider"></span>
+                    <span class="tool-toggle__label">Comprimida (añade flag 0x01)</span>
+                  </label>
+                </div>
+                <div class="tool-field">
+                  <label class="tool-toggle">
+                    <input type="checkbox" class="tool-toggle__input" id="encode-mainnet" checked />
+                    <span class="tool-toggle__slider"></span>
+                    <span class="tool-toggle__label">Mainnet (testnet si off)</span>
+                  </label>
+                </div>
+              </div>
+
+              <button class="tool-btn" id="btn-encode">🔐 Codificar a WIF</button>
+            </div>
+
+            <!-- Error -->
+            <div class="tool-error" id="encode-error" style="display: none;"></div>
+
+            <!-- Resultado encode -->
+            <div class="tool-container" id="encode-result" style="display: none;">
+              <h2 class="tool-container__title">WIF resultante</h2>
+
+              <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                <div class="tool-output" id="encode-wif" style="flex: 1; font-size: 0.9rem; color: var(--accent);">—</div>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="encode-wif">📋</button>
+              </div>
+
+              <!-- Proceso paso a paso -->
+              <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md);">
+                <div class="tool-label" style="margin-bottom: 0.75rem;">Proceso de codificación</div>
+                <div id="encode-steps"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ==================== -->
+          <!-- TAB 2: DECODE -->
+          <!-- ==================== -->
+          <div class="tab-content" id="tab-decode">
+            <div class="tool-container">
+              <h2 class="tool-container__title">Clave WIF</h2>
+
+              <div class="tool-field">
+                <label class="tool-label" for="decode-wif">WIF (empieza por 5, K, L, o c)</label>
+                <input 
+                  type="text" 
+                  id="decode-wif" 
+                  class="tool-input" 
+                  placeholder="Ej: 5HueCGU8rMjxEXxiPuD5BDku4MkFqeZyd4dZ1jvhTVqvbTLvyTJ"
+                  style="font-family: 'JetBrains Mono', monospace;"
+                />
+              </div>
+
+              <button class="tool-btn" id="btn-decode" style="margin-top: 1rem;">🔓 Decodificar</button>
+            </div>
+
+            <!-- Error -->
+            <div class="tool-error" id="decode-error" style="display: none;"></div>
+
+            <!-- Resultado decode -->
+            <div class="tool-container" id="decode-result" style="display: none;">
+              <h2 class="tool-container__title">Clave privada decodificada</h2>
+
+              <div class="tool-row" style="margin-bottom: 1rem;">
+                <div class="tool-result-card">
+                  <div class="tool-result-card__label">Red</div>
+                  <div class="tool-result-card__value" id="decode-network">—</div>
+                </div>
+                <div class="tool-result-card">
+                  <div class="tool-result-card__label">Comprimida</div>
+                  <div class="tool-result-card__value" id="decode-compressed">—</div>
+                </div>
+              </div>
+
+              <div class="tool-field" style="margin-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                  <label class="tool-label" style="margin-bottom: 0;">Clave privada (hex)</label>
+                  <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="decode-privkey">📋</button>
+                </div>
+                <div class="tool-output" id="decode-privkey" style="word-break: break-all;">—</div>
+              </div>
+
+              <!-- Verificación checksum -->
+              <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md);">
+                <div class="tool-row">
+                  <div>
+                    <div class="tool-label">Checksum en WIF</div>
+                    <div id="decode-checksum-original" style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">—</div>
+                  </div>
+                  <div>
+                    <div class="tool-label">Checksum calculado</div>
+                    <div id="decode-checksum-calculated" style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">—</div>
+                  </div>
+                </div>
+                <div id="decode-checksum-status" style="margin-top: 0.75rem; font-weight: 600;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Referencia de prefijos -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Prefijos WIF</h2>
+            
+            <div class="tool-table-wrapper">
+              <table class="tool-table">
+                <thead>
+                  <tr>
+                    <th>Red</th>
+                    <th>Comprimida</th>
+                    <th>Prefix hex</th>
+                    <th>Empieza por</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Mainnet</td>
+                    <td>Sí</td>
+                    <td>0x80 + key + 0x01</td>
+                    <td><strong>K</strong> o <strong>L</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Mainnet</td>
+                    <td>No</td>
+                    <td>0x80 + key</td>
+                    <td><strong>5</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Testnet</td>
+                    <td>Sí</td>
+                    <td>0xEF + key + 0x01</td>
+                    <td><strong>c</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Testnet</td>
+                    <td>No</td>
+                    <td>0xEF + key</td>
+                    <td><strong>9</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más sobre claves privadas</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-3/clave-privada.html">Claves privadas en detalle →</a> · 
+              <a href="checksum-base58.html">Base58Check encoding →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/hex-utils.js"></script>
+  <script src="../js/base58.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === CONSTANTES ===
+    const PREFIX_MAINNET = 0x80;
+    const PREFIX_TESTNET = 0xEF;
+    const COMPRESSION_FLAG = 0x01;
+
+    // === ELEMENTOS DEL DOM ===
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    // Encode
+    const encodePrivkey = document.getElementById('encode-privkey');
+    const encodeStatus = document.getElementById('encode-status');
+    const encodeCompressed = document.getElementById('encode-compressed');
+    const encodeMainnet = document.getElementById('encode-mainnet');
+    const btnEncode = document.getElementById('btn-encode');
+    const encodeError = document.getElementById('encode-error');
+    const encodeResult = document.getElementById('encode-result');
+    const encodeWif = document.getElementById('encode-wif');
+    const encodeSteps = document.getElementById('encode-steps');
+
+    // Decode
+    const decodeWifInput = document.getElementById('decode-wif');
+    const btnDecode = document.getElementById('btn-decode');
+    const decodeError = document.getElementById('decode-error');
+    const decodeResult = document.getElementById('decode-result');
+    const decodeNetwork = document.getElementById('decode-network');
+    const decodeCompressedEl = document.getElementById('decode-compressed');
+    const decodePrivkey = document.getElementById('decode-privkey');
+    const decodeChecksumOriginal = document.getElementById('decode-checksum-original');
+    const decodeChecksumCalculated = document.getElementById('decode-checksum-calculated');
+    const decodeChecksumStatus = document.getElementById('decode-checksum-status');
+
+    // === PESTAÑAS ===
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('tab--active'));
+        tabContents.forEach(c => c.classList.remove('tab-content--active'));
+        tab.classList.add('tab--active');
+        document.getElementById('tab-' + tab.dataset.tab).classList.add('tab-content--active');
+      });
+    });
+
+    // === ENCODE ===
+
+    encodePrivkey.addEventListener('input', () => {
+      const value = encodePrivkey.value.replace(/[^0-9a-fA-F]/g, '');
+      encodePrivkey.value = value;
+      encodeStatus.textContent = `${value.length} / 64 caracteres`;
+      encodeStatus.style.color = value.length === 64 ? '#2ea043' : 'var(--text-secondary)';
+    });
+
+    btnEncode.addEventListener('click', encodeToWif);
+
+    async function encodeToWif() {
+      encodeError.style.display = 'none';
+      
+      const privkeyHex = encodePrivkey.value.toLowerCase();
+      
+      if (!/^[0-9a-f]{64}$/.test(privkeyHex)) {
+        encodeError.textContent = 'La clave privada debe tener 64 caracteres hexadecimales.';
+        encodeError.style.display = 'block';
+        encodeResult.style.display = 'none';
+        return;
+      }
+
+      const compressed = encodeCompressed.checked;
+      const mainnet = encodeMainnet.checked;
+      const prefix = mainnet ? PREFIX_MAINNET : PREFIX_TESTNET;
+
+      try {
+        // Construir payload
+        const privkeyBytes = HexUtils.hexToBytes(privkeyHex);
+        let payload;
+        
+        if (compressed) {
+          payload = new Uint8Array(34);
+          payload[0] = prefix;
+          payload.set(privkeyBytes, 1);
+          payload[33] = COMPRESSION_FLAG;
+        } else {
+          payload = new Uint8Array(33);
+          payload[0] = prefix;
+          payload.set(privkeyBytes, 1);
+        }
+
+        const payloadHex = HexUtils.bytesToHex(payload);
+
+        // Calcular checksum
+        const checksum = await Base58.calculateChecksum(payload);
+        const checksumHex = HexUtils.bytesToHex(checksum);
+
+        // Resultado final
+        const finalBytes = new Uint8Array(payload.length + 4);
+        finalBytes.set(payload);
+        finalBytes.set(checksum, payload.length);
+        
+        const wif = Base58.encode(finalBytes);
+
+        // Mostrar resultado
+        encodeWif.textContent = wif;
+
+        // Mostrar pasos
+        encodeSteps.innerHTML = `
+          <div class="wif-step">
+            <span class="wif-step__label">1. Prefix</span>
+            <span class="wif-step__value" style="color: var(--accent);">${prefix.toString(16).padStart(2, '0')}</span>
+            <span class="wif-step__bytes">${mainnet ? 'mainnet' : 'testnet'}</span>
+          </div>
+          <div class="wif-step">
+            <span class="wif-step__label">2. Private Key</span>
+            <span class="wif-step__value">${privkeyHex}</span>
+            <span class="wif-step__bytes">32 bytes</span>
+          </div>
+          ${compressed ? `
+          <div class="wif-step">
+            <span class="wif-step__label">3. Compression</span>
+            <span class="wif-step__value" style="color: #a371f7;">01</span>
+            <span class="wif-step__bytes">flag</span>
+          </div>
+          ` : ''}
+          <div class="wif-step">
+            <span class="wif-step__label">${compressed ? '4' : '3'}. Payload</span>
+            <span class="wif-step__value">${payloadHex}</span>
+            <span class="wif-step__bytes">${payload.length} bytes</span>
+          </div>
+          <div class="wif-step">
+            <span class="wif-step__label">${compressed ? '5' : '4'}. Checksum</span>
+            <span class="wif-step__value" style="color: #2ea043;">${checksumHex}</span>
+            <span class="wif-step__bytes">4 bytes</span>
+          </div>
+          <div class="wif-step">
+            <span class="wif-step__label">${compressed ? '6' : '5'}. WIF</span>
+            <span class="wif-step__value" style="color: var(--accent); font-weight: 600;">${wif}</span>
+            <span class="wif-step__bytes">Base58</span>
+          </div>
+        `;
+
+        encodeResult.style.display = 'block';
+
+      } catch (error) {
+        encodeError.textContent = 'Error: ' + error.message;
+        encodeError.style.display = 'block';
+        encodeResult.style.display = 'none';
+      }
+    }
+
+    // === DECODE ===
+
+    btnDecode.addEventListener('click', decodeFromWif);
+
+    async function decodeFromWif() {
+      decodeError.style.display = 'none';
+      
+      const wif = decodeWifInput.value.trim();
+      
+      if (!wif) {
+        decodeError.textContent = 'Introduce una clave WIF.';
+        decodeError.style.display = 'block';
+        decodeResult.style.display = 'none';
+        return;
+      }
+
+      try {
+        // Decodificar Base58
+        const bytes = Base58.decode(wif);
+        
+        if (bytes.length < 33) {
+          throw new Error('WIF demasiado corto');
+        }
+
+        // Separar payload y checksum
+        const payload = bytes.slice(0, -4);
+        const checksumOriginal = bytes.slice(-4);
+        const checksumOriginalHex = HexUtils.bytesToHex(checksumOriginal);
+
+        // Calcular checksum
+        const checksumCalculated = await Base58.calculateChecksum(payload);
+        const checksumCalculatedHex = HexUtils.bytesToHex(checksumCalculated);
+
+        // Verificar checksum
+        let checksumValid = true;
+        for (let i = 0; i < 4; i++) {
+          if (checksumOriginal[i] !== checksumCalculated[i]) {
+            checksumValid = false;
+            break;
+          }
+        }
+
+        // Extraer datos
+        const prefix = payload[0];
+        let network, compressed, privkeyHex;
+
+        if (prefix === PREFIX_MAINNET) {
+          network = 'Mainnet';
+        } else if (prefix === PREFIX_TESTNET) {
+          network = 'Testnet';
+        } else {
+          throw new Error('Prefijo de red desconocido: 0x' + prefix.toString(16));
+        }
+
+        if (payload.length === 34 && payload[33] === COMPRESSION_FLAG) {
+          compressed = true;
+          privkeyHex = HexUtils.bytesToHex(payload.slice(1, 33));
+        } else if (payload.length === 33) {
+          compressed = false;
+          privkeyHex = HexUtils.bytesToHex(payload.slice(1, 33));
+        } else {
+          throw new Error('Longitud de WIF inválida');
+        }
+
+        // Mostrar resultados
+        decodeNetwork.textContent = network;
+        decodeNetwork.style.color = network === 'Mainnet' ? '#2ea043' : '#58a6ff';
+        
+        decodeCompressedEl.textContent = compressed ? 'Sí' : 'No';
+        decodePrivkey.textContent = privkeyHex;
+        
+        decodeChecksumOriginal.textContent = checksumOriginalHex;
+        decodeChecksumCalculated.textContent = checksumCalculatedHex;
+
+        if (checksumValid) {
+          decodeChecksumStatus.textContent = '✓ Checksum válido';
+          decodeChecksumStatus.style.color = '#2ea043';
+        } else {
+          decodeChecksumStatus.textContent = '✗ Checksum inválido — la clave puede estar corrupta';
+          decodeChecksumStatus.style.color = '#da3633';
+        }
+
+        decodeResult.style.display = 'block';
+
+      } catch (error) {
+        decodeError.textContent = 'Error: ' + error.message;
+        decodeError.style.display = 'block';
+        decodeResult.style.display = 'none';
+      }
+    }
+
+    // === COPIAR ===
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const targetId = btn.dataset.target;
+        const target = document.getElementById(targetId);
+        const text = target.textContent;
+
+        if (text && text !== '—') {
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.textContent = '✓';
+            setTimeout(() => { btn.textContent = '📋'; }, 1000);
+          } catch (err) {
+            console.error('Error copiando:', err);
+          }
+        }
+      });
+    });
+
+  })();
+  </script>
+</body>
+</html>

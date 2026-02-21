@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Genera direcciones SegWit nativas (bc1q) y Taproot (bc1p) desde una clave pública. Encoding Bech32 y Bech32m." />
+  <title>Dirección Bitcoin (Bech32 / Bech32m) — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+  <style>
+    .address-type-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .address-type-card__header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .address-type-card__icon {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 1.1rem;
+    }
+    
+    .address-type-card__icon--p2wpkh {
+      background: rgba(88, 166, 255, 0.2);
+    }
+    
+    .address-type-card__icon--p2tr {
+      background: rgba(247, 147, 26, 0.2);
+    }
+    
+    .address-type-card__title {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    
+    .address-type-card__subtitle {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+    
+    .witness-program {
+      background: var(--bg-primary);
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius-md);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-top: 0.75rem;
+      word-break: break-all;
+    }
+    
+    .witness-program__label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+    
+    .decode-section {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--bg-border);
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Herramientas">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Herramientas prácticas</div>
+          <a href="conversor.html" class="sidebar__link">Conversor BTC / EUR / sats</a>
+          <a href="calculadora-dca.html" class="sidebar__link">Calculadora DCA</a>
+          <a href="calculadora-fees.html" class="sidebar__link">Calculadora de fees</a>
+          <a href="calculadora-impuestos.html" class="sidebar__link">Calculadora de impuestos</a>
+          <a href="comparador-exchanges.html" class="sidebar__link">Comparador de exchanges</a>
+          <a href="calculadora-herencia.html" class="sidebar__link">Calculadora de herencia</a>
+        </div>
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Herramientas técnicas</div>
+          <a href="hash.html" class="sidebar__link">Hash functions</a>
+          <a href="private-key.html" class="sidebar__link sidebar__link--active">Claves y direcciones</a>
+          <a href="hd-wallet.html" class="sidebar__link">HD Wallet explorer</a>
+          <a href="transaccion.html" class="sidebar__link">Transacciones</a>
+          <a href="script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="block-tools.html" class="sidebar__link">Bloques</a>
+          <a href="firma.html" class="sidebar__link">Criptografía</a>
+          <a href="index.html" class="sidebar__link">Utilidades</a>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Dirección Bech32</span>
+        </nav>
+
+        <article class="article">
+          <h1>Dirección Bitcoin (Bech32 / Bech32m)</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Genera direcciones Native SegWit (bc1q...) y Taproot (bc1p...) desde tu clave pública.
+          </p>
+
+          <!-- Disclaimer educativo -->
+          <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">Herramienta educativa</div>
+              <p class="callout__text">Esta herramienta es para aprendizaje. NO la uses para generar direcciones para fondos reales.</p>
+            </div>
+          </div>
+
+          <!-- Input -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Clave pública comprimida</h2>
+            
+            <div class="tool-field">
+              <label class="tool-label" for="input-pubkey">Clave pública (66 hex, prefijo 02 o 03)</label>
+              <input 
+                type="text" 
+                id="input-pubkey" 
+                class="tool-input" 
+                placeholder="02 o 03 + 64 caracteres hexadecimales"
+                maxlength="66"
+                style="font-family: 'JetBrains Mono', monospace;"
+              />
+              <span class="tool-note" id="pubkey-status">0 / 66 caracteres</span>
+            </div>
+
+            <div class="tool-btn-row">
+              <button class="tool-btn tool-btn--secondary" id="btn-example">
+                📋 Cargar ejemplo
+              </button>
+              <button class="tool-btn" id="btn-generate">
+                🏠 Generar direcciones
+              </button>
+            </div>
+          </div>
+
+          <!-- Error -->
+          <div class="tool-error" id="error-message" style="display: none;"></div>
+
+          <!-- Outputs -->
+          <div class="tool-container" id="output-section" style="display: none;">
+            <h2 class="tool-container__title">Direcciones generadas</h2>
+
+            <!-- P2WPKH -->
+            <div class="address-type-card">
+              <div class="address-type-card__header">
+                <div class="address-type-card__icon address-type-card__icon--p2wpkh">⚡</div>
+                <div>
+                  <div class="address-type-card__title">P2WPKH (Native SegWit)</div>
+                  <div class="address-type-card__subtitle">Bech32 · Witness version 0 · empieza por bc1q</div>
+                </div>
+              </div>
+              
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <div class="tool-output" id="output-p2wpkh" style="flex: 1; word-break: break-all; color: #58a6ff; font-size: 0.95rem;">—</div>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-p2wpkh">📋</button>
+              </div>
+              
+              <div class="witness-program">
+                <div class="witness-program__label">Witness Program (20 bytes)</div>
+                <div id="witness-p2wpkh">—</div>
+              </div>
+            </div>
+
+            <!-- P2TR -->
+            <div class="address-type-card">
+              <div class="address-type-card__header">
+                <div class="address-type-card__icon address-type-card__icon--p2tr">🌳</div>
+                <div>
+                  <div class="address-type-card__title">P2TR (Taproot)</div>
+                  <div class="address-type-card__subtitle">Bech32m · Witness version 1 · empieza por bc1p</div>
+                </div>
+              </div>
+              
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <div class="tool-output" id="output-p2tr" style="flex: 1; word-break: break-all; color: var(--accent); font-size: 0.95rem;">—</div>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-p2tr">📋</button>
+              </div>
+              
+              <div class="witness-program">
+                <div class="witness-program__label">Witness Program (32 bytes) — x-only pubkey</div>
+                <div id="witness-p2tr">—</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Decodificar dirección existente -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Decodificar dirección Bech32</h2>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+              Introduce una dirección bc1... para ver sus componentes internos.
+            </p>
+
+            <div class="tool-field">
+              <label class="tool-label" for="input-decode">Dirección Bech32 / Bech32m</label>
+              <input 
+                type="text" 
+                id="input-decode" 
+                class="tool-input" 
+                placeholder="bc1q... o bc1p..."
+                style="font-family: 'JetBrains Mono', monospace;"
+              />
+            </div>
+
+            <button class="tool-btn tool-btn--secondary" id="btn-decode" style="margin-top: 0.75rem;">
+              🔍 Decodificar
+            </button>
+
+            <div id="decode-results" style="display: none; margin-top: 1rem;">
+              <div class="decoded-fields" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                  <div class="tool-result-card" style="flex: 1; min-width: 100px;">
+                    <div class="tool-result-card__label">HRP</div>
+                    <div class="tool-result-card__value" id="decode-hrp">—</div>
+                  </div>
+                  <div class="tool-result-card" style="flex: 1; min-width: 100px;">
+                    <div class="tool-result-card__label">Version</div>
+                    <div class="tool-result-card__value" id="decode-version">—</div>
+                  </div>
+                  <div class="tool-result-card" style="flex: 1; min-width: 100px;">
+                    <div class="tool-result-card__label">Encoding</div>
+                    <div class="tool-result-card__value" id="decode-spec">—</div>
+                  </div>
+                </div>
+                <div style="background: var(--bg-primary); padding: 0.75rem; border-radius: var(--radius-md);">
+                  <div class="tool-label" style="margin-bottom: 0.25rem;">Witness Program</div>
+                  <div id="decode-program" style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; word-break: break-all;">—</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bech32 vs Bech32m -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Bech32 vs Bech32m</h2>
+            
+            <div class="tool-table-wrapper">
+              <table class="tool-table">
+                <thead>
+                  <tr>
+                    <th>Especificación</th>
+                    <th>BIP</th>
+                    <th>Witness Version</th>
+                    <th>Uso</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Bech32</strong></td>
+                    <td>BIP 173</td>
+                    <td>0</td>
+                    <td>P2WPKH, P2WSH (SegWit v0)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Bech32m</strong></td>
+                    <td>BIP 350</td>
+                    <td>1+</td>
+                    <td>P2TR (Taproot) y futuras versiones</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem;">
+              Bech32m corrige un edge case de Bech32 que podía causar problemas con ciertos patrones de datos. 
+              La única diferencia técnica es la constante usada en el checksum.
+            </p>
+          </div>
+
+          <!-- Proceso -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">¿Cómo se generan?</h2>
+            
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+              <!-- P2WPKH -->
+              <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md);">
+                <div style="font-weight: 600; color: #58a6ff; margin-bottom: 0.5rem;">P2WPKH (bc1q...)</div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary);">
+                  <code>pubkey</code> → <code>HASH160</code> → <code>witness program (20 bytes)</code> → <code>Bech32("bc", 0, program)</code>
+                </div>
+              </div>
+
+              <!-- P2TR -->
+              <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md);">
+                <div style="font-weight: 600; color: var(--accent); margin-bottom: 0.5rem;">P2TR (bc1p...)</div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary);">
+                  <code>pubkey</code> → quitar prefijo 02/03 → <code>x-only (32 bytes)</code> → <code>Bech32m("bc", 1, program)</code>
+                </div>
+              </div>
+            </div>
+
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem;">
+              <strong>Nota:</strong> En Taproot, la dirección P2TR básica usa solo la coordenada X de la clave pública 
+              (x-only pubkey). En la práctica, Taproot suele incluir un tweak para añadir árboles de scripts, 
+              pero esta herramienta muestra el caso más simple.
+            </p>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más sobre direcciones SegWit</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-3/tipos-de-direcciones.html">Tipos de direcciones →</a> · 
+              <a href="../nivel-5/p2wpkh-p2wsh.html">P2WPKH y P2WSH en detalle →</a> ·
+              <a href="address-base58.html">Direcciones Base58 (legacy) →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/hex-utils.js"></script>
+  <script src="../js/ripemd160.js"></script>
+  <script src="../js/bech32.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === CONSTANTES ===
+    // Ejemplo: clave pública comprimida del punto generador (G)
+    const EXAMPLE_PUBKEY = '0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798';
+
+    // === ELEMENTOS DEL DOM ===
+    const inputPubkey = document.getElementById('input-pubkey');
+    const pubkeyStatus = document.getElementById('pubkey-status');
+    const btnExample = document.getElementById('btn-example');
+    const btnGenerate = document.getElementById('btn-generate');
+    const errorMessage = document.getElementById('error-message');
+    const outputSection = document.getElementById('output-section');
+
+    const outputP2wpkh = document.getElementById('output-p2wpkh');
+    const outputP2tr = document.getElementById('output-p2tr');
+    const witnessP2wpkh = document.getElementById('witness-p2wpkh');
+    const witnessP2tr = document.getElementById('witness-p2tr');
+
+    const inputDecode = document.getElementById('input-decode');
+    const btnDecode = document.getElementById('btn-decode');
+    const decodeResults = document.getElementById('decode-results');
+    const decodeHrp = document.getElementById('decode-hrp');
+    const decodeVersion = document.getElementById('decode-version');
+    const decodeSpec = document.getElementById('decode-spec');
+    const decodeProgram = document.getElementById('decode-program');
+
+    // === FUNCIONES ===
+
+    /**
+     * Valida formato de clave pública comprimida
+     */
+    function validatePubkey(hex) {
+      hex = hex.toLowerCase();
+      return /^0[23][0-9a-f]{64}$/.test(hex);
+    }
+
+    /**
+     * Extrae x-only pubkey (quita el prefijo 02/03)
+     */
+    function getXOnlyPubkey(compressedPubkeyHex) {
+      return compressedPubkeyHex.substring(2);
+    }
+
+    /**
+     * Genera dirección P2WPKH
+     */
+    async function generateP2WPKH(pubkeyHex) {
+      const pubkeyBytes = HexUtils.hexToBytes(pubkeyHex);
+      const hash160 = await HexUtils.hash160(pubkeyBytes);
+      const address = Bech32.encodeP2WPKH(hash160, 'mainnet');
+      return {
+        address,
+        program: HexUtils.bytesToHex(hash160)
+      };
+    }
+
+    /**
+     * Genera dirección P2TR (básica, sin tweak)
+     */
+    function generateP2TR(pubkeyHex) {
+      const xOnlyHex = getXOnlyPubkey(pubkeyHex);
+      const xOnlyBytes = HexUtils.hexToBytes(xOnlyHex);
+      const address = Bech32.encodeP2TR(xOnlyBytes, 'mainnet');
+      return {
+        address,
+        program: xOnlyHex
+      };
+    }
+
+    /**
+     * Genera direcciones
+     */
+    async function generate() {
+      hideError();
+      
+      const pubkey = inputPubkey.value.replace(/\s/g, '').toLowerCase();
+      
+      if (!validatePubkey(pubkey)) {
+        showError('Clave pública inválida. Debe ser 66 caracteres hex, empezando por 02 o 03.');
+        return;
+      }
+
+      try {
+        // P2WPKH
+        const p2wpkh = await generateP2WPKH(pubkey);
+        outputP2wpkh.textContent = p2wpkh.address;
+        witnessP2wpkh.textContent = p2wpkh.program;
+
+        // P2TR
+        const p2tr = generateP2TR(pubkey);
+        outputP2tr.textContent = p2tr.address;
+        witnessP2tr.textContent = p2tr.program;
+
+        outputSection.style.display = 'block';
+
+      } catch (error) {
+        showError('Error generando direcciones: ' + error.message);
+      }
+    }
+
+    /**
+     * Decodifica dirección Bech32/Bech32m
+     */
+    function decodeAddress() {
+      const address = inputDecode.value.trim();
+      
+      if (!address) {
+        decodeResults.style.display = 'none';
+        return;
+      }
+
+      try {
+        const decoded = Bech32.decode(address);
+        
+        decodeHrp.textContent = decoded.hrp;
+        decodeVersion.textContent = decoded.version;
+        decodeSpec.textContent = decoded.spec.toUpperCase();
+        decodeProgram.textContent = HexUtils.bytesToHex(decoded.program);
+        
+        // Colorear según tipo
+        decodeSpec.style.color = decoded.spec === 'bech32m' ? 'var(--accent)' : '#58a6ff';
+        
+        decodeResults.style.display = 'block';
+
+      } catch (error) {
+        decodeHrp.textContent = '—';
+        decodeVersion.textContent = '—';
+        decodeSpec.textContent = 'Error';
+        decodeSpec.style.color = '#da3633';
+        decodeProgram.textContent = error.message;
+        decodeResults.style.display = 'block';
+      }
+    }
+
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.style.display = 'block';
+      outputSection.style.display = 'none';
+    }
+
+    function hideError() {
+      errorMessage.style.display = 'none';
+    }
+
+    // === EVENT LISTENERS ===
+
+    inputPubkey.addEventListener('input', () => {
+      const value = inputPubkey.value.replace(/[^0-9a-fA-F]/g, '');
+      inputPubkey.value = value;
+      
+      if (validatePubkey(value)) {
+        pubkeyStatus.textContent = '✓ Clave pública comprimida válida';
+        pubkeyStatus.style.color = '#2ea043';
+      } else {
+        pubkeyStatus.textContent = `${value.length} / 66 caracteres`;
+        pubkeyStatus.style.color = 'var(--text-secondary)';
+      }
+    });
+
+    btnExample.addEventListener('click', () => {
+      inputPubkey.value = EXAMPLE_PUBKEY;
+      inputPubkey.dispatchEvent(new Event('input'));
+    });
+
+    btnGenerate.addEventListener('click', generate);
+
+    inputPubkey.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') generate();
+    });
+
+    btnDecode.addEventListener('click', decodeAddress);
+
+    inputDecode.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') decodeAddress();
+    });
+
+    // Auto-decode mientras se escribe
+    inputDecode.addEventListener('input', () => {
+      if (inputDecode.value.length > 10) {
+        decodeAddress();
+      } else {
+        decodeResults.style.display = 'none';
+      }
+    });
+
+    // Copiar
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const targetId = btn.dataset.target;
+        const target = document.getElementById(targetId);
+        const text = target.textContent;
+
+        if (text && text !== '—') {
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.textContent = '✓';
+            setTimeout(() => { btn.textContent = '📋'; }, 1000);
+          } catch (err) {
+            console.error('Error copiando:', err);
+          }
+        }
+      });
+    });
+
+  })();
+  </script>
+</body>
+</html>

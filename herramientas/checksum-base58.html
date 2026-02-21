@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Codifica y decodifica datos en Base58Check. Calcula checksums para direcciones y claves Bitcoin." />
+  <title>Base58Check y Checksum — Herramientas | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Herramientas">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Herramientas prácticas</div>
+          <a href="conversor.html" class="sidebar__link">Conversor BTC / EUR / sats</a>
+          <a href="calculadora-dca.html" class="sidebar__link">Calculadora DCA</a>
+          <a href="calculadora-fees.html" class="sidebar__link">Calculadora de fees</a>
+          <a href="calculadora-impuestos.html" class="sidebar__link">Calculadora de impuestos</a>
+          <a href="comparador-exchanges.html" class="sidebar__link">Comparador de exchanges</a>
+          <a href="calculadora-herencia.html" class="sidebar__link">Calculadora de herencia</a>
+        </div>
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Herramientas técnicas</div>
+          <a href="hash.html" class="sidebar__link">Hash functions</a>
+          <a href="private-key.html" class="sidebar__link sidebar__link--active">Claves y direcciones</a>
+          <a href="hd-wallet.html" class="sidebar__link">HD Wallet explorer</a>
+          <a href="transaccion.html" class="sidebar__link">Transacciones</a>
+          <a href="script.html" class="sidebar__link">Bitcoin Script</a>
+          <a href="block-tools.html" class="sidebar__link">Bloques</a>
+          <a href="firma.html" class="sidebar__link">Criptografía</a>
+          <a href="index.html" class="sidebar__link">Utilidades</a>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Base58Check</span>
+        </nav>
+
+        <article class="article">
+          <h1>Base58Check y Checksum</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Explora el encoding Base58Check que Bitcoin usa para direcciones y claves WIF.
+          </p>
+
+          <!-- Disclaimer educativo -->
+          <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">Herramienta educativa</div>
+              <p class="callout__text">Esta herramienta es para aprendizaje. NO la uses para datos de fondos reales.</p>
+            </div>
+          </div>
+
+          <!-- Alfabeto Base58 -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">Alfabeto Base58</h2>
+            <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; letter-spacing: 0.1em; word-break: break-all;">
+              123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz
+            </div>
+            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.75rem;">
+              <strong>58 caracteres.</strong> Faltan: <code>0</code>, <code>O</code>, <code>I</code>, <code>l</code> — 
+              eliminados para evitar confusión visual entre caracteres similares.
+            </p>
+          </div>
+
+          <!-- Sección 1: Base58 simple -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">1. Base58 (sin checksum)</h2>
+            
+            <div class="tool-row">
+              <div class="tool-field">
+                <label class="tool-label" for="b58-hex">Hexadecimal</label>
+                <input 
+                  type="text" 
+                  id="b58-hex" 
+                  class="tool-input" 
+                  placeholder="Ej: 48656c6c6f"
+                  style="font-family: 'JetBrains Mono', monospace;"
+                />
+              </div>
+              <div class="tool-field">
+                <label class="tool-label" for="b58-result">Base58</label>
+                <input 
+                  type="text" 
+                  id="b58-result" 
+                  class="tool-input" 
+                  placeholder="Resultado"
+                  style="font-family: 'JetBrains Mono', monospace;"
+				/>
+              </div>
+            </div>
+            
+            <div class="tool-btn-row" style="margin-top: 0.75rem;">
+              <button class="tool-btn tool-btn--secondary" id="btn-b58-encode">Hex → Base58</button>
+              <button class="tool-btn tool-btn--secondary" id="btn-b58-decode">Base58 → Hex</button>
+            </div>
+          </div>
+
+          <!-- Sección 2: Base58Check Encoder -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">2. Base58Check Encoder</h2>
+            
+            <div class="tool-row">
+              <div class="tool-field" style="flex: 0 0 120px;">
+                <label class="tool-label" for="b58c-version">Version (hex)</label>
+                <input 
+                  type="text" 
+                  id="b58c-version" 
+                  class="tool-input" 
+                  value="00"
+                  maxlength="2"
+                  style="font-family: 'JetBrains Mono', monospace; text-align: center;"
+                />
+              </div>
+              <div class="tool-field" style="flex: 1;">
+                <label class="tool-label" for="b58c-data">Datos (hex)</label>
+                <input 
+                  type="text" 
+                  id="b58c-data" 
+                  class="tool-input" 
+                  placeholder="Ej: 751e76e8199196d454941c45d1b3a323f1433bd6"
+                  style="font-family: 'JetBrains Mono', monospace;"
+                />
+              </div>
+            </div>
+
+            <!-- Presets de version -->
+            <div class="tool-presets" style="margin: 0.75rem 0;">
+              <button class="tool-preset" data-version="00">0x00 P2PKH</button>
+              <button class="tool-preset" data-version="05">0x05 P2SH</button>
+              <button class="tool-preset" data-version="80">0x80 WIF</button>
+              <button class="tool-preset" data-version="6f">0x6F Testnet</button>
+            </div>
+
+            <button class="tool-btn" id="btn-b58c-encode" style="margin-top: 0.5rem;">🔐 Codificar Base58Check</button>
+
+            <!-- Resultado encoder -->
+            <div id="b58c-encode-result" style="display: none; margin-top: 1rem;">
+              <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md);">
+                <div style="margin-bottom: 0.75rem;">
+                  <div class="tool-label">Payload (version + data)</div>
+                  <div id="b58c-payload" style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; word-break: break-all;">—</div>
+                </div>
+                <div style="margin-bottom: 0.75rem;">
+                  <div class="tool-label">Checksum (SHA256² primeros 4 bytes)</div>
+                  <div id="b58c-checksum" style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #2ea043;">—</div>
+                </div>
+                <div>
+                  <div class="tool-label">Resultado Base58Check</div>
+                  <div style="display: flex; gap: 0.5rem;">
+                    <div id="b58c-result" class="tool-output" style="flex: 1; color: var(--accent);">—</div>
+                    <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="b58c-result">📋</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sección 3: Base58Check Decoder -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">3. Base58Check Decoder</h2>
+            
+            <div class="tool-field">
+              <label class="tool-label" for="b58c-decode-input">String Base58Check</label>
+              <input 
+                type="text" 
+                id="b58c-decode-input" 
+                class="tool-input" 
+                placeholder="Ej: 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2"
+                style="font-family: 'JetBrains Mono', monospace;"
+              />
+            </div>
+
+            <button class="tool-btn" id="btn-b58c-decode" style="margin-top: 0.75rem;">🔓 Decodificar</button>
+
+            <!-- Resultado decoder -->
+            <div id="b58c-decode-result" style="display: none; margin-top: 1rem;">
+              <div class="tool-row" style="margin-bottom: 0.75rem;">
+                <div class="tool-result-card">
+                  <div class="tool-result-card__label">Version</div>
+                  <div class="tool-result-card__value" id="b58c-dec-version">—</div>
+                </div>
+                <div class="tool-result-card">
+                  <div class="tool-result-card__label">Checksum</div>
+                  <div class="tool-result-card__value" id="b58c-dec-valid">—</div>
+                </div>
+              </div>
+              
+              <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md);">
+                <div class="tool-label">Datos (hex)</div>
+                <div id="b58c-dec-data" style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; word-break: break-all;">—</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sección 4: Tabla de version bytes -->
+          <div class="tool-container">
+            <h2 class="tool-container__title">4. Tabla de Version Bytes</h2>
+            
+            <div class="tool-table-wrapper">
+              <table class="tool-table">
+                <thead>
+                  <tr>
+                    <th>Version (hex)</th>
+                    <th>Prefijo</th>
+                    <th>Uso</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>0x00</code></td>
+                    <td><strong>1</strong></td>
+                    <td>Dirección P2PKH mainnet</td>
+                  </tr>
+                  <tr>
+                    <td><code>0x05</code></td>
+                    <td><strong>3</strong></td>
+                    <td>Dirección P2SH mainnet</td>
+                  </tr>
+                  <tr>
+                    <td><code>0x6F</code></td>
+                    <td><strong>m</strong> o <strong>n</strong></td>
+                    <td>Dirección P2PKH testnet</td>
+                  </tr>
+                  <tr>
+                    <td><code>0xC4</code></td>
+                    <td><strong>2</strong></td>
+                    <td>Dirección P2SH testnet</td>
+                  </tr>
+                  <tr>
+                    <td><code>0x80</code></td>
+                    <td><strong>5</strong>, <strong>K</strong>, <strong>L</strong></td>
+                    <td>WIF mainnet</td>
+                  </tr>
+                  <tr>
+                    <td><code>0xEF</code></td>
+                    <td><strong>c</strong></td>
+                    <td>WIF testnet</td>
+                  </tr>
+                  <tr>
+                    <td><code>0x0488B21E</code></td>
+                    <td><strong>xpub</strong></td>
+                    <td>Extended public key (BIP32)</td>
+                  </tr>
+                  <tr>
+                    <td><code>0x0488ADE4</code></td>
+                    <td><strong>xprv</strong></td>
+                    <td>Extended private key (BIP32)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Callout contextual -->
+          <div class="tool-callout">
+            <div class="tool-callout__title">Aprende más sobre direcciones</div>
+            <p class="tool-callout__text">
+              <a href="../nivel-3/tipos-de-direcciones.html">Tipos de direcciones →</a> · 
+              <a href="wif.html">WIF encoding →</a>
+            </p>
+          </div>
+
+          <div class="ad-slot ad-content" id="ad-content-1" aria-hidden="true"></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/hex-utils.js"></script>
+  <script src="../js/base58.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // === ELEMENTOS DEL DOM ===
+    
+    // Base58 simple
+    const b58Hex = document.getElementById('b58-hex');
+    const b58Result = document.getElementById('b58-result');
+    const btnB58Encode = document.getElementById('btn-b58-encode');
+    const btnB58Decode = document.getElementById('btn-b58-decode');
+
+    // Base58Check encoder
+    const b58cVersion = document.getElementById('b58c-version');
+    const b58cData = document.getElementById('b58c-data');
+    const btnB58cEncode = document.getElementById('btn-b58c-encode');
+    const b58cEncodeResult = document.getElementById('b58c-encode-result');
+    const b58cPayload = document.getElementById('b58c-payload');
+    const b58cChecksum = document.getElementById('b58c-checksum');
+    const b58cResult = document.getElementById('b58c-result');
+
+    // Base58Check decoder
+    const b58cDecodeInput = document.getElementById('b58c-decode-input');
+    const btnB58cDecode = document.getElementById('btn-b58c-decode');
+    const b58cDecodeResult = document.getElementById('b58c-decode-result');
+    const b58cDecVersion = document.getElementById('b58c-dec-version');
+    const b58cDecValid = document.getElementById('b58c-dec-valid');
+    const b58cDecData = document.getElementById('b58c-dec-data');
+
+    // === BASE58 SIMPLE ===
+
+    btnB58Encode.addEventListener('click', () => {
+      try {
+        const hex = b58Hex.value.replace(/\s/g, '').toLowerCase();
+        if (!/^[0-9a-f]*$/.test(hex) || hex.length === 0) {
+          throw new Error('Hexadecimal inválido');
+        }
+        const bytes = HexUtils.hexToBytes(hex);
+        b58Result.value = Base58.encode(bytes);
+      } catch (error) {
+        b58Result.value = 'Error: ' + error.message;
+      }
+    });
+
+    btnB58Decode.addEventListener('click', () => {
+      try {
+        const str = b58Result.value.trim();
+        if (!str) throw new Error('Introduce un string Base58');
+        const bytes = Base58.decode(str);
+        b58Hex.value = HexUtils.bytesToHex(bytes);
+      } catch (error) {
+        b58Hex.value = 'Error: ' + error.message;
+      }
+    });
+
+    // === BASE58CHECK ENCODER ===
+
+    // Presets
+    document.querySelectorAll('[data-version]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        b58cVersion.value = btn.dataset.version;
+      });
+    });
+
+    btnB58cEncode.addEventListener('click', async () => {
+      try {
+        const version = b58cVersion.value.replace(/\s/g, '').toLowerCase();
+        const data = b58cData.value.replace(/\s/g, '').toLowerCase();
+
+        if (!/^[0-9a-f]{2}$/.test(version)) {
+          throw new Error('Version debe ser 1 byte hex (2 caracteres)');
+        }
+        if (!/^[0-9a-f]+$/.test(data) || data.length === 0) {
+          throw new Error('Datos hexadecimales inválidos');
+        }
+
+        const versionByte = parseInt(version, 16);
+        const dataBytes = HexUtils.hexToBytes(data);
+
+        // Crear payload
+        const payload = new Uint8Array(1 + dataBytes.length);
+        payload[0] = versionByte;
+        payload.set(dataBytes, 1);
+        const payloadHex = HexUtils.bytesToHex(payload);
+
+        // Calcular checksum
+        const checksum = await Base58.calculateChecksum(payload);
+        const checksumHex = HexUtils.bytesToHex(checksum);
+
+        // Codificar
+        const result = await Base58.checkEncode(versionByte, dataBytes);
+
+        // Mostrar
+        b58cPayload.textContent = payloadHex;
+        b58cChecksum.textContent = checksumHex;
+        b58cResult.textContent = result;
+        b58cEncodeResult.style.display = 'block';
+
+      } catch (error) {
+        alert('Error: ' + error.message);
+      }
+    });
+
+    // === BASE58CHECK DECODER ===
+
+    btnB58cDecode.addEventListener('click', async () => {
+      try {
+        const input = b58cDecodeInput.value.trim();
+        if (!input) throw new Error('Introduce un string Base58Check');
+
+        const decoded = await Base58.checkDecode(input);
+
+        b58cDecVersion.textContent = '0x' + HexUtils.bytesToHex(decoded.version);
+        b58cDecData.textContent = HexUtils.bytesToHex(decoded.data);
+
+        if (decoded.valid) {
+          b58cDecValid.textContent = '✓ Válido';
+          b58cDecValid.style.color = '#2ea043';
+        } else {
+          b58cDecValid.textContent = '✗ Inválido';
+          b58cDecValid.style.color = '#da3633';
+        }
+
+        b58cDecodeResult.style.display = 'block';
+
+      } catch (error) {
+        b58cDecVersion.textContent = '—';
+        b58cDecValid.textContent = 'Error';
+        b58cDecValid.style.color = '#da3633';
+        b58cDecData.textContent = error.message;
+        b58cDecodeResult.style.display = 'block';
+      }
+    });
+
+    // === COPIAR ===
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const targetId = btn.dataset.target;
+        const target = document.getElementById(targetId);
+        const text = target.textContent;
+
+        if (text && text !== '—') {
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.textContent = '✓';
+            setTimeout(() => { btn.textContent = '📋'; }, 1000);
+          } catch (err) {
+            console.error('Error copiando:', err);
+          }
+        }
+      });
+    });
+
+  })();
+  </script>
+</body>
+</html>
