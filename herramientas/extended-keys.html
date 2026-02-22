@@ -421,8 +421,7 @@
   <script src="../js/search.js"></script>
   <script src="../js/hex-utils.js"></script>
   <script src="../js/base58.js"></script>
-  <script src="https://unpkg.com/@noble/secp256k1@1.7.1/lib/index.js"></script>
-
+  
   <script>
   (function() {
     'use strict';
@@ -476,12 +475,21 @@
       return webCrypto;
     }
 
-    function getSecp() {
-      const secpLib = globalThis.nobleSecp256k1 || globalThis.secp256k1 || null;
-      if (!secpLib) {
-        throw new Error('Librería secp256k1 no cargada. Recarga la página e inténtalo de nuevo.');
+    let secpLoadPromise = null;
+    async function getSecp() {
+      const loaded = globalThis.nobleSecp256k1 || globalThis.secp256k1 || null;
+      if (loaded) return loaded;
+
+      if (!secpLoadPromise) {
+        secpLoadPromise = import('../js/noble-secp256k1.browser.js').then((mod) => {
+          const lib = mod.default || mod;
+          globalThis.nobleSecp256k1 = lib;
+          globalThis.secp256k1 = lib;
+          return lib;
+        });
       }
-      return secpLib;
+
+      return secpLoadPromise;
     }
 
     /**
@@ -513,7 +521,7 @@
       const masterChainCode = hmacResult.slice(32);
 
       // Derivar public key
-      const secp = getSecp();
+      const secp = await getSecp();
       const masterPublicKey = secp.getPublicKey(masterPrivateKey, true);
 
       return {

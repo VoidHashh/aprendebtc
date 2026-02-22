@@ -545,17 +545,16 @@
         return secpCache;
       }
       if (!secpLoadPromise) {
-        secpLoadPromise = (async () => {
-          let mod = null;
-          try {
-            mod = await import('https://cdn.jsdelivr.net/npm/@noble/secp256k1@1.7.1/+esm');
-          } catch (_) {
-            mod = await import('https://unpkg.com/@noble/secp256k1@1.7.1/+esm');
+        secpLoadPromise = import('../js/noble-secp256k1.browser.js').then((mod) => {
+          const lib = (mod && mod.default) ? (mod.default || mod) : mod;
+          if (!lib || typeof lib.getPublicKey !== 'function') {
+            throw new Error('No se pudo inicializar secp256k1');
           }
-          secpCache = mod.default && typeof mod.default.getPublicKey === 'function' ? mod.default : mod;
+          secpCache = lib;
           window.nobleSecp256k1 = secpCache;
+          window.secp256k1 = secpCache;
           return secpCache;
-        })();
+        });
       }
       return secpLoadPromise;
     }
@@ -570,7 +569,9 @@
 
     function randomBytes(length) {
       const bytes = new Uint8Array(length);
-      window.crypto.getRandomValues(bytes);
+      const webCrypto = globalThis.crypto || (typeof window !== 'undefined' ? window.crypto : null);
+      if (!webCrypto) throw new Error('Web Crypto API no disponible');
+      webCrypto.getRandomValues(bytes);
       return bytes;
     }
 
@@ -578,6 +579,21 @@
       if (secp?.utils?.randomPrivateKey) return secp.utils.randomPrivateKey();
       if (secp?.utils?.randomSecretKey) return secp.utils.randomSecretKey();
       return randomBytes(32);
+    }
+
+    function toHex(value) {
+      if (typeof value === 'string') return onlyHex(value);
+      if (value instanceof Uint8Array) return HexUtils.bytesToHex(value);
+      if (ArrayBuffer.isView(value)) {
+        return HexUtils.bytesToHex(new Uint8Array(value.buffer, value.byteOffset, value.byteLength));
+      }
+      throw new Error('Formato no soportado para convertir a hex');
+    }
+
+    function toBytes(value) {
+      if (value instanceof Uint8Array) return value;
+      const hex = toHex(value);
+      return HexUtils.hexToBytes(hex);
     }
 
     // === TABS ===
@@ -622,8 +638,9 @@
         // Hash del mensaje
         let msgHash;
         if (isHex) {
-          if (msg.length !== 64) throw new Error('El hash debe ser 32 bytes (64 hex)');
-          msgHash = HexUtils.hexToBytes(onlyHex(msg));
+          const msgHex = onlyHex(msg);
+          if (msgHex.length !== 64) throw new Error('El hash debe ser 32 bytes (64 hex)');
+          msgHash = HexUtils.hexToBytes(msgHex);
         } else {
           const encoder = new TextEncoder();
           msgHash = await HexUtils.sha256(encoder.encode(msg));
@@ -632,22 +649,23 @@
         const privkey = HexUtils.hexToBytes(privkeyHex);
         
         // Firmar
-        const signature = await secp.sign(msgHash, privkey, { der: false, recovered: false });
-        const signatureDer = await secp.sign(msgHash, privkey, { der: true });
+        const signatureHex = toHex(await secp.sign(msgHash, privkey, { der: false, recovered: false }));
+        const signatureDerHex = toHex(await secp.sign(msgHash, privkey, { der: true }));
         
         // Public key
-        const pubkey = secp.getPublicKey(privkey, true);
+        const pubkey = toBytes(secp.getPublicKey(privkey, true));
 
         // Extraer r y s
-        const r = HexUtils.bytesToHex(signature.slice(0, 32));
-        const s = HexUtils.bytesToHex(signature.slice(32, 64));
+        const signatureBytes = HexUtils.hexToBytes(signatureHex);
+        const r = HexUtils.bytesToHex(signatureBytes.slice(0, 32));
+        const s = HexUtils.bytesToHex(signatureBytes.slice(32, 64));
 
         // Mostrar
         document.getElementById('ecdsa-sign-msghash').textContent = HexUtils.bytesToHex(msgHash);
         document.getElementById('ecdsa-sign-pubkey').textContent = HexUtils.bytesToHex(pubkey);
         document.getElementById('ecdsa-sign-r').textContent = r;
         document.getElementById('ecdsa-sign-s').textContent = s;
-        document.getElementById('ecdsa-sign-der').textContent = HexUtils.bytesToHex(signatureDer);
+        document.getElementById('ecdsa-sign-der').textContent = signatureDerHex;
 
         resultEl.style.display = 'block';
 
@@ -743,12 +761,12 @@
         const msg = 'Hello Bitcoin!';
         const msgHash = await HexUtils.sha256(new TextEncoder().encode(msg));
         const privkey = randomPrivateKey(secp);
-        const signatureDer = await secp.sign(msgHash, privkey, { der: true });
-        const pubkey = secp.getPublicKey(privkey, true);
+        const signatureDerHex = toHex(await secp.sign(msgHash, privkey, { der: true }));
+        const pubkey = toBytes(secp.getPublicKey(privkey, true));
 
         document.getElementById('ecdsa-verify-msg').value = msg;
         document.getElementById('ecdsa-verify-ishex').checked = false;
-        document.getElementById('ecdsa-verify-sig').value = HexUtils.bytesToHex(signatureDer);
+        document.getElementById('ecdsa-verify-sig').value = signatureDerHex;
         document.getElementById('ecdsa-verify-pubkey').value = HexUtils.bytesToHex(pubkey);
         document.getElementById('ecdsa-verify-error').style.display = 'none';
         document.getElementById('ecdsa-verify-result').style.display = 'none';
@@ -789,13 +807,13 @@
         const privkey = HexUtils.hexToBytes(privkeyHex);
 
         // Schnorr signature (BIP340)
-        const signature = await secp.schnorr.sign(msg, privkey);
+        const signatureHex = toHex(await secp.schnorr.sign(msg, privkey));
         
         // x-only pubkey
-        const fullPubkey = secp.getPublicKey(privkey, true);
+        const fullPubkey = toBytes(secp.getPublicKey(privkey, true));
         const xOnlyPubkey = fullPubkey.slice(1); // Remove prefix byte
 
-        const sigHex = HexUtils.bytesToHex(signature);
+        const sigHex = signatureHex;
         const rx = sigHex.substring(0, 64);
         const s = sigHex.substring(64);
 
@@ -866,11 +884,11 @@
       const secp = await ensureSecp();
       const msg = randomBytes(32);
       const privkey = randomPrivateKey(secp);
-      const signature = await secp.schnorr.sign(msg, privkey);
-      const pubkey = secp.getPublicKey(privkey, true).slice(1);
+      const signatureHex = toHex(await secp.schnorr.sign(msg, privkey));
+      const pubkey = toBytes(secp.getPublicKey(privkey, true)).slice(1);
 
       document.getElementById('schnorr-verify-msg').value = HexUtils.bytesToHex(msg);
-      document.getElementById('schnorr-verify-sig').value = HexUtils.bytesToHex(signature);
+      document.getElementById('schnorr-verify-sig').value = signatureHex;
       document.getElementById('schnorr-verify-pubkey').value = HexUtils.bytesToHex(pubkey);
       document.getElementById('schnorr-verify-error').style.display = 'none';
       document.getElementById('schnorr-verify-result').style.display = 'none';
@@ -884,8 +902,8 @@
       const secp = await ensureSecp();
       const msgHash = await HexUtils.sha256(new TextEncoder().encode('DER example for aprendebtc'));
       const privkey = randomPrivateKey(secp);
-      const der = await secp.sign(msgHash, privkey, { der: true });
-      document.getElementById('der-input').value = HexUtils.bytesToHex(der) + '01';
+      const derHex = toHex(await secp.sign(msgHash, privkey, { der: true }));
+      document.getElementById('der-input').value = derHex + '01';
       document.getElementById('der-error').style.display = 'none';
       document.getElementById('der-result').style.display = 'none';
     });

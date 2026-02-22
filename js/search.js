@@ -1,6 +1,6 @@
 /**
  * aprendebtc.com - search.js
- * Client-side search with static core pages + dynamic base index.
+ * Client-side search with static fallback + dynamic site/base indexes.
  */
 
 (function () {
@@ -141,7 +141,7 @@
     { title: 'Tiempo Unix', url: '/herramientas/unix-time.html', tags: ['herramientas', 'timestamp', 'unix', 'bloques'], section: 'Herramientas' },
     { title: 'Decodificador de timelocks', url: '/herramientas/timelock-decoder.html', tags: ['herramientas', 'timelock', 'locktime', 'sequence'], section: 'Herramientas' },
     { title: 'Decodificador de factura Lightning', url: '/herramientas/lightning-invoice.html', tags: ['herramientas', 'lightning', 'bolt11', 'invoice'], section: 'Herramientas' },
-    { title: 'Analizador de entropía', url: '/herramientas/entropy-analyzer.html', tags: ['herramientas', 'entropia', 'entropía', 'aleatoriedad', 'seguridad'], section: 'Herramientas' },
+    { title: 'Analizador de entrop\u00eda', url: '/herramientas/entropy-analyzer.html', tags: ['herramientas', 'entropia', 'entrop\u00eda', 'aleatoriedad', 'seguridad'], section: 'Herramientas' },
     { title: 'Validador de seed phrase', url: '/herramientas/seed-validator.html', tags: ['herramientas', 'seed', 'bip39', 'mnemonic'], section: 'Herramientas' },
 
 
@@ -150,7 +150,23 @@
   ];
 
   const nivelLabels = { 1: 'N1', 2: 'N2', 3: 'N3', 4: 'N4', 5: 'N5', 6: 'N6' };
+  const synonymMap = {
+    'frase semilla': ['seed phrase', 'seed', 'semilla', 'mnemonic', 'bip39', 'palabras de recuperacion'],
+    'seed phrase': ['frase semilla', 'seed', 'mnemonic', 'bip39'],
+    semilla: ['seed', 'mnemonic', 'bip39'],
+    mnemonic: ['frase semilla', 'seed', 'semilla', 'bip39'],
+    wallet: ['billetera', 'cartera'],
+    billetera: ['wallet', 'cartera'],
+    cartera: ['wallet', 'billetera']
+  };
+  const stopWords = new Set([
+    'a', 'al', 'con', 'de', 'del', 'el', 'en', 'es', 'la', 'las', 'lo', 'los', 'o', 'para', 'por', 'que', 'un', 'una', 'y'
+  ]);
+
   let baseIndex = [];
+  let siteIndex = [];
+  let mergedIndex = [];
+  let indexLoaded = false;
 
   function normalize(text) {
     return (text || '')
@@ -160,15 +176,138 @@
       .trim();
   }
 
+  function tokenize(text) {
+    return normalize(text)
+      .split(/[^a-z0-9]+/)
+      .filter((token) => token.length > 1 && !stopWords.has(token));
+  }
+
+  function expandTerms(query) {
+    const q = normalize(query);
+    if (!q) return [];
+
+    const terms = new Set([q]);
+    const tokens = tokenize(q);
+
+    tokens.forEach((token) => terms.add(token));
+
+    if (synonymMap[q]) {
+      synonymMap[q].forEach((term) => terms.add(normalize(term)));
+    }
+
+    tokens.forEach((token) => {
+      if (synonymMap[token]) {
+        synonymMap[token].forEach((term) => terms.add(normalize(term)));
+      }
+    });
+
+    if (tokens.length > 1) {
+      for (let i = 0; i < tokens.length - 1; i += 1) {
+        const bigram = `${tokens[i]} ${tokens[i + 1]}`;
+        terms.add(bigram);
+        if (synonymMap[bigram]) {
+          synonymMap[bigram].forEach((term) => terms.add(normalize(term)));
+        }
+      }
+    }
+
+    return Array.from(terms).filter(Boolean);
+  }
+
+  function detectNivelFromUrl(url) {
+    const match = String(url || '').match(/\/nivel-(\d)\//);
+    return match ? Number(match[1]) : undefined;
+  }
+
+  function prepareItem(raw) {
+    const title = String(raw?.title || 'Sin titulo').trim();
+    const url = String(raw?.url || '#').trim();
+    const tags = Array.isArray(raw?.tags) ? raw.tags.map((tag) => String(tag).trim()).filter(Boolean) : [];
+    const section = String(raw?.section || 'Contenido').trim();
+    const nivel = Number(raw?.nivel) || detectNivelFromUrl(url);
+    const keywords = String(raw?.keywords || '').trim();
+
+    const titleNorm = normalize(title);
+    const tagsNorm = normalize(tags.join(' '));
+    const keywordsNorm = normalize(keywords);
+    const sectionNorm = normalize(section);
+    const corpus = `${titleNorm} ${tagsNorm} ${keywordsNorm} ${sectionNorm}`.replace(/\s+/g, ' ').trim();
+
+    return {
+      title,
+      url,
+      tags,
+      section,
+      ...(nivel ? { nivel } : {}),
+      ...(keywords ? { keywords } : {}),
+      _titleNorm: titleNorm,
+      _tagsNorm: tagsNorm,
+      _keywordsNorm: keywordsNorm,
+      _corpus: corpus
+    };
+  }
+
+  function mergeIndexes(sources) {
+    const byUrl = new Map();
+
+    sources.flat().forEach((rawItem) => {
+      if (!rawItem || !rawItem.url || !rawItem.title) return;
+
+      const item = prepareItem(rawItem);
+      const key = item.url;
+
+      if (!byUrl.has(key)) {
+        byUrl.set(key, item);
+        return;
+      }
+
+      const existing = byUrl.get(key);
+      const mergedTags = Array.from(new Set([...(existing.tags || []), ...(item.tags || [])]));
+      const mergedKeywords = `${existing.keywords || ''} ${item.keywords || ''}`.replace(/\s+/g, ' ').trim();
+
+      byUrl.set(
+        key,
+        prepareItem({
+          ...existing,
+          title: existing.title || item.title,
+          url: existing.url,
+          tags: mergedTags,
+          section: existing.section && existing.section !== 'Contenido' ? existing.section : item.section,
+          nivel: existing.nivel || item.nivel,
+          keywords: mergedKeywords
+        })
+      );
+    });
+
+    return Array.from(byUrl.values());
+  }
+
   function scoreItem(item, query) {
     const q = normalize(query);
-    const title = normalize(item.title);
-    const tags = (item.tags || []).map(normalize).join(' ');
+    if (q.length < 2) return 0;
 
+    const terms = expandTerms(q);
     let score = 0;
-    if (title.startsWith(q)) score += 8;
-    if (title.includes(q)) score += 4;
-    if (tags.includes(q)) score += 2;
+
+    if (item._titleNorm.startsWith(q)) score += 20;
+    if (item._titleNorm.includes(q)) score += 12;
+    if (item._tagsNorm.includes(q)) score += 8;
+    if (item._keywordsNorm.includes(q)) score += 6;
+
+    const queryTokens = tokenize(q);
+    const tokenHits = queryTokens.filter((token) => item._corpus.includes(token)).length;
+    if (queryTokens.length > 0) {
+      if (tokenHits === queryTokens.length) score += 10;
+      else score += tokenHits * 2;
+    }
+
+    terms.forEach((term) => {
+      if (!term || term === q) return;
+      if (item._titleNorm.includes(term)) score += 5;
+      else if (item._tagsNorm.includes(term)) score += 3;
+      else if (item._keywordsNorm.includes(term)) score += 2;
+    });
+
     return score;
   }
 
@@ -176,11 +315,16 @@
     const q = normalize(query);
     if (q.length < 2) return [];
 
-    return [...staticIndex, ...baseIndex]
+    const source = mergedIndex.length ? mergedIndex : mergeIndexes([staticIndex]);
+
+    return source
       .map((item) => ({ item, score: scoreItem(item, q) }))
       .filter((entry) => entry.score > 0)
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 10)
+      .sort((a, b) => {
+        if (b.score !== a.score) return b.score - a.score;
+        return a.item.title.localeCompare(b.item.title, 'es');
+      })
+      .slice(0, 12)
       .map((entry) => entry.item);
   }
 
@@ -199,7 +343,7 @@
 
     const cleanQuery = (query || '').trim();
     if (cleanQuery.length < 2) {
-      container.innerHTML = '<p class="search-hint">Escribe para buscar art\u00edculos, conceptos y niveles...</p>';
+      container.innerHTML = '<p class="search-hint">Escribe para buscar artÃƒÆ’Ã‚Â­culos, conceptos y niveles...</p>';
       return;
     }
 
@@ -208,12 +352,15 @@
       return;
     }
 
-    container.innerHTML = results.map((item) => {
-      const badgeLabel = item.nivel ? nivelLabels[item.nivel] : 'DOC';
-      const badgeClass = item.nivel ? `search-result-item__badge search-result-item__badge--nivel-${item.nivel}` : 'search-result-item__badge';
-      const meta = item.section || 'Contenido';
+    container.innerHTML = results
+      .map((item) => {
+        const badgeLabel = item.nivel ? nivelLabels[item.nivel] : 'DOC';
+        const badgeClass = item.nivel
+          ? `search-result-item__badge search-result-item__badge--nivel-${item.nivel}`
+          : 'search-result-item__badge';
+        const meta = item.section || 'Contenido';
 
-      return `
+        return `
         <a href="${item.url}" class="search-result-item">
           <span class="${badgeClass}">${badgeLabel}</span>
           <span class="search-result-item__body">
@@ -222,29 +369,41 @@
           </span>
         </a>
       `;
-    }).join('');
+      })
+      .join('');
   }
 
-  async function loadBaseIndex() {
+  async function fetchIndexFile(filename) {
     const basePath = document.documentElement.dataset.basePath ?? '';
-    const url = `${basePath}js/search-index.base.json`;
+    const url = `${basePath}js/${filename}`;
 
     try {
-      const response = await fetch(url, { cache: 'no-store' });
-      if (!response.ok) return;
+      const response = await fetch(url);
+      if (!response.ok) return [];
       const data = await response.json();
-      if (Array.isArray(data)) {
-        baseIndex = data;
-      }
+      return Array.isArray(data) ? data : [];
     } catch (_) {
-      // keep static index only
+      return [];
     }
+  }
+
+  async function loadIndexes() {
+    const [siteData, baseData] = await Promise.all([
+      fetchIndexFile('search-index.site.json'),
+      fetchIndexFile('search-index.base.json')
+    ]);
+
+    siteIndex = siteData;
+    baseIndex = baseData;
+    mergedIndex = mergeIndexes([siteIndex, baseIndex, staticIndex]);
   }
 
   function bindInput() {
     const input = document.getElementById('search-input');
     if (!input) return;
+    if (input.dataset.searchBound === '1') return;
 
+    input.dataset.searchBound = '1';
     let debounceTimer;
 
     input.addEventListener('input', () => {
@@ -264,7 +423,11 @@
   }
 
   async function init() {
-    await loadBaseIndex();
+    if (!indexLoaded) {
+      await loadIndexes();
+      indexLoaded = true;
+    }
+
     bindInput();
   }
 

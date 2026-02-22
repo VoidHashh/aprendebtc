@@ -330,8 +330,7 @@
   <script src="../js/base58.js"></script>
   <script src="../js/bech32.js"></script>
   <script src="../js/ripemd160.js"></script>
-  <script src="https://unpkg.com/@noble/secp256k1@1.7.1/lib/index.js"></script>
-
+  
   <script>
   (function() {
     'use strict';
@@ -341,7 +340,7 @@
     const SECP256K1_ORDER = BigInt('0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141');
 
     // zpub de ejemplo (derivada de mnemonic "abandon abandon..." de test en m/84'/0'/0')
-    const EXAMPLE_ZPUB = 'zpub6rFR7y4Q2AijBEqTUqoBKjVdYPCqJq3Rry2oXm4FvzNp9Jz9S3mEPWZPgZxFUGTVdmYKpyTrH8ypQeNKLrewgKkFqqqZDPbCiJ4HbAZMtKF';
+    const EXAMPLE_ZPUB = 'xpub661MyMwAqRbcFkPHucMnrGNzDwb6teAX1RbKQmqtEF8kK3Z7LZ59qafCjB9eCRLiTVG3uxBxgKvRgbubRhqSKXnGGb1aoaqLrpMBDrVxga8';
 
     const VERSION_INFO = {
       '0488b21e': { prefix: 'xpub', type: 'public', bip: '44', addrType: 'P2PKH' },
@@ -390,10 +389,21 @@
       return webCrypto;
     }
 
-    function getSecp() {
-      const secpLib = globalThis.nobleSecp256k1 || globalThis.secp256k1 || null;
-      if (!secpLib) throw new Error('Librería secp256k1 no cargada.');
-      return secpLib;
+    let secpLoadPromise = null;
+    async function getSecp() {
+      const loaded = globalThis.nobleSecp256k1 || globalThis.secp256k1 || null;
+      if (loaded) return loaded;
+
+      if (!secpLoadPromise) {
+        secpLoadPromise = import('../js/noble-secp256k1.browser.js').then((mod) => {
+          const lib = mod.default || mod;
+          globalThis.nobleSecp256k1 = lib;
+          globalThis.secp256k1 = lib;
+          return lib;
+        });
+      }
+
+      return secpLoadPromise;
     }
 
     // === DECODIFICAR EXTENDED KEY ===
@@ -417,7 +427,7 @@
 
       if (versionInfo.type === 'private') {
         privateKey = keyData.slice(1);
-        publicKey = getSecp().getPublicKey(privateKey, true);
+        publicKey = (await getSecp()).getPublicKey(privateKey, true);
       } else {
         publicKey = keyData;
       }
@@ -434,7 +444,7 @@
     // === CHILD KEY DERIVATION (solo normal, no hardened) ===
 
     async function deriveChildNormal(parentKey, index) {
-      const secp = getSecp();
+      const secp = await getSecp();
       
       // publicKey (33 bytes) + index (4 bytes)
       const data = new Uint8Array(37);
@@ -664,6 +674,7 @@
   </script>
 </body>
 </html>
+
 
 
 

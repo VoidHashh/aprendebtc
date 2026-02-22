@@ -353,13 +353,15 @@
         return secpLib;
       }
 
-      const mod = await import('https://cdn.jsdelivr.net/npm/@noble/secp256k1@1.7.1/+esm');
-      if (!mod || typeof mod.getPublicKey !== 'function') {
+      const mod = await import('../js/noble-secp256k1.browser.js');
+      const lib = (mod && mod.default) ? (mod.default || mod) : mod;
+      if (!lib || typeof lib.getPublicKey !== 'function') {
         throw new Error('No se pudo inicializar secp256k1');
       }
 
-      window.nobleSecp256k1 = mod;
-      secpLib = mod;
+      window.nobleSecp256k1 = lib;
+      window.secp256k1 = lib;
+      secpLib = lib;
       return secpLib;
     }
 

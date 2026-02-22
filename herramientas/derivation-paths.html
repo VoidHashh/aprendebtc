@@ -373,8 +373,7 @@
   <script src="../js/base58.js"></script>
   <script src="../js/bech32.js"></script>
   <script src="../js/ripemd160.js"></script>
-  <script src="https://unpkg.com/@noble/secp256k1@1.7.1/lib/index.js"></script>
-
+  
   <script>
   (function() {
     'use strict';
@@ -384,7 +383,7 @@
     const SECP256K1_ORDER = BigInt('0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141');
 
     // xprv de ejemplo (generada desde mnemonic "abandon abandon..." de test)
-    const EXAMPLE_XPRV = 'xprv9s21ZrQH143K3GJpoapnV8SFfuZcESnU9dfrEfRAvuwaS7DEgUmMCB7gjVqMSvE5BKXRP6XpDh1aRdc6DZdBcpSxNHrS4NovKhmkqLR5Hqp';
+    const EXAMPLE_XPRV = 'xprv9s21ZrQH143K3GJpoapnV8SFfukcVBSfeCficPSGfubmSFDxo1kuHnLisriDvSnRRuL2Qrg5ggqHKNVpxR86QEC8w35uxmGoggxtQTPvfUu';
 
     const VERSION_BYTES = {
       '0488ade4': { prefix: 'xprv', type: 'private', network: 'mainnet' },
@@ -424,10 +423,21 @@
       return webCrypto;
     }
 
-    function getSecp() {
-      const secpLib = globalThis.nobleSecp256k1 || globalThis.secp256k1 || null;
-      if (!secpLib) throw new Error('Librería secp256k1 no cargada.');
-      return secpLib;
+    let secpLoadPromise = null;
+    async function getSecp() {
+      const loaded = globalThis.nobleSecp256k1 || globalThis.secp256k1 || null;
+      if (loaded) return loaded;
+
+      if (!secpLoadPromise) {
+        secpLoadPromise = import('../js/noble-secp256k1.browser.js').then((mod) => {
+          const lib = mod.default || mod;
+          globalThis.nobleSecp256k1 = lib;
+          globalThis.secp256k1 = lib;
+          return lib;
+        });
+      }
+
+      return secpLoadPromise;
     }
 
     // === DECODIFICAR EXTENDED KEY ===
@@ -453,7 +463,7 @@
 
       if (versionInfo.type === 'private') {
         privateKey = keyData.slice(1); // Quitar el 0x00 prefix
-        publicKey = getSecp().getPublicKey(privateKey, true);
+        publicKey = (await getSecp()).getPublicKey(privateKey, true);
       } else {
         publicKey = keyData;
       }
@@ -473,7 +483,7 @@
     // === CHILD KEY DERIVATION ===
 
     async function deriveChild(parentKey, index, hardened) {
-      const secp = getSecp();
+      const secp = await getSecp();
       const actualIndex = hardened ? index + HARDENED_OFFSET : index;
 
       let data;
@@ -765,6 +775,7 @@
   </script>
 </body>
 </html>
+
 
 
 

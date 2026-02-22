@@ -497,17 +497,16 @@
       }
 
       if (!secpLoadPromise) {
-        secpLoadPromise = (async () => {
-          let mod;
-          try {
-            mod = await import('https://cdn.jsdelivr.net/npm/@noble/secp256k1@1.7.1/+esm');
-          } catch (_) {
-            mod = await import('https://unpkg.com/@noble/secp256k1@1.7.1/+esm');
+        secpLoadPromise = import('../js/noble-secp256k1.browser.js').then((mod) => {
+          const lib = (mod && mod.default) ? (mod.default || mod) : mod;
+          if (!lib || typeof lib.getPublicKey !== 'function') {
+            throw new Error('No se pudo inicializar secp256k1');
           }
-          secpCache = mod.default && typeof mod.default.getPublicKey === 'function' ? mod.default : mod;
+          secpCache = lib;
           window.nobleSecp256k1 = secpCache;
+          window.secp256k1 = secpCache;
           return secpCache;
-        })();
+        });
       }
 
       return secpLoadPromise;
