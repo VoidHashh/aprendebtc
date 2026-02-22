@@ -1,5 +1,28 @@
 [
   {
+    "title": "Actualizaciones y changelog",
+    "url": "/actualizaciones.html",
+    "tags": [
+      "proyecto",
+      "actualizaciones",
+      "frase semilla",
+      "seed phrase",
+      "mnemonic",
+      "bip39",
+      "wallet",
+      "billetera",
+      "lightning",
+      "factura lightning",
+      "xpub",
+      "xprv",
+      "bip32",
+      "claves",
+      "direcciones"
+    ],
+    "section": "Proyecto",
+    "keywords": "Historial de actualizaciones de aprendeBTC. Qué contenido se ha añadido, modificado o corregido. Febrero 2026 [Futuras actualizaciones se añadirán aquí] [Mes Año] Política de actualizaciones Inicio &rsaquo; Proyecto &rsaquo; Actualizaciones y changelog Proyecto Actualizaciones y changelog Registro de cambios del contenido de aprendeBTC. Esta página documenta los cambios significativos en aprendeBTC: contenido nuevo, correcciones, actualizaciones de herramientas, y mejoras generales. Febrero 2026 Lanzamiento inicial de aprendeBTC. Contenido: 6 niveles completos de aprendizaje (92 páginas) Base de Conocimiento con 28 páginas de referencia Glosario con 150+ términos La Madriguera con 8 artículos inaugurales Herramientas: 39 herramientas interactivas en 8 categorías Categoría 1: Hash Functions (SHA-256, RIPEMD-160, HASH160, HASH256) Categoría 2: Keys (generador de claves, WIF encoder/decoder, compresión de claves) Categoría 3: Addresses (Legacy, SegWit, Bech32, validador) Categoría 4: HD Wallets (mnemonic, extended keys, derivation paths, address from xpub) Categoría 5: Transactions (decoder, splitter, builder, script interpreter, PSBT) Categoría 6: Cryptography (ECDSA/Schnorr, EC calculator) Categorías 7-8: Utilities (reverse bytes, converters, timelock decoder, Lightning invoice, entropy analyzer, seed validator) Otros: Sección de recursos (libros, podcasts, documentales) Página de comunidad con enlace a nostrfacil.com Test \"¿Por dónde empiezo?\" [Futuras actualizaciones se añad"
+  },
+  {
     "title": "Economía Austríaca y Bitcoin",
     "url": "/base/austrian-economics.html",
     "tags": [
@@ -523,6 +546,16 @@
     ],
     "section": "Comunidad",
     "keywords": "Nostr y Bitcoin comparten valores: descentralización, resistencia a censura, soberanía. Descubre cómo se conectan. Qué es Nostr en una línea La conexión con Bitcoin Filosofía común Lightning como sistema de pagos nativo La comunidad se cruza Por qué debería importarte Cómo empezar La diferencia con otras redes Limitaciones honestas Guía completa Inicio &rsaquo; Comunidad &rsaquo; Nostr y Bitcoin: ecosistemas hermanos Nostr y Bitcoin: ecosistemas hermanos Dos protocolos abiertos que se complementan. Bitcoin mueve el valor, Nostr mueve la información. Qué es Nostr en una línea Nostr es un protocolo abierto para redes sociales descentralizadas. Sin censura, sin intermediarios, sin empresa que lo controle. Técnicamente: un conjunto de relays (servidores simples) que almacenan y retransmiten mensajes firmados criptográficamente por los usuarios. Cada usuario tiene un par de claves (como en Bitcoin) que le da control total sobre su identidad. La conexión con Bitcoin Nostr y Bitcoin no son el mismo proyecto, pero comparten ADN: Filosofía común Descentralización: No hay servidor central ni empresa detrás. Nadie puede \"apagar\" Nostr ni Bitcoin. Resistencia a censura: Nadie puede silenciarte ni congelar tu cuenta. Tu identidad y mensajes son tuyos. Código abierto: Cualquiera puede leer el código, contribuir, o crear su propia implementación. Sin permiso: No necesitas aprobación de nadie para participar. Lightning como sistema de pagos nativo Los \"zaps\" son micropagos en satoshis enviad"
+  },
+  {
+    "title": "¿Por dónde empiezo?",
+    "url": "/empezar.html",
+    "tags": [
+      "general",
+      "empezar"
+    ],
+    "section": "General",
+    "keywords": "Descubre tu nivel de conocimiento sobre Bitcoin y empieza en el punto adecuado. Test rápido en 4 preguntas. Inicio &rsaquo; Proyecto &rsaquo; ¿Por dónde empiezo? Proyecto ¿Por dónde empiezo? Responde 4 preguntas y te recomendamos por dónde empezar. aprendeBTC tiene 6 niveles de contenido, desde los conceptos más básicos hasta la criptografía y contribución al código. No todo el mundo necesita empezar desde cero — quizás ya tienes experiencia y quieres profundizar en temas específicos. Responde estas preguntas y te recomendamos el nivel adecuado para ti. Test de nivel 💡 Nota NOTA: Este contenido está diseñado para implementarse como un test interactivo en JavaScript. A continuación se define la lógica del test. &larr; Anterior Actualizaciones y changelog"
   },
   {
     "title": "Glosario de Bitcoin",
@@ -1126,6 +1159,153 @@
     ],
     "section": "Inicio",
     "keywords": "La guía educativa más completa sobre Bitcoin en español. Desde tu primera compra hasta criptografía avanzada. 6 niveles para todos los conocimientos. Elige tu nivel Tu primera compra de bitcoin Toma el control de tus bitcoin Entiende lo que controlas Privacidad, herencia y minería Criptografía, scripts y protocolo Filosofía, contribución y educación Pilares del conocimiento Inicio &rsaquo; Landing ₿ Educación Bitcoin en Español Aprende Bitcoin paso a paso La guía más completa en español. Desde tu primera compra hasta criptografía avanzada. 6 niveles para todos los conocimientos. Empezar desde cero → Explorar niveles Ruta de aprendizaje Elige tu nivel Un camino progresivo desde cero hasta dominar Bitcoin a nivel técnico. 1 7 páginas Explorador Tu primera compra de bitcoin Entiende qué es Bitcoin, decide tu camino (KYC o no-KYC), y compra tus primeros sats. Empezar desde cero → 2 15 páginas Soberano Toma el control de tus bitcoin Autocustodia, wallets, Lightning Network, exchanges y seguridad esencial. Ir al nivel 2 → 3 18 páginas Analista Entiende lo que controlas Modelo UTXO, claves, direcciones, nodos, hardware wallets, coin control y fiscalidad. Ir al nivel 3 → 4 23 páginas En la madriguera Privacidad, herencia y minería CoinJoin, multisig, planificación de herencia, Lightning avanzado y minería casera. Ir al nivel 4 → 5 19 páginas Mentor Criptografía, scripts y protocolo Curva elíptica, ECDSA, Schnorr, Bitcoin Script, SegWit, Taproot y transacciones raw. Ir al nivel 5 → 6 "
+  },
+  {
+    "title": "Bitcoin y energía: el debate completo",
+    "url": "/la-madriguera/bitcoin-y-energia.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "bitcoin",
+      "energia",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "¿Consume Bitcoin demasiada energía? Datos, contexto, y los argumentos que nadie te cuenta. Análisis honesto. El dato básico Por qué Bitcoin consume energía Comparaciones relevantes El mix energético La minería como comprador de último recurso Los contraargumentos honestos 1. No toda la minería es verde 2. El consumo es significativo 3. La energía \"sobrante\" podría usarse para otra cosa 4. Los incentivos no garantizan resultados verdes El debate Proof of Work vs Proof of Stake La pregunta correcta Inicio &rsaquo; La Madriguera &rsaquo; Bitcoin y energía: el debate completo La madriguera Bitcoin y energía: el debate completo Los datos reales sobre el consumo energético de Bitcoin, sin propaganda en ninguna dirección. Fecha de publicación: Febrero 2026 Autor: aprendeBTC Tiempo de lectura: ~18 minutos \"Bitcoin consume más energía que Argentina\". \"Bitcoin está destruyendo el planeta\". \"Bitcoin es un desastre medioambiental\". Estos titulares aparecen regularmente en medios de comunicación. Y contienen algo de verdad: Bitcoin sí consume cantidades significativas de energía. Pero la historia completa es más matizada de lo que los titulares sugieren. Este artículo presenta los datos reales, el contexto necesario, y los argumentos de ambos lados — sin propaganda en ninguna dirección. El dato básico Bitcoin consume aproximadamente 100-150 TWh (teravatios-hora) de electricidad al año. Esta cifra varía según el hashrate de la red y la eficiencia del hardware de minería. Para poner esto en"
+  },
+  {
+    "title": "El caso Samourai Wallet y el futuro de la privacidad en Bitcoin",
+    "url": "/la-madriguera/el-caso-samourai-wallet.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "caso",
+      "samourai",
+      "wallet",
+      "billetera",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "En 2024, los fundadores de Samourai Wallet fueron arrestados. Qué pasó, qué implica, y qué futuro tiene la privacidad en Bitcoin. Qué era Samourai Wallet El arresto La posición del DOJ La posición de la defensa y la comunidad Bitcoin Argumento 1: CoinJoin es privacidad, no lavado de dinero Argumento 2: Samourai no custodiaba fondos Argumento 3: Escribir código es libertad de expresión Argumento 4: Precedente peligroso Las reacciones en cadena El precedente de Tornado Cash La tensión fundamental ¿Dónde queda la privacidad? Inicio &rsaquo; La Madriguera &rsaquo; El caso Samourai Wallet y el futuro de la privacidad en Bitcoin La madriguera El caso Samourai Wallet y el futuro de la privacidad en Bitcoin Cuando el gobierno de EEUU arrestó a los creadores de una wallet de privacidad, la comunidad Bitcoin se dividió. Fecha de publicación: Febrero 2026 Autor: aprendeBTC Tiempo de lectura: ~16 minutos El 24 de abril de 2024, el Departamento de Justicia de Estados Unidos anunció el arresto de Keonne Rodriguez y William Hill, fundadores de Samourai Wallet, una aplicación de wallet de Bitcoin enfocada en privacidad. Los cargos: conspiración para cometer lavado de dinero y operar un negocio de transmisión de dinero sin licencia. El arresto sacudió a la comunidad Bitcoin. Para algunos, era un ataque directo a la privacidad financiera y a la libertad de escribir código. Para otros, Samourai había cruzado líneas que no debería haber cruzado. El debate reveló tensiones profundas sobre qué sig"
+  },
+  {
+    "title": "El colapso de FTX: qué pasó y qué lecciones dejó",
+    "url": "/la-madriguera/el-colapso-de-ftx.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "colapso",
+      "ftx",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "Cronología del mayor fraude en la historia de las criptomonedas. Por qué FTX no tiene nada que ver con Bitcoin. Los antecedentes: Alameda Research y FTX El ascenso El token FTT El detonante: el artículo de CoinDesk El tweet de CZ El colapso Lo que se descubrió El juicio Las lecciones Lección 1: \"Not your keys, not your coins\" no es un eslogan — es una realidad Lección 2: Los exchanges son empresas frágiles Lección 3: FTX no es un argumento contra Bitcoin Inicio &rsaquo; La Madriguera &rsaquo; El colapso de FTX: qué pasó y qué lecciones dejó La madriguera El colapso de FTX: qué pasó y qué lecciones dejó Cómo un exchange de 32 mil millones de dólares se desmoronó en una semana, y por qué refuerza la tesis de Bitcoin. Fecha de publicación: Febrero 2026 Autor: aprendeBTC Tiempo de lectura: ~15 minutos En noviembre de 2022, FTX era el segundo exchange de criptomonedas más grande del mundo. Su fundador, Sam Bankman-Fried (SBF), era la cara pública de la industria: aparecía en portadas de Forbes, testificaba ante el Congreso de Estados Unidos, donaba millones a políticos, y era tratado como un genio de las finanzas. Una semana después, FTX estaba en bancarrota. Ocho mil millones de dólares de fondos de clientes habían desaparecido. SBF fue arrestado y acusado de fraude. El colapso arrastró a todo el mercado de criptomonedas y generó titulares que declaraban la muerte de Bitcoin. Pero Bitcoin no murió. La red siguió funcionando exactamente igual. Cada bloque se minó cada 10 minutos. "
+  },
+  {
+    "title": "El halving y los ciclos de precio: ¿correlación o causalidad?",
+    "url": "/la-madriguera/halving-y-ciclos-de-precio.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "halving",
+      "ciclos",
+      "precio"
+    ],
+    "section": "La Madriguera",
+    "keywords": "Análisis de la relación entre los halvings de Bitcoin y los ciclos de precio. Datos históricos, teorías, y por qué el pasado no predice el futuro. Qué es el halving (repaso rápido) Los datos históricos Halving 1 — 28 de noviembre de 2012 Halving 2 — 9 de julio de 2016 Halving 3 — 11 de mayo de 2020 Halving 4 — Abril 2024 La teoría del shock de oferta El modelo Stock-to-Flow La profecía autocumplida Rendimientos decrecientes Lo que no sabemos Lo que sí sabemos Inicio &rsaquo; La Madriguera &rsaquo; El halving y los ciclos de precio: ¿correlación o causalidad? La madriguera El halving y los ciclos de precio: ¿correlación o causalidad? Cada halving ha precedido un ciclo alcista. ¿Es inevitable o es una profecía autocumplida? Fecha de publicación: Febrero 2026 Autor: aprendeBTC Tiempo de lectura: ~14 minutos Cada cuatro años aproximadamente, la recompensa que reciben los mineros de Bitcoin se reduce a la mitad. Este evento — el halving — ha precedido históricamente a los mayores ciclos alcistas de Bitcoin. Pero, ¿es el halving la causa de las subidas, o es solo coincidencia? ¿O algo más complejo? Este artículo examina los datos, las teorías, y las limitaciones de lo que realmente sabemos. Qué es el halving (repaso rápido) Cada 210.000 bloques (aproximadamente 4 años), la recompensa por bloque se reduce a la mitad: 2009-2012: 50 BTC por bloque 2012-2016: 25 BTC por bloque 2016-2020: 12.5 BTC por bloque 2020-2024: 6.25 BTC por bloque 2024-2028: 3.125 BTC por bloque Esto continúa ha"
+  },
+  {
+    "title": "La Madriguera",
+    "url": "/la-madriguera/",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "wallet",
+      "billetera",
+      "lightning",
+      "factura lightning"
+    ],
+    "section": "La Madriguera",
+    "keywords": "Artículos en profundidad sobre Bitcoin: historia, debates, energía, privacidad, regulación y economía. Análisis riguroso en español. Artículos La Guerra del Tamaño de Bloque: la batalla que definió Bitcoin El colapso de FTX: qué pasó y qué lecciones dejó Bitcoin y energía: el debate completo El caso Samourai Wallet y el futuro de la privacidad en Bitcoin Lightning Network: dónde estamos y hacia dónde vamos Los soft forks de Bitcoin: historia de cada cambio de consenso ¿Puede un gobierno prohibir Bitcoin? El halving y los ciclos de precio: ¿correlación o causalidad? Sobre esta sección Inicio &rsaquo; La Madriguera &rsaquo; La Madriguera La madriguera La Madriguera Artículos en profundidad para quienes quieren ir más allá de lo básico. La Madriguera es nuestra sección de artículos en profundidad. Aquí analizamos los temas más relevantes del ecosistema Bitcoin con rigor, datos y perspectiva. No son tutoriales — son ensayos para pensar. No son neutrales como la Base de Conocimiento — aquí hay análisis y opinión, siempre fundamentada en hechos. Si ya dominas los niveles 1-4, este es tu siguiente paso. Si quieres entender no solo cómo funciona Bitcoin sino por qué funciona así y qué debates lo rodean, estás en el lugar correcto. Artículos La Guerra del Tamaño de Bloque: la batalla que definió Bitcoin Cómo un debate técnico se convirtió en una guerra civil, y qué nos enseña sobre la gobernanza de Bitcoin. Febrero 2026 · ~4500 palabras El colapso de FTX: qué pasó y qué lecciones dejó"
+  },
+  {
+    "title": "La Guerra del Tamaño de Bloque: la batalla que definió Bitcoin",
+    "url": "/la-madriguera/la-guerra-del-tamano-de-bloque.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "guerra",
+      "del",
+      "tamano",
+      "bloque",
+      "lightning",
+      "factura lightning",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "Historia completa de la Blocksize War (2015-2017). El debate que casi divide Bitcoin y por qué importa todavía hoy. El origen: el límite de 1 MB Las dos visiones Los actores La escalada El Acuerdo de Nueva York (SegWit2x) 1 de agosto de 2017: el fork Las consecuencias Las lecciones 1. Bitcoin es extremadamente difícil de cambiar 2. Los usuarios tienen el poder real 3. Los forks hostiles no heredan el efecto de red 4. La descentralización tiene costes reales Inicio &rsaquo; La Madriguera &rsaquo; La Guerra del Tamaño de Bloque: la batalla que definió Bitcoin La madriguera La Guerra del Tamaño de Bloque: la batalla que definió Bitcoin Cómo un debate técnico se convirtió en una guerra civil, y qué nos enseña sobre la gobernanza de Bitcoin. Fecha de publicación: Febrero 2026 Autor: aprendeBTC Tiempo de lectura: ~20 minutos Entre 2015 y 2017, Bitcoin vivió su crisis existencial más severa. Lo que empezó como un debate técnico sobre el tamaño de los bloques se convirtió en una guerra civil que dividió a la comunidad, generó ataques personales, acusaciones de censura, y finalmente resultó en la división de la cadena. El resultado de esa guerra definió qué tipo de sistema es Bitcoin. Las lecciones que dejó siguen siendo relevantes hoy. El origen: el límite de 1 MB En 2010, Satoshi Nakamoto añadió un límite de 1 MB al tamaño de los bloques de Bitcoin. En ese momento, los bloques estaban prácticamente vacíos — el límite era una medida anti-spam para prevenir que alguien inundara la red"
+  },
+  {
+    "title": "Lightning Network: dónde estamos y hacia dónde vamos",
+    "url": "/la-madriguera/lightning-network-estado-actual.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "lightning",
+      "network",
+      "estado",
+      "actual",
+      "wallet",
+      "billetera",
+      "factura lightning",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "Estado actual de Lightning Network en 2025-2026. Adopción, retos técnicos, liquidez, y el futuro de los pagos en Bitcoin. Qué es Lightning (breve repaso) Estado actual de la red Adopción real Los retos técnicos 1. Gestión de liquidez 2. Enrutamiento 3. Watchtowers 4. Fuerza de cierre y tiempos de espera 5. Backups El debate custodial vs no-custodial LSPs: ¿la solución o centralización disfrazada? Propuestas técnicas en desarrollo Inicio &rsaquo; La Madriguera &rsaquo; Lightning Network: dónde estamos y hacia dónde vamos La madriguera Lightning Network: dónde estamos y hacia dónde vamos Lightning ha crecido enormemente, pero tiene retos importantes por delante. Un análisis honesto. Fecha de publicación: Febrero 2026 Autor: aprendeBTC Tiempo de lectura: ~17 minutos Lightning Network es la principal solución de escalado de Bitcoin. Permite pagos instantáneos con comisiones de fracciones de céntimo, sin esperar confirmaciones en la blockchain. Es lo que hace posible pagar un café con bitcoin sin pagar más en fees que el precio del café. Después de años de desarrollo, Lightning ha alcanzado adopción significativa. Millones de personas la usan. Comercios la aceptan. Aplicaciones enteras se construyen sobre ella. Pero también tiene limitaciones y retos que no siempre se discuten honestamente. Este artículo presenta el estado actual de Lightning: lo que funciona, lo que no funciona, y hacia dónde va. Qué es Lightning (breve repaso) Lightning Network es una \"capa 2\" construida sobre B"
+  },
+  {
+    "title": "¿Puede un gobierno prohibir Bitcoin?",
+    "url": "/la-madriguera/puede-un-gobierno-prohibir-bitcoin.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "puede",
+      "gobierno",
+      "prohibir",
+      "bitcoin",
+      "frase semilla",
+      "seed phrase",
+      "mnemonic",
+      "bip39",
+      "utxo",
+      "transacciones",
+      "claves",
+      "direcciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "Análisis de los intentos de prohibir Bitcoin, por qué han fracasado, y qué podría hacer un gobierno determinado. El historial de prohibiciones China — La prohibición más seria Nigeria — Prohibición formal, uso récord India — Ida y vuelta Bolivia, Argelia, Marruecos, y otros Por qué las prohibiciones fallan 1. No hay servidor que cerrar 2. Internet es difícil de censurar completamente 3. Las claves privadas son información 4. Los mercados P2P son resilientes Lo que un gobierno SÍ puede hacer Lo que un gobierno NO puede hacer Inicio &rsaquo; La Madriguera &rsaquo; ¿Puede un gobierno prohibir Bitcoin? La madriguera ¿Puede un gobierno prohibir Bitcoin? China lo intentó. Nigeria lo intentó. India lo consideró. Ninguno lo logró. ¿Es Bitcoin realmente imparable? Fecha de publicación: Febrero 2026 Autor: aprendeBTC Tiempo de lectura: ~14 minutos \"¿No puede el gobierno simplemente prohibir Bitcoin?\" Es una pregunta razonable. Los gobiernos tienen mucho poder. Controlan el sistema legal, las fuerzas de seguridad, el sistema bancario. Si decidieran que Bitcoin es una amenaza, ¿no podrían eliminarlo? La respuesta corta es: probablemente no. Pero la respuesta larga es más interesante. El historial de prohibiciones Varios países han intentado prohibir o restringir severamente Bitcoin. Ninguno ha tenido éxito completo. China — La prohibición más seria China es el caso de estudio más importante. El gobierno chino prohibió Bitcoin múltiples veces: 2013: Prohibición a instituciones financieras"
+  },
+  {
+    "title": "Los soft forks de Bitcoin: historia de cada cambio de consenso",
+    "url": "/la-madriguera/soft-forks-de-bitcoin.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "soft",
+      "forks",
+      "bitcoin",
+      "lightning",
+      "factura lightning",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "Todos los soft forks de Bitcoin desde 2012. P2SH, CLTV, CSV, SegWit, Taproot. Qué cambió cada uno y cómo se activaron. Qué es un soft fork BIP 16 — Pay to Script Hash (P2SH) — Abril 2012 BIP 65 — OP_CHECKLOCKTIMEVERIFY (CLTV) — Diciembre 2015 BIP 68, 112, 113 — Relative Timelocks (CSV) — Julio 2016 BIP 141, 143, 147 — Segregated Witness (SegWit) — Agosto 2017 BIP 340, 341, 342 — Taproot — Noviembre 2021 El debate sobre futuros soft forks El debate de la osificación Lecciones de gobernanza Fuentes Enlaces relacionados en aprendeBTC Inicio &rsaquo; La Madriguera &rsaquo; Los soft forks de Bitcoin: historia de cada cambio de consenso La madriguera Los soft forks de Bitcoin: historia de cada cambio de consenso Una cronología completa de los cambios de consenso en Bitcoin y las lecciones de gobernanza que dejaron. Fecha de publicación: Febrero 2026 Autor: aprendeBTC Tiempo de lectura: ~19 minutos Bitcoin tiene fama de ser imposible de cambiar. Es parcialmente cierto: cambiar las reglas de consenso de Bitcoin es extraordinariamente difícil. Pero no es imposible. Desde 2012, Bitcoin ha tenido varios \"soft forks\" — cambios compatibles hacia atrás que añaden nuevas funcionalidades sin romper el software existente. Cada soft fork cuenta una historia sobre cómo se gobierna Bitcoin, qué prioriza la comunidad, y qué tan difícil es llegar a consenso. Esta es la historia completa. Qué es un soft fork Un soft fork es un cambio en las reglas de Bitcoin que hace válidas menos cosas que antes. "
   },
   {
     "title": "Antes de empezar: qué vas a hacer y por qué",
@@ -2713,5 +2893,17 @@
     ],
     "section": "Recursos",
     "keywords": "Los mejores libros, podcasts, documentales, webs y herramientas sobre Bitcoin en español e inglés. Selección curada. Libros Podcasts (español) Podcasts (inglés) Documentales Webs de referencia Herramientas Inicio &rsaquo; Recursos imprescindibles sobre Bitcoin Recursos imprescindibles sobre Bitcoin Una selección curada de los mejores recursos para profundizar en Bitcoin, en español e inglés. Libros The Bitcoin Standard — Saifedean Ammous El libro de referencia sobre Bitcoin como dinero sólido. Explica la historia del dinero, por qué el dinero fiat falla, y cómo Bitcoin resuelve esos problemas. Lectura obligatoria para entender el \"por qué\" de Bitcoin. Existe en español (\"El Patrón Bitcoin\"). Mastering Bitcoin — Andreas Antonopoulos La referencia técnica definitiva. Explica el protocolo en profundidad: transacciones, scripts, minería, claves. Ideal para desarrolladores y curiosos técnicos. Gratuito online en GitHub. The Blocksize War — Jonathan Bier La historia del debate del tamaño de bloque y el fork de Bitcoin Cash. Documenta uno de los conflictos más importantes en la historia de Bitcoin y cómo se resolvió mediante el mercado y los usuarios. 21 Lessons — Gigi Reflexiones filosóficas, económicas y técnicas sobre lo que Bitcoin enseña. Estructura única: 21 lecciones en 3 capítulos. Gratuito en 21lessons.com. Inventing Bitcoin — Yan Pritzker Explicación técnica accesible para no-programadores. Construye Bitcoin desde cero conceptualmente, explicando cada pieza del puzzle. The"
+  },
+  {
+    "title": "Sobre aprendeBTC",
+    "url": "/sobre.html",
+    "tags": [
+      "proyecto",
+      "sobre",
+      "lightning",
+      "factura lightning"
+    ],
+    "section": "Proyecto",
+    "keywords": "Quiénes somos, por qué creamos aprendeBTC, y cómo apoyar el proyecto. Educación Bitcoin en español, libre y sin publicidad invasiva. Qué es aprendeBTC Por qué existe aprendeBTC Nuestros principios Quién está detrás Proyectos hermanos Cómo apoyar el proyecto Zaps vía Lightning Donación on-chain Compartir el contenido Contribuir contenido Contacto Inicio &rsaquo; Proyecto &rsaquo; Sobre aprendeBTC Proyecto Sobre aprendeBTC Educación Bitcoin en español, libre, independiente y de código abierto. Qué es aprendeBTC aprendeBTC es la guía más completa de Bitcoin en español. Nuestro objetivo es que cualquier persona hispanohablante pueda aprender Bitcoin desde cero hasta nivel experto, con contenido riguroso, actualizado y accesible. El proyecto incluye: 6 niveles de aprendizaje progresivo (92+ páginas de contenido) 39 herramientas interactivas (calculadoras, decodificadores, generadores) Base de Conocimiento con 28+ páginas de referencia Glosario con 150+ términos explicados La Madriguera: artículos en profundidad sobre temas complejos Sección de recursos curados (libros, podcasts, documentales) Enlaces a la comunidad Bitcoin en español Todo el contenido es gratuito y lo será siempre. Por qué existe aprendeBTC Los mejores recursos educativos sobre Bitcoin están en inglés. En español, la situación es problemática: Muchos recursos son superficiales — explican qué es Bitcoin en 500 palabras y pasan a promocionar trading Las traducciones automáticas son de baja calidad Muchos sitios mezc"
   }
 ]

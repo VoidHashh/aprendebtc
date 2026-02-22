@@ -39,8 +39,9 @@ function classify(route) {
   if (/^\/nivel-[1-6]\/$/.test(route)) return { priority: '0.9', changefreq: 'weekly' };
   if (/^\/nivel-[1-6]\/.+\.html$/.test(route)) return { priority: '0.8', changefreq: 'monthly' };
   if (route === '/base/' || /^\/base\/.+\.html$/.test(route)) return { priority: '0.8', changefreq: 'monthly' };
+  if (route === '/la-madriguera/' || /^\/la-madriguera\/.+\.html$/.test(route)) return { priority: '0.8', changefreq: 'monthly' };
   if (route === '/herramientas/' || /^\/herramientas\/.+\.html$/.test(route)) return { priority: '0.7', changefreq: 'monthly' };
-  if (route === '/glosario.html' || route === '/recursos.html') return { priority: '0.6', changefreq: 'monthly' };
+  if (route === '/glosario.html' || route === '/recursos.html' || route === '/sobre.html' || route === '/actualizaciones.html') return { priority: '0.6', changefreq: 'monthly' };
   if (route === '/comunidad/' || /^\/comunidad\/.+\.html$/.test(route)) return { priority: '0.6', changefreq: 'monthly' };
   return { priority: '0.6', changefreq: 'monthly' };
 }

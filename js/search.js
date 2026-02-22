@@ -103,6 +103,18 @@
     { title: 'Protocolo P2P', url: '/nivel-5/protocolo-p2p.html', tags: ['nivel 5', 'p2p', 'red'], section: 'Nivel 5', nivel: 5 },
 
     { title: 'Base de Conocimiento', url: '/base/', tags: ['base', 'referencia'], section: 'Pilares' },
+    { title: 'La Madriguera', url: '/la-madriguera/', tags: ['analisis', 'profundidad', 'historia bitcoin'], section: 'Pilares' },
+    { title: 'La guerra del tamano de bloque', url: '/la-madriguera/la-guerra-del-tamano-de-bloque.html', tags: ['madriguera', 'blocksize war', 'segwit', 'uasf'], section: 'La Madriguera' },
+    { title: 'El colapso de FTX', url: '/la-madriguera/el-colapso-de-ftx.html', tags: ['madriguera', 'ftx', 'custodia', 'riesgo contraparte'], section: 'La Madriguera' },
+    { title: 'Bitcoin y energia', url: '/la-madriguera/bitcoin-y-energia.html', tags: ['madriguera', 'energia', 'mineria', 'pow'], section: 'La Madriguera' },
+    { title: 'El caso Samourai Wallet', url: '/la-madriguera/el-caso-samourai-wallet.html', tags: ['madriguera', 'privacidad', 'samourai', 'coinjoin'], section: 'La Madriguera' },
+    { title: 'Lightning: estado actual', url: '/la-madriguera/lightning-network-estado-actual.html', tags: ['madriguera', 'lightning', 'liquidez'], section: 'La Madriguera' },
+    { title: 'Soft forks de Bitcoin', url: '/la-madriguera/soft-forks-de-bitcoin.html', tags: ['madriguera', 'soft fork', 'consenso'], section: 'La Madriguera' },
+    { title: 'Puede un gobierno prohibir Bitcoin', url: '/la-madriguera/puede-un-gobierno-prohibir-bitcoin.html', tags: ['madriguera', 'regulacion', 'censura'], section: 'La Madriguera' },
+    { title: 'Halving y ciclos de precio', url: '/la-madriguera/halving-y-ciclos-de-precio.html', tags: ['madriguera', 'halving', 'ciclos'], section: 'La Madriguera' },
+    { title: 'Empieza aqui', url: '/empezar.html', tags: ['empezar', 'por donde empiezo', 'ruta inicial'], section: 'Proyecto' },
+    { title: 'Sobre aprendeBTC', url: '/sobre.html', tags: ['proyecto', 'sobre nosotros'], section: 'Proyecto' },
+    { title: 'Actualizaciones y changelog', url: '/actualizaciones.html', tags: ['proyecto', 'changelog', 'actualizaciones'], section: 'Proyecto' },
     { title: 'Glosario', url: '/glosario.html', tags: ['terminos', 'definiciones'], section: 'Pilares' },
     { title: 'Recursos', url: '/recursos.html', tags: ['libros', 'podcasts'], section: 'Pilares' },
     { title: 'Herramientas', url: '/herramientas/', tags: ['tools', 'hash'], section: 'Pilares' },
@@ -343,7 +355,7 @@
 
     const cleanQuery = (query || '').trim();
     if (cleanQuery.length < 2) {
-      container.innerHTML = '<p class="search-hint">Escribe para buscar artÃƒÆ’Ã‚Â­culos, conceptos y niveles...</p>';
+      container.innerHTML = '<p class="search-hint">Escribe para buscar artículos, conceptos y niveles...</p>';
       return;
     }
 
@@ -434,4 +446,5 @@
   document.addEventListener('includes:loaded', init);
   document.addEventListener('DOMContentLoaded', () => setTimeout(init, 150));
 })();
+
 

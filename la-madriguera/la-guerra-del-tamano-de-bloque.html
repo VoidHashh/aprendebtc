@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Historia completa de la Blocksize War (2015-2017). El debate que casi divide Bitcoin y por qué importa todavía hoy." />
+  <meta property="og:title" content="La Guerra del Tamaño de Bloque: la batalla que definió Bitcoin | aprendebtc.com" />
+  <meta property="og:description" content="Historia completa de la Blocksize War (2015-2017). El debate que casi divide Bitcoin y por qué importa todavía hoy." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/la-madriguera/la-guerra-del-tamano-de-bloque.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="La Guerra del Tamaño de Bloque: la batalla que definió Bitcoin | aprendebtc.com" />
+  <meta name="twitter:description" content="Historia completa de la Blocksize War (2015-2017). El debate que casi divide Bitcoin y por qué importa todavía hoy." />
+  <title>La Guerra del Tamaño de Bloque: la batalla que definió Bitcoin | aprendebtc.com</title>
+  <link rel="canonical" href="https://aprendebtc.com/la-madriguera/la-guerra-del-tamano-de-bloque.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegacion de la madriguera"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-auto" aria-hidden="true"></div></div></nav></aside>
+    <main class="page-layout__content" id="main-content"><div class="content-inner">
+      <nav class="breadcrumb" aria-label="Ruta de navegacion"><a href="/" class="breadcrumb__item">Inicio</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><a href="/la-madriguera/" class="breadcrumb__item">La Madriguera</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><span class="breadcrumb__current">La Guerra del Tamaño de Bloque: la batalla que definió Bitcoin</span></nav>
+      <article class="article"><div class="nivel-badge nivel-badge--4 article__badge">La madriguera</div><h1>La Guerra del Tamaño de Bloque: la batalla que definió Bitcoin</h1><p class="article__subtitle">Cómo un debate técnico se convirtió en una guerra civil, y qué nos enseña sobre la gobernanza de Bitcoin.</p>
+<p>Fecha de publicación: Febrero 2026 Autor: aprendeBTC Tiempo de lectura: ~20 minutos</p>
+
+<p>Entre 2015 y 2017, Bitcoin vivió su crisis existencial más severa. Lo que empezó como un debate técnico sobre el tamaño de los bloques se convirtió en una guerra civil que dividió a la comunidad, generó ataques personales, acusaciones de censura, y finalmente resultó en la división de la cadena.</p>
+
+<p>El resultado de esa guerra definió qué tipo de sistema es Bitcoin. Las lecciones que dejó siguen siendo relevantes hoy.</p>
+
+<h2>El origen: el límite de 1 MB</h2>
+
+<p>En 2010, Satoshi Nakamoto añadió un límite de 1 MB al tamaño de los bloques de Bitcoin. En ese momento, los bloques estaban prácticamente vacíos — el límite era una medida anti-spam para prevenir que alguien inundara la red con transacciones basura.</p>
+
+<p>Satoshi mencionó que el límite podría aumentarse en el futuro si era necesario. Lo que no especificó fue cómo, cuándo, ni bajo qué condiciones.</p>
+
+<p>Durante años, el límite no importó. Los bloques tenían espacio de sobra. Pero a medida que Bitcoin crecía, los bloques empezaron a llenarse.</p>
+
+<p>En 2015-2016, los bloques frecuentemente alcanzaban el límite de 1 MB. Las transacciones competían por espacio. Las comisiones subían. Los tiempos de confirmación se volvían impredecibles. Para muchos, era evidente que algo tenía que cambiar.</p>
+
+<p>La pregunta era qué.</p>
+
+<h2>Las dos visiones</h2>
+
+<p>Se formaron dos campos con visiones fundamentalmente diferentes de qué debía ser Bitcoin.</p>
+
+<p><strong>Los &quot;big blockers&quot;</strong> argumentaban que Bitcoin debía ser un sistema de pagos accesible para todos. Si los bloques estaban llenos, la solución obvia era hacerlos más grandes. Más espacio = más transacciones = comisiones más bajas = Bitcoin utilizable como dinero para el día a día.</p>
+
+<p>Propusieron varios forks del software con límites de bloque mayores:</p>
+
+<ul><li>Bitcoin XT (2015): propuesto por Mike Hearn y Gavin Andresen, aumentaba el límite a 8 MB con incrementos posteriores</li><li>Bitcoin Classic (2016): proponía un aumento más modesto a 2 MB</li><li>Bitcoin Unlimited (2016): eliminaba el límite fijo, dejando que el mercado decidiera</li></ul>
+
+<p><strong>Los &quot;small blockers&quot;</strong> argumentaban que aumentar el tamaño de bloque tenía costes que los big blockers ignoraban. Bloques más grandes significan:</p>
+
+<ul><li>Blockchain que crece más rápido → más costoso almacenarla → menos gente puede ejecutar nodos → más centralización</li><li>Mayor ancho de banda necesario para propagar bloques → ventaja para mineros grandes → más centralización de la minería</li><li>Menor descentralización → Bitcoin más vulnerable a censura y control</li></ul>
+
+<p>Su propuesta era diferente: optimizar el espacio existente con SegWit (Segregated Witness) y escalar en &quot;capas&quot; secundarias como Lightning Network. La blockchain base sería una &quot;capa de liquidación&quot; para transacciones de alto valor, mientras que los pagos cotidianos ocurrirían en Lightning.</p>
+
+<h2>Los actores</h2>
+
+<p>El conflicto no era solo técnico. Era también personal, político, y económico.</p>
+
+<p>En el bando big blocker:</p>
+
+<ul><li><strong>Gavin Andresen</strong>: a quien Satoshi había delegado el proyecto, favorecía bloques grandes</li><li><strong>Mike Hearn</strong>: desarrollador temprano de Bitcoin, creador de Bitcoin XT</li><li><strong>Roger Ver</strong>: inversor temprano y evangelista de Bitcoin, conocido como &quot;Bitcoin Jesus&quot;</li><li><strong>Jihan Wu</strong>: CEO de Bitmain, el mayor fabricante de ASICs, con intereses económicos en mantener transacciones baratas y en bloquear SegWit (que afectaba a su patente de &quot;AsicBoost&quot;)</li></ul>
+
+<p>En el bando small blocker:</p>
+
+<ul><li><strong>Los desarrolladores de Bitcoin Core</strong>: la mayoría favorecía SegWit + capas, incluyendo a Gregory Maxwell, Pieter Wuille, Luke Dashjr, y otros</li><li><strong>Adam Back</strong>: CEO de Blockstream, empresa que desarrollaba soluciones de capa 2</li><li><strong>La mayoría de los nodos económicos</strong>: exchanges y empresas que ejecutaban nodos completos</li></ul>
+
+<h2>La escalada</h2>
+
+<p>El debate se volvió tóxico. Acusaciones de censura en el subreddit r/bitcoin (los moderadores eliminaban posts pro-big-blocks). Creación de r/btc como foro alternativo. Ataques DDoS contra nodos que ejecutaban Bitcoin XT. Ataques personales constantes en redes sociales.</p>
+
+<p>Conferencias que intentaron alcanzar compromisos fracasaron. El &quot;Hong Kong Agreement&quot; de 2016, donde desarrolladores y mineros acordaron implementar SegWit junto con un aumento de bloque a 2 MB, se rompió cuando los desarrolladores argumentaron que no podían comprometer cambios sin consenso de la comunidad.</p>
+
+<h2>El Acuerdo de Nueva York (SegWit2x)</h2>
+
+<p>En mayo de 2017, representantes de más de 50 empresas del ecosistema Bitcoin firmaron el &quot;New York Agreement&quot; o SegWit2x. El plan: activar SegWit y aumentar el límite a 2 MB tres meses después.</p>
+
+<p>Los firmantes representaban una porción enorme del hashrate y la economía de Bitcoin. Parecía un hecho consumado.</p>
+
+<p>Pero había un problema: los desarrolladores de Bitcoin Core no habían sido invitados a la negociación. Y los usuarios que ejecutaban nodos tampoco.</p>
+
+<p>La respuesta fue UASF: User Activated Soft Fork. Un movimiento de usuarios que declararon que sus nodos rechazarían bloques que no señalizaran soporte para SegWit a partir del 1 de agosto de 2017, independientemente de lo que hicieran los mineros.</p>
+
+<p>Era una apuesta arriesgada. Si los mineros ignoraban el UASF, podría haber una división de la cadena con consecuencias impredecibles. Pero también era una demostración de un principio fundamental: los usuarios, no los mineros ni las empresas, son quienes deciden qué reglas sigue Bitcoin.</p>
+
+<h2>1 de agosto de 2017: el fork</h2>
+
+<p>El 1 de agosto de 2017, la cadena se dividió. Pero no de la forma que muchos esperaban.</p>
+
+<p>Un grupo liderado por Roger Ver, Jihan Wu, y otros big blockers ejecutó un hard fork creando Bitcoin Cash (BCH), con bloques de 8 MB. Quien tenía bitcoin antes del fork ahora tenía la misma cantidad en ambas cadenas.</p>
+
+<p>Mientras tanto, SegWit se activó en Bitcoin el 24 de agosto de 2017, en parte gracias a la presión del UASF. Los mineros, viendo que los usuarios no iban a ceder, señalizaron soporte para SegWit.</p>
+
+<p>SegWit2x, el aumento a 2 MB que supuestamente venía después, fue cancelado en noviembre de 2017. No había consenso. Los defensores de bloques pequeños habían ganado.</p>
+
+<h2>Las consecuencias</h2>
+
+<p>Bitcoin mantuvo su límite de bloque efectivo (aunque SegWit lo aumentó indirectamente mediante &quot;weight units&quot;). Lightning Network se desarrolló sobre SegWit. La tesis de &quot;escalar en capas&quot; se convirtió en la dirección oficial del desarrollo.</p>
+
+<p>Bitcoin Cash siguió su propio camino. Aumentó el bloque a 32 MB, luego se dividió de nuevo en 2018 cuando Craig Wright (quien afirmaba ser Satoshi) creó Bitcoin SV. La adopción de ambas cadenas ha declinado constantemente. A fecha de 2025, BCH vale una fracción pequeña de lo que vale BTC, y BSV aún menos.</p>
+
+<h2>Las lecciones</h2>
+
+<p>La Guerra del Tamaño de Bloque dejó lecciones que siguen siendo fundamentales para entender Bitcoin:</p>
+
+<h2>1. Bitcoin es extremadamente difícil de cambiar</h2>
+
+<p>Cambiar las reglas de consenso de Bitcoin requiere un nivel de acuerdo casi unánime. Ni los mineros, ni las empresas, ni los desarrolladores pueden imponer cambios si los usuarios no están de acuerdo. Esto es una feature, no un bug — protege las propiedades que hacen a Bitcoin valioso.</p>
+
+<h2>2. Los usuarios tienen el poder real</h2>
+
+<p>UASF demostró que quienes ejecutan nodos tienen poder de veto. Los mineros producen bloques, pero los nodos deciden qué bloques son válidos. Si suficientes usuarios rechazan un cambio, los mineros que lo implementen estarán minando una cadena que nadie usa.</p>
+
+<h2>3. Los forks hostiles no heredan el efecto de red</h2>
+
+<p>Bitcoin Cash tenía el apoyo de empresas grandes, mineros importantes, y figuras conocidas. Pero no pudo replicar el efecto de red de Bitcoin. Los desarrolladores, la liquidez, la infraestructura, y la confianza se quedaron con BTC.</p>
+
+<h2>4. La descentralización tiene costes reales</h2>
+
+<p>Mantener bloques pequeños tiene un coste real: transacciones más caras y lentas en la capa base. Los small blockers ganaron el debate argumentando que este coste vale la pena para preservar la descentralización. El tiempo dirá si Lightning y otras capas cumplen la promesa de pagos baratos sin sacrificar la descentralización base.</p>
+
+<h2>5. El debate nunca termina realmente</h2>
+
+<p>Aunque la guerra terminó con una victoria clara de los small blockers, el debate subyacente persiste. ¿Debería Bitcoin optimizar para pagos cotidianos o para ser una reserva de valor? ¿Las capas secundarias son suficientes? ¿El límite de bloque debería aumentarse eventualmente?</p>
+
+<p>Estos debates continúan, aunque con menos intensidad. Lo que cambió es que ahora sabemos lo difícil que es cambiar Bitcoin — y eso, paradójicamente, da confianza en sus propiedades a largo plazo.</p>
+
+<h2>Fuentes y lecturas adicionales</h2>
+
+<ul><li>&quot;The Blocksize War&quot; de Jonathan Bier — el libro definitivo sobre el conflicto, con entrevistas y documentación exhaustiva</li><li>&quot;El Libro de Satoshi&quot; de Phil Champagne — incluye las discusiones originales de Satoshi sobre escalabilidad (libroblockchain.com/satoshi/)</li><li>Posts originales de Satoshi en BitcoinTalk sobre el límite de bloque</li></ul>
+
+<h2>Enlaces relacionados en aprendeBTC</h2>
+
+<ul><li><a href="/base/que-es-blockchain.html">¿Qué es la blockchain?</a></li><li><a href="/base/historia-bitcoin.html">Historia de Bitcoin</a></li><li><a href="/nivel-5/segwit-internals.html">¿Qué es SegWit?</a></li><li><a href="/nivel-2/que-es-lightning.html">Lightning Network</a></li></ul>
+<div class="ad-slot ad-content" id="ad-content-auto" aria-hidden="true"></div>
+<nav class="page-nav" aria-label="Navegacion entre paginas"><a href="/la-madriguera/index.html" class="page-nav__item"><span class="page-nav__label">&larr; Anterior</span><span class="page-nav__title">La Madriguera</span></a><a href="/la-madriguera/el-colapso-de-ftx.html" class="page-nav__item page-nav__item--next"><span class="page-nav__label">Siguiente &rarr;</span><span class="page-nav__title">El colapso de FTX: qué pasó y qué lecciones dejó</span></a></nav></article>
+    </div></main>
+  </div>
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

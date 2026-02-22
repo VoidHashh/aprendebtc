@@ -168,6 +168,20 @@
       ]
     },
     {
+      title: 'La Madriguera',
+      index: '/la-madriguera/',
+      pages: [
+        { href: '/la-madriguera/la-guerra-del-tamano-de-bloque.html', text: 'La guerra del tamano de bloque' },
+        { href: '/la-madriguera/el-colapso-de-ftx.html', text: 'El colapso de FTX' },
+        { href: '/la-madriguera/bitcoin-y-energia.html', text: 'Bitcoin y energia' },
+        { href: '/la-madriguera/el-caso-samourai-wallet.html', text: 'El caso Samourai Wallet' },
+        { href: '/la-madriguera/lightning-network-estado-actual.html', text: 'Lightning: estado actual' },
+        { href: '/la-madriguera/soft-forks-de-bitcoin.html', text: 'Soft forks de Bitcoin' },
+        { href: '/la-madriguera/puede-un-gobierno-prohibir-bitcoin.html', text: 'Puede un gobierno prohibir Bitcoin' },
+        { href: '/la-madriguera/halving-y-ciclos-de-precio.html', text: 'Halving y ciclos de precio' }
+      ]
+    },
+    {
       title: 'Herramientas',
       index: '/herramientas/',
       pages: [
@@ -253,6 +267,7 @@
 
     if (nivelMatch) return `Nivel ${nivelMatch[1]}`;
     if (path === '/base' || path.startsWith('/base/')) return 'Base de Conocimiento';
+    if (path === '/la-madriguera' || path.startsWith('/la-madriguera/')) return 'La Madriguera';
     if (path === '/comunidad' || path.startsWith('/comunidad/')) return 'Comunidad';
     if (path === '/herramientas' || path.startsWith('/herramientas/')) return 'Herramientas';
     if (path === '/glosario.html') return 'Glosario';

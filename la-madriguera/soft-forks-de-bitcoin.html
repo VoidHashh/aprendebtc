@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Todos los soft forks de Bitcoin desde 2012. P2SH, CLTV, CSV, SegWit, Taproot. Qué cambió cada uno y cómo se activaron." />
+  <meta property="og:title" content="Los soft forks de Bitcoin: historia de cada cambio de consenso | aprendebtc.com" />
+  <meta property="og:description" content="Todos los soft forks de Bitcoin desde 2012. P2SH, CLTV, CSV, SegWit, Taproot. Qué cambió cada uno y cómo se activaron." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/la-madriguera/soft-forks-de-bitcoin.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Los soft forks de Bitcoin: historia de cada cambio de consenso | aprendebtc.com" />
+  <meta name="twitter:description" content="Todos los soft forks de Bitcoin desde 2012. P2SH, CLTV, CSV, SegWit, Taproot. Qué cambió cada uno y cómo se activaron." />
+  <title>Los soft forks de Bitcoin: historia de cada cambio de consenso | aprendebtc.com</title>
+  <link rel="canonical" href="https://aprendebtc.com/la-madriguera/soft-forks-de-bitcoin.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegacion de la madriguera"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-auto" aria-hidden="true"></div></div></nav></aside>
+    <main class="page-layout__content" id="main-content"><div class="content-inner">
+      <nav class="breadcrumb" aria-label="Ruta de navegacion"><a href="/" class="breadcrumb__item">Inicio</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><a href="/la-madriguera/" class="breadcrumb__item">La Madriguera</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><span class="breadcrumb__current">Los soft forks de Bitcoin: historia de cada cambio de consenso</span></nav>
+      <article class="article"><div class="nivel-badge nivel-badge--4 article__badge">La madriguera</div><h1>Los soft forks de Bitcoin: historia de cada cambio de consenso</h1><p class="article__subtitle">Una cronología completa de los cambios de consenso en Bitcoin y las lecciones de gobernanza que dejaron.</p>
+<p>Fecha de publicación: Febrero 2026 Autor: aprendeBTC Tiempo de lectura: ~19 minutos</p>
+
+<p>Bitcoin tiene fama de ser imposible de cambiar. Es parcialmente cierto: cambiar las reglas de consenso de Bitcoin es extraordinariamente difícil. Pero no es imposible. Desde 2012, Bitcoin ha tenido varios &quot;soft forks&quot; — cambios compatibles hacia atrás que añaden nuevas funcionalidades sin romper el software existente.</p>
+
+<p>Cada soft fork cuenta una historia sobre cómo se gobierna Bitcoin, qué prioriza la comunidad, y qué tan difícil es llegar a consenso. Esta es la historia completa.</p>
+
+<h2>Qué es un soft fork</h2>
+
+<p>Un soft fork es un cambio en las reglas de Bitcoin que hace válidas menos cosas que antes. Las transacciones y bloques que eran inválidos siguen siendo inválidos. Algunas transacciones y bloques que antes eran válidos ahora son inválidos. Pero los nodos antiguos (que no han actualizado) siguen viendo la cadena como válida — simplemente no entienden las nuevas reglas.</p>
+
+<p>Esto contrasta con un hard fork, que hace válidas cosas que antes eran inválidas. Un hard fork requiere que todos los nodos actualicen o se quedan en una cadena separada.</p>
+
+<p>Los soft forks son la forma preferida de actualizar Bitcoin porque:</p>
+
+<p>1. No fuerzan a nadie a actualizar inmediatamente 2. No dividen la red si algunos nodos no actualizan 3. Son más seguros (no pueden eliminar restricciones, solo añadirlas)</p>
+
+<h2>BIP 16 — Pay to Script Hash (P2SH) — Abril 2012</h2>
+
+<p>El primer soft fork significativo de Bitcoin introdujo P2SH, una forma de crear direcciones para scripts arbitrarios.</p>
+
+<p><strong>El problema</strong>: antes de P2SH, si querías que alguien te pagara a un script complejo (por ejemplo, multisig 2-de-3), tenías que darles el script entero. Esto era largo, propenso a errores, y revelaba las condiciones de gasto antes de usarlas.</p>
+
+<p><strong>La solución</strong>: P2SH permite representar cualquier script como un hash de 20 bytes. El pagador solo ve una dirección normal (empezando por 3). El receptor proporciona el script original solo cuando gasta los fondos.</p>
+
+<p><strong>Cómo se activó</strong>: mediante señalización de mineros. Si el 55% de los bloques en una ventana de 7 días señalizaban soporte, el soft fork se activaba. Fue el primer soft fork con este mecanismo.</p>
+
+<p><strong>Controversia</strong>: Gavin Andresen impulsó P2SH. Hubo alternativas propuestas (OP_EVAL, OP_CHECKMULTISIG nativo) que algunos consideraban técnicamente superiores. P2SH ganó por ser más pragmático y tener apoyo de Gavin, quien entonces lideraba el desarrollo.</p>
+
+<p><strong>Legado</strong>: P2SH habilitó multisig práctico y sentó las bases para scripts más complejos. Las direcciones &quot;3...&quot; siguen siendo comunes hoy.</p>
+
+<h2>BIP 65 — OP_CHECKLOCKTIMEVERIFY (CLTV) — Diciembre 2015</h2>
+
+<p>Este soft fork añadió un nuevo opcode que permite bloquear fondos hasta un momento específico en el futuro.</p>
+
+<p><strong>El problema</strong>: antes de CLTV, podías crear transacciones con timelock usando el campo nLocktime. Pero esto tenía limitaciones: el timelock estaba en la transacción que gastaba, no en las condiciones de gasto del output. No podías crear un output que nadie pudiera gastar antes de cierta fecha.</p>
+
+<p><strong>La solución</strong>: OP_CHECKLOCKTIMEVERIFY permite poner la condición temporal directamente en el script. El output no puede gastarse hasta que pase el tiempo especificado, independientemente de qué transacción intente gastarlo.</p>
+
+<p><strong>Casos de uso</strong>: herencias (fondos que solo se pueden reclamar después de cierta fecha), pagos escrow con fecha límite, canales de pago unidireccionales.</p>
+
+<p><strong>Activación</strong>: mediante señalización de mineros usando &quot;version bits&quot; (BIP 9), un mecanismo más flexible que el de P2SH.</p>
+
+<h2>BIP 68, 112, 113 — Relative Timelocks (CSV) — Julio 2016</h2>
+
+<p>Un conjunto de tres BIPs que habilitaron timelocks relativos (relativos a cuándo se confirmó la transacción anterior, no a una fecha absoluta).</p>
+
+<p><strong>BIP 68</strong>: redefinió el campo nSequence para codificar timelocks relativos.</p>
+
+<p><strong>BIP 112</strong>: añadió OP_CHECKSEQUENCEVERIFY (CSV), similar a CLTV pero para tiempos relativos.</p>
+
+<p><strong>BIP 113</strong>: cambió cómo se calcula el tiempo en timelocks (usando tiempo medio de bloques anteriores en lugar del timestamp del bloque actual).</p>
+
+<p><strong>Por qué importa</strong>: los timelocks relativos son esenciales para Lightning Network. Los canales Lightning usan CSV para dar tiempo a detectar intentos de fraude: si tu contraparte intenta cerrar el canal con un estado antiguo, tienes un periodo (definido por CSV) para publicar la transacción de penalización.</p>
+
+<p>Sin CSV, Lightning no funcionaría como lo conocemos.</p>
+
+<h2>BIP 141, 143, 147 — Segregated Witness (SegWit) — Agosto 2017</h2>
+
+<p>El soft fork más importante y controvertido desde la creación de Bitcoin.</p>
+
+<p><strong>El problema principal</strong>: transaction malleability. Antes de SegWit, era posible modificar el txid de una transacción sin invalidarla (cambiando la firma de forma que sigue siendo válida pero tiene un hash diferente). Esto rompía protocolos que dependían de conocer el txid antes de que la transacción se confirmara — incluyendo Lightning Network.</p>
+
+<p><strong>Otro problema</strong>: escalar transacciones. Los bloques estaban llenos. Aumentar el límite era controvertido. SegWit ofrecía un aumento efectivo de capacidad sin cambiar el límite de 1 MB.</p>
+
+<p><strong>La solución</strong>: SegWit &quot;separa&quot; (segregates) las firmas (witness data) del resto de la transacción. El txid se calcula sin incluir las firmas, eliminando malleability. Las firmas se cuentan con un &quot;descuento&quot; de peso, permitiendo más transacciones por bloque.</p>
+
+<p><strong>Detalles técnicos</strong>:</p>
+
+<ul><li>Introdujo &quot;weight units&quot; en lugar de bytes para medir tamaño de bloque. El límite pasó a ser 4 millones de weight units (equivalente a ~2.3 MB si todas las transacciones son SegWit)</li><li>Creó dos nuevos tipos de salida: P2WPKH (native SegWit para claves individuales) y P2WSH (native SegWit para scripts)</li><li>Habilitó versiones de script futuras, facilitando futuros soft forks</li></ul>
+
+<p><strong>La guerra de activación</strong>: SegWit fue el campo de batalla de la Guerra del Tamaño de Bloque. Los mineros (especialmente Bitmain) bloquearon su activación durante más de un año. El movimiento UASF (User Activated Soft Fork) forzó la mano: usuarios amenazaron con rechazar bloques que no señalizaran SegWit a partir del 1 de agosto de 2017.</p>
+
+<p>Ante la amenaza de división, los mineros capitularon. SegWit se activó el 24 de agosto de 2017.</p>
+
+<p><strong>Legado</strong>: SegWit habilitó Lightning Network, mejoró la privacidad futura con Taproot, y demostró que los usuarios tienen poder sobre los mineros.</p>
+
+<p><a href="/la-madriguera/la-guerra-del-tamano-de-bloque.html">Para más contexto, ver</a></p>
+
+<h2>BIP 340, 341, 342 — Taproot — Noviembre 2021</h2>
+
+<p>El soft fork más reciente, y probablemente el más ambicioso técnicamente.</p>
+
+<p><strong>BIP 340 — Firmas Schnorr</strong>: reemplazó las firmas ECDSA por firmas Schnorr para outputs Taproot. Schnorr tiene propiedades matemáticas superiores: las firmas son más pequeñas, y múltiples firmas pueden agregarse en una sola (útil para multisig).</p>
+
+<p><strong>BIP 341 — Taproot</strong>: introdujo un nuevo tipo de output (P2TR) que puede gastarse de dos formas:</p>
+
+<p>1. Key path: con una firma simple, como si fuera una dirección normal 2. Script path: revelando un script específico de un árbol de scripts (MAST)</p>
+
+<p>La magia: si todas las partes de un contrato complejo cooperan, pueden gastar con el key path, y nadie ve que había condiciones complejas. Solo si hay disputa se revela el script. Esto mejora privacidad y eficiencia.</p>
+
+<p><strong>BIP 342 — Tapscript</strong>: actualizó Bitcoin Script para outputs Taproot, añadiendo nuevos opcodes y preparando el terreno para futuras mejoras.</p>
+
+<p><strong>Activación</strong>: después de la controversia de SegWit, la comunidad debatió extensamente cómo activar Taproot. Finalmente se usó &quot;Speedy Trial&quot;: los mineros tenían un periodo corto para señalizar 90% de soporte. Si lo lograban, Taproot se activaría meses después. Si no, habría que buscar otra estrategia.</p>
+
+<p>Los mineros señalizaron rápidamente. Taproot se activó el 14 de noviembre de 2021 en el bloque 709.632.</p>
+
+<p><strong>Legado</strong>: Taproot mejora la privacidad (muchas transacciones complejas parecen pagos simples), reduce costes (firmas más pequeñas, scripts más eficientes), y habilita contratos más sofisticados. La adopción ha sido gradual pero continua.</p>
+
+<h2>El debate sobre futuros soft forks</h2>
+
+<p>Después de Taproot, la comunidad ha debatido qué viene después — y si debería venir algo.</p>
+
+<p><strong>Propuestas activas</strong>:</p>
+
+<p><strong>OP_CTV (CheckTemplateVerify)</strong>: permite crear &quot;covenants&quot; — outputs que restringen a qué direcciones pueden ir los fondos. Casos de uso incluyen bóvedas de seguridad, canales de pago mejorados, y &quot;congestion control&quot; (pre-comprometer transacciones futuras).</p>
+
+<p><strong>OP_CAT</strong>: un opcode antiguo que Satoshi deshabilitó por preocupaciones de seguridad. Rehabilitarlo permitiría concatenar datos en scripts, habilitando muchas construcciones nuevas. Algunos lo ven como peligrosamente poderoso.</p>
+
+<p><strong>OP_VAULT</strong>: diseñado específicamente para crear bóvedas de seguridad donde los fondos tienen un &quot;periodo de enfriamiento&quot; antes de poder gastarse, con opción de cancelar durante ese periodo.</p>
+
+<p><strong>ANYPREVOUT (APO)</strong>: modificación a los sighashes que facilitaría Eltoo, una versión mejorada de canales Lightning.</p>
+
+<h2>El debate de la osificación</h2>
+
+<p>Algunos argumentan que Bitcoin debería &quot;osificarse&quot; — dejar de hacer cambios significativos al protocolo:</p>
+
+<ul><li>Cada cambio tiene riesgo de introducir bugs</li><li>Los cambios requieren coordinar a miles de participantes</li><li>Bitcoin ya funciona. ¿Por qué arriesgarse?</li><li>La dificultad de cambiar Bitcoin es una feature, no un bug</li></ul>
+
+<p>Otros argumentan lo contrario:</p>
+
+<ul><li>Sin mejoras, Bitcoin se quedará atrás en funcionalidad</li><li>Hay mejoras claras que beneficiarían a todos</li><li>La osificación prematura congela bugs y limitaciones actuales</li><li>Otros sistemas que no evolucionan mueren</li></ul>
+
+<p>No hay consenso. Lo que sí es claro es que cada futuro soft fork será más difícil que el anterior. La barra está muy alta.</p>
+
+<h2>Lecciones de gobernanza</h2>
+
+<p>Los soft forks de Bitcoin revelan cómo se gobierna realmente la red:</p>
+
+<p>1. <strong>Los desarrolladores proponen, no imponen</strong>. Los BIPs son propuestas. Ningún desarrollador puede forzar un cambio.</p>
+
+<p>2. <strong>Los mineros señalizan, pero no deciden</strong>. La señalización de mineros es una forma de medir consenso, pero UASF demostró que los usuarios pueden forzar activación si los mineros bloquean.</p>
+
+<p>3. <strong>Los usuarios tienen el poder final</strong>. Quien ejecuta nodos decide qué reglas sigue. Si suficientes usuarios rechazan un cambio, el cambio no ocurre.</p>
+
+<p>4. <strong>El consenso es difícil pero funciona</strong>. El proceso es lento, conflictivo, y frustrante. Pero ha producido mejoras significativas sin dividir la red (excepto Bitcoin Cash, que fue un fork hostil, no un soft fork).</p>
+
+<p>5. <strong>Cada cambio hace el siguiente más difícil</strong>. La comunidad es cada vez más cautelosa. Esto protege contra cambios malos pero también ralentiza mejoras buenas.</p>
+
+<p>Bitcoin no es inmutable. Es muy, muy difícil de cambiar. Eso es diferente.</p>
+
+<h2>Fuentes</h2>
+
+<ul><li>Bitcoin Improvement Proposals (github.com/bitcoin/bips)</li><li>Bitcoin Optech para explicaciones técnicas</li><li>&quot;The Blocksize War&quot; de Jonathan Bier para contexto de SegWit</li></ul>
+
+<h2>Enlaces relacionados en aprendeBTC</h2>
+
+<ul><li><a href="/nivel-6/soft-fork-hard-fork.html">¿Qué es un soft fork vs hard fork?</a></li><li><a href="/nivel-6/que-es-un-bip.html">¿Qué es un BIP?</a></li><li><a href="/la-madriguera/la-guerra-del-tamano-de-bloque.html">La Guerra del Tamaño de Bloque</a></li></ul>
+<div class="ad-slot ad-content" id="ad-content-auto" aria-hidden="true"></div>
+<nav class="page-nav" aria-label="Navegacion entre paginas"><a href="/la-madriguera/lightning-network-estado-actual.html" class="page-nav__item"><span class="page-nav__label">&larr; Anterior</span><span class="page-nav__title">Lightning Network: dónde estamos y hacia dónde vamos</span></a><a href="/la-madriguera/puede-un-gobierno-prohibir-bitcoin.html" class="page-nav__item page-nav__item--next"><span class="page-nav__label">Siguiente &rarr;</span><span class="page-nav__title">¿Puede un gobierno prohibir Bitcoin?</span></a></nav></article>
+    </div></main>
+  </div>
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>
