@@ -2,7 +2,7 @@
 
 ## Lighthouse (Chrome DevTools)
 - [ ] Ejecutar Lighthouse en / -> Performance > 90, Accessibility > 95, SEO > 95
-- [ ] Ejecutar en /nivel-1/antes-de-empezar.html (pagina de contenido tipica)
+- [ ] Ejecutar en /nivel-1/antes-de-empezar.html (página de contenido tipica)
 - [ ] Ejecutar en /herramientas/conversor.html (herramienta con API)
 
 ## Core Web Vitals

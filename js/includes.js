@@ -11,7 +11,7 @@
   // Obtener la ruta base desde el atributo del elemento <html>
   // Páginas en raíz: data-base-path=""
   // Páginas en /nivel-1/: data-base-path="../"
-  const basePath = document.documentElement.dataset.basePath ?? '';
+  const basePath = document.documentElement.dataset.basePath ? '';
 
   function ensureFavicon() {
     const href = `${basePath}assets/img/bitcoincalculadora-favicon.svg`;

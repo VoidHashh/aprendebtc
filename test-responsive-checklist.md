@@ -15,12 +15,12 @@
 - [ ] Pilares visibles y clicables
 - [ ] Footer completo
 
-### Pagina de contenido (cualquier nivel)
+### Página de contenido (cualquier nivel)
 - [ ] Sidebar oculta en movil, visible como menu hamburguesa
 - [ ] Sidebar visible en desktop a la izquierda
 - [ ] Breadcrumbs no desbordan
 - [ ] Callouts legibles, no cortados
-- [ ] Navegacion prev/next visible y clicable
+- [ ] Navegación prev/next visible y clicable
 - [ ] Ad slots no rompen el layout
 - [ ] Texto maximo ~75 caracteres por linea (legibilidad)
 

@@ -25,7 +25,7 @@
         { href: '/nivel-1/dos-caminos.html', text: 'Dos caminos: KYC o no-KYC' },
         { href: '/nivel-1/registrarte-en-un-exchange.html', text: 'Registrarte en un exchange' },
         { href: '/nivel-1/tu-primera-compra.html', text: 'Tu primera compra' },
-        { href: '/nivel-1/que-has-hecho.html', text: 'Que acabas de hacer' }
+        { href: '/nivel-1/que-has-hecho.html', text: 'Qu? acabas de hacer' }
       ]
     },
     {
@@ -39,11 +39,11 @@
         { href: '/nivel-2/cajeros-bitcoin.html', text: 'Comprar en cajeros Bitcoin' },
         { href: '/nivel-2/wallet-y-seed-nokyc.html', text: 'Wallet y seed (no-KYC)' },
         { href: '/nivel-2/exchanges-comparativa.html', text: 'Comparativa de exchanges' },
-        { href: '/nivel-2/que-es-lightning.html', text: 'Lightning: que es' },
-        { href: '/nivel-2/usar-lightning.html', text: 'Como usar Lightning' },
+        { href: '/nivel-2/que-es-lightning.html', text: 'Lightning: qu? es' },
+        { href: '/nivel-2/usar-lightning.html', text: 'Cómo usar Lightning' },
         { href: '/nivel-2/wallets-lightning.html', text: 'Wallets Lightning recomendadas' },
         { href: '/nivel-2/lightning-address.html', text: 'Lightning Address e invoices' },
-        { href: '/nivel-2/como-hacer-backup.html', text: 'Como hacer backup correctamente' },
+        { href: '/nivel-2/como-hacer-backup.html', text: 'Cómo hacer backup correctamente' },
         { href: '/nivel-2/wallets-recomendadas.html', text: 'Wallets recomendadas' }
       ]
     },
@@ -52,18 +52,18 @@
       index: '/nivel-3/',
       pages: [
         { href: '/nivel-3/modelo-utxo.html', text: 'El modelo UTXO' },
-        { href: '/nivel-3/anatomia-transaccion.html', text: 'Anatomia de una transaccion' },
+        { href: '/nivel-3/anatomia-transaccion.html', text: 'Anatomía de una transacción' },
         { href: '/nivel-3/mempool.html', text: 'La mempool' },
         { href: '/nivel-3/rbf-cpfp.html', text: 'RBF y CPFP' },
         { href: '/nivel-3/utxos-y-privacidad.html', text: 'Tus UTXOs y tu privacidad' },
         { href: '/nivel-3/clave-privada.html', text: 'Clave privada' },
-        { href: '/nivel-3/clave-publica.html', text: 'Clave publica' },
+        { href: '/nivel-3/clave-publica.html', text: 'Clave pública' },
         { href: '/nivel-3/tipos-de-direcciones.html', text: 'Tipos de direcciones Bitcoin' },
         { href: '/nivel-3/hd-wallets.html', text: 'HD wallets y derivation paths' },
         { href: '/nivel-3/firma-digital.html', text: 'Firma digital' },
-        { href: '/nivel-3/que-es-un-nodo.html', text: 'Que es un nodo' },
+        { href: '/nivel-3/que-es-un-nodo.html', text: 'Qué es un nodo' },
         { href: '/nivel-3/montar-tu-nodo.html', text: 'Monta tu propio nodo' },
-        { href: '/nivel-3/mineria-en-detalle.html', text: 'Mineria en detalle' },
+        { href: '/nivel-3/mineria-en-detalle.html', text: 'Minería en detalle' },
         { href: '/nivel-3/halving.html', text: 'El halving' },
         { href: '/nivel-3/configurar-hardware-wallet.html', text: 'Configura tu hardware wallet' },
         { href: '/nivel-3/comparativa-hardware-wallets.html', text: 'Comparativa hardware wallets' },
@@ -75,19 +75,19 @@
       index: '/nivel-4/',
       pages: [
         { href: '/nivel-4/configurar-multisig.html', text: 'Configurar multisig con Sparrow' },
-        { href: '/nivel-4/distribucion-claves.html', text: 'Distribucion geografica de claves' },
+        { href: '/nivel-4/distribucion-claves.html', text: 'Distribución geográfica de claves' },
         { href: '/nivel-4/herencia-bitcoin.html', text: 'Herencia de Bitcoin' },
-        { href: '/nivel-4/guia-herencia.html', text: 'Guia de herencia paso a paso' },
+        { href: '/nivel-4/guia-herencia.html', text: 'Guía de herencia paso a paso' },
         { href: '/nivel-4/herencia-multisig.html', text: 'Herencia con multisig' },
         { href: '/nivel-4/canales-lightning.html', text: 'Canales de pago' },
-        { href: '/nivel-4/liquidez-lightning.html', text: 'Gestion de liquidez' },
+        { href: '/nivel-4/liquidez-lightning.html', text: 'Gestión de liquidez' },
         { href: '/nivel-4/routing-lightning.html', text: 'Routing de pagos' },
         { href: '/nivel-4/nodo-lightning.html', text: 'Montar tu nodo Lightning' },
-        { href: '/nivel-4/mineria-casera.html', text: 'Mineria casera: tiene sentido' },
-        { href: '/nivel-4/hardware-mineria.html', text: 'Hardware de mineria' },
-        { href: '/nivel-4/pools-mineria.html', text: 'Pools de mineria' },
-        { href: '/nivel-4/mineria-bitaxe.html', text: 'Mineria con Bitaxe' },
-        { href: '/nivel-4/calefaccion-bitcoin.html', text: 'Bitcoin como calefaccion' }
+        { href: '/nivel-4/mineria-casera.html', text: 'Minería casera: tiene sentido' },
+        { href: '/nivel-4/hardware-mineria.html', text: 'Hardware de minería' },
+        { href: '/nivel-4/pools-mineria.html', text: 'Pools de minería' },
+        { href: '/nivel-4/mineria-bitaxe.html', text: 'Minería con Bitaxe' },
+        { href: '/nivel-4/calefaccion-bitcoin.html', text: 'Bitcoin como calefacción' }
       ]
     },
     {
@@ -121,14 +121,14 @@
       pages: [
         { href: '/nivel-6/por-que-bitcoin-importa.html', text: 'Por que Bitcoin importa de verdad' },
         { href: '/nivel-6/bitcoin-y-libertad.html', text: 'Bitcoin y libertad financiera' },
-        { href: '/nivel-6/bitcoin-game-theory.html', text: 'Teoria de juegos de Bitcoin' },
-        { href: '/nivel-6/criticas-a-bitcoin.html', text: 'Las criticas a Bitcoin y las respuestas' },
-        { href: '/nivel-6/contribuir-bitcoin-core.html', text: 'Como contribuir a Bitcoin Core' },
-        { href: '/nivel-6/que-es-un-bip.html', text: 'Que es un BIP' },
+        { href: '/nivel-6/bitcoin-game-theory.html', text: 'Teoría de juegos de Bitcoin' },
+        { href: '/nivel-6/criticas-a-bitcoin.html', text: 'Las críticas a Bitcoin y las respuestas' },
+        { href: '/nivel-6/contribuir-bitcoin-core.html', text: 'Cómo contribuir a Bitcoin Core' },
+        { href: '/nivel-6/que-es-un-bip.html', text: 'Qué es un BIP' },
         { href: '/nivel-6/soft-fork-hard-fork.html', text: 'Soft fork vs Hard fork' },
         { href: '/nivel-6/contribuir-sin-codigo.html', text: 'Contribuir sin saber programar' },
-        { href: '/nivel-6/como-explicar-bitcoin.html', text: 'Como explicar Bitcoin sin que te miren raro' },
-        { href: '/nivel-6/bitcoinizar-tu-entorno.html', text: 'Como bitcoinizar tu entorno' }
+        { href: '/nivel-6/como-explicar-bitcoin.html', text: 'Cómo explicar Bitcoin sin que te miren raro' },
+        { href: '/nivel-6/bitcoinizar-tu-entorno.html', text: 'Cómo bitcoinizar tu entorno' }
       ]
     }
   ];
@@ -138,34 +138,34 @@
       title: 'Base de Conocimiento',
       index: '/base/',
       pages: [
-        { href: '/base/que-es-bitcoin.html', text: 'Que es Bitcoin' },
-        { href: '/base/como-funciona-bitcoin.html', text: 'Como funciona Bitcoin' },
-        { href: '/base/que-es-blockchain.html', text: 'Que es la blockchain' },
-        { href: '/base/que-es-la-mineria.html', text: 'Que es la mineria' },
+        { href: '/base/que-es-bitcoin.html', text: 'Qué es Bitcoin' },
+        { href: '/base/como-funciona-bitcoin.html', text: 'Cómo funciona Bitcoin' },
+        { href: '/base/que-es-blockchain.html', text: 'Qué es la blockchain' },
+        { href: '/base/que-es-la-mineria.html', text: 'Qué es la minería' },
         { href: '/base/los-21-millones.html', text: 'Los 21 millones y la oferta fija' },
-        { href: '/base/que-es-un-satoshi.html', text: 'Que es un satoshi' },
+        { href: '/base/que-es-un-satoshi.html', text: 'Qué es un satoshi' },
         { href: '/base/historia-bitcoin.html', text: 'Historia de Bitcoin' },
-        { href: '/base/quien-es-satoshi.html', text: 'Quien es Satoshi Nakamoto' },
+        { href: '/base/quien-es-satoshi.html', text: 'Quién es Satoshi Nakamoto' },
         { href: '/base/el-whitepaper.html', text: 'El whitepaper de Bitcoin' },
         { href: '/base/problema-del-dinero-tradicional.html', text: 'El problema del dinero tradicional' },
         { href: '/base/bitcoin-vs-dinero-tradicional.html', text: 'Bitcoin vs dinero tradicional' },
         { href: '/base/historia-del-dinero.html', text: 'Historia del dinero' },
-        { href: '/base/inflacion-y-bitcoin.html', text: 'Inflacion y Bitcoin' },
-        { href: '/base/austrian-economics.html', text: 'Economia Austriaca y Bitcoin' },
+        { href: '/base/inflacion-y-bitcoin.html', text: 'Inflación y Bitcoin' },
+        { href: '/base/austrian-economics.html', text: 'Economía Austríaca y Bitcoin' },
         { href: '/base/bitcoin-vs-oro.html', text: 'Bitcoin vs Oro' },
         { href: '/base/bitcoin-reserva-de-valor.html', text: 'Bitcoin como reserva de valor' },
         { href: '/base/bitcoin-vs-altcoins.html', text: 'Bitcoin vs altcoins' },
         { href: '/base/exchange-centralizado-cex.html', text: 'Exchange centralizado (CEX)' },
         { href: '/base/exchange-descentralizado-dex.html', text: 'Exchange descentralizado (DEX)' },
         { href: '/base/kyc-vs-no-kyc.html', text: 'KYC y no-KYC' },
-        { href: '/base/dca-compras-periodicas.html', text: 'DCA: compras periodicas' },
+        { href: '/base/dca-compras-periodicas.html', text: 'DCA: compras periódicas' },
         { href: '/base/tipos-de-wallet.html', text: 'Tipos de wallet' },
-        { href: '/base/que-es-seed-phrase.html', text: 'Que es la seed phrase' },
+        { href: '/base/que-es-seed-phrase.html', text: 'Qué es la seed phrase' },
         { href: '/base/on-chain-vs-lightning.html', text: 'On-chain vs Lightning' },
-        { href: '/base/que-es-una-direccion.html', text: 'Que es una direccion Bitcoin' },
-        { href: '/base/que-es-una-confirmacion.html', text: 'Que es una confirmacion' },
-        { href: '/base/que-son-las-fees.html', text: 'Que son las comisiones (fees)' },
-        { href: '/base/seguridad-basica.html', text: 'Seguridad basica' },
+        { href: '/base/que-es-una-direccion.html', text: 'Qué es una dirección Bitcoin' },
+        { href: '/base/que-es-una-confirmacion.html', text: 'Qué es una confirmación' },
+        { href: '/base/que-son-las-fees.html', text: 'Qué son las comisiones (fees)' },
+        { href: '/base/seguridad-basica.html', text: 'Seguridad básica' },
         { href: '/base/estafas-comunes.html', text: 'Estafas comunes en Bitcoin' }
       ]
     },
@@ -178,10 +178,10 @@
         { href: '/la-madriguera/la-crisis-de-terra-luna.html', text: '03 - Crisis Terra/Luna' },
         { href: '/la-madriguera/los-etfs-de-bitcoin.html', text: '04 - ETFs de Bitcoin' },
         { href: '/la-madriguera/ordinals-inscriptions-debate.html', text: '05 - Ordinals e Inscriptions' },
-        { href: '/la-madriguera/la-geopolitica-de-la-mineria.html', text: '06 - Geopolitica de la mineria' },
+        { href: '/la-madriguera/la-geopolitica-de-la-mineria.html', text: '06 - Geopolitica de la minería' },
         { href: '/la-madriguera/el-ataque-del-51-por-ciento.html', text: '07 - Ataque del 51%' },
         { href: '/la-madriguera/bloques-huerfanos-y-reorganizaciones.html', text: '08 - Bloques huerfanos y reorgs' },
-        { href: '/la-madriguera/la-guerra-del-tamano-de-bloque.html', text: 'Debate - Tamano de bloque' },
+        { href: '/la-madriguera/la-guerra-del-tamano-de-bloque.html', text: 'Debate - Tamaño de bloque' },
         { href: '/la-madriguera/el-colapso-de-ftx.html', text: 'Debate - Colapso FTX' },
         { href: '/la-madriguera/bitcoin-y-energia.html', text: 'Debate - Bitcoin y energia' },
         { href: '/la-madriguera/el-caso-samourai-wallet.html', text: 'Debate - Caso Samourai' },
@@ -202,17 +202,17 @@
         { href: '/herramientas/comparador-exchanges.html', text: 'Comparador de exchanges' },
         { href: '/herramientas/calculadora-herencia.html', text: 'Calculadora de herencia' },
         { href: '/herramientas/hash.html', text: 'Calculadora de hash' },
-        { href: '/herramientas/mining-simulator.html', text: 'Simulador de mineria' },
+        { href: '/herramientas/mining-simulator.html', text: 'Simulador de minería' },
         { href: '/herramientas/difficulty-converter.html', text: 'Conversor de dificultad y target' },
         { href: '/herramientas/merkle-tree.html', text: 'Generador de Merkle Tree' },
         { href: '/herramientas/block-tools.html', text: 'Herramientas de bloques' },
         { href: '/herramientas/private-key.html', text: 'Generador de clave privada' },
-        { href: '/herramientas/public-key.html', text: 'Derivar clave publica' },
+        { href: '/herramientas/public-key.html', text: 'Derivar clave pública' },
         { href: '/herramientas/wif.html', text: 'Codificador/decodificador WIF' },
-        { href: '/herramientas/address-base58.html', text: 'Direccion Bitcoin (Base58)' },
-        { href: '/herramientas/address-bech32.html', text: 'Direccion Bitcoin (Bech32)' },
+        { href: '/herramientas/address-base58.html', text: 'Dirección Bitcoin (Base58)' },
+        { href: '/herramientas/address-bech32.html', text: 'Dirección Bitcoin (Bech32)' },
         { href: '/herramientas/checksum-base58.html', text: 'Base58Check y checksum' },
-        { href: '/herramientas/multisig-address.html', text: 'Generador de direccion multisig' },
+        { href: '/herramientas/multisig-address.html', text: 'Generador de dirección multisig' },
         { href: '/herramientas/mnemonic-seed.html', text: 'Mnemonic y seed (BIP39)' },
         { href: '/herramientas/extended-keys.html', text: 'Extended keys (xpub/xprv)' },
         { href: '/herramientas/derivation-paths.html', text: 'Derivation paths (BIP32)' },
@@ -672,7 +672,7 @@
   }
 
   function createPillarSidebarSection(pillarItem) {
-    const rootLabel = pillarItem.pages.length > 0 ? 'Indice del pilar' : 'Abrir pagina';
+    const rootLabel = pillarItem.pages.length > 0 ? 'Indice del pilar' : 'Abrir página';
     const links = [{ href: pillarItem.index, text: rootLabel }, ...pillarItem.pages];
     return createSidebarSection(pillarItem.title, links, 'sidebar__section--primary sidebar__section--pillar');
   }
@@ -931,7 +931,7 @@
         items: PILLAR_TREE.map((pillar) => ({
           title: pillar.title,
           levelNum: '',
-          links: [{ href: pillar.index, text: pillar.pages.length > 0 ? 'Indice del pilar' : 'Abrir pagina' }, ...pillar.pages]
+          links: [{ href: pillar.index, text: pillar.pages.length > 0 ? 'Indice del pilar' : 'Abrir página' }, ...pillar.pages]
         }))
       }
     ];

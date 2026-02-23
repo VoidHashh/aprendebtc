@@ -5,7 +5,7 @@
     {
       numero: 1,
       nombre: 'Explorador',
-      paginas: 7,
+      páginas: 7,
       descripcion:
         'Empieza desde cero: qué es Bitcoin, por qué existe, decisión KYC/no-KYC y primeros satoshis.',
       url: '/nivel-1/'
@@ -13,7 +13,7 @@
     {
       numero: 2,
       nombre: 'Soberano',
-      paginas: 15,
+      páginas: 15,
       descripcion:
         'Autocustodia real: wallet propia, retiro desde exchange, seed phrase y primeros pasos en Lightning.',
       url: '/nivel-2/'
@@ -21,7 +21,7 @@
     {
       numero: 3,
       nombre: 'Analista',
-      paginas: 18,
+      páginas: 18,
       descripcion:
         'UTXO, claves, direcciones, nodos, hardware wallet, coin control y lectura técnica de transacciones.',
       url: '/nivel-3/'
@@ -29,7 +29,7 @@
     {
       numero: 4,
       nombre: 'En la madriguera',
-      paginas: 23,
+      páginas: 23,
       descripcion:
         'Privacidad avanzada, multisig, herencia, Lightning avanzado y minería casera con visión operativa.',
       url: '/nivel-4/'
@@ -37,7 +37,7 @@
     {
       numero: 5,
       nombre: 'Mentor',
-      paginas: 19,
+      páginas: 19,
       descripcion:
         'Criptografía, Script, internals de transacciones, SegWit, Taproot y protocolo Bitcoin desde dentro.',
       url: '/nivel-5/'
@@ -45,7 +45,7 @@
     {
       numero: 6,
       nombre: 'Satoshi',
-      paginas: 10,
+      páginas: 10,
       descripcion:
         'Filosofía, game theory, BIPs, contribución y educación para multiplicar conocimiento en tu entorno.',
       url: '/nivel-6/'

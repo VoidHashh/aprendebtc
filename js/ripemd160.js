@@ -131,7 +131,7 @@
     
     // Calcular longitud con padding
     // Mensaje + 1 byte (0x80) + padding + 8 bytes de longitud
-    // Tras a?adir 0x80 (1 byte), rellenamos con ceros hasta que queden 8 bytes libres
+    // Tras añadir 0x80 (1 byte), rellenamos con ceros hasta que queden 8 bytes libres
     // para la longitud final en bits (little-endian).
     const padLen = (msgLen % 64 < 56) ? (55 - (msgLen % 64)) : (119 - (msgLen % 64));
     const totalLen = msgLen + 1 + padLen + 8;

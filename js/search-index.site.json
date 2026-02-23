@@ -777,7 +777,7 @@
       "exchanges"
     ],
     "section": "Herramientas",
-    "keywords": "Compara exchanges de Bitcoin por comisiones, metodos de pago, seguridad y funciones. Filtra y ordena para encontrar el que mejor encaja contigo. Filtros Inicio &rsaquo; Herramientas &rsaquo; Comparador de exchanges Comparador de exchanges Bitcoin Compara exchanges segun comisiones, pagos, KYC, app y enfoque Bitcoin-only. Filtros Solo con DCA automatico Solo Bitcoin-only Metodo de pago Todos SEPA Tarjeta Ordenar por Nombre (A-Z) Comision (menor) Comision (mayor) Exchange Comision Retiro BTC DCA KYC Pagos App BTC-only Sede No hay exchanges que coincidan con los filtros seleccionados. Nota: Las comisiones y condiciones cambian con frecuencia. Verifica siempre la informacion en la web oficial de cada plataforma antes de operar. Actualizacion: Datos orientativos de referencia para uso educativo. Como elegir un exchange Evalua comisiones, metodo de pago, seguridad y facilidad de retiro a autocustodia. Ver guia de exchanges en Nivel 2 ->"
+    "keywords": "Compara exchanges de Bitcoin por comisiones, metodos de pago, seguridad y funciones. Filtra y ordena para encontrar el que mejor encaja contigo. Filtros Inicio &rsaquo; Herramientas &rsaquo; Comparador de exchanges Comparador de exchanges Bitcoin Compara exchanges segun comisiones, pagos, KYC, app y enfoque Bitcoin-only. Filtros Solo con DCA automatico Solo Bitcoin-only Metodo de pago Todos SEPA Tarjeta Ordenar por Nombre (A-Z) Comision (menor) Comision (mayor) Exchange Comision Retiro BTC DCA KYC Pagos App BTC-only Sede No hay exchanges que coincidan con los filtros seleccionados. Nota: Las comisiones y condiciones cambian con frecuencia. Verifica siempre la informacion en la web oficial de cada plataforma antes de operar. Actualizacion: Datos orientativos de referencia para uso educativo. Cómo elegir un exchange Evalua comisiones, metodo de pago, seguridad y facilidad de retiro a autocustodia. Ver guia de exchanges en Nivel 2 ->"
   },
   {
     "title": "Conversor BTC / EUR / sats",
@@ -938,7 +938,7 @@
       "direcciones"
     ],
     "section": "Herramientas",
-    "keywords": "Herramientas interactivas para calcular y experimentar con Bitcoin: conversor, DCA, fees, impuestos, exchanges y herencia. Herramientas practicas Herramientas tecnicas Inicio &rsaquo; Herramientas Herramientas Herramientas interactivas para calcular, comprobar y experimentar con Bitcoin. Herramientas practicas Conversor BTC / EUR / sats Calculadora de fees Calculadora DCA Calculadora de impuestos (ES, 2026) Comparador de exchanges Calculadora de herencia Herramientas tecnicas Calculadora de hash (SHA-256, HASH160) Simulador de mineria (PoW) Conversor de dificultad y target Generador de Merkle Tree Herramientas de bloques (decoder + hash) Generador de clave privada Derivar clave publica Codificador/decodificador WIF Direccion Bitcoin (Base58) Direccion Bitcoin (Bech32 / Bech32m) Base58Check y checksum Generador de direccion multisig (P2SH/P2WSH) Mnemonic y seed (BIP39) Extended keys (xpub/xprv) Derivation paths (BIP32) Direcciones desde xpub HD Wallet explorer Decodificador de transacciones TX splitter (analisis byte a byte) Constructor de transacciones (raw) Interprete de Bitcoin Script Decodificador PSBT (BIP174) Firma digital: ECDSA y Schnorr Calculadora de curva eliptica Compact Size (VarInt) ASCII y hexadecimal Tiempo Unix Decodificador de timelocks Decodificador de factura Lightning (BOLT11) Analizador de entropía Validador de seed phrase"
+    "keywords": "Herramientas interactivas para calcular y experimentar con Bitcoin: conversor, DCA, fees, impuestos, exchanges y herencia. Herramientas practicas Herramientas técnicas Inicio &rsaquo; Herramientas Herramientas Herramientas interactivas para calcular, comprobar y experimentar con Bitcoin. Herramientas practicas Conversor BTC / EUR / sats Calculadora de fees Calculadora DCA Calculadora de impuestos (ES, 2026) Comparador de exchanges Calculadora de herencia Herramientas técnicas Calculadora de hash (SHA-256, HASH160) Simulador de minería (PoW) Conversor de dificultad y target Generador de Merkle Tree Herramientas de bloques (decoder + hash) Generador de clave privada Derivar clave pública Codificador/decodificador WIF Dirección Bitcoin (Base58) Dirección Bitcoin (Bech32 / Bech32m) Base58Check y checksum Generador de dirección multisig (P2SH/P2WSH) Mnemonic y seed (BIP39) Extended keys (xpub/xprv) Derivation paths (BIP32) Direcciones desde xpub HD Wallet explorer Decodificador de transacciones TX splitter (análisis byte a byte) Constructor de transacciones (raw) Interprete de Bitcoin Script Decodificador PSBT (BIP174) Firma digital: ECDSA y Schnorr Calculadora de curva eliptica Compact Size (VarInt) ASCII y hexadecimal Tiempo Unix Decodificador de timelocks Decodificador de factura Lightning (BOLT11) Analizador de entropía Validador de seed phrase"
   },
   {
     "title": "Decodificador de factura Lightning",
@@ -2018,7 +2018,7 @@
     ],
     "section": "Nivel 3",
     "nivel": 3,
-    "keywords": "Fiscalidad de Bitcoin en el nivel 3 de aprendeBTC. Inicio &rsaquo; Nivel 3 &rsaquo; Fiscalidad de Bitcoin Nivel 3 Fiscalidad de Bitcoin Aspectos fiscales basicos para operar con Bitcoin. Esta pagina ya esta creada como placeholder para mantener la navegacion sin enlaces rotos. El contenido didactico completo se anadira en la siguiente iteracion. i Estado Ruta habilitada y estructura integrada en el sitio. &larr; Anterior Seguridad operativa Siguiente &rarr; Nivel 4 - En la madriguera"
+    "keywords": "Fiscalidad de Bitcoin en el nivel 3 de aprendeBTC. Inicio &rsaquo; Nivel 3 &rsaquo; Fiscalidad de Bitcoin Nivel 3 Fiscalidad de Bitcoin Aspectos fiscales basicos para operar con Bitcoin. Esta página ya esta creada como placeholder para mantener la navegación sin enlaces rotos. El contenido didactico completo se añadir? en la siguiente iteracion. i Estado Ruta habilitada y estructura integrada en el sitio. &larr; Anterior Seguridad operativa Siguiente &rarr; Nivel 4 - En la madriguera"
   },
   {
     "title": "El halving",
@@ -2204,7 +2204,7 @@
     ],
     "section": "Nivel 3",
     "nivel": 3,
-    "keywords": "Seguridad operativa en el nivel 3 de aprendeBTC. Inicio &rsaquo; Nivel 3 &rsaquo; Seguridad operativa Nivel 3 Seguridad operativa Practicas de OpSec para reducir riesgos en el uso de Bitcoin. Esta pagina ya esta creada como placeholder para mantener la navegacion sin enlaces rotos. El contenido didactico completo se anadira en la siguiente iteracion. i Estado Ruta habilitada y estructura integrada en el sitio. &larr; Anterior Coin control Siguiente &rarr; Fiscalidad de Bitcoin"
+    "keywords": "Seguridad operativa en el nivel 3 de aprendeBTC. Inicio &rsaquo; Nivel 3 &rsaquo; Seguridad operativa Nivel 3 Seguridad operativa Practicas de OpSec para reducir riesgos en el uso de Bitcoin. Esta página ya esta creada como placeholder para mantener la navegación sin enlaces rotos. El contenido didactico completo se añadir? en la siguiente iteracion. i Estado Ruta habilitada y estructura integrada en el sitio. &larr; Anterior Coin control Siguiente &rarr; Fiscalidad de Bitcoin"
   },
   {
     "title": "Tipos de direcciones Bitcoin",
@@ -2217,7 +2217,8 @@
       "wallet",
       "billetera",
       "utxo",
-      "transacciones"
+      "transacciones",
+      "claves"
     ],
     "section": "Nivel 3",
     "nivel": 3,
@@ -2264,7 +2265,7 @@
     ],
     "section": "Nivel 4",
     "nivel": 4,
-    "keywords": "Contenido en preparacion para aprendeBTC. Inicio &rsaquo; Nivel 4 &rsaquo; Coinjoin Coinjoin Pagina en preparacion. Volvera pronto con contenido completo. Contenido en preparacion. Siguiente &rarr; Que es multisig"
+    "keywords": "Contenido en preparacion para aprendeBTC. Inicio &rsaquo; Nivel 4 &rsaquo; Coinjoin Coinjoin Página en preparacion. Volvera pronto con contenido completo. Contenido en preparacion. Siguiente &rarr; Qué es multisig"
   },
   {
     "title": "Configurar multisig con Sparrow",
@@ -2279,7 +2280,7 @@
     ],
     "section": "Nivel 4",
     "nivel": 4,
-    "keywords": "Configurar multisig con Sparrow en el nivel 4 de aprendeBTC. Inicio &rsaquo; Nivel 4 &rsaquo; Configurar multisig con Sparrow Nivel 4 Configurar multisig con Sparrow Guia base para montar una wallet multisig de forma segura. Ruta habilitada para continuidad de navegacion. El contenido completo se publicara en el siguiente bloque. &larr; Anterior Que es multisig Siguiente &rarr; Distribucion geografica de claves"
+    "keywords": "Configurar multisig con Sparrow en el nivel 4 de aprendeBTC. Inicio &rsaquo; Nivel 4 &rsaquo; Configurar multisig con Sparrow Nivel 4 Configurar multisig con Sparrow Guía base para montar una wallet multisig de forma segura. Ruta habilitada para continuidad de navegacion. El contenido completo se publicara en el siguiente bloque. &larr; Anterior Qué es multisig Siguiente &rarr; Distribución geográfica de claves"
   },
   {
     "title": "Distribución geográfica de claves",
@@ -2383,7 +2384,7 @@
     ],
     "section": "Nivel 4",
     "nivel": 4,
-    "keywords": "Nivel 4 de aprendeBTC: privacidad, multisig, herencia, Lightning avanzado y mineria casera en una guia practica. Seccion 2 &middot; Multisig Seccion 3 &middot; Herencia Seccion 4 &middot; Lightning avanzado Seccion 5 &middot; Mineria casera Inicio &rsaquo; Nivel 4 &mdash; En la madriguera Nivel 4 En la madriguera Por qu&eacute; En la madriguera: profundizas en privacidad, multisig y herencia. Privacidad, multisig, herencia, Lightning avanzado y mineria casera para operar Bitcoin con criterio tecnico. i Como usar este nivel Este bloque profundiza en seguridad real, operacion avanzada y continuidad patrimonial. Avanza en orden para mantener contexto. Seccion 2 &middot; Multisig 1 Distribución geográfica de claves No guardes todas las llaves en el mismo sitio. Distribución geográfica como defensa contra múltiples amenazas. &rarr; Seccion 3 &middot; Herencia 2 Herencia de Bitcoin Si mueres sin preparación, tus bitcoin desaparecen para siempre. No hay \"departamento de herencias\" que ayude. &rarr; 3 Guía de herencia paso a paso Tres enfoques prácticos para asegurar que tus bitcoin lleguen a quien debe recibirlos. &rarr; 4 Herencia con multisig Multisig como solución elegante para herencia: control total en vida, acceso para herederos tras el fallecimiento. &rarr; Seccion 4 &middot; Lightning avanzado 5 Canales de pago Conexiones bidireccionales entre nodos con bitcoin bloqueado. El fundamento técnico de Lightning. &rarr; 6 Gestión de liquidez El problema más complejo de Lightning: "
+    "keywords": "Nivel 4 de aprendeBTC: privacidad, multisig, herencia, Lightning avanzado y minería casera en una guia practica. Sección 2 &middot; Multisig Sección 3 &middot; Herencia Sección 4 &middot; Lightning avanzado Sección 5 &middot; Minería casera Inicio &rsaquo; Nivel 4 &mdash; En la madriguera Nivel 4 En la madriguera Por qu&eacute; En la madriguera: profundizas en privacidad, multisig y herencia. Privacidad, multisig, herencia, Lightning avanzado y minería casera para operar Bitcoin con criterio tecnico. i Como usar este nivel Este bloque profundiza en seguridad real, operacion avanzada y continuidad patrimonial. Avanza en orden para mantener contexto. Sección 2 &middot; Multisig 1 Distribución geográfica de claves No guardes todas las llaves en el mismo sitio. Distribución geográfica como defensa contra múltiples amenazas. &rarr; Sección 3 &middot; Herencia 2 Herencia de Bitcoin Si mueres sin preparación, tus bitcoin desaparecen para siempre. No hay \"departamento de herencias\" que ayude. &rarr; 3 Guía de herencia paso a paso Tres enfoques prácticos para asegurar que tus bitcoin lleguen a quien debe recibirlos. &rarr; 4 Herencia con multisig Multisig como solución elegante para herencia: control total en vida, acceso para herederos tras el fallecimiento. &rarr; Sección 4 &middot; Lightning avanzado 5 Canales de pago Conexiones bidireccionales entre nodos con bitcoin bloqueado. El fundamento técnico de Lightning. &rarr; 6 Gestión de liquidez El problema más complejo de Lightning: "
   },
   {
     "title": "Gestión de liquidez",
@@ -2471,7 +2472,7 @@
     "keywords": "Qué son los pools de minería, cómo funcionan, principales opciones (Ocean, Braiins), modelos de pago (PPLNS, PPS), y por qué importa la descentralización. El problema del minero solitario La solución: pools Cómo funciona técnicamente Modelos de pago PPLNS (Pay Per Last N Shares) PPS (Pay Per Share) FPPS (Full Pay Per Share) Pools relevantes Ocean Pool Braiins Pool (antes Slush Pool) Foundry USA F2Pool, ViaBTC, Antpool Inicio &rsaquo; Nivel 4 &rsaquo; Pools de minería Nivel 4 Pools de minería Mineros que combinan fuerzas para obtener recompensas regulares. Cómo elegir pool y por qué la descentralización importa. El problema del minero solitario La probabilidad de que un minero individual encuentre un bloque es proporcional a su hash rate dividido por el hash rate total de la red. Con la dificultad actual, un Antminer S21 (~200 TH/s) encontraría un bloque aproximadamente cada... varios años. Quizás décadas. Es como una lotería donde compras un boleto cada pocos años. Podrías ganar el premio gordo (6.25 BTC + fees), pero probablemente no. La varianza es enorme. Puedes tener suerte rápida o nunca encontrar nada. La solución: pools Un pool de minería agrupa el hash rate de muchos mineros. El pool encuentra bloques con regularidad (proporcional a su hash rate total) y reparte las recompensas entre los participantes según su contribución. En vez de esperar años por un premio gordo improbable, recibes pequeños pagos regulares proporcionales a tu trabajo. Es como formar un sindicato d"
   },
   {
-    "title": "Que Es Multisig",
+    "title": "Qué Es Multisig",
     "url": "/nivel-4/que-es-multisig.html",
     "tags": [
       "nivel 4",
@@ -2481,7 +2482,7 @@
     ],
     "section": "Nivel 4",
     "nivel": 4,
-    "keywords": "Contenido en preparacion para aprendeBTC. Inicio &rsaquo; Nivel 4 &rsaquo; Que Es Multisig Que Es Multisig Pagina en preparacion. Volvera pronto con contenido completo. Contenido en preparacion. &larr; Anterior Coinjoin Siguiente &rarr; Configurar multisig con Sparrow"
+    "keywords": "Contenido en preparacion para aprendeBTC. Inicio &rsaquo; Nivel 4 &rsaquo; Qué Es Multisig Qué Es Multisig Página en preparacion. Volvera pronto con contenido completo. Contenido en preparacion. &larr; Anterior Coinjoin Siguiente &rarr; Configurar multisig con Sparrow"
   },
   {
     "title": "Routing de pagos",
@@ -2510,7 +2511,9 @@
       "wallet",
       "billetera",
       "utxo",
-      "transacciones"
+      "transacciones",
+      "claves",
+      "direcciones"
     ],
     "section": "Nivel 5",
     "nivel": 5,
@@ -2577,7 +2580,9 @@
       "lightning",
       "factura lightning",
       "utxo",
-      "transacciones"
+      "transacciones",
+      "claves",
+      "direcciones"
     ],
     "section": "Nivel 5",
     "nivel": 5,

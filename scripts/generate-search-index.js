@@ -144,7 +144,7 @@ function buildSemanticTags(title, description, bodyText) {
     tags.add('xprv');
     tags.add('bip32');
   }
-  if (/(bech32|base58|wif|clave privada|clave publica|secp256k1)/.test(blob)) {
+  if (/(bech32|base58|wif|clave privada|clave pública|secp256k1)/.test(blob)) {
     tags.add('claves');
     tags.add('direcciones');
   }
