@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cómo el colapso de Terra/Luna en mayo de 2022 destruyó $60 mil millones en una semana y desencadenó un efecto dominó en cripto." />
+  <meta property="og:title" content="La crisis de Terra/Luna: la &quot;stablecoin&quot; que no era estable | aprendebtc.com" />
+  <meta property="og:description" content="Cómo el colapso de Terra/Luna en mayo de 2022 destruyó $60 mil millones en una semana y desencadenó un efecto dominó en cripto." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/la-madriguera/la-crisis-de-terra-luna.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="La crisis de Terra/Luna: la &quot;stablecoin&quot; que no era estable | aprendebtc.com" />
+  <meta name="twitter:description" content="Cómo el colapso de Terra/Luna en mayo de 2022 destruyó $60 mil millones en una semana y desencadenó un efecto dominó en cripto." />
+  <title>La crisis de Terra/Luna: la &quot;stablecoin&quot; que no era estable | aprendebtc.com</title>
+  <link rel="canonical" href="https://aprendebtc.com/la-madriguera/la-crisis-de-terra-luna.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación de la madriguera">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-auto" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="/" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="/la-madriguera/" class="breadcrumb__item">La Madriguera</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">La crisis de Terra/Luna: la &quot;stablecoin&quot; que no era estable</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--4 article__badge">La madriguera</div>
+          <h1>La crisis de Terra/Luna: la &quot;stablecoin&quot; que no era estable</h1>
+          <p class="article__subtitle">$60 mil millones evaporados en una semana. La muerte espiral de una stablecoin algorítmica y sus lecciones para los bitcoiners.</p>
+          <p style="color: var(--text-secondary);">Fecha de publicación: Febrero 2026 · Tiempo de lectura: ~6 minutos</p>
+
+<p>En mayo de 2022, el ecosistema Terra — valorado en más de 60 mil millones de dólares — colapsó en menos de una semana. Su stablecoin UST perdió el peg con el dólar. Su token LUNA pasó de 80 dólares a fracciones de céntimo. La onda expansiva derribó hedge funds, plataformas de lending, y eventualmente contribuyó a la caída de FTX seis meses después.</p>
+
+<p>Para los bitcoiners, Terra es un caso de estudio sobre por qué Bitcoin no es &quot;cripto&quot; y por qué la ingeniería financiera no puede crear estabilidad desde la nada.</p>
+
+<h2>¿Qué era Terra?</h2>
+
+<p>Terra era una blockchain construida sobre Cosmos SDK, lanzada en 2018 por Do Kwon y Daniel Shin. Su producto principal era UST (TerraUSD), una stablecoin &quot;algorítmica&quot; diseñada para mantener paridad 1:1 con el dólar estadounidense.</p>
+
+<p>A diferencia de stablecoins como USDT (Tether) o USDC (Circle), que supuestamente están respaldadas por dólares o activos equivalentes en reservas, UST no tenía respaldo directo. Mantenía su peg mediante un mecanismo de arbitraje con LUNA, el token nativo de Terra.</p>
+
+<p>El mecanismo funcionaba así:</p>
+
+<p>Si UST cotiza por debajo de 1 dólar (digamos, 0.98), los arbitrajistas pueden comprar UST a 0.98 y &quot;quemarlo&quot; a cambio de exactamente 1 dólar en LUNA. Venden esa LUNA, obtienen profit, y la presión de compra de UST lo devuelve a 1 dólar.</p>
+
+<p>Si UST cotiza por encima de 1 dólar (digamos, 1.02), los arbitrajistas pueden crear (mintear) nuevo UST quemando 1 dólar en LUNA. Venden ese UST a 1.02, obtienen profit, y la presión de venta de UST lo devuelve a 1 dólar.</p>
+
+<p>En teoría, el sistema se autoequilibraba. En la práctica, dependía de una suposición crítica: que LUNA siempre tuviera valor.</p>
+
+<h2>El imán: Anchor Protocol</h2>
+
+<p>¿Por qué alguien querría UST? La respuesta era Anchor Protocol.</p>
+
+<p>Anchor era una plataforma de lending construida sobre Terra que ofrecía un rendimiento del 20% anual en depósitos de UST. Veinte por ciento. Garantizado. En un mundo donde las cuentas de ahorro bancarias ofrecen menos del 1%.</p>
+
+<p>Este rendimiento era, obviamente, insostenible. No había ningún negocio subyacente que generara retornos del 20% de forma consistente y sin riesgo. El rendimiento se pagaba parcialmente con el staking de tokens colaterales y parcialmente con las reservas de la Luna Foundation Guard (LFG).</p>
+
+<p>Pero a los inversores no les importaba de dónde venía el dinero mientras el dinero llegara.</p>
+
+<p>Miles de millones de dólares fluyeron hacia Anchor. En su pico, Anchor tenía más de 17 mil millones de dólares en depósitos — la gran mayoría del UST en circulación. Era, efectivamente, un esquema donde casi todo el dinero estaba en un solo lugar esperando un rendimiento que no podía durar.</p>
+
+<p>La Luna Foundation Guard, consciente de las vulnerabilidades del sistema, comenzó a acumular reservas de Bitcoin como respaldo adicional. Llegaron a tener aproximadamente 80.000 BTC — más de 3 mil millones de dólares al precio de entonces.</p>
+
+<h2>La espiral de la muerte</h2>
+
+<p>El mecanismo de UST tenía un fallo fatal conocido desde el diseño: el &quot;death spiral&quot; o espiral de la muerte.</p>
+
+<p>Si por alguna razón UST perdía el peg y la gente perdía confianza, todos querrían vender UST y convertirlo a LUNA para recuperar su valor. Pero al convertir UST a LUNA, se crea más LUNA. Más LUNA significa más oferta. Más oferta significa precio más bajo. LUNA más barato significa que el &quot;respaldo&quot; de UST vale menos. UST vale menos significa más gente queriendo salir. Más gente saliendo significa más LUNA creada.</p>
+
+<p>Es un bucle de retroalimentación negativo: cuanto más cae, más cae.</p>
+
+<p>Este escenario teórico se materializó en mayo de 2022.</p>
+
+<p>El 7 de mayo, comenzaron retiros masivos de Anchor Protocol. La TVL (valor total bloqueado) pasó de 17 mil millones a 11 mil millones en días. Nadie sabe exactamente qué desencadenó los retiros — puede haber sido un gran holder vendiendo, o preocupaciones sobre la sostenibilidad del rendimiento del 20%, o manipulación deliberada.</p>
+
+<p>El 8 de mayo, UST perdió brevemente el peg, cayendo a 0.98 dólares. El mecanismo de arbitraje se activó, pero la presión era enorme. UST se recuperó pero siguió inestable.</p>
+
+<p>El 9 de mayo, la espiral comenzó en serio. UST cayó a 0.90, luego a 0.80. El mecanismo de arbitraje funcionaba — UST se convertía a LUNA — pero la cantidad de LUNA creada era astronómica. El precio de LUNA empezó a caer.</p>
+
+<p>La Luna Foundation Guard intervino vendiendo sus reservas de Bitcoin para comprar UST y defender el peg. Vendieron decenas de miles de BTC en el mercado abierto. Esto causó una caída del 15% en el precio de Bitcoin — daño colateral a todo el ecosistema cripto.</p>
+
+<p>No fue suficiente.</p>
+
+<p>El 10-11 de mayo, la espiral se aceleró. LUNA pasó de 60 dólares a 30 dólares a 10 dólares a 1 dólar. Se crearon miles de millones de tokens LUNA nuevos mientras los holders de UST huían. UST cayó a 0.50, luego a 0.30.</p>
+
+<p>El 12 de mayo, LUNA cotizaba a fracciones de céntimo. UST estaba alrededor de 0.10 dólares. El ecosistema de 60 mil millones de dólares había evaporado.</p>
+
+<p>Do Kwon, fundador de Terra, publicó un plan de &quot;recuperación&quot; que implicaba crear una nueva blockchain sin la stablecoin. Nadie estaba interesado.</p>
+
+<h2>El efecto dominó</h2>
+
+<p>El colapso de Terra no se quedó en Terra.</p>
+
+<p>Three Arrows Capital (3AC), un hedge fund cripto gestionado desde Singapur, tenía una exposición masiva a LUNA. Cuando LUNA colapsó, 3AC quedó insolvente. Debían cientos de millones de dólares a múltiples prestamistas.</p>
+
+<p>Celsius Network, una plataforma de lending cripto con más de un millón de usuarios, tenía exposición a 3AC. En junio de 2022, Celsius suspendió los retiros de usuarios. Poco después se declaró en bancarrota.</p>
+
+<p>Voyager Digital, un broker cripto, tenía préstamos a 3AC por más de 650 millones de dólares. Cuando 3AC no pudo pagar, Voyager quebró.</p>
+
+<p>BlockFi, otra plataforma de lending, recibió un rescate de emergencia de FTX en junio de 2022. Esto temporalmente estabilizó la situación, pero cuando FTX colapsó en noviembre, BlockFi cayó con él.</p>
+
+<p>El hilo es claro: Terra → 3AC → Celsius/Voyager → (parcialmente) FTX. Las fichas de dominó cayeron una tras otra durante seis meses.</p>
+
+<h2>Las lecciones</h2>
+
+<p>Para bitcoiners, Terra es un caso de estudio sobre qué no es Bitcoin:</p>
+
+<p><strong>Las stablecoins algorítmicas no funcionan.</strong> La idea de crear estabilidad a partir de dos activos volátiles que se referencian mutuamente es fundamentalmente defectuosa. Es una serpiente mordiéndose la cola. No hay respaldo externo — solo matemáticas que funcionan hasta que dejan de funcionar.</p>
+
+<p><strong>El rendimiento alto sin riesgo no existe.</strong> 20% APY es una bandera roja gigante, siempre. Si no puedes identificar de dónde viene el rendimiento, tú eres el rendimiento. Anchor pagaba 20% porque necesitaba atraer depósitos para mantener la ilusión de demanda por UST. Cuando los depósitos se fueron, el castillo de naipes colapsó.</p>
+
+<p><strong>Bitcoin no es &quot;cripto&quot;.</strong> Bitcoin no tiene CEO que pueda huir a otro país. No tiene token de gobernanza cuyo precio dependa de la confianza en un equipo. No tiene mecanismos algorítmicos experimentales que pueden fallar catastróficamente. Bitcoin es protocolo puro que funciona igual independientemente de quién lo use o qué pase con cualquier empresa.</p>
+
+<p><strong>La correlación existe en crisis.</strong> Cuando Terra vendió 80.000 BTC para defender el peg, Bitcoin cayó un 15%. Los bitcoiners puros que pensaban que estaban aislados del drama de las altcoins descubrieron que, al menos en el corto plazo, los mercados están conectados.</p>
+
+<p><strong>La venta de BTC por LFG fue inútil.</strong> 3 mil millones de dólares en Bitcoin quemados intentando defender algo que no podía defenderse. Si hubieran distribuido ese BTC a los holders de UST desde el principio, al menos algo se habría salvado.</p>
+
+<p>La diferencia fundamental es esta: Bitcoin cayó 65% de su ATH en 2022. Fue doloroso. Pero Bitcoin se ha recuperado de cada caída en su historia de 15 años. LUNA nunca volverá.</p>
+
+<h2>¿Dónde está Do Kwon?</h2>
+
+<p>Do Kwon, el fundador de Terra, huyó de Corea del Sur tras el colapso. Fue localizado en Montenegro en marzo de 2023 intentando salir del país con pasaportes falsificados.</p>
+
+<p>Fue arrestado y tanto Estados Unidos como Corea del Sur solicitaron su extradición. En 2024, Montenegro decidió extraditarlo a Estados Unidos, donde enfrenta cargos de fraude.</p>
+
+<p>El caso sigue en curso. Kwon ha negado responsabilidad, argumentando que el colapso fue un evento de mercado imprevisible, no un fraude.</p>
+
+<p>Los usuarios que perdieron sus ahorros en Terra tienen una perspectiva diferente.</p>
+
+<h2>Fuentes y referencias:</h2>
+
+<ul><li>Análisis forense de Nansen y Chainalysis sobre el colapso</li><li>Filings del Departamento de Justicia de EEUU contra Do Kwon</li><li>Reportes de Bloomberg, The Block y CoinDesk durante mayo 2022</li><li>Datos de DeFi Llama sobre TVL de Anchor Protocol</li><li>Documentos del arresto de Do Kwon en Montenegro</li></ul>
+
+<h2>Enlaces internos:</h2>
+
+<ul><li><a href="/la-madriguera/el-colapso-de-ftx.html">El colapso de FTX</a></li><li><a href="/base/bitcoin-vs-altcoins.html">Bitcoin vs altcoins</a></li><li><a href="/base/estafas-comunes.html">Estafas comunes en Bitcoin</a></li></ul>
+
+          <div class="ad-slot ad-content" id="ad-content-la-crisis-de-terra-luna" aria-hidden="true"></div>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/la-madriguera/silk-road-y-ross-ulbricht.html" class="page-nav__item"><span class="page-nav__label">← Anterior</span><span class="page-nav__title">Silk Road, Ross Ulbricht y el debate sobre la libertad</span></a>
+            <a href="/la-madriguera/los-etfs-de-bitcoin.html" class="page-nav__item page-nav__item--next"><span class="page-nav__label">Siguiente →</span><span class="page-nav__title">Los ETFs de Bitcoin: qué son, qué significan y qué cambian</span></a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

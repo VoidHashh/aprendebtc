@@ -426,7 +426,17 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://aprendebtc.com/la-madriguera/el-hackeo-de-mt-gox.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://aprendebtc.com/la-madriguera/halving-y-ciclos-de-precio.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aprendebtc.com/la-madriguera/la-crisis-de-terra-luna.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -441,7 +451,17 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://aprendebtc.com/la-madriguera/los-etfs-de-bitcoin.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://aprendebtc.com/la-madriguera/puede-un-gobierno-prohibir-bitcoin.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aprendebtc.com/la-madriguera/silk-road-y-ross-ulbricht.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

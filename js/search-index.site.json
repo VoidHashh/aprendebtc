@@ -1199,7 +1199,7 @@
       "transacciones"
     ],
     "section": "Inicio",
-    "keywords": "La guía educativa más completa sobre Bitcoin en español. Desde tu primera compra hasta criptografía avanzada. ¿Por dónde empiezo? Ruta personalizada en menos de 2 minutos Elige tu nivel Tu primera compra de bitcoin Toma el control de tus bitcoin Entiende lo que controlas Privacidad, herencia y minería Criptografía, scripts y protocolo Filosofía, contribución y educación Pilares del conocimiento Inicio › Landing ₿ Educación Bitcoin en español Aprende Bitcoin paso a paso La guía más completa en español. Desde tu primera compra hasta criptografía avanzada. 6 niveles para todos los conocimientos. Empezar desde cero → Hacer test rápido Test interactivo ¿Por dónde empiezo? Responde 8 preguntas y te recomendamos el nivel ideal para empezar hoy. Diagnóstico inicial Ruta personalizada en menos de 2 minutos El test cruza fundamentos, autocustodia, seed phrase, Lightning, UTXO y conocimientos técnicos. Frase semilla Wallets Lightning UTXO BIP Empezar test Abrir página standalone Incluye preguntas sobre: frase semilla, UTXO, Taproot, ECDSA/Schnorr, nodo, autocustodia y objetivo de aprendizaje. Ruta de aprendizaje Elige tu nivel Un camino progresivo desde cero hasta dominar Bitcoin a nivel técnico. 1 7 páginas Explorador Tu primera compra de bitcoin Entiende qué es Bitcoin, decide tu camino (KYC o no-KYC), y compra tus primeros sats. Empezar desde cero → 2 15 páginas Soberano Toma el control de tus bitcoin Autocustodia, wallets, Lightning Network, exchanges y seguridad esencial. Ir al niv"
+    "keywords": "La guía educativa más completa sobre Bitcoin en español. Desde tu primera compra hasta criptografía avanzada. ¿Por dónde empiezo? Ruta personalizada en menos de 2 minutos Elige tu nivel Tu primera compra de bitcoin Toma el control de tus bitcoin Entiende lo que controlas Privacidad, herencia y minería Criptografía, scripts y protocolo Filosofía, contribución y educación Pilares del conocimiento Inicio › Landing ₿ Educación Bitcoin en español Aprende Bitcoin paso a paso La guía más completa en español. Desde tu primera compra hasta criptografía avanzada. 6 niveles para todos los conocimientos. Empezar desde cero → Hacer test rápido Test interactivo ¿Por dónde empiezo? Responde 8 preguntas y te recomendamos el nivel ideal para empezar hoy. Diagnóstico inicial Ruta personalizada en menos de 2 minutos El test cruza fundamentos, autocustodia, seed phrase, Lightning, UTXO y conocimientos técnicos. Frase semilla Wallets Lightning UTXO BIP Empezar test Incluye preguntas sobre: frase semilla, UTXO, Taproot, ECDSA/Schnorr, nodo, autocustodia y objetivo de aprendizaje. Ruta de aprendizaje Elige tu nivel Un camino progresivo desde cero hasta dominar Bitcoin a nivel técnico. 1 7 páginas Explorador Tu primera compra de bitcoin Entiende qué es Bitcoin, decide tu camino (KYC o no-KYC), y compra tus primeros sats. Empezar desde cero → 2 15 páginas Soberano Toma el control de tus bitcoin Autocustodia, wallets, Lightning Network, exchanges y seguridad esencial. Ir al nivel 2 → 3 18 páginas Anal"
   },
   {
     "title": "Bitcoin y energía: el debate completo",
@@ -1246,6 +1246,20 @@
     "keywords": "Cronología del mayor fraude en la historia de las criptomonedas. Por qué FTX no tiene nada que ver con Bitcoin. Los antecedentes: Alameda Research y FTX El ascenso El token FTT El detonante: el artículo de CoinDesk El tweet de CZ El colapso Lo que se descubrió El juicio Las lecciones Lección 1: \"Not your keys, not your coins\" no es un eslogan — es una realidad Lección 2: Los exchanges son empresas frágiles Lección 3: FTX no es un argumento contra Bitcoin Inicio &rsaquo; La Madriguera &rsaquo; El colapso de FTX: qué pasó y qué lecciones dejó La madriguera El colapso de FTX: qué pasó y qué lecciones dejó Cómo un exchange de 32 mil millones de dólares se desmoronó en una semana, y por qué refuerza la tesis de Bitcoin. Fecha de publicación: Febrero 2026 Autor: aprendeBTC Tiempo de lectura: ~15 minutos En noviembre de 2022, FTX era el segundo exchange de criptomonedas más grande del mundo. Su fundador, Sam Bankman-Fried (SBF), era la cara pública de la industria: aparecía en portadas de Forbes, testificaba ante el Congreso de Estados Unidos, donaba millones a políticos, y era tratado como un genio de las finanzas. Una semana después, FTX estaba en bancarrota. Ocho mil millones de dólares de fondos de clientes habían desaparecido. SBF fue arrestado y acusado de fraude. El colapso arrastró a todo el mercado de criptomonedas y generó titulares que declaraban la muerte de Bitcoin. Pero Bitcoin no murió. La red siguió funcionando exactamente igual. Cada bloque se minó cada 10 minutos. "
   },
   {
+    "title": "El hackeo de Mt. Gox: el mayor robo de Bitcoin de la historia",
+    "url": "/la-madriguera/el-hackeo-de-mt-gox.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "hackeo",
+      "gox",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "Historia completa de Mt. Gox: de dominar el 70% del trading de Bitcoin a perder 850.000 BTC. Cronología, causas y lecciones. Los orígenes improbables El ascenso Las señales de alarma El colapso La investigación y el juicio La saga de los reembolsos Las lecciones Fuentes y referencias: Enlaces internos: Inicio › La Madriguera › El hackeo de Mt. Gox: el mayor robo de Bitcoin de la historia La madriguera El hackeo de Mt. Gox: el mayor robo de Bitcoin de la historia Cómo un exchange que manejaba el 70% del volumen mundial de Bitcoin colapsó, y por qué 10 años después seguimos aprendiendo de ello. Fecha de publicación: Febrero 2026 · Tiempo de lectura: ~8 minutos Mt. Gox es el fantasma que acecha a cada exchange de Bitcoin. En su apogeo, manejaba el 70% del volumen mundial de trading. En su caída, perdió 850.000 BTC de sus usuarios — aproximadamente 450 millones de dólares al precio de entonces, y miles de millones al precio actual. Es la historia definitiva de por qué \"not your keys, not your coins\" no es un eslogan vacío. Los orígenes improbables La historia de Mt. Gox empieza con cartas de Magic: The Gathering. En 2006, Jed McCaleb, un programador estadounidense, creó un sitio web para intercambiar cartas del popular juego de cartas coleccionables. El nombre Mt. Gox era un acrónimo de \"Magic: The Gathering Online eXchange\". El sitio nunca despegó para su propósito original. En 2010, McCaleb descubrió Bitcoin. Vio una oportunidad: reutilizar su dominio y código base para crear u"
+  },
+  {
     "title": "El halving y los ciclos de precio: ¿correlación o causalidad?",
     "url": "/la-madriguera/halving-y-ciclos-de-precio.html",
     "tags": [
@@ -1270,7 +1284,20 @@
       "factura lightning"
     ],
     "section": "La Madriguera",
-    "keywords": "Artículos en profundidad sobre Bitcoin: historia, debates, energía, privacidad, regulación y economía. Análisis riguroso en español. Artículos La Guerra del Tamaño de Bloque: la batalla que definió Bitcoin El colapso de FTX: qué pasó y qué lecciones dejó Bitcoin y energía: el debate completo El caso Samourai Wallet y el futuro de la privacidad en Bitcoin Lightning Network: dónde estamos y hacia dónde vamos Los soft forks de Bitcoin: historia de cada cambio de consenso ¿Puede un gobierno prohibir Bitcoin? El halving y los ciclos de precio: ¿correlación o causalidad? Sobre esta sección Inicio &rsaquo; La Madriguera &rsaquo; La Madriguera La madriguera La Madriguera Artículos en profundidad para quienes quieren ir más allá de lo básico. La Madriguera es nuestra sección de artículos en profundidad. Aquí analizamos los temas más relevantes del ecosistema Bitcoin con rigor, datos y perspectiva. No son tutoriales — son ensayos para pensar. No son neutrales como la Base de Conocimiento — aquí hay análisis y opinión, siempre fundamentada en hechos. Si ya dominas los niveles 1-4, este es tu siguiente paso. Si quieres entender no solo cómo funciona Bitcoin sino por qué funciona así y qué debates lo rodean, estás en el lugar correcto. Artículos La Guerra del Tamaño de Bloque: la batalla que definió Bitcoin Cómo un debate técnico se convirtió en una guerra civil, y qué nos enseña sobre la gobernanza de Bitcoin. Febrero 2026 · ~4500 palabras El colapso de FTX: qué pasó y qué lecciones dejó"
+    "keywords": "Artículos en profundidad sobre Bitcoin: historia, eventos, regulación, energía y debates técnicos. Análisis riguroso en español. Historia y eventos Debates y análisis de protocolo Inicio › La Madriguera La madriguera La Madriguera Artículos en profundidad para quienes quieren ir más allá de lo básico. La Madriguera es nuestra sección de análisis de fondo. Aquí agrupamos historia profunda de Bitcoin, eventos que cambiaron el ecosistema y debates técnicos que siguen vigentes. No son tutoriales paso a paso: son ensayos para entender contexto, incentivos y consecuencias. Historia y eventos El hackeo de Mt. Gox: el mayor robo de Bitcoin de la historia · Febrero 2026 · ~4200 palabras Silk Road, Ross Ulbricht y el debate sobre la libertad · Febrero 2026 · ~4500 palabras La crisis de Terra/Luna: la \"stablecoin\" que no era estable · Febrero 2026 · ~3200 palabras Los ETFs de Bitcoin: qué son, qué significan y qué cambian · Febrero 2026 · ~3800 palabras Debates y análisis de protocolo La Guerra del Tamaño de Bloque: la batalla que definió Bitcoin · Febrero 2026 · ~4500 palabras El colapso de FTX: qué pasó y qué lecciones dejó · Febrero 2026 · ~3500 palabras Bitcoin y energía: el debate completo · Febrero 2026 · ~4000 palabras El caso Samourai Wallet y el futuro de la privacidad en Bitcoin · Febrero 2026 · ~3500 palabras Lightning Network: dónde estamos y hacia dónde vamos · Febrero 2026 · ~3800 palabras Los soft forks de Bitcoin: historia de cada cambio de consenso · Febrero 2026 · ~400"
+  },
+  {
+    "title": "La crisis de Terra/Luna: la \"stablecoin\" que no era estable",
+    "url": "/la-madriguera/la-crisis-de-terra-luna.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "crisis",
+      "terra",
+      "luna"
+    ],
+    "section": "La Madriguera",
+    "keywords": "Cómo el colapso de Terra/Luna en mayo de 2022 destruyó $60 mil millones en una semana y desencadenó un efecto dominó en cripto. ¿Qué era Terra? El imán: Anchor Protocol La espiral de la muerte El efecto dominó Las lecciones ¿Dónde está Do Kwon? Fuentes y referencias: Enlaces internos: Inicio › La Madriguera › La crisis de Terra/Luna: la \"stablecoin\" que no era estable La madriguera La crisis de Terra/Luna: la \"stablecoin\" que no era estable $60 mil millones evaporados en una semana. La muerte espiral de una stablecoin algorítmica y sus lecciones para los bitcoiners. Fecha de publicación: Febrero 2026 · Tiempo de lectura: ~6 minutos En mayo de 2022, el ecosistema Terra — valorado en más de 60 mil millones de dólares — colapsó en menos de una semana. Su stablecoin UST perdió el peg con el dólar. Su token LUNA pasó de 80 dólares a fracciones de céntimo. La onda expansiva derribó hedge funds, plataformas de lending, y eventualmente contribuyó a la caída de FTX seis meses después. Para los bitcoiners, Terra es un caso de estudio sobre por qué Bitcoin no es \"cripto\" y por qué la ingeniería financiera no puede crear estabilidad desde la nada. ¿Qué era Terra? Terra era una blockchain construida sobre Cosmos SDK, lanzada en 2018 por Do Kwon y Daniel Shin. Su producto principal era UST (TerraUSD), una stablecoin \"algorítmica\" diseñada para mantener paridad 1:1 con el dólar estadounidense. A diferencia de stablecoins como USDT (Tether) o USDC (Circle), que supuestamente están respaldada"
   },
   {
     "title": "La Guerra del Tamaño de Bloque: la batalla que definió Bitcoin",
@@ -1310,6 +1337,21 @@
     "keywords": "Estado actual de Lightning Network en 2025-2026. Adopción, retos técnicos, liquidez, y el futuro de los pagos en Bitcoin. Qué es Lightning (breve repaso) Estado actual de la red Adopción real Los retos técnicos 1. Gestión de liquidez 2. Enrutamiento 3. Watchtowers 4. Fuerza de cierre y tiempos de espera 5. Backups El debate custodial vs no-custodial LSPs: ¿la solución o centralización disfrazada? Propuestas técnicas en desarrollo Inicio &rsaquo; La Madriguera &rsaquo; Lightning Network: dónde estamos y hacia dónde vamos La madriguera Lightning Network: dónde estamos y hacia dónde vamos Lightning ha crecido enormemente, pero tiene retos importantes por delante. Un análisis honesto. Fecha de publicación: Febrero 2026 Autor: aprendeBTC Tiempo de lectura: ~17 minutos Lightning Network es la principal solución de escalado de Bitcoin. Permite pagos instantáneos con comisiones de fracciones de céntimo, sin esperar confirmaciones en la blockchain. Es lo que hace posible pagar un café con bitcoin sin pagar más en fees que el precio del café. Después de años de desarrollo, Lightning ha alcanzado adopción significativa. Millones de personas la usan. Comercios la aceptan. Aplicaciones enteras se construyen sobre ella. Pero también tiene limitaciones y retos que no siempre se discuten honestamente. Este artículo presenta el estado actual de Lightning: lo que funciona, lo que no funciona, y hacia dónde va. Qué es Lightning (breve repaso) Lightning Network es una \"capa 2\" construida sobre B"
   },
   {
+    "title": "Los ETFs de Bitcoin: qué son, qué significan y qué cambian",
+    "url": "/la-madriguera/los-etfs-de-bitcoin.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "los",
+      "etfs",
+      "bitcoin",
+      "wallet",
+      "billetera"
+    ],
+    "section": "La Madriguera",
+    "keywords": "En enero de 2024, EEUU aprobó los ETFs spot de Bitcoin. BlackRock, Fidelity y otros entraron al mercado. Análisis completo. ¿Qué es un ETF? La década de rechazos El día de la aprobación Los números ¿Qué cambia? Las preocupaciones legítimas La perspectiva maximalista Más allá de EEUU El futuro Fuentes y referencias: Enlaces internos: Inicio › La Madriguera › Los ETFs de Bitcoin: qué son, qué significan y qué cambian La madriguera Los ETFs de Bitcoin: qué son, qué significan y qué cambian Wall Street entró en Bitcoin. ¿Es bueno o malo? Un análisis sin fanatismos. Fecha de publicación: Febrero 2026 · Tiempo de lectura: ~8 minutos El 10 de enero de 2024, la Comisión de Valores de Estados Unidos (SEC) aprobó once ETFs de Bitcoin spot. Por primera vez, inversores estadounidenses podían obtener exposición directa a Bitcoin a través de productos cotizados en bolsas tradicionales, sin necesidad de gestionar claves ni usar exchanges de criptomonedas. BlackRock, el mayor gestor de activos del mundo, lanzó su ETF (IBIT). Fidelity, uno de los mayores brokers de EEUU, lanzó el suyo (FBTC). En semanas, estos productos acumularon decenas de miles de millones de dólares. Era el momento que muchos llevaban esperando una década. Era también el momento que otros temían. ¿Qué es un ETF? Un ETF (Exchange-Traded Fund) es un fondo de inversión que cotiza en bolsa como si fuera una acción. El inversor compra participaciones del fondo a través de su broker habitual, y el fondo gestiona los activos sub"
+  },
+  {
     "title": "¿Puede un gobierno prohibir Bitcoin?",
     "url": "/la-madriguera/puede-un-gobierno-prohibir-bitcoin.html",
     "tags": [
@@ -1330,6 +1372,22 @@
     ],
     "section": "La Madriguera",
     "keywords": "Análisis de los intentos de prohibir Bitcoin, por qué han fracasado, y qué podría hacer un gobierno determinado. El historial de prohibiciones China — La prohibición más seria Nigeria — Prohibición formal, uso récord India — Ida y vuelta Bolivia, Argelia, Marruecos, y otros Por qué las prohibiciones fallan 1. No hay servidor que cerrar 2. Internet es difícil de censurar completamente 3. Las claves privadas son información 4. Los mercados P2P son resilientes Lo que un gobierno SÍ puede hacer Lo que un gobierno NO puede hacer Inicio &rsaquo; La Madriguera &rsaquo; ¿Puede un gobierno prohibir Bitcoin? La madriguera ¿Puede un gobierno prohibir Bitcoin? China lo intentó. Nigeria lo intentó. India lo consideró. Ninguno lo logró. ¿Es Bitcoin realmente imparable? Fecha de publicación: Febrero 2026 Autor: aprendeBTC Tiempo de lectura: ~14 minutos \"¿No puede el gobierno simplemente prohibir Bitcoin?\" Es una pregunta razonable. Los gobiernos tienen mucho poder. Controlan el sistema legal, las fuerzas de seguridad, el sistema bancario. Si decidieran que Bitcoin es una amenaza, ¿no podrían eliminarlo? La respuesta corta es: probablemente no. Pero la respuesta larga es más interesante. El historial de prohibiciones Varios países han intentado prohibir o restringir severamente Bitcoin. Ninguno ha tenido éxito completo. China — La prohibición más seria China es el caso de estudio más importante. El gobierno chino prohibió Bitcoin múltiples veces: 2013: Prohibición a instituciones financieras"
+  },
+  {
+    "title": "Silk Road, Ross Ulbricht y el debate sobre la libertad",
+    "url": "/la-madriguera/silk-road-y-ross-ulbricht.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "silk",
+      "road",
+      "ross",
+      "ulbricht",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "La historia de Silk Road: el primer mercado de Bitcoin, el arresto de Ross Ulbricht, y el debate sobre libertad, privacidad y censura. El contexto: los cypherpunks y los mercados libres El nacimiento de Silk Road La investigación El arresto El juicio El debate El legado El final inesperado La reflexión sobre Bitcoin Fuentes y referencias: Enlaces internos: Inicio › La Madriguera › Silk Road, Ross Ulbricht y el debate sobre la libertad La madriguera Silk Road, Ross Ulbricht y el debate sobre la libertad El primer gran caso de uso de Bitcoin fue un mercado ilegal. La historia es más compleja de lo que parece. Fecha de publicación: Febrero 2026 · Tiempo de lectura: ~9 minutos Silk Road fue el primer gran experimento de comercio libre usando Bitcoin. Para el gobierno estadounidense, fue un mercado de drogas que facilitó crímenes. Para los libertarios, fue una demostración de que el comercio sin intermediarios era posible. Para Bitcoin, fue simultáneamente una prueba de concepto y una maldición que lo asoció con actividad criminal durante años. La historia de Ross Ulbricht — el hombre que creó Silk Road bajo el seudónimo \"Dread Pirate Roberts\" — es una historia de ideales, errores, y una sentencia que muchos consideran desproporcionada. Es también una historia que, once años después, tuvo un final inesperado. El contexto: los cypherpunks y los mercados libres Para entender Silk Road hay que entender el movimiento cypherpunk. Los cypherpunks eran un grupo de criptógrafos, programad"
   },
   {
     "title": "Los soft forks de Bitcoin: historia de cada cambio de consenso",

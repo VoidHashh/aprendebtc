@@ -173,6 +173,10 @@
       title: 'La Madriguera',
       index: '/la-madriguera/',
       pages: [
+        { href: '/la-madriguera/el-hackeo-de-mt-gox.html', text: 'El hackeo de Mt. Gox' },
+        { href: '/la-madriguera/silk-road-y-ross-ulbricht.html', text: 'Silk Road y Ross Ulbricht' },
+        { href: '/la-madriguera/la-crisis-de-terra-luna.html', text: 'La crisis de Terra/Luna' },
+        { href: '/la-madriguera/los-etfs-de-bitcoin.html', text: 'Los ETFs de Bitcoin' },
         { href: '/la-madriguera/la-guerra-del-tamano-de-bloque.html', text: 'La guerra del tamano de bloque' },
         { href: '/la-madriguera/el-colapso-de-ftx.html', text: 'El colapso de FTX' },
         { href: '/la-madriguera/bitcoin-y-energia.html', text: 'Bitcoin y energia' },
