@@ -1,21 +1,53 @@
-/**
- * aprendebtc.com — includes.js
- * Carga header.html y footer.html dinámicamente en cada página.
+﻿/**
+ * aprendebtc.com - includes.js
+ * Carga header.html y footer.html dinamicamente en cada pagina.
  * Uso: <div data-include="header"></div>
- * Configuración: <html data-base-path="../"> para páginas en subcarpetas
+ * Configuracion: <html data-base-path="../"> para paginas en subcarpetas
  */
 
 (function () {
   'use strict';
 
-  // Obtener la ruta base desde el atributo del elemento <html>
-  // Páginas en raíz: data-base-path=""
-  // Páginas en /nivel-1/: data-base-path="../"
-  const basePath = document.documentElement.dataset.basePath ? '';
+  const GA_MEASUREMENT_ID = 'G-FQZGS04FVD';
+
+  // Paginas en raiz: data-base-path=""
+  // Paginas en /nivel-1/: data-base-path="../"
+  const basePath = document.documentElement.dataset.basePath || '';
+
+  function isLocalEnvironment() {
+    const host = window.location.hostname;
+    return (
+      window.location.protocol === 'file:' ||
+      host === 'localhost' ||
+      host === '127.0.0.1'
+    );
+  }
+
+  function initAnalytics() {
+    if (isLocalEnvironment()) return;
+    if (window.__aprendebtcAnalyticsInitialized) return;
+
+    window.__aprendebtcAnalyticsInitialized = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function gtag() { window.dataLayer.push(arguments); };
+
+    const existing = document.querySelector(`script[data-gtag-id="${GA_MEASUREMENT_ID}"]`);
+    if (!existing) {
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+      script.setAttribute('data-gtag-id', GA_MEASUREMENT_ID);
+      document.head.appendChild(script);
+    }
+
+    window.gtag('js', new Date());
+    window.gtag('config', GA_MEASUREMENT_ID);
+  }
 
   function ensureFavicon() {
     const href = `${basePath}assets/img/bitcoincalculadora-favicon.svg`;
     const icons = Array.from(document.querySelectorAll('link[rel~="icon"]'));
+
     if (icons.length > 0) {
       icons.forEach((el) => {
         el.setAttribute('href', href);
@@ -47,30 +79,27 @@
       const response = await fetch(url);
       if (!response.ok) throw new Error(`No se pudo cargar ${url}: ${response.status}`);
       const html = await response.text();
-      el.outerHTML = html; // Reemplaza el div con el contenido real
+      el.outerHTML = html;
     } catch (error) {
       console.error('[aprendebtc] Error cargando include:', error);
     }
   }
 
   /**
-   * Inicialización: busca todos los elementos con data-include
+   * Inicializacion: busca todos los elementos con data-include
    * y los carga en paralelo. Luego dispara el evento para nav.js.
    */
   async function init() {
+    initAnalytics();
     ensureFavicon();
 
     const includes = document.querySelectorAll('[data-include]');
     if (includes.length === 0) return;
 
-    // Cargar todos los includes en paralelo
     await Promise.all(Array.from(includes).map(loadInclude));
-
-    // Notificar a otros scripts que los includes ya están en el DOM
     document.dispatchEvent(new CustomEvent('includes:loaded'));
   }
 
-  // Ejecutar cuando el DOM esté listo
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
