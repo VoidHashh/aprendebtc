@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="En 2023, aparecieron NFTs en Bitcoin. La comunidad se dividió. ¿Son spam o uso legítimo? El debate sobre el espacio de bloque." />
+  <meta property="og:title" content="Ordinals, Inscriptions y la guerra por el espacio de bloque | aprendebtc.com" />
+  <meta property="og:description" content="En 2023, aparecieron NFTs en Bitcoin. La comunidad se dividió. ¿Son spam o uso legítimo? El debate sobre el espacio de bloque." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/la-madriguera/ordinals-inscriptions-debate.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ordinals, Inscriptions y la guerra por el espacio de bloque | aprendebtc.com" />
+  <meta name="twitter:description" content="En 2023, aparecieron NFTs en Bitcoin. La comunidad se dividió. ¿Son spam o uso legítimo? El debate sobre el espacio de bloque." />
+  <title>Ordinals, Inscriptions y la guerra por el espacio de bloque | aprendebtc.com</title>
+  <link rel="canonical" href="https://aprendebtc.com/la-madriguera/ordinals-inscriptions-debate.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegacion de la madriguera">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-auto" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegacion">
+          <a href="/" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="/la-madriguera/" class="breadcrumb__item">La Madriguera</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Ordinals, Inscriptions y la guerra por el espacio de bloque</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--4 article__badge">La madriguera</div>
+          <h1>Ordinals, Inscriptions y la guerra por el espacio de bloque</h1>
+          <p class="article__subtitle">¿Quién decide qué es una transacción legítima en Bitcoin? El debate más polarizado desde la Blocksize War.</p>
+          <p style="color: var(--text-secondary);">Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~7 minutos</p>
+
+<p>En enero de 2023, un desarrollador llamado Casey Rodarmor lanzó el protocolo Ordinals. La idea era simple pero provocadora: asignar un número único a cada satoshi individual, permitiendo &quot;inscribir&quot; datos arbitrarios en la blockchain de Bitcoin.</p>
+
+<p>En semanas, miles de imágenes, textos y hasta pequeños videojuegos estaban siendo grabados permanentemente en Bitcoin. Las fees se dispararon. La mempool se llenó. Y la comunidad se dividió de una forma que no se veía desde la Guerra del Tamaño de Bloque.</p>
+
+<p>¿Eran los Ordinals una innovación legítima o spam que ensuciaba la blockchain? ¿Quién tiene autoridad para decidir qué es una &quot;transacción legítima&quot; en un sistema permissionless? El debate reveló tensiones profundas sobre la identidad de Bitcoin.</p>
+
+<h2>¿Qué son los Ordinals?</h2>
+
+<p>El protocolo Ordinals introduce dos conceptos relacionados pero distintos:</p>
+
+<p><strong>Ordinal Theory</strong> es un sistema para numerar satoshis individuales. Cada satoshi que ha existido o existirá recibe un número ordinal basado en cuándo fue minado. El primer satoshi del bloque génesis es el ordinal #0. El último satoshi que se minará (aproximadamente en el año 2140) tendrá un número de cuatrillones.</p>
+
+<p>Esta numeración es puramente convencional — no está en el protocolo de Bitcoin. Es una forma de &quot;rastrear&quot; satoshis específicos a través de transacciones, tratando cada sat como único en lugar de fungible.</p>
+
+<p><strong>Inscriptions</strong> son datos arbitrarios grabados en el witness data de transacciones Bitcoin. Pueden ser imágenes, texto, HTML, JSON, o cualquier dato que quepa. Estos datos se almacenan permanentemente en la blockchain.</p>
+
+<p>La posibilidad técnica de hacer esto no es nueva. Siempre ha sido posible incluir datos arbitrarios en transacciones Bitcoin (usando OP_RETURN, por ejemplo). Lo que cambió con Ordinals fue la escala y la facilidad.</p>
+
+<p>¿Por qué? Por Taproot y SegWit.</p>
+
+<p>SegWit (activado en 2017) separó el witness data (firmas) del resto de la transacción y le aplicó un &quot;descuento&quot; de peso: el witness cuenta solo como 1/4 del peso efectivo para el cálculo del tamaño del bloque. Esto fue diseñado para incentivar el uso de SegWit.</p>
+
+<p>Taproot (activado en 2021) permitió scripts más grandes en el witness, eliminando límites previos que hacían impráctico incluir datos grandes.</p>
+
+<p>La combinación creó un incentivo económico: poner datos en el witness es más barato (por el descuento de peso) y ahora no tiene límites prácticos de tamaño. Rodarmor simplemente explotó esta realidad.</p>
+
+<h2>La explosión</h2>
+
+<p>Febrero-marzo de 2023 vio los primeros miles de inscriptions. Imágenes pixeladas, arte generativo, memes, textos. La comunidad de coleccionistas de NFTs, que hasta entonces operaba principalmente en Ethereum, descubrió que podía hacer lo mismo en Bitcoin — con la ventaja de que Bitcoin es más seguro y descentralizado.</p>
+
+<p>Los &quot;Ordinal Punks&quot; (imitación de CryptoPunks), &quot;Bitcoin Rocks&quot; (imitación de EtherRocks), y docenas de colecciones similares aparecieron. Algunos se vendieron por miles de dólares.</p>
+
+<p>En mayo de 2023, llegó BRC-20.</p>
+
+<p>BRC-20 no era un estándar técnico real — era un truco. Inscribiendo JSON con cierto formato en la blockchain, se podían &quot;crear&quot; tokens fungibles sobre Bitcoin. El protocolo no entendía estos tokens; eran simplemente convenciones que los wallets e indexadores acordaban interpretar.</p>
+
+<p>BRC-20 desató una fiebre especulativa. Tokens con nombres como ORDI, SATS y PEPE se crearon y comerciaron. El volumen de inscriptions se multiplicó por diez.</p>
+
+<p>Las consecuencias fueron inmediatas:</p>
+
+<p>Las fees se dispararon. Transacciones que costaban 2-5 sat/vB pasaron a costar 200-500 sat/vB en picos. Usuarios que querían hacer transacciones financieras normales tenían que competir con inscribers dispuestos a pagar fees altas.</p>
+
+<p>La mempool se llenó. Decenas de miles de transacciones pendientes acumuladas, algunas esperando días para confirmarse.</p>
+
+<p>El tamaño de la blockchain creció más rápido. Cada inscription añade datos permanentes. Un JPEG de 100KB es un JPEG de 100KB para siempre.</p>
+
+<h2>El debate</h2>
+
+<p>La comunidad se polarizó rápidamente.</p>
+
+<h2>Los defensores de Ordinals argumentaban:</h2>
+
+<p>Las transacciones de inscriptions son válidas según las reglas de consenso de Bitcoin. No hay ningún hackeo ni exploit. Simplemente usan las capacidades que SegWit y Taproot habilitaron.</p>
+
+<p>Pagan fees como cualquier otra transacción. De hecho, pagan fees altas. Esto es bueno para la seguridad a largo plazo de Bitcoin: a medida que el subsidy de bloque disminuye con cada halving, las fees deben compensar. Ordinals demuestran que hay demanda de espacio de bloque.</p>
+
+<p>Bitcoin es permissionless. No hay un comité que decida qué transacciones son &quot;legítimas&quot;. Si pagas la fee y la transacción es válida, se incluye. Esa es la promesa fundamental de Bitcoin.</p>
+
+<p>Los mineros tienen incentivos para incluir transacciones que pagan fees altas. Filtrar Ordinals iría contra sus intereses económicos.</p>
+
+<h2>Los críticos de Ordinals argumentaban:</h2>
+
+<p>Los Ordinals ensucian la blockchain con datos basura que hay que almacenar para siempre. Cada nodo completo debe descargar y almacenar cada JPEG inscrito hasta el fin de los tiempos.</p>
+
+<p>Encarecen las transacciones financieras reales. Cuando un salvadoreño quiere enviar una remesa, tiene que competir con especuladores de JPEGs. Esto pervierte el propósito de Bitcoin.</p>
+
+<p>Explotan un &quot;bug&quot; económico. El descuento de witness fue diseñado para incentivar SegWit, no para subsidiar almacenamiento de datos arbitrarios. Los inscribers pagan menos de lo que deberían por el espacio que usan.</p>
+
+<p>Centralizan la red. Bloques más grandes significan blockchain que crece más rápido, lo que significa nodos más caros de ejecutar, lo que significa menos gente ejecutando nodos, lo que significa más centralización.</p>
+
+<p>La mayoría son especulación pura sin valor duradero. El 99% de los Ordinals serán olvidados en años. Pero los datos permanecerán en la blockchain para siempre.</p>
+
+<h2>Los intentos de filtrado</h2>
+
+<p>Algunos miembros de la comunidad decidieron actuar.</p>
+
+<p>Luke Dashjr, desarrollador veterano de Bitcoin Core, propuso un parche para filtrar inscriptions en la mempool de los nodos. Su argumento era que los nodos siempre han tenido políticas de mempool (qué transacciones aceptar antes de que se minen), y filtrar inscriptions era simplemente otra política.</p>
+
+<p>Ocean Mining, un pool de minería cofundado por Dashjr, implementó filtrado durante un tiempo, rechazando incluir inscriptions en los bloques que minaba.</p>
+
+<p>Esto generó un debate dentro del debate: ¿es el filtrado censura?</p>
+
+<p>Los defensores del filtrado argumentaban que los operadores de nodos tienen libertad para configurar su software como quieran. Si no quieren propagar inscriptions, es su derecho. Los mineros pueden incluir lo que quieran en sus bloques. La libertad individual incluye la libertad de no participar en algo que consideras dañino.</p>
+
+<p>Los críticos del filtrado argumentaban que, aunque técnicamente legal, era contrario al espíritu de Bitcoin. Si suficientes nodos y mineros filtran cierto tipo de transacciones, se crea censura efectiva. Hoy son inscriptions; mañana podrían ser transacciones de CoinJoin o transacciones a ciertas direcciones.</p>
+
+<p>En la práctica, el filtrado no tuvo impacto significativo. La gran mayoría de nodos y pools no filtraron. Las inscriptions se siguieron incluyendo normalmente.</p>
+
+<h2>Runes: el sucesor</h2>
+
+<p>Casey Rodarmor, el creador de Ordinals, era consciente de las críticas sobre BRC-20. El protocolo era ineficiente: creaba muchos UTXOs pequeños (&quot;UTXO dust&quot;) que congestionaban la red.</p>
+
+<p>En abril de 2024, coincidiendo con el halving, Rodarmor lanzó Runes, un protocolo de tokens fungibles diseñado para ser más eficiente que BRC-20. Runes usa OP_RETURN en lugar de inscriptions completas, reduciendo la huella en la blockchain.</p>
+
+<p>La ironía no se perdió: el creador de los Ordinals lanzando un protocolo específicamente diseñado para ser menos dañino que la consecuencia de su creación anterior.</p>
+
+<p>Runes tuvo su propia fiebre especulativa, pero con menos impacto en las fees que BRC-20.</p>
+
+<h2>Las consecuencias económicas</h2>
+
+<p>Para los mineros, Ordinals fueron una bendición.</p>
+
+<p>En 2023-2024, las fees por inscriptions representaron una fracción significativa de los ingresos de los mineros — en algunos momentos, más que el subsidy de bloque.</p>
+
+<p>El halving de abril de 2024 redujo el subsidy de 6.25 BTC a 3.125 BTC por bloque. Las fees de Ordinals y Runes ayudaron a compensar esta reducción, suavizando el impacto en la rentabilidad de los mineros.</p>
+
+<p>Esto añade una dimensión interesante al debate: Ordinals, sean &quot;spam&quot; o no, están contribuyendo a la seguridad de Bitcoin al proporcionar ingresos a los mineros que de otro modo no existirían.</p>
+
+<h2>La conexión con el debate de osificación</h2>
+
+<p>El debate sobre Ordinals está conectado con un debate más amplio sobre si Bitcoin debería seguir cambiando.</p>
+
+<p>Algunos argumentan que los Ordinals son una consecuencia no intencionada de Taproot, y que futuras actualizaciones del protocolo deberían cerrar la posibilidad de inscriptions masivas.</p>
+
+<p>Otros argumentan que esto sería un cambio retroactivo de las reglas — algo que Bitcoin nunca ha hecho. Las inscriptions son válidas bajo las reglas actuales. Cambiar las reglas para prohibirlas sería una forma de censura a nivel de protocolo.</p>
+
+<p>La posición pragmática es que las reglas son las reglas. Si la comunidad quiere cambiarlas, el proceso es proponer un soft fork, construir consenso, y activarlo. Pero hasta que eso ocurra, las inscriptions son legítimas.</p>
+
+<p>La posición maximalista anti-Ordinals es que Taproot fue un error, o al menos que sus consecuencias no fueron previstas, y que deberían corregirse.</p>
+
+<p>La posición maximalista pro-Ordinals es que Bitcoin debe ser neutral respecto al contenido de las transacciones, y que cualquier intento de filtrar ciertos usos es el primer paso hacia la censura.</p>
+
+<h2>Estado actual</h2>
+
+<p>A principios de 2026, los Ordinals siguen siendo parte del ecosistema Bitcoin, aunque la fiebre especulativa inicial se ha moderado.</p>
+
+<p>Las inscriptions continúan, pero a un ritmo más sostenible. Las fees se han normalizado. La mempool ya no está perpetuamente congestionada.</p>
+
+<p>Algunos coleccionistas siguen comprando y vendiendo Ordinals como &quot;arte digital en Bitcoin&quot;. La mayoría de las colecciones BRC-20 han perdido casi todo su valor, como era predecible.</p>
+
+<p>El debate filosófico no se ha resuelto — probablemente nunca se resolverá. Es una tensión inherente a un sistema permissionless: la libertad de usar Bitcoin como quieras incluye usos que otros consideran inapropiados.</p>
+
+<h2>Fuentes y referencias:</h2>
+
+<ul><li>Repositorio de Ordinals (ordinals.com)</li><li>Documentación del protocolo Runes</li><li>Datos de mempool.space sobre fees históricas</li><li>Posts de Luke Dashjr sobre filtrado</li><li>Artículos de Bitcoin Magazine sobre la evolución del debate</li></ul>
+
+<h2>Enlaces internos:</h2>
+
+<ul><li><a href="/la-madriguera/la-guerra-del-tamano-de-bloque.html">La Guerra del Tamaño de Bloque</a></li><li><a href="/nivel-5/taproot-internals.html">Taproot por dentro</a></li><li><a href="/nivel-5/segwit-internals.html">SegWit por dentro</a></li><li><a href="/nivel-3/mempool.html">¿Qué es la mempool?</a></li><li><a href="/la-madriguera/soft-forks-de-bitcoin.html">El debate de la osificación</a></li></ul>
+
+          <div class="ad-slot ad-content" id="ad-content-ordinals-inscriptions-debate" aria-hidden="true"></div>
+
+          <nav class="page-nav" aria-label="Navegacion entre paginas">
+            <a href="/la-madriguera/los-etfs-de-bitcoin.html" class="page-nav__item"><span class="page-nav__label">&larr; Anterior</span><span class="page-nav__title">Los ETFs de Bitcoin: qué son, qué significan y qué cambian</span></a>
+            <a href="/la-madriguera/la-geopolitica-de-la-mineria.html" class="page-nav__item page-nav__item--next"><span class="page-nav__label">Siguiente &rarr;</span><span class="page-nav__title">La geopolítica de la minería de Bitcoin</span></a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

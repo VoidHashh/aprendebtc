@@ -69,3 +69,15 @@ Botón contextual volver (global):
 
 - El `sitemap.xml` definitivo se cerrará al final del proyecto.
 - No dejar placeholders rotos; si una ruta no existe aún, documentarlo.
+
+## 10) Regla fija de La Madriguera
+
+- Toda nueva pagina de `la-madriguera/` debe clasificarse en:
+  - Ruta historica (orden recomendado), o
+  - Debates y analisis.
+- En el menu lateral, las paginas historicas van primero y numeradas (`01`, `02`, ...), manteniendo orden cronologico/logico de lectura.
+- Despues van los articulos de debate/analisis.
+- Al actualizar el contenido, mantener coherencia en:
+  - `la-madriguera/index.html`
+  - bloque `La Madriguera` de `js/nav.js`
+  - navegacion Anterior/Siguiente de los articulos

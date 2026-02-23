@@ -416,6 +416,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://aprendebtc.com/la-madriguera/bloques-huerfanos-y-reorganizaciones.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aprendebtc.com/la-madriguera/el-ataque-del-51-por-ciento.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://aprendebtc.com/la-madriguera/el-caso-samourai-wallet.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -441,6 +451,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://aprendebtc.com/la-madriguera/la-geopolitica-de-la-mineria.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://aprendebtc.com/la-madriguera/la-guerra-del-tamano-de-bloque.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -452,6 +467,11 @@
   </url>
   <url>
     <loc>https://aprendebtc.com/la-madriguera/los-etfs-de-bitcoin.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aprendebtc.com/la-madriguera/ordinals-inscriptions-debate.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

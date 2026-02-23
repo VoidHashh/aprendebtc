@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="El ataque del 51% explicado en profundidad. Qué dijo Satoshi, qué ha pasado desde entonces, y por qué Bitcoin es resistente." />
+  <meta property="og:title" content="El ataque del 51%: qué puede y qué NO puede hacer | aprendebtc.com" />
+  <meta property="og:description" content="El ataque del 51% explicado en profundidad. Qué dijo Satoshi, qué ha pasado desde entonces, y por qué Bitcoin es resistente." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/la-madriguera/el-ataque-del-51-por-ciento.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="El ataque del 51%: qué puede y qué NO puede hacer | aprendebtc.com" />
+  <meta name="twitter:description" content="El ataque del 51% explicado en profundidad. Qué dijo Satoshi, qué ha pasado desde entonces, y por qué Bitcoin es resistente." />
+  <title>El ataque del 51%: qué puede y qué NO puede hacer | aprendebtc.com</title>
+  <link rel="canonical" href="https://aprendebtc.com/la-madriguera/el-ataque-del-51-por-ciento.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegacion de la madriguera">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-auto" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegacion">
+          <a href="/" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="/la-madriguera/" class="breadcrumb__item">La Madriguera</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">El ataque del 51%: qué puede y qué NO puede hacer</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--4 article__badge">La madriguera</div>
+          <h1>El ataque del 51%: qué puede y qué NO puede hacer</h1>
+          <p class="article__subtitle">Todo el mundo habla del &quot;ataque del 51%&quot;. Casi nadie entiende realmente qué puede hacer y qué no.</p>
+          <p style="color: var(--text-secondary);">Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~7 minutos</p>
+
+<p>El &quot;ataque del 51%&quot; es probablemente el vector de ataque más mencionado y menos entendido de Bitcoin. En conversaciones casuales, se presenta como una amenaza existencial: si alguien consigue más del 50% del hashrate, puede &quot;destruir&quot; Bitcoin.</p>
+
+<p>La realidad es más matizada. Un atacante con mayoría de hashrate tiene poderes reales pero limitados. Y los incentivos económicos hacen que el ataque sea irracional en casi todos los escenarios.</p>
+
+<p>Satoshi entendió esto desde el principio. En el whitepaper y en sus discusiones posteriores, analizó el escenario en detalle y explicó por qué el sistema era robusto incluso ante este tipo de amenaza.</p>
+
+<h2>¿Qué es el ataque del 51%?</h2>
+
+<p>En Bitcoin, la cadena válida es la que tiene más trabajo acumulado (proof-of-work). Los nodos siempre aceptan la cadena más larga.</p>
+
+<p>Un minero (o grupo de mineros) que controla más del 50% del hashrate puede, estadísticamente, producir bloques más rápido que el resto de la red. Esto le da la capacidad de crear la cadena más larga y, por tanto, la cadena que todos los nodos aceptarán como válida.</p>
+
+<p>Con esta capacidad, el atacante puede:</p>
+
+<p><strong>Revertir sus propias transacciones recientes.</strong> El atacante envía bitcoin a un exchange, espera que se acredite su cuenta, retira dinero fiat, y luego publica una cadena alternativa donde esa transacción nunca ocurrió (el bitcoin vuelve a su control). Esto es el &quot;doble gasto&quot;.</p>
+
+<p><strong>Censurar transacciones.</strong> El atacante puede negarse a incluir ciertas transacciones en sus bloques. Si controla la mayoría del hashrate, eventualmente sus bloques dominan y las transacciones censuradas nunca se confirman.</p>
+
+<p><strong>Minar bloques vacíos.</strong> El atacante puede producir bloques sin transacciones, ralentizando la red.</p>
+
+<h2>¿Qué NO puede hacer un atacante del 51%?</h2>
+
+<p>Los límites son igualmente importantes:</p>
+
+<p><strong>No puede robar bitcoin de wallets ajenas.</strong> Para gastar bitcoin de una dirección, necesitas la clave privada correspondiente. El hashrate no te da acceso a claves privadas. El atacante solo puede gastar bitcoin que ya controla.</p>
+
+<p><strong>No puede crear bitcoin de la nada.</strong> Los nodos verifican que cada bloque siga las reglas de consenso, incluyendo el subsidy de bloque (actualmente 3.125 BTC). Un bloque que intente crear más bitcoin sería rechazado por todos los nodos honestos, independientemente del hashrate del atacante.</p>
+
+<p><strong>No puede cambiar las reglas de consenso.</strong> El atacante puede producir la cadena más larga, pero esa cadena debe seguir las reglas. Si intenta cambiar las reglas (aumentar el supply, cambiar el algoritmo, etc.), los nodos simplemente ignorarán su cadena.</p>
+
+<p><strong>No puede revertir transacciones muy antiguas fácilmente.</strong> Revertir una transacción con 100 confirmaciones requiere reconstruir 100 bloques. El coste en electricidad es proporcional al número de bloques a revertir.</p>
+
+<h2>Lo que dijo Satoshi</h2>
+
+<p>Satoshi analizó este escenario en detalle en el whitepaper y en discusiones posteriores recopiladas en el Libro de Satoshi.</p>
+
+<p>En la sección 11 del whitepaper, presentó un modelo matemático usando la distribución de Poisson para calcular la probabilidad de éxito de un atacante. La conclusión: la probabilidad de éxito decrece exponencialmente con el número de confirmaciones.</p>
+
+<p>Con un atacante que tiene el 10% del hashrate, 5 confirmaciones dan una seguridad de &gt;99.9%. Con un atacante del 30%, necesitas más confirmaciones para el mismo nivel de seguridad. La recomendación común de &quot;esperar 6 confirmaciones&quot; viene de este análisis.</p>
+
+<p>Pero Satoshi fue más allá del análisis técnico. En sus discusiones, abordó el incentivo económico:</p>
+
+<p>&quot;El incentivo puede ayudar a animar a los nodos a mantenerse honestos. Si un atacante codicioso es capaz de reunir más potencia CPU que todos los nodos honestos, tendría que elegir entre usarla para defraudar a la gente robando sus pagos, o usarla para generar nuevas monedas. Debería encontrar más rentable jugar según las reglas, tales reglas que lo favorecen con más monedas nuevas que a todos los demás combinados, que socavar el sistema y la validez de su propia riqueza.&quot;</p>
+
+<p>Este argumento es crucial: un atacante capaz de conseguir &gt;50% del hashrate ha invertido enormes recursos en hardware de minería. Ese hardware solo es útil para minar Bitcoin (los ASICs son específicos para SHA-256). Si el atacante destruye la confianza en Bitcoin, destruye el valor de su propia inversión.</p>
+
+<p>Es más rentable minar honestamente que atacar.</p>
+
+<h2>Las matemáticas del ataque</h2>
+
+<p>La sección 11 del whitepaper incluye código en C que calcula las probabilidades. Aquí está la tabla simplificada:</p>
+
+<p>Para un atacante con 10% del hashrate:</p>
+
+<ul><li>0 confirmaciones: 100% de éxito (trivial, aún no confirmado)</li><li>1 confirmación: 20% de éxito</li><li>5 confirmaciones: 0.1% de éxito</li><li>10 confirmaciones: 0.0004% de éxito</li></ul>
+
+<p>Para un atacante con 30% del hashrate:</p>
+
+<ul><li>5 confirmaciones: 17.7% de éxito</li><li>10 confirmaciones: 4.2% de éxito</li><li>20 confirmaciones: 0.25% de éxito</li><li>30 confirmaciones: 0.02% de éxito</li></ul>
+
+<p>Para un atacante con 45% del hashrate:</p>
+
+<ul><li>10 confirmaciones: 40% de éxito</li><li>30 confirmaciones: 14% de éxito</li><li>50 confirmaciones: 5% de éxito</li></ul>
+
+<p>La lección: con menos del 50%, el éxito es posible pero improbable, y se vuelve más improbable con más confirmaciones. Con más del 50%, el éxito es eventual pero no instantáneo — todavía requiere tiempo y recursos.</p>
+
+<h2>¿Ha ocurrido alguna vez?</h2>
+
+<p>En Bitcoin, nunca ha habido un ataque del 51% exitoso. Ni siquiera un intento documentado.</p>
+
+<p>La razón es simple: el coste es prohibitivo. Para conseguir &gt;50% del hashrate actual de Bitcoin, necesitarías:</p>
+
+<p>Millones de ASICs. Estos son hardware especializado que solo fabrica un puñado de empresas (Bitmain, MicroBT, Canaan). Comprar suficientes máquinas llevaría meses o años, y el volumen de compra alertaría al mercado.</p>
+
+<p>Infraestructura masiva. Electricidad, refrigeración, instalaciones. Estamos hablando de consumos de energía comparables a países pequeños.</p>
+
+<p>Electricidad constante. Mientras dure el ataque, estás pagando electricidad a escala industrial. Las estimaciones sugieren que un ataque de 1 hora costaría cientos de millones de dólares solo en electricidad.</p>
+
+<p>Y al final del ataque, ¿qué has conseguido? Has destruido (o dañado severamente) el valor de Bitcoin. Tu hardware de minería, que solo sirve para minar Bitcoin, ahora es inútil. Has destruido tu propia inversión.</p>
+
+<h2>Ataques en otras cadenas</h2>
+
+<p>En cadenas con menor hashrate, los ataques del 51% sí han ocurrido:</p>
+
+<p>Ethereum Classic sufrió al menos tres ataques del 51% en 2020. Los atacantes lograron dobles gastos por millones de dólares.</p>
+
+<p>Bitcoin Gold fue atacado en 2018 y 2020, con dobles gastos significativos.</p>
+
+<p>Verge fue atacado múltiples veces en 2018.</p>
+
+<p>El patrón es claro: cadenas con hashrate bajo son vulnerables porque el coste de alquilar suficiente poder de cómputo es manejable. Sitios como NiceHash permiten alquilar hashrate temporalmente. Para una cadena pequeña, el coste de un ataque de unas horas puede ser de miles o decenas de miles de dólares — rentable si puedes hacer doble gasto en un exchange por más que eso.</p>
+
+<p>Para Bitcoin, el hashrate es tan alto que alquilar suficiente capacidad simplemente no es posible. No hay suficientes ASICs de SHA-256 disponibles para alquiler en el mundo.</p>
+
+<h2>El escenario estado-nación</h2>
+
+<p>La pregunta que queda es: ¿podría un estado-nación con recursos ilimitados atacar Bitcoin?</p>
+
+<p>Teóricamente, sí. Estados Unidos, China, o una coalición de países podrían, con suficiente determinación, fabricar o confiscar suficientes ASICs para superar el hashrate de la red.</p>
+
+<p>Prácticamente, sería extraordinariamente difícil:</p>
+
+<p>La cadena de suministro de ASICs depende de fábricas específicas, principalmente TSMC en Taiwán. Expandir la producción significativamente llevaría años.</p>
+
+<p>Comprar o confiscar el hardware existente alertaría al mercado. Los precios de ASICs se dispararían. Los mineros existentes podrían resistirse o esconderse.</p>
+
+<p>El ataque tendría que ser sostenido. No basta con atacar una vez — la comunidad podría responder. En el caso extremo, podría cambiarse el algoritmo de minería (el &quot;nuclear option&quot;), haciendo todos los ASICs existentes inútiles.</p>
+
+<p>Otros países tendrían incentivos para defender Bitcoin. Si EEUU ataca Bitcoin, China podría defender su uso. Si China ataca, EEUU podría defender. La naturaleza global de Bitcoin crea una especie de equilibrio geopolítico.</p>
+
+<p>La conclusión de Satoshi sigue siendo válida: incluso si un atacante pudiera técnicamente conseguir el 51%, los incentivos económicos (y, en el caso de estados, los geopolíticos) hacen que el ataque sea irracional.</p>
+
+<h2>Defensas y respuestas</h2>
+
+<p>Si, hipotéticamente, un ataque del 51% ocurriera, la comunidad tiene opciones de respuesta:</p>
+
+<p><strong>Esperar más confirmaciones.</strong> Si se detecta un atacante con hashrate significativo, exchanges y comerciantes pueden aumentar el número de confirmaciones requeridas antes de considerar un pago final.</p>
+
+<p><strong>Checkpoints manuales.</strong> Los desarrolladores podrían insertar checkpoints en el código que impidan reorganizaciones más allá de cierto punto. Esto es controvertido porque centraliza poder en los desarrolladores, pero es una opción de emergencia.</p>
+
+<p><strong>Cambio de algoritmo.</strong> En el caso extremo, podría cambiarse el algoritmo de proof-of-work de SHA-256 a otro. Esto invalidaría todo el hardware ASIC existente y &quot;reiniciaría&quot; la competencia. Es el &quot;nuclear option&quot; — destructivo pero efectivo contra un atacante que ha invertido en hardware específico.</p>
+
+<p><strong>Respuesta social.</strong> La comunidad podría acordar simplemente ignorar los bloques del atacante y continuar en una cadena minoritaria. Esto requeriría coordinación social extraordinaria pero ha ocurrido en otras criptomonedas.</p>
+
+<p>Ninguna de estas respuestas es ideal. Todas tienen costes y riesgos. Pero su existencia significa que incluso un ataque &quot;exitoso&quot; no destruiría Bitcoin — solo causaría una crisis que la comunidad tendría que resolver.</p>
+
+<h2>Fuentes y referencias:</h2>
+
+<ul><li>Whitepaper de Bitcoin, secciones 6 y 11</li><li>El Libro de Satoshi, capítulo 5 (&quot;El Ataque del 51%&quot;)</li><li>Posts originales de Satoshi en bitcointalk.org</li><li>Datos de crypto51.app sobre coste de ataques</li><li>Análisis de Princeton sobre ataques a cadenas menores</li><li>Documentación de los ataques a Ethereum Classic (2020)</li></ul>
+
+<h2>Enlaces internos:</h2>
+
+<ul><li><a href="/base/el-whitepaper.html">El whitepaper de Bitcoin</a></li><li><a href="/base/que-es-la-mineria.html">¿Qué es la minería de Bitcoin?</a></li><li><a href="/nivel-5/proof-of-work.html">Proof of Work explicado</a></li><li><a href="/base/que-es-una-confirmacion.html">¿Qué es una confirmación?</a></li></ul>
+
+          <div class="ad-slot ad-content" id="ad-content-el-ataque-del-51-por-ciento" aria-hidden="true"></div>
+
+          <nav class="page-nav" aria-label="Navegacion entre paginas">
+            <a href="/la-madriguera/la-geopolitica-de-la-mineria.html" class="page-nav__item"><span class="page-nav__label">&larr; Anterior</span><span class="page-nav__title">La geopolítica de la minería de Bitcoin</span></a>
+            <a href="/la-madriguera/bloques-huerfanos-y-reorganizaciones.html" class="page-nav__item page-nav__item--next"><span class="page-nav__label">Siguiente &rarr;</span><span class="page-nav__title">Bloques huérfanos, stale blocks y reorganizaciones de cadena</span></a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

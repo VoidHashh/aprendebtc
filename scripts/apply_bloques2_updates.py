@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import html
 import re
@@ -7,29 +7,7 @@ from pathlib import Path
 
 ROOT = Path(r"d:\Directorio BTC\aprendebtc")
 TXT = Path(r"d:\Directorio BTC\bloques2.txt")
-
-TARGET_SLUGS = {
-    "el-hackeo-de-mt-gox.html",
-    "silk-road-y-ross-ulbricht.html",
-    "la-crisis-de-terra-luna.html",
-    "los-etfs-de-bitcoin.html",
-}
-
-PAGE_TITLES = {
-    "/la-madriguera/": "La Madriguera",
-    "/la-madriguera/el-hackeo-de-mt-gox.html": "El hackeo de Mt. Gox: el mayor robo de Bitcoin de la historia",
-    "/la-madriguera/silk-road-y-ross-ulbricht.html": "Silk Road, Ross Ulbricht y el debate sobre la libertad",
-    "/la-madriguera/la-crisis-de-terra-luna.html": "La crisis de Terra/Luna: la \"stablecoin\" que no era estable",
-    "/la-madriguera/los-etfs-de-bitcoin.html": "Los ETFs de Bitcoin: qué son, qué significan y qué cambian",
-    "/la-madriguera/la-guerra-del-tamano-de-bloque.html": "La Guerra del Tamaño de Bloque: la batalla que definió Bitcoin",
-    "/la-madriguera/el-colapso-de-ftx.html": "El colapso de FTX: qué pasó y qué lecciones dejó",
-    "/la-madriguera/bitcoin-y-energia.html": "Bitcoin y energía: el debate completo",
-    "/la-madriguera/el-caso-samourai-wallet.html": "El caso Samourai Wallet y el futuro de la privacidad en Bitcoin",
-    "/la-madriguera/lightning-network-estado-actual.html": "Lightning Network: dónde estamos y hacia dónde vamos",
-    "/la-madriguera/soft-forks-de-bitcoin.html": "Los soft forks de Bitcoin: historia de cada cambio de consenso",
-    "/la-madriguera/puede-un-gobierno-prohibir-bitcoin.html": "¿Puede un gobierno prohibir Bitcoin?",
-    "/la-madriguera/halving-y-ciclos-de-precio.html": "El halving y los ciclos de precio: ¿correlación o causalidad?",
-}
+DEFAULT_DIR = "la-madriguera"
 
 NAV_SEQUENCE = [
     "/la-madriguera/",
@@ -37,6 +15,10 @@ NAV_SEQUENCE = [
     "/la-madriguera/silk-road-y-ross-ulbricht.html",
     "/la-madriguera/la-crisis-de-terra-luna.html",
     "/la-madriguera/los-etfs-de-bitcoin.html",
+    "/la-madriguera/ordinals-inscriptions-debate.html",
+    "/la-madriguera/la-geopolitica-de-la-mineria.html",
+    "/la-madriguera/el-ataque-del-51-por-ciento.html",
+    "/la-madriguera/bloques-huerfanos-y-reorganizaciones.html",
     "/la-madriguera/la-guerra-del-tamano-de-bloque.html",
     "/la-madriguera/el-colapso-de-ftx.html",
     "/la-madriguera/bitcoin-y-energia.html",
@@ -47,6 +29,14 @@ NAV_SEQUENCE = [
     "/la-madriguera/halving-y-ciclos-de-precio.html",
 ]
 
+LINK_MAP = {
+    "/whitepaper.pdf": "/whitepaper-bitcoin-es.pdf",
+    "https://bitcoin.org/bitcoin.pdf": "/whitepaper-bitcoin-en.pdf",
+    "http://bitcoin.org/bitcoin.pdf": "/whitepaper-bitcoin-en.pdf",
+    "/nivel-4/privacidad-la-verdad.html": "/nivel-3/utxos-y-privacidad.html",
+    "/la-madriguera/el-debate-de-la-osificacion.html": "/la-madriguera/soft-forks-de-bitcoin.html",
+}
+
 
 def score_text(value: str) -> int:
     good = len(re.findall(r"[A-Za-z0-9áéíóúüñÁÉÍÓÚÜÑ¿¡]", value))
@@ -54,7 +44,7 @@ def score_text(value: str) -> int:
     return good - (bad * 6)
 
 
-def repair_mojibake(value: str) -> str:
+def maybe_repair_mojibake(value: str) -> str:
     if not value:
         return value
     if not any(ch in value for ch in ("Ã", "Â", "â")):
@@ -66,180 +56,191 @@ def repair_mojibake(value: str) -> str:
     return repaired if score_text(repaired) >= score_text(value) else value
 
 
-def read_source() -> list[str]:
-    data = TXT.read_bytes()
+def read_source_lines() -> list[str]:
+    raw = TXT.read_bytes()
     candidates: list[str] = []
+
     for enc in ("utf-8", "cp1252", "latin1"):
         try:
-            decoded = data.decode(enc, errors="replace")
+            decoded = raw.decode(enc, errors="replace")
         except Exception:
             continue
         candidates.append(decoded)
-        candidates.append(repair_mojibake(decoded))
+        candidates.append(maybe_repair_mojibake(decoded))
+
     text = max(candidates, key=score_text)
     text = text.replace("\r\n", "\n").replace("\r", "\n")
-    lines = [repair_mojibake(line).replace("\ufeff", "") for line in text.split("\n")]
-    return lines
+    return [maybe_repair_mojibake(line).replace("\ufeff", "") for line in text.split("\n")]
 
 
 def normalize_key(raw: str) -> str:
-    norm = unicodedata.normalize("NFKD", raw)
-    norm = "".join(ch for ch in norm if unicodedata.category(ch) != "Mn")
-    norm = norm.upper()
-    norm = re.sub(r"[^A-Z ]+", "", norm)
-    return " ".join(norm.split())
+    normalized = unicodedata.normalize("NFKD", raw)
+    normalized = "".join(ch for ch in normalized if unicodedata.category(ch) != "Mn")
+    normalized = normalized.upper()
+    normalized = re.sub(r"[^A-Z ]+", "", normalized)
+    return " ".join(normalized.split())
+
+
+def normalize_page_path(raw_path: str) -> str:
+    value = maybe_repair_mojibake(raw_path.strip().replace("\\", "/"))
+    value = value.lstrip("/")
+    if "/" not in value:
+        return f"{DEFAULT_DIR}/{value}"
+    return value
 
 
 def normalize_target(href: str) -> str:
-    clean = href.strip()
-    clean = clean.replace("/whitepaper.pdf", "/whitepaper-bitcoin-es.pdf")
-    clean = clean.replace("https://bitcoin.org/bitcoin.pdf", "/whitepaper-bitcoin-en.pdf")
-    clean = clean.replace("http://bitcoin.org/bitcoin.pdf", "/whitepaper-bitcoin-en.pdf")
-    clean = clean.replace("/nivel-4/privacidad-la-verdad.html", "/nivel-3/utxos-y-privacidad.html")
-    return clean
+    clean = maybe_repair_mojibake(href.strip())
+    return LINK_MAP.get(clean, clean)
 
 
-def parse_articles(lines: list[str]) -> list[dict[str, str]]:
+def parse_blocks(lines: list[str]) -> list[dict[str, str]]:
     entries: list[dict[str, str]] = []
     i = 0
+
     while i < len(lines):
-        line = lines[i].strip()
-        if not line:
+        stripped = lines[i].strip()
+        if not stripped or ":" not in stripped:
             i += 1
             continue
 
-        key, sep, value = line.partition(":")
-        if sep and normalize_key(key).endswith("ARTICULO"):
-            slug = value.strip()
+        key, _, value = stripped.partition(":")
+        key_norm = normalize_key(key)
+
+        if key_norm not in {"ARTICULO", "PAGINA"}:
             i += 1
+            continue
 
-            title = ""
-            meta = ""
-            subtitle = ""
-            fecha = ""
-            longitud = ""
-            body_lines: list[str] = []
-            header_mode = True
+        page_path = normalize_page_path(value)
+        i += 1
 
-            while i < len(lines):
-                current = lines[i]
-                stripped = current.strip()
-                if stripped:
-                    k, s, v = stripped.partition(":")
-                    k_norm = normalize_key(k) if s else ""
-                    if s and k_norm.endswith("ARTICULO"):
-                        break
-                    if re.match(r"^Bloque\s+\d+\s+completado", stripped, re.IGNORECASE):
-                        break
-                    if re.match(r"^FIN\s+DEL\s+BLOQUE", stripped, re.IGNORECASE):
-                        break
+        title = ""
+        meta = ""
+        subtitle = ""
+        date = ""
+        length = ""
+        body_lines: list[str] = []
+        in_header = True
 
-                if header_mode:
-                    if not stripped or set(stripped) <= {"=", "-"}:
-                        i += 1
-                        continue
+        while i < len(lines):
+            line = lines[i]
+            s = line.strip()
 
-                    k, s, v = stripped.partition(":")
-                    if s:
-                        k_norm = normalize_key(k)
-                        val = repair_mojibake(v.strip())
-                        if k_norm == "TITULO":
-                            title = val
-                            i += 1
-                            continue
-                        if k_norm == "META DESCRIPTION":
-                            meta = val
-                            i += 1
-                            continue
-                        if k_norm == "SUBTITULO":
-                            subtitle = val
-                            i += 1
-                            continue
-                        if k_norm == "FECHA":
-                            fecha = val
-                            i += 1
-                            continue
-                        if k_norm == "LONGITUD":
-                            longitud = val
-                            i += 1
-                            continue
+            if s and ":" in s:
+                mk, _, _ = s.partition(":")
+                mk_norm = normalize_key(mk)
+                if mk_norm in {"ARTICULO", "PAGINA"}:
+                    break
 
-                    header_mode = False
+            if re.match(r"^Bloque\s+\d+\s+completado", s, re.IGNORECASE):
+                break
 
-                if stripped.startswith("==="):
+            if re.match(r"^FIN\s+DEL\s+BLOQUE", s, re.IGNORECASE):
+                i += 1
+                continue
+
+            if in_header:
+                if not s or set(s) <= {"=", "-"}:
                     i += 1
                     continue
 
-                body_lines.append(current.rstrip())
+                if ":" in s:
+                    hk, _, hv = s.partition(":")
+                    hk_norm = normalize_key(hk)
+                    hv = maybe_repair_mojibake(hv.strip())
+
+                    if hk_norm == "TITULO":
+                        title = hv
+                        i += 1
+                        continue
+                    if hk_norm == "META DESCRIPTION":
+                        meta = hv
+                        i += 1
+                        continue
+                    if hk_norm == "SUBTITULO":
+                        subtitle = hv
+                        i += 1
+                        continue
+                    if hk_norm == "FECHA":
+                        date = hv
+                        i += 1
+                        continue
+                    if hk_norm == "LONGITUD":
+                        length = hv
+                        i += 1
+                        continue
+
+                in_header = False
+
+            if s.startswith("==="):
                 i += 1
+                continue
 
-            body = "\n".join(body_lines).strip()
-            entries.append(
-                {
-                    "slug": slug,
-                    "title": title,
-                    "meta": meta,
-                    "subtitle": subtitle,
-                    "fecha": fecha,
-                    "longitud": longitud,
-                    "body": body,
-                }
-            )
-            continue
+            body_lines.append(line.rstrip())
+            i += 1
 
-        i += 1
+        entries.append(
+            {
+                "path": page_path,
+                "title": title,
+                "meta": meta,
+                "subtitle": subtitle,
+                "date": date,
+                "length": length,
+                "body": "\n".join(body_lines).strip(),
+            }
+        )
 
-    return entries
+    return [e for e in entries if e["path"].startswith("la-madriguera/")]
 
 
-def inline_bold(text: str) -> str:
-    chunks = re.split(r"(\*\*.*?\*\*)", text)
+def fallback_title(slug: str) -> str:
+    base = slug.replace(".html", "").replace("-", " ").strip()
+    return base[:1].upper() + base[1:]
+
+
+def inline_with_bold(text: str) -> str:
+    parts = re.split(r"(\*\*.*?\*\*)", text)
     out: list[str] = []
-    for chunk in chunks:
-        if chunk.startswith("**") and chunk.endswith("**") and len(chunk) > 4:
-            out.append(f"<strong>{html.escape(chunk[2:-2])}</strong>")
+    for part in parts:
+        if part.startswith("**") and part.endswith("**") and len(part) > 4:
+            out.append(f"<strong>{html.escape(part[2:-2])}</strong>")
         else:
-            out.append(html.escape(chunk))
+            out.append(html.escape(part))
     return "".join(out)
 
 
 def render_inline(text: str) -> str:
-    src = repair_mojibake((text or "").strip())
-    src = src.replace("â†’", "→")
-    src = src.replace(" / ", "/")
+    src = maybe_repair_mojibake((text or "").strip())
     if not src:
         return ""
 
-    m = re.fullmatch(r"(.+?)\s*→\s*(/[^\s]+)", src)
+    src = src.replace("â†’", "→")
+    m = re.fullmatch(r"(.+?)\s*(?:→|->)\s*(/[\w\-\./]+)", src)
     if m:
-        label = inline_bold(m.group(1).strip())
+        label = inline_with_bold(m.group(1).strip())
         href = html.escape(normalize_target(m.group(2)), quote=True)
         return f'<a href="{href}">{label}</a>'
 
-    return inline_bold(src)
+    return inline_with_bold(src)
 
 
 def body_to_html(body: str) -> str:
     lines = body.splitlines()
-    parts: list[str] = []
+    out: list[str] = []
     paragraph: list[str] = []
 
     def flush_paragraph() -> None:
         nonlocal paragraph
         if paragraph:
-            parts.append(f"<p>{render_inline(' '.join(paragraph))}</p>")
+            out.append(f"<p>{render_inline(' '.join(paragraph))}</p>")
             paragraph = []
 
     i = 0
     while i < len(lines):
-        line = repair_mojibake(lines[i].strip())
+        line = maybe_repair_mojibake(lines[i].strip())
 
         if not line or line == "---" or line.startswith("==="):
-            flush_paragraph()
-            i += 1
-            continue
-
-        if re.match(r"^FIN\s+DEL\s+BLOQUE", line, re.IGNORECASE):
             flush_paragraph()
             i += 1
             continue
@@ -252,7 +253,7 @@ def body_to_html(body: str) -> str:
                 i += 1
                 continue
             flush_paragraph()
-            parts.append(f"<h2>{render_inline(heading_text)}</h2>")
+            out.append(f"<h2>{render_inline(heading_text)}</h2>")
             i += 1
             continue
 
@@ -260,67 +261,87 @@ def body_to_html(body: str) -> str:
             flush_paragraph()
             items: list[str] = []
             while i < len(lines):
-                candidate = repair_mojibake(lines[i].strip())
-                if not candidate.startswith("- "):
+                current = maybe_repair_mojibake(lines[i].strip())
+                if not current.startswith("- "):
                     break
-                items.append(candidate[2:].strip())
+                items.append(current[2:].strip())
                 i += 1
-            li = "".join(f"<li>{render_inline(item)}</li>" for item in items)
-            parts.append(f"<ul>{li}</ul>")
+            out.append("<ul>" + "".join(f"<li>{render_inline(item)}</li>" for item in items) + "</ul>")
             continue
 
         paragraph.append(line)
         i += 1
 
     flush_paragraph()
-    return "\n\n".join(parts)
+    return "\n\n".join(out)
 
 
-def reading_minutes(body: str) -> int:
-    words = re.findall(r"\w+", body, flags=re.UNICODE)
+def reading_minutes(text: str) -> int:
+    words = re.findall(r"\w+", text, flags=re.UNICODE)
     return max(1, round(len(words) / 230))
 
 
-def page_nav_for(slug: str) -> tuple[tuple[str, str] | None, tuple[str, str] | None]:
-    current = f"/la-madriguera/{slug}"
-    if current not in NAV_SEQUENCE:
+def collect_titles() -> dict[str, str]:
+    titles: dict[str, str] = {"/la-madriguera/": "La Madriguera"}
+    for route in NAV_SEQUENCE:
+        if route == "/la-madriguera/":
+            continue
+        file_path = ROOT / route.lstrip("/")
+        if not file_path.exists():
+            continue
+        content = file_path.read_text(encoding="utf-8", errors="ignore")
+        m = re.search(r"<h1[^>]*>(.*?)</h1>", content, re.IGNORECASE | re.DOTALL)
+        if not m:
+            continue
+        title = re.sub(r"<[^>]+>", "", m.group(1)).strip()
+        titles[route] = html.unescape(title)
+    return titles
+
+
+def nav_links(path: str, titles: dict[str, str]) -> tuple[tuple[str, str] | None, tuple[str, str] | None]:
+    route = "/" + path.lstrip("/")
+    if route not in NAV_SEQUENCE:
         return None, None
 
-    idx = NAV_SEQUENCE.index(current)
-
+    idx = NAV_SEQUENCE.index(route)
     prev_item = None
     next_item = None
 
     if idx > 0:
-        prev_url = NAV_SEQUENCE[idx - 1]
-        prev_item = (prev_url, PAGE_TITLES.get(prev_url, "Anterior"))
+        prev_route = NAV_SEQUENCE[idx - 1]
+        prev_title = titles.get(prev_route, fallback_title(prev_route.split("/")[-1]))
+        prev_item = (prev_route, prev_title)
 
     if idx < len(NAV_SEQUENCE) - 1:
-        next_url = NAV_SEQUENCE[idx + 1]
-        next_item = (next_url, PAGE_TITLES.get(next_url, "Siguiente"))
+        next_route = NAV_SEQUENCE[idx + 1]
+        next_title = titles.get(next_route, fallback_title(next_route.split("/")[-1]))
+        next_item = (next_route, next_title)
 
     return prev_item, next_item
 
 
-def render_page(article: dict[str, str]) -> str:
-    slug = article["slug"]
-    title = article["title"].strip()
-    subtitle = article["subtitle"].strip()
-    meta = article["meta"].strip()
-    fecha = article["fecha"].strip()
-    body = article["body"].strip()
+def render_page(entry: dict[str, str], titles: dict[str, str]) -> str:
+    path = entry["path"]
+    route = "/" + path
+    slug = path.split("/")[-1]
 
-    minutes = reading_minutes(body)
-    content_html = body_to_html(body)
-    prev_item, next_item = page_nav_for(slug)
+    title = entry["title"].strip() or fallback_title(slug)
+    subtitle = entry["subtitle"].strip() or "Analisis en profundidad para entender Bitcoin con mas contexto historico y tecnico."
+    meta = entry["meta"].strip() or subtitle
 
-    canonical = f"https://aprendebtc.com/la-madriguera/{slug}"
+    body = entry["body"].strip()
+    article_html = body_to_html(body)
+
+    date = entry["date"].strip()
+    mins = reading_minutes(body)
+
+    prev_item, next_item = nav_links(path, titles)
 
     prev_html = "<div></div>"
     if prev_item:
         prev_html = (
             f'<a href="{prev_item[0]}" class="page-nav__item">'
-            f'<span class="page-nav__label">← Anterior</span>'
+            f'<span class="page-nav__label">&larr; Anterior</span>'
             f'<span class="page-nav__title">{html.escape(prev_item[1])}</span>'
             "</a>"
         )
@@ -329,18 +350,20 @@ def render_page(article: dict[str, str]) -> str:
     if next_item:
         next_html = (
             f'<a href="{next_item[0]}" class="page-nav__item page-nav__item--next">'
-            f'<span class="page-nav__label">Siguiente →</span>'
+            f'<span class="page-nav__label">Siguiente &rarr;</span>'
             f'<span class="page-nav__title">{html.escape(next_item[1])}</span>'
             "</a>"
         )
 
     date_line = ""
-    if fecha:
+    if date:
         date_line = (
             f'<p style="color: var(--text-secondary);">'
-            f'Fecha de publicación: {html.escape(fecha)} · Tiempo de lectura: ~{minutes} minutos'
+            f'Fecha de publicacion: {html.escape(date)} &middot; Tiempo de lectura: ~{mins} minutos'
             "</p>"
         )
+
+    canonical = f"https://aprendebtc.com{route}"
 
     return f"""<!DOCTYPE html>
 <html lang=\"es\" data-base-path=\"../\">
@@ -366,7 +389,7 @@ def render_page(article: dict[str, str]) -> str:
   <div data-include=\"header\"></div>
 
   <div class=\"page-layout\">
-    <aside class=\"page-layout__sidebar\" aria-label=\"Navegación de la madriguera\">
+    <aside class=\"page-layout__sidebar\" aria-label=\"Navegacion de la madriguera\">
       <nav class=\"sidebar\">
         <div class=\"sidebar__ad-wrap\">
           <div class=\"ad-slot ad-sidebar\" id=\"ad-sidebar-auto\" aria-hidden=\"true\"></div>
@@ -376,11 +399,11 @@ def render_page(article: dict[str, str]) -> str:
 
     <main class=\"page-layout__content\" id=\"main-content\">
       <div class=\"content-inner\">
-        <nav class=\"breadcrumb\" aria-label=\"Ruta de navegación\">
+        <nav class=\"breadcrumb\" aria-label=\"Ruta de navegacion\">
           <a href=\"/\" class=\"breadcrumb__item\">Inicio</a>
-          <span class=\"breadcrumb__separator\" aria-hidden=\"true\">›</span>
+          <span class=\"breadcrumb__separator\" aria-hidden=\"true\">&rsaquo;</span>
           <a href=\"/la-madriguera/\" class=\"breadcrumb__item\">La Madriguera</a>
-          <span class=\"breadcrumb__separator\" aria-hidden=\"true\">›</span>
+          <span class=\"breadcrumb__separator\" aria-hidden=\"true\">&rsaquo;</span>
           <span class=\"breadcrumb__current\">{html.escape(title)}</span>
         </nav>
 
@@ -390,11 +413,11 @@ def render_page(article: dict[str, str]) -> str:
           <p class=\"article__subtitle\">{html.escape(subtitle)}</p>
           {date_line}
 
-{content_html}
+{article_html}
 
           <div class=\"ad-slot ad-content\" id=\"ad-content-{slug.replace('.html', '')}\" aria-hidden=\"true\"></div>
 
-          <nav class=\"page-nav\" aria-label=\"Navegación entre páginas\">
+          <nav class=\"page-nav\" aria-label=\"Navegacion entre paginas\">
             {prev_html}
             {next_html}
           </nav>
@@ -413,17 +436,25 @@ def render_page(article: dict[str, str]) -> str:
 
 
 def main() -> None:
-    lines = read_source()
-    parsed = [x for x in parse_articles(lines) if x["slug"] in TARGET_SLUGS]
+    lines = read_source_lines()
+    entries = parse_blocks(lines)
+    if not entries:
+        raise SystemExit("No pages detected in bloques2.txt")
 
-    if not parsed:
-        raise SystemExit("No se encontraron artículos objetivo en bloques2.txt")
+    titles = collect_titles()
+    for entry in entries:
+        route = "/" + entry["path"]
+        if entry["title"].strip():
+            titles[route] = entry["title"].strip()
 
-    for article in parsed:
-        output = ROOT / "la-madriguera" / article["slug"]
-        output.write_text(render_page(article), encoding="utf-8", newline="\n")
+    generated = 0
+    for entry in entries:
+        out_file = ROOT / entry["path"]
+        out_file.parent.mkdir(parents=True, exist_ok=True)
+        out_file.write_text(render_page(entry, titles), encoding="utf-8", newline="\n")
+        generated += 1
 
-    print(f"Artículos regenerados: {len(parsed)}")
+    print(f"Articulos generados/actualizados: {generated}")
 
 
 if __name__ == "__main__":

@@ -102,3 +102,13 @@ Abrir:
 
 - Usar siempre `aprendeBTC` y `aprendebtc.com`.
 - No reintroducir `bitcoinfácil` ni variantes anteriores.
+
+## Regla de orden para La Madriguera
+
+- Al crear/actualizar articulos en `la-madriguera/`, ordenar siempre en dos bloques:
+  1. Ruta historica (recomendada) con orden de lectura numerado.
+  2. Debates y analisis de protocolo.
+- Reflejar ese mismo orden en:
+  - `la-madriguera/index.html`
+  - `js/nav.js` (menu lateral y movil)
+  - navegacion `Anterior/Siguiente` dentro de cada articulo.

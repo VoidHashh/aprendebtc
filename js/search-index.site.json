@@ -1216,6 +1216,41 @@
     "keywords": "¿Consume Bitcoin demasiada energía? Datos, contexto, y los argumentos que nadie te cuenta. Análisis honesto. El dato básico Por qué Bitcoin consume energía Comparaciones relevantes El mix energético La minería como comprador de último recurso Los contraargumentos honestos 1. No toda la minería es verde 2. El consumo es significativo 3. La energía \"sobrante\" podría usarse para otra cosa 4. Los incentivos no garantizan resultados verdes El debate Proof of Work vs Proof of Stake La pregunta correcta Inicio &rsaquo; La Madriguera &rsaquo; Bitcoin y energía: el debate completo La madriguera Bitcoin y energía: el debate completo Los datos reales sobre el consumo energético de Bitcoin, sin propaganda en ninguna dirección. Fecha de publicación: Febrero 2026 Autor: aprendeBTC Tiempo de lectura: ~18 minutos \"Bitcoin consume más energía que Argentina\". \"Bitcoin está destruyendo el planeta\". \"Bitcoin es un desastre medioambiental\". Estos titulares aparecen regularmente en medios de comunicación. Y contienen algo de verdad: Bitcoin sí consume cantidades significativas de energía. Pero la historia completa es más matizada de lo que los titulares sugieren. Este artículo presenta los datos reales, el contexto necesario, y los argumentos de ambos lados — sin propaganda en ninguna dirección. El dato básico Bitcoin consume aproximadamente 100-150 TWh (teravatios-hora) de electricidad al año. Esta cifra varía según el hashrate de la red y la eficiencia del hardware de minería. Para poner esto en"
   },
   {
+    "title": "Bloques huérfanos, stale blocks y reorganizaciones de cadena",
+    "url": "/la-madriguera/bloques-huerfanos-y-reorganizaciones.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "bloques",
+      "huerfanos",
+      "reorganizaciones",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "Qué pasa cuando dos mineros encuentran un bloque casi a la vez. Bloques huérfanos, stale blocks y reorgs explicados. El escenario La resolución natural Terminología: huérfanos vs stale ¿Qué pasa con las transacciones? Lo que dijo Satoshi Reorganizaciones (reorgs) Mejoras técnicas El reorg más notable Implicaciones prácticas Fuentes y referencias: Enlaces internos: Inicio &rsaquo; La Madriguera &rsaquo; Bloques huérfanos, stale blocks y reorganizaciones de cadena La madriguera Bloques huérfanos, stale blocks y reorganizaciones de cadena Dos mineros, un bloque. ¿Cómo resuelve Bitcoin este conflicto sin un árbitro central? Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~6 minutos Imagina que dos mineros en lados opuestos del mundo encuentran un bloque válido casi simultáneamente. Ambos bloques son correctos según las reglas de consenso. Ambos extienden la misma cadena anterior. Pero solo uno puede ser parte de la historia oficial de Bitcoin. ¿Cómo resuelve Bitcoin este conflicto sin un árbitro central? La respuesta es elegante y fue diseñada por Satoshi desde el principio. El escenario La propagación de información por internet no es instantánea. Un bloque recién minado en Australia tarda varios segundos en llegar a Europa y América. Durante esos segundos, un minero en otro lugar podría encontrar también un bloque válido. Cuando esto ocurre, diferentes nodos de la red ven diferentes \"verdades\": Los nodos cercanos al minero A reciben primero el bloque A y lo acept"
+  },
+  {
+    "title": "El ataque del 51%: qué puede y qué NO puede hacer",
+    "url": "/la-madriguera/el-ataque-del-51-por-ciento.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "ataque",
+      "del",
+      "por",
+      "ciento",
+      "wallet",
+      "billetera",
+      "utxo",
+      "transacciones",
+      "claves",
+      "direcciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "El ataque del 51% explicado en profundidad. Qué dijo Satoshi, qué ha pasado desde entonces, y por qué Bitcoin es resistente. ¿Qué es el ataque del 51%? ¿Qué NO puede hacer un atacante del 51%? Lo que dijo Satoshi Las matemáticas del ataque ¿Ha ocurrido alguna vez? Ataques en otras cadenas El escenario estado-nación Defensas y respuestas Fuentes y referencias: Enlaces internos: Inicio &rsaquo; La Madriguera &rsaquo; El ataque del 51%: qué puede y qué NO puede hacer La madriguera El ataque del 51%: qué puede y qué NO puede hacer Todo el mundo habla del \"ataque del 51%\". Casi nadie entiende realmente qué puede hacer y qué no. Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~7 minutos El \"ataque del 51%\" es probablemente el vector de ataque más mencionado y menos entendido de Bitcoin. En conversaciones casuales, se presenta como una amenaza existencial: si alguien consigue más del 50% del hashrate, puede \"destruir\" Bitcoin. La realidad es más matizada. Un atacante con mayoría de hashrate tiene poderes reales pero limitados. Y los incentivos económicos hacen que el ataque sea irracional en casi todos los escenarios. Satoshi entendió esto desde el principio. En el whitepaper y en sus discusiones posteriores, analizó el escenario en detalle y explicó por qué el sistema era robusto incluso ante este tipo de amenaza. ¿Qué es el ataque del 51%? En Bitcoin, la cadena válida es la que tiene más trabajo acumulado (proof-of-work). Los nodos siempre aceptan la cadena más larg"
+  },
+  {
     "title": "El caso Samourai Wallet y el futuro de la privacidad en Bitcoin",
     "url": "/la-madriguera/el-caso-samourai-wallet.html",
     "tags": [
@@ -1284,7 +1319,7 @@
       "factura lightning"
     ],
     "section": "La Madriguera",
-    "keywords": "Artículos en profundidad sobre Bitcoin: historia, eventos, regulación, energía y debates técnicos. Análisis riguroso en español. Historia y eventos Debates y análisis de protocolo Inicio › La Madriguera La madriguera La Madriguera Artículos en profundidad para quienes quieren ir más allá de lo básico. La Madriguera es nuestra sección de análisis de fondo. Aquí agrupamos historia profunda de Bitcoin, eventos que cambiaron el ecosistema y debates técnicos que siguen vigentes. No son tutoriales paso a paso: son ensayos para entender contexto, incentivos y consecuencias. Historia y eventos El hackeo de Mt. Gox: el mayor robo de Bitcoin de la historia · Febrero 2026 · ~4200 palabras Silk Road, Ross Ulbricht y el debate sobre la libertad · Febrero 2026 · ~4500 palabras La crisis de Terra/Luna: la \"stablecoin\" que no era estable · Febrero 2026 · ~3200 palabras Los ETFs de Bitcoin: qué son, qué significan y qué cambian · Febrero 2026 · ~3800 palabras Debates y análisis de protocolo La Guerra del Tamaño de Bloque: la batalla que definió Bitcoin · Febrero 2026 · ~4500 palabras El colapso de FTX: qué pasó y qué lecciones dejó · Febrero 2026 · ~3500 palabras Bitcoin y energía: el debate completo · Febrero 2026 · ~4000 palabras El caso Samourai Wallet y el futuro de la privacidad en Bitcoin · Febrero 2026 · ~3500 palabras Lightning Network: dónde estamos y hacia dónde vamos · Febrero 2026 · ~3800 palabras Los soft forks de Bitcoin: historia de cada cambio de consenso · Febrero 2026 · ~400"
+    "keywords": "Artículos en profundidad sobre Bitcoin: historia, eventos, regulación, energía y debates técnicos. Análisis riguroso en español. Ruta histórica (orden recomendado) Debates y análisis de protocolo Inicio › La Madriguera La madriguera La Madriguera Artículos en profundidad para usuarios avanzados: historia, eventos y debates de fondo en Bitcoin. Esta sección está pensada para quien quiere más contexto: no solo qué es Bitcoin, sino qué ha pasado, por qué ha pasado y qué consecuencias tuvo. Puedes leer por tema o seguir la ruta histórica recomendada para recorrer los hitos en orden. Ruta histórica (orden recomendado) 01 · El hackeo de Mt. Gox · 2014 · ~4200 palabras 02 · Silk Road y Ross Ulbricht · 2011-2025 · ~4500 palabras 03 · La crisis de Terra/Luna · 2022 · ~3200 palabras 04 · Los ETFs de Bitcoin · 2024 · ~3800 palabras 05 · Ordinals e Inscriptions · 2023-2026 · ~3500 palabras 06 · Geopolítica de la minería · 2021-2026 · ~4000 palabras 07 · Ataque del 51% · marco técnico · ~3800 palabras 08 · Bloques huérfanos y reorganizaciones · marco técnico · ~3600 palabras Debates y análisis de protocolo La Guerra del Tamaño de Bloque: la batalla que definió Bitcoin · ~4500 palabras El colapso de FTX: qué pasó y qué lecciones dejó · ~3500 palabras Bitcoin y energía: el debate completo · ~4000 palabras El caso Samourai Wallet y el futuro de la privacidad · ~3500 palabras Lightning Network: dónde estamos y hacia dónde vamos · ~3800 palabras Los soft forks de Bitcoin: historia de cada camb"
   },
   {
     "title": "La crisis de Terra/Luna: la \"stablecoin\" que no era estable",
@@ -1298,6 +1333,20 @@
     ],
     "section": "La Madriguera",
     "keywords": "Cómo el colapso de Terra/Luna en mayo de 2022 destruyó $60 mil millones en una semana y desencadenó un efecto dominó en cripto. ¿Qué era Terra? El imán: Anchor Protocol La espiral de la muerte El efecto dominó Las lecciones ¿Dónde está Do Kwon? Fuentes y referencias: Enlaces internos: Inicio › La Madriguera › La crisis de Terra/Luna: la \"stablecoin\" que no era estable La madriguera La crisis de Terra/Luna: la \"stablecoin\" que no era estable $60 mil millones evaporados en una semana. La muerte espiral de una stablecoin algorítmica y sus lecciones para los bitcoiners. Fecha de publicación: Febrero 2026 · Tiempo de lectura: ~6 minutos En mayo de 2022, el ecosistema Terra — valorado en más de 60 mil millones de dólares — colapsó en menos de una semana. Su stablecoin UST perdió el peg con el dólar. Su token LUNA pasó de 80 dólares a fracciones de céntimo. La onda expansiva derribó hedge funds, plataformas de lending, y eventualmente contribuyó a la caída de FTX seis meses después. Para los bitcoiners, Terra es un caso de estudio sobre por qué Bitcoin no es \"cripto\" y por qué la ingeniería financiera no puede crear estabilidad desde la nada. ¿Qué era Terra? Terra era una blockchain construida sobre Cosmos SDK, lanzada en 2018 por Do Kwon y Daniel Shin. Su producto principal era UST (TerraUSD), una stablecoin \"algorítmica\" diseñada para mantener paridad 1:1 con el dólar estadounidense. A diferencia de stablecoins como USDT (Tether) o USDC (Circle), que supuestamente están respaldada"
+  },
+  {
+    "title": "La geopolítica de la minería de Bitcoin",
+    "url": "/la-madriguera/la-geopolitica-de-la-mineria.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "geopolitica",
+      "mineria",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "De China a Texas: cómo la minería de Bitcoin se ha convertido en un asunto geopolítico. Mapas, datos y análisis. China: el auge y la caída La Gran Migración Estados Unidos: el nuevo líder El mapa global actual La dimensión geopolítica La concentración en pools El futuro Fuentes y referencias: Enlaces internos: Inicio &rsaquo; La Madriguera &rsaquo; La geopolítica de la minería de Bitcoin La madriguera La geopolítica de la minería de Bitcoin La minería de Bitcoin es un asunto de estado. Quién mina, dónde, y por qué importa políticamente. Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~7 minutos En mayo de 2021, China controlaba aproximadamente el 65% del hashrate mundial de Bitcoin. Dos meses después, ese porcentaje era cercano a cero. El gobierno chino había prohibido la minería de Bitcoin, y decenas de miles de máquinas se apagaron simultáneamente. La red de Bitcoin no se inmutó. La difficulty se ajustó. Los bloques siguieron produciéndose cada diez minutos, en promedio. Y en los meses siguientes, el hashrate se recuperó — pero distribuido de forma completamente diferente. Esta migración masiva demostró tanto la resiliencia de Bitcoin como su dimensión geopolítica. La minería de Bitcoin no es solo una actividad económica; es un asunto de seguridad nacional, política energética y competencia entre potencias. China: el auge y la caída Durante casi una década, China dominó la minería de Bitcoin. Las razones eran claras: electricidad barata (hidroeléctrica en Sic"
   },
   {
     "title": "La Guerra del Tamaño de Bloque: la batalla que definió Bitcoin",
@@ -1350,6 +1399,23 @@
     ],
     "section": "La Madriguera",
     "keywords": "En enero de 2024, EEUU aprobó los ETFs spot de Bitcoin. BlackRock, Fidelity y otros entraron al mercado. Análisis completo. ¿Qué es un ETF? La década de rechazos El día de la aprobación Los números ¿Qué cambia? Las preocupaciones legítimas La perspectiva maximalista Más allá de EEUU El futuro Fuentes y referencias: Enlaces internos: Inicio › La Madriguera › Los ETFs de Bitcoin: qué son, qué significan y qué cambian La madriguera Los ETFs de Bitcoin: qué son, qué significan y qué cambian Wall Street entró en Bitcoin. ¿Es bueno o malo? Un análisis sin fanatismos. Fecha de publicación: Febrero 2026 · Tiempo de lectura: ~8 minutos El 10 de enero de 2024, la Comisión de Valores de Estados Unidos (SEC) aprobó once ETFs de Bitcoin spot. Por primera vez, inversores estadounidenses podían obtener exposición directa a Bitcoin a través de productos cotizados en bolsas tradicionales, sin necesidad de gestionar claves ni usar exchanges de criptomonedas. BlackRock, el mayor gestor de activos del mundo, lanzó su ETF (IBIT). Fidelity, uno de los mayores brokers de EEUU, lanzó el suyo (FBTC). En semanas, estos productos acumularon decenas de miles de millones de dólares. Era el momento que muchos llevaban esperando una década. Era también el momento que otros temían. ¿Qué es un ETF? Un ETF (Exchange-Traded Fund) es un fondo de inversión que cotiza en bolsa como si fuera una acción. El inversor compra participaciones del fondo a través de su broker habitual, y el fondo gestiona los activos sub"
+  },
+  {
+    "title": "Ordinals, Inscriptions y la guerra por el espacio de bloque",
+    "url": "/la-madriguera/ordinals-inscriptions-debate.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "ordinals",
+      "inscriptions",
+      "debate",
+      "wallet",
+      "billetera",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "En 2023, aparecieron NFTs en Bitcoin. La comunidad se dividió. ¿Son spam o uso legítimo? El debate sobre el espacio de bloque. ¿Qué son los Ordinals? La explosión El debate Los defensores de Ordinals argumentaban: Los críticos de Ordinals argumentaban: Los intentos de filtrado Runes: el sucesor Las consecuencias económicas La conexión con el debate de osificación Estado actual Fuentes y referencias: Enlaces internos: Inicio &rsaquo; La Madriguera &rsaquo; Ordinals, Inscriptions y la guerra por el espacio de bloque La madriguera Ordinals, Inscriptions y la guerra por el espacio de bloque ¿Quién decide qué es una transacción legítima en Bitcoin? El debate más polarizado desde la Blocksize War. Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~7 minutos En enero de 2023, un desarrollador llamado Casey Rodarmor lanzó el protocolo Ordinals. La idea era simple pero provocadora: asignar un número único a cada satoshi individual, permitiendo \"inscribir\" datos arbitrarios en la blockchain de Bitcoin. En semanas, miles de imágenes, textos y hasta pequeños videojuegos estaban siendo grabados permanentemente en Bitcoin. Las fees se dispararon. La mempool se llenó. Y la comunidad se dividió de una forma que no se veía desde la Guerra del Tamaño de Bloque. ¿Eran los Ordinals una innovación legítima o spam que ensuciaba la blockchain? ¿Quién tiene autoridad para decidir qué es una \"transacción legítima\" en un sistema permissionless? El debate reveló tensiones profundas sobre l"
   },
   {
     "title": "¿Puede un gobierno prohibir Bitcoin?",
