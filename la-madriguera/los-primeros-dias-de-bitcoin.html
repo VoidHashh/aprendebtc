@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Los meses iniciales de Bitcoin: el software v0.1, los primeros mineros, la primera transacción, y cómo era usar Bitcoin en 2009." />
+  <meta property="og:title" content="Los primeros días de Bitcoin: del whitepaper al bloque 1000 | aprendebtc.com" />
+  <meta property="og:description" content="Los meses iniciales de Bitcoin: el software v0.1, los primeros mineros, la primera transacción, y cómo era usar Bitcoin en 2009." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/la-madriguera/los-primeros-dias-de-bitcoin.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Los primeros días de Bitcoin: del whitepaper al bloque 1000 | aprendebtc.com" />
+  <meta name="twitter:description" content="Los meses iniciales de Bitcoin: el software v0.1, los primeros mineros, la primera transacción, y cómo era usar Bitcoin en 2009." />
+  <title>Los primeros días de Bitcoin: del whitepaper al bloque 1000 | aprendebtc.com</title>
+  <link rel="canonical" href="https://aprendebtc.com/la-madriguera/los-primeros-dias-de-bitcoin.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegacion de la madriguera">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-auto" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegacion">
+          <a href="/" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="/la-madriguera/" class="breadcrumb__item">La Madriguera</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Los primeros días de Bitcoin: del whitepaper al bloque 1000</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--4 article__badge">La madriguera</div>
+          <h1>Los primeros días de Bitcoin: del whitepaper al bloque 1000</h1>
+          <p class="article__subtitle">Así era Bitcoin cuando solo lo usaban un puñado de personas. Una reconstrucción de los primeros meses.</p>
+          <p style="color: var(--text-secondary);">Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~8 minutos</p>
+
+<p>El 3 de enero de 2009, en algún lugar del mundo, una computadora minó el bloque génesis de Bitcoin. Dentro del bloque, codificado para siempre, estaba un mensaje del periódico The Times: &quot;Chancellor on brink of second bailout for banks.&quot;</p>
+
+<p>Era el comienzo de algo que cambiaría el mundo. Pero en ese momento, nadie lo sabía.</p>
+
+<p>Esta es la historia de los primeros meses de Bitcoin: cómo era el software, quiénes fueron los primeros usuarios, y cómo una idea en un whitepaper se convirtió en una red funcional.</p>
+
+<h2>Antes del lanzamiento: el trabajo previo</h2>
+
+<p>El whitepaper de Bitcoin se publicó el 31 de octubre de 2008 en la lista de correo de criptografía metzdowd.com. Pero Satoshi había estado trabajando en el código mucho antes.</p>
+
+<p>Lo sabemos porque el software lanzado en enero de 2009 era demasiado complejo para haberse escrito en dos meses. Contenía más de 14.000 líneas de código C++. Incluía el nodo, el minero, y el wallet — todo integrado. Tenía manejo de reorganizaciones de cadena, propagación de transacciones, ajuste de dificultad.</p>
+
+<p>Satoshi mencionó en comunicaciones posteriores que había trabajado en el código durante un año y medio antes de publicar el whitepaper. Primero escribió el código para demostrar que la idea funcionaba, luego escribió el paper describiéndola.</p>
+
+<p>Este enfoque — código primero, teoría después — es inusual en criptografía académica, donde normalmente se publica la teoría y alguien más implementa años después. Satoshi era un ingeniero pragmático, no un académico.</p>
+
+<h2>Las primeras reacciones</h2>
+
+<p>El whitepaper fue recibido con escepticismo por la mayoría de los criptógrafos de la lista de correo.</p>
+
+<p>James A. Donald escribió: &quot;No creo que escale al tamaño requerido&quot;, preocupado por el tamaño de la blockchain.</p>
+
+<p>Ray Dillinger expresó dudas sobre si los incentivos económicos funcionarían.</p>
+
+<p>Hal Finney fue una de las pocas voces entusiastas: &quot;Bitcoin me parece una idea muy prometedora.&quot;</p>
+
+<p>Finney era un criptógrafo veterano, creador de RPOW (Reusable Proofs of Work), y uno de los primeros destinatarios de emails anónimos vía remailers. Entendía lo que Satoshi intentaba hacer y por qué era importante.</p>
+
+<h2>El lanzamiento: enero 2009</h2>
+
+<p>El 3 de enero de 2009, Satoshi minó el bloque génesis (bloque 0). El timestamp del bloque es 18:15:05 UTC.</p>
+
+<p>Curiosamente, el bloque 1 no se minó hasta el 9 de enero, seis días después. Nadie sabe exactamente por qué. Quizás Satoshi estaba probando el software. Quizás quería asegurarse de que todo funcionaba antes de que otros se unieran.</p>
+
+<p>El 8 de enero de 2009, Satoshi anunció el lanzamiento de Bitcoin v0.1 en la lista de correo de criptografía:</p>
+
+<p>&quot;Announcing the first release of Bitcoin, a new electronic cash system that uses a peer-to-peer network to prevent double-spending. It&#x27;s completely decentralized with no server or central authority.&quot;</p>
+
+<p>El software estaba disponible solo para Windows. Era un ejecutable único que combinaba todas las funciones: nodo para validar y propagar transacciones, minero para crear nuevos bloques, y wallet para gestionar claves y enviar/recibir bitcoin.</p>
+
+<h2>Cómo era el software v0.1</h2>
+
+<p>Bitcoin v0.1 era tosco pero funcional.</p>
+
+<p>La interfaz gráfica era básica: una ventana con tu balance, un historial de transacciones, y campos para enviar bitcoin. Había un botón para activar/desactivar la minería.</p>
+
+<p>La minería usaba la CPU. No existían GPUs ni ASICs para minería de Bitcoin — cualquier ordenador personal podía minar. La dificultad era 1 (la mínima posible), lo que significaba que encontrar un bloque era relativamente fácil.</p>
+
+<p>No había exchanges. Bitcoin no tenía precio en términos de dinero fiat porque no había forma de comprarlo o venderlo por dólares. Era simplemente un experimento técnico.</p>
+
+<p>Las direcciones eran claves públicas completas, no los hashes cortos que usamos hoy. Esto hacía las direcciones muy largas e incómodas.</p>
+
+<p>Había bugs conocidos. Algunos se descubrirían y corregirían en los meses siguientes. Otros tardarían años en salir a la luz.</p>
+
+<h2>Los primeros usuarios</h2>
+
+<p>En los primeros días, Bitcoin era usado por un puñado de personas:</p>
+
+<p><strong>Satoshi Nakamoto</strong>: obviamente, el creador. Satoshi minó extensivamente en los primeros meses. El análisis posterior (el &quot;Patrón Patoshi&quot; de Sergio Demian Lerner) sugiere que Satoshi minó aproximadamente un millón de bitcoin en el primer año. Estos bitcoin nunca se han movido.</p>
+
+<p><strong>Hal Finney</strong>: probablemente el segundo usuario de Bitcoin. Finney descargó el software el día del lanzamiento y comenzó a minar. El 12 de enero de 2009, tuiteó &quot;Running bitcoin&quot; — posiblemente el primer tweet sobre Bitcoin jamás.</p>
+
+<p>Ese mismo día, Satoshi envió 10 BTC a Finney. Fue la primera transacción de Bitcoin entre dos personas (el bloque 170). Finney respondió reportando bugs y sugiriendo mejoras. Fue el primer &quot;beta tester&quot; real de Bitcoin.</p>
+
+<p><strong>Dustin Trammell</strong>: un investigador de seguridad que intercambió emails con Satoshi en enero de 2009. En el capítulo 69 del Libro de Satoshi, se reproducen algunos de estos intercambios, donde discutieron detalles técnicos del protocolo.</p>
+
+<p><strong>Martti Malmi</strong>: un estudiante finlandés que se unió en abril de 2009. Malmi fue crucial para la infraestructura temprana: creó el sitio bitcoin.org, administró el foro original, y ayudó con el desarrollo. Satoshi eventualmente le transfirió el control del dominio.</p>
+
+<h2>Los meses silenciosos</h2>
+
+<p>Durante la mayor parte de 2009, Bitcoin existió en silencio. Un pequeño grupo de entusiastas minaba bloques, experimentaba con el software, y discutía mejoras.</p>
+
+<p>No había precio porque no había mercado. Los bitcoin que se minaban no &quot;valían&quot; nada en términos convencionales. Eran tokens en un experimento interesante.</p>
+
+<p>Los bloques se minaban irregularmente. A veces pasaban horas entre bloques porque había pocos mineros y la dificultad, aunque baja, no era trivial para CPUs de la época.</p>
+
+<p>La red era frágil. Con tan pocos nodos, un ataque habría sido fácil. Pero nadie atacó porque nadie le prestaba atención.</p>
+
+<h2>El primer precio</h2>
+
+<p>El primer intento de establecer un precio para Bitcoin vino de New Liberty Standard, un pequeño exchange que comenzó a operar en octubre de 2009.</p>
+
+<p>El método era simple: calcular el coste de electricidad de minar un bitcoin y usar eso como precio base. El resultado fue aproximadamente $0.00076 por bitcoin — menos de una décima de centavo.</p>
+
+<p>En esta valoración, los 10 BTC que Satoshi envió a Finney valían menos de un centavo. Hoy valen cientos de miles de dólares.</p>
+
+<h2>El Bitcoin Market y Mt. Gox</h2>
+
+<p>En febrero de 2010, apareció Bitcoin Market, el primer exchange &quot;real&quot; donde la gente podía comprar y vender bitcoin por dólares vía PayPal.</p>
+
+<p>En julio de 2010, Jed McCaleb lanzó Mt. Gox. Originalmente un sitio para intercambiar cartas de Magic: The Gathering (de ahí el nombre: Magic: The Gathering Online eXchange), McCaleb lo reconvirtió en un exchange de Bitcoin.</p>
+
+<p>Mt. Gox rápidamente dominó el mercado. Para 2013, manejaba el 70% del volumen global de Bitcoin. Su colapso en 2014 sería el mayor desastre de la historia temprana de Bitcoin.</p>
+
+<h2>Pizza Day</h2>
+
+<p>El 22 de mayo de 2010 ocurrió la primera compra documentada de un bien físico con bitcoin.</p>
+
+<p>Laszlo Hanyecz, un programador que había contribuido al código de Bitcoin (incluyendo la primera implementación de minería con GPU), publicó en el foro de Bitcoin ofreciendo 10.000 BTC a quien le enviara dos pizzas.</p>
+
+<p>Alguien aceptó. Ordenó dos pizzas de Papa John&#x27;s por aproximadamente $25 y las envió a Laszlo. A cambio, recibió 10.000 BTC.</p>
+
+<p>Esos 10.000 BTC valen hoy, dependiendo del precio, entre 500 millones y mil millones de dólares. Es la pizza más cara de la historia.</p>
+
+<p>Pero Laszlo no se arrepiente. Como ha explicado en entrevistas, el punto era demostrar que Bitcoin podía usarse como dinero real. Si nadie lo gastaba, era solo un experimento académico. Alguien tenía que dar el primer paso.</p>
+
+<p>El 22 de mayo se celebra cada año como &quot;Bitcoin Pizza Day&quot;.</p>
+
+<h2>El bug de agosto de 2010</h2>
+
+<p>El 15 de agosto de 2010 ocurrió el incidente más grave de la historia temprana de Bitcoin.</p>
+
+<p>Un atacante explotó un bug de overflow en el código de verificación de transacciones. Creó una transacción que generaba 184.467.440.737 BTC — 184 mil millones de bitcoin, muy por encima de los 21 millones máximos.</p>
+
+<p>El bloque conteniendo esta transacción fue aceptado por la red. Durante unas horas, existieron más bitcoin de los que deberían existir.</p>
+
+<p>Satoshi y otros desarrolladores respondieron rápidamente. Lanzaron una versión parcheada del software y coordinaron con los mineros para adoptar una cadena alternativa que no incluyera la transacción maliciosa.</p>
+
+<p>El soft fork tuvo éxito. La cadena con los 184 mil millones de bitcoin fue abandonada. La red volvió a la normalidad en horas.</p>
+
+<p>El incidente demostró tanto la vulnerabilidad del software temprano como la capacidad de la comunidad para responder a crisis. También demostró que Satoshi seguía activamente involucrado y capaz de coordinar respuestas de emergencia.</p>
+
+<h2>La desaparición de Satoshi</h2>
+
+<p>A lo largo de 2010, Satoshi fue gradualmente reduciendo su participación.</p>
+
+<p>En diciembre de 2010, dejó de publicar en los foros. Transfirió el control del repositorio de código a Gavin Andresen, el desarrollador que había emergido como líder técnico de la comunidad.</p>
+
+<p>En abril de 2011, envió un último email a Mike Hearn: &quot;He pasado a otras cosas.&quot; Nunca más se supo de él.</p>
+
+<p>¿Por qué desapareció? Las teorías abundan:</p>
+
+<ul><li>WikiLeaks estaba empezando a aceptar Bitcoin, atrayendo atención no deseada</li><li>El proyecto estaba en buenas manos y no necesitaba a su creador</li><li>Un Bitcoin sin líder identificable es más descentralizado</li><li>Razones personales que nunca conoceremos</li></ul>
+
+<p>Sea cual sea la razón, la desaparición de Satoshi fue, paradójicamente, buena para Bitcoin. Demostró que el sistema no dependía de ningún individuo. El proyecto continuó y prosperó sin su creador.</p>
+
+<h2>Lo que Satoshi dejó</h2>
+
+<p>Antes de desaparecer, Satoshi dejó varias cosas claras sobre su visión para Bitcoin:</p>
+
+<p>En el capítulo 19 del Libro de Satoshi, discutió los posibles primeros usos: pagos internacionales, micropagos, resistencia a censura financiera.</p>
+
+<p>En sus emails a Dustin Trammell, discutió la importancia de la escalabilidad y la necesidad de que el software mejorara con el tiempo.</p>
+
+<p>Dejó código funcional, documentación, y una comunidad incipiente de desarrolladores que entendían el sistema.</p>
+
+<p>Lo que no dejó fue instrucciones sobre cómo evolucionar el protocolo. Las decisiones sobre el futuro de Bitcoin — desde el tamaño de bloque hasta los soft forks — quedarían en manos de una comunidad que tendría que aprender a gobernarse sin líder.</p>
+
+<h2>De experimento a fenómeno</h2>
+
+<p>Entre enero de 2009 y diciembre de 2010, Bitcoin pasó de ser un experimento de un solo programador a una red funcional con miles de usuarios, exchanges funcionando, y atención mediática creciente.</p>
+
+<p>El precio pasó de cero a unos pocos centavos. La dificultad de minería aumentó miles de veces. El hashrate pasó de una computadora a granjas enteras de GPUs.</p>
+
+<p>Era todavía minúsculo comparado con lo que vendría. Pero los fundamentos estaban establecidos: el código funcionaba, la red era estable, y una comunidad estaba formándose alrededor de la idea de dinero digital descentralizado.</p>
+
+<p>Todo lo que vino después — los ciclos de boom y bust, las guerras internas, la adopción institucional, los ETFs de BlackRock — tiene sus raíces en esos primeros meses cuando un puñado de criptógrafos decidió que la idea de Satoshi merecía la pena.</p>
+
+<h2>Fuentes y referencias:</h2>
+
+<ul><li>El Libro de Satoshi, capítulos 18, 19, 21, 69 y 70</li><li>Repositorio histórico de Bitcoin en GitHub</li><li>Posts de Hal Finney en bitcointalk.org</li><li>Análisis de Sergio Demian Lerner sobre el &quot;Patrón Patoshi&quot;</li><li>Documentación del incidente del overflow de agosto 2010</li></ul>
+
+<h2>Enlaces internos:</h2>
+
+<ul><li><a href="/base/quien-es-satoshi.html">¿Quién es Satoshi Nakamoto?</a></li><li><a href="/base/historia-bitcoin.html">Historia de Bitcoin</a></li><li><a href="/base/el-whitepaper.html">El whitepaper de Bitcoin</a></li></ul>
+
+          <div class="ad-slot ad-content" id="ad-content-los-primeros-dias-de-bitcoin" aria-hidden="true"></div>
+
+          <nav class="page-nav" aria-label="Navegaci?n entre p?ginas">
+            <a href="/la-madriguera/" class="page-nav__item"><span class="page-nav__label">&larr; Anterior</span><span class="page-nav__title">La Madriguera</span></a>
+            <a href="/la-madriguera/bitcoin-y-wikileaks.html" class="page-nav__item page-nav__item--next"><span class="page-nav__label">Siguiente &rarr;</span><span class="page-nav__title">Bitcoin y WikiLeaks: el momento en que Satoshi dijo &quot;no&quot;</span></a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

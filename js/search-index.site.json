@@ -1202,6 +1202,25 @@
     "keywords": "La guía educativa más completa sobre Bitcoin en español. Desde tu primera compra hasta criptografía avanzada. ¿Por dónde empiezo? Ruta personalizada en menos de 2 minutos Elige tu nivel Tu primera compra de bitcoin Toma el control de tus bitcoin Entiende lo que controlas Privacidad, herencia y minería Criptografía, scripts y protocolo Filosofía, contribución y educación Pilares del conocimiento Inicio › Landing ₿ Educación Bitcoin en español Aprende Bitcoin paso a paso La guía más completa en español. Desde tu primera compra hasta criptografía avanzada. 6 niveles para todos los conocimientos. Empezar desde cero → Hacer test rápido Test interactivo ¿Por dónde empiezo? Responde 8 preguntas y te recomendamos el nivel ideal para empezar hoy. Diagnóstico inicial Ruta personalizada en menos de 2 minutos El test cruza fundamentos, autocustodia, seed phrase, Lightning, UTXO y conocimientos técnicos. Frase semilla Wallets Lightning UTXO BIP Empezar test Incluye preguntas sobre: frase semilla, UTXO, Taproot, ECDSA/Schnorr, nodo, autocustodia y objetivo de aprendizaje. Ruta de aprendizaje Elige tu nivel Un camino progresivo desde cero hasta dominar Bitcoin a nivel técnico. 1 7 páginas Explorador Tu primera compra de bitcoin Entiende qué es Bitcoin, decide tu camino (KYC o no-KYC), y compra tus primeros sats. Empezar desde cero → 2 15 páginas Soberano Toma el control de tus bitcoin Autocustodia, wallets, Lightning Network, exchanges y seguridad esencial. Ir al nivel 2 → 3 18 páginas Anal"
   },
   {
+    "title": "Bitcoin: ¿medio de pago o reserva de valor?",
+    "url": "/la-madriguera/bitcoin-medio-de-pago-vs-reserva-de-valor.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "bitcoin",
+      "medio",
+      "pago",
+      "reserva",
+      "valor",
+      "lightning",
+      "factura lightning",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "El gran debate interno de la comunidad Bitcoin. ¿Es Bitcoin para pagar el café o para ahorrar a largo plazo? Análisis completo. El argumento de la reserva de valor El argumento del medio de pago El trasfondo: la Guerra del Tamaño de Bloque La respuesta económica: Gresham vs Thiers El modelo en capas ¿Qué dice la práctica? La posición pragmática La posición de aprendeBTC Fuentes y referencias: Enlaces internos: Inicio &rsaquo; La Madriguera &rsaquo; Bitcoin: ¿medio de pago o reserva de valor? La madriguera Bitcoin: ¿medio de pago o reserva de valor? ¿Deberías gastar tus bitcoin o guardarlos? El debate más antiguo de la comunidad. Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~6 minutos El título del whitepaper de Bitcoin es \"Bitcoin: A Peer-to-Peer Electronic Cash System\" — un sistema de dinero electrónico peer-to-peer. La palabra clave es \"cash\": dinero para gastar. Pero la mayoría de los bitcoiners no gasta sus bitcoin. Los acumula. Los guarda como ahorro a largo plazo. Habla de Bitcoin como \"oro digital\", no como \"Visa digital\". ¿Quién tiene razón? ¿El whitepaper o la práctica actual? ¿Es Bitcoin para pagar el café o para guardarlo durante décadas? Este debate ha dividido a la comunidad durante años y fue el trasfondo filosófico de la Guerra del Tamaño de Bloque. El argumento de la reserva de valor Los defensores de Bitcoin como reserva de valor (\"store of value\" o SoV) argumentan: La escasez de 21 millones lo hace ideal para ahorro. El oro ha funcionado co"
+  },
+  {
     "title": "Bitcoin y energía: el debate completo",
     "url": "/la-madriguera/bitcoin-y-energia.html",
     "tags": [
@@ -1214,6 +1233,20 @@
     ],
     "section": "La Madriguera",
     "keywords": "¿Consume Bitcoin demasiada energía? Datos, contexto, y los argumentos que nadie te cuenta. Análisis honesto. El dato básico Por qué Bitcoin consume energía Comparaciones relevantes El mix energético La minería como comprador de último recurso Los contraargumentos honestos 1. No toda la minería es verde 2. El consumo es significativo 3. La energía \"sobrante\" podría usarse para otra cosa 4. Los incentivos no garantizan resultados verdes El debate Proof of Work vs Proof of Stake La pregunta correcta Inicio &rsaquo; La Madriguera &rsaquo; Bitcoin y energía: el debate completo La madriguera Bitcoin y energía: el debate completo Los datos reales sobre el consumo energético de Bitcoin, sin propaganda en ninguna dirección. Fecha de publicación: Febrero 2026 Autor: aprendeBTC Tiempo de lectura: ~18 minutos \"Bitcoin consume más energía que Argentina\". \"Bitcoin está destruyendo el planeta\". \"Bitcoin es un desastre medioambiental\". Estos titulares aparecen regularmente en medios de comunicación. Y contienen algo de verdad: Bitcoin sí consume cantidades significativas de energía. Pero la historia completa es más matizada de lo que los titulares sugieren. Este artículo presenta los datos reales, el contexto necesario, y los argumentos de ambos lados — sin propaganda en ninguna dirección. El dato básico Bitcoin consume aproximadamente 100-150 TWh (teravatios-hora) de electricidad al año. Esta cifra varía según el hashrate de la red y la eficiencia del hardware de minería. Para poner esto en"
+  },
+  {
+    "title": "Bitcoin y WikiLeaks: el momento en que Satoshi dijo \"no\"",
+    "url": "/la-madriguera/bitcoin-y-wikileaks.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "bitcoin",
+      "wikileaks",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "Cuando WikiLeaks empezó a aceptar Bitcoin en 2010, Satoshi pidió que parasen. Poco después, desapareció. La historia completa. El contexto: WikiLeaks bajo asedio La sugerencia de la comunidad La reacción de Satoshi El razonamiento de Satoshi Lo que pasó después La desaparición de Satoshi Las lecciones La tensión permanente Fuentes y referencias: Enlaces internos: Inicio &rsaquo; La Madriguera &rsaquo; Bitcoin y WikiLeaks: el momento en que Satoshi dijo \"no\" La madriguera Bitcoin y WikiLeaks: el momento en que Satoshi dijo \"no\" \"WikiLeaks ha pateado el avispero, y el enjambre se dirige hacia nosotros.\" La historia del momento más tenso en la vida pública de Satoshi. Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~6 minutos En diciembre de 2010, Bitcoin recibió más atención mediática de la que nunca había tenido. Pero no era la atención que Satoshi quería. WikiLeaks, la organización de Julian Assange, acababa de publicar miles de cables diplomáticos estadounidenses. El gobierno de EEUU presionó a Visa, Mastercard, PayPal y Bank of America para que cortaran todas las donaciones a WikiLeaks. La organización quedó financieramente asfixiada. La comunidad Bitcoin vio una oportunidad: WikiLeaks podía aceptar donaciones en Bitcoin, un sistema que nadie podía censurar. Satoshi vio un peligro existencial. El contexto: WikiLeaks bajo asedio WikiLeaks había publicado material explosivo antes — videos de ataques militares, registros de la guerra de Afganistán — pero Cablega"
   },
   {
     "title": "Bloques huérfanos, stale blocks y reorganizaciones de cadena",
@@ -1229,6 +1262,20 @@
     ],
     "section": "La Madriguera",
     "keywords": "Qué pasa cuando dos mineros encuentran un bloque casi a la vez. Bloques huérfanos, stale blocks y reorgs explicados. El escenario La resolución natural Terminología: huérfanos vs stale ¿Qué pasa con las transacciones? Lo que dijo Satoshi Reorganizaciones (reorgs) Mejoras técnicas El reorg más notable Implicaciones prácticas Fuentes y referencias: Enlaces internos: Inicio &rsaquo; La Madriguera &rsaquo; Bloques huérfanos, stale blocks y reorganizaciones de cadena La madriguera Bloques huérfanos, stale blocks y reorganizaciones de cadena Dos mineros, un bloque. ¿Cómo resuelve Bitcoin este conflicto sin un árbitro central? Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~6 minutos Imagina que dos mineros en lados opuestos del mundo encuentran un bloque válido casi simultáneamente. Ambos bloques son correctos según las reglas de consenso. Ambos extienden la misma cadena anterior. Pero solo uno puede ser parte de la historia oficial de Bitcoin. ¿Cómo resuelve Bitcoin este conflicto sin un árbitro central? La respuesta es elegante y fue diseñada por Satoshi desde el principio. El escenario La propagación de información por internet no es instantánea. Un bloque recién minado en Australia tarda varios segundos en llegar a Europa y América. Durante esos segundos, un minero en otro lugar podría encontrar también un bloque válido. Cuando esto ocurre, diferentes nodos de la red ven diferentes \"verdades\": Los nodos cercanos al minero A reciben primero el bloque A y lo acept"
+  },
+  {
+    "title": "Economía austríaca para bitcoiners: Menger, Mises y Hayek",
+    "url": "/la-madriguera/economia-austriaca-para-bitcoiners.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "economia",
+      "austriaca",
+      "para",
+      "bitcoiners"
+    ],
+    "section": "La Madriguera",
+    "keywords": "Los fundamentos económicos de Bitcoin vienen de la escuela austríaca. Menger, Mises y Hayek explicados para bitcoiners. ¿Qué es la escuela austríaca? Carl Menger: el origen del valor y del dinero La teoría del valor subjetivo El origen espontáneo del dinero Ludwig von Mises: el cálculo económico y el dinero sólido La teoría del ciclo económico El teorema de la regresión Friedrich Hayek: la competencia de monedas y el conocimiento disperso El uso del conocimiento en la sociedad La desnacionalización del dinero Murray Rothbard y la tradición libertaria Los cypherpunks y la conexión austríaca Inicio &rsaquo; La Madriguera &rsaquo; Economía austríaca para bitcoiners: Menger, Mises y Hayek La madriguera Economía austríaca para bitcoiners: Menger, Mises y Hayek Bitcoin no nació en el vacío. Sus fundamentos económicos tienen 150 años. Aquí los explicamos. Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~9 minutos Cuando los bitcoiners hablan de \"dinero sólido\", \"valor subjetivo\" o \"los peligros de la expansión crediticia\", están usando conceptos que tienen más de un siglo de historia. No inventaron estas ideas — las heredaron de una tradición intelectual conocida como la escuela austríaca de economía. Entender esta tradición no es obligatorio para usar Bitcoin. Pero ayuda a entender por qué Bitcoin está diseñado como está, y por qué sus defensores más apasionados hablan de él en términos casi filosóficos. ¿Qué es la escuela austríaca? La escuela austríaca es una tradi"
   },
   {
     "title": "El ataque del 51%: qué puede y qué NO puede hacer",
@@ -1281,6 +1328,36 @@
     "keywords": "Cronología del mayor fraude en la historia de las criptomonedas. Por qué FTX no tiene nada que ver con Bitcoin. Los antecedentes: Alameda Research y FTX El ascenso El token FTT El detonante: el artículo de CoinDesk El tweet de CZ El colapso Lo que se descubrió El juicio Las lecciones Lección 1: \"Not your keys, not your coins\" no es un eslogan — es una realidad Lección 2: Los exchanges son empresas frágiles Lección 3: FTX no es un argumento contra Bitcoin Inicio &rsaquo; La Madriguera &rsaquo; El colapso de FTX: qué pasó y qué lecciones dejó La madriguera El colapso de FTX: qué pasó y qué lecciones dejó Cómo un exchange de 32 mil millones de dólares se desmoronó en una semana, y por qué refuerza la tesis de Bitcoin. Fecha de publicación: Febrero 2026 Autor: aprendeBTC Tiempo de lectura: ~15 minutos En noviembre de 2022, FTX era el segundo exchange de criptomonedas más grande del mundo. Su fundador, Sam Bankman-Fried (SBF), era la cara pública de la industria: aparecía en portadas de Forbes, testificaba ante el Congreso de Estados Unidos, donaba millones a políticos, y era tratado como un genio de las finanzas. Una semana después, FTX estaba en bancarrota. Ocho mil millones de dólares de fondos de clientes habían desaparecido. SBF fue arrestado y acusado de fraude. El colapso arrastró a todo el mercado de criptomonedas y generó titulares que declaraban la muerte de Bitcoin. Pero Bitcoin no murió. La red siguió funcionando exactamente igual. Cada bloque se minó cada 10 minutos. "
   },
   {
+    "title": "El debate de la osificación: ¿debe Bitcoin dejar de cambiar?",
+    "url": "/la-madriguera/el-debate-de-la-osificacion.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "debate",
+      "osificacion",
+      "lightning",
+      "factura lightning",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "Un sector de la comunidad Bitcoin quiere que el protocolo deje de recibir cambios. Otro quiere seguir mejorándolo. ¿Quién tiene razón? ¿Qué es la osificación? Los argumentos a favor de osificar Cada cambio es un riesgo. La predictibilidad es una feature. Ya tenemos lo que necesitamos. El proceso de activación es peligroso. El efecto Lindy. Los argumentos contra osificar Bitcoin tiene problemas reales sin resolver. Sin cambios, Lightning no puede mejorar sustancialmente. La osificación prematura congela bugs y limitaciones. Los competidores no se osifican. Inicio &rsaquo; La Madriguera &rsaquo; El debate de la osificación: ¿debe Bitcoin dejar de cambiar? La madriguera El debate de la osificación: ¿debe Bitcoin dejar de cambiar? Estabilidad vs evolución. El debate sobre si Bitcoin debería congelarse o seguir cambiando. Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~6 minutos Bitcoin tiene 16 años. Ha sobrevivido a hackeos, forks hostiles, prohibiciones gubernamentales, colapsos de exchanges, y ciclos de boom y bust. El protocolo ha demostrado ser extraordinariamente robusto. Esto plantea una pregunta: ¿debería Bitcoin seguir cambiando, o ha llegado el momento de \"congelar\" el protocolo y dejarlo tal como está? Este debate — conocido como el debate de la \"osificación\" — divide a la comunidad Bitcoin de formas que trascienden las líneas tradicionales entre desarrolladores, usuarios e inversores. ¿Qué es la osificación? Osificación, en este contexto, significa que"
+  },
+  {
+    "title": "El doble gasto: el problema que Bitcoin resolvió",
+    "url": "/la-madriguera/el-doble-gasto.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "doble",
+      "gasto",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "El doble gasto era el obstáculo central del dinero digital. Cómo Satoshi lo resolvió y por qué sigue siendo relevante entenderlo. El problema La solución tradicional: intermediarios La solución de Satoshi Cómo funciona en la práctica Las confirmaciones como defensa Vectores de ataque reales El estado actual Lightning Network y el doble gasto Por qué importa entenderlo Fuentes y referencias: Enlaces internos: Inicio &rsaquo; La Madriguera &rsaquo; El doble gasto: el problema que Bitcoin resolvió La madriguera El doble gasto: el problema que Bitcoin resolvió Antes de Bitcoin, el dinero digital tenía un problema fatal. Satoshi lo solucionó sin necesidad de un banco. Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~6 minutos El dinero físico tiene una propiedad obvia que damos por sentada: si le das un billete a alguien, ya no lo tienes. No puedes gastar el mismo billete dos veces porque el billete es un objeto físico que solo puede estar en un lugar a la vez. El dinero digital es diferente. El dinero digital es información. Y la información se puede copiar. Si tu \"billete digital\" es simplemente un archivo, ¿qué impide que lo copies y lo gastes dos veces? ¿O mil veces? Este es el problema del doble gasto, y fue el obstáculo central que impidió el dinero digital durante décadas. Satoshi lo resolvió, y esa solución es el corazón de Bitcoin. El problema Imagina el dinero digital más simple posible: un archivo que representa 10 euros. Alice tiene ese archivo. Quiere p"
+  },
+  {
     "title": "El hackeo de Mt. Gox: el mayor robo de Bitcoin de la historia",
     "url": "/la-madriguera/el-hackeo-de-mt-gox.html",
     "tags": [
@@ -1293,6 +1370,20 @@
     ],
     "section": "La Madriguera",
     "keywords": "Historia completa de Mt. Gox: de dominar el 70% del trading de Bitcoin a perder 850.000 BTC. Cronología, causas y lecciones. Los orígenes improbables El ascenso Las señales de alarma El colapso La investigación y el juicio La saga de los reembolsos Las lecciones Fuentes y referencias: Enlaces internos: Inicio › La Madriguera › El hackeo de Mt. Gox: el mayor robo de Bitcoin de la historia La madriguera El hackeo de Mt. Gox: el mayor robo de Bitcoin de la historia Cómo un exchange que manejaba el 70% del volumen mundial de Bitcoin colapsó, y por qué 10 años después seguimos aprendiendo de ello. Fecha de publicación: Febrero 2026 · Tiempo de lectura: ~8 minutos Mt. Gox es el fantasma que acecha a cada exchange de Bitcoin. En su apogeo, manejaba el 70% del volumen mundial de trading. En su caída, perdió 850.000 BTC de sus usuarios — aproximadamente 450 millones de dólares al precio de entonces, y miles de millones al precio actual. Es la historia definitiva de por qué \"not your keys, not your coins\" no es un eslogan vacío. Los orígenes improbables La historia de Mt. Gox empieza con cartas de Magic: The Gathering. En 2006, Jed McCaleb, un programador estadounidense, creó un sitio web para intercambiar cartas del popular juego de cartas coleccionables. El nombre Mt. Gox era un acrónimo de \"Magic: The Gathering Online eXchange\". El sitio nunca despegó para su propósito original. En 2010, McCaleb descubrió Bitcoin. Vio una oportunidad: reutilizar su dominio y código base para crear u"
+  },
+  {
+    "title": "El Problema del General Bizantino y cómo Bitcoin lo resuelve",
+    "url": "/la-madriguera/el-problema-del-general-bizantino.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "problema",
+      "del",
+      "general",
+      "bizantino"
+    ],
+    "section": "La Madriguera",
+    "keywords": "Bitcoin resuelve un problema clásico de la informática: ¿cómo lograr consenso sin confianza? La solución de Satoshi explicada. La analogía de los generales El problema formal Las soluciones clásicas La solución de Satoshi Por qué funciona Los intentos anteriores y por qué fallaron Proof-of-Stake: una solución diferente La elegancia de la solución Fuentes y referencias: Enlaces internos: Inicio &rsaquo; La Madriguera &rsaquo; El Problema del General Bizantino y cómo Bitcoin lo resuelve La madriguera El Problema del General Bizantino y cómo Bitcoin lo resuelve Un problema que los informáticos llevaban décadas sin resolver. Satoshi lo resolvió con proof-of-work. Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~7 minutos En 1982, tres investigadores de Microsoft y SRI International publicaron un paper que definiría uno de los problemas fundamentales de la informática distribuida. Leslie Lamport, Robert Shostak y Marshall Pease describieron lo que llamaron \"El Problema de los Generales Bizantinos\". El problema parecía abstracto, casi filosófico. Pero durante décadas, limitó lo que era posible construir en sistemas distribuidos. Todos los intentos de dinero digital previos a Bitcoin fracasaron, de una forma u otra, porque no podían resolver este problema sin depender de una autoridad central. Satoshi lo resolvió. Y la solución fue tan elegante que muchos criptógrafos tardaron años en entender por qué funcionaba. La analogía de los generales Imagina varios generales b"
   },
   {
     "title": "El halving y los ciclos de precio: ¿correlación o causalidad?",
@@ -1308,6 +1399,18 @@
     "keywords": "Análisis de la relación entre los halvings de Bitcoin y los ciclos de precio. Datos históricos, teorías, y por qué el pasado no predice el futuro. Qué es el halving (repaso rápido) Los datos históricos Halving 1 — 28 de noviembre de 2012 Halving 2 — 9 de julio de 2016 Halving 3 — 11 de mayo de 2020 Halving 4 — Abril 2024 La teoría del shock de oferta El modelo Stock-to-Flow La profecía autocumplida Rendimientos decrecientes Lo que no sabemos Lo que sí sabemos Inicio &rsaquo; La Madriguera &rsaquo; El halving y los ciclos de precio: ¿correlación o causalidad? La madriguera El halving y los ciclos de precio: ¿correlación o causalidad? Cada halving ha precedido un ciclo alcista. ¿Es inevitable o es una profecía autocumplida? Fecha de publicación: Febrero 2026 Autor: aprendeBTC Tiempo de lectura: ~14 minutos Cada cuatro años aproximadamente, la recompensa que reciben los mineros de Bitcoin se reduce a la mitad. Este evento — el halving — ha precedido históricamente a los mayores ciclos alcistas de Bitcoin. Pero, ¿es el halving la causa de las subidas, o es solo coincidencia? ¿O algo más complejo? Este artículo examina los datos, las teorías, y las limitaciones de lo que realmente sabemos. Qué es el halving (repaso rápido) Cada 210.000 bloques (aproximadamente 4 años), la recompensa por bloque se reduce a la mitad: 2009-2012: 50 BTC por bloque 2012-2016: 25 BTC por bloque 2016-2020: 12.5 BTC por bloque 2020-2024: 6.25 BTC por bloque 2024-2028: 3.125 BTC por bloque Esto continúa ha"
   },
   {
+    "title": "Hiperinflaciones del mundo real y el caso de uso de Bitcoin",
+    "url": "/la-madriguera/hiperinflaciones-y-bitcoin.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "hiperinflaciones",
+      "bitcoin"
+    ],
+    "section": "La Madriguera",
+    "keywords": "Venezuela, Argentina, Turquía, Líbano. Casos reales donde la moneda colapsa y Bitcoin ofrece una alternativa concreta. ¿Qué es la hiperinflación? Casos históricos Venezuela: de potencia petrolera a colapso Argentina: inflación crónica y cepo Turquía: autoritarismo y colapso de la lira Líbano: el colapso total Stablecoins: la competencia Las ventajas de Bitcoin sobre stablecoins: Las ventajas de stablecoins sobre Bitcoin: Lo que los privilegiados no ven Fuentes y referencias: Enlaces internos: Inicio &rsaquo; La Madriguera &rsaquo; Hiperinflaciones del mundo real y el caso de uso de Bitcoin La madriguera Hiperinflaciones del mundo real y el caso de uso de Bitcoin Para miles de millones de personas, Bitcoin no es una inversión especulativa. Es una herramienta de supervivencia. Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~7 minutos Desde España o Estados Unidos, Bitcoin puede parecer una inversión especulativa, un hobby tecnológico, o quizás una apuesta sobre el futuro del dinero. Desde Venezuela, Argentina, Turquía o Líbano, Bitcoin es algo muy diferente: una herramienta de supervivencia económica. Cuando tu moneda pierde el 50% de su valor en un año, cuando el gobierno congela los depósitos bancarios, cuando no puedes enviar dinero al exterior porque hay controles de capital — Bitcoin no es teoría. Es necesidad práctica. ¿Qué es la hiperinflación? La definición técnica (propuesta por el economista Phillip Cagan) es una inflación mensual superior al 50%. Esto"
+  },
+  {
     "title": "La Madriguera",
     "url": "/la-madriguera/",
     "tags": [
@@ -1319,7 +1422,7 @@
       "factura lightning"
     ],
     "section": "La Madriguera",
-    "keywords": "Artículos en profundidad sobre Bitcoin: historia, eventos, regulación, energía y debates técnicos. Análisis riguroso en español. Ruta histórica (orden recomendado) Debates y análisis de protocolo Inicio › La Madriguera La madriguera La Madriguera Artículos en profundidad para usuarios avanzados: historia, eventos y debates de fondo en Bitcoin. Esta sección está pensada para quien quiere más contexto: no solo qué es Bitcoin, sino qué ha pasado, por qué ha pasado y qué consecuencias tuvo. Puedes leer por tema o seguir la ruta histórica recomendada para recorrer los hitos en orden. Ruta histórica (orden recomendado) 01 · El hackeo de Mt. Gox · 2014 · ~4200 palabras 02 · Silk Road y Ross Ulbricht · 2011-2025 · ~4500 palabras 03 · La crisis de Terra/Luna · 2022 · ~3200 palabras 04 · Los ETFs de Bitcoin · 2024 · ~3800 palabras 05 · Ordinals e Inscriptions · 2023-2026 · ~3500 palabras 06 · Geopolítica de la minería · 2021-2026 · ~4000 palabras 07 · Ataque del 51% · marco técnico · ~3800 palabras 08 · Bloques huérfanos y reorganizaciones · marco técnico · ~3600 palabras Debates y análisis de protocolo La Guerra del Tamaño de Bloque: la batalla que definió Bitcoin · ~4500 palabras El colapso de FTX: qué pasó y qué lecciones dejó · ~3500 palabras Bitcoin y energía: el debate completo · ~4000 palabras El caso Samourai Wallet y el futuro de la privacidad · ~3500 palabras Lightning Network: dónde estamos y hacia dónde vamos · ~3800 palabras Los soft forks de Bitcoin: historia de cada camb"
+    "keywords": "Artículos avanzados de Bitcoin: historia, fundamentos y análisis profundo para entender el contexto completo de la red. Historia Fundamentos Análisis Inicio › La Madriguera La madriguera La Madriguera Ruta avanzada de contexto: historia, fundamentos y análisis para entender Bitcoin con profundidad. Esta sección está pensada para usuarios que ya dominan lo básico y quieren conectar los hechos históricos, las decisiones de diseño y los debates abiertos del ecosistema. Puedes leerla por tema o seguir el orden completo del 01 al 27 para una ruta progresiva. Historia Los primeros días de Bitcoin (2009) Bitcoin y WikiLeaks (2010) Silk Road y Ross Ulbricht (2013) Mt. Gox (2014) Guerra del tamaño de bloque (2015-2017) Crisis Terra/Luna (2022) Colapso de FTX (2022) Ordinals e Inscriptions (2023) Caso Samourai Wallet (2024) ETFs de Bitcoin (2024) Fundamentos El ataque del 51% Bloques huérfanos y reorgs El problema del General Bizantino El doble gasto La política monetaria de Bitcoin Los soft forks de Bitcoin Multisig y herencia según Satoshi Economía austríaca para bitcoiners Análisis Bitcoin y energía Geopolítica de la minería Lightning Network: estado actual Privacidad en Bitcoin: estado actual ¿Puede un gobierno prohibir Bitcoin? El debate de la osificación ¿Medio de pago o reserva de valor? Hiperinflaciones y Bitcoin El halving y los ciclos de precio 💡 Cómo leer esta sección Si quieres continuidad histórica, sigue del 01 al 10. Si quieres profundizar en diseño y seguridad, empieza"
   },
   {
     "title": "La crisis de Terra/Luna: la \"stablecoin\" que no era estable",
@@ -1367,6 +1470,23 @@
     "keywords": "Historia completa de la Blocksize War (2015-2017). El debate que casi divide Bitcoin y por qué importa todavía hoy. El origen: el límite de 1 MB Las dos visiones Los actores La escalada El Acuerdo de Nueva York (SegWit2x) 1 de agosto de 2017: el fork Las consecuencias Las lecciones 1. Bitcoin es extremadamente difícil de cambiar 2. Los usuarios tienen el poder real 3. Los forks hostiles no heredan el efecto de red 4. La descentralización tiene costes reales Inicio &rsaquo; La Madriguera &rsaquo; La Guerra del Tamaño de Bloque: la batalla que definió Bitcoin La madriguera La Guerra del Tamaño de Bloque: la batalla que definió Bitcoin Cómo un debate técnico se convirtió en una guerra civil, y qué nos enseña sobre la gobernanza de Bitcoin. Fecha de publicación: Febrero 2026 Autor: aprendeBTC Tiempo de lectura: ~20 minutos Entre 2015 y 2017, Bitcoin vivió su crisis existencial más severa. Lo que empezó como un debate técnico sobre el tamaño de los bloques se convirtió en una guerra civil que dividió a la comunidad, generó ataques personales, acusaciones de censura, y finalmente resultó en la división de la cadena. El resultado de esa guerra definió qué tipo de sistema es Bitcoin. Las lecciones que dejó siguen siendo relevantes hoy. El origen: el límite de 1 MB En 2010, Satoshi Nakamoto añadió un límite de 1 MB al tamaño de los bloques de Bitcoin. En ese momento, los bloques estaban prácticamente vacíos — el límite era una medida anti-spam para prevenir que alguien inundara la red"
   },
   {
+    "title": "La política monetaria de Bitcoin: lo que Satoshi diseñó y por qué",
+    "url": "/la-madriguera/la-politica-monetaria-de-bitcoin.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "politica",
+      "monetaria",
+      "bitcoin",
+      "lightning",
+      "factura lightning",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "21 millones, halvings, deflación. La política monetaria de Bitcoin explicada desde las palabras de Satoshi hasta el debate actual. El diseño: ¿por qué 21 millones? Divisibilidad: los satoshis Lo que dijo Satoshi sobre la inflación inicial El debate sobre la deflación Los halvings El futuro: cuando se acabe el subsidy La inmutabilidad como feature Fuentes y referencias: Enlaces internos: Inicio &rsaquo; La Madriguera &rsaquo; La política monetaria de Bitcoin: lo que Satoshi diseñó y por qué La madriguera La política monetaria de Bitcoin: lo que Satoshi diseñó y por qué Bitcoin tiene una política monetaria fija, predecible y que nadie puede cambiar. Satoshi la diseñó deliberadamente. Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~6 minutos Bitcoin tiene algo que ninguna moneda fiat tiene: una política monetaria predeterminada que nadie puede cambiar. Habrá exactamente 21 millones de bitcoin. La emisión sigue un calendario fijo conocido desde 2009. Cada cuatro años aproximadamente, la emisión se reduce a la mitad. Para el año 2140, el último satoshi habrá sido minado. Estas reglas no son decisiones de un comité. No pueden cambiarse por decreto. Están escritas en el código y protegidas por el consenso de miles de nodos independientes. Satoshi diseñó esta política monetaria deliberadamente, y sus escritos revelan el razonamiento detrás de cada decisión. El diseño: ¿por qué 21 millones? La emisión de Bitcoin sigue una serie geométrica: Bloques 0-209.999: 50 BTC por"
+  },
+  {
     "title": "Lightning Network: dónde estamos y hacia dónde vamos",
     "url": "/la-madriguera/lightning-network-estado-actual.html",
     "tags": [
@@ -1401,6 +1521,43 @@
     "keywords": "En enero de 2024, EEUU aprobó los ETFs spot de Bitcoin. BlackRock, Fidelity y otros entraron al mercado. Análisis completo. ¿Qué es un ETF? La década de rechazos El día de la aprobación Los números ¿Qué cambia? Las preocupaciones legítimas La perspectiva maximalista Más allá de EEUU El futuro Fuentes y referencias: Enlaces internos: Inicio › La Madriguera › Los ETFs de Bitcoin: qué son, qué significan y qué cambian La madriguera Los ETFs de Bitcoin: qué son, qué significan y qué cambian Wall Street entró en Bitcoin. ¿Es bueno o malo? Un análisis sin fanatismos. Fecha de publicación: Febrero 2026 · Tiempo de lectura: ~8 minutos El 10 de enero de 2024, la Comisión de Valores de Estados Unidos (SEC) aprobó once ETFs de Bitcoin spot. Por primera vez, inversores estadounidenses podían obtener exposición directa a Bitcoin a través de productos cotizados en bolsas tradicionales, sin necesidad de gestionar claves ni usar exchanges de criptomonedas. BlackRock, el mayor gestor de activos del mundo, lanzó su ETF (IBIT). Fidelity, uno de los mayores brokers de EEUU, lanzó el suyo (FBTC). En semanas, estos productos acumularon decenas de miles de millones de dólares. Era el momento que muchos llevaban esperando una década. Era también el momento que otros temían. ¿Qué es un ETF? Un ETF (Exchange-Traded Fund) es un fondo de inversión que cotiza en bolsa como si fuera una acción. El inversor compra participaciones del fondo a través de su broker habitual, y el fondo gestiona los activos sub"
   },
   {
+    "title": "Los primeros días de Bitcoin: del whitepaper al bloque 1000",
+    "url": "/la-madriguera/los-primeros-dias-de-bitcoin.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "los",
+      "primeros",
+      "dias",
+      "bitcoin",
+      "wallet",
+      "billetera",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "Los meses iniciales de Bitcoin: el software v0.1, los primeros mineros, la primera transacción, y cómo era usar Bitcoin en 2009. Antes del lanzamiento: el trabajo previo Las primeras reacciones El lanzamiento: enero 2009 Cómo era el software v0.1 Los primeros usuarios Los meses silenciosos El primer precio El Bitcoin Market y Mt. Gox Pizza Day El bug de agosto de 2010 La desaparición de Satoshi Lo que Satoshi dejó Inicio &rsaquo; La Madriguera &rsaquo; Los primeros días de Bitcoin: del whitepaper al bloque 1000 La madriguera Los primeros días de Bitcoin: del whitepaper al bloque 1000 Así era Bitcoin cuando solo lo usaban un puñado de personas. Una reconstrucción de los primeros meses. Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~8 minutos El 3 de enero de 2009, en algún lugar del mundo, una computadora minó el bloque génesis de Bitcoin. Dentro del bloque, codificado para siempre, estaba un mensaje del periódico The Times: \"Chancellor on brink of second bailout for banks.\" Era el comienzo de algo que cambiaría el mundo. Pero en ese momento, nadie lo sabía. Esta es la historia de los primeros meses de Bitcoin: cómo era el software, quiénes fueron los primeros usuarios, y cómo una idea en un whitepaper se convirtió en una red funcional. Antes del lanzamiento: el trabajo previo El whitepaper de Bitcoin se publicó el 31 de octubre de 2008 en la lista de correo de criptografía metzdowd.com. Pero Satoshi había estado trabajando en el código mucho antes. Lo sabemos"
+  },
+  {
+    "title": "Multisig, custodia y herencia: lo que Satoshi ya anticipó",
+    "url": "/la-madriguera/multisig-custodia-y-herencia-segun-satoshi.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "multisig",
+      "custodia",
+      "herencia",
+      "segun",
+      "satoshi",
+      "wallet",
+      "billetera",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "Satoshi discutió multisig, escrow y custodia compartida años antes de que existieran las herramientas actuales. Sus ideas siguen vigentes. Multisig en el diseño original Lo que Satoshi escribió sobre escrow Multisig hoy: usos reales Seguridad personal mejorada Custodia colaborativa Empresas y organizaciones El problema de la herencia La solución multisig para herencia Opción 1: Heredero directo + abogado Opción 2: Múltiples herederos Opción 3: Servicios especializados Timelocks: otra herramienta Inicio &rsaquo; La Madriguera &rsaquo; Multisig, custodia y herencia: lo que Satoshi ya anticipó La madriguera Multisig, custodia y herencia: lo que Satoshi ya anticipó En 2010, Satoshi ya describió esquemas de custodia compartida y transacciones multifirma. Estaban en el código desde el día 1. Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~7 minutos Una de las características más útiles de Bitcoin para la seguridad avanzada — las transacciones multifirma o \"multisig\" — no fue un añadido posterior. Satoshi lo incluyó en el código original desde el primer día. En el capítulo 54 del Libro de Satoshi (\"Custodia de Depósitos y Transacciones Multi-Firma\"), discutió exactamente cómo funcionarían estos esquemas y para qué servirían. Sus ideas, escritas en 2010, describen con precisión los productos que empresas como Casa, Unchained y Nunchuk ofrecen hoy. Multisig en el diseño original Bitcoin Script, el lenguaje de scripting que determina las condiciones para gastar bitcoin,"
+  },
+  {
     "title": "Ordinals, Inscriptions y la guerra por el espacio de bloque",
     "url": "/la-madriguera/ordinals-inscriptions-debate.html",
     "tags": [
@@ -1416,6 +1573,24 @@
     ],
     "section": "La Madriguera",
     "keywords": "En 2023, aparecieron NFTs en Bitcoin. La comunidad se dividió. ¿Son spam o uso legítimo? El debate sobre el espacio de bloque. ¿Qué son los Ordinals? La explosión El debate Los defensores de Ordinals argumentaban: Los críticos de Ordinals argumentaban: Los intentos de filtrado Runes: el sucesor Las consecuencias económicas La conexión con el debate de osificación Estado actual Fuentes y referencias: Enlaces internos: Inicio &rsaquo; La Madriguera &rsaquo; Ordinals, Inscriptions y la guerra por el espacio de bloque La madriguera Ordinals, Inscriptions y la guerra por el espacio de bloque ¿Quién decide qué es una transacción legítima en Bitcoin? El debate más polarizado desde la Blocksize War. Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~7 minutos En enero de 2023, un desarrollador llamado Casey Rodarmor lanzó el protocolo Ordinals. La idea era simple pero provocadora: asignar un número único a cada satoshi individual, permitiendo \"inscribir\" datos arbitrarios en la blockchain de Bitcoin. En semanas, miles de imágenes, textos y hasta pequeños videojuegos estaban siendo grabados permanentemente en Bitcoin. Las fees se dispararon. La mempool se llenó. Y la comunidad se dividió de una forma que no se veía desde la Guerra del Tamaño de Bloque. ¿Eran los Ordinals una innovación legítima o spam que ensuciaba la blockchain? ¿Quién tiene autoridad para decidir qué es una \"transacción legítima\" en un sistema permissionless? El debate reveló tensiones profundas sobre l"
+  },
+  {
+    "title": "Privacidad en Bitcoin: el estado actual y las alternativas",
+    "url": "/la-madriguera/privacidad-en-bitcoin-estado-actual.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "privacidad",
+      "bitcoin",
+      "estado",
+      "actual",
+      "wallet",
+      "billetera",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "CoinJoin, PayJoin, Silent Payments, Nostr. El mapa completo de la privacidad en Bitcoin tras el caso Samourai Wallet. El punto de partida: Bitcoin no es anónimo Lo que se perdió: Samourai y Wasabi Lo que queda: opciones actuales JoinMarket PayJoin (BIP 78) Coin Control Ejecutar tu propio nodo sobre Tor Lightning Network Silent Payments (BIP 352) Niveles prácticos de privacidad Nivel 0 — Sin privacidad Nivel 1 — Higiene básica Inicio &rsaquo; La Madriguera &rsaquo; Privacidad en Bitcoin: el estado actual y las alternativas La madriguera Privacidad en Bitcoin: el estado actual y las alternativas Después de Samourai, ¿qué queda? Un mapa actualizado de las herramientas y técnicas de privacidad en Bitcoin. Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~8 minutos En abril de 2024, el Departamento de Justicia de Estados Unidos arrestó a los fundadores de Samourai Wallet, la herramienta de privacidad más popular del ecosistema Bitcoin. Semanas después, Wasabi Wallet cerró su coordinador de CoinJoin. Phoenix Wallet se retiró del mercado estadounidense. El panorama de la privacidad en Bitcoin cambió dramáticamente en cuestión de meses. ¿Qué opciones quedan? ¿Es todavía posible usar Bitcoin de forma privada? Este artículo mapea el estado actual de las herramientas, técnicas y debates sobre privacidad en Bitcoin. El punto de partida: Bitcoin no es anónimo Antes de hablar de soluciones, es importante entender el problema. Bitcoin es pseudónimo, no anónimo. Cada transacció"
   },
   {
     "title": "¿Puede un gobierno prohibir Bitcoin?",

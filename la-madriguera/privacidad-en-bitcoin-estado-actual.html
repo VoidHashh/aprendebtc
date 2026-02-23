@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CoinJoin, PayJoin, Silent Payments, Nostr. El mapa completo de la privacidad en Bitcoin tras el caso Samourai Wallet." />
+  <meta property="og:title" content="Privacidad en Bitcoin: el estado actual y las alternativas | aprendebtc.com" />
+  <meta property="og:description" content="CoinJoin, PayJoin, Silent Payments, Nostr. El mapa completo de la privacidad en Bitcoin tras el caso Samourai Wallet." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/la-madriguera/privacidad-en-bitcoin-estado-actual.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Privacidad en Bitcoin: el estado actual y las alternativas | aprendebtc.com" />
+  <meta name="twitter:description" content="CoinJoin, PayJoin, Silent Payments, Nostr. El mapa completo de la privacidad en Bitcoin tras el caso Samourai Wallet." />
+  <title>Privacidad en Bitcoin: el estado actual y las alternativas | aprendebtc.com</title>
+  <link rel="canonical" href="https://aprendebtc.com/la-madriguera/privacidad-en-bitcoin-estado-actual.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegacion de la madriguera">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-auto" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegacion">
+          <a href="/" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="/la-madriguera/" class="breadcrumb__item">La Madriguera</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Privacidad en Bitcoin: el estado actual y las alternativas</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--4 article__badge">La madriguera</div>
+          <h1>Privacidad en Bitcoin: el estado actual y las alternativas</h1>
+          <p class="article__subtitle">Después de Samourai, ¿qué queda? Un mapa actualizado de las herramientas y técnicas de privacidad en Bitcoin.</p>
+          <p style="color: var(--text-secondary);">Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~8 minutos</p>
+
+<p>En abril de 2024, el Departamento de Justicia de Estados Unidos arrestó a los fundadores de Samourai Wallet, la herramienta de privacidad más popular del ecosistema Bitcoin. Semanas después, Wasabi Wallet cerró su coordinador de CoinJoin. Phoenix Wallet se retiró del mercado estadounidense.</p>
+
+<p>El panorama de la privacidad en Bitcoin cambió dramáticamente en cuestión de meses.</p>
+
+<p>¿Qué opciones quedan? ¿Es todavía posible usar Bitcoin de forma privada? Este artículo mapea el estado actual de las herramientas, técnicas y debates sobre privacidad en Bitcoin.</p>
+
+<h2>El punto de partida: Bitcoin no es anónimo</h2>
+
+<p>Antes de hablar de soluciones, es importante entender el problema.</p>
+
+<p>Bitcoin es pseudónimo, no anónimo. Cada transacción es pública y permanente, registrada en una blockchain que cualquiera puede examinar. Las direcciones no tienen nombres, pero con suficiente análisis (especialmente cuando se cruzan con datos de exchanges que requieren identificación), se pueden vincular transacciones a personas reales.</p>
+
+<p>Empresas como Chainalysis, Elliptic y CipherTrace han construido negocios multimillonarios analizando la blockchain de Bitcoin para gobiernos, exchanges y entidades financieras. Sus técnicas incluyen:</p>
+
+<p><strong>Clustering de direcciones</strong>: si dos UTXOs se gastan juntos en una transacción, probablemente pertenecen al mismo dueño. Este simple principio permite agrupar direcciones en &quot;clusters&quot; que representan a una misma entidad.</p>
+
+<p><strong>Análisis de flujo</strong>: siguiendo el movimiento de fondos a través de múltiples transacciones, se puede rastrear el origen y destino de bitcoin.</p>
+
+<p><strong>Puntos de entrada/salida</strong>: los exchanges con KYC (Know Your Customer) son puntos donde las direcciones se vinculan a identidades reales. Una vez que sabes que una dirección pertenece a Juan, puedes seguir todo lo que Juan hace con esos fondos.</p>
+
+<p><strong>Heurísticas de cambio</strong>: en una transacción típica, un output va al destinatario y otro vuelve al emisor como &quot;cambio&quot;. Identificar cuál es cuál revela información sobre ambas partes.</p>
+
+<p>El resultado: para un usuario típico que compra bitcoin en un exchange KYC y lo envía a su wallet personal, la privacidad es mínima. El exchange sabe quién eres. El análisis de blockchain puede seguir tus fondos. Tu historial financiero en Bitcoin es, en la práctica, público.</p>
+
+<h2>Lo que se perdió: Samourai y Wasabi</h2>
+
+<p>Samourai Wallet y Wasabi Wallet eran las dos herramientas de CoinJoin más utilizadas.</p>
+
+<p>CoinJoin es una técnica donde múltiples usuarios combinan sus transacciones en una sola transacción grande. Si 10 personas cada una con 0.1 BTC hacen un CoinJoin, la transacción resultante tiene 10 inputs de 0.1 BTC y 10 outputs de 0.1 BTC. Un observador externo no puede saber qué input corresponde a qué output.</p>
+
+<p><strong>Samourai Wallet</strong> ofrecía Whirlpool, un servicio de CoinJoin coordinado. Los usuarios enviaban bitcoin a pools de mezcla donde se combinaban con fondos de otros usuarios. El resultado eran UTXOs &quot;mezclados&quot; cuyo historial previo era difícil de rastrear.</p>
+
+<p>Tras el arresto de sus fundadores, Samourai cerró. Los servidores de Whirlpool fueron incautados. Los usuarios que tenían fondos en proceso de mezcla tuvieron que recuperarlos de formas complicadas.</p>
+
+<p><strong>Wasabi Wallet</strong> ofrecía un servicio similar con su propio coordinador de CoinJoin. Tras el arresto de Samourai, zkSNACKs (la empresa detrás de Wasabi) cerró su coordinador en junio de 2024, citando riesgos legales.</p>
+
+<p>El software de Wasabi sigue siendo de código abierto y utilizable, pero sin un coordinador central que organice los CoinJoins, la funcionalidad principal está efectivamente muerta.</p>
+
+<p>En cuestión de meses, las dos herramientas de privacidad más accesibles desaparecieron.</p>
+
+<h2>Lo que queda: opciones actuales</h2>
+
+<p>A pesar de las pérdidas, existen alternativas:</p>
+
+<h2>JoinMarket</h2>
+
+<p>JoinMarket es un protocolo de CoinJoin descentralizado que no depende de ningún coordinador central.</p>
+
+<p>En JoinMarket, hay dos roles: &quot;makers&quot; que ofrecen liquidez para CoinJoins (y cobran una pequeña fee) y &quot;takers&quot; que pagan por usar esa liquidez para mezclar sus fondos.</p>
+
+<p>No hay servidor central que pueda ser cerrado. No hay empresa que pueda ser demandada. Es puramente peer-to-peer.</p>
+
+<p>La desventaja: JoinMarket es más complejo de usar. Requiere correr software especializado, entender el modelo de makers/takers, y generalmente más conocimiento técnico que Samourai o Wasabi ofrecían.</p>
+
+<p><strong>Jam</strong> es una interfaz gráfica que hace JoinMarket más accesible, pero sigue siendo más complejo que las soluciones que ya no existen.</p>
+
+<h2>PayJoin (BIP 78)</h2>
+
+<p>PayJoin es una técnica diferente a CoinJoin. En lugar de mezclar fondos entre desconocidos, PayJoin hace que los pagos normales parezcan más privados.</p>
+
+<p>En una transacción PayJoin, tanto el emisor como el receptor contribuyen inputs. Esto rompe la heurística común de que todos los inputs pertenecen al emisor.</p>
+
+<p>Un observador que analiza la blockchain ve una transacción que parece normal pero cuyo análisis da resultados incorrectos. El emisor y el receptor colaboran para engañar al análisis.</p>
+
+<p>PayJoin requiere que tanto emisor como receptor usen wallets compatibles, lo que limita su adopción. Pero es una técnica elegante que no requiere coordinadores ni terceros.</p>
+
+<h2>Coin Control</h2>
+
+<p>No es mezcla, pero es defensa básica.</p>
+
+<p>Coin control significa gestionar manualmente qué UTXOs usas en cada transacción. La mayoría de wallets avanzadas (Sparrow, Electrum, Bitcoin Core) permiten esto.</p>
+
+<p>¿Por qué importa? Si tienes un UTXO de un exchange KYC y otro de una fuente anónima, gastarlos juntos vincula ambos a tu identidad. Coin control te permite mantenerlos separados.</p>
+
+<p>Es defensa pasiva, no activa. No mejora la privacidad de UTXOs existentes, pero evita empeorarla.</p>
+
+<h2>Ejecutar tu propio nodo sobre Tor</h2>
+
+<p>Cuando usas un wallet que se conecta a servidores de terceros, esos servidores ven tus direcciones y pueden vincularlas a tu IP.</p>
+
+<p>Ejecutar tu propio nodo Bitcoin (Bitcoin Core, o un nodo en Umbrel/RaspiBlitz/etc.) y conectar tu wallet a él elimina este vector de fuga de información.</p>
+
+<p>Hacerlo sobre Tor añade otra capa: incluso si alguien observa tu tráfico de red, no puede ver que estás usando Bitcoin.</p>
+
+<p>No es mezcla, pero es higiene básica de privacidad.</p>
+
+<h2>Lightning Network</h2>
+
+<p>Lightning ofrece mejor privacidad que las transacciones on-chain, con matices importantes.</p>
+
+<p>Los pagos Lightning no se registran en la blockchain pública. Solo el emisor, el receptor y los nodos intermedios ven el pago. Y los nodos intermedios solo ven que están enrutando un pago, no los detalles de emisor/receptor.</p>
+
+<p>Sin embargo:</p>
+
+<ul><li>Abrir y cerrar canales requiere transacciones on-chain, que son públicas</li><li>Los nodos de routing pueden intentar correlacionar pagos si controlan suficientes puntos de la red</li><li>Si usas una wallet custodia de Lightning, el custodio ve todo</li></ul>
+
+<p>Lightning no es privacidad perfecta, pero es significativamente mejor que on-chain para pagos cotidianos.</p>
+
+<h2>Silent Payments (BIP 352)</h2>
+
+<p>Silent Payments es una propuesta que permitiría generar direcciones únicas para cada transacción sin necesidad de interacción entre emisor y receptor.</p>
+
+<p>Actualmente, si quieres recibir pagos privados, necesitas generar una nueva dirección para cada pago y comunicarla al pagador. Silent Payments permitiría publicar una sola dirección estática que genera direcciones únicas automáticamente para cada pago.</p>
+
+<p>El problema: Silent Payments aún no está implementado en el protocolo Bitcoin. Requiere cambios que, aunque no son un soft fork de consenso, necesitan adopción amplia de wallets y nodos.</p>
+
+<p>Es la mejora de privacidad más prometedora en el horizonte, pero aún no está disponible.</p>
+
+<h2>Niveles prácticos de privacidad</h2>
+
+<p>Dado el panorama actual, aquí hay niveles realistas de privacidad que un usuario puede alcanzar:</p>
+
+<h2>Nivel 0 — Sin privacidad</h2>
+
+<p>Compras en exchange KYC → envías a tu wallet → gastas directamente.</p>
+
+<p>Tu identidad está vinculada a tus fondos. El exchange sabe que compraste. El análisis de blockchain puede seguir todo lo que haces. Cualquiera que conozca una de tus direcciones puede investigar tu historial financiero.</p>
+
+<h2>Nivel 1 — Higiene básica</h2>
+
+<ul><li>Usa direcciones nuevas para cada recepción (las HD wallets lo hacen automáticamente)</li><li>No reutilices direcciones</li><li>Practica coin control: no mezcles UTXOs de diferentes fuentes</li><li>Conecta tu wallet a tu propio nodo</li></ul>
+
+<p>Esto no mejora la privacidad de lo que ya tienes, pero evita empeorarla activamente.</p>
+
+<h2>Nivel 2 — Evitar KYC</h2>
+
+<ul><li>Compra bitcoin en mercados P2P (Bisq, HodlHodl, RoboSats)</li><li>Usa cajeros automáticos de Bitcoin que no requieran identificación</li><li>Acepta pagos en bitcoin por bienes y servicios</li><li>Minería (si es viable para ti)</li></ul>
+
+<p>Si nunca vinculas tu identidad a tus bitcoin en primer lugar, el análisis de blockchain tiene mucho menos con qué trabajar.</p>
+
+<h2>Nivel 3 — Mezcla activa</h2>
+
+<ul><li>Usa JoinMarket para mezclar fondos</li><li>Implementa PayJoin cuando sea posible</li><li>Ejecuta todo sobre Tor</li><li>Usa Lightning para pagos cotidianos</li></ul>
+
+<p>Este nivel requiere esfuerzo técnico significativo. Las herramientas fáciles (Samourai, Wasabi) ya no existen en su forma original.</p>
+
+<h2>Nivel 4 — Avanzado</h2>
+
+<ul><li>Todo lo anterior</li><li>Nodo en hardware dedicado con conexión Tor permanente</li><li>Múltiples identidades separadas (fondos KYC completamente aislados de fondos no-KYC)</li><li>Conocimiento profundo de análisis de blockchain para evitar errores</li></ul>
+
+<p>Este nivel es para usuarios técnicos dispuestos a invertir tiempo significativo en privacidad.</p>
+
+<h2>Bitcoin y Nostr: la conexión</h2>
+
+<p>Nostr es un protocolo de comunicación descentralizado que muchos bitcoiners usan. La conexión con la privacidad de Bitcoin es relevante:</p>
+
+<p><strong>Zaps</strong>: Nostr integra &quot;zaps&quot;, propinas en satoshis enviadas vía Lightning. Esto permite micropagos con la privacidad mejorada de Lightning.</p>
+
+<p><strong>Identidad pseudónima</strong>: Nostr permite crear identidades pseudónimas no vinculadas a identidad real. Combinado con Lightning, permite recibir pagos sin revelar quién eres.</p>
+
+<p><strong>Coordinación sin servidores centrales</strong>: si las futuras herramientas de privacidad de Bitcoin necesitan coordinación, Nostr podría proporcionar esa capa sin puntos centrales de fallo.</p>
+
+<p>nostrfacil.com, el proyecto hermano de aprendeBTC, cubre Nostr en profundidad.</p>
+
+<h2>El futuro de la privacidad en Bitcoin</h2>
+
+<p>La presión regulatoria sobre herramientas de privacidad va a aumentar, no a disminuir. Los gobiernos ven la privacidad financiera con sospecha, especialmente después de casos de alto perfil como Samourai.</p>
+
+<p>Las herramientas que sobrevivirán son las que no tienen puntos centrales de fallo:</p>
+
+<ul><li>JoinMarket (descentralizado)</li><li>PayJoin (peer-to-peer)</li><li>Silent Payments (cuando se implemente)</li><li>Lightning (con sus limitaciones)</li></ul>
+
+<p>Las herramientas con coordinadores centrales (como Samourai y Wasabi) son vulnerables a presión legal. Los creadores pueden ser arrestados. Los servidores pueden ser cerrados.</p>
+
+<p>El objetivo a largo plazo de muchos desarrolladores es la &quot;privacidad por defecto&quot;: que las transacciones de Bitcoin sean indistinguibles entre sí sin esfuerzo del usuario. Taproot fue un paso en esta dirección (las transacciones P2TR parecen iguales sean singlesig, multisig o scripts complejos).</p>
+
+<p>Pero estamos lejos de ese objetivo. Mientras tanto, la privacidad en Bitcoin requiere esfuerzo activo, conocimiento técnico, y aceptar que las herramientas más fáciles han desaparecido.</p>
+
+<h2>Fuentes y referencias:</h2>
+
+<ul><li>Documentación de JoinMarket (github.com/JoinMarket-Org)</li><li>BIP 78 (PayJoin)</li><li>BIP 352 (Silent Payments)</li><li>Reportes de Chainalysis sobre técnicas de análisis</li><li>Artículos de Bitcoin Magazine sobre el estado de la privacidad post-Samourai</li></ul>
+
+<h2>Enlaces internos:</h2>
+
+<ul><li><a href="/la-madriguera/el-caso-samourai-wallet.html">El caso Samourai Wallet</a></li><li><a href="/nivel-3/utxos-y-privacidad.html">La verdad sobre la privacidad en Bitcoin</a></li><li><a href="/nivel-4/coinjoin.html">¿Qué es CoinJoin?</a></li><li><a href="/nivel-3/utxos-y-privacidad.html">Bitcoin sobre Tor</a></li><li><a href="/comunidad/nostr-y-bitcoin.html">Nostr y Bitcoin</a></li></ul>
+
+          <div class="ad-slot ad-content" id="ad-content-privacidad-en-bitcoin-estado-actual" aria-hidden="true"></div>
+
+          <nav class="page-nav" aria-label="Navegaci?n entre p?ginas">
+            <a href="/la-madriguera/lightning-network-estado-actual.html" class="page-nav__item"><span class="page-nav__label">&larr; Anterior</span><span class="page-nav__title">Lightning Network: dónde estamos y hacia dónde vamos</span></a>
+            <a href="/la-madriguera/puede-un-gobierno-prohibir-bitcoin.html" class="page-nav__item page-nav__item--next"><span class="page-nav__label">Siguiente &rarr;</span><span class="page-nav__title">¿Puede un gobierno prohibir Bitcoin?</span></a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

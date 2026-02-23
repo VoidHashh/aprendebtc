@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="El doble gasto era el obstáculo central del dinero digital. Cómo Satoshi lo resolvió y por qué sigue siendo relevante entenderlo." />
+  <meta property="og:title" content="El doble gasto: el problema que Bitcoin resolvió | aprendebtc.com" />
+  <meta property="og:description" content="El doble gasto era el obstáculo central del dinero digital. Cómo Satoshi lo resolvió y por qué sigue siendo relevante entenderlo." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/la-madriguera/el-doble-gasto.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="El doble gasto: el problema que Bitcoin resolvió | aprendebtc.com" />
+  <meta name="twitter:description" content="El doble gasto era el obstáculo central del dinero digital. Cómo Satoshi lo resolvió y por qué sigue siendo relevante entenderlo." />
+  <title>El doble gasto: el problema que Bitcoin resolvió | aprendebtc.com</title>
+  <link rel="canonical" href="https://aprendebtc.com/la-madriguera/el-doble-gasto.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegacion de la madriguera">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-auto" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegacion">
+          <a href="/" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="/la-madriguera/" class="breadcrumb__item">La Madriguera</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">El doble gasto: el problema que Bitcoin resolvió</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--4 article__badge">La madriguera</div>
+          <h1>El doble gasto: el problema que Bitcoin resolvió</h1>
+          <p class="article__subtitle">Antes de Bitcoin, el dinero digital tenía un problema fatal. Satoshi lo solucionó sin necesidad de un banco.</p>
+          <p style="color: var(--text-secondary);">Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~6 minutos</p>
+
+<p>El dinero físico tiene una propiedad obvia que damos por sentada: si le das un billete a alguien, ya no lo tienes. No puedes gastar el mismo billete dos veces porque el billete es un objeto físico que solo puede estar en un lugar a la vez.</p>
+
+<p>El dinero digital es diferente. El dinero digital es información. Y la información se puede copiar.</p>
+
+<p>Si tu &quot;billete digital&quot; es simplemente un archivo, ¿qué impide que lo copies y lo gastes dos veces? ¿O mil veces?</p>
+
+<p>Este es el problema del doble gasto, y fue el obstáculo central que impidió el dinero digital durante décadas. Satoshi lo resolvió, y esa solución es el corazón de Bitcoin.</p>
+
+<h2>El problema</h2>
+
+<p>Imagina el dinero digital más simple posible: un archivo que representa 10 euros. Alice tiene ese archivo. Quiere pagar a Bob.</p>
+
+<p>Alice envía el archivo a Bob. Pero Alice puede haber guardado una copia. Ahora envía esa copia a Carol. Y otra copia a David.</p>
+
+<p>Todos piensan que tienen 10 euros. Pero solo hay 10 euros reales en el sistema. Cuando intenten gastar su dinero, alguien se llevará una sorpresa desagradable.</p>
+
+<p>Este es el doble gasto: usar el mismo dinero más de una vez.</p>
+
+<h2>La solución tradicional: intermediarios</h2>
+
+<p>Antes de Bitcoin, todas las soluciones al doble gasto requerían un intermediario de confianza.</p>
+
+<p>En el sistema bancario, el banco lleva el registro de quién tiene qué. Cuando Alice envía dinero a Bob, el banco resta de la cuenta de Alice y suma a la de Bob. Alice no puede gastar el mismo dinero dos veces porque el banco verifica que tiene fondos suficientes antes de procesar cada transacción.</p>
+
+<p>DigiCash, e-gold, PayPal — todos funcionaban igual. Un servidor central que mantiene el registro autoritativo de quién posee qué.</p>
+
+<p>El problema es que el intermediario es un punto de fallo:</p>
+
+<ul><li>Puede ser hackeado (Mt. Gox)</li><li>Puede ser cerrado por el gobierno (Liberty Reserve, e-gold)</li><li>Puede congelar tu cuenta arbitrariamente (PayPal)</li><li>Puede quebrar (DigiCash)</li><li>Puede censurar transacciones (WikiLeaks, Silk Road)</li></ul>
+
+<p>Para tener dinero digital verdaderamente libre, necesitabas resolver el doble gasto sin intermediarios. Durante décadas, nadie supo cómo.</p>
+
+<h2>La solución de Satoshi</h2>
+
+<p>Satoshi describió el problema directamente en el whitepaper:</p>
+
+<p>&quot;El problema principal con la moneda electrónica es que alguien debe evitar el doble gasto. Tradicionalmente esto se resuelve teniendo una autoridad central de confianza que verifica cada transacción. El problema es que el destino de todo el sistema monetario depende de la empresa que lo gestiona.&quot;</p>
+
+<p>Y propuso la solución:</p>
+
+<p>&quot;Proponemos una solución al problema del doble gasto usando una red peer-to-peer. La red marca cada transacción con una timestamp mediante el hash en una cadena continua de proof-of-work, formando un registro que no puede cambiarse sin rehacer el proof-of-work.&quot;</p>
+
+<p>La idea clave: en lugar de que un servidor central decida qué transacciones son válidas, toda la red lo decide colectivamente. Y lo hace registrando las transacciones en un orden cronológico público e inmutable.</p>
+
+<p>Si Alice intenta gastar el mismo bitcoin dos veces, las dos transacciones conflictivas llegarán a la red. Pero solo una puede incluirse en la blockchain. La que se incluya primero es la válida; la otra es rechazada automáticamente porque intenta gastar un output que ya no existe.</p>
+
+<h2>Cómo funciona en la práctica</h2>
+
+<p>Supongamos que Alice tiene 1 BTC y quiere hacer doble gasto. Crea dos transacciones:</p>
+
+<ul><li>TX1: envía 1 BTC a Bob</li><li>TX2: envía 1 BTC a Carol</li></ul>
+
+<p>Ambas transacciones son técnicamente válidas — ambas gastan el mismo UTXO (output no gastado) que Alice controla.</p>
+
+<p>Alice envía TX1 a Bob y TX2 a Carol simultáneamente, esperando que ambos le den algo a cambio antes de que se den cuenta del conflicto.</p>
+
+<p>Pero aquí está el problema de Alice:</p>
+
+<p>Ambas transacciones se propagan por la red. Los nodos ven el conflicto. Cada nodo acepta la primera transacción que recibe y rechaza la segunda como &quot;doble gasto&quot;.</p>
+
+<p>Cuando un minero crea un bloque, incluye solo una de las dos transacciones (la que recibió primero o la que paga más fees). Una vez que ese bloque se confirma, la transacción incluida es permanente.</p>
+
+<p>La transacción no incluida se vuelve permanentemente inválida — intenta gastar un UTXO que ya no existe.</p>
+
+<p>Si Bob y Carol esperan al menos una confirmación antes de entregar lo que Alice quería, uno de ellos detectará que su transacción nunca se confirmó. Alice solo puede engañar a uno de los dos, y solo si ese uno acepta la transacción sin confirmaciones.</p>
+
+<h2>Las confirmaciones como defensa</h2>
+
+<p>Este es el origen de la recomendación de &quot;esperar confirmaciones&quot;:</p>
+
+<p><strong>0 confirmaciones</strong>: la transacción está en la mempool pero no en ningún bloque. Un atacante con buena conectividad podría hacer doble gasto enviando una transacción conflictiva que llegue antes a los mineros.</p>
+
+<p><strong>1 confirmación</strong>: la transacción está en un bloque. Para revertirla, el atacante necesita que ese bloque se vuelva stale (reorganización de la cadena). Posible pero difícil.</p>
+
+<p><strong>6 confirmaciones</strong>: hay 6 bloques encima de la transacción. Para revertirla, el atacante necesita reorganizar 6 bloques. Extremadamente difícil sin una cantidad masiva de hashrate.</p>
+
+<p>En el capítulo 15 del Libro de Satoshi (&quot;Más Sobre Doble Gasto, Prueba de Trabajo y Comisiones de Transacción&quot;), Satoshi discutió estos escenarios en detalle. Su posición era pragmática: para transacciones pequeñas, 0 confirmaciones es aceptable (el riesgo es bajo). Para cantidades significativas, esperar confirmaciones es prudente.</p>
+
+<h2>Vectores de ataque reales</h2>
+
+<p>El doble gasto no es solo teórico. Hay vectores de ataque específicos:</p>
+
+<p><strong>Race attack</strong>: el atacante envía dos transacciones conflictivas casi simultáneamente — una al comerciante, otra a la red general con fee más alta. Si el comerciante acepta sin confirmaciones, puede quedarse sin el pago.</p>
+
+<p>Mitigación: esperar al menos una confirmación, o para pagos pequeños, verificar que la transacción se ha propagado bien por la red.</p>
+
+<p><strong>Finney attack</strong>: nombrado por Hal Finney, quien lo describió. El atacante es minero. Pre-mina un bloque con una transacción que se paga a sí mismo. Luego va a un comercio, paga con una transacción conflictiva, recibe el producto, y publica su bloque pre-minado (que invalida el pago al comercio).</p>
+
+<p>Mitigación: esperar confirmaciones. El ataque solo funciona si el atacante publica su bloque antes de que otro minero encuentre uno.</p>
+
+<p><strong>Ataque del 51%</strong>: con mayoría del hashrate, un atacante puede minar una cadena secreta y publicarla después de haber hecho doble gasto. Ya cubierto en detalle en el artículo sobre el ataque del 51%.</p>
+
+<p><strong>RBF (Replace-By-Fee)</strong>: técnicamente no es un &quot;ataque&quot; sino una feature del protocolo. Una transacción marcada como RBF puede ser reemplazada por otra con fee más alta antes de confirmarse. Los comerciantes que aceptan 0-conf deben verificar si la transacción tiene el flag RBF.</p>
+
+<h2>El estado actual</h2>
+
+<p>En los 16 años de historia de Bitcoin, no hay casos documentados de dobles gastos exitosos en transacciones con confirmaciones.</p>
+
+<p>Los robos masivos de bitcoin (Mt. Gox, Bitfinex, etc.) no fueron dobles gastos — fueron robos de claves privadas. El protocolo de Bitcoin no fue vulnerado; lo que falló fue la seguridad de los custodios.</p>
+
+<p>Esto es notable. Miles de millones de dólares en transacciones procesadas, ningún doble gasto con confirmaciones. El sistema funciona.</p>
+
+<h2>Lightning Network y el doble gasto</h2>
+
+<p>Lightning Network resuelve el problema de las confirmaciones para pagos pequeños.</p>
+
+<p>En Lightning, los pagos son casi instantáneos porque no requieren confirmación en la blockchain. Pero Lightning tiene sus propios mecanismos anti-fraude: si alguien intenta publicar un estado antiguo de un canal (una forma de doble gasto), la contraparte puede publicar una &quot;penalty transaction&quot; que confisca todos los fondos del atacante.</p>
+
+<p>Esto permite pagos rápidos sin sacrificar seguridad. Para pagos pequeños cotidianos, Lightning elimina la espera de confirmaciones que el doble gasto hacía necesaria.</p>
+
+<h2>Por qué importa entenderlo</h2>
+
+<p>El doble gasto puede parecer un problema técnico abstracto, pero entenderlo es fundamental para usar Bitcoin de forma segura:</p>
+
+<p>Si eres comerciante, necesitas saber cuántas confirmaciones esperar según el valor de la transacción.</p>
+
+<p>Si eres usuario, necesitas entender por qué tus transacciones tardan en &quot;confirmarse&quot; y por qué los exchanges te hacen esperar múltiples confirmaciones antes de acreditar tu depósito.</p>
+
+<p>Si evalúas otras criptomonedas, necesitas entender que el mecanismo de consenso debe prevenir dobles gastos. Cadenas con menor hashrate o mecanismos de consenso menos probados son más vulnerables.</p>
+
+<p>La solución al doble gasto es lo que hace que Bitcoin sea dinero real en lugar de solo información copiable. Es el breakthrough que permitió el dinero digital sin bancos.</p>
+
+<h2>Fuentes y referencias:</h2>
+
+<ul><li>Whitepaper de Bitcoin, secciones 1, 2 y 11</li><li>El Libro de Satoshi, capítulos 12 y 15</li><li>&quot;Two Bitcoins at the Price of One? Double-Spending Attacks on Fast Payments in Bitcoin&quot; (Karame et al., 2012)</li><li>Documentación de BIP 125 (Replace-By-Fee)</li></ul>
+
+<h2>Enlaces internos:</h2>
+
+<ul><li><a href="/base/el-whitepaper.html">El whitepaper de Bitcoin</a></li><li><a href="/la-madriguera/el-ataque-del-51-por-ciento.html">El ataque del 51%</a></li><li><a href="/base/que-es-una-confirmacion.html">¿Qué es una confirmación?</a></li><li><a href="/nivel-3/rbf-cpfp.html">RBF y CPFP</a></li><li><a href="/nivel-2/que-es-lightning.html">Lightning Network</a></li></ul>
+
+          <div class="ad-slot ad-content" id="ad-content-el-doble-gasto" aria-hidden="true"></div>
+
+          <nav class="page-nav" aria-label="Navegaci?n entre p?ginas">
+            <a href="/la-madriguera/el-problema-del-general-bizantino.html" class="page-nav__item"><span class="page-nav__label">&larr; Anterior</span><span class="page-nav__title">El Problema del General Bizantino y cómo Bitcoin lo resuelve</span></a>
+            <a href="/la-madriguera/la-politica-monetaria-de-bitcoin.html" class="page-nav__item page-nav__item--next"><span class="page-nav__label">Siguiente &rarr;</span><span class="page-nav__title">La política monetaria de Bitcoin: lo que Satoshi diseñó y por qué</span></a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

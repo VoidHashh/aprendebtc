@@ -11,21 +11,32 @@ DEFAULT_DIR = "la-madriguera"
 
 NAV_SEQUENCE = [
     "/la-madriguera/",
-    "/la-madriguera/el-hackeo-de-mt-gox.html",
+    "/la-madriguera/los-primeros-dias-de-bitcoin.html",
+    "/la-madriguera/bitcoin-y-wikileaks.html",
     "/la-madriguera/silk-road-y-ross-ulbricht.html",
+    "/la-madriguera/el-hackeo-de-mt-gox.html",
+    "/la-madriguera/la-guerra-del-tamano-de-bloque.html",
     "/la-madriguera/la-crisis-de-terra-luna.html",
-    "/la-madriguera/los-etfs-de-bitcoin.html",
+    "/la-madriguera/el-colapso-de-ftx.html",
     "/la-madriguera/ordinals-inscriptions-debate.html",
-    "/la-madriguera/la-geopolitica-de-la-mineria.html",
+    "/la-madriguera/el-caso-samourai-wallet.html",
+    "/la-madriguera/los-etfs-de-bitcoin.html",
     "/la-madriguera/el-ataque-del-51-por-ciento.html",
     "/la-madriguera/bloques-huerfanos-y-reorganizaciones.html",
-    "/la-madriguera/la-guerra-del-tamano-de-bloque.html",
-    "/la-madriguera/el-colapso-de-ftx.html",
-    "/la-madriguera/bitcoin-y-energia.html",
-    "/la-madriguera/el-caso-samourai-wallet.html",
-    "/la-madriguera/lightning-network-estado-actual.html",
+    "/la-madriguera/el-problema-del-general-bizantino.html",
+    "/la-madriguera/el-doble-gasto.html",
+    "/la-madriguera/la-politica-monetaria-de-bitcoin.html",
     "/la-madriguera/soft-forks-de-bitcoin.html",
+    "/la-madriguera/multisig-custodia-y-herencia-segun-satoshi.html",
+    "/la-madriguera/economia-austriaca-para-bitcoiners.html",
+    "/la-madriguera/bitcoin-y-energia.html",
+    "/la-madriguera/la-geopolitica-de-la-mineria.html",
+    "/la-madriguera/lightning-network-estado-actual.html",
+    "/la-madriguera/privacidad-en-bitcoin-estado-actual.html",
     "/la-madriguera/puede-un-gobierno-prohibir-bitcoin.html",
+    "/la-madriguera/el-debate-de-la-osificacion.html",
+    "/la-madriguera/bitcoin-medio-de-pago-vs-reserva-de-valor.html",
+    "/la-madriguera/hiperinflaciones-y-bitcoin.html",
     "/la-madriguera/halving-y-ciclos-de-precio.html",
 ]
 
@@ -34,7 +45,8 @@ LINK_MAP = {
     "https://bitcoin.org/bitcoin.pdf": "/whitepaper-bitcoin-en.pdf",
     "http://bitcoin.org/bitcoin.pdf": "/whitepaper-bitcoin-en.pdf",
     "/nivel-4/privacidad-la-verdad.html": "/nivel-3/utxos-y-privacidad.html",
-    "/la-madriguera/el-debate-de-la-osificacion.html": "/la-madriguera/soft-forks-de-bitcoin.html",
+    "/la-madriguera/los-soft-forks-de-bitcoin.html": "/la-madriguera/soft-forks-de-bitcoin.html",
+    "/nivel-4/tor-bitcoin.html": "/nivel-3/utxos-y-privacidad.html",
 }
 
 
@@ -136,6 +148,10 @@ def parse_blocks(lines: list[str]) -> list[dict[str, str]]:
                 break
 
             if re.match(r"^FIN\s+DEL\s+BLOQUE", s, re.IGNORECASE):
+                i += 1
+                continue
+
+            if re.match(r"^#\s*BLOQUE", s, re.IGNORECASE):
                 i += 1
                 continue
 

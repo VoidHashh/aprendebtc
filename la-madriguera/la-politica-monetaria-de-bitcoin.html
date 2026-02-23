@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="21 millones, halvings, deflación. La política monetaria de Bitcoin explicada desde las palabras de Satoshi hasta el debate actual." />
+  <meta property="og:title" content="La política monetaria de Bitcoin: lo que Satoshi diseñó y por qué | aprendebtc.com" />
+  <meta property="og:description" content="21 millones, halvings, deflación. La política monetaria de Bitcoin explicada desde las palabras de Satoshi hasta el debate actual." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/la-madriguera/la-politica-monetaria-de-bitcoin.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="La política monetaria de Bitcoin: lo que Satoshi diseñó y por qué | aprendebtc.com" />
+  <meta name="twitter:description" content="21 millones, halvings, deflación. La política monetaria de Bitcoin explicada desde las palabras de Satoshi hasta el debate actual." />
+  <title>La política monetaria de Bitcoin: lo que Satoshi diseñó y por qué | aprendebtc.com</title>
+  <link rel="canonical" href="https://aprendebtc.com/la-madriguera/la-politica-monetaria-de-bitcoin.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegacion de la madriguera">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-auto" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegacion">
+          <a href="/" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="/la-madriguera/" class="breadcrumb__item">La Madriguera</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">La política monetaria de Bitcoin: lo que Satoshi diseñó y por qué</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--4 article__badge">La madriguera</div>
+          <h1>La política monetaria de Bitcoin: lo que Satoshi diseñó y por qué</h1>
+          <p class="article__subtitle">Bitcoin tiene una política monetaria fija, predecible y que nadie puede cambiar. Satoshi la diseñó deliberadamente.</p>
+          <p style="color: var(--text-secondary);">Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~6 minutos</p>
+
+<p>Bitcoin tiene algo que ninguna moneda fiat tiene: una política monetaria predeterminada que nadie puede cambiar.</p>
+
+<p>Habrá exactamente 21 millones de bitcoin. La emisión sigue un calendario fijo conocido desde 2009. Cada cuatro años aproximadamente, la emisión se reduce a la mitad. Para el año 2140, el último satoshi habrá sido minado.</p>
+
+<p>Estas reglas no son decisiones de un comité. No pueden cambiarse por decreto. Están escritas en el código y protegidas por el consenso de miles de nodos independientes.</p>
+
+<p>Satoshi diseñó esta política monetaria deliberadamente, y sus escritos revelan el razonamiento detrás de cada decisión.</p>
+
+<h2>El diseño: ¿por qué 21 millones?</h2>
+
+<p>La emisión de Bitcoin sigue una serie geométrica:</p>
+
+<ul><li>Bloques 0-209.999: 50 BTC por bloque</li><li>Bloques 210.000-419.999: 25 BTC por bloque</li><li>Bloques 420.000-629.999: 12.5 BTC por bloque</li><li>Bloques 630.000-839.999: 6.25 BTC por bloque</li><li>Bloques 840.000-1.049.999: 3.125 BTC por bloque</li><li>(continúa reduciéndose...)</li></ul>
+
+<p>La suma de esta serie converge a exactamente 20.999.999,9769 BTC — redondeando, 21 millones.</p>
+
+<p>Satoshi nunca explicó públicamente por qué eligió exactamente 21 millones. Pero la estructura matemática es elegante: 50 × 210.000 × 2 = 21.000.000. El número total es el producto del subsidy inicial, el intervalo de halving, y el factor 2 (la suma de la serie geométrica 1 + 1/2 + 1/4 + ... = 2).</p>
+
+<p>Lo que sí explicó es la filosofía detrás de un suministro fijo. En el capítulo 23 del Libro de Satoshi (&quot;Sobre el Suministro de Dinero&quot;), discutió por qué eligió un suministro predeterminado en lugar de uno que se ajustara a la demanda:</p>
+
+<p>Un suministro fijo significa que, a medida que la economía Bitcoin crece, cada unidad vale más. Esto es deflación: el poder adquisitivo aumenta con el tiempo. Satoshi era consciente de esto y lo veía como una feature, no como un bug.</p>
+
+<h2>Divisibilidad: los satoshis</h2>
+
+<p>Un argumento común contra el suministro fijo es: &quot;21 millones no son suficientes para una economía global&quot;.</p>
+
+<p>Pero cada bitcoin es divisible en 100.000.000 satoshis. Esto significa que el suministro total es de 2.1 × 10^15 satoshis — 2.100 billones de unidades.</p>
+
+<p>Si Bitcoin se convirtiera en la moneda global, un satoshi valdría una fracción de céntimo, pero seguiría siendo utilizable para transacciones cotidianas. Y si algún día un satoshi valiera demasiado para micropagos, el protocolo podría actualizarse para permitir subdivisiones más pequeñas (milisatoshis ya se usan en Lightning Network).</p>
+
+<p>El suministro fijo no limita el uso — solo determina la denominación.</p>
+
+<h2>Lo que dijo Satoshi sobre la inflación inicial</h2>
+
+<p>En los primeros años, la tasa de inflación de Bitcoin era muy alta. Con 50 BTC por bloque cada 10 minutos, se emitían 7.200 BTC diarios. Sobre un suministro inicial pequeño, esto representaba una inflación anualizada de más del 35%.</p>
+
+<p>En el capítulo 7 del Libro de Satoshi (&quot;Sobre la Tasa de Inflación Inicial del 35%&quot;), Satoshi reconoció esto y explicó el razonamiento:</p>
+
+<p>La alta inflación inicial era necesaria para la distribución. Bitcoin necesitaba llegar a manos de usuarios. Los primeros mineros — que invertían recursos reales (electricidad, hardware) — recibían bitcoin como recompensa. Esto distribuía la moneda de forma más justa que una &quot;pre-mina&quot; donde los fundadores se quedan con todo.</p>
+
+<p>Satoshi comparó esto con los mineros de oro: invierten recursos para extraer oro y añadirlo a la circulación. La diferencia es que la tasa de emisión de Bitcoin es predecible, mientras que la del oro depende de la tecnología minera y los descubrimientos de nuevos yacimientos.</p>
+
+<h2>El debate sobre la deflación</h2>
+
+<p>La deflación es uno de los temas más debatidos en economía, y Bitcoin lo trae al centro del escenario.</p>
+
+<p>Los economistas keynesianos argumentan que una moneda deflacionaria es problemática:</p>
+
+<p>Si mi dinero vale más mañana, ¿por qué gastaría hoy? La deflación desincentiva el consumo y la inversión. Todos acumulan dinero esperando que valga más. La economía se paraliza.</p>
+
+<p>Satoshi y los economistas de la escuela austríaca tienen una respuesta diferente, que discutió en el capítulo 30 del Libro de Satoshi (&quot;Sobre la Deflación Natural&quot;):</p>
+
+<p>La gente sigue comprando lo que necesita. Nadie deja de comer esperando que la comida sea más barata mañana. La tecnología es deflacionaria — los ordenadores, teléfonos y televisores bajan de precio cada año — y la gente sigue comprándolos.</p>
+
+<p>Lo que la deflación cambia es el comportamiento marginal. En un sistema inflacionario, tienes incentivo para gastar rápido (el dinero pierde valor) e invertir en activos que suban de precio. En un sistema deflacionario, tienes incentivo para ahorrar y solo gastar en lo que realmente vale la pena.</p>
+
+<p>Los defensores de Bitcoin argumentan que esto es más sano: se penaliza el consumismo frívolo y se premia la prudencia. Los críticos argumentan que es receta para el estancamiento.</p>
+
+<p>El debate no se resolverá aquí. Lo que es factual es que Bitcoin implementa una política deflacionaria por diseño, y quien participe en Bitcoin debe entender esta característica.</p>
+
+<h2>Los halvings</h2>
+
+<p>Cada 210.000 bloques (aproximadamente 4 años), el subsidy de bloque se reduce a la mitad. Este evento se llama &quot;halving&quot;.</p>
+
+<p>Halvings pasados:</p>
+
+<ul><li>Noviembre 2012: de 50 a 25 BTC</li><li>Julio 2016: de 25 a 12.5 BTC</li><li>Mayo 2020: de 12.5 a 6.25 BTC</li><li>Abril 2024: de 6.25 a 3.125 BTC</li></ul>
+
+<p>Halvings futuros (aproximados):</p>
+
+<ul><li>2028: de 3.125 a 1.5625 BTC</li><li>2032: de 1.5625 a 0.78125 BTC</li><li>... continúa hasta ~2140</li></ul>
+
+<p>El halving tiene efectos económicos directos:</p>
+
+<p><strong>Reduce la presión de venta de los mineros.</strong> Antes del halving de 2024, los mineros emitían ~900 BTC diarios que, en su mayoría, vendían para cubrir costes operativos. Después del halving, emiten ~450 BTC diarios. Menos oferta nueva entrando al mercado.</p>
+
+<p><strong>Aumenta la escasez.</strong> Cada halving hace que Bitcoin sea más escaso en términos de flujo (stock-to-flow). Después del halving de 2024, se tardarían más de 120 años en duplicar el suministro existente al ritmo de emisión actual.</p>
+
+<p><strong>Presiona la rentabilidad de los mineros.</strong> Si el precio no compensa la reducción del subsidy, los mineros menos eficientes quiebran. Esto concentra la minería en los operadores más eficientes.</p>
+
+<h2>El futuro: cuando se acabe el subsidy</h2>
+
+<p>Aproximadamente en el año 2140, el subsidy de bloque será efectivamente cero. Todos los ~21 millones de bitcoin habrán sido emitidos.</p>
+
+<p>¿Qué mantendrá la seguridad de la red cuando no haya subsidy?</p>
+
+<p>Las fees de transacción.</p>
+
+<p>Ya hoy, los mineros ganan subsidy + fees. A medida que el subsidy disminuye, las fees deben aumentar proporcionalmente para mantener los ingresos de los mineros y, por tanto, la seguridad de la red.</p>
+
+<p>¿Serán las fees suficientes? Es una pregunta abierta:</p>
+
+<p><strong>Escenario optimista</strong>: si Bitcoin se usa globalmente, la demanda de espacio de bloque será enorme. Las fees serán sustanciales. Ordinals y Inscriptions ya demostraron que hay demanda por espacio de bloque más allá de las transacciones financieras.</p>
+
+<p><strong>Escenario pesimista</strong>: si la mayoría de las transacciones migran a Lightning y otras capas 2, las transacciones on-chain serán pocas. Las fees podrían no ser suficientes para mantener un hashrate alto.</p>
+
+<p><strong>Escenario intermedio</strong>: Bitcoin on-chain se convierte en una &quot;capa de liquidación&quot; para transacciones de alto valor. Las transacciones son pocas pero pagan fees altas. Las capas 2 manejan los pagos cotidianos.</p>
+
+<p>Hay propuestas más radicales, como la &quot;tail emission&quot; (una pequeña emisión perpetua que nunca llega a cero), defendida por Peter Todd y otros. Esta propuesta es extremadamente controvertida porque cambiaría la promesa fundamental de los 21 millones. Es poco probable que alcance consenso.</p>
+
+<h2>La inmutabilidad como feature</h2>
+
+<p>La política monetaria de Bitcoin no ha cambiado nunca. Y es extremadamente improbable que cambie.</p>
+
+<p>Cualquier cambio requeriría un hard fork con consenso casi unánime. Los nodos que no actualicen simplemente seguirían con las reglas antiguas. Y dado que los 21 millones son quizás la característica más importante de Bitcoin para la mayoría de sus usuarios, cualquier propuesta de cambiarla enfrentaría resistencia masiva.</p>
+
+<p>Compara esto con las monedas fiat:</p>
+
+<p>La Reserva Federal de Estados Unidos puede cambiar la política monetaria con una decisión de 12 personas. El BCE igual. El banco central de cualquier país puede imprimir dinero por decreto.</p>
+
+<p>En Bitcoin, cambiar la política monetaria requiere convencer a miles de operadores de nodos independientes, distribuidos globalmente, de que abandonen la regla que hace a Bitcoin valioso.</p>
+
+<p>Satoshi diseñó Bitcoin como un antídoto a la política monetaria discrecional. No porque toda política discrecional sea mala, sino porque quería ofrecer una alternativa: dinero cuyas reglas están fijadas y son verificables por cualquiera.</p>
+
+<h2>Fuentes y referencias:</h2>
+
+<ul><li>Whitepaper de Bitcoin, sección 6</li><li>El Libro de Satoshi, capítulos 7, 23 y 30</li><li>Datos de Clark Moody Bitcoin Dashboard para métricas de halving</li><li>&quot;The Bitcoin Standard&quot; de Saifedean Ammous (Wiley, 2018)</li><li>Propuesta de tail emission de Peter Todd</li></ul>
+
+<h2>Enlaces internos:</h2>
+
+<ul><li><a href="/base/los-21-millones.html">Los 21 millones de Bitcoin</a></li><li><a href="/nivel-3/halving.html">¿Qué es el halving?</a></li><li><a href="/la-madriguera/halving-y-ciclos-de-precio.html">El halving y los ciclos de precio</a></li><li><a href="/base/inflacion-y-bitcoin.html">Bitcoin e inflación</a></li></ul>
+
+          <div class="ad-slot ad-content" id="ad-content-la-politica-monetaria-de-bitcoin" aria-hidden="true"></div>
+
+          <nav class="page-nav" aria-label="Navegaci?n entre p?ginas">
+            <a href="/la-madriguera/el-doble-gasto.html" class="page-nav__item"><span class="page-nav__label">&larr; Anterior</span><span class="page-nav__title">El doble gasto: el problema que Bitcoin resolvió</span></a>
+            <a href="/la-madriguera/soft-forks-de-bitcoin.html" class="page-nav__item page-nav__item--next"><span class="page-nav__label">Siguiente &rarr;</span><span class="page-nav__title">Los soft forks de Bitcoin: historia de cada cambio de consenso</span></a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Satoshi discutió multisig, escrow y custodia compartida años antes de que existieran las herramientas actuales. Sus ideas siguen vigentes." />
+  <meta property="og:title" content="Multisig, custodia y herencia: lo que Satoshi ya anticipó | aprendebtc.com" />
+  <meta property="og:description" content="Satoshi discutió multisig, escrow y custodia compartida años antes de que existieran las herramientas actuales. Sus ideas siguen vigentes." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/la-madriguera/multisig-custodia-y-herencia-segun-satoshi.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Multisig, custodia y herencia: lo que Satoshi ya anticipó | aprendebtc.com" />
+  <meta name="twitter:description" content="Satoshi discutió multisig, escrow y custodia compartida años antes de que existieran las herramientas actuales. Sus ideas siguen vigentes." />
+  <title>Multisig, custodia y herencia: lo que Satoshi ya anticipó | aprendebtc.com</title>
+  <link rel="canonical" href="https://aprendebtc.com/la-madriguera/multisig-custodia-y-herencia-segun-satoshi.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegacion de la madriguera">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-auto" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegacion">
+          <a href="/" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="/la-madriguera/" class="breadcrumb__item">La Madriguera</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Multisig, custodia y herencia: lo que Satoshi ya anticipó</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--4 article__badge">La madriguera</div>
+          <h1>Multisig, custodia y herencia: lo que Satoshi ya anticipó</h1>
+          <p class="article__subtitle">En 2010, Satoshi ya describió esquemas de custodia compartida y transacciones multifirma. Estaban en el código desde el día 1.</p>
+          <p style="color: var(--text-secondary);">Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~7 minutos</p>
+
+<p>Una de las características más útiles de Bitcoin para la seguridad avanzada — las transacciones multifirma o &quot;multisig&quot; — no fue un añadido posterior. Satoshi lo incluyó en el código original desde el primer día.</p>
+
+<p>En el capítulo 54 del Libro de Satoshi (&quot;Custodia de Depósitos y Transacciones Multi-Firma&quot;), discutió exactamente cómo funcionarían estos esquemas y para qué servirían. Sus ideas, escritas en 2010, describen con precisión los productos que empresas como Casa, Unchained y Nunchuk ofrecen hoy.</p>
+
+<h2>Multisig en el diseño original</h2>
+
+<p>Bitcoin Script, el lenguaje de scripting que determina las condiciones para gastar bitcoin, incluyó OP_CHECKMULTISIG desde la versión 0.1 del software.</p>
+
+<p>Este opcode permite crear outputs que requieren múltiples firmas para gastarse. Un output &quot;2-de-3&quot; requiere firmas de al menos 2 de 3 claves posibles. Un output &quot;3-de-5&quot; requiere 3 de 5.</p>
+
+<p>Satoshi no añadió esto como ocurrencia tardía. Lo diseñó desde el principio porque entendía que la seguridad de una sola clave no era suficiente para todos los casos de uso.</p>
+
+<p>Una sola clave significa un único punto de fallo: si la pierdes, pierdes todo. Si alguien la roba, pierde todo. Multisig distribuye el riesgo.</p>
+
+<h2>Lo que Satoshi escribió sobre escrow</h2>
+
+<p>En el capítulo 54 del Libro de Satoshi, Satoshi describió un sistema de escrow (depósito en garantía) usando multisig 2-de-3:</p>
+
+<p>Imagina una transacción comercial entre un comprador y un vendedor que no confían entre sí. El comprador no quiere pagar hasta recibir el producto. El vendedor no quiere enviar hasta recibir el pago. Punto muerto clásico.</p>
+
+<p>La solución de Satoshi: los fondos se envían a una dirección 2-de-3 controlada por tres claves:</p>
+
+<ul><li>Una del comprador</li><li>Una del vendedor</li><li>Una de un árbitro neutral</li></ul>
+
+<p>Para liberar los fondos, se necesitan 2 de las 3 firmas.</p>
+
+<p><strong>Escenario 1: todo va bien.</strong> El comprador recibe el producto, está satisfecho. Comprador y vendedor firman juntos liberando los fondos al vendedor. El árbitro no necesita intervenir.</p>
+
+<p><strong>Escenario 2: hay disputa.</strong> El comprador dice que el producto era defectuoso. El vendedor dice que no. El árbitro examina la evidencia y decide a favor de una de las partes. Firma junto con la parte ganadora para liberar los fondos.</p>
+
+<p><strong>Punto crucial:</strong> el árbitro nunca puede robar los fondos por sí solo. Necesita la firma del comprador O del vendedor. Es un árbitro sin capacidad de abuso.</p>
+
+<p>Este diseño es exactamente lo que servicios de custodia colaborativa como Unchained ofrecen hoy: tú controlas 2 de 3 claves, ellos controlan 1. Pueden ayudarte a recuperar fondos si pierdes una clave, pero no pueden acceder a tus fondos sin tu cooperación.</p>
+
+<h2>Multisig hoy: usos reales</h2>
+
+<p>Las ideas de Satoshi se han implementado en múltiples productos y casos de uso:</p>
+
+<h2>Seguridad personal mejorada</h2>
+
+<p>Un esquema 2-de-3 donde tú controlas las 3 claves, pero las guardas en diferentes ubicaciones:</p>
+
+<ul><li>Clave 1: en tu hardware wallet en casa</li><li>Clave 2: en un hardware wallet diferente en una caja de seguridad bancaria</li><li>Clave 3: en otro hardware wallet guardado por un familiar de confianza</li></ul>
+
+<p>Para gastar, necesitas 2 de las 3. Esto significa:</p>
+
+<ul><li>Si pierdes una clave (robo, incendio, olvido), todavía puedes acceder con las otras 2</li><li>Si alguien roba una clave, no puede hacer nada sin otra más</li><li>Tienes redundancia sin sacrificar seguridad</li></ul>
+
+<h2>Custodia colaborativa</h2>
+
+<p>Servicios como Unchained ofrecen 2-de-3 donde:</p>
+
+<ul><li>Tú tienes 2 claves (una principal, una de respaldo)</li><li>Unchained tiene 1 clave</li></ul>
+
+<p>En operación normal, usas tus 2 claves. Unchained no puede tocar tus fondos.</p>
+
+<p>Si pierdes una de tus claves, Unchained puede firmar junto con tu clave restante para recuperar acceso.</p>
+
+<p>Pagas por la tranquilidad de tener un plan de recuperación, pero no entregas custodia real.</p>
+
+<h2>Empresas y organizaciones</h2>
+
+<p>Una empresa con 5 directivos puede usar 3-de-5:</p>
+
+<ul><li>Ningún directivo individual puede mover fondos</li><li>Cualquier combinación de 3 directivos puede aprobar transacciones</li><li>Si 2 directivos dejan la empresa, los otros 3 mantienen acceso</li></ul>
+
+<p>Esto es gobierno corporativo básico aplicado a Bitcoin.</p>
+
+<h2>El problema de la herencia</h2>
+
+<p>El problema más difícil de Bitcoin no es la seguridad — es la herencia.</p>
+
+<p>Si mueres, ¿cómo acceden tus herederos a tus bitcoin?</p>
+
+<p><strong>Sin planificación:</strong> tus bitcoin se pierden para siempre. Nadie puede acceder a una wallet sin la seed phrase. No hay &quot;servicio al cliente&quot; que resetee tu contraseña. No hay banco que pueda ordenar una transferencia. Los bitcoin simplemente dejan de estar disponibles para siempre.</p>
+
+<p>Se estima que millones de bitcoin están permanentemente perdidos por este motivo — propietarios que murieron sin dejar instrucciones, o que simplemente olvidaron sus claves.</p>
+
+<h2>La solución multisig para herencia</h2>
+
+<p>Satoshi anticipó este problema también. El esquema de escrow 2-de-3 se adapta naturalmente a la herencia:</p>
+
+<h2>Opción 1: Heredero directo + abogado</h2>
+
+<p>Configuras un 2-de-3:</p>
+
+<ul><li>Tu clave principal (la usas normalmente)</li><li>Clave del heredero (guardada en sobre sellado con el abogado)</li><li>Clave del abogado</li></ul>
+
+<p>Mientras vives, usas tu clave principal + la del heredero (que tú guardas) para transacciones normales.</p>
+
+<p>Si mueres, el abogado verifica el fallecimiento y entrega la clave del heredero al beneficiario. El heredero + el abogado pueden entonces mover los fondos.</p>
+
+<h2>Opción 2: Múltiples herederos</h2>
+
+<p>Para una herencia más compleja, un 3-de-5 entre varios herederos:</p>
+
+<ul><li>Heredero 1</li><li>Heredero 2</li><li>Heredero 3</li><li>Abogado/notario</li><li>Servicio de custodia (Casa, Unchained)</li></ul>
+
+<p>Cualquier combinación de 3 puede mover los fondos after verificación del fallecimiento.</p>
+
+<h2>Opción 3: Servicios especializados</h2>
+
+<p>Casa ofrece un producto específico de herencia donde:</p>
+
+<ul><li>Tú tienes acceso normal a tus fondos</li><li>Si mueres, Casa verifica el fallecimiento con tus herederos designados</li><li>Tras un periodo de espera (para prevenir fraude), Casa ayuda a los herederos a acceder</li></ul>
+
+<h2>Timelocks: otra herramienta</h2>
+
+<p>Además de multisig, Bitcoin tiene timelocks: transacciones que solo pueden ejecutarse después de cierta fecha o altura de bloque.</p>
+
+<p>Una aplicación para herencia:</p>
+
+<p>Creas una transacción que envía todos tus bitcoin a tu heredero, pero con un timelock de 1 año. Cada año, &quot;renuevas&quot; el timelock creando una nueva transacción con fecha futura.</p>
+
+<p>Si mueres y no renuevas, después de un año la transacción se vuelve válida y tu heredero puede reclamar los fondos.</p>
+
+<p>Esto funciona sin terceros, pero requiere disciplina: debes recordar renovar cada año.</p>
+
+<h2>Los retos del multisig</h2>
+
+<p>Multisig no es perfecto. Tiene desventajas reales:</p>
+
+<p><strong>Complejidad.</strong> Configurar un multisig correctamente requiere entender qué estás haciendo. Errores en la configuración pueden resultar en pérdida de fondos.</p>
+
+<p><strong>Coordinación.</strong> Para una transacción, necesitas reunir múltiples firmas. Esto es más lento y complejo que una firma única.</p>
+
+<p><strong>Tamaño de transacciones.</strong> Las transacciones multisig son más grandes (más datos de firma) y por tanto más caras en fees.</p>
+
+<p><strong>Compatibilidad.</strong> No todas las wallets soportan multisig bien. Las que lo hacen pueden no ser compatibles entre sí.</p>
+
+<p><strong>Privacidad.</strong> Hasta Taproot, las transacciones multisig eran visiblemente diferentes de las transacciones normales en la blockchain. Taproot mejora esto significativamente.</p>
+
+<h2>Taproot y el futuro del multisig</h2>
+
+<p>Taproot (activado en 2021) mejora el multisig de varias formas:</p>
+
+<p><strong>MuSig2</strong> permite que múltiples firmantes produzcan una firma única indistinguible de una firma individual. Una transacción 3-de-3 con MuSig2 parece idéntica a una transacción normal en la blockchain.</p>
+
+<p><strong>Mejor privacidad.</strong> Con Taproot, nadie puede saber mirando la blockchain si una transacción era multisig o no (asumiendo el &quot;happy path&quot; donde todos los firmantes cooperan).</p>
+
+<p><strong>Menor tamaño.</strong> Las firmas Schnorr (que Taproot usa) son más pequeñas y se agregan mejor que ECDSA.</p>
+
+<p>La adopción de Taproot multisig está creciendo pero aún es minoritaria. Las herramientas necesitan tiempo para actualizarse.</p>
+
+<h2>El futuro: covenants y vaults</h2>
+
+<p>Más allá de lo que existe hoy, hay propuestas que mejorarían dramáticamente la seguridad y herencia:</p>
+
+<p><strong>OP_VAULT</strong> permitiría crear &quot;bóvedas&quot; donde los fondos tienen un periodo de enfriamiento. Si alguien intenta gastar, hay una ventana de tiempo (días o semanas) durante la cual puedes cancelar la transacción y mover los fondos a una dirección de recuperación.</p>
+
+<p>Si te roban la clave, el ladrón inicia el gasto. Recibes una alerta. Cancelas y mueves los fondos antes de que el ladrón pueda completar el robo.</p>
+
+<p><strong>OP_CTV</strong> permitiría pre-comprometer transacciones futuras, habilitando esquemas de herencia más sofisticados sin confiar en terceros.</p>
+
+<p>Estas propuestas requieren soft forks que aún no han alcanzado consenso. El debate sobre osificación (cubierto en otro artículo) afecta directamente si y cuándo se implementarán.</p>
+
+<h2>Satoshi plantó la semilla</h2>
+
+<p>Lo notable es que Satoshi anticipó estos casos de uso hace 15 años.</p>
+
+<p>El código para multisig estaba ahí desde el día 1. Los casos de uso que describió (escrow, custodia compartida) son exactamente lo que la industria ha construido.</p>
+
+<p>La comunidad tardó años en desarrollar las herramientas que hacen prácticas las ideas de Satoshi. Hardware wallets, software de coordinación de firmas, servicios de custodia colaborativa — todo esto vino después.</p>
+
+<p>Pero la capacidad fundamental estaba ahí desde el principio, esperando a que alguien la usara.</p>
+
+<h2>Fuentes y referencias:</h2>
+
+<ul><li>El Libro de Satoshi, capítulo 54 (&quot;Custodia de Depósitos y Transacciones Multi-Firma&quot;)</li><li>Código fuente de Bitcoin v0.1 (OP_CHECKMULTISIG)</li><li>Documentación de Casa, Unchained y Nunchuk</li><li>BIP 340 (firmas Schnorr), BIP 341 (Taproot)</li><li>Propuestas de BIP para OP_VAULT y OP_CTV</li></ul>
+
+<h2>Enlaces internos:</h2>
+
+<ul><li><a href="/nivel-4/que-es-multisig.html">¿Qué es multisig?</a></li><li><a href="/nivel-4/configurar-multisig.html">Configurar multisig</a></li><li><a href="/nivel-4/herencia-bitcoin.html">Herencia de Bitcoin</a></li><li><a href="/nivel-4/herencia-multisig.html">Herencia con multisig</a></li><li><a href="/herramientas/multisig-address.html">Herramientas: generador de dirección multisig</a></li></ul>
+
+<p>Crea esta nueva organización en los articulos de &quot;La Madriguera&quot; con tres secciones separadas,</p>
+
+<p>HISTORIA 01 - Los primeros días de Bitcoin (2009) 02 - Bitcoin y WikiLeaks (2010) 03 - Silk Road y Ross Ulbricht (2013) 04 - Mt. Gox (2014) 05 - Guerra del tamaño de bloque (2015-17) 06 - Crisis Terra/Luna (2022) 07 - Colapso de FTX (2022) 08 - Ordinals e Inscriptions (2023) 09 - Caso Samourai Wallet (2024) 10 - ETFs de Bitcoin (2024)</p>
+
+<p>FUNDAMENTOS 11 - El ataque del 51% 12 - Bloques huérfanos y reorgs 13 - El Problema del General Bizantino 14 - El doble gasto 15 - La política monetaria de Bitcoin 16 - Los soft forks de Bitcoin 17 - Multisig y herencia según Satoshi 18 - Economía austríaca para bitcoiners</p>
+
+<p>ANÁLISIS 19 - Bitcoin y energía 20 - Geopolítica de la minería 21 - Lightning Network: estado actual 22 - Privacidad: estado actual 23 - ¿Puede un gobierno prohibir Bitcoin? 24 - El debate de la osificación 25 - ¿Medio de pago o reserva de valor? 26 - Hiperinflaciones y Bitcoin 27 - El halving y los ciclos de precio</p>
+
+          <div class="ad-slot ad-content" id="ad-content-multisig-custodia-y-herencia-segun-satoshi" aria-hidden="true"></div>
+
+          <nav class="page-nav" aria-label="Navegaci?n entre p?ginas">
+            <a href="/la-madriguera/soft-forks-de-bitcoin.html" class="page-nav__item"><span class="page-nav__label">&larr; Anterior</span><span class="page-nav__title">Los soft forks de Bitcoin: historia de cada cambio de consenso</span></a>
+            <a href="/la-madriguera/economia-austriaca-para-bitcoiners.html" class="page-nav__item page-nav__item--next"><span class="page-nav__label">Siguiente &rarr;</span><span class="page-nav__title">Economía austríaca para bitcoiners: Menger, Mises y Hayek</span></a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

@@ -411,12 +411,27 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://aprendebtc.com/la-madriguera/bitcoin-medio-de-pago-vs-reserva-de-valor.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://aprendebtc.com/la-madriguera/bitcoin-y-energia.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://aprendebtc.com/la-madriguera/bitcoin-y-wikileaks.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://aprendebtc.com/la-madriguera/bloques-huerfanos-y-reorganizaciones.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aprendebtc.com/la-madriguera/economia-austriaca-para-bitcoiners.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -436,12 +451,32 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://aprendebtc.com/la-madriguera/el-debate-de-la-osificacion.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aprendebtc.com/la-madriguera/el-doble-gasto.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://aprendebtc.com/la-madriguera/el-hackeo-de-mt-gox.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://aprendebtc.com/la-madriguera/el-problema-del-general-bizantino.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://aprendebtc.com/la-madriguera/halving-y-ciclos-de-precio.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aprendebtc.com/la-madriguera/hiperinflaciones-y-bitcoin.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -461,6 +496,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://aprendebtc.com/la-madriguera/la-politica-monetaria-de-bitcoin.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://aprendebtc.com/la-madriguera/lightning-network-estado-actual.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -471,7 +511,22 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://aprendebtc.com/la-madriguera/los-primeros-dias-de-bitcoin.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aprendebtc.com/la-madriguera/multisig-custodia-y-herencia-segun-satoshi.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://aprendebtc.com/la-madriguera/ordinals-inscriptions-debate.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aprendebtc.com/la-madriguera/privacidad-en-bitcoin-estado-actual.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
