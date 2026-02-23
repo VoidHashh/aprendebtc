@@ -3,41 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="La guía educativa más completa sobre Bitcoin en español. Desde tu primera compra hasta criptografía avanzada. 6 niveles para todos los conocimientos." />
-  <!-- Open Graph -->
+  <meta name="description" content="La guía educativa más completa sobre Bitcoin en español. Desde tu primera compra hasta criptografía avanzada." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aprendebtc.com/" />
   <meta property="og:title" content="aprendebtc.com — Aprende Bitcoin en español, paso a paso" />
-  <meta property="og:description" content="La guía educativa más completa sobre Bitcoin en español. Desde tu primera compra hasta criptografía avanzada. 6 niveles para todos los conocimientos." />
+  <meta property="og:description" content="La guía educativa más completa sobre Bitcoin en español. Desde tu primera compra hasta criptografía avanzada." />
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
   <meta property="og:site_name" content="aprendeBTC" />
   <meta property="og:locale" content="es_ES" />
-
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="aprendebtc.com — Aprende Bitcoin en español, paso a paso" />
-  <meta name="twitter:description" content="La guía educativa más completa sobre Bitcoin en español. Desde tu primera compra hasta criptografía avanzada. 6 niveles para todos los conocimientos." />
+  <meta name="twitter:description" content="La guía educativa más completa sobre Bitcoin en español. Desde tu primera compra hasta criptografía avanzada." />
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
-
-  <!-- Canonical -->
+  <title>aprendebtc.com — Aprende Bitcoin en español, paso a paso</title>
   <link rel="canonical" href="https://aprendebtc.com/" />
   <link rel="alternate" hreflang="es" href="https://aprendebtc.com/" />
   <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/" />
-<meta property="og:url" content="https://aprendebtc.com/" />
-<meta property="og:description" content="La guía educativa más completa sobre Bitcoin en español. Desde tu primera compra hasta criptografía avanzada. 6 niveles para todos los conocimientos." />
-<meta property="og:site_name" content="aprendeBTC" />
-<meta name="twitter:title" content="aprendebtc.com — Aprende Bitcoin en español, paso a paso" />
-<meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
-<link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/" />
-<title>aprendebtc.com — Aprende Bitcoin en español, paso a paso</title>
-
-  <!-- Preconnect fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-  <!-- CSS -->
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/quiz.css" />
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -56,41 +42,76 @@
   </script>
 </head>
 <body>
-
-  <!-- Header (inyectado dinámicamente) -->
   <div data-include="header"></div>
 
-  <!-- Contenido principal -->
   <main class="main-content" id="main-content">
-
     <div class="container" style="padding-top: 1.5rem; max-width: 1200px;">
-      <nav class="breadcrumb" aria-label="Ruta de navegacion">
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
         <a href="/" class="breadcrumb__item">Inicio</a>
-        <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+        <span class="breadcrumb__separator" aria-hidden="true">›</span>
         <span class="breadcrumb__current">Landing</span>
       </nav>
     </div>
 
-    <!-- Hero -->
-    <div class="hero">
-      <div class="hero__eyebrow">
-        ₿ Educación Bitcoin en Español
-      </div>
-      <h1 class="hero__title">
-        Aprende Bitcoin<br><span>paso a paso</span>
-      </h1>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__eyebrow">₿ Educación Bitcoin en español</div>
+      <h1 class="hero__title" id="hero-title">Aprende Bitcoin<br><span>paso a paso</span></h1>
       <p class="hero__subtitle">
-        La guía más completa en español. Desde tu primera compra hasta criptografía avanzada. 6 niveles para todos los conocimientos.
+        La guía más completa en español. Desde tu primera compra hasta criptografía avanzada.
+        6 niveles para todos los conocimientos.
       </p>
       <div class="hero__ctas">
         <a href="/nivel-1/" class="btn btn--primary">Empezar desde cero →</a>
-        <a href="#niveles" class="btn btn--secondary">Explorar niveles</a>
+        <a href="#por-donde-empezar" class="btn btn--secondary">Hacer test rápido</a>
       </div>
-    </div>
+    </section>
 
     <hr class="section-divider" />
 
-    <!-- Sección: Niveles -->
+    <section class="section section--quiz" id="por-donde-empezar" aria-labelledby="quiz-home-title">
+      <div class="section__header">
+        <div class="section__tag">Test interactivo</div>
+        <h2 class="section__title" id="quiz-home-title">¿Por dónde empiezo?</h2>
+        <p class="section__subtitle">Responde 8 preguntas y te recomendamos el nivel ideal para empezar hoy.</p>
+      </div>
+
+      <div class="quiz-widget" data-quiz-root>
+        <div class="quiz-widget__panel" data-quiz-screen="start">
+          <p class="quiz-widget__eyebrow">Diagnóstico inicial</p>
+          <h3 class="quiz-widget__title">Ruta personalizada en menos de 2 minutos</h3>
+          <p class="quiz-widget__subtitle">
+            El test cruza fundamentos, autocustodia, seed phrase, Lightning, UTXO y conocimientos técnicos.
+          </p>
+          <div class="quiz-widget__topics" aria-hidden="true">
+            <span class="quiz-widget__topic">Frase semilla</span>
+            <span class="quiz-widget__topic">Wallets</span>
+            <span class="quiz-widget__topic">Lightning</span>
+            <span class="quiz-widget__topic">UTXO</span>
+            <span class="quiz-widget__topic">BIP</span>
+          </div>
+          <div class="quiz-widget__start-actions">
+            <button type="button" class="quiz-widget__start-button" data-quiz-start-btn>Empezar test</button>
+            <a class="quiz-widget__start-link" href="/empezar.html">Abrir página standalone</a>
+          </div>
+          <p class="quiz-widget__seo-copy">
+            <strong>Incluye preguntas sobre:</strong> frase semilla, UTXO, Taproot, ECDSA/Schnorr, nodo,
+            autocustodia y objetivo de aprendizaje.
+          </p>
+        </div>
+
+        <div class="quiz-widget__panel is-hidden" data-quiz-screen="flow">
+          <div class="quiz-widget__progress" data-quiz-progressbar role="progressbar" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0">
+            <div class="quiz-widget__progress-fill" data-quiz-progress-fill></div>
+          </div>
+          <div data-quiz-question></div>
+        </div>
+
+        <div class="quiz-widget__panel is-hidden" data-quiz-screen="result" tabindex="-1"></div>
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
     <section class="section" id="niveles" aria-labelledby="niveles-title">
       <div class="section__header">
         <div class="section__tag">Ruta de aprendizaje</div>
@@ -99,7 +120,6 @@
       </div>
 
       <div class="nivel-cards">
-
         <a href="/nivel-1/" class="nivel-card nivel-card--1">
           <div class="nivel-card__header">
             <span class="nivel-card__number">1</span>
@@ -165,13 +185,11 @@
           <p class="nivel-card__subtitle">Por qué Bitcoin importa, cómo contribuir al código, y cómo explicar Bitcoin sin que te miren raro.</p>
           <span class="nivel-card__cta">Ir al nivel 6 →</span>
         </a>
-
       </div>
     </section>
 
     <hr class="section-divider" />
 
-    <!-- Sección: Pilares -->
     <section class="section" aria-labelledby="pilares-title">
       <div class="section__header">
         <div class="section__tag">Recursos permanentes</div>
@@ -180,41 +198,24 @@
       </div>
 
       <div class="pilar-cards">
-        <a href="/base/" class="pilar-card">
-          <span class="pilar-card__icon" aria-hidden="true">📚</span>
-          Base de Conocimiento
-        </a>
-        <a href="/herramientas/" class="pilar-card">
-          <span class="pilar-card__icon" aria-hidden="true">🛠</span>
-          Herramientas
-        </a>
-        <a href="/comunidad/" class="pilar-card">
-          <span class="pilar-card__icon" aria-hidden="true">💬</span>
-          Comunidad
-        </a>
-        <a href="/glosario.html" class="pilar-card">
-          <span class="pilar-card__icon" aria-hidden="true">📖</span>
-          Glosario
-        </a>
-        <a href="/recursos.html" class="pilar-card">
-          <span class="pilar-card__icon" aria-hidden="true">🔗</span>
-          Recursos
-        </a>
+        <a href="/base/" class="pilar-card"><span class="pilar-card__icon" aria-hidden="true">📚</span>Base de Conocimiento</a>
+        <a href="/la-madriguera/" class="pilar-card"><span class="pilar-card__icon" aria-hidden="true">🕳️</span>La Madriguera</a>
+        <a href="/herramientas/" class="pilar-card"><span class="pilar-card__icon" aria-hidden="true">🛠</span>Herramientas</a>
+        <a href="/comunidad/" class="pilar-card"><span class="pilar-card__icon" aria-hidden="true">💬</span>Comunidad</a>
+        <a href="/glosario.html" class="pilar-card"><span class="pilar-card__icon" aria-hidden="true">📖</span>Glosario</a>
+        <a href="/recursos.html" class="pilar-card"><span class="pilar-card__icon" aria-hidden="true">🔗</span>Recursos</a>
       </div>
     </section>
 
-      <div class="container" style="max-width: 1200px; padding-bottom: 2rem;">
+    <div class="container" style="max-width: 1200px; padding-bottom: 2rem;">
       <div class="ad-slot ad-content" id="ad-home" aria-hidden="true"></div>
     </div>
-
   </main>
 
-  <!-- Footer (inyectado dinámicamente) -->
   <div data-include="footer"></div>
-
-  <!-- Scripts -->
   <script src="js/includes.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/search.js"></script>
+  <script src="js/quiz.js"></script>
 </body>
 </html>

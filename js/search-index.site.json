@@ -133,6 +133,21 @@
     "keywords": "Dollar Cost Averaging explicado: compras regulares independientes del precio. Cómo funciona, por qué reduce el estrés, y cómo automatizarlo. Definición Cómo funciona Por qué funciona psicológicamente Elimina la parálisis Reduce el arrepentimiento Hace el proceso automático Automatizar DCA Consideraciones importantes DCA no garantiza ganancias Fees acumuladas Retiro a wallet propia DCA vs Lump Sum Inicio &rsaquo; Base de Conocimiento &rsaquo; DCA: la estrategia de compras periódicas Base DCA: la estrategia de compras periódicas Comprar una cantidad fija a intervalos regulares. Sin intentar predecir el mejor momento. Definición DCA significa Dollar Cost Averaging (Promedio del Coste en Dólares). Es una estrategia de compra donde inviertes una cantidad fija de dinero a intervalos regulares, independientemente del precio. En vez de intentar \"comprar en el momento perfecto\", compras constantemente y promedias el precio a lo largo del tiempo. Cómo funciona Ejemplo: decides comprar 50€ de bitcoin cada semana. | Semana | Precio BTC | €50 compran | |--------|------------|-------------| | 1 | 40.000€ | 0.00125 BTC | | 2 | 35.000€ | 0.00143 BTC | | 3 | 45.000€ | 0.00111 BTC | | 4 | 38.000€ | 0.00132 BTC | | Total | - | 0.00511 BTC | Has invertido 200€ y tienes 0.00511 BTC. Tu precio promedio: 200€ / 0.00511 = ~39.140€/BTC No compraste en el mínimo (35.000€), pero tampoco en el máximo (45.000€). Promediaste. Por qué funciona psicológicamente Elimina la parálisis \"¿Es buen momento para co"
   },
   {
+    "title": "El whitepaper de Bitcoin",
+    "url": "/base/el-whitepaper.html",
+    "tags": [
+      "base de conocimiento",
+      "base",
+      "whitepaper",
+      "lightning",
+      "factura lightning",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "Base de Conocimiento",
+    "keywords": "El whitepaper de Bitcoin explicado: estructura, ideas clave y cómo leer hoy el documento de 2008 de Satoshi Nakamoto. Qué es el whitepaper Cómo leerlo hoy Ideas clave que siguen vigentes 1. El doble gasto se resuelve por consenso distribuido 2. Proof of Work como mecanismo de orden 3. Incentivos alineados 4. Verificación independiente Qué no cubre el whitepaper Enlaces para seguir Inicio › Base de Conocimiento › El whitepaper de Bitcoin Base El whitepaper de Bitcoin Nueve páginas que definieron un sistema de dinero digital sin intermediarios. Qué es el whitepaper El whitepaper es el documento técnico que Satoshi Nakamoto publicó el 31 de octubre de 2008 con el título Bitcoin: A Peer-to-Peer Electronic Cash System . Resume el problema a resolver y propone una arquitectura concreta para evitar el doble gasto sin banco central. No es un manual completo de implementación ni un texto legal. Es un diseño de alto nivel con las piezas esenciales: transacciones firmadas, cadena de bloques, prueba de trabajo, ajuste de dificultad, incentivos de minería y verificación simplificada. Cómo leerlo hoy Lee primero la introducción y la sección 1 para entender el problema. Pasa a secciones 2-4 para el flujo de transacciones y la estructura de bloque. Después revisa secciones 5-8 para consenso, incentivos y almacenamiento. Vuelve una segunda vez para conectar conceptos con la implementación actual. 📚 Descarga directa Whitepaper en español (PDF) Whitepaper original en inglés (PDF) Ideas clave q"
+  },
+  {
     "title": "Estafas comunes en Bitcoin",
     "url": "/base/estafas-comunes.html",
     "tags": [
@@ -227,7 +242,7 @@
       "transacciones"
     ],
     "section": "Base de Conocimiento",
-    "keywords": "Base de Conocimiento de aprendeBTC: fundamentos, economía, compra, wallets, red y seguridad en Bitcoin. Bitcoin: los fundamentos Dinero y economía Compra: conceptos Wallets y custodia Red y transacciones Seguridad Inicio › Base de Conocimiento Base Base de Conocimiento Biblioteca de referencia para entender Bitcoin desde conceptos base hasta seguridad práctica. Este pilar organiza contenidos de consulta para resolver dudas sin romper el flujo de aprendizaje por niveles. Si empiezas desde cero, avanza en orden por fundamentos y después salta a compra, custodia y red. 💡 Cómo usar este Índice Lee por sección o busca un tema puntual. Cada página tiene navegación anterior/siguiente para facilitar recorrido continuo. Bitcoin: los fundamentos Conceptos base para entender qué es Bitcoin y por qué funciona. ¿Qué es Bitcoin? → ¿Cómo funciona Bitcoin? → ¿Qué es la blockchain? → ¿Qué es la minería? → Los 21 millones y la oferta fija → ¿Qué es un satoshi? → Historia de Bitcoin → Dinero y economía Cómo encaja Bitcoin frente al dinero tradicional y otras tesis de valor. El problema del dinero tradicional → Bitcoin vs dinero tradicional → Historia del dinero → Inflación y Bitcoin → Economía Austríaca y Bitcoin → Bitcoin vs Oro → Bitcoin como reserva de valor → Bitcoin vs altcoins → Compra: conceptos Modelos de compra, privacidad y estrategia para empezar sin improvisar. Exchange centralizado (CEX) → Exchange descentralizado (DEX) → KYC y no-KYC: qué significan y por qué importan → DCA: la e"
+    "keywords": "Base de Conocimiento de aprendeBTC: fundamentos, economía, compra, wallets, red y seguridad en Bitcoin. Bitcoin: los fundamentos Dinero y economía Compra: conceptos Wallets y custodia Red y transacciones Seguridad Inicio › Base de Conocimiento Base Base de Conocimiento Biblioteca de referencia para entender Bitcoin desde conceptos base hasta seguridad práctica. Este pilar organiza contenidos de consulta para resolver dudas sin romper el flujo de aprendizaje por niveles. Si empiezas desde cero, avanza en orden por fundamentos y después salta a compra, custodia y red. 💡 Cómo usar este Índice Lee por sección o busca un tema puntual. Cada página tiene navegación anterior/siguiente para facilitar recorrido continuo. Bitcoin: los fundamentos Conceptos base para entender qué es Bitcoin y por qué funciona. ¿Qué es Bitcoin? → ¿Cómo funciona Bitcoin? → ¿Qué es la blockchain? → ¿Qué es la minería? → Los 21 millones y la oferta fija → ¿Qué es un satoshi? → Historia de Bitcoin → Quién es Satoshi Nakamoto → El whitepaper de Bitcoin → Dinero y economía Cómo encaja Bitcoin frente al dinero tradicional y otras tesis de valor. El problema del dinero tradicional → Bitcoin vs dinero tradicional → Historia del dinero → Inflación y Bitcoin → Economía Austríaca y Bitcoin → Bitcoin vs Oro → Bitcoin como reserva de valor → Bitcoin vs altcoins → Compra: conceptos Modelos de compra, privacidad y estrategia para empezar sin improvisar. Exchange centralizado (CEX) → Exchange descentralizado (DEX) → KYC "
   },
   {
     "title": "Inflación y Bitcoin",
@@ -447,6 +462,18 @@
     "keywords": "Fees de Bitcoin explicadas: cómo funcionan, qué determina el coste, cómo estimarlas con mempool.space, y consejos para pagar menos. Definición Cómo funcionan Cómo se miden Qué afecta el tamaño Cómo saber cuánto pagar mempool.space Tu wallet Regla práctica Consejos para pagar menos Esperar momentos de baja demanda Usar SegWit o Taproot Consolidar UTXOs cuando las fees son bajas Inicio &rsaquo; Base de Conocimiento &rsaquo; ¿Qué son las comisiones (fees)? Base ¿Qué son las comisiones (fees)? El pago al minero que incluye tu transacción en un bloque. Un mercado que sube y baja según la demanda. Definición Las fees (comisiones) de Bitcoin son la cantidad que el emisor de una transacción paga para que un minero la incluya en un bloque. No son un porcentaje del monto enviado. Son un pago por el \"espacio\" que tu transacción ocupa en el bloque. Cómo funcionan 1. Creas una transacción que ocupa X bytes (o vBytes en SegWit) 2. Decides cuántos satoshis por byte ofrecer 3. Los mineros priorizan las transacciones que pagan más por byte 4. Tu transacción se confirma más rápido si pagas más Es un mercado: cuando hay mucha demanda (mempool llena), las fees suben. Cuando hay poca demanda, bajan. Cómo se miden sat/vB (satoshis por virtual byte): La unidad estándar. Una transacción típica ocupa 140-250 vBytes dependiendo del tipo y número de inputs/outputs. Ejemplo: Transacción de 200 vBytes Fee de 20 sat/vB Total: 200 × 20 = 4.000 sats A precio actual de bitcoin, calcula cuánto es en euros. Qu"
   },
   {
+    "title": "Quién es Satoshi Nakamoto",
+    "url": "/base/quien-es-satoshi.html",
+    "tags": [
+      "base de conocimiento",
+      "base",
+      "quien",
+      "satoshi"
+    ],
+    "section": "Base de Conocimiento",
+    "keywords": "Quién es Satoshi Nakamoto: qué sabemos, qué no sabemos y por qué su anonimato importa para Bitcoin. El misterio fundacional Qué sabemos con alta confianza Qué no sabemos Por qué su anonimato importa Lecturas recomendadas Inicio › Base de Conocimiento › Quién es Satoshi Nakamoto Base Quién es Satoshi Nakamoto El creador de Bitcoin sigue siendo un misterio. Esta es la parte verificable de la historia. El misterio fundacional Satoshi Nakamoto es el pseudónimo de la persona o grupo que diseñó Bitcoin. Publicó el whitepaper en octubre de 2008, lanzó el software en enero de 2009 y desapareció gradualmente en 2010. Desde entonces, cientos de artículos han intentado identificarle. Ninguno ha aportado una prueba criptográfica concluyente. La identidad real sigue sin confirmarse. Qué sabemos con alta confianza El 31 de octubre de 2008 publicó Bitcoin: A Peer-to-Peer Electronic Cash System . En enero de 2009 liberó la primera implementación de Bitcoin. Mantuvo comunicación técnica pública hasta 2010. Su última etapa de actividad fue transferir mantenimiento del código a otros desarrolladores. No hay movimientos públicamente atribuidos a sus primeras monedas minadas. 💡 Prueba real de identidad La prueba técnica sería firmar un mensaje con claves privadas históricamente atribuidas a Satoshi. A día de hoy, eso no ha ocurrido de forma verificable. Qué no sabemos Su nombre real. Si era una única persona o un equipo. Su nacionalidad o ubicación exacta. Cuántos bitcoin minó realmente en los p"
+  },
+  {
     "title": "Seguridad básica: las reglas de oro",
     "url": "/base/seguridad-basica.html",
     "tags": [
@@ -551,11 +578,21 @@
     "title": "¿Por dónde empiezo?",
     "url": "/empezar.html",
     "tags": [
-      "general",
-      "empezar"
+      "proyecto",
+      "empezar",
+      "frase semilla",
+      "seed phrase",
+      "mnemonic",
+      "bip39",
+      "wallet",
+      "billetera",
+      "lightning",
+      "factura lightning",
+      "utxo",
+      "transacciones"
     ],
-    "section": "General",
-    "keywords": "Descubre tu nivel de conocimiento sobre Bitcoin y empieza en el punto adecuado. Test rápido en 4 preguntas. Inicio &rsaquo; Proyecto &rsaquo; ¿Por dónde empiezo? Proyecto ¿Por dónde empiezo? Responde 4 preguntas y te recomendamos por dónde empezar. aprendeBTC tiene 6 niveles de contenido, desde los conceptos más básicos hasta la criptografía y contribución al código. No todo el mundo necesita empezar desde cero — quizás ya tienes experiencia y quieres profundizar en temas específicos. Responde estas preguntas y te recomendamos el nivel adecuado para ti. Test de nivel 💡 Nota NOTA: Este contenido está diseñado para implementarse como un test interactivo en JavaScript. A continuación se define la lógica del test. &larr; Anterior Actualizaciones y changelog"
+    "section": "Proyecto",
+    "keywords": "Descubre tu punto de partida en aprendeBTC. Test interactivo de 8 preguntas para recomendarte el nivel ideal. 8 preguntas para recomendarte tu nivel Inicio › ¿Por dónde empiezo? Ruta sugerida ¿Por dónde empiezo? aprendeBTC tiene 6 niveles, desde primeros pasos hasta protocolo. Responde este test y te recomendamos un punto de inicio realista según tu conocimiento actual. Test interactivo 8 preguntas para recomendarte tu nivel Evalúa fundamentos, autocustodia, seed phrase, Lightning, UTXO y conceptos técnicos. Seed phrase Lightning UTXO Nodos Taproot Empezar test Prefiero empezar desde cero Incluye preguntas sobre: frase semilla, wallets, autocustodia, nodos, UTXO, Taproot, ECDSA/Schnorr y BIP."
   },
   {
     "title": "Glosario de Bitcoin",
@@ -1150,6 +1187,10 @@
     "url": "/",
     "tags": [
       "inicio",
+      "frase semilla",
+      "seed phrase",
+      "mnemonic",
+      "bip39",
       "wallet",
       "billetera",
       "lightning",
@@ -1158,7 +1199,7 @@
       "transacciones"
     ],
     "section": "Inicio",
-    "keywords": "La guía educativa más completa sobre Bitcoin en español. Desde tu primera compra hasta criptografía avanzada. 6 niveles para todos los conocimientos. Elige tu nivel Tu primera compra de bitcoin Toma el control de tus bitcoin Entiende lo que controlas Privacidad, herencia y minería Criptografía, scripts y protocolo Filosofía, contribución y educación Pilares del conocimiento Inicio &rsaquo; Landing ₿ Educación Bitcoin en Español Aprende Bitcoin paso a paso La guía más completa en español. Desde tu primera compra hasta criptografía avanzada. 6 niveles para todos los conocimientos. Empezar desde cero → Explorar niveles Ruta de aprendizaje Elige tu nivel Un camino progresivo desde cero hasta dominar Bitcoin a nivel técnico. 1 7 páginas Explorador Tu primera compra de bitcoin Entiende qué es Bitcoin, decide tu camino (KYC o no-KYC), y compra tus primeros sats. Empezar desde cero → 2 15 páginas Soberano Toma el control de tus bitcoin Autocustodia, wallets, Lightning Network, exchanges y seguridad esencial. Ir al nivel 2 → 3 18 páginas Analista Entiende lo que controlas Modelo UTXO, claves, direcciones, nodos, hardware wallets, coin control y fiscalidad. Ir al nivel 3 → 4 23 páginas En la madriguera Privacidad, herencia y minería CoinJoin, multisig, planificación de herencia, Lightning avanzado y minería casera. Ir al nivel 4 → 5 19 páginas Mentor Criptografía, scripts y protocolo Curva elíptica, ECDSA, Schnorr, Bitcoin Script, SegWit, Taproot y transacciones raw. Ir al nivel 5 → 6 "
+    "keywords": "La guía educativa más completa sobre Bitcoin en español. Desde tu primera compra hasta criptografía avanzada. ¿Por dónde empiezo? Ruta personalizada en menos de 2 minutos Elige tu nivel Tu primera compra de bitcoin Toma el control de tus bitcoin Entiende lo que controlas Privacidad, herencia y minería Criptografía, scripts y protocolo Filosofía, contribución y educación Pilares del conocimiento Inicio › Landing ₿ Educación Bitcoin en español Aprende Bitcoin paso a paso La guía más completa en español. Desde tu primera compra hasta criptografía avanzada. 6 niveles para todos los conocimientos. Empezar desde cero → Hacer test rápido Test interactivo ¿Por dónde empiezo? Responde 8 preguntas y te recomendamos el nivel ideal para empezar hoy. Diagnóstico inicial Ruta personalizada en menos de 2 minutos El test cruza fundamentos, autocustodia, seed phrase, Lightning, UTXO y conocimientos técnicos. Frase semilla Wallets Lightning UTXO BIP Empezar test Abrir página standalone Incluye preguntas sobre: frase semilla, UTXO, Taproot, ECDSA/Schnorr, nodo, autocustodia y objetivo de aprendizaje. Ruta de aprendizaje Elige tu nivel Un camino progresivo desde cero hasta dominar Bitcoin a nivel técnico. 1 7 páginas Explorador Tu primera compra de bitcoin Entiende qué es Bitcoin, decide tu camino (KYC o no-KYC), y compra tus primeros sats. Empezar desde cero → 2 15 páginas Soberano Toma el control de tus bitcoin Autocustodia, wallets, Lightning Network, exchanges y seguridad esencial. Ir al niv"
   },
   {
     "title": "Bitcoin y energía: el debate completo",

@@ -103,7 +103,7 @@ function inferSectionAndNivel(route) {
   if (pathName.startsWith('/comunidad/')) return { section: 'Comunidad', nivel: undefined };
   if (pathName === '/glosario.html') return { section: 'Glosario', nivel: undefined };
   if (pathName === '/recursos.html') return { section: 'Recursos', nivel: undefined };
-  if (pathName === '/sobre.html' || pathName === '/actualizaciones.html') return { section: 'Proyecto', nivel: undefined };
+  if (pathName === '/sobre.html' || pathName === '/actualizaciones.html' || pathName === '/empezar.html') return { section: 'Proyecto', nivel: undefined };
   if (pathName === '/') return { section: 'Inicio', nivel: undefined };
   return { section: 'General', nivel: undefined };
 }
@@ -217,4 +217,5 @@ function main() {
 }
 
 main();
+
 

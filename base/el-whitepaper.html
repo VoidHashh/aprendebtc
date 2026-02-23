@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="El whitepaper de Bitcoin explicado: estructura, ideas clave y cómo leer hoy el documento de 2008 de Satoshi Nakamoto." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/base/el-whitepaper.html" />
+  <meta property="og:title" content="El whitepaper de Bitcoin — Base de Conocimiento | aprendebtc.com" />
+  <meta property="og:description" content="Qué dice realmente el whitepaper de Bitcoin, por qué importa y cómo leerlo sin perderte." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="El whitepaper de Bitcoin — Base de Conocimiento | aprendebtc.com" />
+  <meta name="twitter:description" content="Qué dice realmente el whitepaper de Bitcoin, por qué importa y cómo leerlo sin perderte." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <title>El whitepaper de Bitcoin — Base de Conocimiento | aprendebtc.com</title>
+  <link rel="canonical" href="https://aprendebtc.com/base/el-whitepaper.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación de la base">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-auto" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="/" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="/base/" class="breadcrumb__item">Base de Conocimiento</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">El whitepaper de Bitcoin</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--base article__badge">Base</div>
+          <h1>El whitepaper de Bitcoin</h1>
+          <p class="article__subtitle">Nueve páginas que definieron un sistema de dinero digital sin intermediarios.</p>
+
+          <h2>Qué es el whitepaper</h2>
+          <p>
+            El whitepaper es el documento técnico que Satoshi Nakamoto publicó el 31 de octubre de 2008 con el título
+            <em>Bitcoin: A Peer-to-Peer Electronic Cash System</em>. Resume el problema a resolver y propone una arquitectura
+            concreta para evitar el doble gasto sin banco central.
+          </p>
+          <p>
+            No es un manual completo de implementación ni un texto legal. Es un diseño de alto nivel con las piezas
+            esenciales: transacciones firmadas, cadena de bloques, prueba de trabajo, ajuste de dificultad, incentivos
+            de minería y verificación simplificada.
+          </p>
+
+          <h2>Cómo leerlo hoy</h2>
+          <ul>
+            <li>Lee primero la introducción y la sección 1 para entender el problema.</li>
+            <li>Pasa a secciones 2-4 para el flujo de transacciones y la estructura de bloque.</li>
+            <li>Después revisa secciones 5-8 para consenso, incentivos y almacenamiento.</li>
+            <li>Vuelve una segunda vez para conectar conceptos con la implementación actual.</li>
+          </ul>
+
+          <div class="callout callout--info">
+            <span class="callout__icon" aria-hidden="true">📚</span>
+            <div class="callout__content">
+              <div class="callout__title">Descarga directa</div>
+              <p class="callout__text">
+                <a href="/whitepaper-bitcoin-es.pdf" target="_blank" rel="noopener">Whitepaper en español (PDF)</a><br />
+                <a href="/whitepaper-bitcoin-en.pdf" target="_blank" rel="noopener">Whitepaper original en inglés (PDF)</a>
+              </p>
+            </div>
+          </div>
+
+          <h2>Ideas clave que siguen vigentes</h2>
+          <h3>1. El doble gasto se resuelve por consenso distribuido</h3>
+          <p>
+            Bitcoin evita que una misma moneda se gaste dos veces usando una historia compartida de transacciones
+            (la blockchain) validada por una red abierta de nodos.
+          </p>
+
+          <h3>2. Proof of Work como mecanismo de orden</h3>
+          <p>
+            La prueba de trabajo convierte la creación de bloques en algo costoso y verificable. Eso hace caro reescribir
+            la historia y protege el consenso sin autoridad central.
+          </p>
+
+          <h3>3. Incentivos alineados</h3>
+          <p>
+            Los mineros reciben recompensa y comisiones por seguir reglas. Si intentan romper el sistema, se exponen a
+            perder ingresos y valor económico.
+          </p>
+
+          <h3>4. Verificación independiente</h3>
+          <p>
+            Cualquier usuario puede ejecutar un nodo y verificar reglas por sí mismo. Esta propiedad de verificación
+            independiente es central en Bitcoin y distingue protocolo de confianza personal.
+          </p>
+
+          <h2>Qué no cubre el whitepaper</h2>
+          <ul>
+            <li>SegWit, Taproot y mejoras posteriores (fueron añadidas años después).</li>
+            <li>Modelos de privacidad avanzada o coin control moderno.</li>
+            <li>Lightning Network (capa 2 que apareció mucho después).</li>
+            <li>Detalles completos de seguridad operativa para usuarios.</li>
+          </ul>
+
+          <div class="callout callout--warning">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">No conviertas el whitepaper en dogma</div>
+              <p class="callout__text">
+                Es un punto de partida histórico y técnico, no una fotografía final del protocolo. Bitcoin evoluciona mediante
+                consenso y BIPs, manteniendo compatibilidad y conservadurismo en cambios críticos.
+              </p>
+            </div>
+          </div>
+
+          <h2>Enlaces para seguir</h2>
+          <ul>
+            <li><a href="/base/como-funciona-bitcoin.html">Cómo funciona Bitcoin</a></li>
+            <li><a href="/base/que-es-blockchain.html">Qué es la blockchain</a></li>
+            <li><a href="/base/quien-es-satoshi.html">Quién es Satoshi Nakamoto</a></li>
+            <li><a href="/nivel-6/que-es-un-bip.html">Qué es un BIP</a></li>
+          </ul>
+
+          <div class="ad-slot ad-content" id="ad-content-base-whitepaper" aria-hidden="true"></div>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/base/quien-es-satoshi.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">Quién es Satoshi Nakamoto</span>
+            </a>
+            <a href="/base/problema-del-dinero-tradicional.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">El problema del dinero tradicional</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

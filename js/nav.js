@@ -145,6 +145,8 @@
         { href: '/base/los-21-millones.html', text: 'Los 21 millones y la oferta fija' },
         { href: '/base/que-es-un-satoshi.html', text: 'Que es un satoshi' },
         { href: '/base/historia-bitcoin.html', text: 'Historia de Bitcoin' },
+        { href: '/base/quien-es-satoshi.html', text: 'Quien es Satoshi Nakamoto' },
+        { href: '/base/el-whitepaper.html', text: 'El whitepaper de Bitcoin' },
         { href: '/base/problema-del-dinero-tradicional.html', text: 'El problema del dinero tradicional' },
         { href: '/base/bitcoin-vs-dinero-tradicional.html', text: 'Bitcoin vs dinero tradicional' },
         { href: '/base/historia-del-dinero.html', text: 'Historia del dinero' },
@@ -1263,6 +1265,7 @@
     document.addEventListener('DOMContentLoaded', () => setTimeout(init, 100));
   }
 })();
+
 
 
 

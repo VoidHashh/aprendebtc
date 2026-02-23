@@ -3,38 +3,88 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Descubre tu nivel de conocimiento sobre Bitcoin y empieza en el punto adecuado. Test rápido en 4 preguntas." />
-  <meta property="og:title" content="¿Por dónde empiezo? | aprendebtc.com" />
-  <meta property="og:description" content="Descubre tu nivel de conocimiento sobre Bitcoin y empieza en el punto adecuado. Test rápido en 4 preguntas." />
+  <meta name="description" content="Descubre tu punto de partida en aprendeBTC. Test interactivo de 8 preguntas para recomendarte el nivel ideal." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://aprendebtc.com/empezar.html" />
+  <meta property="og:title" content="¿Por dónde empiezo? | aprendebtc.com" />
+  <meta property="og:description" content="Test de 8 preguntas para recomendarte el nivel de aprendizaje de Bitcoin que mejor encaja contigo." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="¿Por dónde empiezo? | aprendebtc.com" />
-  <meta name="twitter:description" content="Descubre tu nivel de conocimiento sobre Bitcoin y empieza en el punto adecuado. Test rápido en 4 preguntas." />
+  <meta name="twitter:description" content="Test de 8 preguntas para recomendarte el nivel de aprendizaje de Bitcoin que mejor encaja contigo." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
   <title>¿Por dónde empiezo? | aprendebtc.com</title>
   <link rel="canonical" href="https://aprendebtc.com/empezar.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/quiz.css" />
 </head>
 <body>
   <div data-include="header"></div>
-  <div class="page-layout">
-    <aside class="page-layout__sidebar" aria-label="Navegacion del proyecto"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-auto" aria-hidden="true"></div></div></nav></aside>
-    <main class="page-layout__content" id="main-content"><div class="content-inner">
-      <nav class="breadcrumb" aria-label="Ruta de navegacion"><a href="/" class="breadcrumb__item">Inicio</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><a href="/" class="breadcrumb__item">Proyecto</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><span class="breadcrumb__current">¿Por dónde empiezo?</span></nav>
-      <article class="article"><div class="nivel-badge nivel-badge--base article__badge">Proyecto</div><h1>¿Por dónde empiezo?</h1><p class="article__subtitle">Responde 4 preguntas y te recomendamos por dónde empezar.</p>
-<p>aprendeBTC tiene 6 niveles de contenido, desde los conceptos más básicos hasta la criptografía y contribución al código. No todo el mundo necesita empezar desde cero — quizás ya tienes experiencia y quieres profundizar en temas específicos. Responde estas preguntas y te recomendamos el nivel adecuado para ti. Test de nivel</p>
 
-<div class="callout callout--info"><span class="callout__icon" aria-hidden="true">💡</span><div class="callout__content"><div class="callout__title">Nota</div><p class="callout__text">NOTA: Este contenido está diseñado para implementarse como un test interactivo en JavaScript. A continuación se define la lógica del test.</p></div></div>
-<div class="ad-slot ad-content" id="ad-content-auto" aria-hidden="true"></div>
-<nav class="page-nav" aria-label="Navegacion entre paginas"><a href="/actualizaciones.html" class="page-nav__item"><span class="page-nav__label">&larr; Anterior</span><span class="page-nav__title">Actualizaciones y changelog</span></a><div></div></nav></article>
-    </div></main>
-  </div>
+  <main class="main-content" id="main-content">
+    <div class="quiz-page">
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <a href="/" class="breadcrumb__item">Inicio</a>
+        <span class="breadcrumb__separator" aria-hidden="true">›</span>
+        <span class="breadcrumb__current">¿Por dónde empiezo?</span>
+      </nav>
+
+      <div class="quiz-page__intro">
+        <div class="nivel-badge nivel-badge--1" style="margin-bottom: 0.75rem;">Ruta sugerida</div>
+        <h1>¿Por dónde empiezo?</h1>
+        <p>
+          aprendeBTC tiene 6 niveles, desde primeros pasos hasta protocolo. Responde este test y te recomendamos
+          un punto de inicio realista según tu conocimiento actual.
+        </p>
+      </div>
+
+      <section class="quiz-widget" data-quiz-root aria-label="Test interactivo de nivel">
+        <div class="quiz-widget__panel" data-quiz-screen="start">
+          <p class="quiz-widget__eyebrow">Test interactivo</p>
+          <h2 class="quiz-widget__title">8 preguntas para recomendarte tu nivel</h2>
+          <p class="quiz-widget__subtitle">
+            Evalúa fundamentos, autocustodia, seed phrase, Lightning, UTXO y conceptos técnicos.
+          </p>
+          <div class="quiz-widget__topics" aria-hidden="true">
+            <span class="quiz-widget__topic">Seed phrase</span>
+            <span class="quiz-widget__topic">Lightning</span>
+            <span class="quiz-widget__topic">UTXO</span>
+            <span class="quiz-widget__topic">Nodos</span>
+            <span class="quiz-widget__topic">Taproot</span>
+          </div>
+          <div class="quiz-widget__start-actions">
+            <button type="button" class="quiz-widget__start-button" data-quiz-start-btn>Empezar test</button>
+            <a class="quiz-widget__start-link" href="/nivel-1/">Prefiero empezar desde cero</a>
+          </div>
+          <p class="quiz-widget__seo-copy">
+            <strong>Incluye preguntas sobre:</strong> frase semilla, wallets, autocustodia, nodos, UTXO,
+            Taproot, ECDSA/Schnorr y BIP.
+          </p>
+        </div>
+
+        <div class="quiz-widget__panel is-hidden" data-quiz-screen="flow">
+          <div class="quiz-widget__progress" data-quiz-progressbar role="progressbar" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0">
+            <div class="quiz-widget__progress-fill" data-quiz-progress-fill></div>
+          </div>
+          <div data-quiz-question></div>
+        </div>
+
+        <div class="quiz-widget__panel is-hidden" data-quiz-screen="result" tabindex="-1"></div>
+      </section>
+
+      <div class="ad-slot ad-content" id="ad-empezar" aria-hidden="true"></div>
+    </div>
+  </main>
+
   <div data-include="footer"></div>
   <script src="js/includes.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/search.js"></script>
+  <script src="js/quiz.js"></script>
 </body>
 </html>
+
