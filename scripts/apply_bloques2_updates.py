@@ -155,6 +155,12 @@ def parse_blocks(lines: list[str]) -> list[dict[str, str]]:
                 i += 1
                 continue
 
+            if re.match(r"^Crea\s+esta\s+nueva\s+organizaci", s, re.IGNORECASE):
+                break
+
+            if re.match(r"^(HISTORIA|FUNDAMENTOS|AN[A?]LISIS)\b", s, re.IGNORECASE):
+                break
+
             if in_header:
                 if not s or set(s) <= {"=", "-"}:
                     i += 1
