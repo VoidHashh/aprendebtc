@@ -172,34 +172,50 @@
     {
       title: 'La Madriguera',
       index: '/la-madriguera/',
-      pages: [
-        { href: '/la-madriguera/los-primeros-dias-de-bitcoin.html', text: '01 - Los primeros días de Bitcoin (2009)' },
-        { href: '/la-madriguera/bitcoin-y-wikileaks.html', text: '02 - Bitcoin y WikiLeaks (2010)' },
-        { href: '/la-madriguera/silk-road-y-ross-ulbricht.html', text: '03 - Silk Road y Ross Ulbricht (2013)' },
-        { href: '/la-madriguera/el-hackeo-de-mt-gox.html', text: '04 - Mt. Gox (2014)' },
-        { href: '/la-madriguera/la-guerra-del-tamano-de-bloque.html', text: '05 - Guerra del tamaño de bloque (2015-17)' },
-        { href: '/la-madriguera/la-crisis-de-terra-luna.html', text: '06 - Crisis Terra/Luna (2022)' },
-        { href: '/la-madriguera/el-colapso-de-ftx.html', text: '07 - Colapso de FTX (2022)' },
-        { href: '/la-madriguera/ordinals-inscriptions-debate.html', text: '08 - Ordinals e Inscriptions (2023)' },
-        { href: '/la-madriguera/el-caso-samourai-wallet.html', text: '09 - Caso Samourai Wallet (2024)' },
-        { href: '/la-madriguera/los-etfs-de-bitcoin.html', text: '10 - ETFs de Bitcoin (2024)' },
-        { href: '/la-madriguera/el-ataque-del-51-por-ciento.html', text: '11 - El ataque del 51%' },
-        { href: '/la-madriguera/bloques-huerfanos-y-reorganizaciones.html', text: '12 - Bloques huérfanos y reorgs' },
-        { href: '/la-madriguera/el-problema-del-general-bizantino.html', text: '13 - El Problema del General Bizantino' },
-        { href: '/la-madriguera/el-doble-gasto.html', text: '14 - El doble gasto' },
-        { href: '/la-madriguera/la-politica-monetaria-de-bitcoin.html', text: '15 - La política monetaria de Bitcoin' },
-        { href: '/la-madriguera/soft-forks-de-bitcoin.html', text: '16 - Los soft forks de Bitcoin' },
-        { href: '/la-madriguera/multisig-custodia-y-herencia-segun-satoshi.html', text: '17 - Multisig y herencia según Satoshi' },
-        { href: '/la-madriguera/economia-austriaca-para-bitcoiners.html', text: '18 - Economía austríaca para bitcoiners' },
-        { href: '/la-madriguera/bitcoin-y-energia.html', text: '19 - Bitcoin y energía' },
-        { href: '/la-madriguera/la-geopolitica-de-la-mineria.html', text: '20 - Geopolítica de la minería' },
-        { href: '/la-madriguera/lightning-network-estado-actual.html', text: '21 - Lightning Network: estado actual' },
-        { href: '/la-madriguera/privacidad-en-bitcoin-estado-actual.html', text: '22 - Privacidad: estado actual' },
-        { href: '/la-madriguera/puede-un-gobierno-prohibir-bitcoin.html', text: '23 - ¿Puede un gobierno prohibir Bitcoin?' },
-        { href: '/la-madriguera/el-debate-de-la-osificacion.html', text: '24 - El debate de la osificación' },
-        { href: '/la-madriguera/bitcoin-medio-de-pago-vs-reserva-de-valor.html', text: '25 - ¿Medio de pago o reserva de valor?' },
-        { href: '/la-madriguera/hiperinflaciones-y-bitcoin.html', text: '26 - Hiperinflaciones y Bitcoin' },
-        { href: '/la-madriguera/halving-y-ciclos-de-precio.html', text: '27 - El halving y los ciclos de precio' }
+      pages: [],
+      groups: [
+        {
+          title: 'HISTORIA',
+          links: [
+            { href: '/la-madriguera/los-primeros-dias-de-bitcoin.html', text: '01 - Los primeros días de Bitcoin (2009)' },
+            { href: '/la-madriguera/bitcoin-y-wikileaks.html', text: '02 - Bitcoin y WikiLeaks (2010)' },
+            { href: '/la-madriguera/silk-road-y-ross-ulbricht.html', text: '03 - Silk Road y Ross Ulbricht (2013)' },
+            { href: '/la-madriguera/el-hackeo-de-mt-gox.html', text: '04 - Mt. Gox (2014)' },
+            { href: '/la-madriguera/la-guerra-del-tamano-de-bloque.html', text: '05 - Guerra del tamaño de bloque (2015-17)' },
+            { href: '/la-madriguera/la-crisis-de-terra-luna.html', text: '06 - Crisis Terra/Luna (2022)' },
+            { href: '/la-madriguera/el-colapso-de-ftx.html', text: '07 - Colapso de FTX (2022)' },
+            { href: '/la-madriguera/ordinals-inscriptions-debate.html', text: '08 - Ordinals e Inscriptions (2023)' },
+            { href: '/la-madriguera/el-caso-samourai-wallet.html', text: '09 - Caso Samourai Wallet (2024)' },
+            { href: '/la-madriguera/los-etfs-de-bitcoin.html', text: '10 - ETFs de Bitcoin (2024)' }
+          ]
+        },
+        {
+          title: 'FUNDAMENTOS',
+          links: [
+            { href: '/la-madriguera/el-ataque-del-51-por-ciento.html', text: '11 - El ataque del 51%' },
+            { href: '/la-madriguera/bloques-huerfanos-y-reorganizaciones.html', text: '12 - Bloques huérfanos y reorgs' },
+            { href: '/la-madriguera/el-problema-del-general-bizantino.html', text: '13 - El Problema del General Bizantino' },
+            { href: '/la-madriguera/el-doble-gasto.html', text: '14 - El doble gasto' },
+            { href: '/la-madriguera/la-politica-monetaria-de-bitcoin.html', text: '15 - La política monetaria de Bitcoin' },
+            { href: '/la-madriguera/soft-forks-de-bitcoin.html', text: '16 - Los soft forks de Bitcoin' },
+            { href: '/la-madriguera/multisig-custodia-y-herencia-segun-satoshi.html', text: '17 - Multisig y herencia según Satoshi' },
+            { href: '/la-madriguera/economia-austriaca-para-bitcoiners.html', text: '18 - Economía austríaca para bitcoiners' }
+          ]
+        },
+        {
+          title: 'ANÁLISIS',
+          links: [
+            { href: '/la-madriguera/bitcoin-y-energia.html', text: '19 - Bitcoin y energía' },
+            { href: '/la-madriguera/la-geopolitica-de-la-mineria.html', text: '20 - Geopolítica de la minería' },
+            { href: '/la-madriguera/lightning-network-estado-actual.html', text: '21 - Lightning Network: estado actual' },
+            { href: '/la-madriguera/privacidad-en-bitcoin-estado-actual.html', text: '22 - Privacidad: estado actual' },
+            { href: '/la-madriguera/puede-un-gobierno-prohibir-bitcoin.html', text: '23 - ¿Puede un gobierno prohibir Bitcoin?' },
+            { href: '/la-madriguera/el-debate-de-la-osificacion.html', text: '24 - El debate de la osificación' },
+            { href: '/la-madriguera/bitcoin-medio-de-pago-vs-reserva-de-valor.html', text: '25 - ¿Medio de pago o reserva de valor?' },
+            { href: '/la-madriguera/hiperinflaciones-y-bitcoin.html', text: '26 - Hiperinflaciones y Bitcoin' },
+            { href: '/la-madriguera/halving-y-ciclos-de-precio.html', text: '27 - El halving y los ciclos de precio' }
+          ]
+        }
       ]
     },
     {
@@ -644,7 +660,7 @@
   }
 
   function sanitizeSidebarTexts() {
-    document.querySelectorAll('.sidebar__section-title, .sidebar__link').forEach((node) => {
+    document.querySelectorAll('.sidebar__section-title, .sidebar__link, .sidebar__subgroup-title').forEach((node) => {
       const cleaned = sanitizeLabel(node.textContent);
       if (cleaned) node.textContent = cleaned;
     });
@@ -683,9 +699,46 @@
   }
 
   function createPillarSidebarSection(pillarItem) {
-    const rootLabel = pillarItem.pages.length > 0 ? 'Indice del pilar' : 'Abrir página';
-    const links = [{ href: pillarItem.index, text: rootLabel }, ...pillarItem.pages];
-    return createSidebarSection(pillarItem.title, links, 'sidebar__section--primary sidebar__section--pillar');
+    const grouped = Array.isArray(pillarItem.groups) && pillarItem.groups.some((group) => Array.isArray(group.links) && group.links.length > 0);
+    const rootLabel = grouped || pillarItem.pages.length > 0 ? 'Indice del pilar' : 'Abrir página';
+
+    if (!grouped) {
+      const links = [{ href: pillarItem.index, text: rootLabel }, ...pillarItem.pages];
+      return createSidebarSection(pillarItem.title, links, 'sidebar__section--primary sidebar__section--pillar');
+    }
+
+    const section = document.createElement('div');
+    section.className = 'sidebar__section sidebar__section--primary sidebar__section--pillar';
+
+    const titleNode = document.createElement('div');
+    titleNode.className = 'sidebar__section-title';
+    titleNode.textContent = sanitizeLabel(pillarItem.title);
+    section.appendChild(titleNode);
+
+    const rootLink = document.createElement('a');
+    rootLink.className = 'sidebar__link';
+    rootLink.href = pillarItem.index;
+    rootLink.textContent = sanitizeLabel(rootLabel);
+    section.appendChild(rootLink);
+
+    pillarItem.groups.forEach((group) => {
+      if (!group || !Array.isArray(group.links) || group.links.length === 0) return;
+
+      const subgroupTitle = document.createElement('div');
+      subgroupTitle.className = 'sidebar__subgroup-title';
+      subgroupTitle.textContent = sanitizeLabel(group.title);
+      section.appendChild(subgroupTitle);
+
+      group.links.forEach((item) => {
+        const link = document.createElement('a');
+        link.className = 'sidebar__link sidebar__link--subgroup';
+        link.href = item.href;
+        link.textContent = sanitizeLabel(item.text);
+        section.appendChild(link);
+      });
+    });
+
+    return section;
   }
 
   function createSidebarGroupHeading(title, sectionClass) {
@@ -939,11 +992,25 @@
       },
       {
         title: 'Pilares',
-        items: PILLAR_TREE.map((pillar) => ({
-          title: pillar.title,
-          levelNum: '',
-          links: [{ href: pillar.index, text: pillar.pages.length > 0 ? 'Indice del pilar' : 'Abrir página' }, ...pillar.pages]
-        }))
+        items: PILLAR_TREE.map((pillar) => {
+          const grouped = Array.isArray(pillar.groups) && pillar.groups.some((group) => Array.isArray(group.links) && group.links.length > 0);
+          const hasChildren = grouped || pillar.pages.length > 0;
+          const groups = grouped
+            ? pillar.groups
+                .filter((group) => Array.isArray(group.links) && group.links.length > 0)
+                .map((group) => ({
+                  title: group.title,
+                  links: group.links
+                }))
+            : [];
+
+          return {
+            title: pillar.title,
+            levelNum: '',
+            links: [{ href: pillar.index, text: hasChildren ? 'Indice del pilar' : 'Abrir página' }, ...pillar.pages],
+            groups
+          };
+        })
       }
     ];
 
@@ -1008,9 +1075,9 @@
 
         let itemHasActive = false;
 
-        item.links.forEach((linkData) => {
+        const appendMobileTreeLink = (linkData, extraClass) => {
           const link = document.createElement('a');
-          link.className = 'mobile-tree__link';
+          link.className = `mobile-tree__link ${extraClass || ''}`.trim();
           link.href = linkData.href;
           link.textContent = sanitizeLabel(linkData.text);
 
@@ -1028,7 +1095,26 @@
           }
 
           itemChildren.appendChild(link);
+        };
+
+        item.links.forEach((linkData) => {
+          appendMobileTreeLink(linkData);
         });
+
+        if (Array.isArray(item.groups) && item.groups.length > 0) {
+          item.groups.forEach((subgroup) => {
+            if (!subgroup || !Array.isArray(subgroup.links) || subgroup.links.length === 0) return;
+
+            const subgroupTitle = document.createElement('div');
+            subgroupTitle.className = 'mobile-tree__subgroup-title';
+            subgroupTitle.textContent = sanitizeLabel(subgroup.title);
+            itemChildren.appendChild(subgroupTitle);
+
+            subgroup.links.forEach((linkData) => {
+              appendMobileTreeLink(linkData, 'mobile-tree__link--subgroup');
+            });
+          });
+        }
 
         itemNode.appendChild(itemChildren);
         groupChildren.appendChild(itemNode);
@@ -1284,6 +1370,7 @@
     document.addEventListener('DOMContentLoaded', () => setTimeout(init, 100));
   }
 })();
+
 
 
 
