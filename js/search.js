@@ -122,8 +122,8 @@
     { title: 'Libros recomendados sobre Bitcoin', url: '/recursos/libros.html', tags: ['recursos', 'libros', 'amazon', 'lecturas bitcoin'], section: 'Recursos' },
     { title: 'Podcasts de Bitcoin', url: '/recursos/podcasts.html', tags: ['recursos', 'podcasts', 'audio', 'entrevistas'], section: 'Recursos' },
     { title: 'Documentales sobre Bitcoin', url: '/recursos/documentales.html', tags: ['recursos', 'documentales', 'historia bitcoin', 'videos'], section: 'Recursos' },
-    { title: 'Webs de referencia sobre Bitcoin', url: '/recursos/webs-referencia.html', tags: ['recursos', 'referencia', 'documentacion', 'webs'], section: 'Recursos' },
-    { title: 'Herramientas recomendadas', url: '/recursos/herramientas.html', tags: ['recursos', 'herramientas', 'mempool', 'lightning'], section: 'Recursos' },
+    { title: 'Webs de referencia sobre Bitcoin', url: '/recursos/webs-referencia.html', tags: ['recursos', 'referencia', 'documentación', 'webs'], section: 'Recursos' },
+    { title: 'Herramientas recomendadas', url: '/recursos/herramientas.html', tags: ['recursos', 'herramientas', 'mempool', 'lightning', 'analítica'], section: 'Recursos' },
     { title: 'Hardware wallets recomendadas', url: '/recursos/hardware-wallets.html', tags: ['recursos', 'hardware wallet', 'autocustodia', 'seguridad'], section: 'Recursos' },
     { title: 'Otros recursos de Bitcoin', url: '/recursos/otros-recursos.html', tags: ['recursos', 'whitepaper', 'comunidad', 'bitcoin core'], section: 'Recursos' },
     { title: 'Herramientas', url: '/herramientas/', tags: ['tools', 'hash'], section: 'Pilares' },
@@ -455,5 +455,4 @@
   document.addEventListener('includes:loaded', init);
   document.addEventListener('DOMContentLoaded', () => setTimeout(init, 150));
 })();
-
 
