@@ -1001,6 +1001,41 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://aprendebtc.com/recursos/documentales.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aprendebtc.com/recursos/hardware-wallets.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aprendebtc.com/recursos/herramientas.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aprendebtc.com/recursos/libros.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aprendebtc.com/recursos/otros-recursos.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aprendebtc.com/recursos/podcasts.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aprendebtc.com/recursos/webs-referencia.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://aprendebtc.com/sobre.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

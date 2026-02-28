@@ -282,7 +282,15 @@
     {
       title: 'Recursos',
       index: '/recursos.html',
-      pages: []
+      pages: [
+        { href: '/recursos/libros.html', text: 'Libros' },
+        { href: '/recursos/podcasts.html', text: 'Podcasts' },
+        { href: '/recursos/documentales.html', text: 'Documentales' },
+        { href: '/recursos/webs-referencia.html', text: 'Webs de referencia' },
+        { href: '/recursos/herramientas.html', text: 'Herramientas recomendadas' },
+        { href: '/recursos/hardware-wallets.html', text: 'Hardware wallets' },
+        { href: '/recursos/otros-recursos.html', text: 'Otros recursos' }
+      ]
     }
   ];
 
@@ -308,7 +316,7 @@
     if (path === '/comunidad' || path.startsWith('/comunidad/')) return 'Comunidad';
     if (path === '/herramientas' || path.startsWith('/herramientas/')) return 'Herramientas';
     if (path === '/glosario.html') return 'Glosario';
-    if (path === '/recursos.html') return 'Recursos';
+    if (path === '/recursos.html' || path.startsWith('/recursos/')) return 'Recursos';
 
     return 'Contenido';
   }
@@ -1370,7 +1378,6 @@
     document.addEventListener('DOMContentLoaded', () => setTimeout(init, 100));
   }
 })();
-
 
 
 

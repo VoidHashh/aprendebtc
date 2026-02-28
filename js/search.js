@@ -118,7 +118,14 @@
     { title: 'Sobre aprendeBTC', url: '/sobre.html', tags: ['proyecto', 'sobre nosotros'], section: 'Proyecto' },
     { title: 'Actualizaciones y changelog', url: '/actualizaciones.html', tags: ['proyecto', 'changelog', 'actualizaciones'], section: 'Proyecto' },
     { title: 'Glosario', url: '/glosario.html', tags: ['terminos', 'definiciones'], section: 'Pilares' },
-    { title: 'Recursos', url: '/recursos.html', tags: ['libros', 'podcasts'], section: 'Pilares' },
+    { title: 'Recursos', url: '/recursos.html', tags: ['libros', 'podcasts', 'documentales', 'webs', 'herramientas'], section: 'Pilares' },
+    { title: 'Libros recomendados sobre Bitcoin', url: '/recursos/libros.html', tags: ['recursos', 'libros', 'amazon', 'lecturas bitcoin'], section: 'Recursos' },
+    { title: 'Podcasts de Bitcoin', url: '/recursos/podcasts.html', tags: ['recursos', 'podcasts', 'audio', 'entrevistas'], section: 'Recursos' },
+    { title: 'Documentales sobre Bitcoin', url: '/recursos/documentales.html', tags: ['recursos', 'documentales', 'historia bitcoin', 'videos'], section: 'Recursos' },
+    { title: 'Webs de referencia sobre Bitcoin', url: '/recursos/webs-referencia.html', tags: ['recursos', 'referencia', 'documentacion', 'webs'], section: 'Recursos' },
+    { title: 'Herramientas recomendadas', url: '/recursos/herramientas.html', tags: ['recursos', 'herramientas', 'mempool', 'lightning'], section: 'Recursos' },
+    { title: 'Hardware wallets recomendadas', url: '/recursos/hardware-wallets.html', tags: ['recursos', 'hardware wallet', 'autocustodia', 'seguridad'], section: 'Recursos' },
+    { title: 'Otros recursos de Bitcoin', url: '/recursos/otros-recursos.html', tags: ['recursos', 'whitepaper', 'comunidad', 'bitcoin core'], section: 'Recursos' },
     { title: 'Herramientas', url: '/herramientas/', tags: ['tools', 'hash'], section: 'Pilares' },
     { title: 'Conversor BTC / EUR / sats', url: '/herramientas/conversor.html', tags: ['herramientas', 'conversor', 'sats', 'eur', 'usd'], section: 'Herramientas' },
     { title: 'Calculadora de fees', url: '/herramientas/calculadora-fees.html', tags: ['herramientas', 'fees', 'mempool', 'sat/vb'], section: 'Herramientas' },
@@ -448,6 +455,5 @@
   document.addEventListener('includes:loaded', init);
   document.addEventListener('DOMContentLoaded', () => setTimeout(init, 150));
 })();
-
 
 
