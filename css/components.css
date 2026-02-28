@@ -1737,6 +1737,149 @@ html[data-ads="on"] .sidebar__ad-wrap {
   margin-bottom: 2rem;
 }
 
+.books-note {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  margin-top: -0.5rem;
+  margin-bottom: 1.6rem;
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .book-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.58rem;
+  padding: 1rem 1rem 1.05rem;
+  background: linear-gradient(180deg, rgba(28, 33, 40, 0.6), rgba(13, 17, 23, 0.35));
+  border: 1px solid rgba(48, 54, 61, 0.94);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+}
+
+.book-card:hover {
+  border-color: var(--accent-muted);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.28);
+  transform: translateY(-1px);
+}
+
+.book-card__title {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.book-card__author {
+  margin: 0;
+  color: #9fb0c2;
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.book-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.1rem;
+}
+
+.book-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.52rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
+.book-tag--tema-economia {
+  color: #ffd39e;
+  background: rgba(247, 147, 26, 0.15);
+  border-color: rgba(247, 147, 26, 0.48);
+}
+
+.book-tag--tema-tecnico {
+  color: #9cc8ff;
+  background: rgba(88, 166, 255, 0.12);
+  border-color: rgba(88, 166, 255, 0.44);
+}
+
+.book-tag--tema-filosofia {
+  color: #d6b7ff;
+  background: rgba(163, 113, 247, 0.12);
+  border-color: rgba(163, 113, 247, 0.44);
+}
+
+.book-tag--tema-historia {
+  color: #f3df8f;
+  background: rgba(240, 192, 0, 0.11);
+  border-color: rgba(240, 192, 0, 0.42);
+}
+
+.book-tag--tema-narrativa {
+  color: #ffb1aa;
+  background: rgba(218, 54, 51, 0.11);
+  border-color: rgba(218, 54, 51, 0.42);
+}
+
+.book-tag--tema-defi {
+  color: #8be4a1;
+  background: rgba(46, 160, 67, 0.12);
+  border-color: rgba(46, 160, 67, 0.44);
+}
+
+.book-tag--tema-divulgacion {
+  color: #c7d3df;
+  background: rgba(110, 118, 129, 0.15);
+  border-color: rgba(139, 148, 158, 0.44);
+}
+
+.book-tag--nivel-principiante {
+  color: #ffd39e;
+  background: rgba(247, 147, 26, 0.1);
+  border-color: rgba(247, 147, 26, 0.44);
+}
+
+.book-tag--nivel-intermedio {
+  color: #9cc8ff;
+  background: rgba(88, 166, 255, 0.1);
+  border-color: rgba(88, 166, 255, 0.42);
+}
+
+.book-tag--nivel-avanzado {
+  color: #ffb1aa;
+  background: rgba(218, 54, 51, 0.1);
+  border-color: rgba(218, 54, 51, 0.42);
+}
+
+.book-card__description {
+  margin: 0;
+  color: #d0dae4;
+  font-size: 0.92rem;
+  line-height: 1.62;
+}
+
+.book-card__cta {
+  margin-top: auto;
+  width: fit-content;
+  text-decoration: none !important;
+}
+
 .nivel-badge--base {
   color: var(--accent);
   background: var(--accent-bg);
@@ -2065,5 +2208,4 @@ html[data-ads="on"] .sidebar__ad-wrap {
     width: calc(100% - var(--sidebar-width));
   }
 }
-
 
