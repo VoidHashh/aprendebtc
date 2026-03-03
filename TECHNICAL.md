@@ -56,19 +56,21 @@ Gestionado en `js/nav.js`:
 - El footer solo muestra CTA a la pagina de donaciones: `/donar.html`.
 - La logica de pagos esta en:
   - `donar.html` (estructura del widget y bloques `noscript`)
-  - `js/donate.js` (LNURL-pay, QR, copiado y fallback)
+  - `js/donate.js` (BOLT12/BIP353, QR, copiado y fallback)
   - `js/qrcode.min.js` (libreria QR local)
 
 Datos configurables:
 
 - Lightning Address: `CONFIG.lightningAddress` en `js/donate.js`.
+- Oferta BOLT12 reutilizable: `CONFIG.bolt12Offer` en `js/donate.js`.
 - Direccion on-chain: `CONFIG.onchainAddress` en `js/donate.js`.
 - Perfil Nostr: link en `donar.html` (`https://njump.me/voidhash@nostr.lol`).
 
 Nota de compatibilidad Lightning:
 
-- Para facturas con monto desde navegador se requiere Lightning Address compatible con LNURL-pay (LUD-16) y endpoint `/.well-known/lnurlp/...` accesible.
-- Direcciones BIP353 (por ejemplo `@phoenixwallet.me`) no exponen ese endpoint web y solo permiten fallback por copiado/escaneo de direccion.
+- El flujo actual no genera facturas BOLT11 con monto desde navegador.
+- Se muestra una oferta BOLT12 reutilizable y una Lightning Address (BIP353) como alternativa.
+- Si se quiere volver al flujo de monto dinamico, hay que usar un proveedor LNURL-pay (LUD-16) con endpoint `/.well-known/lnurlp/...` publico.
 
 ## Publicidad
 
