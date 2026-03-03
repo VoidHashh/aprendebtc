@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Apoya aprendeBTC con una donaci&oacute;n en Bitcoin. M&eacute;todo recomendado: Lightning. Tambi&eacute;n disponible on-chain y v&iacute;a Nostr." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aprendebtc.com/donar.html" />
+  <meta property="og:title" content="Apoya aprendeBTC | Donaciones Bitcoin" />
+  <meta property="og:description" content="Donaciones para apoyar el proyecto aprendeBTC. Lightning recomendado, on-chain para montos grandes, y zaps v&iacute;a Nostr." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Apoya aprendeBTC | Donaciones Bitcoin" />
+  <meta name="twitter:description" content="Donaciones para apoyar el proyecto aprendeBTC. Lightning recomendado, on-chain para montos grandes, y zaps v&iacute;a Nostr." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/donar.html" />
+  <link rel="alternate" hreflang="es" href="https://aprendebtc.com/donar.html" />
+  <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/donar.html" />
+  <title>Apoya aprendeBTC | Donaciones Bitcoin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegaci&oacute;n lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegaci&oacute;n">
+          <a href="/" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="/sobre.html" class="breadcrumb__item">Proyecto</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Apoya aprendeBTC</span>
+        </nav>
+
+        <article class="article donate-page">
+          <h1>Apoya aprendeBTC</h1>
+          <p class="article__subtitle">Este proyecto es gratuito y sin publicidad invasiva. Si te ha sido &uacute;til, puedes apoyarlo con una donaci&oacute;n en bitcoin.</p>
+
+          <div class="callout callout--success">
+            <span class="callout__icon" aria-hidden="true">&#10084;</span>
+            <div class="callout__content">
+              <div class="callout__title">Gracias por tu apoyo</div>
+              <p class="callout__text">Cada satoshi ayuda a mantener y mejorar el contenido educativo en espa&ntilde;ol para toda la comunidad.</p>
+            </div>
+          </div>
+
+          <section class="donate__section" aria-labelledby="donate-lightning-title">
+            <h2 class="donate__section-title" id="donate-lightning-title">Lightning (recomendado)</h2>
+
+            <div id="donate-lightning-content">
+              <noscript>
+                <p class="donate__instruction">
+                  Copia esta Lightning Address y p&eacute;gala en tu wallet compatible
+                  (Phoenix, Zeus, BlueWallet, Wallet of Satoshi...):
+                </p>
+                <div class="donate__address-row">
+                  <code class="donate__address-text">applealpaca64@phoenixwallet.me</code>
+                </div>
+              </noscript>
+            </div>
+          </section>
+
+          <section class="donate__section" aria-labelledby="donate-onchain-title">
+            <h2 class="donate__section-title" id="donate-onchain-title">On-chain</h2>
+
+            <div id="donate-onchain-content">
+              <noscript>
+                <div class="donate__privacy-note">
+                  <span aria-hidden="true">i</span>
+                  <span>Por privacidad, preferimos donaciones v&iacute;a Lightning. Cada pago Lightning genera una factura &uacute;nica. Usa on-chain solo para montos grandes.</span>
+                </div>
+                <p class="donate__instruction">Direcci&oacute;n Bitcoin (SegWit):</p>
+                <div class="donate__address-row">
+                  <code class="donate__address-text">bc1qqqnmg5yfxjyskqamyvwu3l33dtcjhrq6reuwxj</code>
+                </div>
+              </noscript>
+            </div>
+          </section>
+
+          <section class="donate__section" aria-labelledby="donate-nostr-title">
+            <h2 class="donate__section-title" id="donate-nostr-title">V&iacute;a Nostr</h2>
+            <p class="donate__nostr-text">Tambi&eacute;n puedes enviarnos un zap desde tu cliente Nostr favorito.</p>
+            <a href="https://njump.me/NPUB_AQUI" class="donate__nostr-link" target="_blank" rel="noopener">
+              Ir a nuestro perfil en Nostr
+            </a>
+            <p class="donate__nostr-hint">Pendiente: reemplazar <code>NPUB_AQUI</code> por el npub/nprofile real.</p>
+          </section>
+
+          <div class="donate__thanks">
+            Gracias por apoyar la educaci&oacute;n Bitcoin en espa&ntilde;ol.
+          </div>
+
+          <div class="page-nav page-nav--single">
+            <a href="/sobre.html" class="page-nav__item">
+              <span class="page-nav__label">&larr; Volver</span>
+              <span class="page-nav__title">Sobre aprendeBTC</span>
+            </a>
+          </div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="js/includes.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/qrcode.min.js"></script>
+  <script src="js/donate.js"></script>
+</body>
+</html>

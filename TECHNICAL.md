@@ -51,20 +51,19 @@ Gestionado en `js/nav.js`:
 - Cuando navegas desde un nivel a una página de `/base/`, se propaga `?from=...` (y se guarda en `sessionStorage`).
 - En páginas de Base, si hay contexto válido, aparece un botón de volver junto al breadcrumb.
 
-## Footer (donaciones y enlaces)
+## Footer y donaciones
 
-- Editar `includes/footer.html` para:
-  - Dirección on-chain (BTC) en `data-donate-copy`.
-  - Dirección Lightning (LNURL / Lightning Address) en `data-donate-copy`.
-  - URI móvil (wallet) en `data-donate-mobile`:
-    - On-chain: `bitcoin:...`
-    - Lightning: `lightning:...`
+- El footer solo muestra CTA a la pagina de donaciones: `/donar.html`.
+- La logica de pagos esta en:
+  - `donar.html` (estructura del widget y bloques `noscript`)
+  - `js/donate.js` (LNURL-pay, QR, copiado y fallback)
+  - `js/qrcode.min.js` (libreria QR local)
 
-Comportamiento:
+Datos configurables:
 
-- Desktop: el botón copia al portapapeles.
-- Móvil: el botón intenta abrir la wallet.
-- Las direcciones no deben mostrarse como texto visible.
+- Lightning Address: `CONFIG.lightningAddress` en `js/donate.js`.
+- Direccion on-chain: `CONFIG.onchainAddress` en `js/donate.js`.
+- Perfil Nostr: link en `donar.html` (`https://njump.me/NPUB_AQUI` pendiente).
 
 ## Publicidad
 

@@ -317,6 +317,7 @@
     if (path === '/herramientas' || path.startsWith('/herramientas/')) return 'Herramientas';
     if (path === '/glosario.html') return 'Glosario';
     if (path === '/recursos.html' || path.startsWith('/recursos/')) return 'Recursos';
+    if (path === '/sobre.html' || path === '/actualizaciones.html' || path === '/donar.html') return 'Proyecto';
 
     return 'Contenido';
   }
@@ -1378,7 +1379,6 @@
     document.addEventListener('DOMContentLoaded', () => setTimeout(init, 100));
   }
 })();
-
 
 
 

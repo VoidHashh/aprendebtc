@@ -116,6 +116,7 @@
     { title: 'Halving y ciclos de precio', url: '/la-madriguera/halving-y-ciclos-de-precio.html', tags: ['madriguera', 'halving', 'ciclos'], section: 'La Madriguera' },
     { title: 'Empieza aqu?', url: '/empezar.html', tags: ['empezar', 'por donde empiezo', 'test de nivel', 'frase semilla', 'seed phrase', 'wallet', 'utxo', 'nodo', 'lightning'], section: 'Proyecto' },
     { title: 'Sobre aprendeBTC', url: '/sobre.html', tags: ['proyecto', 'sobre nosotros'], section: 'Proyecto' },
+    { title: 'Apoya aprendeBTC', url: '/donar.html', tags: ['proyecto', 'donaciones', 'lightning', 'on-chain', 'zaps'], section: 'Proyecto' },
     { title: 'Actualizaciones y changelog', url: '/actualizaciones.html', tags: ['proyecto', 'changelog', 'actualizaciones'], section: 'Proyecto' },
     { title: 'Glosario', url: '/glosario.html', tags: ['terminos', 'definiciones'], section: 'Pilares' },
     { title: 'Recursos', url: '/recursos.html', tags: ['libros', 'podcasts', 'documentales', 'webs', 'herramientas'], section: 'Pilares' },
@@ -455,4 +456,3 @@
   document.addEventListener('includes:loaded', init);
   document.addEventListener('DOMContentLoaded', () => setTimeout(init, 150));
 })();
-
