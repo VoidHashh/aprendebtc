@@ -63,7 +63,7 @@ Datos configurables:
 
 - Lightning Address: `CONFIG.lightningAddress` en `js/donate.js`.
 - Direccion on-chain: `CONFIG.onchainAddress` en `js/donate.js`.
-- Perfil Nostr: link en `donar.html` (`https://njump.me/NPUB_AQUI` pendiente).
+- Perfil Nostr: link en `donar.html` (`https://njump.me/voidhash@nostr.lol`).
 
 ## Publicidad
 

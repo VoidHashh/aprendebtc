@@ -202,14 +202,15 @@
     html += '<code class="donate__address-text" title="' + escapeHtml(invoice) + '">' + escapeHtml(truncate(invoice, 20, 10)) + '</code>';
     html += '<button class="donate__copy-btn" id="donate-copy-invoice">Copiar invoice</button>';
     html += '</div>';
-    html += '<a href="lightning:' + encodeURIComponent(invoice) + '" class="donate__wallet-link">Abrir con wallet</a>';
+    html += '<a href="lightning:' + invoice + '" class="donate__wallet-link">Abrir con wallet</a>';
     html += '<p class="donate__expiry">La factura expira en ~' + CONFIG.invoiceExpiryMinutes + ' minutos</p>';
     html += '</div>';
     html += '<button class="donate__generate-new-btn" id="donate-generate-new">Generar otra factura</button>';
     lightningContainer.innerHTML = html;
 
     const qrContainer = document.getElementById('donate-ln-qr');
-    const qrImg = createQrImage('lightning:' + String(invoice).toUpperCase());
+    // Use plain BOLT11 in QR for better wallet compatibility.
+    const qrImg = createQrImage(String(invoice).toUpperCase());
     if (qrContainer) {
       if (qrImg) {
         qrContainer.appendChild(qrImg);
@@ -404,11 +405,7 @@
       renderInvoice(invoice, amount);
     } catch (err) {
       console.error('generateInvoiceFlow:', err);
-      if (!state.lnurlParams) {
-        renderFallback();
-      } else {
-        renderError('No se pudo generar la factura. ' + (err && err.message ? err.message : 'Intenta de nuevo.'));
-      }
+      renderError('No se pudo generar la factura con monto. ' + (err && err.message ? err.message : 'Intenta de nuevo.'));
     }
   }
 
