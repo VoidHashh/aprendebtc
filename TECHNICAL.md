@@ -65,6 +65,11 @@ Datos configurables:
 - Direccion on-chain: `CONFIG.onchainAddress` en `js/donate.js`.
 - Perfil Nostr: link en `donar.html` (`https://njump.me/voidhash@nostr.lol`).
 
+Nota de compatibilidad Lightning:
+
+- Para facturas con monto desde navegador se requiere Lightning Address compatible con LNURL-pay (LUD-16) y endpoint `/.well-known/lnurlp/...` accesible.
+- Direcciones BIP353 (por ejemplo `@phoenixwallet.me`) no exponen ese endpoint web y solo permiten fallback por copiado/escaneo de direccion.
+
 ## Publicidad
 
 - Los `ad-slot` están preparados.

@@ -111,6 +111,17 @@
     return 'https://' + domain + '/.well-known/lnurlp/' + user;
   }
 
+  function getLightningDomain(address) {
+    const parts = String(address || '').split('@');
+    return (parts[1] || '').toLowerCase();
+  }
+
+  function isKnownBip353OnlyAddress(address) {
+    const domain = getLightningDomain(address);
+    // Phoenix currently uses BIP353 on phoenixwallet.me (no public LNURL endpoint).
+    return domain === 'phoenixwallet.me';
+  }
+
   async function fetchLnurlParams() {
     const url = resolveLightningAddress(CONFIG.lightningAddress);
     const response = await fetch(url);
@@ -382,6 +393,11 @@
     const amount = Number(state.selectedAmount);
     if (!amount || amount < 1) {
       renderError('Introduce un monto valido en satoshis.');
+      return;
+    }
+
+    if (isKnownBip353OnlyAddress(CONFIG.lightningAddress)) {
+      renderError('Esta direccion usa BIP353 (Phoenix) y no permite generar factura con monto desde navegador. Usa la Lightning Address directamente o cambia a una direccion LNURL (LUD-16) para facturas dinamicas.');
       return;
     }
 
