@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Codifica y decodifica datos en Base58Check. Calcula checksums para direcciones y claves Bitcoin." />
+  <meta name="description" content="Verifica el checksum Base58Check de direcciones Bitcoin, claves WIF y xpub/xprv. Detecta errores de transcripción antes de usar los datos." />
 
   <!-- Open Graph -->
 
@@ -13,7 +13,7 @@
 
   <meta property="og:title" content="Base58Check y Checksum — Herramientas | aprendebtc.com" />
 
-  <meta property="og:description" content="Codifica y decodifica datos en Base58Check. Calcula checksums para direcciones y claves Bitcoin." />
+  <meta property="og:description" content="Verifica el checksum Base58Check de direcciones Bitcoin, claves WIF y xpub/xprv. Detecta errores de transcripción antes de usar los datos." />
 
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
 
@@ -28,7 +28,7 @@
 
   <meta name="twitter:title" content="Base58Check y Checksum — Herramientas | aprendebtc.com" />
 
-  <meta name="twitter:description" content="Codifica y decodifica datos en Base58Check. Calcula checksums para direcciones y claves Bitcoin." />
+  <meta name="twitter:description" content="Verifica el checksum Base58Check de direcciones Bitcoin, claves WIF y xpub/xprv. Detecta errores de transcripción antes de usar los datos." />
 
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 
@@ -41,7 +41,7 @@
 
   <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/checksum-base58.html" />
 <meta property="og:url" content="https://aprendebtc.com/herramientas/checksum-base58.html" />
-<meta property="og:description" content="Codifica y decodifica datos en Base58Check. Calcula checksums para direcciones y claves Bitcoin." />
+<meta property="og:description" content="Verifica el checksum Base58Check de direcciones Bitcoin, claves WIF y xpub/xprv. Detecta errores de transcripción antes de usar los datos." />
 <meta property="og:site_name" content="aprendeBTC" />
 <meta name="twitter:title" content="Base58Check y Checksum — Herramientas | aprendebtc.com" />
 <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
@@ -95,9 +95,7 @@
 
         <article class="article">
           <h1>Base58Check y Checksum</h1>
-          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
-            Explora el encoding Base58Check que Bitcoin usa para direcciones y claves WIF.
-          </p>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">El checksum de Base58Check es el mecanismo que protege las direcciones Bitcoin y las claves en formato WIF contra errores de transcripción. Se calcula tomando los primeros 4 bytes del doble hash SHA-256 del payload y añadiéndolos al final antes de codificar. Esta herramienta verifica el checksum de cualquier dato en formato Base58Check: direcciones Legacy, claves WIF, claves extendidas (xpub/xprv). Si el checksum no coincide, indica que hubo un error al copiar o transcribir el dato, un mecanismo de seguridad que previene envíos accidentales a direcciones erróneas. También permite calcular el checksum para datos arbitrarios.</p>
 
           <!-- Disclaimer educativo -->
           <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
@@ -526,6 +524,7 @@
   </script>
 </body>
 </html>
+
 
 
 

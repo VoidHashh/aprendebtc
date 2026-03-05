@@ -1,120 +1,34 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" data-base-path="../">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Configurar multisig con Sparrow en el nivel 4 de aprendeBTC." />
-
-  <!-- Open Graph -->
-
-  <meta property="og:type" content="website" />
-
+  <meta name="description" content="Guía paso a paso para configurar una wallet multisig 2-de-3 con Sparrow Wallet y hardware wallets. Protege tu bitcoin." />
+  <meta property="og:type" content="article" />
   <meta property="og:url" content="https://aprendebtc.com/nivel-4/configurar-multisig.html" />
-
-  <meta property="og:title" content="Configurar multisig con Sparrow &amp;mdash; Nivel 4 | aprendebtc.com" />
-
-  <meta property="og:description" content="Configurar multisig con Sparrow en el nivel 4 de aprendeBTC." />
-
+  <meta property="og:title" content="Configurar multisig con Sparrow Wallet — Nivel 4 | aprendebtc.com" />
+  <meta property="og:description" content="Guía paso a paso para configurar una wallet multisig 2-de-3 con Sparrow Wallet y hardware wallets. Protege tu bitcoin." />
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
-
   <meta property="og:site_name" content="aprendeBTC" />
-
-  <meta property="og:locale" content="es_ES" />
-
-
-  <!-- Twitter Card -->
-
   <meta name="twitter:card" content="summary_large_image" />
-
-  <meta name="twitter:title" content="Configurar multisig con Sparrow &amp;mdash; Nivel 4 | aprendebtc.com" />
-
-  <meta name="twitter:description" content="Configurar multisig con Sparrow en el nivel 4 de aprendeBTC." />
-
+  <meta name="twitter:title" content="Configurar multisig con Sparrow Wallet — Nivel 4 | aprendebtc.com" />
+  <meta name="twitter:description" content="Guía paso a paso para configurar una wallet multisig 2-de-3 con Sparrow Wallet y hardware wallets. Protege tu bitcoin." />
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
-
-
-  <!-- Canonical -->
-
   <link rel="canonical" href="https://aprendebtc.com/nivel-4/configurar-multisig.html" />
-
-  <link rel="alternate" hreflang="es" href="https://aprendebtc.com/nivel-4/configurar-multisig.html" />
-
-  <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/nivel-4/configurar-multisig.html" /><meta property="og:url" content="https://aprendebtc.com/nivel-4/configurar-multisig.html" /><meta property="og:description" content="Configurar multisig con Sparrow en el nivel 4 de aprendeBTC." /><meta property="og:site_name" content="aprendeBTC" /><meta name="twitter:title" content="Configurar multisig con Sparrow &amp;mdash; Nivel 4 | aprendebtc.com" /><meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" /><link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/nivel-4/configurar-multisig.html" /><title>Configurar multisig con Sparrow &mdash; Nivel 4 | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/components.css" />
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Configurar multisig con Sparrow",
-  "description": "Configurar multisig con Sparrow en el nivel 4 de aprendeBTC.",
-  "url": "https://aprendebtc.com/nivel-4/configurar-multisig.html",
-  "inLanguage": "es",
-  "publisher": {
-    "@type": "Organization",
-    "name": "aprendeBTC",
-    "url": "https://aprendebtc.com"
-  },
-  "isPartOf": {
-    "@type": "WebSite",
-    "name": "aprendeBTC",
-    "url": "https://aprendebtc.com"
-  }
-}
-  </script>
+  <title>Configurar multisig con Sparrow Wallet — Nivel 4 | aprendebtc.com</title>
 </head>
 <body>
   <div data-include="header"></div>
 
   <div class="page-layout">
-    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 4">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral">
       <nav class="sidebar">
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Sección 2 &middot; Multisig</div>
-          <a href="distribucion-claves.html" class="sidebar__link">Distribución geográfica de claves</a>
-        </div>
-
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Sección 3 &middot; Herencia</div>
-          <a href="herencia-bitcoin.html" class="sidebar__link">Herencia de Bitcoin</a>
-          <a href="guia-herencia.html" class="sidebar__link">Guía de herencia paso a paso</a>
-          <a href="herencia-multisig.html" class="sidebar__link">Herencia con multisig</a>
-        </div>
-
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Sección 4 &middot; Lightning avanzado</div>
-          <a href="canales-lightning.html" class="sidebar__link">Canales de pago</a>
-          <a href="liquidez-lightning.html" class="sidebar__link">Gestión de liquidez</a>
-          <a href="routing-lightning.html" class="sidebar__link">Routing de pagos</a>
-          <a href="nodo-lightning.html" class="sidebar__link">Montar tu nodo Lightning</a>
-        </div>
-
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Sección 5 &middot; Sidechains y eCash</div>
-          <a href="que-son-las-sidechains.html" class="sidebar__link">¿Qué son las sidechains de Bitcoin?</a>
-          <a href="rootstock-rsk.html" class="sidebar__link">Rootstock (RSK)</a>
-          <a href="liquid-network.html" class="sidebar__link">Liquid Network</a>
-          <a href="fedimint-y-cashu.html" class="sidebar__link">Fedimint y Cashu</a>
-        </div>
-
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Sección 6 &middot; Minería casera</div>
-          <a href="mineria-casera.html" class="sidebar__link">Minería casera: ¿tiene sentido?</a>
-          <a href="hardware-mineria.html" class="sidebar__link">Hardware de minería</a>
-          <a href="pools-mineria.html" class="sidebar__link">Pools de minería</a>
-          <a href="mineria-bitaxe.html" class="sidebar__link">Minería con Bitaxe</a>
-          <a href="calefaccion-bitcoin.html" class="sidebar__link">Bitcoin como calefacción</a>
-        </div>
-
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Siguiente nivel</div>
-          <a href="../nivel-5/" class="sidebar__link">Nivel 5 &mdash; Mentor</a>
-        </div>
-
         <div class="sidebar__ad-wrap">
-          <div class="ad-slot ad-sidebar" id="ad-sidebar-n4" aria-hidden="true"></div>
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
         </div>
       </nav>
     </aside>
@@ -126,23 +40,170 @@
           <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
           <a href="./" class="breadcrumb__item">Nivel 4</a>
           <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
-          <span class="breadcrumb__current">Configurar multisig con Sparrow</span>
+          <span class="breadcrumb__current">Configurar multisig con Sparrow Wallet</span>
         </nav>
 
         <article class="article">
-          <div class="nivel-badge nivel-badge--4 article__badge">Nivel 4</div>
-          <h1>Configurar multisig con Sparrow</h1>
-          <p class="article__subtitle">Guía base para montar una wallet multisig de forma segura.</p>
-          <p>Ruta habilitada para continuidad de navegacion. El contenido completo se publicara en el siguiente bloque.</p>
+          <div class="nivel-badge nivel-badge--4 article__badge">Nivel 4 — Down the Rabbit Hole</div>
+          <h1>Configurar multisig con Sparrow Wallet</h1>
+          <p class="article__subtitle">Guía práctica para crear tu primera wallet multisig 2-de-3 usando Sparrow y tus hardware wallets.</p>
 
-          <div class="ad-slot ad-content" id="ad-content-4" aria-hidden="true"></div>
+          <div class="callout callout--warning">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">Versión y cambios de interfaz.</div>
+              <p class="callout__text">Esta guía usa Sparrow Wallet en su versión disponible a marzo de 2026. La interfaz puede variar en versiones futuras. Consulta siempre <a href="https://sparrowwallet.com/docs/" target="_blank" rel="noopener">sparrowwallet.com/docs</a> para la documentación más actualizada antes de proceder.</p>
+            </div>
+          </div>
 
-          <nav class="page-nav" aria-label="Navegación entre páginas">
-            <a href="que-es-multisig.html" class="page-nav__item">
+          <h2>Antes de empezar: qué necesitas</h2>
+          <ul>
+            <li><strong>2 o 3 hardware wallets</strong>: pueden ser del mismo modelo o de fabricantes distintos. Usar dispositivos de diferentes fabricantes (por ejemplo, una Coldcard y una Trezor) añade diversificación: si se descubre una vulnerabilidad en el firmware de uno, el otro no se ve afectado.</li>
+            <li><strong>Sparrow Wallet instalada</strong>: descárgala desde <a href="https://sparrowwallet.com" target="_blank" rel="noopener">sparrowwallet.com</a>. Verifica siempre la firma del instalador antes de ejecutarlo.</li>
+            <li><strong>Conexión al servidor</strong>: Sparrow puede conectarse a tu propio nodo Bitcoin (recomendado para máxima privacidad) o a un servidor público. Para esta guía, cualquiera de las dos opciones funciona.</li>
+            <li><strong>Tiempo y tranquilidad</strong>: no hagas esto con prisa. Reserva al menos una hora sin interrupciones para el setup inicial y las verificaciones.</li>
+          </ul>
+
+          <div class="callout callout--warning">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">Lee primero.</div>
+              <p class="callout__text">Antes de seguir esta guía, asegúrate de haber leído <a href="/nivel-4/que-es-multisig.html">¿Qué es multisig?</a> para entender los conceptos. Si tienes dudas sobre qué es una seed phrase o un hardware wallet, visita primero <a href="/nivel-3/configurar-hardware-wallet.html">Configurar tu hardware wallet</a>.</p>
+            </div>
+          </div>
+
+          <h2>Paso 1: Crear la nueva wallet en Sparrow</h2>
+          <ol>
+            <li>Abre Sparrow Wallet.</li>
+            <li>En el menú superior: <strong>File → New Wallet</strong>.</li>
+            <li>Elige un nombre descriptivo para tu wallet. Algo como <code>multisig-ahorro-2de3</code> ayuda a identificarla claramente si tienes varias wallets en Sparrow.</li>
+            <li>En la pantalla de configuración, localiza el campo <strong>Policy Type</strong> y selecciona <strong>Multi Signature</strong>.</li>
+            <li>Configura el esquema M-de-N: en este caso, <strong>2 Required (M)</strong> y <strong>3 Cosigners (N)</strong>.</li>
+          </ol>
+
+          <h2>Paso 2: Configurar los tres cosignatarios (keystores)</h2>
+          <p>Sparrow te mostrará tres slots de cosignatario (Keystore 1, Keystore 2, Keystore 3). Para cada uno, debes importar la clave pública extendida (xpub) del dispositivo correspondiente.</p>
+
+          <h3>Keystore 1: primer hardware wallet</h3>
+          <ol>
+            <li>Conecta tu primer hardware wallet al ordenador.</li>
+            <li>En el slot Keystore 1, haz clic en <strong>Connected Hardware Wallet</strong>.</li>
+            <li>Sparrow detectará el dispositivo. Selecciónalo y haz clic en <strong>Import Keystore</strong>.</li>
+            <li>Confirma la operación en el dispositivo si te lo pide (en la pantalla del hardware wallet).</li>
+            <li>Sparrow importará la xpub de ese dispositivo. Verás el fingerprint (huella) de la clave: anótalo para futuras referencias.</li>
+          </ol>
+
+          <h3>Keystore 2: segundo hardware wallet</h3>
+          <ol>
+            <li>Desconecta el primero, conecta el segundo hardware wallet.</li>
+            <li>Repite el mismo proceso en el slot Keystore 2.</li>
+          </ol>
+
+          <h3>Keystore 3: tercera clave</h3>
+          <p>Tienes dos opciones para la tercera clave:</p>
+          <ul>
+            <li><strong>Opción A</strong>: un tercer hardware wallet, igual que los anteriores. La opción más robusta.</li>
+            <li><strong>Opción B</strong>: un backup de seed en papel o metal, del que derivas la xpub usando Sparrow o una herramienta offline. Esta opción es más arriesgada porque la clave no está en un dispositivo de seguridad dedicado, pero puede ser válida si la ubicación física es muy segura (por ejemplo, una caja fuerte en otra ciudad).</li>
+          </ul>
+          <p>En ambos casos, el procedimiento de importación en Sparrow es el mismo.</p>
+
+          <h2>Paso 3: Seleccionar el tipo de script</h2>
+          <p>En el campo <strong>Script Type</strong>, selecciona <strong>Native Segwit (P2WSH)</strong>. Es el estándar moderno para multisig: genera las direcciones de menor coste en fees y es compatible con la gran mayoría de hardware wallets actuales.</p>
+          <p>Evita P2SH (el tipo de script más antiguo) a menos que tengas un motivo específico de compatibilidad.</p>
+
+          <h2>Paso 4: Aplicar y verificar la wallet</h2>
+          <ol>
+            <li>Haz clic en <strong>Apply</strong>. Sparrow te pedirá una contraseña opcional para cifrar el archivo de wallet en tu ordenador, recomendable.</li>
+            <li>La wallet está creada. Verás la pantalla principal con la dirección de recepción.</li>
+          </ol>
+
+          <h3>Verificación crítica: confirmar la dirección en los dispositivos</h3>
+          <p>Este paso es <strong>obligatorio antes de enviar fondos reales</strong>. Debes confirmar que la dirección de recepción que muestra Sparrow coincide con la que muestran al menos 2 de tus 3 hardware wallets cuando les pides verificar la dirección.</p>
+          <ol>
+            <li>En Sparrow, ve a la pestaña <strong>Receive</strong> y copia la primera dirección de recepción.</li>
+            <li>Conecta cada hardware wallet y usa su función de verificación de dirección (en Coldcard: Address Explorer; en Trezor/Ledger: Verify address en Sparrow con el dispositivo conectado).</li>
+            <li>Confirma que la dirección en el dispositivo coincide exactamente con la que muestra Sparrow. Si no coincide, detente y no envíes fondos.</li>
+          </ol>
+
+          <div class="callout callout--danger">
+            <span class="callout__icon" aria-hidden="true">🚨</span>
+            <div class="callout__content">
+              <div class="callout__title">No omitas la verificación de dirección.</div>
+              <p class="callout__text">Un malware en tu ordenador podría modificar la dirección que muestra Sparrow. La única forma de saber que la dirección es realmente la tuya es confirmarla directamente en la pantalla de tus hardware wallets.</p>
+            </div>
+          </div>
+
+          <h2>Paso 5: Prueba con fondos pequeños</h2>
+          <p>Antes de mover cantidades importantes, haz una prueba completa:</p>
+          <ol>
+            <li>Envía una cantidad pequeña (el mínimo razonable dado las fees actuales) a la dirección que acabas de verificar.</li>
+            <li>Espera a que se confirme.</li>
+            <li>Crea una transacción de prueba para devolverte esos fondos a otra wallet tuya.</li>
+            <li>Firma esa transacción con exactamente 2 de tus 3 hardware wallets para confirmar que el flujo de firma funciona correctamente.</li>
+          </ol>
+          <p>Solo cuando hayas completado este ciclo completo (recibir + enviar + confirmar), la configuración está verificada.</p>
+
+          <h2>Paso 6: El backup del descriptor, tan importante como las seeds</h2>
+          <p>En una wallet multisig, además de las seeds de cada dispositivo, existe el <strong>wallet descriptor</strong>: un archivo que describe la estructura completa de la wallet (qué claves la forman, en qué orden, con qué tipo de script). Sin él, aunque tengas las 3 seeds, no puedes reconstruir la wallet.</p>
+
+          <div class="callout callout--danger">
+            <span class="callout__icon" aria-hidden="true">🚨</span>
+            <div class="callout__content">
+              <div class="callout__title">El descriptor es tan importante como las seeds.</div>
+              <p class="callout__text">Con las 3 seeds pero sin el descriptor, no puedes reconstruir tu wallet multisig. Guarda siempre una copia del descriptor junto con cada copia de cada seed, en cada ubicación física donde guardes material de backup.</p>
+            </div>
+          </div>
+
+          <h3>Cómo exportar el descriptor en Sparrow</h3>
+          <ol>
+            <li>Con la wallet abierta en Sparrow, ve a <strong>File → Export Wallet</strong>.</li>
+            <li>Elige el formato <strong>Output Descriptor</strong> (o el formato específico compatible con la herramienta de recuperación que planeas usar).</li>
+            <li>Guarda el archivo en múltiples ubicaciones: junto con cada seed, en una memoria USB separada, impreso en papel.</li>
+          </ol>
+
+          <h2>Cómo firmar transacciones: el flujo PSBT</h2>
+          <p>Una vez que la wallet está configurada, cada vez que quieras enviar bitcoin necesitarás firmar con al menos 2 de los 3 dispositivos. Sparrow usa el estándar <strong>PSBT</strong> (Partially Signed Bitcoin Transaction) para gestionar este proceso:</p>
+          <ol>
+            <li>Crea la transacción en Sparrow (monto, destino, fee).</li>
+            <li>Conecta el primer hardware wallet. Sparrow le envía la transacción sin firmar. El dispositivo muestra los detalles: verifica en la pantalla del dispositivo que la dirección de destino y el monto son correctos. Firma.</li>
+            <li>Conecta el segundo hardware wallet. Repite el proceso. Con 2 firmas, la transacción está lista para emitir.</li>
+            <li>Sparrow difunde la transacción a la red.</li>
+          </ol>
+
+          <div class="callout callout--info">
+            <span class="callout__icon" aria-hidden="true">ℹ️</span>
+            <div class="callout__content">
+              <div class="callout__title">Por qué Sparrow para multisig.</div>
+              <p class="callout__text">Sparrow es la wallet de escritorio más recomendada para multisig por su interfaz clara, su soporte completo de PSBT, y su compatibilidad con los principales hardware wallets del mercado. También es software de código abierto, auditable por cualquiera.</p>
+            </div>
+          </div>
+
+          <h2>El siguiente paso: distribuir correctamente las claves</h2>
+          <p>La configuración técnica es solo la mitad del trabajo. La otra mitad es decidir dónde y cómo guardar físicamente las 3 claves (y el descriptor) para que sean al mismo tiempo seguras contra pérdida, robo y desastre físico.</p>
+
+          <div class="callout callout--warning">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">No improvises la distribución.</div>
+              <p class="callout__text">Antes de guardar las seeds en ubicaciones definitivas, lee el artículo de distribución geográfica de claves. Una mala distribución puede crear vulnerabilidades que anulan toda la seguridad de multisig.</p>
+            </div>
+          </div>
+
+          <h2>Ver también</h2>
+          <ul>
+            <li><a href="/nivel-4/que-es-multisig.html">¿Qué es multisig? (conceptos previos)</a></li>
+            <li><a href="/nivel-4/distribucion-claves.html">Distribución geográfica de claves</a></li>
+            <li><a href="/nivel-4/herencia-bitcoin.html">Herencia Bitcoin</a></li>
+            <li><a href="/nivel-3/configurar-hardware-wallet.html">Configurar tu hardware wallet</a></li>
+            <li><a href="/nivel-5/psbt.html">PSBT: transacciones parcialmente firmadas</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación de páginas">
+            <a href="/nivel-4/que-es-multisig.html" class="page-nav__item">
               <span class="page-nav__label">&larr; Anterior</span>
-              <span class="page-nav__title">Qué es multisig</span>
+              <span class="page-nav__title">¿Qué es multisig?</span>
             </a>
-            <a href="distribucion-claves.html" class="page-nav__item page-nav__item--next">
+            <a href="/nivel-4/distribucion-claves.html" class="page-nav__item page-nav__item--next">
               <span class="page-nav__label">Siguiente &rarr;</span>
               <span class="page-nav__title">Distribución geográfica de claves</span>
             </a>

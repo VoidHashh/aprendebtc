@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Firma y verifica mensajes con ECDSA y Schnorr sobre secp256k1. Decodifica firmas DER. Herramienta educativa Bitcoin." />
+  <meta name="description" content="Crea y verifica firmas ECDSA y Schnorr en Bitcoin. Compara ambos esquemas y entiende cómo se autoriza criptográficamente cada transacción." />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aprendebtc.com/herramientas/ecdsa-schnorr.html" />
   <meta property="og:title" content="Firma digital: ECDSA y Schnorr — Herramientas | aprendebtc.com" />
-  <meta property="og:description" content="Firma y verifica mensajes con ECDSA y Schnorr sobre secp256k1. Decodifica firmas DER. Herramienta educativa Bitcoin." />
+  <meta property="og:description" content="Crea y verifica firmas ECDSA y Schnorr en Bitcoin. Compara ambos esquemas y entiende cómo se autoriza criptográficamente cada transacción." />
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
   <meta property="og:site_name" content="aprendeBTC" />
   <meta property="og:locale" content="es_ES" />
@@ -16,7 +16,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Firma digital: ECDSA y Schnorr — Herramientas | aprendebtc.com" />
-  <meta name="twitter:description" content="Firma y verifica mensajes con ECDSA y Schnorr sobre secp256k1. Decodifica firmas DER. Herramienta educativa Bitcoin." />
+  <meta name="twitter:description" content="Crea y verifica firmas ECDSA y Schnorr en Bitcoin. Compara ambos esquemas y entiende cómo se autoriza criptográficamente cada transacción." />
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 
   <!-- Canonical -->
@@ -24,7 +24,7 @@
   <link rel="alternate" hreflang="es" href="https://aprendebtc.com/herramientas/ecdsa-schnorr.html" />
   <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/ecdsa-schnorr.html" />
 <meta property="og:url" content="https://aprendebtc.com/herramientas/ecdsa-schnorr.html" />
-<meta property="og:description" content="Firma y verifica mensajes con ECDSA y Schnorr sobre secp256k1. Decodifica firmas DER. Herramienta educativa Bitcoin." />
+<meta property="og:description" content="Crea y verifica firmas ECDSA y Schnorr en Bitcoin. Compara ambos esquemas y entiende cómo se autoriza criptográficamente cada transacción." />
 <meta property="og:site_name" content="aprendeBTC" />
 <meta name="twitter:title" content="Firma digital: ECDSA y Schnorr — Herramientas | aprendebtc.com" />
 <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
@@ -140,9 +140,7 @@
 
         <article class="article">
           <h1>Firma digital: ECDSA y Schnorr</h1>
-          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
-            Firma, verifica y analiza firmas digitales ECDSA y Schnorr sobre la curva secp256k1.
-          </p>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">Bitcoin usa dos esquemas de firma digital: ECDSA (Elliptic Curve Digital Signature Algorithm), el esquema original, y Schnorr, introducido con Taproot en 2021. Esta herramienta permite crear y verificar firmas con ambos algoritmos. Introduce una clave privada y un mensaje (o su hash), y la herramienta genera la firma correspondiente y verifica que sea válida con la clave pública derivada. También muestra las diferencias entre ambos esquemas: las firmas Schnorr son más cortas, permiten agregación de firmas (múltiples firmantes en una sola firma) y tienen propiedades matemáticas más limpias que ECDSA. Imprescindible para entender cómo Bitcoin autoriza transacciones criptográficamente.</p>
 
           <!-- Disclaimer -->
           <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
@@ -1067,6 +1065,7 @@
   </script>
 </body>
 </html>
+
 
 
 

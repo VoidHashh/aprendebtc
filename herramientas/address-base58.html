@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Genera direcciones Bitcoin P2PKH y P2SH desde una clave pública. Entiende el proceso de hashing y Base58Check." />
+  <meta name="description" content="Genera direcciones Bitcoin Legacy (Base58Check) desde una clave pública. Visualiza paso a paso SHA-256, RIPEMD-160 y el checksum de la dirección." />
 
   <!-- Open Graph -->
 
@@ -13,7 +13,7 @@
 
   <meta property="og:title" content="Dirección Bitcoin (Base58) — Herramientas | aprendebtc.com" />
 
-  <meta property="og:description" content="Genera direcciones Bitcoin P2PKH y P2SH desde una clave pública. Entiende el proceso de hashing y Base58Check." />
+  <meta property="og:description" content="Genera direcciones Bitcoin Legacy (Base58Check) desde una clave pública. Visualiza paso a paso SHA-256, RIPEMD-160 y el checksum de la dirección." />
 
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
 
@@ -28,7 +28,7 @@
 
   <meta name="twitter:title" content="Dirección Bitcoin (Base58) — Herramientas | aprendebtc.com" />
 
-  <meta name="twitter:description" content="Genera direcciones Bitcoin P2PKH y P2SH desde una clave pública. Entiende el proceso de hashing y Base58Check." />
+  <meta name="twitter:description" content="Genera direcciones Bitcoin Legacy (Base58Check) desde una clave pública. Visualiza paso a paso SHA-256, RIPEMD-160 y el checksum de la dirección." />
 
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 
@@ -41,7 +41,7 @@
 
   <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/address-base58.html" />
 <meta property="og:url" content="https://aprendebtc.com/herramientas/address-base58.html" />
-<meta property="og:description" content="Genera direcciones Bitcoin P2PKH y P2SH desde una clave pública. Entiende el proceso de hashing y Base58Check." />
+<meta property="og:description" content="Genera direcciones Bitcoin Legacy (Base58Check) desde una clave pública. Visualiza paso a paso SHA-256, RIPEMD-160 y el checksum de la dirección." />
 <meta property="og:site_name" content="aprendeBTC" />
 <meta name="twitter:title" content="Dirección Bitcoin (Base58) — Herramientas | aprendebtc.com" />
 <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
@@ -166,9 +166,7 @@
 
         <article class="article">
           <h1>Dirección Bitcoin (Base58)</h1>
-          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
-            Convierte una clave pública en una dirección Bitcoin legacy (Base58Check).
-          </p>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">Las direcciones Legacy de Bitcoin (formato P2PKH, que empiezan por 1) y las direcciones P2SH (que empiezan por 3) usan la codificación Base58Check para representar datos binarios en un formato legible y con detección de errores. Esta herramienta genera direcciones Bitcoin Legacy desde una clave pública, mostrando cada paso del proceso: hash SHA-256, hash RIPEMD-160, prefijo de versión, cálculo del checksum doble SHA-256, y codificación final en Base58. Es la forma más directa de entender qué hay dentro de una dirección Bitcoin clásica y por qué el checksum permite detectar errores de transcripción antes de enviar fondos.</p>
 
           <!-- Disclaimer educativo -->
           <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
@@ -670,4 +668,5 @@
   </script>
 </body>
 </html>
+
 

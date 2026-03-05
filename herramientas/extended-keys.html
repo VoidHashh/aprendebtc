@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Genera y decodifica extended keys (xpub, xprv, ypub, zpub, tpub). Entiende las master keys BIP32." />
+  <meta name="description" content="Claves extendidas Bitcoin (xpub/xprv): convierte formatos, decodifica estructura y entiende cómo las wallets HD exportan conjuntos de claves." />
 
   <!-- Open Graph -->
 
@@ -13,7 +13,7 @@
 
   <meta property="og:title" content="Extended Keys (xpub / xprv) — Herramientas | aprendebtc.com" />
 
-  <meta property="og:description" content="Genera y decodifica extended keys (xpub, xprv, ypub, zpub, tpub). Entiende las master keys BIP32." />
+  <meta property="og:description" content="Claves extendidas Bitcoin (xpub/xprv): convierte formatos, decodifica estructura y entiende cómo las wallets HD exportan conjuntos de claves." />
 
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
 
@@ -28,7 +28,7 @@
 
   <meta name="twitter:title" content="Extended Keys (xpub / xprv) — Herramientas | aprendebtc.com" />
 
-  <meta name="twitter:description" content="Genera y decodifica extended keys (xpub, xprv, ypub, zpub, tpub). Entiende las master keys BIP32." />
+  <meta name="twitter:description" content="Claves extendidas Bitcoin (xpub/xprv): convierte formatos, decodifica estructura y entiende cómo las wallets HD exportan conjuntos de claves." />
 
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 
@@ -41,7 +41,7 @@
 
   <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/extended-keys.html" />
 <meta property="og:url" content="https://aprendebtc.com/herramientas/extended-keys.html" />
-<meta property="og:description" content="Genera y decodifica extended keys (xpub, xprv, ypub, zpub, tpub). Entiende las master keys BIP32." />
+<meta property="og:description" content="Claves extendidas Bitcoin (xpub/xprv): convierte formatos, decodifica estructura y entiende cómo las wallets HD exportan conjuntos de claves." />
 <meta property="og:site_name" content="aprendeBTC" />
 <meta name="twitter:title" content="Extended Keys (xpub / xprv) — Herramientas | aprendebtc.com" />
 <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
@@ -152,9 +152,7 @@
 
         <article class="article">
           <h1>Extended Keys (xpub / xprv)</h1>
-          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
-            Deriva master keys desde la seed y explora el formato de extended keys BIP32.
-          </p>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">Las claves extendidas (xpub/xprv, ypub/yprv, zpub/zprv) son la forma en que las wallets HD exportan e importan conjuntos completos de claves sin compartir la clave maestra. Una xpub permite generar todas las direcciones de recepción de una cuenta sin exponer ninguna clave privada, es la base del watch-only wallet. Esta herramienta convierte entre los diferentes formatos de claves extendidas (x/y/z para mainnet, t/u/v para testnet), decodifica el contenido de una clave extendida (profundidad, fingerprint del padre, índice de hijo) y muestra la clave pública o privada subyacente. Fundamental para configurar wallets de solo lectura y para entender cómo los multisig coordinan las firmas.</p>
 
           <!-- Disclaimer educativo -->
           <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
@@ -817,6 +815,7 @@
   </script>
 </body>
 </html>
+
 
 
 

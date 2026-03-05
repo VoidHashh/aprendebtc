@@ -1,22 +1,22 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" data-base-path="../">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Construye un árbol de Merkle visualmente. Introduce transacciones y ve cómo se calcula la Merkle root paso a paso." />
+  <meta name="description" content="Visualiza la construcción de árboles de Merkle Bitcoin. Genera pruebas de inclusión de transacciones sin necesitar el bloque completo (SPV)." />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aprendebtc.com/herramientas/merkle-tree.html" />
-  <meta property="og:title" content="Generador de Merkle Tree — Herramientas | aprendebtc.com" />
-  <meta property="og:description" content="Construye un árbol de Merkle visualmente. Introduce transacciones y ve cómo se calcula la Merkle root paso a paso." />
+  <meta property="og:title" content="Generador de Merkle Tree â€” Herramientas | aprendebtc.com" />
+  <meta property="og:description" content="Visualiza la construcción de árboles de Merkle Bitcoin. Genera pruebas de inclusión de transacciones sin necesitar el bloque completo (SPV)." />
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
   <meta property="og:site_name" content="aprendeBTC" />
   <meta property="og:locale" content="es_ES" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Generador de Merkle Tree — Herramientas | aprendebtc.com" />
-  <meta name="twitter:description" content="Construye un árbol de Merkle visualmente. Introduce transacciones y ve cómo se calcula la Merkle root paso a paso." />
+  <meta name="twitter:title" content="Generador de Merkle Tree â€” Herramientas | aprendebtc.com" />
+  <meta name="twitter:description" content="Visualiza la construcción de árboles de Merkle Bitcoin. Genera pruebas de inclusión de transacciones sin necesitar el bloque completo (SPV)." />
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 
   <!-- Canonical -->
@@ -24,12 +24,12 @@
   <link rel="alternate" hreflang="es" href="https://aprendebtc.com/herramientas/merkle-tree.html" />
   <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/merkle-tree.html" />
 <meta property="og:url" content="https://aprendebtc.com/herramientas/merkle-tree.html" />
-<meta property="og:description" content="Construye un árbol de Merkle visualmente. Introduce transacciones y ve cómo se calcula la Merkle root paso a paso." />
+<meta property="og:description" content="Visualiza la construcción de árboles de Merkle Bitcoin. Genera pruebas de inclusión de transacciones sin necesitar el bloque completo (SPV)." />
 <meta property="og:site_name" content="aprendeBTC" />
-<meta name="twitter:title" content="Generador de Merkle Tree — Herramientas | aprendebtc.com" />
+<meta name="twitter:title" content="Generador de Merkle Tree â€” Herramientas | aprendebtc.com" />
 <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/merkle-tree.html" />
-<title>Generador de Merkle Tree — Herramientas | aprendebtc.com</title>
+<title>Generador de Merkle Tree â€” Herramientas | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -37,7 +37,7 @@
   <link rel="stylesheet" href="../css/components.css" />
   <link rel="stylesheet" href="../css/tools.css" />
   <style>
-    /* Estilos del árbol de Merkle */
+    /* Estilos del Ã¡rbol de Merkle */
     .merkle-tree {
       display: flex;
       flex-direction: column;
@@ -123,7 +123,7 @@
       width: 100%;
     }
 
-    /* Líneas conectoras con SVG */
+    /* LÃ­neas conectoras con SVG */
     .merkle-tree-container {
       position: relative;
       min-height: 200px;
@@ -204,7 +204,7 @@
   <div data-include="header"></div>
 
   <div class="page-layout">
-        <aside class="page-layout__sidebar" aria-label="Navegación lateral">
+        <aside class="page-layout__sidebar" aria-label="NavegaciÃ³n lateral">
       <nav class="sidebar">
         <div class="sidebar__ad-wrap">
           <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
@@ -214,26 +214,24 @@
 
     <main class="page-layout__content" id="main-content">
       <div class="content-inner">
-        <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <nav class="breadcrumb" aria-label="Ruta de navegaciÃ³n">
           <a href="../" class="breadcrumb__item">Inicio</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__separator" aria-hidden="true">â€º</span>
           <a href="index.html" class="breadcrumb__item">Herramientas</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__separator" aria-hidden="true">â€º</span>
           <span class="breadcrumb__current">Merkle Tree</span>
         </nav>
 
         <article class="article">
           <h1>Generador de Merkle Tree</h1>
-          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
-            Visualiza cómo se construye el árbol de Merkle que resume todas las transacciones de un bloque.
-          </p>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">El árbol de Merkle es la estructura de datos que permite a Bitcoin comprimir todas las transacciones de un bloque en un único hash de 32 bytes (el Merkle root), incluido en la cabecera del bloque. Esta herramienta visualiza la construcción del árbol: introduce una lista de txids (o cualquier conjunto de datos) y observa cómo se combinan por pares mediante hashes SHA-256 hasta llegar a la raíz. También genera pruebas de Merkle: dado un txid concreto, calcula el camino mínimo de hashes que permite demostrar que esa transacción está incluida en el árbol sin necesidad de conocer todas las demás transacciones. Es la base técnica de los nodos SPV y de los filtros de Bloom.</p>
 
           <!-- Disclaimer educativo -->
           <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
-            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <span class="callout__icon" aria-hidden="true">âš ï¸</span>
             <div class="callout__content">
               <div class="callout__title">Herramienta educativa</div>
-              <p class="callout__text">Esta herramienta es para aprendizaje. NO la uses para generar datos criptográficos para fondos reales.</p>
+              <p class="callout__text">Esta herramienta es para aprendizaje. NO la uses para generar datos criptogrÃ¡ficos para fondos reales.</p>
             </div>
           </div>
 
@@ -248,30 +246,30 @@
             </div>
 
             <div id="txids-container">
-              <!-- Se llena dinámicamente -->
+              <!-- Se llena dinÃ¡micamente -->
             </div>
 
             <div class="tool-btn-row" style="margin-top: 1rem;">
-              <button class="tool-btn tool-btn--secondary" id="btn-add">+ Añadir TX</button>
-              <button class="tool-btn tool-btn--secondary" id="btn-remove">- Eliminar última</button>
-              <button class="tool-btn tool-btn--secondary" id="btn-example-4">📋 Cargar ejemplo (4 tx)</button>
-              <button class="tool-btn tool-btn--secondary" id="btn-example-7">📋 Cargar ejemplo (7 tx)</button>
+              <button class="tool-btn tool-btn--secondary" id="btn-add">+ AÃ±adir TX</button>
+              <button class="tool-btn tool-btn--secondary" id="btn-remove">- Eliminar Ãºltima</button>
+              <button class="tool-btn tool-btn--secondary" id="btn-example-4">ðŸ“‹ Cargar ejemplo (4 tx)</button>
+              <button class="tool-btn tool-btn--secondary" id="btn-example-7">ðŸ“‹ Cargar ejemplo (7 tx)</button>
             </div>
 
             <div class="tool-btn-row" style="margin-top: 0.75rem;">
-              <button class="tool-btn" id="btn-build">🌳 Construir árbol</button>
-              <button class="tool-btn tool-btn--secondary" id="btn-step">▶ Paso a paso</button>
+              <button class="tool-btn" id="btn-build">ðŸŒ³ Construir Ã¡rbol</button>
+              <button class="tool-btn tool-btn--secondary" id="btn-step">â–¶ Paso a paso</button>
             </div>
           </div>
 
-          <!-- Visualización del árbol -->
+          <!-- VisualizaciÃ³n del Ã¡rbol -->
           <div class="tool-container">
-            <h2 class="tool-container__title">Árbol de Merkle</h2>
+            <h2 class="tool-container__title">Ãrbol de Merkle</h2>
             
             <div class="merkle-tree-container">
               <div class="merkle-tree" id="merkle-tree">
                 <p style="color: var(--text-secondary); text-align: center;">
-                  Introduce transacciones y pulsa "Construir árbol"
+                  Introduce transacciones y pulsa "Construir Ã¡rbol"
                 </p>
               </div>
             </div>
@@ -279,8 +277,8 @@
             <!-- Detalle del nodo seleccionado -->
             <div class="node-detail" id="node-detail">
               <div class="node-detail__title" id="detail-title">Nodo seleccionado</div>
-              <div class="node-detail__hash" id="detail-hash">—</div>
-              <div class="node-detail__operation" id="detail-operation">—</div>
+              <div class="node-detail__hash" id="detail-hash">â€”</div>
+              <div class="node-detail__operation" id="detail-operation">â€”</div>
             </div>
           </div>
 
@@ -288,7 +286,7 @@
           <div class="tool-container">
             <h2 class="tool-container__title">Merkle Root</h2>
             <div class="tool-output tool-output--large" id="merkle-root" style="text-align: center; font-size: 0.85rem;">
-              —
+              â€”
             </div>
             <div class="tool-note" style="margin-top: 0.5rem; text-align: center;">
               Este hash se incluye en el block header y resume todas las transacciones.
@@ -299,21 +297,21 @@
           <div class="tool-container">
             <h2 class="tool-container__title">Merkle Proof</h2>
             <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
-              Selecciona una transacción para ver qué hashes necesitas para demostrar que pertenece al árbol.
+              Selecciona una transacciÃ³n para ver quÃ© hashes necesitas para demostrar que pertenece al Ã¡rbol.
             </p>
 
             <div class="tool-field">
-              <label class="tool-label" for="proof-select">Transacción a verificar</label>
+              <label class="tool-label" for="proof-select">TransacciÃ³n a verificar</label>
               <select id="proof-select" class="tool-select">
-                <option value="">— Selecciona una transacción —</option>
+                <option value="">â€” Selecciona una transacciÃ³n â€”</option>
               </select>
             </div>
 
             <div class="proof-info" id="proof-info" style="display: none;">
-              <div class="proof-info__title">📜 Merkle Proof</div>
+              <div class="proof-info__title">ðŸ“œ Merkle Proof</div>
               <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
                 Solo necesitas <strong id="proof-count">X</strong> hashes de <strong id="total-nodes">Y</strong> 
-                totales para verificar esta transacción.
+                totales para verificar esta transacciÃ³n.
               </p>
               <div id="proof-hashes" style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;">
                 <!-- Lista de hashes necesarios -->
@@ -321,26 +319,26 @@
             </div>
           </div>
 
-          <!-- Explicación -->
+          <!-- ExplicaciÃ³n -->
           <div class="tool-container">
-            <h2 class="tool-container__title">¿Cómo funciona?</h2>
+            <h2 class="tool-container__title">Â¿CÃ³mo funciona?</h2>
             <p style="color: var(--text-secondary); line-height: 1.7;">
-              El árbol de Merkle combina los hashes de las transacciones en parejas, subiendo nivel por nivel 
-              hasta llegar a un único hash: la <strong>Merkle Root</strong>. Este proceso permite verificar 
-              si una transacción pertenece a un bloque sin necesidad de descargar todas las transacciones.
+              El Ã¡rbol de Merkle combina los hashes de las transacciones en parejas, subiendo nivel por nivel 
+              hasta llegar a un Ãºnico hash: la <strong>Merkle Root</strong>. Este proceso permite verificar 
+              si una transacciÃ³n pertenece a un bloque sin necesidad de descargar todas las transacciones.
             </p>
             <p style="color: var(--text-secondary); line-height: 1.7; margin-top: 1rem;">
-              En Bitcoin, cada combinación usa <strong>HASH256</strong> (doble SHA-256) sobre la concatenación 
-              de dos hashes, con los bytes invertidos (little-endian). Si hay un número impar de elementos 
-              en un nivel, el último se duplica.
+              En Bitcoin, cada combinaciÃ³n usa <strong>HASH256</strong> (doble SHA-256) sobre la concatenaciÃ³n 
+              de dos hashes, con los bytes invertidos (little-endian). Si hay un nÃºmero impar de elementos 
+              en un nivel, el Ãºltimo se duplica.
             </p>
           </div>
 
           <!-- Callout contextual -->
           <div class="tool-callout">
-            <div class="tool-callout__title">Aprende más sobre Merkle Trees</div>
+            <div class="tool-callout__title">Aprende mÃ¡s sobre Merkle Trees</div>
             <p class="tool-callout__text">
-              <a href="../nivel-5/merkle-tree.html">Árboles de Merkle en detalle →</a>
+              <a href="../nivel-5/merkle-tree.html">Ãrboles de Merkle en detalle â†’</a>
             </p>
           </div>
 
@@ -392,20 +390,20 @@
 
     // === EJEMPLOS ===
     const EXAMPLE_4 = [
-      'Transacción de Alice a Bob',
-      'Transacción de Bob a Carol',
-      'Transacción de Carol a Dave',
-      'Transacción de Dave a Eve'
+      'TransacciÃ³n de Alice a Bob',
+      'TransacciÃ³n de Bob a Carol',
+      'TransacciÃ³n de Carol a Dave',
+      'TransacciÃ³n de Dave a Eve'
     ];
 
     const EXAMPLE_7 = [
       'TX-001: Coinbase reward',
-      'TX-002: Alice → Bob (0.5 BTC)',
-      'TX-003: Carol → Dave (1.2 BTC)',
-      'TX-004: Eve → Frank (0.8 BTC)',
-      'TX-005: Grace → Henry (2.0 BTC)',
-      'TX-006: Ivan → Julia (0.3 BTC)',
-      'TX-007: Kevin → Laura (1.5 BTC)'
+      'TX-002: Alice â†’ Bob (0.5 BTC)',
+      'TX-003: Carol â†’ Dave (1.2 BTC)',
+      'TX-004: Eve â†’ Frank (0.8 BTC)',
+      'TX-005: Grace â†’ Henry (2.0 BTC)',
+      'TX-006: Ivan â†’ Julia (0.3 BTC)',
+      'TX-007: Kevin â†’ Laura (1.5 BTC)'
     ];
 
     // === FUNCIONES AUXILIARES ===
@@ -458,7 +456,7 @@
       return hash.substring(0, 8) + '...' + hash.substring(hash.length - 8);
     }
 
-    // === GESTIÓN DE INPUTS ===
+    // === GESTIÃ“N DE INPUTS ===
 
     function renderTxInputs() {
       txidsContainer.innerHTML = '';
@@ -507,7 +505,7 @@
       renderTxInputs();
     }
 
-    // === CONSTRUIR ÁRBOL ===
+    // === CONSTRUIR ÃRBOL ===
 
     async function getTxHashes() {
       const hashes = [];
@@ -520,7 +518,7 @@
           // Usar directamente como TXID
           hash = tx.trim().toLowerCase();
         } else {
-          // Hashear el texto con SHA-256 (simplificado para educación)
+          // Hashear el texto con SHA-256 (simplificado para educaciÃ³n)
           const bytes = textToBytes(tx);
           const hashBytes = await sha256(bytes);
           hash = bytesToHex(hashBytes);
@@ -536,7 +534,7 @@
       const txHashes = await getTxHashes();
       
       if (txHashes.length === 0) {
-        merkleTreeEl.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">No hay transacciones válidas</p>';
+        merkleTreeEl.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">No hay transacciones vÃ¡lidas</p>';
         return;
       }
 
@@ -562,7 +560,7 @@
           let right = currentLevel[i + 1];
           let isDuplicate = false;
           
-          // Si es impar, duplicar el último
+          // Si es impar, duplicar el Ãºltimo
           if (!right) {
             right = { ...left, isDuplicate: true };
             isDuplicate = true;
@@ -608,7 +606,7 @@
         })));
         renderMerkleTree();
         animationStep++;
-        btnStep.textContent = '▶ Siguiente nivel';
+        btnStep.textContent = 'â–¶ Siguiente nivel';
         return;
       }
 
@@ -616,9 +614,9 @@
       const currentLevel = merkleTree[merkleTree.length - 1];
       
       if (currentLevel.length === 1) {
-        // Ya llegamos a la raíz
+        // Ya llegamos a la raÃ­z
         animationStep = 0;
-        btnStep.textContent = '▶ Paso a paso';
+        btnStep.textContent = 'â–¶ Paso a paso';
         updateMerkleRoot();
         return;
       }
@@ -658,21 +656,21 @@
       if (merkleTree[merkleTree.length - 1].length === 1) {
         updateMerkleRoot();
         animationStep = 0;
-        btnStep.textContent = '▶ Reiniciar';
+        btnStep.textContent = 'â–¶ Reiniciar';
       }
     }
 
-    // === RENDERIZAR ÁRBOL ===
+    // === RENDERIZAR ÃRBOL ===
 
     function renderMerkleTree(highlightLevel = -1) {
       if (merkleTree.length === 0) {
-        merkleTreeEl.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">Introduce transacciones y pulsa "Construir árbol"</p>';
+        merkleTreeEl.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">Introduce transacciones y pulsa "Construir Ã¡rbol"</p>';
         return;
       }
 
       let html = '';
       
-      // Renderizar desde la raíz hacia las hojas (invertido visualmente)
+      // Renderizar desde la raÃ­z hacia las hojas (invertido visualmente)
       for (let levelIndex = merkleTree.length - 1; levelIndex >= 0; levelIndex--) {
         const level = merkleTree[levelIndex];
         const isRoot = levelIndex === merkleTree.length - 1;
@@ -723,10 +721,10 @@
       
       if (node.leftChild !== null) {
         detailOperation.innerHTML = `
-          <strong>Operación:</strong> HASH256(${abbreviateHash(node.leftHash)} + ${abbreviateHash(node.rightHash)})
+          <strong>OperaciÃ³n:</strong> HASH256(${abbreviateHash(node.leftHash)} + ${abbreviateHash(node.rightHash)})
         `;
       } else {
-        detailOperation.innerHTML = `<strong>Hoja:</strong> Hash de la transacción`;
+        detailOperation.innerHTML = `<strong>Hoja:</strong> Hash de la transacciÃ³n`;
       }
       
       nodeDetail.classList.add('show');
@@ -737,14 +735,14 @@
         const root = merkleTree[merkleTree.length - 1][0];
         merkleRootEl.textContent = root.hash;
       } else {
-        merkleRootEl.textContent = '—';
+        merkleRootEl.textContent = 'â€”';
       }
     }
 
     // === MERKLE PROOF ===
 
     function updateProofSelect() {
-      proofSelect.innerHTML = '<option value="">— Selecciona una transacción —</option>';
+      proofSelect.innerHTML = '<option value="">â€” Selecciona una transacciÃ³n â€”</option>';
       
       if (merkleTree.length > 0) {
         merkleTree[0].forEach((node, index) => {
@@ -768,7 +766,7 @@
       // Resaltar la TX seleccionada
       highlightNode(0, currentIndex, 'selected');
 
-      // Recorrer el árbol hacia arriba
+      // Recorrer el Ã¡rbol hacia arriba
       for (let level = 0; level < merkleTree.length - 1; level++) {
         const isLeft = currentIndex % 2 === 0;
         const siblingIndex = isLeft ? currentIndex + 1 : currentIndex - 1;
@@ -792,7 +790,7 @@
         currentIndex = Math.floor(currentIndex / 2);
       }
 
-      // Resaltar la raíz
+      // Resaltar la raÃ­z
       highlightNode(merkleTree.length - 1, 0, 'proof');
 
       // Mostrar info
@@ -844,7 +842,7 @@
     
     btnBuild.addEventListener('click', () => {
       animationStep = 0;
-      btnStep.textContent = '▶ Paso a paso';
+      btnStep.textContent = 'â–¶ Paso a paso';
       buildMerkleTree();
     });
     
@@ -860,7 +858,7 @@
       }
     });
 
-    // === INICIALIZACIÓN ===
+    // === INICIALIZACIÃ“N ===
 
     // Cargar ejemplo inicial
     loadExample(EXAMPLE_4);
@@ -869,3 +867,4 @@
   </script>
 </body>
 </html>
+

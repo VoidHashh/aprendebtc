@@ -1,139 +1,131 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" data-base-path="../">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Contenido en preparacion para aprendeBTC." />
-
-  <!-- Open Graph -->
-
-  <meta property="og:type" content="website" />
-
+  <meta name="description" content="CoinJoin en Bitcoin: qué es, cómo funciona, implementaciones actuales y el debate legal tras el caso Samourai Wallet." />
+  <meta property="og:type" content="article" />
   <meta property="og:url" content="https://aprendebtc.com/nivel-4/coinjoin.html" />
-
-  <meta property="og:title" content="Coinjoin &amp;mdash; Nivel 4 | aprendebtc.com" />
-
-  <meta property="og:description" content="Contenido en preparacion para aprendeBTC." />
-
+  <meta property="og:title" content="CoinJoin: transacciones colaborativas para privacidad — Nivel 4 | aprendebtc.com" />
+  <meta property="og:description" content="CoinJoin en Bitcoin: qué es, cómo funciona, implementaciones actuales y el debate legal tras el caso Samourai Wallet." />
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
-
   <meta property="og:site_name" content="aprendeBTC" />
-
-  <meta property="og:locale" content="es_ES" />
-
-
-  <!-- Twitter Card -->
-
   <meta name="twitter:card" content="summary_large_image" />
-
-  <meta name="twitter:title" content="Coinjoin &amp;mdash; Nivel 4 | aprendebtc.com" />
-
-  <meta name="twitter:description" content="Contenido en preparacion para aprendeBTC." />
-
+  <meta name="twitter:title" content="CoinJoin: transacciones colaborativas para privacidad — Nivel 4 | aprendebtc.com" />
+  <meta name="twitter:description" content="CoinJoin en Bitcoin: qué es, cómo funciona, implementaciones actuales y el debate legal tras el caso Samourai Wallet." />
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
-
-
-  <!-- Canonical -->
-
   <link rel="canonical" href="https://aprendebtc.com/nivel-4/coinjoin.html" />
-
-  <link rel="alternate" hreflang="es" href="https://aprendebtc.com/nivel-4/coinjoin.html" />
-
-  <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/nivel-4/coinjoin.html" /><meta property="og:url" content="https://aprendebtc.com/nivel-4/coinjoin.html" /><meta property="og:description" content="Contenido en preparacion para aprendeBTC." /><meta property="og:site_name" content="aprendeBTC" /><meta name="twitter:title" content="Coinjoin &amp;mdash; Nivel 4 | aprendebtc.com" /><meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" /><link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/nivel-4/coinjoin.html" /><title>Coinjoin &mdash; Nivel 4 | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/components.css" />
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Coinjoin",
-  "description": "Contenido en preparacion para aprendeBTC.",
-  "url": "https://aprendebtc.com/nivel-4/coinjoin.html",
-  "inLanguage": "es",
-  "publisher": {
-    "@type": "Organization",
-    "name": "aprendeBTC",
-    "url": "https://aprendebtc.com"
-  },
-  "isPartOf": {
-    "@type": "WebSite",
-    "name": "aprendeBTC",
-    "url": "https://aprendebtc.com"
-  }
-}
-  </script>
+  <title>CoinJoin: transacciones colaborativas para privacidad — Nivel 4 | aprendebtc.com</title>
 </head>
 <body>
   <div data-include="header"></div>
 
   <div class="page-layout">
-    <aside class="page-layout__sidebar" aria-label="Navegación del nivel">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral">
       <nav class="sidebar">
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Sección 2 &middot; Multisig</div>
-          <a href="distribucion-claves.html" class="sidebar__link">Distribución geográfica de claves</a>
-        </div>
-
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Sección 3 &middot; Herencia</div>
-          <a href="herencia-bitcoin.html" class="sidebar__link">Herencia de Bitcoin</a>
-          <a href="guia-herencia.html" class="sidebar__link">Guía de herencia paso a paso</a>
-          <a href="herencia-multisig.html" class="sidebar__link">Herencia con multisig</a>
-        </div>
-
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Sección 4 &middot; Lightning avanzado</div>
-          <a href="canales-lightning.html" class="sidebar__link">Canales de pago</a>
-          <a href="liquidez-lightning.html" class="sidebar__link">Gestión de liquidez</a>
-          <a href="routing-lightning.html" class="sidebar__link">Routing de pagos</a>
-          <a href="nodo-lightning.html" class="sidebar__link">Montar tu nodo Lightning</a>
-        </div>
-
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Sección 5 &middot; Sidechains y eCash</div>
-          <a href="que-son-las-sidechains.html" class="sidebar__link">¿Qué son las sidechains de Bitcoin?</a>
-          <a href="rootstock-rsk.html" class="sidebar__link">Rootstock (RSK)</a>
-          <a href="liquid-network.html" class="sidebar__link">Liquid Network</a>
-          <a href="fedimint-y-cashu.html" class="sidebar__link">Fedimint y Cashu</a>
-        </div>
-
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Sección 6 &middot; Minería casera</div>
-          <a href="mineria-casera.html" class="sidebar__link">Minería casera: ¿tiene sentido?</a>
-          <a href="hardware-mineria.html" class="sidebar__link">Hardware de minería</a>
-          <a href="pools-mineria.html" class="sidebar__link">Pools de minería</a>
-          <a href="mineria-bitaxe.html" class="sidebar__link">Minería con Bitaxe</a>
-          <a href="calefaccion-bitcoin.html" class="sidebar__link">Bitcoin como calefacción</a>
-        </div>
-
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Siguiente nivel</div>
-          <a href="../nivel-5/" class="sidebar__link">Nivel 5 &mdash; Mentor</a>
-        </div>
-
         <div class="sidebar__ad-wrap">
-          <div class="ad-slot ad-sidebar" id="ad-sidebar-n4" aria-hidden="true"></div>
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
         </div>
       </nav>
     </aside>
 
     <main class="page-layout__content" id="main-content">
       <div class="content-inner">
-        <nav class="breadcrumb" aria-label="Ruta de navegación"><a href="/" class="breadcrumb__item">Inicio</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><a href="/nivel-4/" class="breadcrumb__item">Nivel 4</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><span class="breadcrumb__current">Coinjoin</span></nav>
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 4</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">CoinJoin</span>
+        </nav>
 
         <article class="article">
-          <h1>Coinjoin</h1>
-          <p class="article__subtitle">Página en preparacion. Volvera pronto con contenido completo.</p>
-          <p>Contenido en preparacion.</p>
+          <div class="nivel-badge nivel-badge--4 article__badge">Nivel 4 — Down the Rabbit Hole</div>
+          <h1>CoinJoin: transacciones colaborativas para privacidad</h1>
+          <p class="article__subtitle">La técnica que permite mezclar tus transacciones con las de otros para ganar privacidad en Bitcoin.</p>
 
-          <div class="ad-slot ad-content" id="ad-content-4" aria-hidden="true"></div>
+          <p>Bitcoin es pseudónimo, no anónimo. Todas las transacciones son públicas en la blockchain, y con suficiente análisis es posible conectar UTXOs con identidades reales. CoinJoin es la principal técnica nativa de Bitcoin para romper esa trazabilidad, sin necesidad de cambios al protocolo y sin que nadie pueda robar tus fondos en el proceso.</p>
 
-          <nav class="page-nav" aria-label="Navegación entre páginas">
-            <a href="que-es-multisig.html" class="page-nav__item page-nav__item--next">
+          <h2>Qué es CoinJoin</h2>
+          <p>CoinJoin es una técnica propuesta por Gregory Maxwell en 2013 en el foro BitcoinTalk. La idea es simple: si múltiples usuarios combinan sus inputs y outputs en una sola transacción, un observador externo no puede determinar con certeza qué input corresponde a qué output.</p>
+          <p>No es un protocolo nuevo ni un cambio al protocolo de Bitcoin, es simplemente una forma de construir transacciones que siempre ha sido posible. Lo que hizo Maxwell fue sistematizarla y articularla como herramienta de privacidad.</p>
+
+          <div class="callout callout--info">
+            <span class="callout__icon" aria-hidden="true">ℹ️</span>
+            <div class="callout__content">
+              <div class="callout__title">CoinJoin no es "lavar" dinero.</div>
+              <p class="callout__text">Es el equivalente digital de que varias personas metan sus billetes en un sombrero, lo agiten, y cada uno saque la misma cantidad. Nadie gana ni pierde dinero, solo se dificulta el rastreo de qué billete era de quién.</p>
+            </div>
+          </div>
+
+          <h2>Cómo funciona (paso a paso)</h2>
+          <p>Imagina a Alice y Bob, cada uno con un UTXO de 0,1 BTC que quieren mezclar:</p>
+          <ol>
+            <li>Alice y Bob acuerdan (a través de un coordinador o directamente) crear una transacción conjunta.</li>
+            <li>La transacción tiene <strong>2 inputs</strong>: el de Alice (0,1 BTC) y el de Bob (0,1 BTC).</li>
+            <li>La transacción tiene <strong>2 outputs</strong>: un output de 0,1 BTC a una dirección de Alice, y otro de 0,1 BTC a una dirección de Bob (menos las comisiones repartidas entre ambos).</li>
+            <li>Alice firma su input. Bob firma el suyo. Ninguno puede firmar el del otro, sus fondos están seguros en todo momento.</li>
+            <li>Un observador externo ve una transacción con 2 inputs iguales y 2 outputs iguales. No puede saber cuál output es de Alice y cuál de Bob.</li>
+          </ol>
+          <p>La clave de la seguridad: como los outputs tienen <strong>denominaciones iguales</strong>, no hay forma de deducir el flujo de fondos por importe. Y como cada participante solo firma su propio input, nadie puede robarle al otro.</p>
+
+          <h3>El conjunto de anonimato (anonymity set)</h3>
+          <p>Con solo 2 participantes, hay un 50% de probabilidad de acertar qué output es de quién. Con 5 participantes, 20%. Con 100, 1%. Este número, la cantidad de participantes en un CoinJoin, se llama <strong>conjunto de anonimato</strong> (anonymity set). Cuanto más grande, mayor privacidad.</p>
+          <p>Las implementaciones en producción trabajan con grupos de decenas o cientos de participantes para maximizar este conjunto.</p>
+
+          <h2>Implementaciones: qué existe y en qué estado</h2>
+
+          <h3>Samourai Wallet / Whirlpool</h3>
+          <p>Durante años, la implementación de CoinJoin más popular para usuarios móviles. Whirlpool era el protocolo de mezcla de Samourai: agrupaba a los usuarios en pools de denominación fija y realizaba mezclas continuas. En abril de 2024, los fundadores de Samourai Wallet fueron arrestados en EEUU y acusados de conspiración para blanqueo de capitales y operar un negocio de transmisión de dinero sin licencia. El servicio ya no opera en su forma original.</p>
+
+          <h3>Wasabi Wallet / WabiSabi</h3>
+          <p>Wasabi Wallet es una wallet de escritorio (Windows/Mac/Linux) con CoinJoin integrado. Su protocolo actual, WabiSabi, permite pools de denominación variable, lo que lo hace más flexible que Whirlpool. En 2022, Wasabi introdujo un filtro de direcciones sancionadas bajo presión regulatoria, decisión que generó debate sobre la centralización del coordinador. La wallet sigue siendo funcional y bajo desarrollo activo.</p>
+
+          <h3>JoinMarket</h3>
+          <p>La implementación más descentralizada. JoinMarket no tiene un coordinador central: los usuarios se conectan directamente como "makers" (que ofrecen liquidez a cambio de una pequeña comisión) o "takers" (que pagan por la mezcla). Es más compleja de usar pero más resistente a la censura, ya que no hay ningún servidor que pueda ser cerrado ni ninguna entidad central que pueda ser presionada.</p>
+
+          <h2>El debate legal: el caso Samourai Wallet</h2>
+          <p>El arresto de los fundadores de Samourai Wallet en abril de 2024 marcó un antes y un después en el ecosistema de privacidad de Bitcoin. La acusación argumentaba que el propio servicio de mezcla era un negocio de transmisión de dinero no autorizado, independientemente de si los fondos mezclados tenían origen ilícito.</p>
+          <p>Esta interpretación (que un software de privacidad de Bitcoin puede ser ilegal por su funcionamiento, sin necesidad de probar que facilitó actividad criminal concreta) tiene implicaciones profundas para todo el ecosistema de herramientas de privacidad.</p>
+          <p>El caso sigue su curso judicial. Para un análisis completo, consulta el artículo dedicado en La Madriguera.</p>
+
+          <div class="callout callout--warning">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">Estado legal en evolución.</div>
+              <p class="callout__text">El estado legal de las herramientas de CoinJoin varía por jurisdicción y está en evolución activa tras el caso Samourai Wallet (2024). Infórmate sobre la legislación vigente en tu país antes de usar estas herramientas. Este contenido es informativo y no constituye asesoría legal.</p>
+            </div>
+          </div>
+
+          <h2>Trade-offs: qué ganas y qué sacrificas</h2>
+          <p>CoinJoin no es gratuito en términos de experiencia de usuario:</p>
+          <ul>
+            <li><strong>Comisiones adicionales</strong>: la coordinación y las transacciones más grandes implican fees mayores que una transacción normal.</li>
+            <li><strong>Denominaciones fijas</strong>: para que la mezcla funcione, los outputs deben tener el mismo importe. Los importes de cambio no se mezclan igual de bien y pueden reducir la privacidad del UTXO restante.</li>
+            <li><strong>Tiempo de espera</strong>: dependiendo de la implementación, puede ser necesario esperar a que se complete un grupo de participantes.</li>
+            <li><strong>Complejidad</strong>: configurar y usar correctamente una herramienta de CoinJoin requiere entender el modelo UTXO y algunos conceptos de privacidad previos.</li>
+          </ul>
+
+          <h2>Ver también</h2>
+          <ul>
+            <li><a href="/nivel-3/utxos-y-privacidad.html">UTXOs y privacidad</a></li>
+            <li><a href="/nivel-4/que-es-multisig.html">¿Qué es multisig?</a></li>
+            <li><a href="/la-madriguera/el-caso-samourai-wallet.html">La Madriguera: El caso Samourai Wallet</a></li>
+            <li><a href="/la-madriguera/privacidad-en-bitcoin-estado-actual.html">La Madriguera: Privacidad en Bitcoin, estado actual</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación de páginas">
+            <a href="/nivel-3/utxos-y-privacidad.html" class="page-nav__item">
+              <span class="page-nav__label">&larr; Anterior</span>
+              <span class="page-nav__title">UTXOs y privacidad</span>
+            </a>
+            <a href="/nivel-4/que-es-multisig.html" class="page-nav__item page-nav__item--next">
               <span class="page-nav__label">Siguiente &rarr;</span>
-              <span class="page-nav__title">Qué es multisig</span>
+              <span class="page-nav__title">¿Qué es multisig?</span>
             </a>
           </nav>
         </article>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Genera listas de direcciones Bitcoin desde una xpub, ypub o zpub. Visualiza las direcciones de tu wallet sin exponer claves privadas." />
+  <meta name="description" content="Deriva direcciones Bitcoin desde un xpub sin exponer claves privadas. Genera direcciones de recepción para wallets de solo lectura (watch-only)." />
 
   <!-- Open Graph -->
 
@@ -13,7 +13,7 @@
 
   <meta property="og:title" content="Direcciones desde Extended Key — Herramientas | aprendebtc.com" />
 
-  <meta property="og:description" content="Genera listas de direcciones Bitcoin desde una xpub, ypub o zpub. Visualiza las direcciones de tu wallet sin exponer claves privadas." />
+  <meta property="og:description" content="Deriva direcciones Bitcoin desde un xpub sin exponer claves privadas. Genera direcciones de recepción para wallets de solo lectura (watch-only)." />
 
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
 
@@ -28,7 +28,7 @@
 
   <meta name="twitter:title" content="Direcciones desde Extended Key — Herramientas | aprendebtc.com" />
 
-  <meta name="twitter:description" content="Genera listas de direcciones Bitcoin desde una xpub, ypub o zpub. Visualiza las direcciones de tu wallet sin exponer claves privadas." />
+  <meta name="twitter:description" content="Deriva direcciones Bitcoin desde un xpub sin exponer claves privadas. Genera direcciones de recepción para wallets de solo lectura (watch-only)." />
 
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 
@@ -41,7 +41,7 @@
 
   <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/address-from-xpub.html" />
 <meta property="og:url" content="https://aprendebtc.com/herramientas/address-from-xpub.html" />
-<meta property="og:description" content="Genera listas de direcciones Bitcoin desde una xpub, ypub o zpub. Visualiza las direcciones de tu wallet sin exponer claves privadas." />
+<meta property="og:description" content="Deriva direcciones Bitcoin desde un xpub sin exponer claves privadas. Genera direcciones de recepción para wallets de solo lectura (watch-only)." />
 <meta property="og:site_name" content="aprendeBTC" />
 <meta name="twitter:title" content="Direcciones desde Extended Key — Herramientas | aprendebtc.com" />
 <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
@@ -175,9 +175,7 @@
 
         <article class="article">
           <h1>Direcciones desde Extended Key</h1>
-          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
-            Genera las direcciones de una wallet a partir de su extended public key.
-          </p>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">Dado el xpub (clave pública extendida) de una cuenta, es posible derivar matemáticamente todas sus direcciones de recepción sin necesidad de conocer ninguna clave privada. Esta herramienta toma un xpub y genera las N primeras direcciones de la cadena externa (change=0) o interna (change=1), en el formato correspondiente al tipo de clave (xpub a Legacy, ypub a P2SH-SegWit, zpub a Native SegWit). Es la base de los watch-only wallets (monitorear fondos sin riesgo de exposición de claves privadas) y una forma práctica de entender cómo una sola clave pública extendida da lugar a cientos de direcciones únicas.</p>
 
           <!-- Disclaimer educativo -->
           <div class="callout callout--danger" style="margin-bottom: 1.5rem;">
@@ -674,6 +672,7 @@
   </script>
 </body>
 </html>
+
 
 
 

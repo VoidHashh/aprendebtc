@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Construye transacciones Bitcoin sin firmar (PSBT conceptual). Define inputs, outputs y visualiza el raw hex resultante." />
+  <meta name="description" content="Construye transacciones Bitcoin manualmente: selecciona UTXOs, define outputs, calcula fees y genera el raw hex. Aprende el modelo UTXO en la práctica." />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aprendebtc.com/herramientas/tx-builder.html" />
   <meta property="og:title" content="Constructor de transacciones — Herramientas | aprendebtc.com" />
-  <meta property="og:description" content="Construye transacciones Bitcoin sin firmar (PSBT conceptual). Define inputs, outputs y visualiza el raw hex resultante." />
+  <meta property="og:description" content="Construye transacciones Bitcoin manualmente: selecciona UTXOs, define outputs, calcula fees y genera el raw hex. Aprende el modelo UTXO en la práctica." />
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
   <meta property="og:site_name" content="aprendeBTC" />
   <meta property="og:locale" content="es_ES" />
@@ -16,7 +16,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Constructor de transacciones — Herramientas | aprendebtc.com" />
-  <meta name="twitter:description" content="Construye transacciones Bitcoin sin firmar (PSBT conceptual). Define inputs, outputs y visualiza el raw hex resultante." />
+  <meta name="twitter:description" content="Construye transacciones Bitcoin manualmente: selecciona UTXOs, define outputs, calcula fees y genera el raw hex. Aprende el modelo UTXO en la práctica." />
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 
   <!-- Canonical -->
@@ -24,7 +24,7 @@
   <link rel="alternate" hreflang="es" href="https://aprendebtc.com/herramientas/tx-builder.html" />
   <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/tx-builder.html" />
 <meta property="og:url" content="https://aprendebtc.com/herramientas/tx-builder.html" />
-<meta property="og:description" content="Construye transacciones Bitcoin sin firmar (PSBT conceptual). Define inputs, outputs y visualiza el raw hex resultante." />
+<meta property="og:description" content="Construye transacciones Bitcoin manualmente: selecciona UTXOs, define outputs, calcula fees y genera el raw hex. Aprende el modelo UTXO en la práctica." />
 <meta property="og:site_name" content="aprendeBTC" />
 <meta name="twitter:title" content="Constructor de transacciones — Herramientas | aprendebtc.com" />
 <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
@@ -147,9 +147,7 @@
 
         <article class="article">
           <h1>Constructor de transacciones</h1>
-          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
-            Construye una transacción Bitcoin campo a campo y genera el hex resultante (sin firma).
-          </p>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">Esta herramienta te guía en la construcción manual de una transacción Bitcoin desde sus componentes básicos: selección de UTXOs como inputs, definición de outputs (dirección destino y cantidad), cálculo de fees, y generación del raw hex sin firmar. El proceso ilustra concretamente el modelo UTXO de Bitcoin: cómo las transacciones consumen outputs previos y crean nuevos, cómo se calcula el peso en vbytes para estimar comisiones, y cómo el fee es simplemente la diferencia entre el total de inputs y el total de outputs. La transacción generada es una PSBT (Partially Signed Bitcoin Transaction) lista para ser firmada con un hardware wallet o firmante externo.</p>
 
           <!-- Warning -->
           <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
@@ -789,5 +787,6 @@
   </script>
 </body>
 </html>
+
 
 

@@ -1,110 +1,34 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" data-base-path="../">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Fiscalidad de Bitcoin en el nivel 3 de aprendeBTC." />
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
+  <meta name="description" content="Aspectos fiscales de Bitcoin: qué operaciones tributan, cómo declarar en España y Latinoamérica, y errores comunes a evitar." />
+  <meta property="og:type" content="article" />
   <meta property="og:url" content="https://aprendebtc.com/nivel-3/fiscalidad-bitcoin.html" />
-  <meta property="og:title" content="Fiscalidad de Bitcoin &amp;mdash; Nivel 3 | aprendebtc.com" />
-  <meta property="og:description" content="Fiscalidad de Bitcoin en el nivel 3 de aprendeBTC." />
+  <meta property="og:title" content="Fiscalidad de Bitcoin — Nivel 3 | aprendebtc.com" />
+  <meta property="og:description" content="Aspectos fiscales de Bitcoin: qué operaciones tributan, cómo declarar en España y Latinoamérica, y errores comunes a evitar." />
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
   <meta property="og:site_name" content="aprendeBTC" />
-  <meta property="og:locale" content="es_ES" />
-
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Fiscalidad de Bitcoin &amp;mdash; Nivel 3 | aprendebtc.com" />
-  <meta name="twitter:description" content="Fiscalidad de Bitcoin en el nivel 3 de aprendeBTC." />
+  <meta name="twitter:title" content="Fiscalidad de Bitcoin — Nivel 3 | aprendebtc.com" />
+  <meta name="twitter:description" content="Aspectos fiscales de Bitcoin: qué operaciones tributan, cómo declarar en España y Latinoamérica, y errores comunes a evitar." />
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
-
-  <!-- Canonical -->
   <link rel="canonical" href="https://aprendebtc.com/nivel-3/fiscalidad-bitcoin.html" />
-  <link rel="alternate" hreflang="es" href="https://aprendebtc.com/nivel-3/fiscalidad-bitcoin.html" />
-  <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/nivel-3/fiscalidad-bitcoin.html" />
-<meta property="og:url" content="https://aprendebtc.com/nivel-3/fiscalidad-bitcoin.html" />
-<meta property="og:description" content="Fiscalidad de Bitcoin en el nivel 3 de aprendeBTC." />
-<meta property="og:site_name" content="aprendeBTC" />
-<meta name="twitter:title" content="Fiscalidad de Bitcoin &amp;mdash; Nivel 3 | aprendebtc.com" />
-<meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
-<link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/nivel-3/fiscalidad-bitcoin.html" />
-<title>Fiscalidad de Bitcoin &mdash; Nivel 3 | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/components.css" />
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Fiscalidad de Bitcoin",
-  "description": "Fiscalidad de Bitcoin en el nivel 3 de aprendeBTC.",
-  "url": "https://aprendebtc.com/nivel-3/fiscalidad-bitcoin.html",
-  "inLanguage": "es",
-  "publisher": {
-    "@type": "Organization",
-    "name": "aprendeBTC",
-    "url": "https://aprendebtc.com"
-  },
-  "isPartOf": {
-    "@type": "WebSite",
-    "name": "aprendeBTC",
-    "url": "https://aprendebtc.com"
-  }
-}
-  </script>
+  <title>Fiscalidad de Bitcoin — Nivel 3 | aprendebtc.com</title>
 </head>
 <body>
   <div data-include="header"></div>
 
   <div class="page-layout">
-    <aside class="page-layout__sidebar" aria-label="Navegación del nivel 3">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral">
       <nav class="sidebar">
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Nivel actual</div>
-          <a href="index.html" class="sidebar__link">Nivel 3 - Analista</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Sección 1 &middot; Transacciones y UTXO</div>
-          <a href="modelo-utxo.html" class="sidebar__link">El modelo UTXO</a>
-          <a href="anatomia-transaccion.html" class="sidebar__link">Anatomía de una transacción</a>
-          <a href="mempool.html" class="sidebar__link">La mempool</a>
-          <a href="rbf-cpfp.html" class="sidebar__link">RBF y CPFP</a>
-          <a href="utxos-y-privacidad.html" class="sidebar__link">Tus UTXOs y privacidad</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Sección 2 &middot; Claves y direcciones</div>
-          <a href="clave-privada.html" class="sidebar__link">Clave privada</a>
-          <a href="clave-publica.html" class="sidebar__link">Clave pública</a>
-          <a href="tipos-de-direcciones.html" class="sidebar__link">Tipos de direcciones</a>
-          <a href="hd-wallets.html" class="sidebar__link">HD Wallets</a>
-          <a href="firma-digital.html" class="sidebar__link">Firma digital</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Sección 3 &middot; Nodos y minería</div>
-          <a href="que-es-un-nodo.html" class="sidebar__link">Qué es un nodo</a>
-          <a href="montar-tu-nodo.html" class="sidebar__link">Monta tu nodo</a>
-          <a href="mineria-en-detalle.html" class="sidebar__link">Minería en detalle</a>
-          <a href="halving.html" class="sidebar__link">El halving</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Sección 4 &middot; Hardware y coin control</div>
-          <a href="configurar-hardware-wallet.html" class="sidebar__link">Configura hardware wallet</a>
-          <a href="comparativa-hardware-wallets.html" class="sidebar__link">Comparativa hardware wallets</a>
-          <a href="coin-control.html" class="sidebar__link">Coin control</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Sección 5 &middot; Seguridad y fiscalidad</div>
-          <a href="seguridad-operativa.html" class="sidebar__link">Seguridad operativa</a>
-          <a href="fiscalidad-bitcoin.html" class="sidebar__link sidebar__link--active">Fiscalidad de Bitcoin</a>
-        </div>
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Siguiente nivel</div>
-          <a href="../nivel-4/" class="sidebar__link">Nivel 4 &mdash; En la madriguera</a>
-        </div>
         <div class="sidebar__ad-wrap">
-          <div class="ad-slot ad-sidebar" id="ad-sidebar-n3" aria-hidden="true"></div>
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
         </div>
       </nav>
     </aside>
@@ -120,30 +44,115 @@
         </nav>
 
         <article class="article">
-          <div class="nivel-badge nivel-badge--3 article__badge">Nivel 3</div>
+          <div class="nivel-badge nivel-badge--3 article__badge">Nivel 3 — Rabbit Hole</div>
           <h1>Fiscalidad de Bitcoin</h1>
-          <p class="article__subtitle">Aspectos fiscales basicos para operar con Bitcoin.</p>
+          <p class="article__subtitle">Lo que necesitas saber sobre impuestos y Bitcoin antes de que Hacienda te lo recuerde.</p>
 
-          <p>Esta página ya está creada como placeholder para mantener la navegación sin enlaces rotos. El contenido didáctico completo se añadirá en la siguiente iteración.</p>
-
-          <div class="callout callout--info">
-            <span class="callout__icon" aria-hidden="true">i</span>
+          <div class="callout callout--warning">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
             <div class="callout__content">
-              <div class="callout__title">Estado</div>
-              <p class="callout__text">Ruta habilitada y estructura integrada en el sitio.</p>
+              <div class="callout__title">Esto NO es asesoría fiscal.</div>
+              <p class="callout__text">Cada país, cada situación personal y cada ejercicio fiscal es diferente. El contenido de esta página es informativo y refleja el estado general a marzo de 2026. Las leyes fiscales sobre Bitcoin cambian constantemente. Consulta siempre con un profesional cualificado antes de tomar decisiones.</p>
             </div>
           </div>
 
-          <div class="ad-slot ad-content" id="ad-content-3" aria-hidden="true"></div>
+          <h2>La pregunta incómoda que todos evitan</h2>
+          <p>Muchas personas empiezan a usar Bitcoin sin pensar en las implicaciones fiscales. Compran, venden, intercambian, y un día llega la carta de Hacienda. El problema no es que Bitcoin tribute (en la mayoría de países lo hace) sino que la mayoría de usuarios no lo sabe, o prefiere no pensarlo.</p>
+          <p>La buena noticia: entender los principios básicos es sencillo. Lo complicado es la implementación concreta según tu país y situación.</p>
 
-          <nav class="page-nav" aria-label="Navegación entre páginas">
-            <a href="seguridad-operativa.html" class="page-nav__item">
+          <h2>Qué eventos generan obligación fiscal</h2>
+          <p>En la mayoría de jurisdicciones, los siguientes eventos se consideran <strong>hechos imponibles</strong>, es decir, momentos en que debes declarar una ganancia o pérdida:</p>
+          <ul>
+            <li><strong>Vender bitcoin por moneda fiat</strong> (euros, dólares, pesos): si vendiste a mayor precio del que compraste, tienes una ganancia patrimonial.</li>
+            <li><strong>Intercambiar bitcoin por otro activo</strong>: cambiar BTC por ETH, stablecoins u otra criptomoneda se considera una permuta y tributa por la diferencia de valor.</li>
+            <li><strong>Pagar bienes o servicios con bitcoin</strong>: si usas tus BTC para comprar algo, es fiscalmente equivalente a venderlos por el valor de lo que recibiste.</li>
+            <li><strong>Recibir bitcoin como ingreso o salario</strong>: si cobras en bitcoin por trabajo o servicios, se considera rendimiento del trabajo o de actividad económica, no ganancia patrimonial.</li>
+            <li><strong>Minería y staking</strong>: las recompensas recibidas suelen considerarse rendimientos en el momento de recibirlos.</li>
+          </ul>
+
+          <h2>Qué generalmente NO tributa</h2>
+          <ul>
+            <li><strong>Comprar bitcoin con fiat</strong>: la compra en sí no genera ganancia. Solo establece tu precio de adquisición (base de coste).</li>
+            <li><strong>Transferir entre tus propias wallets</strong>: mover bitcoin de una wallet tuya a otra no es una venta ni un intercambio. No hay ganancia.</li>
+            <li><strong>Mantener (holdear)</strong>: tener bitcoin sin hacer nada con él no genera obligación fiscal en la mayoría de países. La ganancia es latente hasta que la realizas.</li>
+          </ul>
+
+          <div class="callout callout--info">
+            <span class="callout__icon" aria-hidden="true">ℹ️</span>
+            <div class="callout__content">
+              <div class="callout__title">Comprar y mantener no tributa.</div>
+              <p class="callout__text">Comprar bitcoin y no venderlo no genera ninguna obligación fiscal en la mayoría de países. Solo tributas cuando <em>realizas</em> una ganancia, es decir, cuando vendes por más de lo que pagaste.</p>
+            </div>
+          </div>
+
+          <h2>El modelo general: cómo se calcula la ganancia</h2>
+          <p>La fórmula básica es:</p>
+          <pre><code>Ganancia/pérdida = precio de venta − precio de adquisición − gastos deducibles</code></pre>
+          <p>El precio de adquisición es lo que pagaste cuando compraste, incluyendo comisiones del exchange. Los gastos deducibles pueden incluir comisiones de venta según la normativa de cada país.</p>
+
+          <h3>FIFO vs LIFO: el orden importa</h3>
+          <p>Si has comprado bitcoin en diferentes momentos y a diferentes precios, necesitas un método para determinar qué unidades vendiste primero:</p>
+          <ul>
+            <li><strong>FIFO (First In, First Out)</strong>: se considera que vendes primero las unidades que compraste primero. Es el método obligatorio en España y en muchos países.</li>
+            <li><strong>LIFO (Last In, First Out)</strong>: se considera que vendes primero las más recientes. Está permitido en algunos países latinoamericanos.</li>
+          </ul>
+          <p>La elección del método puede cambiar significativamente el resultado fiscal. Por eso el tracking meticuloso de cada compra (fecha, precio, cantidad) es imprescindible.</p>
+
+          <h2>España: IRPF y modelo 721</h2>
+          <p>En España, las ganancias por venta de bitcoin se declaran en el <strong>IRPF</strong> como ganancias y pérdidas patrimoniales en la base imponible del ahorro, con tipos progresivos que van del 19% al 28% según el importe de la ganancia.</p>
+
+          <h3>Modelo 721: la declaración informativa</h3>
+          <p>Desde 2023, existe la obligación de presentar el <strong>Modelo 721</strong> si tienes criptoactivos custodiados en exchanges o servicios ubicados fuera de España con un valor superior a 50.000 € a 31 de diciembre. Es declaración informativa, no implica tributar, pero su no presentación acarrea sanciones.</p>
+          <p>Los exchanges con sede en España (o con filial española) también tienen obligación de informar a la AEAT de los saldos y operaciones de sus usuarios.</p>
+
+          <h2>Latinoamérica: panorama general</h2>
+          <p>La situación varía considerablemente por país, y cambia con frecuencia:</p>
+          <ul>
+            <li><strong>Argentina</strong>: las ganancias por venta de criptomonedas están sujetas al Impuesto a las Ganancias. Adicionalmente, el saldo de criptoactivos puede tributar en el Impuesto sobre los Bienes Personales.</li>
+            <li><strong>México</strong>: las ganancias por enajenación de criptomonedas tributan como ingresos bajo el ISR (Impuesto sobre la Renta).</li>
+            <li><strong>Colombia</strong>: las criptomonedas están sujetas a declaración de renta. Las ganancias se tratan como ganancias ocasionales o rentas de capital según la situación.</li>
+            <li><strong>El Salvador</strong>: caso único. Bitcoin tiene curso legal desde 2021. Las personas físicas están exentas de pagar impuestos sobre las ganancias en Bitcoin.</li>
+          </ul>
+
+          <div class="callout callout--warning">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">La normativa latinoamericana cambia rápido.</div>
+              <p class="callout__text">La información anterior es orientativa. Antes de declarar, verifica la normativa vigente en tu país con fuentes oficiales o un asesor local. En particular, países como Argentina han tenido cambios normativos frecuentes.</p>
+            </div>
+          </div>
+
+          <h2>El KYC y la trazabilidad: lo que ya sabe Hacienda</h2>
+          <p>Si compraste bitcoin en un exchange con KYC (verificación de identidad), ese exchange tiene tus datos y, en muchos países, está legalmente obligado a reportarlos a las autoridades fiscales. En la UE, la normativa DAC8 exige que los exchanges reporten las operaciones de sus usuarios a las agencias tributarias nacionales.</p>
+          <p>Esto significa que, si usaste un exchange regulado, las autoridades fiscales ya tienen o tendrán información sobre tus compras y ventas. El riesgo de no declarar no es solo ético, es práctico.</p>
+
+          <h2>Herramientas de seguimiento</h2>
+          <p>Llevar el registro manual de todas tus operaciones puede ser tedioso si tienes muchas transacciones. Existen herramientas de software especializadas en el cálculo de ganancias/pérdidas para criptoactivos que importan tu historial de exchanges y wallets y generan informes fiscales.</p>
+          <p>No recomendamos ninguna específica: el mercado cambia y cada herramienta tiene sus propias limitaciones y costes. Busca opciones compatibles con la normativa de tu país y verifica siempre el resultado con tu asesor fiscal.</p>
+
+          <div class="callout callout--warning">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">Actualización.</div>
+              <p class="callout__text">Las leyes fiscales sobre Bitcoin cambian constantemente. Este contenido refleja el estado a marzo de 2026. Verifica siempre con fuentes oficiales y un asesor fiscal antes de presentar cualquier declaración.</p>
+            </div>
+          </div>
+
+          <h2>Ver también</h2>
+          <ul>
+            <li><a href="/base/kyc-vs-no-kyc.html">KYC vs no-KYC: qué implica cada uno</a></li>
+            <li><a href="/nivel-1/el-problema-del-kyc.html">El problema del KYC explicado</a></li>
+            <li><a href="/nivel-3/seguridad-operativa.html">Seguridad operativa (OpSec)</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación de páginas">
+            <a href="/nivel-3/seguridad-operativa.html" class="page-nav__item">
               <span class="page-nav__label">&larr; Anterior</span>
-              <span class="page-nav__title">Seguridad operativa</span>
+              <span class="page-nav__title">Seguridad operativa (OpSec)</span>
             </a>
-            <a href="../nivel-4/" class="page-nav__item page-nav__item--next">
+            <a href="/nivel-4/" class="page-nav__item page-nav__item--next">
               <span class="page-nav__label">Siguiente &rarr;</span>
-              <span class="page-nav__title">Nivel 4 - En la madriguera</span>
+              <span class="page-nav__title">Nivel 4: Down the Rabbit Hole</span>
             </a>
           </nav>
         </article>

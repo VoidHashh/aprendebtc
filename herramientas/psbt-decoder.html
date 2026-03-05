@@ -1,22 +1,22 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" data-base-path="../">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Decodifica PSBTs (BIP174). Analiza transacciones parcialmente firmadas, inputs, outputs, firmas y metadata." />
+  <meta name="description" content="Decodifica PSBTs (Partially Signed Bitcoin Transactions): visualiza inputs, firmas parciales y metadatos. Imprescindible para flujos multisig y hardware wallets." />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aprendebtc.com/herramientas/psbt-decoder.html" />
-  <meta property="og:title" content="Decodificador PSBT (BIP174) — Herramientas | aprendebtc.com" />
-  <meta property="og:description" content="Decodifica PSBTs (BIP174). Analiza transacciones parcialmente firmadas, inputs, outputs, firmas y metadata." />
+  <meta property="og:title" content="Decodificador PSBT (BIP174) â€” Herramientas | aprendebtc.com" />
+  <meta property="og:description" content="Decodifica PSBTs (Partially Signed Bitcoin Transactions): visualiza inputs, firmas parciales y metadatos. Imprescindible para flujos multisig y hardware wallets." />
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
   <meta property="og:site_name" content="aprendeBTC" />
   <meta property="og:locale" content="es_ES" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Decodificador PSBT (BIP174) — Herramientas | aprendebtc.com" />
-  <meta name="twitter:description" content="Decodifica PSBTs (BIP174). Analiza transacciones parcialmente firmadas, inputs, outputs, firmas y metadata." />
+  <meta name="twitter:title" content="Decodificador PSBT (BIP174) â€” Herramientas | aprendebtc.com" />
+  <meta name="twitter:description" content="Decodifica PSBTs (Partially Signed Bitcoin Transactions): visualiza inputs, firmas parciales y metadatos. Imprescindible para flujos multisig y hardware wallets." />
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 
   <!-- Canonical -->
@@ -24,12 +24,12 @@
   <link rel="alternate" hreflang="es" href="https://aprendebtc.com/herramientas/psbt-decoder.html" />
   <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/psbt-decoder.html" />
 <meta property="og:url" content="https://aprendebtc.com/herramientas/psbt-decoder.html" />
-<meta property="og:description" content="Decodifica PSBTs (BIP174). Analiza transacciones parcialmente firmadas, inputs, outputs, firmas y metadata." />
+<meta property="og:description" content="Decodifica PSBTs (Partially Signed Bitcoin Transactions): visualiza inputs, firmas parciales y metadatos. Imprescindible para flujos multisig y hardware wallets." />
 <meta property="og:site_name" content="aprendeBTC" />
-<meta name="twitter:title" content="Decodificador PSBT (BIP174) — Herramientas | aprendebtc.com" />
+<meta name="twitter:title" content="Decodificador PSBT (BIP174) â€” Herramientas | aprendebtc.com" />
 <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/psbt-decoder.html" />
-<title>Decodificador PSBT (BIP174) — Herramientas | aprendebtc.com</title>
+<title>Decodificador PSBT (BIP174) â€” Herramientas | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -172,7 +172,7 @@
   <div data-include="header"></div>
 
   <div class="page-layout">
-        <aside class="page-layout__sidebar" aria-label="Navegación lateral">
+        <aside class="page-layout__sidebar" aria-label="NavegaciÃ³n lateral">
       <nav class="sidebar">
         <div class="sidebar__ad-wrap">
           <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
@@ -182,26 +182,24 @@
 
     <main class="page-layout__content" id="main-content">
       <div class="content-inner">
-        <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <nav class="breadcrumb" aria-label="Ruta de navegaciÃ³n">
           <a href="../" class="breadcrumb__item">Inicio</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__separator" aria-hidden="true">â€º</span>
           <a href="./" class="breadcrumb__item">Herramientas</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__separator" aria-hidden="true">â€º</span>
           <span class="breadcrumb__current">Decodificador PSBT</span>
         </nav>
 
         <article class="article">
           <h1>Decodificador PSBT (BIP174)</h1>
-          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
-            Analiza transacciones parcialmente firmadas (Partially Signed Bitcoin Transactions).
-          </p>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">PSBT (Partially Signed Bitcoin Transaction, BIP174/370) es el formato estándar para intercambiar transacciones Bitcoin que aún no han sido completamente firmadas. Es la base del flujo de firma en wallets multisig y en los hardware wallets modernos: el coordinador construye la transacción, la empaqueta como PSBT, y la envía a cada firmante para que añada su firma parcial. Esta herramienta decodifica cualquier PSBT (en Base64 o hexadecimal) y muestra su estructura completa: transacción global, inputs con sus UTXOs de referencia y firmas parciales existentes, outputs, y metadatos de derivación. Esencial para auditar el estado de una transacción multisig en proceso de firma.</p>
 
           <!-- Info -->
           <div class="callout callout--info" style="margin-bottom: 1.5rem;">
-            <span class="callout__icon" aria-hidden="true">ℹ️</span>
+            <span class="callout__icon" aria-hidden="true">â„¹ï¸</span>
             <div class="callout__content">
-              <div class="callout__title">¿Qué es un PSBT?</div>
-              <p class="callout__text">Un formato estándar (BIP174) para intercambiar transacciones sin firmar o parcialmente firmadas entre wallets, hardware wallets y coordinadores multisig.</p>
+              <div class="callout__title">Â¿QuÃ© es un PSBT?</div>
+              <p class="callout__text">Un formato estÃ¡ndar (BIP174) para intercambiar transacciones sin firmar o parcialmente firmadas entre wallets, hardware wallets y coordinadores multisig.</p>
             </div>
           </div>
 
@@ -221,8 +219,8 @@
             </div>
 
             <div class="tool-btn-row">
-              <button class="tool-btn tool-btn--secondary" id="btn-example">📋 PSBT de ejemplo</button>
-              <button class="tool-btn" id="btn-decode">🔍 Decodificar</button>
+              <button class="tool-btn tool-btn--secondary" id="btn-example">ðŸ“‹ PSBT de ejemplo</button>
+              <button class="tool-btn" id="btn-decode">ðŸ” Decodificar</button>
             </div>
           </div>
 
@@ -249,24 +247,24 @@
             <h2 class="tool-container__title">Estructura de un PSBT</h2>
             
             <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; line-height: 1.8;">
-              <div><span style="color: #58a6ff;">70736274ff</span> — Magic bytes "psbt" + separator</div>
+              <div><span style="color: #58a6ff;">70736274ff</span> â€” Magic bytes "psbt" + separator</div>
               <div style="margin-top: 0.5rem;"><strong>Global Map</strong></div>
               <div style="padding-left: 1rem; color: var(--text-secondary);">
                 key_len + key + value_len + value<br>
-                ... más pares key-value ...<br>
-                <span style="color: #da3633;">00</span> — separador
+                ... mÃ¡s pares key-value ...<br>
+                <span style="color: #da3633;">00</span> â€” separador
               </div>
               <div style="margin-top: 0.5rem;"><strong>Input Maps</strong> (uno por cada input)</div>
               <div style="padding-left: 1rem; color: var(--text-secondary);">
                 key_len + key + value_len + value<br>
                 ...<br>
-                <span style="color: #da3633;">00</span> — separador
+                <span style="color: #da3633;">00</span> â€” separador
               </div>
               <div style="margin-top: 0.5rem;"><strong>Output Maps</strong> (uno por cada output)</div>
               <div style="padding-left: 1rem; color: var(--text-secondary);">
                 key_len + key + value_len + value<br>
                 ...<br>
-                <span style="color: #da3633;">00</span> — separador
+                <span style="color: #da3633;">00</span> â€” separador
               </div>
             </div>
           </div>
@@ -279,8 +277,8 @@
                 <thead>
                   <tr>
                     <th>Tipo</th>
-                    <th>Ámbito</th>
-                    <th>Descripción</th>
+                    <th>Ãmbito</th>
+                    <th>DescripciÃ³n</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -306,11 +304,11 @@
 
           <!-- Callout contextual -->
           <div class="tool-callout">
-            <div class="tool-callout__title">Aprende más sobre PSBT</div>
+            <div class="tool-callout__title">Aprende mÃ¡s sobre PSBT</div>
             <p class="tool-callout__text">
-              <a href="../nivel-5/psbt.html">PSBT en detalle →</a> · 
-              <a href="tx-decoder.html">Decodificador de TX →</a> ·
-              <a href="tx-builder.html">Constructor de TX →</a>
+              <a href="../nivel-5/psbt.html">PSBT en detalle â†’</a> Â· 
+              <a href="tx-decoder.html">Decodificador de TX â†’</a> Â·
+              <a href="tx-builder.html">Constructor de TX â†’</a>
             </p>
           </div>
 
@@ -331,7 +329,7 @@
     'use strict';
 
     // === EJEMPLO PSBT ===
-    // PSBT simple con una transacción sin firmar
+    // PSBT simple con una transacciÃ³n sin firmar
     const EXAMPLE_PSBT = 'cHNidP8BAFICAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/////AaCGAQAAAAAAFgAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBH6CGAQAAAAAAFgAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==';
 
     // === CONSTANTES ===
@@ -452,13 +450,13 @@
         // Verificar magic
         const magic = HexUtils.bytesToHex(this.readBytes(5));
         if (magic !== PSBT_MAGIC) {
-          throw new Error('Magic bytes inválidos. No es un PSBT válido.');
+          throw new Error('Magic bytes invÃ¡lidos. No es un PSBT vÃ¡lido.');
         }
 
         // Global map
         const globalMap = this.readMap();
 
-        // Encontrar el número de inputs/outputs desde la unsigned TX
+        // Encontrar el nÃºmero de inputs/outputs desde la unsigned TX
         let inputCount = 0;
         let outputCount = 0;
         let unsignedTx = null;
@@ -648,7 +646,7 @@
                 ${keyName}
                 <code>key: ${keyHex}</code>
               </div>
-              <div class="psbt-field__value" title="${valueHex}">${displayValue || '(vacío)'}</div>
+              <div class="psbt-field__value" title="${valueHex}">${displayValue || '(vacÃ­o)'}</div>
             </div>
           `;
         });
@@ -661,7 +659,7 @@
               ${title}
               <span class="psbt-section__badge ${badgeClass}">${entries.length} campos</span>
             </div>
-            <span class="psbt-section__toggle ${openByDefault ? 'psbt-section__toggle--open' : ''}">▼</span>
+            <span class="psbt-section__toggle ${openByDefault ? 'psbt-section__toggle--open' : ''}">â–¼</span>
           </div>
           <div class="psbt-section__content ${openByDefault ? 'psbt-section__content--open' : ''}">
             ${fieldsHtml}
@@ -731,3 +729,4 @@
   </script>
 </body>
 </html>
+

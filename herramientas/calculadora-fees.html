@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Estima la comisión de tu transacción Bitcoin. Datos de la mempool en tiempo real y recomendaciones de fee." />
+  <meta name="description" content="Calcula comisiones de transacciones Bitcoin en sat/vbyte. Estima el fee según tipo de inputs/outputs (Legacy, SegWit, Taproot, multisig)." />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aprendebtc.com/herramientas/calculadora-fees.html" />
   <meta property="og:title" content="Calculadora de fees Bitcoin — Herramientas | aprendebtc.com" />
-  <meta property="og:description" content="Estima la comisión de tu transacción Bitcoin. Datos de la mempool en tiempo real y recomendaciones de fee." />
+  <meta property="og:description" content="Calcula comisiones de transacciones Bitcoin en sat/vbyte. Estima el fee según tipo de inputs/outputs (Legacy, SegWit, Taproot, multisig)." />
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
   <meta property="og:site_name" content="aprendeBTC" />
   <meta property="og:locale" content="es_ES" />
@@ -16,7 +16,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Calculadora de fees Bitcoin — Herramientas | aprendebtc.com" />
-  <meta name="twitter:description" content="Estima la comisión de tu transacción Bitcoin. Datos de la mempool en tiempo real y recomendaciones de fee." />
+  <meta name="twitter:description" content="Calcula comisiones de transacciones Bitcoin en sat/vbyte. Estima el fee según tipo de inputs/outputs (Legacy, SegWit, Taproot, multisig)." />
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 
   <!-- Canonical -->
@@ -24,7 +24,7 @@
   <link rel="alternate" hreflang="es" href="https://aprendebtc.com/herramientas/calculadora-fees.html" />
   <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/calculadora-fees.html" />
 <meta property="og:url" content="https://aprendebtc.com/herramientas/calculadora-fees.html" />
-<meta property="og:description" content="Estima la comisión de tu transacción Bitcoin. Datos de la mempool en tiempo real y recomendaciones de fee." />
+<meta property="og:description" content="Calcula comisiones de transacciones Bitcoin en sat/vbyte. Estima el fee según tipo de inputs/outputs (Legacy, SegWit, Taproot, multisig)." />
 <meta property="og:site_name" content="aprendeBTC" />
 <meta name="twitter:title" content="Calculadora de fees Bitcoin — Herramientas | aprendebtc.com" />
 <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
@@ -60,7 +60,7 @@
 
         <article class="article">
           <h1>Calculadora de fees Bitcoin</h1>
-          <p class="article__subtitle">Calcula cuánto costará tu próxima transacción Bitcoin según la congestión de la red.</p>
+          <p class="article__subtitle">Las comisiones de transacción en Bitcoin no se calculan sobre el importe enviado sino sobre el tamaño de la transacción en bytes virtuales (vbytes). Esta calculadora estima el fee total de una transacción a partir de sus características: número y tipo de inputs, número y tipo de outputs, y el fee rate actual en sat/vbyte. También funciona en inverso: dado un fee total que quieres pagar, calcula el fee rate equivalente. Los diferentes tipos de inputs y outputs (Legacy, SegWit, Taproot, multisig) tienen pesos distintos en vbytes, lo que explica por qué transacciones con el mismo número de inputs y outputs pueden costar diferente según el tipo de script utilizado.</p>
 
           <!-- Ticker de mempool -->
           <div class="tool-price-ticker" id="mempool-ticker">
@@ -442,4 +442,5 @@
   </script>
 </body>
 </html>
+
 

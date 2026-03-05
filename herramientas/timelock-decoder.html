@@ -1,22 +1,22 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" data-base-path="../">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Decodifica nLocktime y nSequence de transacciones Bitcoin. Entiende timelocks absolutos y relativos." />
+  <meta name="description" content="Decodifica timelocks Bitcoin: nLocktime, nSequence, OP_CLTV y OP_CSV. Entiende qué bloque o fecha permite gastar cada output restringido." />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aprendebtc.com/herramientas/timelock-decoder.html" />
-  <meta property="og:title" content="Decodificador de Timelocks — Herramientas | aprendebtc.com" />
-  <meta property="og:description" content="Decodifica nLocktime y nSequence de transacciones Bitcoin. Entiende timelocks absolutos y relativos." />
+  <meta property="og:title" content="Decodificador de Timelocks â€” Herramientas | aprendebtc.com" />
+  <meta property="og:description" content="Decodifica timelocks Bitcoin: nLocktime, nSequence, OP_CLTV y OP_CSV. Entiende qué bloque o fecha permite gastar cada output restringido." />
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
   <meta property="og:site_name" content="aprendeBTC" />
   <meta property="og:locale" content="es_ES" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Decodificador de Timelocks — Herramientas | aprendebtc.com" />
-  <meta name="twitter:description" content="Decodifica nLocktime y nSequence de transacciones Bitcoin. Entiende timelocks absolutos y relativos." />
+  <meta name="twitter:title" content="Decodificador de Timelocks â€” Herramientas | aprendebtc.com" />
+  <meta name="twitter:description" content="Decodifica timelocks Bitcoin: nLocktime, nSequence, OP_CLTV y OP_CSV. Entiende qué bloque o fecha permite gastar cada output restringido." />
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 
   <!-- Canonical -->
@@ -24,12 +24,12 @@
   <link rel="alternate" hreflang="es" href="https://aprendebtc.com/herramientas/timelock-decoder.html" />
   <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/timelock-decoder.html" />
 <meta property="og:url" content="https://aprendebtc.com/herramientas/timelock-decoder.html" />
-<meta property="og:description" content="Decodifica nLocktime y nSequence de transacciones Bitcoin. Entiende timelocks absolutos y relativos." />
+<meta property="og:description" content="Decodifica timelocks Bitcoin: nLocktime, nSequence, OP_CLTV y OP_CSV. Entiende qué bloque o fecha permite gastar cada output restringido." />
 <meta property="og:site_name" content="aprendeBTC" />
-<meta name="twitter:title" content="Decodificador de Timelocks — Herramientas | aprendebtc.com" />
+<meta name="twitter:title" content="Decodificador de Timelocks â€” Herramientas | aprendebtc.com" />
 <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/timelock-decoder.html" />
-<title>Decodificador de Timelocks — Herramientas | aprendebtc.com</title>
+<title>Decodificador de Timelocks â€” Herramientas | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -148,7 +148,7 @@
   <div data-include="header"></div>
 
   <div class="page-layout">
-        <aside class="page-layout__sidebar" aria-label="Navegación lateral">
+        <aside class="page-layout__sidebar" aria-label="NavegaciÃ³n lateral">
       <nav class="sidebar">
         <div class="sidebar__ad-wrap">
           <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
@@ -158,27 +158,25 @@
 
     <main class="page-layout__content" id="main-content">
       <div class="content-inner">
-        <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <nav class="breadcrumb" aria-label="Ruta de navegaciÃ³n">
           <a href="../" class="breadcrumb__item">Inicio</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__separator" aria-hidden="true">â€º</span>
           <a href="./" class="breadcrumb__item">Herramientas</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__separator" aria-hidden="true">â€º</span>
           <span class="breadcrumb__current">Decodificador de timelocks</span>
         </nav>
 
         <article class="article">
           <h1>Decodificador de Timelocks</h1>
-          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
-            Interpreta los campos nLocktime y nSequence que controlan cuándo se puede gastar una transacción.
-          </p>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">Los timelocks son restricciones temporales que impiden que un output de Bitcoin sea gastado antes de cierto momento. Existen cuatro tipos: nLocktime y nSequence (a nivel de transacción e input) y OP_CHECKLOCKTIMEVERIFY / OP_CHECKSEQUENCEVERIFY (a nivel de script). Los valores pueden expresar tiempo como número de bloque (absoluto o relativo) o como timestamp Unix, y la interpretación depende del tipo de timelock y del valor específico. Esta herramienta decodifica cualquier valor de timelock y explica exactamente qué restricción impone: a partir de qué bloque o fecha el output puede gastarse. Fundamental para auditar transacciones con timelocks y para diseñar contratos Bitcoin con restricciones temporales.</p>
 
           <!-- Section 1: nLocktime -->
           <div class="decoder-section">
             <div class="decoder-section__title">
-              <span>🔒</span> nLocktime (Timelock absoluto)
+              <span>ðŸ”’</span> nLocktime (Timelock absoluto)
             </div>
             <div class="decoder-section__subtitle">
-              Campo de 4 bytes al final de cada transacción. Define cuándo la TX puede ser incluida en un bloque.
+              Campo de 4 bytes al final de cada transacciÃ³n. Define cuÃ¡ndo la TX puede ser incluida en un bloque.
             </div>
 
             <div class="tool-field">
@@ -193,10 +191,10 @@
             </div>
 
             <div class="tool-presets" style="margin-top: 0.5rem;">
-              <button class="tool-preset" data-locktime="0">0 (sin restricción)</button>
+              <button class="tool-preset" data-locktime="0">0 (sin restricciÃ³n)</button>
               <button class="tool-preset" data-locktime="500000">Bloque 500.000</button>
-              <button class="tool-preset" data-locktime="499999999">499.999.999 (máx bloque)</button>
-              <button class="tool-preset" data-locktime="500000000">500.000.000 (mín timestamp)</button>
+              <button class="tool-preset" data-locktime="499999999">499.999.999 (mÃ¡x bloque)</button>
+              <button class="tool-preset" data-locktime="500000000">500.000.000 (mÃ­n timestamp)</button>
               <button class="tool-preset" data-locktime="1700000000">Timestamp 2023</button>
             </div>
 
@@ -206,10 +204,10 @@
           <!-- Section 2: nSequence (BIP68) -->
           <div class="decoder-section">
             <div class="decoder-section__title">
-              <span>⏱️</span> nSequence (BIP68 - Timelock relativo)
+              <span>â±ï¸</span> nSequence (BIP68 - Timelock relativo)
             </div>
             <div class="decoder-section__subtitle">
-              Campo de 4 bytes en cada input. Si el bit 31 = 0, activa timelock relativo desde la confirmación del output previo.
+              Campo de 4 bytes en cada input. Si el bit 31 = 0, activa timelock relativo desde la confirmaciÃ³n del output previo.
             </div>
 
             <div class="tool-field">
@@ -227,9 +225,9 @@
               <button class="tool-preset" data-sequence="ffffffff">0xFFFFFFFF (final)</button>
               <button class="tool-preset" data-sequence="fffffffe">0xFFFFFFFE (RBF)</button>
               <button class="tool-preset" data-sequence="00000001">1 bloque relativo</button>
-              <button class="tool-preset" data-sequence="00000090">144 bloques (~1 día)</button>
+              <button class="tool-preset" data-sequence="00000090">144 bloques (~1 dÃ­a)</button>
               <button class="tool-preset" data-sequence="00400001">1 unidad de tiempo (512s)</button>
-              <button class="tool-preset" data-sequence="004000b0">176 × 512s (~1 día)</button>
+              <button class="tool-preset" data-sequence="004000b0">176 Ã— 512s (~1 dÃ­a)</button>
             </div>
 
             <div id="sequence-result" style="display: none;"></div>
@@ -238,10 +236,10 @@
           <!-- Section 3: RBF Detection -->
           <div class="decoder-section">
             <div class="decoder-section__title">
-              <span>🔄</span> Detección RBF (Replace-By-Fee)
+              <span>ðŸ”„</span> DetecciÃ³n RBF (Replace-By-Fee)
             </div>
             <div class="decoder-section__subtitle">
-              Una transacción señala RBF si al menos un input tiene sequence &lt; 0xFFFFFFFE (BIP125).
+              Una transacciÃ³n seÃ±ala RBF si al menos un input tiene sequence &lt; 0xFFFFFFFE (BIP125).
             </div>
 
             <div class="tool-field">
@@ -264,7 +262,7 @@
 
           <!-- Reference -->
           <div class="tool-container">
-            <h2 class="tool-container__title">Referencia rápida</h2>
+            <h2 class="tool-container__title">Referencia rÃ¡pida</h2>
             <div class="tool-table-wrapper">
               <table class="tool-table">
                 <thead>
@@ -278,17 +276,17 @@
                   <tr>
                     <td>nLocktime</td>
                     <td><code>0</code></td>
-                    <td>Sin restricción temporal</td>
+                    <td>Sin restricciÃ³n temporal</td>
                   </tr>
                   <tr>
                     <td>nLocktime</td>
-                    <td><code>1 – 499.999.999</code></td>
-                    <td>Altura de bloque mínima</td>
+                    <td><code>1 â€“ 499.999.999</code></td>
+                    <td>Altura de bloque mÃ­nima</td>
                   </tr>
                   <tr>
                     <td>nLocktime</td>
-                    <td><code>≥ 500.000.000</code></td>
-                    <td>Unix timestamp mínimo</td>
+                    <td><code>â‰¥ 500.000.000</code></td>
+                    <td>Unix timestamp mÃ­nimo</td>
                   </tr>
                   <tr>
                     <td>nSequence</td>
@@ -303,7 +301,7 @@
                   <tr>
                     <td>nSequence</td>
                     <td><code>&lt; 0xFFFFFFFE</code></td>
-                    <td>RBF señalado + posible timelock relativo</td>
+                    <td>RBF seÃ±alado + posible timelock relativo</td>
                   </tr>
                 </tbody>
               </table>
@@ -312,11 +310,11 @@
 
           <!-- Callout contextual -->
           <div class="tool-callout">
-            <div class="tool-callout__title">Aprende más</div>
+            <div class="tool-callout__title">Aprende mÃ¡s</div>
             <p class="tool-callout__text">
-              <a href="../nivel-5/locktime-sequence.html">Locktime y Sequence en detalle →</a> · 
-              <a href="tx-decoder.html">Decodificador de transacciones →</a> ·
-              <a href="unix-time.html">Unix timestamp →</a>
+              <a href="../nivel-5/locktime-sequence.html">Locktime y Sequence en detalle â†’</a> Â· 
+              <a href="tx-decoder.html">Decodificador de transacciones â†’</a> Â·
+              <a href="unix-time.html">Unix timestamp â†’</a>
             </p>
           </div>
 
@@ -369,10 +367,10 @@
       if (value === 0) {
         html = `
           <div class="interpretation-box interpretation-box--disabled">
-            <div class="interpretation-box__type interpretation-box__type--disabled">Sin restricción</div>
+            <div class="interpretation-box__type interpretation-box__type--disabled">Sin restricciÃ³n</div>
             <div class="interpretation-box__value">0</div>
             <div class="interpretation-box__detail">
-              La transacción puede incluirse en cualquier bloque inmediatamente.
+              La transacciÃ³n puede incluirse en cualquier bloque inmediatamente.
             </div>
           </div>
         `;
@@ -382,7 +380,7 @@
             <div class="interpretation-box__type interpretation-box__type--block">Altura de bloque</div>
             <div class="interpretation-box__value">Bloque ${value.toLocaleString('es-ES')}</div>
             <div class="interpretation-box__detail">
-              La transacción no puede incluirse hasta que la blockchain alcance esta altura.
+              La transacciÃ³n no puede incluirse hasta que la blockchain alcance esta altura.
             </div>
           </div>
         `;
@@ -397,7 +395,7 @@
             <div class="interpretation-box__value">${date.toUTCString()}</div>
             <div class="interpretation-box__detail">
               Timestamp: ${value.toLocaleString('es-ES')}<br>
-              Estado: ${isPast ? '✓ Ya pasado (válido ahora)' : '⏳ En el futuro (no válido aún)'}
+              Estado: ${isPast ? 'âœ“ Ya pasado (vÃ¡lido ahora)' : 'â³ En el futuro (no vÃ¡lido aÃºn)'}
             </div>
           </div>
         `;
@@ -460,7 +458,7 @@
       if (value === 0xFFFFFFFF) {
         interpretation = `
           <div class="interpretation-box interpretation-box--disabled">
-            <div class="interpretation-box__type interpretation-box__type--disabled">Final (máximo)</div>
+            <div class="interpretation-box__type interpretation-box__type--disabled">Final (mÃ¡ximo)</div>
             <div class="interpretation-box__value">0xFFFFFFFF</div>
             <div class="interpretation-box__detail">
               Sin RBF. Sin timelock relativo. Ignora nLocktime.
@@ -483,7 +481,7 @@
             <div class="interpretation-box__type interpretation-box__type--disabled">Timelock relativo desactivado</div>
             <div class="interpretation-box__value">Bit 31 = 1</div>
             <div class="interpretation-box__detail">
-              RBF señalado (sequence &lt; 0xFFFFFFFE).<br>
+              RBF seÃ±alado (sequence &lt; 0xFFFFFFFE).<br>
               Timelock relativo BIP68 desactivado.
             </div>
           </div>
@@ -497,9 +495,9 @@
               <div class="interpretation-box__type interpretation-box__type--block">Timelock relativo: bloques</div>
               <div class="interpretation-box__value">${lockValue.toLocaleString('es-ES')} bloques</div>
               <div class="interpretation-box__detail">
-                RBF señalado.<br>
-                Debe esperar ${lockValue} bloques desde la confirmación del output previo.<br>
-                ≈ ${Math.round(lockValue * 10 / 60)} horas / ${(lockValue * 10 / 60 / 24).toFixed(1)} días
+                RBF seÃ±alado.<br>
+                Debe esperar ${lockValue} bloques desde la confirmaciÃ³n del output previo.<br>
+                â‰ˆ ${Math.round(lockValue * 10 / 60)} horas / ${(lockValue * 10 / 60 / 24).toFixed(1)} dÃ­as
               </div>
             </div>
           `;
@@ -512,10 +510,10 @@
           interpretation = `
             <div class="interpretation-box interpretation-box--time">
               <div class="interpretation-box__type interpretation-box__type--time">Timelock relativo: tiempo</div>
-              <div class="interpretation-box__value">${lockValue} × 512 segundos = ${seconds.toLocaleString('es-ES')} s</div>
+              <div class="interpretation-box__value">${lockValue} Ã— 512 segundos = ${seconds.toLocaleString('es-ES')} s</div>
               <div class="interpretation-box__detail">
-                RBF señalado.<br>
-                Debe esperar ${hours.toFixed(1)} horas (${days.toFixed(2)} días) desde la confirmación.
+                RBF seÃ±alado.<br>
+                Debe esperar ${hours.toFixed(1)} horas (${days.toFixed(2)} dÃ­as) desde la confirmaciÃ³n.
               </div>
             </div>
           `;
@@ -562,22 +560,22 @@
       if (isRBF) {
         html = `
           <div class="interpretation-box interpretation-box--rbf">
-            <div class="interpretation-box__type interpretation-box__type--rbf">RBF señalado</div>
-            <div class="interpretation-box__value">✓ Sí</div>
+            <div class="interpretation-box__type interpretation-box__type--rbf">RBF seÃ±alado</div>
+            <div class="interpretation-box__value">âœ“ SÃ­</div>
             <div class="interpretation-box__detail">
               Sequence 0x${hex.toUpperCase()} &lt; 0xFFFFFFFE<br>
-              Esta transacción puede ser reemplazada por otra con mayor fee (BIP125).
+              Esta transacciÃ³n puede ser reemplazada por otra con mayor fee (BIP125).
             </div>
           </div>
         `;
       } else {
         html = `
           <div class="interpretation-box interpretation-box--disabled">
-            <div class="interpretation-box__type interpretation-box__type--disabled">RBF no señalado</div>
-            <div class="interpretation-box__value">✗ No</div>
+            <div class="interpretation-box__type interpretation-box__type--disabled">RBF no seÃ±alado</div>
+            <div class="interpretation-box__value">âœ— No</div>
             <div class="interpretation-box__detail">
-              Sequence 0x${hex.toUpperCase()} ≥ 0xFFFFFFFE<br>
-              Esta transacción indica que no debe ser reemplazada (aunque los mineros pueden ignorarlo).
+              Sequence 0x${hex.toUpperCase()} â‰¥ 0xFFFFFFFE<br>
+              Esta transacciÃ³n indica que no debe ser reemplazada (aunque los mineros pueden ignorarlo).
             </div>
           </div>
         `;
@@ -606,3 +604,4 @@
   </script>
 </body>
 </html>
+

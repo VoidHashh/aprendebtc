@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Genera direcciones SegWit nativas (bc1q) y Taproot (bc1p) desde una clave pública. Encoding Bech32 y Bech32m." />
+  <meta name="description" content="Genera y verifica direcciones Bitcoin Bech32 (bc1q) y Bech32m (bc1p). Entiende el formato SegWit nativo y Taproot con validación de checksum." />
 
   <!-- Open Graph -->
 
@@ -13,7 +13,7 @@
 
   <meta property="og:title" content="Dirección Bitcoin (Bech32 / Bech32m) — Herramientas | aprendebtc.com" />
 
-  <meta property="og:description" content="Genera direcciones SegWit nativas (bc1q) y Taproot (bc1p) desde una clave pública. Encoding Bech32 y Bech32m." />
+  <meta property="og:description" content="Genera y verifica direcciones Bitcoin Bech32 (bc1q) y Bech32m (bc1p). Entiende el formato SegWit nativo y Taproot con validación de checksum." />
 
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
 
@@ -28,7 +28,7 @@
 
   <meta name="twitter:title" content="Dirección Bitcoin (Bech32 / Bech32m) — Herramientas | aprendebtc.com" />
 
-  <meta name="twitter:description" content="Genera direcciones SegWit nativas (bc1q) y Taproot (bc1p) desde una clave pública. Encoding Bech32 y Bech32m." />
+  <meta name="twitter:description" content="Genera y verifica direcciones Bitcoin Bech32 (bc1q) y Bech32m (bc1p). Entiende el formato SegWit nativo y Taproot con validación de checksum." />
 
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 
@@ -41,7 +41,7 @@
 
   <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/address-bech32.html" />
 <meta property="og:url" content="https://aprendebtc.com/herramientas/address-bech32.html" />
-<meta property="og:description" content="Genera direcciones SegWit nativas (bc1q) y Taproot (bc1p) desde una clave pública. Encoding Bech32 y Bech32m." />
+<meta property="og:description" content="Genera y verifica direcciones Bitcoin Bech32 (bc1q) y Bech32m (bc1p). Entiende el formato SegWit nativo y Taproot con validación de checksum." />
 <meta property="og:site_name" content="aprendeBTC" />
 <meta name="twitter:title" content="Dirección Bitcoin (Bech32 / Bech32m) — Herramientas | aprendebtc.com" />
 <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
@@ -163,9 +163,7 @@
 
         <article class="article">
           <h1>Dirección Bitcoin (Bech32 / Bech32m)</h1>
-          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
-            Genera direcciones Native SegWit (bc1q...) y Taproot (bc1p...) desde tu clave pública.
-          </p>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">Bech32 (y su actualización Bech32m) es el formato de codificación de las direcciones SegWit nativas de Bitcoin. Las direcciones Native SegWit (P2WPKH, que empiezan por bc1q) y Taproot (P2TR, que empiezan por bc1p) usan este formato, que tiene ventajas sobre Base58: solo usa letras minúsculas y números, lo que facilita la lectura en voz alta y la detección de errores, y tiene una capacidad de corrección de errores superior. Esta herramienta genera direcciones Bech32 y Bech32m desde una clave pública, muestra el proceso de codificación (witness version, witness program, checksum Bech32) y permite verificar si una dirección dada es válida.</p>
 
           <!-- Disclaimer educativo -->
           <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
@@ -619,4 +617,5 @@
   </script>
 </body>
 </html>
+
 

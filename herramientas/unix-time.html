@@ -1,22 +1,22 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" data-base-path="../">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Convierte entre Unix timestamp y fecha legible. Los block headers y timelocks de Bitcoin usan timestamps Unix." />
+  <meta name="description" content="Convierte timestamps Unix a fecha legible y viceversa. Referencia para timelocks Bitcoin, cabeceras de bloque y planificación de transacciones con restricción temporal." />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aprendebtc.com/herramientas/unix-time.html" />
-  <meta property="og:title" content="Tiempo Unix — Herramientas | aprendebtc.com" />
-  <meta property="og:description" content="Convierte entre Unix timestamp y fecha legible. Los block headers y timelocks de Bitcoin usan timestamps Unix." />
+  <meta property="og:title" content="Tiempo Unix â€” Herramientas | aprendebtc.com" />
+  <meta property="og:description" content="Convierte timestamps Unix a fecha legible y viceversa. Referencia para timelocks Bitcoin, cabeceras de bloque y planificación de transacciones con restricción temporal." />
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
   <meta property="og:site_name" content="aprendeBTC" />
   <meta property="og:locale" content="es_ES" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Tiempo Unix — Herramientas | aprendebtc.com" />
-  <meta name="twitter:description" content="Convierte entre Unix timestamp y fecha legible. Los block headers y timelocks de Bitcoin usan timestamps Unix." />
+  <meta name="twitter:title" content="Tiempo Unix â€” Herramientas | aprendebtc.com" />
+  <meta name="twitter:description" content="Convierte timestamps Unix a fecha legible y viceversa. Referencia para timelocks Bitcoin, cabeceras de bloque y planificación de transacciones con restricción temporal." />
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 
   <!-- Canonical -->
@@ -24,12 +24,12 @@
   <link rel="alternate" hreflang="es" href="https://aprendebtc.com/herramientas/unix-time.html" />
   <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/unix-time.html" />
 <meta property="og:url" content="https://aprendebtc.com/herramientas/unix-time.html" />
-<meta property="og:description" content="Convierte entre Unix timestamp y fecha legible. Los block headers y timelocks de Bitcoin usan timestamps Unix." />
+<meta property="og:description" content="Convierte timestamps Unix a fecha legible y viceversa. Referencia para timelocks Bitcoin, cabeceras de bloque y planificación de transacciones con restricción temporal." />
 <meta property="og:site_name" content="aprendeBTC" />
-<meta name="twitter:title" content="Tiempo Unix — Herramientas | aprendebtc.com" />
+<meta name="twitter:title" content="Tiempo Unix â€” Herramientas | aprendebtc.com" />
 <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/unix-time.html" />
-<title>Tiempo Unix — Herramientas | aprendebtc.com</title>
+<title>Tiempo Unix â€” Herramientas | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -115,7 +115,7 @@
   <div data-include="header"></div>
 
   <div class="page-layout">
-        <aside class="page-layout__sidebar" aria-label="Navegación lateral">
+        <aside class="page-layout__sidebar" aria-label="NavegaciÃ³n lateral">
       <nav class="sidebar">
         <div class="sidebar__ad-wrap">
           <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
@@ -125,30 +125,28 @@
 
     <main class="page-layout__content" id="main-content">
       <div class="content-inner">
-        <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <nav class="breadcrumb" aria-label="Ruta de navegaciÃ³n">
           <a href="../" class="breadcrumb__item">Inicio</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__separator" aria-hidden="true">â€º</span>
           <a href="./" class="breadcrumb__item">Herramientas</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__separator" aria-hidden="true">â€º</span>
           <span class="breadcrumb__current">Tiempo Unix</span>
         </nav>
 
         <article class="article">
           <h1>Tiempo Unix</h1>
-          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
-            Convierte entre timestamps Unix (como los que usa Bitcoin) y fechas legibles.
-          </p>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">Los bloques de Bitcoin incluyen un timestamp en formato Unix time: el número de segundos transcurridos desde el 1 de enero de 1970 (la época Unix). Este timestamp no es perfectamente preciso, los mineros tienen cierta libertad para ajustarlo dentro de márgenes, pero sirve como referencia temporal para los timelocks y para el ajuste de dificultad. Esta herramienta convierte entre timestamp Unix y fecha/hora legible en ambas direcciones, muestra el timestamp del bloque génesis (1231006505, correspondiente al 3 de enero de 2009 a las 18:15:05 UTC) como referencia, y calcula cuántos segundos o bloques estimados faltan hasta una fecha futura, útil para planificar timelocks.</p>
 
           <!-- Current time -->
           <div class="current-time">
             <div class="current-time__label">Timestamp actual</div>
-            <div class="current-time__value" id="current-timestamp">—</div>
+            <div class="current-time__value" id="current-timestamp">â€”</div>
           </div>
 
           <!-- Timestamp to Date -->
           <div class="time-section">
             <div class="time-section__title">
-              <span>📅</span> Timestamp → Fecha
+              <span>ðŸ“…</span> Timestamp â†’ Fecha
             </div>
 
             <div class="tool-field">
@@ -162,26 +160,26 @@
                 style="font-family: 'JetBrains Mono', monospace;"
               />
               <button class="tool-btn tool-btn--secondary tool-btn--small" id="btn-now" style="margin-top: 0.5rem;">
-                ⏱️ Usar ahora
+                â±ï¸ Usar ahora
               </button>
             </div>
 
             <div class="result-grid" id="ts-result" style="display: none;">
               <div class="result-item">
                 <div class="result-item__label">UTC</div>
-                <div class="result-item__value" id="ts-utc">—</div>
+                <div class="result-item__value" id="ts-utc">â€”</div>
               </div>
               <div class="result-item">
                 <div class="result-item__label">Hora local</div>
-                <div class="result-item__value" id="ts-local">—</div>
+                <div class="result-item__value" id="ts-local">â€”</div>
               </div>
               <div class="result-item">
                 <div class="result-item__label">ISO 8601</div>
-                <div class="result-item__value" id="ts-iso">—</div>
+                <div class="result-item__value" id="ts-iso">â€”</div>
               </div>
               <div class="result-item">
                 <div class="result-item__label">Hex (4 bytes LE)</div>
-                <div class="result-item__value" id="ts-hex">—</div>
+                <div class="result-item__value" id="ts-hex">â€”</div>
               </div>
             </div>
           </div>
@@ -189,7 +187,7 @@
           <!-- Date to Timestamp -->
           <div class="time-section">
             <div class="time-section__title">
-              <span>🔢</span> Fecha → Timestamp
+              <span>ðŸ”¢</span> Fecha â†’ Timestamp
             </div>
 
             <div class="datetime-row">
@@ -206,20 +204,20 @@
             <div class="result-grid" id="date-result" style="display: none; margin-top: 1rem;">
               <div class="result-item">
                 <div class="result-item__label">Unix timestamp</div>
-                <div class="result-item__value" id="date-ts">—</div>
+                <div class="result-item__value" id="date-ts">â€”</div>
               </div>
               <div class="result-item">
                 <div class="result-item__label">Hex (4 bytes LE)</div>
-                <div class="result-item__value" id="date-hex">—</div>
+                <div class="result-item__value" id="date-hex">â€”</div>
               </div>
             </div>
           </div>
 
           <!-- Presets -->
           <div class="tool-container">
-            <h2 class="tool-container__title">Momentos históricos de Bitcoin</h2>
+            <h2 class="tool-container__title">Momentos histÃ³ricos de Bitcoin</h2>
             <div class="tool-presets">
-              <button class="tool-preset" data-ts="1231006505">Bloque génesis (3 Ene 2009)</button>
+              <button class="tool-preset" data-ts="1231006505">Bloque gÃ©nesis (3 Ene 2009)</button>
               <button class="tool-preset" data-ts="1354116278">Primer halving (28 Nov 2012)</button>
               <button class="tool-preset" data-ts="1468082773">Segundo halving (9 Jul 2016)</button>
               <button class="tool-preset" data-ts="1589225023">Tercer halving (11 May 2020)</button>
@@ -233,18 +231,18 @@
             <h2 class="tool-container__title">Unix timestamp en Bitcoin</h2>
             <div style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7;">
               <p>
-                El <strong>Unix timestamp</strong> es el número de segundos desde el 1 de enero de 1970 00:00:00 UTC (la "época Unix").
+                El <strong>Unix timestamp</strong> es el nÃºmero de segundos desde el 1 de enero de 1970 00:00:00 UTC (la "Ã©poca Unix").
               </p>
               
               <p style="margin-top: 0.75rem;">En Bitcoin se usa en varios lugares:</p>
               <ul style="margin-top: 0.5rem; padding-left: 1.25rem;">
-                <li><strong>Block header</strong> — campo <code>time</code> (4 bytes, little-endian)</li>
-                <li><strong>nLocktime</strong> — si ≥ 500.000.000, se interpreta como timestamp</li>
-                <li><strong>OP_CHECKLOCKTIMEVERIFY</strong> — para timelocks absolutos</li>
+                <li><strong>Block header</strong> â€” campo <code>time</code> (4 bytes, little-endian)</li>
+                <li><strong>nLocktime</strong> â€” si â‰¥ 500.000.000, se interpreta como timestamp</li>
+                <li><strong>OP_CHECKLOCKTIMEVERIFY</strong> â€” para timelocks absolutos</li>
               </ul>
 
               <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md); margin-top: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">
-                <div style="color: var(--text-secondary);">Ejemplo: timestamp del bloque génesis</div>
+                <div style="color: var(--text-secondary);">Ejemplo: timestamp del bloque gÃ©nesis</div>
                 <div style="margin-top: 0.5rem;">
                   Decimal: <span style="color: var(--accent);">1231006505</span>
                 </div>
@@ -262,9 +260,9 @@
           <div class="tool-callout">
             <div class="tool-callout__title">Relacionado</div>
             <p class="tool-callout__text">
-              <a href="timelock-decoder.html">Decodificador de timelocks →</a> · 
-              <a href="tx-decoder.html">Decodificador de transacciones →</a> ·
-              <a href="compact-size.html">Compact Size (VarInt) →</a>
+              <a href="timelock-decoder.html">Decodificador de timelocks â†’</a> Â· 
+              <a href="tx-decoder.html">Decodificador de transacciones â†’</a> Â·
+              <a href="compact-size.html">Compact Size (VarInt) â†’</a>
             </p>
           </div>
 
@@ -317,7 +315,7 @@
       return bytes.reverse().join('');
     }
 
-    // Timestamp → Fecha
+    // Timestamp â†’ Fecha
     function convertTimestamp() {
       const ts = parseInt(tsInput.value.trim().replace(/\./g, '').replace(/,/g, ''));
       
@@ -346,7 +344,7 @@
       convertTimestamp();
     });
 
-    // Fecha → Timestamp
+    // Fecha â†’ Timestamp
     function convertDate() {
       const dateVal = dateInput.value;
       const timeVal = timeInput.value || '00:00';
@@ -385,3 +383,4 @@
   </script>
 </body>
 </html>
+

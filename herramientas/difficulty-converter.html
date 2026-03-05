@@ -1,22 +1,22 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" data-base-path="../">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Convierte entre dificultad, target y bits (compact) de Bitcoin. Entiende cómo se codifica la dificultad de minería." />
+  <meta name="description" content="Convierte entre nBits, target hash y dificultad de minado Bitcoin. Entiende cómo la red ajusta la dificultad cada 2016 bloques." />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aprendebtc.com/herramientas/difficulty-converter.html" />
-  <meta property="og:title" content="Conversor de dificultad y target — Herramientas | aprendebtc.com" />
-  <meta property="og:description" content="Convierte entre dificultad, target y bits (compact) de Bitcoin. Entiende cómo se codifica la dificultad de minería." />
+  <meta property="og:title" content="Conversor de dificultad y target â€” Herramientas | aprendebtc.com" />
+  <meta property="og:description" content="Convierte entre nBits, target hash y dificultad de minado Bitcoin. Entiende cómo la red ajusta la dificultad cada 2016 bloques." />
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
   <meta property="og:site_name" content="aprendeBTC" />
   <meta property="og:locale" content="es_ES" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Conversor de dificultad y target — Herramientas | aprendebtc.com" />
-  <meta name="twitter:description" content="Convierte entre dificultad, target y bits (compact) de Bitcoin. Entiende cómo se codifica la dificultad de minería." />
+  <meta name="twitter:title" content="Conversor de dificultad y target â€” Herramientas | aprendebtc.com" />
+  <meta name="twitter:description" content="Convierte entre nBits, target hash y dificultad de minado Bitcoin. Entiende cómo la red ajusta la dificultad cada 2016 bloques." />
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 
   <!-- Canonical -->
@@ -24,12 +24,12 @@
   <link rel="alternate" hreflang="es" href="https://aprendebtc.com/herramientas/difficulty-converter.html" />
   <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/difficulty-converter.html" />
 <meta property="og:url" content="https://aprendebtc.com/herramientas/difficulty-converter.html" />
-<meta property="og:description" content="Convierte entre dificultad, target y bits (compact) de Bitcoin. Entiende cómo se codifica la dificultad de minería." />
+<meta property="og:description" content="Convierte entre nBits, target hash y dificultad de minado Bitcoin. Entiende cómo la red ajusta la dificultad cada 2016 bloques." />
 <meta property="og:site_name" content="aprendeBTC" />
-<meta name="twitter:title" content="Conversor de dificultad y target — Herramientas | aprendebtc.com" />
+<meta name="twitter:title" content="Conversor de dificultad y target â€” Herramientas | aprendebtc.com" />
 <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/difficulty-converter.html" />
-<title>Conversor de dificultad y target — Herramientas | aprendebtc.com</title>
+<title>Conversor de dificultad y target â€” Herramientas | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -96,7 +96,7 @@
   <div data-include="header"></div>
 
   <div class="page-layout">
-        <aside class="page-layout__sidebar" aria-label="Navegación lateral">
+        <aside class="page-layout__sidebar" aria-label="NavegaciÃ³n lateral">
       <nav class="sidebar">
         <div class="sidebar__ad-wrap">
           <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
@@ -106,35 +106,33 @@
 
     <main class="page-layout__content" id="main-content">
       <div class="content-inner">
-        <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <nav class="breadcrumb" aria-label="Ruta de navegaciÃ³n">
           <a href="../" class="breadcrumb__item">Inicio</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__separator" aria-hidden="true">â€º</span>
           <a href="index.html" class="breadcrumb__item">Herramientas</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__separator" aria-hidden="true">â€º</span>
           <span class="breadcrumb__current">Conversor de dificultad</span>
         </nav>
 
         <article class="article">
           <h1>Conversor de dificultad y target</h1>
-          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
-            Convierte entre los tres formatos que expresan la dificultad de minería en Bitcoin.
-          </p>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">La dificultad de minado en Bitcoin se almacena en la cabecera de cada bloque en un formato compacto de 4 bytes llamado bits (o nBits). Este formato codifica el target hash que los mineros deben alcanzar: cuanto menor es el target, más difícil es encontrar un hash válido. Esta herramienta convierte entre los tres formatos relacionados con la dificultad: el valor compacto nBits tal como aparece en la cabecera del bloque, el target hash completo de 256 bits en hexadecimal, y el número de dificultad relativa (la métrica más usada en los exploradores de bloques, que expresa cuántas veces más difícil es minar ahora que en el bloque génesis).</p>
 
           <!-- Disclaimer educativo -->
           <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
-            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <span class="callout__icon" aria-hidden="true">âš ï¸</span>
             <div class="callout__content">
               <div class="callout__title">Herramienta educativa</div>
-              <p class="callout__text">Esta herramienta es para aprendizaje. NO la uses para generar datos criptográficos para fondos reales.</p>
+              <p class="callout__text">Esta herramienta es para aprendizaje. NO la uses para generar datos criptogrÃ¡ficos para fondos reales.</p>
             </div>
           </div>
 
-          <!-- Presets históricos -->
+          <!-- Presets histÃ³ricos -->
           <div class="tool-container">
-            <h2 class="tool-container__title">Valores históricos</h2>
+            <h2 class="tool-container__title">Valores histÃ³ricos</h2>
             <div class="presets-row">
-              <button class="preset-btn" data-bits="1d00ffff" data-name="Bloque génesis (2009)">
-                Bloque génesis (2009)
+              <button class="preset-btn" data-bits="1d00ffff" data-name="Bloque gÃ©nesis (2009)">
+                Bloque gÃ©nesis (2009)
               </button>
               <button class="preset-btn" data-bits="1a44b9f2" data-name="Primer halving (2012)">
                 Primer halving (2012)
@@ -142,23 +140,23 @@
               <button class="preset-btn" data-bits="1703255b" data-name="Halving 2024">
                 Halving 2024
               </button>
-              <button class="preset-btn" data-bits="17034219" data-name="Récord 2024">
-                Récord 2024
+              <button class="preset-btn" data-bits="17034219" data-name="RÃ©cord 2024">
+                RÃ©cord 2024
               </button>
             </div>
           </div>
 
           <!-- Conversores interconectados -->
           <div class="tool-container">
-            <h2 class="tool-container__title">Conversión de formatos</h2>
+            <h2 class="tool-container__title">ConversiÃ³n de formatos</h2>
             <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.25rem;">
-              Modifica cualquiera de los tres campos y los demás se actualizarán automáticamente.
+              Modifica cualquiera de los tres campos y los demÃ¡s se actualizarÃ¡n automÃ¡ticamente.
             </p>
 
             <!-- Bits (compact) -->
             <div class="tool-field" style="margin-bottom: 1.25rem;">
               <label class="tool-label" for="input-bits">
-                Bits (compact) — 4 bytes hexadecimales
+                Bits (compact) â€” 4 bytes hexadecimales
               </label>
               <input 
                 type="text" 
@@ -175,7 +173,7 @@
             <!-- Dificultad -->
             <div class="tool-field" style="margin-bottom: 1.25rem;">
               <label class="tool-label" for="input-difficulty">
-                Dificultad — número decimal
+                Dificultad â€” nÃºmero decimal
               </label>
               <input 
                 type="text" 
@@ -185,13 +183,13 @@
                 placeholder="Ej: 1"
                 style="font-family: 'JetBrains Mono', monospace;"
               />
-              <span class="tool-note">Ratio entre el target máximo (dificultad 1) y el target actual</span>
+              <span class="tool-note">Ratio entre el target mÃ¡ximo (dificultad 1) y el target actual</span>
             </div>
 
             <!-- Target -->
             <div class="tool-field">
               <label class="tool-label" for="input-target">
-                Target — 256 bits hexadecimales
+                Target â€” 256 bits hexadecimales
               </label>
               <textarea 
                 id="input-target" 
@@ -200,49 +198,49 @@
                 placeholder="32 bytes en hexadecimal"
                 style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;"
               ></textarea>
-              <span class="tool-note">El hash del bloque debe ser menor que este valor para ser válido</span>
+              <span class="tool-note">El hash del bloque debe ser menor que este valor para ser vÃ¡lido</span>
             </div>
           </div>
 
-          <!-- Visualización del target -->
+          <!-- VisualizaciÃ³n del target -->
           <div class="tool-container">
-            <h2 class="tool-container__title">Visualización del target</h2>
+            <h2 class="tool-container__title">VisualizaciÃ³n del target</h2>
             <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
-              Los ceros iniciales (en verde) indican cuántos ceros debe tener el hash del bloque como mínimo.
+              Los ceros iniciales (en verde) indican cuÃ¡ntos ceros debe tener el hash del bloque como mÃ­nimo.
             </p>
             <div class="target-display" id="target-visual">
-              —
+              â€”
             </div>
             <div style="margin-top: 0.75rem; display: flex; gap: 1rem; flex-wrap: wrap;">
               <div class="tool-result-card" style="flex: 1; min-width: 120px;">
                 <div class="tool-result-card__label">Ceros iniciales</div>
-                <div class="tool-result-card__value tool-result-card__value--accent" id="leading-zeros">—</div>
+                <div class="tool-result-card__value tool-result-card__value--accent" id="leading-zeros">â€”</div>
               </div>
               <div class="tool-result-card" style="flex: 1; min-width: 120px;">
                 <div class="tool-result-card__label">Probabilidad</div>
-                <div class="tool-result-card__value" id="probability">—</div>
+                <div class="tool-result-card__value" id="probability">â€”</div>
               </div>
             </div>
           </div>
 
-          <!-- Fórmulas -->
+          <!-- FÃ³rmulas -->
           <div class="tool-container">
-            <h2 class="tool-container__title">Fórmulas de conversión</h2>
+            <h2 class="tool-container__title">FÃ³rmulas de conversiÃ³n</h2>
             
             <div style="margin-bottom: 1.25rem;">
-              <label class="tool-label">Bits → Target</label>
+              <label class="tool-label">Bits â†’ Target</label>
               <div class="formula-box">
                 exponente = bits[0]<br>
                 coeficiente = bits[1:4]<br>
-                target = coeficiente × 2^(8 × (exponente - 3))
+                target = coeficiente Ã— 2^(8 Ã— (exponente - 3))
               </div>
               <span class="tool-note" style="display: block; margin-top: 0.5rem;">
-                El primer byte indica el tamaño, los siguientes 3 son el valor significativo.
+                El primer byte indica el tamaÃ±o, los siguientes 3 son el valor significativo.
               </span>
             </div>
 
             <div style="margin-bottom: 1.25rem;">
-              <label class="tool-label">Target → Dificultad</label>
+              <label class="tool-label">Target â†’ Dificultad</label>
               <div class="formula-box">
                 target_max = 0x00000000FFFF0000...0000 (dificultad 1)<br>
                 dificultad = target_max / target_actual
@@ -253,35 +251,35 @@
             </div>
 
             <div>
-              <label class="tool-label">¿Por qué "compact"?</label>
+              <label class="tool-label">Â¿Por quÃ© "compact"?</label>
               <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
                 El target completo ocupa 32 bytes (256 bits), pero el block header solo tiene 80 bytes 
                 y necesita espacio para otros campos. El formato "bits" comprime el target en solo 4 bytes, 
-                sacrificando algo de precisión pero ahorrando 28 bytes en cada bloque.
+                sacrificando algo de precisiÃ³n pero ahorrando 28 bytes en cada bloque.
               </p>
             </div>
           </div>
 
-          <!-- Explicación del ajuste -->
+          <!-- ExplicaciÃ³n del ajuste -->
           <div class="tool-container">
             <h2 class="tool-container__title">El ajuste de dificultad</h2>
             <p style="color: var(--text-secondary); line-height: 1.7;">
               Bitcoin ajusta la dificultad cada <strong>2016 bloques</strong> (~2 semanas). El objetivo es 
               mantener un tiempo promedio de <strong>10 minutos entre bloques</strong>. Si los 2016 bloques 
-              anteriores se minaron en menos de 2 semanas, la dificultad sube; si tardaron más, baja.
+              anteriores se minaron en menos de 2 semanas, la dificultad sube; si tardaron mÃ¡s, baja.
             </p>
             <p style="color: var(--text-secondary); line-height: 1.7; margin-top: 1rem;">
-              El ajuste máximo por periodo es ×4 o ÷4, para evitar cambios bruscos. Esto hace que Bitcoin 
-              sea resistente tanto a aumentos como a caídas repentinas del hashrate.
+              El ajuste mÃ¡ximo por periodo es Ã—4 o Ã·4, para evitar cambios bruscos. Esto hace que Bitcoin 
+              sea resistente tanto a aumentos como a caÃ­das repentinas del hashrate.
             </p>
           </div>
 
           <!-- Callouts contextuales -->
           <div class="tool-callout">
-            <div class="tool-callout__title">Aprende más sobre minería y dificultad</div>
+            <div class="tool-callout__title">Aprende mÃ¡s sobre minerÃ­a y dificultad</div>
             <p class="tool-callout__text">
-              <a href="../nivel-5/proof-of-work.html">Proof of Work en detalle →</a> · 
-              <a href="../nivel-3/mineria-en-detalle.html">Minería paso a paso →</a>
+              <a href="../nivel-5/proof-of-work.html">Proof of Work en detalle â†’</a> Â· 
+              <a href="../nivel-3/mineria-en-detalle.html">MinerÃ­a paso a paso â†’</a>
             </p>
           </div>
 
@@ -301,8 +299,8 @@
     'use strict';
 
     // === CONSTANTES ===
-    // Target máximo (dificultad 1) — corresponde a bits = 1d00ffff
-    // target_max = 0x00000000FFFF × 2^208
+    // Target mÃ¡ximo (dificultad 1) â€” corresponde a bits = 1d00ffff
+    // target_max = 0x00000000FFFF Ã— 2^208
     const TARGET_MAX_BITS = '1d00ffff';
 
     // === ELEMENTOS DEL DOM ===
@@ -313,10 +311,10 @@
     const leadingZerosEl = document.getElementById('leading-zeros');
     const probabilityEl = document.getElementById('probability');
 
-    // Flag para evitar loops infinitos de actualización
+    // Flag para evitar loops infinitos de actualizaciÃ³n
     let updating = false;
 
-    // === FUNCIONES DE CONVERSIÓN CON BIGINT ===
+    // === FUNCIONES DE CONVERSIÃ“N CON BIGINT ===
 
     /**
      * Convierte bits (compact) a target (BigInt)
@@ -330,7 +328,7 @@
       const exponent = parseInt(bitsHex.substring(0, 2), 16);
       const coefficient = BigInt('0x' + bitsHex.substring(2, 8));
 
-      // target = coefficient × 2^(8 × (exponent - 3))
+      // target = coefficient Ã— 2^(8 Ã— (exponent - 3))
       const shift = BigInt(8 * (exponent - 3));
       
       if (shift < 0n) {
@@ -347,13 +345,13 @@
         throw new Error('Target debe ser positivo');
       }
 
-      // Encontrar el tamaño en bytes del target
+      // Encontrar el tamaÃ±o en bytes del target
       let targetHex = target.toString(16);
       if (targetHex.length % 2 !== 0) targetHex = '0' + targetHex;
       
       let size = targetHex.length / 2;
       
-      // Obtener los 3 bytes más significativos
+      // Obtener los 3 bytes mÃ¡s significativos
       let coefficientHex;
       if (targetHex.length <= 6) {
         coefficientHex = targetHex.padStart(6, '0');
@@ -361,7 +359,7 @@
         coefficientHex = targetHex.substring(0, 6);
       }
 
-      // Si el bit más alto del coeficiente está activado, necesitamos ajustar
+      // Si el bit mÃ¡s alto del coeficiente estÃ¡ activado, necesitamos ajustar
       // para evitar interpretarlo como negativo
       let coefficient = parseInt(coefficientHex, 16);
       if (coefficient & 0x800000) {
@@ -387,10 +385,10 @@
      */
     function targetToDifficulty(target) {
       const targetMax = getTargetMax();
-      // Usar aritmética de punto flotante para dificultad
-      // ya que puede ser un número muy grande con decimales
+      // Usar aritmÃ©tica de punto flotante para dificultad
+      // ya que puede ser un nÃºmero muy grande con decimales
       
-      // Para precisión, multiplicamos por un factor grande y luego dividimos
+      // Para precisiÃ³n, multiplicamos por un factor grande y luego dividimos
       const precision = 1000000000000n; // 10^12
       const scaledDiff = (targetMax * precision) / target;
       return Number(scaledDiff) / Number(precision);
@@ -427,7 +425,7 @@
     }
 
     /**
-     * Formatea número con separadores
+     * Formatea nÃºmero con separadores
      */
     function formatNumber(num) {
       if (num >= 1e15) return (num / 1e15).toFixed(2) + ' P';
@@ -454,8 +452,8 @@
       leadingZerosEl.textContent = zeros;
 
       // Calcular probabilidad aproximada
-      // P ≈ 16^(-zeros) para una aproximación simple
-      // Más preciso: P = target / 2^256
+      // P â‰ˆ 16^(-zeros) para una aproximaciÃ³n simple
+      // MÃ¡s preciso: P = target / 2^256
       try {
         const target = BigInt('0x' + targetHex);
         const maxHash = 2n ** 256n;
@@ -463,7 +461,7 @@
         const probInverse = maxHash / target;
         probabilityEl.textContent = '1 / ' + formatNumber(Number(probInverse));
       } catch {
-        probabilityEl.textContent = '—';
+        probabilityEl.textContent = 'â€”';
       }
     }
 
@@ -484,7 +482,7 @@
           renderTargetVisual(targetHex);
         }
       } catch (error) {
-        console.error('Error conversión bits:', error);
+        console.error('Error conversiÃ³n bits:', error);
       }
 
       updating = false;
@@ -508,7 +506,7 @@
           renderTargetVisual(targetHex);
         }
       } catch (error) {
-        console.error('Error conversión dificultad:', error);
+        console.error('Error conversiÃ³n dificultad:', error);
       }
 
       updating = false;
@@ -535,7 +533,7 @@
           }
         }
       } catch (error) {
-        console.error('Error conversión target:', error);
+        console.error('Error conversiÃ³n target:', error);
       }
 
       updating = false;
@@ -555,7 +553,7 @@
       });
     });
 
-    // === INICIALIZACIÓN ===
+    // === INICIALIZACIÃ“N ===
 
     updateFromBits();
 

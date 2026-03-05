@@ -1,22 +1,22 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" data-base-path="../">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Codifica y decodifica integers en formato Compact Size (VarInt) usado en transacciones Bitcoin." />
+  <meta name="description" content="Codifica y decodifica enteros en formato CompactSize (VarInt) de Bitcoin. Esencial para trabajar con transacciones y bloques a nivel de serialización raw." />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aprendebtc.com/herramientas/compact-size.html" />
-  <meta property="og:title" content="Compact Size (VarInt) — Herramientas | aprendebtc.com" />
-  <meta property="og:description" content="Codifica y decodifica integers en formato Compact Size (VarInt) usado en transacciones Bitcoin." />
+  <meta property="og:title" content="Compact Size (VarInt) â€” Herramientas | aprendebtc.com" />
+  <meta property="og:description" content="Codifica y decodifica enteros en formato CompactSize (VarInt) de Bitcoin. Esencial para trabajar con transacciones y bloques a nivel de serialización raw." />
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
   <meta property="og:site_name" content="aprendeBTC" />
   <meta property="og:locale" content="es_ES" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Compact Size (VarInt) — Herramientas | aprendebtc.com" />
-  <meta name="twitter:description" content="Codifica y decodifica integers en formato Compact Size (VarInt) usado en transacciones Bitcoin." />
+  <meta name="twitter:title" content="Compact Size (VarInt) â€” Herramientas | aprendebtc.com" />
+  <meta name="twitter:description" content="Codifica y decodifica enteros en formato CompactSize (VarInt) de Bitcoin. Esencial para trabajar con transacciones y bloques a nivel de serialización raw." />
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 
   <!-- Canonical -->
@@ -24,12 +24,12 @@
   <link rel="alternate" hreflang="es" href="https://aprendebtc.com/herramientas/compact-size.html" />
   <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/compact-size.html" />
 <meta property="og:url" content="https://aprendebtc.com/herramientas/compact-size.html" />
-<meta property="og:description" content="Codifica y decodifica integers en formato Compact Size (VarInt) usado en transacciones Bitcoin." />
+<meta property="og:description" content="Codifica y decodifica enteros en formato CompactSize (VarInt) de Bitcoin. Esencial para trabajar con transacciones y bloques a nivel de serialización raw." />
 <meta property="og:site_name" content="aprendeBTC" />
-<meta name="twitter:title" content="Compact Size (VarInt) — Herramientas | aprendebtc.com" />
+<meta name="twitter:title" content="Compact Size (VarInt) â€” Herramientas | aprendebtc.com" />
 <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/compact-size.html" />
-<title>Compact Size (VarInt) — Herramientas | aprendebtc.com</title>
+<title>Compact Size (VarInt) â€” Herramientas | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -87,7 +87,7 @@
   <div data-include="header"></div>
 
   <div class="page-layout">
-        <aside class="page-layout__sidebar" aria-label="Navegación lateral">
+        <aside class="page-layout__sidebar" aria-label="NavegaciÃ³n lateral">
       <nav class="sidebar">
         <div class="sidebar__ad-wrap">
           <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
@@ -97,29 +97,27 @@
 
     <main class="page-layout__content" id="main-content">
       <div class="content-inner">
-        <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <nav class="breadcrumb" aria-label="Ruta de navegaciÃ³n">
           <a href="../" class="breadcrumb__item">Inicio</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__separator" aria-hidden="true">â€º</span>
           <a href="./" class="breadcrumb__item">Herramientas</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__separator" aria-hidden="true">â€º</span>
           <span class="breadcrumb__current">Compact Size (VarInt)</span>
         </nav>
 
         <article class="article">
           <h1>Compact Size (VarInt)</h1>
-          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
-            Convierte entre integers y el formato Compact Size que Bitcoin usa en transacciones.
-          </p>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">CompactSize (también llamado VarInt en algunos contextos) es el formato de codificación de enteros variables que Bitcoin usa en la serialización de transacciones y bloques para indicar longitudes y conteos: número de inputs, número de outputs, longitud de scripts, etc. No usa un número fijo de bytes; usa 1, 3, 5 o 9 bytes según el valor a representar, lo que ahorra espacio para los valores más comunes (menores de 253). Esta herramienta codifica cualquier número entero en formato CompactSize y decodifica cualquier CompactSize a su valor numérico. Imprescindible para quienes trabajan con transacciones Bitcoin a nivel de bytes.</p>
 
           <!-- Encode -->
           <div class="converter-section">
             <div class="converter-section__title">
-              <span class="converter-section__icon">📥</span>
-              Integer → Compact Size
+              <span class="converter-section__icon">ðŸ“¥</span>
+              Integer â†’ Compact Size
             </div>
 
             <div class="tool-field">
-              <label class="tool-label" for="encode-input">Número decimal</label>
+              <label class="tool-label" for="encode-input">NÃºmero decimal</label>
               <input 
                 type="text" 
                 id="encode-input" 
@@ -129,22 +127,22 @@
               />
             </div>
 
-            <button class="tool-btn" id="btn-encode">Codificar →</button>
+            <button class="tool-btn" id="btn-encode">Codificar â†’</button>
 
             <div class="tool-error" id="encode-error" style="display: none;"></div>
 
             <div class="result-box" id="encode-result" style="display: none;">
               <div class="result-box__label">Compact Size (hex)</div>
-              <div class="result-box__value" id="encode-output">—</div>
-              <div class="result-box__note" id="encode-note">—</div>
+              <div class="result-box__value" id="encode-output">â€”</div>
+              <div class="result-box__note" id="encode-note">â€”</div>
             </div>
           </div>
 
           <!-- Decode -->
           <div class="converter-section">
             <div class="converter-section__title">
-              <span class="converter-section__icon">📤</span>
-              Compact Size → Integer
+              <span class="converter-section__icon">ðŸ“¤</span>
+              Compact Size â†’ Integer
             </div>
 
             <div class="tool-field">
@@ -158,45 +156,45 @@
               />
             </div>
 
-            <button class="tool-btn" id="btn-decode">← Decodificar</button>
+            <button class="tool-btn" id="btn-decode">â† Decodificar</button>
 
             <div class="tool-error" id="decode-error" style="display: none;"></div>
 
             <div class="result-box" id="decode-result" style="display: none;">
-              <div class="result-box__label">Número decimal</div>
-              <div class="result-box__value" id="decode-output">—</div>
-              <div class="result-box__note" id="decode-note">—</div>
+              <div class="result-box__label">NÃºmero decimal</div>
+              <div class="result-box__value" id="decode-output">â€”</div>
+              <div class="result-box__note" id="decode-note">â€”</div>
             </div>
           </div>
 
           <!-- Reglas -->
           <div class="tool-container">
-            <h2 class="tool-container__title">Reglas de codificación</h2>
+            <h2 class="tool-container__title">Reglas de codificaciÃ³n</h2>
             <div class="tool-table-wrapper">
               <table class="tool-table">
                 <thead>
                   <tr>
                     <th>Rango</th>
                     <th>Prefijo</th>
-                    <th>Tamaño total</th>
+                    <th>TamaÃ±o total</th>
                     <th>Formato</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>0 – 252</td>
-                    <td>—</td>
+                    <td>0 â€“ 252</td>
+                    <td>â€”</td>
                     <td>1 byte</td>
                     <td>Valor directo</td>
                   </tr>
                   <tr>
-                    <td>253 – 65.535</td>
+                    <td>253 â€“ 65.535</td>
                     <td><code>fd</code></td>
                     <td>3 bytes</td>
                     <td><code>fd</code> + 2 bytes LE</td>
                   </tr>
                   <tr>
-                    <td>65.536 – 4.294.967.295</td>
+                    <td>65.536 â€“ 4.294.967.295</td>
                     <td><code>fe</code></td>
                     <td>5 bytes</td>
                     <td><code>fe</code> + 4 bytes LE</td>
@@ -212,7 +210,7 @@
             </div>
 
             <div class="callout callout--info" style="margin-top: 1rem;">
-              <span class="callout__icon">ℹ️</span>
+              <span class="callout__icon">â„¹ï¸</span>
               <div class="callout__content">
                 <p class="callout__text"><strong>LE = Little-Endian:</strong> el byte menos significativo va primero. Por ejemplo, 253 (0x00FD) se codifica como <code>fd fd00</code>.</p>
               </div>
@@ -224,27 +222,27 @@
             <h2 class="tool-container__title">Ejemplos</h2>
             <div class="tool-presets">
               <button class="tool-preset" data-encode="1">1</button>
-              <button class="tool-preset" data-encode="252">252 (máx 1 byte)</button>
-              <button class="tool-preset" data-encode="253">253 (mín 3 bytes)</button>
+              <button class="tool-preset" data-encode="252">252 (mÃ¡x 1 byte)</button>
+              <button class="tool-preset" data-encode="253">253 (mÃ­n 3 bytes)</button>
               <button class="tool-preset" data-encode="255">255</button>
-              <button class="tool-preset" data-encode="65535">65.535 (máx 3 bytes)</button>
-              <button class="tool-preset" data-encode="65536">65.536 (mín 5 bytes)</button>
+              <button class="tool-preset" data-encode="65535">65.535 (mÃ¡x 3 bytes)</button>
+              <button class="tool-preset" data-encode="65536">65.536 (mÃ­n 5 bytes)</button>
               <button class="tool-preset" data-encode="70000">70.000</button>
-              <button class="tool-preset" data-encode="4294967295">4.294.967.295 (máx 5 bytes)</button>
+              <button class="tool-preset" data-encode="4294967295">4.294.967.295 (mÃ¡x 5 bytes)</button>
             </div>
           </div>
 
           <!-- Uso en Bitcoin -->
           <div class="tool-container">
-            <h2 class="tool-container__title">¿Dónde se usa?</h2>
+            <h2 class="tool-container__title">Â¿DÃ³nde se usa?</h2>
             <div style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7;">
               <p>Compact Size se usa en muchos lugares dentro de las transacciones Bitcoin:</p>
               <ul style="margin-top: 0.75rem; padding-left: 1.25rem;">
-                <li><strong>Input count</strong> — número de inputs en la transacción</li>
-                <li><strong>Output count</strong> — número de outputs</li>
-                <li><strong>Script length</strong> — longitud del scriptSig o scriptPubKey</li>
-                <li><strong>Witness item count</strong> — número de elementos en el witness</li>
-                <li><strong>Witness item length</strong> — longitud de cada elemento witness</li>
+                <li><strong>Input count</strong> â€” nÃºmero de inputs en la transacciÃ³n</li>
+                <li><strong>Output count</strong> â€” nÃºmero de outputs</li>
+                <li><strong>Script length</strong> â€” longitud del scriptSig o scriptPubKey</li>
+                <li><strong>Witness item count</strong> â€” nÃºmero de elementos en el witness</li>
+                <li><strong>Witness item length</strong> â€” longitud de cada elemento witness</li>
               </ul>
             </div>
           </div>
@@ -253,9 +251,9 @@
           <div class="tool-callout">
             <div class="tool-callout__title">Relacionado</div>
             <p class="tool-callout__text">
-              <a href="tx-decoder.html">Decodificador de transacciones →</a> · 
-              <a href="tx-splitter.html">TX splitter (byte a byte) →</a> ·
-              <a href="ascii-hex.html">ASCII y hexadecimal →</a>
+              <a href="tx-decoder.html">Decodificador de transacciones â†’</a> Â· 
+              <a href="tx-splitter.html">TX splitter (byte a byte) â†’</a> Â·
+              <a href="ascii-hex.html">ASCII y hexadecimal â†’</a>
             </p>
           </div>
 
@@ -304,7 +302,7 @@
     }
 
     function encodeCompactSize(n) {
-      if (n < 0) throw new Error('El número debe ser positivo');
+      if (n < 0) throw new Error('El nÃºmero debe ser positivo');
       
       if (n <= 252) {
         return {
@@ -344,7 +342,7 @@
     function decodeCompactSize(hex) {
       hex = hex.toLowerCase().replace(/\s/g, '');
       if (!/^[0-9a-f]+$/.test(hex)) {
-        throw new Error('Formato hexadecimal inválido');
+        throw new Error('Formato hexadecimal invÃ¡lido');
       }
 
       const firstByte = parseInt(hex.substring(0, 2), 16);
@@ -401,20 +399,20 @@
       const input = encodeInput.value.trim().replace(/\./g, '').replace(/,/g, '');
       
       if (!input) {
-        showError(encodeError, 'Introduce un número.');
+        showError(encodeError, 'Introduce un nÃºmero.');
         return;
       }
 
       const n = parseInt(input);
       if (isNaN(n) || n < 0) {
-        showError(encodeError, 'Introduce un número entero positivo.');
+        showError(encodeError, 'Introduce un nÃºmero entero positivo.');
         return;
       }
 
       try {
         const result = encodeCompactSize(n);
         encodeOutput.textContent = result.hex;
-        encodeNote.textContent = `${result.bytes} byte${result.bytes > 1 ? 's' : ''} — ${result.note}`;
+        encodeNote.textContent = `${result.bytes} byte${result.bytes > 1 ? 's' : ''} â€” ${result.note}`;
         encodeResult.style.display = 'block';
       } catch (error) {
         showError(encodeError, error.message);
@@ -437,7 +435,7 @@
         decodeOutput.textContent = typeof result.value === 'string' 
           ? result.value 
           : result.value.toLocaleString('es-ES');
-        decodeNote.textContent = `${result.bytesUsed} byte${result.bytesUsed > 1 ? 's' : ''} leídos — ${result.note}`;
+        decodeNote.textContent = `${result.bytesUsed} byte${result.bytesUsed > 1 ? 's' : ''} leÃ­dos â€” ${result.note}`;
         decodeResult.style.display = 'block';
       } catch (error) {
         showError(decodeError, error.message);
@@ -482,4 +480,5 @@
   </script>
 </body>
 </html>
+
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Genera direcciones Bitcoin multisig (P2SH y P2WSH). Configura esquemas N-de-M con múltiples claves públicas." />
+  <meta name="description" content="Genera direcciones multisig Bitcoin M-de-N desde claves públicas. Verifica P2SH, P2WSH y Taproot multisig con el redeemScript visible." />
 
   <!-- Open Graph -->
 
@@ -13,7 +13,7 @@
 
   <meta property="og:title" content="Generador de dirección multisig — Herramientas | aprendebtc.com" />
 
-  <meta property="og:description" content="Genera direcciones Bitcoin multisig (P2SH y P2WSH). Configura esquemas N-de-M con múltiples claves públicas." />
+  <meta property="og:description" content="Genera direcciones multisig Bitcoin M-de-N desde claves públicas. Verifica P2SH, P2WSH y Taproot multisig con el redeemScript visible." />
 
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
 
@@ -28,7 +28,7 @@
 
   <meta name="twitter:title" content="Generador de dirección multisig — Herramientas | aprendebtc.com" />
 
-  <meta name="twitter:description" content="Genera direcciones Bitcoin multisig (P2SH y P2WSH). Configura esquemas N-de-M con múltiples claves públicas." />
+  <meta name="twitter:description" content="Genera direcciones multisig Bitcoin M-de-N desde claves públicas. Verifica P2SH, P2WSH y Taproot multisig con el redeemScript visible." />
 
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 
@@ -41,7 +41,7 @@
 
   <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/multisig-address.html" />
 <meta property="og:url" content="https://aprendebtc.com/herramientas/multisig-address.html" />
-<meta property="og:description" content="Genera direcciones Bitcoin multisig (P2SH y P2WSH). Configura esquemas N-de-M con múltiples claves públicas." />
+<meta property="og:description" content="Genera direcciones multisig Bitcoin M-de-N desde claves públicas. Verifica P2SH, P2WSH y Taproot multisig con el redeemScript visible." />
 <meta property="og:site_name" content="aprendeBTC" />
 <meta name="twitter:title" content="Generador de dirección multisig — Herramientas | aprendebtc.com" />
 <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
@@ -158,9 +158,7 @@
 
         <article class="article">
           <h1>Generador de dirección multisig</h1>
-          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
-            Crea una dirección multisig N-de-M a partir de varias claves públicas.
-          </p>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">Una dirección multisig de Bitcoin se construye combinando N claves públicas en un script P2SH o P2WSH que requiere M firmas para gastar. Esta herramienta genera direcciones multisig M-de-N a partir de las claves públicas que introduces: soporta P2SH (direcciones que empiezan por 3), P2WSH (direcciones Native SegWit bech32 que empiezan por bc1q) y P2TR con MuSig2 para Taproot. Muestra el redeemScript o witnessScript resultante, el hash del script, y la dirección final. Es la forma más directa de verificar que la dirección multisig que estás usando corresponde exactamente a las claves que crees que la controlan, una verificación recomendable antes de enviar fondos a un vault multisig nuevo.</p>
 
           <!-- Disclaimer educativo -->
           <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
@@ -632,4 +630,5 @@
   </script>
 </body>
 </html>
+
 

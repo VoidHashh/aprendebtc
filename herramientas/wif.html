@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Codifica y decodifica claves privadas Bitcoin en formato WIF (Wallet Import Format). Base58Check encoding." />
+  <meta name="description" content="Conversor WIF (Wallet Import Format) de Bitcoin. Convierte claves privadas entre hexadecimal y WIF. Verifica checksums Base58Check." />
 
   <!-- Open Graph -->
 
@@ -13,7 +13,7 @@
 
   <meta property="og:title" content="WIF Private Key — Herramientas | aprendebtc.com" />
 
-  <meta property="og:description" content="Codifica y decodifica claves privadas Bitcoin en formato WIF (Wallet Import Format). Base58Check encoding." />
+  <meta property="og:description" content="Conversor WIF (Wallet Import Format) de Bitcoin. Convierte claves privadas entre hexadecimal y WIF. Verifica checksums Base58Check." />
 
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
 
@@ -28,7 +28,7 @@
 
   <meta name="twitter:title" content="WIF Private Key — Herramientas | aprendebtc.com" />
 
-  <meta name="twitter:description" content="Codifica y decodifica claves privadas Bitcoin en formato WIF (Wallet Import Format). Base58Check encoding." />
+  <meta name="twitter:description" content="Conversor WIF (Wallet Import Format) de Bitcoin. Convierte claves privadas entre hexadecimal y WIF. Verifica checksums Base58Check." />
 
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 
@@ -41,7 +41,7 @@
 
   <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/wif.html" />
 <meta property="og:url" content="https://aprendebtc.com/herramientas/wif.html" />
-<meta property="og:description" content="Codifica y decodifica claves privadas Bitcoin en formato WIF (Wallet Import Format). Base58Check encoding." />
+<meta property="og:description" content="Conversor WIF (Wallet Import Format) de Bitcoin. Convierte claves privadas entre hexadecimal y WIF. Verifica checksums Base58Check." />
 <meta property="og:site_name" content="aprendeBTC" />
 <meta name="twitter:title" content="WIF Private Key — Herramientas | aprendebtc.com" />
 <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
@@ -149,9 +149,7 @@
 
         <article class="article">
           <h1>WIF Private Key</h1>
-          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
-            Convierte entre clave privada hexadecimal y formato WIF (Wallet Import Format).
-          </p>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">WIF (Wallet Import Format) es la codificación estándar que Bitcoin usa para representar claves privadas en un formato legible e importable por wallets. Toma la clave privada en hexadecimal puro (32 bytes) y añade un prefijo de versión, un sufijo indicando si la clave pública correspondiente es comprimida, y un checksum; todo codificado en Base58Check. El resultado es una cadena de entre 51 y 52 caracteres que empieza por 5 (sin comprimir) o por K/L (comprimida). Esta herramienta convierte en ambas direcciones: de hexadecimal a WIF y de WIF a hexadecimal, y verifica el checksum para detectar errores de transcripción.</p>
 
           <!-- Disclaimer educativo -->
           <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
@@ -641,4 +639,5 @@
   </script>
 </body>
 </html>
+
 

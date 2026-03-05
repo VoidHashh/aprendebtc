@@ -67,13 +67,17 @@
         { href: '/nivel-3/halving.html', text: 'El halving' },
         { href: '/nivel-3/configurar-hardware-wallet.html', text: 'Configura tu hardware wallet' },
         { href: '/nivel-3/comparativa-hardware-wallets.html', text: 'Comparativa hardware wallets' },
-        { href: '/nivel-3/coin-control.html', text: 'Coin control' }
+        { href: '/nivel-3/coin-control.html', text: 'Coin control' },
+        { href: '/nivel-3/seguridad-operativa.html', text: 'Seguridad operativa (OpSec)' },
+        { href: '/nivel-3/fiscalidad-bitcoin.html', text: 'Fiscalidad de Bitcoin' }
       ]
     },
     {
       title: 'Nivel 4 - En la madriguera',
       index: '/nivel-4/',
       pages: [
+        { href: '/nivel-4/coinjoin.html', text: 'CoinJoin: privacidad colaborativa' },
+        { href: '/nivel-4/que-es-multisig.html', text: '¿Qué es multisig?' },
         { href: '/nivel-4/configurar-multisig.html', text: 'Configurar multisig con Sparrow' },
         { href: '/nivel-4/distribucion-claves.html', text: 'Distribución geográfica de claves' },
         { href: '/nivel-4/herencia-bitcoin.html', text: 'Herencia de Bitcoin' },
@@ -1408,6 +1412,7 @@
     document.addEventListener('DOMContentLoaded', () => setTimeout(init, 100));
   }
 })();
+
 
 
 

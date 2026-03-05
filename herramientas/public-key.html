@@ -1,22 +1,22 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" data-base-path="../">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Deriva la clave pública desde una clave privada Bitcoin. Formato comprimido y no comprimido sobre secp256k1." />
+  <meta name="description" content="Deriva la clave pública Bitcoin desde una clave privada. Visualiza el punto en secp256k1 en formatos comprimido y sin comprimir." />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aprendebtc.com/herramientas/public-key.html" />
-  <meta property="og:title" content="Derivar clave pública — Herramientas | aprendebtc.com" />
-  <meta property="og:description" content="Deriva la clave pública desde una clave privada Bitcoin. Formato comprimido y no comprimido sobre secp256k1." />
+  <meta property="og:title" content="Derivar clave pÃºblica â€” Herramientas | aprendebtc.com" />
+  <meta property="og:description" content="Deriva la clave pública Bitcoin desde una clave privada. Visualiza el punto en secp256k1 en formatos comprimido y sin comprimir." />
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
   <meta property="og:site_name" content="aprendeBTC" />
   <meta property="og:locale" content="es_ES" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Derivar clave pública — Herramientas | aprendebtc.com" />
-  <meta name="twitter:description" content="Deriva la clave pública desde una clave privada Bitcoin. Formato comprimido y no comprimido sobre secp256k1." />
+  <meta name="twitter:title" content="Derivar clave pÃºblica â€” Herramientas | aprendebtc.com" />
+  <meta name="twitter:description" content="Deriva la clave pública Bitcoin desde una clave privada. Visualiza el punto en secp256k1 en formatos comprimido y sin comprimir." />
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 
   <!-- Canonical -->
@@ -24,25 +24,25 @@
   <link rel="alternate" hreflang="es" href="https://aprendebtc.com/herramientas/public-key.html" />
   <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/public-key.html" />
 <meta property="og:url" content="https://aprendebtc.com/herramientas/public-key.html" />
-<meta property="og:description" content="Deriva la clave pública desde una clave privada Bitcoin. Formato comprimido y no comprimido sobre secp256k1." />
+<meta property="og:description" content="Deriva la clave pública Bitcoin desde una clave privada. Visualiza el punto en secp256k1 en formatos comprimido y sin comprimir." />
 <meta property="og:site_name" content="aprendeBTC" />
-<meta name="twitter:title" content="Derivar clave pública — Herramientas | aprendebtc.com" />
+<meta name="twitter:title" content="Derivar clave pÃºblica â€” Herramientas | aprendebtc.com" />
 <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/public-key.html" />
-<title>Derivar clave pública — Herramientas | aprendebtc.com</title>
+<title>Derivar clave pÃºblica â€” Herramientas | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/components.css" />
   <link rel="stylesheet" href="../css/tools.css" />
-  <!-- noble-secp256k1 para operaciones de curva elíptica -->
+  <!-- noble-secp256k1 para operaciones de curva elÃ­ptica -->
 </head>
 <body>
   <div data-include="header"></div>
 
   <div class="page-layout">
-        <aside class="page-layout__sidebar" aria-label="Navegación lateral">
+        <aside class="page-layout__sidebar" aria-label="NavegaciÃ³n lateral">
       <nav class="sidebar">
         <div class="sidebar__ad-wrap">
           <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
@@ -52,23 +52,21 @@
 
     <main class="page-layout__content" id="main-content">
       <div class="content-inner">
-        <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <nav class="breadcrumb" aria-label="Ruta de navegaciÃ³n">
           <a href="../" class="breadcrumb__item">Inicio</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__separator" aria-hidden="true">â€º</span>
           <a href="index.html" class="breadcrumb__item">Herramientas</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
-          <span class="breadcrumb__current">Clave pública</span>
+          <span class="breadcrumb__separator" aria-hidden="true">â€º</span>
+          <span class="breadcrumb__current">Clave pÃºblica</span>
         </nav>
 
         <article class="article">
-          <h1>Derivar clave pública</h1>
-          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
-            Multiplica tu clave privada por el punto generador G para obtener la clave pública.
-          </p>
+          <h1>Derivar clave pÃºblica</h1>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">A partir de una clave privada, Bitcoin deriva matemáticamente una clave pública usando la multiplicación de punto en la curva elíptica secp256k1. Esta herramienta toma una clave privada (en hexadecimal o WIF) y calcula su clave pública correspondiente, tanto en formato sin comprimir (prefijo 04, 65 bytes) como comprimido (prefijo 02 o 03, 33 bytes). El proceso es irreversible: con la clave pública no puedes calcular la privada. Esta propiedad asimétrica es la base de la seguridad de Bitcoin. La herramienta también muestra las coordenadas (x, y) del punto en la curva, permitiendo ver la geometría subyacente de las operaciones criptográficas.</p>
 
           <!-- Disclaimer educativo -->
           <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
-            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <span class="callout__icon" aria-hidden="true">âš ï¸</span>
             <div class="callout__content">
               <div class="callout__title">Herramienta educativa</div>
               <p class="callout__text">Esta herramienta es para aprendizaje. NO la uses para generar claves para fondos reales.</p>
@@ -94,10 +92,10 @@
 
             <div class="tool-btn-row">
               <button class="tool-btn tool-btn--secondary" id="btn-generate">
-                🎲 Generar clave privada
+                ðŸŽ² Generar clave privada
               </button>
               <button class="tool-btn" id="btn-derive">
-                🔑 Derivar clave pública
+                ðŸ”‘ Derivar clave pÃºblica
               </button>
             </div>
           </div>
@@ -107,25 +105,25 @@
 
           <!-- Outputs -->
           <div class="tool-container" id="output-section" style="display: none;">
-            <h2 class="tool-container__title">Clave pública derivada</h2>
+            <h2 class="tool-container__title">Clave pÃºblica derivada</h2>
 
             <!-- Comprimida -->
             <div class="output-row" style="margin-bottom: 1.25rem;">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
-                <label class="tool-label" style="margin-bottom: 0;">Comprimida (33 bytes) — prefijo 02 o 03</label>
-                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-compressed">📋</button>
+                <label class="tool-label" style="margin-bottom: 0;">Comprimida (33 bytes) â€” prefijo 02 o 03</label>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-compressed">ðŸ“‹</button>
               </div>
-              <div class="tool-output" id="output-compressed" style="word-break: break-all; color: var(--accent);">—</div>
-              <span class="tool-note">Formato estándar actual. Más eficiente.</span>
+              <div class="tool-output" id="output-compressed" style="word-break: break-all; color: var(--accent);">â€”</div>
+              <span class="tool-note">Formato estÃ¡ndar actual. MÃ¡s eficiente.</span>
             </div>
 
             <!-- No comprimida -->
             <div class="output-row" style="margin-bottom: 1.25rem;">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
-                <label class="tool-label" style="margin-bottom: 0;">No comprimida (65 bytes) — prefijo 04</label>
-                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-uncompressed">📋</button>
+                <label class="tool-label" style="margin-bottom: 0;">No comprimida (65 bytes) â€” prefijo 04</label>
+                <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-uncompressed">ðŸ“‹</button>
               </div>
-              <div class="tool-output" id="output-uncompressed" style="word-break: break-all; font-size: 0.75rem;">—</div>
+              <div class="tool-output" id="output-uncompressed" style="word-break: break-all; font-size: 0.75rem;">â€”</div>
               <span class="tool-note">Formato legacy. Contiene X e Y completas.</span>
             </div>
 
@@ -134,30 +132,30 @@
               <div class="tool-field">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
                   <label class="tool-label" style="margin-bottom: 0;">Coordenada X (32 bytes)</label>
-                  <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-x">📋</button>
+                  <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-x">ðŸ“‹</button>
                 </div>
-                <div class="tool-output" id="output-x" style="word-break: break-all; font-size: 0.8rem;">—</div>
+                <div class="tool-output" id="output-x" style="word-break: break-all; font-size: 0.8rem;">â€”</div>
               </div>
               <div class="tool-field">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
                   <label class="tool-label" style="margin-bottom: 0;">Coordenada Y (32 bytes)</label>
-                  <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-y">📋</button>
+                  <button class="tool-btn tool-btn--secondary tool-btn--small copy-btn" data-target="output-y">ðŸ“‹</button>
                 </div>
-                <div class="tool-output" id="output-y" style="word-break: break-all; font-size: 0.8rem;">—</div>
+                <div class="tool-output" id="output-y" style="word-break: break-all; font-size: 0.8rem;">â€”</div>
               </div>
             </div>
 
             <!-- Paridad de Y -->
             <div style="margin-top: 1rem; padding: 0.75rem; background: var(--bg-primary); border-radius: var(--radius-md);">
               <span class="tool-label">Paridad de Y:</span>
-              <span id="y-parity" style="font-weight: 600; margin-left: 0.5rem;">—</span>
+              <span id="y-parity" style="font-weight: 600; margin-left: 0.5rem;">â€”</span>
               <span id="y-parity-explanation" style="color: var(--text-secondary); font-size: 0.85rem; margin-left: 0.5rem;"></span>
             </div>
           </div>
 
           <!-- Proceso visual -->
           <div class="tool-container">
-            <h2 class="tool-container__title">El proceso de derivación</h2>
+            <h2 class="tool-container__title">El proceso de derivaciÃ³n</h2>
             
             <div style="background: var(--bg-primary); padding: 1.25rem; border-radius: var(--radius-md); text-align: center;">
               <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
@@ -167,7 +165,7 @@
                   <div style="font-size: 0.7rem; color: var(--text-secondary);">(escalar)</div>
                 </div>
                 
-                <div style="font-size: 1.5rem; color: var(--text-secondary);">×</div>
+                <div style="font-size: 1.5rem; color: var(--text-secondary);">Ã—</div>
                 
                 <div style="background: rgba(163, 113, 247, 0.2); padding: 1rem; border-radius: var(--radius-md);">
                   <div style="font-weight: 700; color: #a371f7; font-size: 1.1rem;">G</div>
@@ -179,21 +177,21 @@
                 
                 <div style="background: rgba(247, 147, 26, 0.2); padding: 1rem; border-radius: var(--radius-md); border: 2px solid var(--accent);">
                   <div style="font-weight: 700; color: var(--accent); font-size: 1.1rem;">P</div>
-                  <div style="font-size: 0.75rem; color: var(--text-secondary);">Clave pública</div>
+                  <div style="font-size: 0.75rem; color: var(--text-secondary);">Clave pÃºblica</div>
                   <div style="font-size: 0.7rem; color: var(--text-secondary);">(punto en curva)</div>
                 </div>
               </div>
             </div>
 
             <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem; text-align: center;">
-              Esta multiplicación tarda milisegundos. El proceso inverso (encontrar k dado P) 
-              es <strong>computacionalmente imposible</strong> — esa asimetría es la base de la seguridad de Bitcoin.
+              Esta multiplicaciÃ³n tarda milisegundos. El proceso inverso (encontrar k dado P) 
+              es <strong>computacionalmente imposible</strong> â€” esa asimetrÃ­a es la base de la seguridad de Bitcoin.
             </p>
           </div>
 
-          <!-- Parámetros de secp256k1 -->
+          <!-- ParÃ¡metros de secp256k1 -->
           <div class="tool-container">
-            <h2 class="tool-container__title">Parámetros de secp256k1</h2>
+            <h2 class="tool-container__title">ParÃ¡metros de secp256k1</h2>
             
             <div style="display: flex; flex-direction: column; gap: 0.75rem;">
               <div style="background: var(--bg-primary); padding: 0.75rem; border-radius: var(--radius-md);">
@@ -228,10 +226,10 @@
 
           <!-- Comprimida vs no comprimida -->
           <div class="tool-container">
-            <h2 class="tool-container__title">¿Comprimida vs no comprimida?</h2>
+            <h2 class="tool-container__title">Â¿Comprimida vs no comprimida?</h2>
             
             <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1rem;">
-              La curva elíptica secp256k1 es <strong>simétrica respecto al eje X</strong>. 
+              La curva elÃ­ptica secp256k1 es <strong>simÃ©trica respecto al eje X</strong>. 
               Esto significa que para cualquier coordenada X, solo hay dos posibles valores de Y: 
               uno par y otro impar.
             </p>
@@ -241,7 +239,7 @@
                 <thead>
                   <tr>
                     <th>Formato</th>
-                    <th>Tamaño</th>
+                    <th>TamaÃ±o</th>
                     <th>Contenido</th>
                   </tr>
                 </thead>
@@ -261,17 +259,17 @@
             </div>
             
             <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem;">
-              <strong>Hoy en día solo se usa el formato comprimido.</strong> El no comprimido es legacy de los 
-              primeros tiempos de Bitcoin. Usar comprimido ahorra 32 bytes en cada transacción.
+              <strong>Hoy en dÃ­a solo se usa el formato comprimido.</strong> El no comprimido es legacy de los 
+              primeros tiempos de Bitcoin. Usar comprimido ahorra 32 bytes en cada transacciÃ³n.
             </p>
           </div>
 
           <!-- Callout contextual -->
           <div class="tool-callout">
-            <div class="tool-callout__title">Aprende más sobre criptografía de curva elíptica</div>
+            <div class="tool-callout__title">Aprende mÃ¡s sobre criptografÃ­a de curva elÃ­ptica</div>
             <p class="tool-callout__text">
-              <a href="../nivel-5/curva-eliptica.html">La curva secp256k1 →</a> · 
-              <a href="../nivel-3/clave-publica.html">Claves públicas →</a>
+              <a href="../nivel-5/curva-eliptica.html">La curva secp256k1 â†’</a> Â· 
+              <a href="../nivel-3/clave-publica.html">Claves pÃºblicas â†’</a>
             </p>
           </div>
 
@@ -427,7 +425,7 @@
 
         outputSection.style.display = 'block';
       } catch (error) {
-        showError('Error derivando clave pública: ' + error.message);
+        showError('Error derivando clave pÃºblica: ' + error.message);
       }
     }
 
@@ -466,11 +464,11 @@
         const target = document.getElementById(targetId);
         const text = target.textContent;
 
-        if (text && text !== '—') {
+        if (text && text !== 'â€”') {
           try {
             await navigator.clipboard.writeText(text);
-            btn.textContent = '✓';
-            setTimeout(function() { btn.textContent = '📋'; }, 1000);
+            btn.textContent = 'âœ“';
+            setTimeout(function() { btn.textContent = 'ðŸ“‹'; }, 1000);
           } catch (err) {
             console.error('Error copiando:', err);
           }

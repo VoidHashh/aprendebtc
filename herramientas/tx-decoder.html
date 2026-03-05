@@ -1,22 +1,22 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" data-base-path="../">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Decodifica transacciones Bitcoin raw. Visualiza inputs, outputs, scripts y witness data byte a byte con colores." />
+  <meta name="description" content="Decodifica cualquier transacción Bitcoin en hexadecimal: visualiza inputs, outputs, scripts, witness y locktime. Entiende la estructura interna de una TX." />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aprendebtc.com/herramientas/tx-decoder.html" />
-  <meta property="og:title" content="Decodificador de transacciones — Herramientas | aprendebtc.com" />
-  <meta property="og:description" content="Decodifica transacciones Bitcoin raw. Visualiza inputs, outputs, scripts y witness data byte a byte con colores." />
+  <meta property="og:title" content="Decodificador de transacciones â€” Herramientas | aprendebtc.com" />
+  <meta property="og:description" content="Decodifica cualquier transacción Bitcoin en hexadecimal: visualiza inputs, outputs, scripts, witness y locktime. Entiende la estructura interna de una TX." />
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
   <meta property="og:site_name" content="aprendeBTC" />
   <meta property="og:locale" content="es_ES" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Decodificador de transacciones — Herramientas | aprendebtc.com" />
-  <meta name="twitter:description" content="Decodifica transacciones Bitcoin raw. Visualiza inputs, outputs, scripts y witness data byte a byte con colores." />
+  <meta name="twitter:title" content="Decodificador de transacciones â€” Herramientas | aprendebtc.com" />
+  <meta name="twitter:description" content="Decodifica cualquier transacción Bitcoin en hexadecimal: visualiza inputs, outputs, scripts, witness y locktime. Entiende la estructura interna de una TX." />
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 
   <!-- Canonical -->
@@ -24,12 +24,12 @@
   <link rel="alternate" hreflang="es" href="https://aprendebtc.com/herramientas/tx-decoder.html" />
   <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/tx-decoder.html" />
 <meta property="og:url" content="https://aprendebtc.com/herramientas/tx-decoder.html" />
-<meta property="og:description" content="Decodifica transacciones Bitcoin raw. Visualiza inputs, outputs, scripts y witness data byte a byte con colores." />
+<meta property="og:description" content="Decodifica cualquier transacción Bitcoin en hexadecimal: visualiza inputs, outputs, scripts, witness y locktime. Entiende la estructura interna de una TX." />
 <meta property="og:site_name" content="aprendeBTC" />
-<meta name="twitter:title" content="Decodificador de transacciones — Herramientas | aprendebtc.com" />
+<meta name="twitter:title" content="Decodificador de transacciones â€” Herramientas | aprendebtc.com" />
 <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/tx-decoder.html" />
-<title>Decodificador de transacciones — Herramientas | aprendebtc.com</title>
+<title>Decodificador de transacciones â€” Herramientas | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -140,7 +140,7 @@
   <div data-include="header"></div>
 
   <div class="page-layout">
-        <aside class="page-layout__sidebar" aria-label="Navegación lateral">
+        <aside class="page-layout__sidebar" aria-label="NavegaciÃ³n lateral">
       <nav class="sidebar">
         <div class="sidebar__ad-wrap">
           <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
@@ -150,30 +150,28 @@
 
     <main class="page-layout__content" id="main-content">
       <div class="content-inner">
-        <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <nav class="breadcrumb" aria-label="Ruta de navegaciÃ³n">
           <a href="../" class="breadcrumb__item">Inicio</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__separator" aria-hidden="true">â€º</span>
           <a href="./" class="breadcrumb__item">Herramientas</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__separator" aria-hidden="true">â€º</span>
           <span class="breadcrumb__current">Decodificador de transacciones</span>
         </nav>
 
         <article class="article">
           <h1>Decodificador de transacciones</h1>
-          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
-            Pega una transacción raw en hexadecimal y visualiza su estructura completa.
-          </p>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">Cada transacción de Bitcoin es una cadena de bytes codificada en un formato específico. Esta herramienta decodifica el hexadecimal raw de cualquier transacción y muestra su estructura completa: versión, número de inputs, cada input (txid referenciado, índice vout, scriptSig o witness), número de outputs, cada output (valor en satoshis, scriptPubKey), locktime, y el txid resultante. Es la forma más directa de entender qué contiene realmente una transacción de Bitcoin más allá de lo que muestra un explorador de bloques. Puedes obtener el raw hex de cualquier transacción desde un explorador de bloques como mempool.space.</p>
 
           <!-- Input -->
           <div class="tool-container">
-            <h2 class="tool-container__title">Transacción raw (hex)</h2>
+            <h2 class="tool-container__title">TransacciÃ³n raw (hex)</h2>
 
             <div class="tool-field">
               <textarea 
                 id="tx-input" 
                 class="tool-input" 
                 rows="4"
-                placeholder="Pega aquí una transacción en hexadecimal..."
+                placeholder="Pega aquÃ­ una transacciÃ³n en hexadecimal..."
                 style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;"
               ></textarea>
             </div>
@@ -184,7 +182,7 @@
               <button class="tool-preset" data-example="taproot">Taproot P2TR</button>
             </div>
 
-            <button class="tool-btn" id="btn-decode">🔍 Decodificar</button>
+            <button class="tool-btn" id="btn-decode">ðŸ” Decodificar</button>
           </div>
 
           <!-- Error -->
@@ -192,48 +190,48 @@
 
           <!-- Hex coloreado -->
           <div class="tool-container" id="hex-section" style="display: none;">
-            <h2 class="tool-container__title">Transacción coloreada</h2>
+            <h2 class="tool-container__title">TransacciÃ³n coloreada</h2>
             <div class="tx-hex" id="colored-hex"></div>
             
             <!-- Leyenda -->
             <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.75rem; font-size: 0.7rem;">
-              <span><span class="version">■</span> Version</span>
-              <span><span class="marker">■</span> Marker/Flag</span>
-              <span><span class="input-count">■</span> Counts</span>
-              <span><span class="input-txid">■</span> Input TXID</span>
-              <span><span class="input-vout">■</span> Vout</span>
-              <span><span class="input-script">■</span> ScriptSig</span>
-              <span><span class="input-sequence">■</span> Sequence</span>
-              <span><span class="output-value">■</span> Value</span>
-              <span><span class="output-script">■</span> ScriptPubKey</span>
-              <span><span class="witness">■</span> Witness</span>
-              <span><span class="locktime">■</span> Locktime</span>
+              <span><span class="version">â– </span> Version</span>
+              <span><span class="marker">â– </span> Marker/Flag</span>
+              <span><span class="input-count">â– </span> Counts</span>
+              <span><span class="input-txid">â– </span> Input TXID</span>
+              <span><span class="input-vout">â– </span> Vout</span>
+              <span><span class="input-script">â– </span> ScriptSig</span>
+              <span><span class="input-sequence">â– </span> Sequence</span>
+              <span><span class="output-value">â– </span> Value</span>
+              <span><span class="output-script">â– </span> ScriptPubKey</span>
+              <span><span class="witness">â– </span> Witness</span>
+              <span><span class="locktime">â– </span> Locktime</span>
             </div>
           </div>
 
           <!-- Stats -->
           <div class="tool-container" id="stats-section" style="display: none;">
-            <h2 class="tool-container__title">Estadísticas</h2>
+            <h2 class="tool-container__title">EstadÃ­sticas</h2>
             <div class="stats-grid">
               <div class="tool-result-card">
                 <div class="tool-result-card__label">TXID</div>
-                <div class="tool-result-card__value" id="stat-txid" style="font-size: 0.6rem; word-break: break-all;">—</div>
+                <div class="tool-result-card__value" id="stat-txid" style="font-size: 0.6rem; word-break: break-all;">â€”</div>
               </div>
               <div class="tool-result-card">
                 <div class="tool-result-card__label">Size</div>
-                <div class="tool-result-card__value" id="stat-size">—</div>
+                <div class="tool-result-card__value" id="stat-size">â€”</div>
               </div>
               <div class="tool-result-card">
                 <div class="tool-result-card__label">vSize</div>
-                <div class="tool-result-card__value" id="stat-vsize">—</div>
+                <div class="tool-result-card__value" id="stat-vsize">â€”</div>
               </div>
               <div class="tool-result-card">
                 <div class="tool-result-card__label">Weight</div>
-                <div class="tool-result-card__value" id="stat-weight">—</div>
+                <div class="tool-result-card__value" id="stat-weight">â€”</div>
               </div>
               <div class="tool-result-card">
                 <div class="tool-result-card__label">SegWit</div>
-                <div class="tool-result-card__value" id="stat-segwit">—</div>
+                <div class="tool-result-card__value" id="stat-segwit">â€”</div>
               </div>
             </div>
           </div>
@@ -244,12 +242,12 @@
             
             <div class="tx-section">
               <div class="tx-field">
-                <span class="tx-field__label">Versión</span>
-                <span class="tx-field__value" id="struct-version">—</span>
+                <span class="tx-field__label">VersiÃ³n</span>
+                <span class="tx-field__value" id="struct-version">â€”</span>
               </div>
               <div class="tx-field">
                 <span class="tx-field__label">Locktime</span>
-                <span class="tx-field__value" id="struct-locktime">—</span>
+                <span class="tx-field__value" id="struct-locktime">â€”</span>
               </div>
             </div>
 
@@ -283,11 +281,11 @@
 
           <!-- Callout contextual -->
           <div class="tool-callout">
-            <div class="tool-callout__title">Aprende más sobre transacciones</div>
+            <div class="tool-callout__title">Aprende mÃ¡s sobre transacciones</div>
             <p class="tool-callout__text">
-              <a href="../nivel-5/estructura-transaccion.html">Estructura de transacciones →</a> · 
-              <a href="tx-builder.html">Constructor de transacciones →</a> ·
-              <a href="tx-splitter.html">Análisis byte a byte →</a>
+              <a href="../nivel-5/estructura-transaccion.html">Estructura de transacciones â†’</a> Â· 
+              <a href="tx-builder.html">Constructor de transacciones â†’</a> Â·
+              <a href="tx-splitter.html">AnÃ¡lisis byte a byte â†’</a>
             </p>
           </div>
 
@@ -506,12 +504,12 @@
         tx.locktime = this.readUint32LE();
         this.addColorRange(locktimeStart, 4, 'locktime');
 
-        // Calcular tamaños
+        // Calcular tamaÃ±os
         tx.size = this.bytes.length;
         
         if (tx.isSegWit) {
           // Weight = (non-witness * 4) + witness
-          // Para calcular el tamaño sin witness, reconstruimos
+          // Para calcular el tamaÃ±o sin witness, reconstruimos
           const nonWitnessSize = this.calculateNonWitnessSize(tx);
           const witnessSize = tx.size - nonWitnessSize - 2; // -2 for marker+flag
           tx.weight = (nonWitnessSize * 4) + witnessSize + 2;
@@ -591,7 +589,7 @@
       }
 
       getColoredHex() {
-        // Ordenar por posición
+        // Ordenar por posiciÃ³n
         this.colorRanges.sort((a, b) => a.start - b.start);
         
         let result = '';
@@ -620,8 +618,8 @@
       
       if (isSegWit) {
         // Para SegWit, el TXID se calcula sin marker, flag y witness
-        // Esto requiere reconstruir la tx sin esos campos - simplificado aquí
-        // En producción, se haría un parsing más completo
+        // Esto requiere reconstruir la tx sin esos campos - simplificado aquÃ­
+        // En producciÃ³n, se harÃ­a un parsing mÃ¡s completo
       }
       
       const bytes = HexUtils.hexToBytes(dataForHash);
@@ -640,17 +638,17 @@
       const hex = txInput.value.trim().replace(/\s/g, '');
 
       if (!hex) {
-        showError('Introduce una transacción en hexadecimal.');
+        showError('Introduce una transacciÃ³n en hexadecimal.');
         return;
       }
 
       if (!/^[0-9a-fA-F]+$/.test(hex)) {
-        showError('La transacción debe contener solo caracteres hexadecimales.');
+        showError('La transacciÃ³n debe contener solo caracteres hexadecimales.');
         return;
       }
 
       if (hex.length < 20) {
-        showError('La transacción es demasiado corta.');
+        showError('La transacciÃ³n es demasiado corta.');
         return;
       }
 
@@ -668,14 +666,14 @@
         document.getElementById('stat-size').textContent = tx.size + ' bytes';
         document.getElementById('stat-vsize').textContent = tx.vsize + ' vB';
         document.getElementById('stat-weight').textContent = tx.weight + ' WU';
-        document.getElementById('stat-segwit').textContent = tx.isSegWit ? 'Sí' : 'No';
+        document.getElementById('stat-segwit').textContent = tx.isSegWit ? 'SÃ­' : 'No';
         document.getElementById('stat-segwit').style.color = tx.isSegWit ? '#a371f7' : 'var(--text-secondary)';
         statsSection.style.display = 'block';
 
         // Estructura
         document.getElementById('struct-version').textContent = tx.version;
         document.getElementById('struct-locktime').textContent = tx.locktime === 0 
-          ? '0 (sin restricción)' 
+          ? '0 (sin restricciÃ³n)' 
           : tx.locktime < 500000000 
             ? `Bloque ${tx.locktime.toLocaleString('es-ES')}` 
             : `Timestamp ${new Date(tx.locktime * 1000).toISOString()}`;
@@ -689,7 +687,7 @@
           const seqInfo = input.sequence === 0xffffffff 
             ? 'Final' 
             : input.sequence === 0xfffffffe 
-              ? 'RBF señalado' 
+              ? 'RBF seÃ±alado' 
               : `0x${input.sequence.toString(16)}`;
           
           inputsContainer.innerHTML += `
@@ -705,7 +703,7 @@
               </div>
               <div class="tx-field">
                 <span class="tx-field__label">ScriptSig</span>
-                <span class="tx-field__value">${input.scriptSig || '(vacío)'}</span>
+                <span class="tx-field__value">${input.scriptSig || '(vacÃ­o)'}</span>
               </div>
               <div class="tx-field">
                 <span class="tx-field__label">Sequence</span>
@@ -762,7 +760,7 @@
             let itemsHtml = items.map((item, j) => `
               <div class="tx-field">
                 <span class="tx-field__label">Item ${j}</span>
-                <span class="tx-field__value" style="font-size: 0.6rem;">${item || '(vacío)'}</span>
+                <span class="tx-field__value" style="font-size: 0.6rem;">${item || '(vacÃ­o)'}</span>
               </div>
             `).join('');
             
@@ -810,3 +808,4 @@
   </script>
 </body>
 </html>
+

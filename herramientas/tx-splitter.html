@@ -1,22 +1,22 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" data-base-path="../">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Descompón una transacción Bitcoin byte a byte. Cada campo identificado, coloreado y explicado." />
+  <meta name="description" content="Planifica la división o consolidación de UTXOs Bitcoin. Calcula el coste en fees y entiende la gestión del coin set para privacidad y eficiencia." />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aprendebtc.com/herramientas/tx-splitter.html" />
-  <meta property="og:title" content="Transaction Splitter (byte a byte) — Herramientas | aprendebtc.com" />
-  <meta property="og:description" content="Descompón una transacción Bitcoin byte a byte. Cada campo identificado, coloreado y explicado." />
+  <meta property="og:title" content="Transaction Splitter (byte a byte) â€” Herramientas | aprendebtc.com" />
+  <meta property="og:description" content="Planifica la división o consolidación de UTXOs Bitcoin. Calcula el coste en fees y entiende la gestión del coin set para privacidad y eficiencia." />
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
   <meta property="og:site_name" content="aprendeBTC" />
   <meta property="og:locale" content="es_ES" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Transaction Splitter (byte a byte) — Herramientas | aprendebtc.com" />
-  <meta name="twitter:description" content="Descompón una transacción Bitcoin byte a byte. Cada campo identificado, coloreado y explicado." />
+  <meta name="twitter:title" content="Transaction Splitter (byte a byte) â€” Herramientas | aprendebtc.com" />
+  <meta name="twitter:description" content="Planifica la división o consolidación de UTXOs Bitcoin. Calcula el coste en fees y entiende la gestión del coin set para privacidad y eficiencia." />
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 
   <!-- Canonical -->
@@ -24,12 +24,12 @@
   <link rel="alternate" hreflang="es" href="https://aprendebtc.com/herramientas/tx-splitter.html" />
   <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/tx-splitter.html" />
 <meta property="og:url" content="https://aprendebtc.com/herramientas/tx-splitter.html" />
-<meta property="og:description" content="Descompón una transacción Bitcoin byte a byte. Cada campo identificado, coloreado y explicado." />
+<meta property="og:description" content="Planifica la división o consolidación de UTXOs Bitcoin. Calcula el coste en fees y entiende la gestión del coin set para privacidad y eficiencia." />
 <meta property="og:site_name" content="aprendeBTC" />
-<meta name="twitter:title" content="Transaction Splitter (byte a byte) — Herramientas | aprendebtc.com" />
+<meta name="twitter:title" content="Transaction Splitter (byte a byte) â€” Herramientas | aprendebtc.com" />
 <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/tx-splitter.html" />
-<title>Transaction Splitter (byte a byte) — Herramientas | aprendebtc.com</title>
+<title>Transaction Splitter (byte a byte) â€” Herramientas | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -145,7 +145,7 @@
   <div data-include="header"></div>
 
   <div class="page-layout">
-        <aside class="page-layout__sidebar" aria-label="Navegación lateral">
+        <aside class="page-layout__sidebar" aria-label="NavegaciÃ³n lateral">
       <nav class="sidebar">
         <div class="sidebar__ad-wrap">
           <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
@@ -155,40 +155,38 @@
 
     <main class="page-layout__content" id="main-content">
       <div class="content-inner">
-        <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <nav class="breadcrumb" aria-label="Ruta de navegaciÃ³n">
           <a href="../" class="breadcrumb__item">Inicio</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__separator" aria-hidden="true">â€º</span>
           <a href="./" class="breadcrumb__item">Herramientas</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__separator" aria-hidden="true">â€º</span>
           <span class="breadcrumb__current">TX splitter (byte a byte)</span>
         </nav>
 
         <article class="article">
           <h1>Transaction Splitter (byte a byte)</h1>
-          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
-            Explora cada byte de una transacción Bitcoin con explicaciones detalladas.
-          </p>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">El coin splitting es la práctica de dividir un UTXO en múltiples outputs más pequeños, o de consolidar varios UTXOs pequeños en uno mayor. Esta herramienta ayuda a planificar esas operaciones: introduce tus UTXOs disponibles y define cómo quieres dividirlos o agruparlos, y calcula el coste en fees de la operación al tipo de fee actual. La gestión del tamaño de los UTXOs tiene implicaciones tanto en privacidad (UTXOs muy grandes son más fáciles de identificar) como en eficiencia (muchos UTXOs pequeños generan transacciones grandes y costosas cuando los gastas juntos). Una herramienta práctica para bitcoiners que gestionan activamente su set de UTXOs.</p>
 
           <!-- Input -->
           <div class="tool-container">
-            <h2 class="tool-container__title">Transacción raw (hex)</h2>
+            <h2 class="tool-container__title">TransacciÃ³n raw (hex)</h2>
 
             <div class="tool-field">
               <textarea 
                 id="tx-input" 
                 class="tool-input" 
                 rows="3"
-                placeholder="Pega aquí una transacción en hexadecimal..."
+                placeholder="Pega aquÃ­ una transacciÃ³n en hexadecimal..."
                 style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;"
               ></textarea>
             </div>
 
             <div class="tool-presets" style="margin: 0.75rem 0;">
-              <button class="tool-preset" data-example="simple">Transacción simple</button>
+              <button class="tool-preset" data-example="simple">TransacciÃ³n simple</button>
               <button class="tool-preset" data-example="segwit">SegWit</button>
             </div>
 
-            <button class="tool-btn" id="btn-split">🔬 Analizar byte a byte</button>
+            <button class="tool-btn" id="btn-split">ðŸ”¬ Analizar byte a byte</button>
           </div>
 
           <!-- Error -->
@@ -198,7 +196,7 @@
           <div class="tool-container" id="hex-section" style="display: none;">
             <h2 class="tool-container__title">Hex interactivo</h2>
             <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.75rem;">
-              Haz clic en cualquier byte para resaltarlo en la tabla, o en cualquier fila de la tabla para resaltarlo aquí.
+              Haz clic en cualquier byte para resaltarlo en la tabla, o en cualquier fila de la tabla para resaltarlo aquÃ­.
             </p>
             <div class="hex-display" id="hex-display"></div>
           </div>
@@ -238,11 +236,11 @@
 
           <!-- Callout contextual -->
           <div class="tool-callout">
-            <div class="tool-callout__title">Aprende más sobre transacciones</div>
+            <div class="tool-callout__title">Aprende mÃ¡s sobre transacciones</div>
             <p class="tool-callout__text">
-              <a href="../nivel-5/estructura-transaccion.html">Estructura de transacciones →</a> · 
-              <a href="tx-decoder.html">Decodificador visual →</a> ·
-              <a href="../nivel-5/segwit-internals.html">SegWit internals →</a>
+              <a href="../nivel-5/estructura-transaccion.html">Estructura de transacciones â†’</a> Â· 
+              <a href="tx-decoder.html">Decodificador visual â†’</a> Â·
+              <a href="../nivel-5/segwit-internals.html">SegWit internals â†’</a>
             </p>
           </div>
 
@@ -458,7 +456,7 @@
         startPos = this.pos;
         const locktime = this.readUint32LE();
         const locktimeNote = locktime === 0 
-          ? 'Sin restricción'
+          ? 'Sin restricciÃ³n'
           : locktime < 500000000 
             ? `Bloque ${locktime}` 
             : `Timestamp`;
@@ -489,7 +487,7 @@
       const hex = txInput.value.trim().replace(/\s/g, '');
 
       if (!hex || !/^[0-9a-fA-F]+$/.test(hex)) {
-        showError('Introduce una transacción hexadecimal válida.');
+        showError('Introduce una transacciÃ³n hexadecimal vÃ¡lida.');
         return;
       }
 
@@ -624,3 +622,4 @@
   </script>
 </body>
 </html>
+

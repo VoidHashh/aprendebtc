@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Ejecuta Bitcoin Script paso a paso. Visualiza la pila (stack) y entiende cómo se validan las transacciones." />
+  <meta name="description" content="Intérprete de Bitcoin Script paso a paso: ejecuta scriptPubKey y scriptSig, visualiza la pila y entiende cómo Bitcoin define las condiciones de gasto." />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aprendebtc.com/herramientas/script-interpreter.html" />
   <meta property="og:title" content="Intérprete de Bitcoin Script — Herramientas | aprendebtc.com" />
-  <meta property="og:description" content="Ejecuta Bitcoin Script paso a paso. Visualiza la pila (stack) y entiende cómo se validan las transacciones." />
+  <meta property="og:description" content="Intérprete de Bitcoin Script paso a paso: ejecuta scriptPubKey y scriptSig, visualiza la pila y entiende cómo Bitcoin define las condiciones de gasto." />
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
   <meta property="og:site_name" content="aprendeBTC" />
   <meta property="og:locale" content="es_ES" />
@@ -16,7 +16,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Intérprete de Bitcoin Script — Herramientas | aprendebtc.com" />
-  <meta name="twitter:description" content="Ejecuta Bitcoin Script paso a paso. Visualiza la pila (stack) y entiende cómo se validan las transacciones." />
+  <meta name="twitter:description" content="Intérprete de Bitcoin Script paso a paso: ejecuta scriptPubKey y scriptSig, visualiza la pila y entiende cómo Bitcoin define las condiciones de gasto." />
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 
   <!-- Canonical -->
@@ -24,7 +24,7 @@
   <link rel="alternate" hreflang="es" href="https://aprendebtc.com/herramientas/script-interpreter.html" />
   <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/script-interpreter.html" />
 <meta property="og:url" content="https://aprendebtc.com/herramientas/script-interpreter.html" />
-<meta property="og:description" content="Ejecuta Bitcoin Script paso a paso. Visualiza la pila (stack) y entiende cómo se validan las transacciones." />
+<meta property="og:description" content="Intérprete de Bitcoin Script paso a paso: ejecuta scriptPubKey y scriptSig, visualiza la pila y entiende cómo Bitcoin define las condiciones de gasto." />
 <meta property="og:site_name" content="aprendeBTC" />
 <meta name="twitter:title" content="Intérprete de Bitcoin Script — Herramientas | aprendebtc.com" />
 <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
@@ -175,9 +175,7 @@
 
         <article class="article">
           <h1>Intérprete de Bitcoin Script</h1>
-          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
-            Escribe o carga un script y ejecútalo paso a paso viendo cómo evoluciona la pila.
-          </p>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">Bitcoin Script es el lenguaje de programación de pila que define las condiciones bajo las que se pueden gastar los fondos de cada output. No es Turing-completo por diseño, es intencionalmente limitado para garantizar que la ejecución siempre termina y es predecible. Esta herramienta interpreta y ejecuta fragmentos de Bitcoin Script paso a paso: introduce un scriptPubKey (la condición de gasto) y un scriptSig o witness (los datos que satisfacen la condición) y observa cómo se ejecuta la pila operación por operación. Soporta los tipos de script más comunes: P2PKH, P2SH, P2WPKH, P2WSH y P2TR. Esencial para entender cómo funciona realmente el smart contracting nativo de Bitcoin.</p>
 
           <!-- Input -->
           <div class="tool-container">
@@ -782,6 +780,7 @@
   </script>
 </body>
 </html>
+
 
 
 

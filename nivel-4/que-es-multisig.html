@@ -1,143 +1,148 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" data-base-path="../">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Contenido en preparacion para aprendeBTC." />
-
-  <!-- Open Graph -->
-
-  <meta property="og:type" content="website" />
-
+  <meta name="description" content="Multisig en Bitcoin: qué es, cómo funciona la firma múltiple, esquemas 2-de-3 y 3-de-5, y por qué mejora tu seguridad." />
+  <meta property="og:type" content="article" />
   <meta property="og:url" content="https://aprendebtc.com/nivel-4/que-es-multisig.html" />
-
-  <meta property="og:title" content="Qué Es Multisig &amp;mdash; Nivel 4 | aprendebtc.com" />
-
-  <meta property="og:description" content="Contenido en preparacion para aprendeBTC." />
-
+  <meta property="og:title" content="¿Qué es multisig? — Nivel 4 | aprendebtc.com" />
+  <meta property="og:description" content="Multisig en Bitcoin: qué es, cómo funciona la firma múltiple, esquemas 2-de-3 y 3-de-5, y por qué mejora tu seguridad." />
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
-
   <meta property="og:site_name" content="aprendeBTC" />
-
-  <meta property="og:locale" content="es_ES" />
-
-
-  <!-- Twitter Card -->
-
   <meta name="twitter:card" content="summary_large_image" />
-
-  <meta name="twitter:title" content="Qué Es Multisig &amp;mdash; Nivel 4 | aprendebtc.com" />
-
-  <meta name="twitter:description" content="Contenido en preparacion para aprendeBTC." />
-
+  <meta name="twitter:title" content="¿Qué es multisig? — Nivel 4 | aprendebtc.com" />
+  <meta name="twitter:description" content="Multisig en Bitcoin: qué es, cómo funciona la firma múltiple, esquemas 2-de-3 y 3-de-5, y por qué mejora tu seguridad." />
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
-
-
-  <!-- Canonical -->
-
   <link rel="canonical" href="https://aprendebtc.com/nivel-4/que-es-multisig.html" />
-
-  <link rel="alternate" hreflang="es" href="https://aprendebtc.com/nivel-4/que-es-multisig.html" />
-
-  <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/nivel-4/que-es-multisig.html" /><meta property="og:url" content="https://aprendebtc.com/nivel-4/que-es-multisig.html" /><meta property="og:description" content="Contenido en preparacion para aprendeBTC." /><meta property="og:site_name" content="aprendeBTC" /><meta name="twitter:title" content="Qué Es Multisig &amp;mdash; Nivel 4 | aprendebtc.com" /><meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" /><link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/nivel-4/que-es-multisig.html" /><title>Qué Es Multisig &mdash; Nivel 4 | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/components.css" />
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Qué Es Multisig",
-  "description": "Contenido en preparacion para aprendeBTC.",
-  "url": "https://aprendebtc.com/nivel-4/que-es-multisig.html",
-  "inLanguage": "es",
-  "publisher": {
-    "@type": "Organization",
-    "name": "aprendeBTC",
-    "url": "https://aprendebtc.com"
-  },
-  "isPartOf": {
-    "@type": "WebSite",
-    "name": "aprendeBTC",
-    "url": "https://aprendebtc.com"
-  }
-}
-  </script>
+  <title>¿Qué es multisig? — Nivel 4 | aprendebtc.com</title>
 </head>
 <body>
   <div data-include="header"></div>
 
   <div class="page-layout">
-    <aside class="page-layout__sidebar" aria-label="Navegación del nivel">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral">
       <nav class="sidebar">
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Sección 2 &middot; Multisig</div>
-          <a href="distribucion-claves.html" class="sidebar__link">Distribución geográfica de claves</a>
-        </div>
-
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Sección 3 &middot; Herencia</div>
-          <a href="herencia-bitcoin.html" class="sidebar__link">Herencia de Bitcoin</a>
-          <a href="guia-herencia.html" class="sidebar__link">Guía de herencia paso a paso</a>
-          <a href="herencia-multisig.html" class="sidebar__link">Herencia con multisig</a>
-        </div>
-
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Sección 4 &middot; Lightning avanzado</div>
-          <a href="canales-lightning.html" class="sidebar__link">Canales de pago</a>
-          <a href="liquidez-lightning.html" class="sidebar__link">Gestión de liquidez</a>
-          <a href="routing-lightning.html" class="sidebar__link">Routing de pagos</a>
-          <a href="nodo-lightning.html" class="sidebar__link">Montar tu nodo Lightning</a>
-        </div>
-
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Sección 5 &middot; Sidechains y eCash</div>
-          <a href="que-son-las-sidechains.html" class="sidebar__link">¿Qué son las sidechains de Bitcoin?</a>
-          <a href="rootstock-rsk.html" class="sidebar__link">Rootstock (RSK)</a>
-          <a href="liquid-network.html" class="sidebar__link">Liquid Network</a>
-          <a href="fedimint-y-cashu.html" class="sidebar__link">Fedimint y Cashu</a>
-        </div>
-
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Sección 6 &middot; Minería casera</div>
-          <a href="mineria-casera.html" class="sidebar__link">Minería casera: ¿tiene sentido?</a>
-          <a href="hardware-mineria.html" class="sidebar__link">Hardware de minería</a>
-          <a href="pools-mineria.html" class="sidebar__link">Pools de minería</a>
-          <a href="mineria-bitaxe.html" class="sidebar__link">Minería con Bitaxe</a>
-          <a href="calefaccion-bitcoin.html" class="sidebar__link">Bitcoin como calefacción</a>
-        </div>
-
-        <div class="sidebar__section">
-          <div class="sidebar__section-title">Siguiente nivel</div>
-          <a href="../nivel-5/" class="sidebar__link">Nivel 5 &mdash; Mentor</a>
-        </div>
-
         <div class="sidebar__ad-wrap">
-          <div class="ad-slot ad-sidebar" id="ad-sidebar-n4" aria-hidden="true"></div>
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
         </div>
       </nav>
     </aside>
 
     <main class="page-layout__content" id="main-content">
       <div class="content-inner">
-        <nav class="breadcrumb" aria-label="Ruta de navegación"><a href="/" class="breadcrumb__item">Inicio</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><a href="/nivel-4/" class="breadcrumb__item">Nivel 4</a><span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span><span class="breadcrumb__current">Qué Es Multisig</span></nav>
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="./" class="breadcrumb__item">Nivel 4</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">¿Qué es multisig?</span>
+        </nav>
 
         <article class="article">
-          <h1>Qué Es Multisig</h1>
-          <p class="article__subtitle">Página en preparacion. Volvera pronto con contenido completo.</p>
-          <p>Contenido en preparacion.</p>
+          <div class="nivel-badge nivel-badge--4 article__badge">Nivel 4 — Down the Rabbit Hole</div>
+          <h1>¿Qué es multisig?</h1>
+          <p class="article__subtitle">Una wallet que necesita más de una llave para firmar. La diferencia entre perderlo todo por un fallo y tener un plan B.</p>
 
-          <div class="ad-slot ad-content" id="ad-content-4" aria-hidden="true"></div>
+          <p>Con una wallet estándar (lo que se llama singlesig) hay una sola clave privada que lo controla todo. Si la pierdes, pierdes el acceso. Si alguien la roba, pierde el acceso. Es el punto único de fallo que hace que muchas personas pierdan bitcoin para siempre.</p>
+          <p>Multisig (firma múltiple) elimina ese punto único de fallo. En lugar de una sola clave, la wallet requiere que un número mínimo de claves de un conjunto mayor firmen cualquier transacción. Perder una no es el fin.</p>
 
-          <nav class="page-nav" aria-label="Navegación entre páginas">
-            <a href="coinjoin.html" class="page-nav__item">
+          <h2>La mecánica: M de N</h2>
+          <p>Multisig se describe siempre con la notación <strong>M-de-N</strong>:</p>
+          <ul>
+            <li><strong>N</strong> es el número total de claves que existen para esa wallet.</li>
+            <li><strong>M</strong> es el número mínimo de esas claves necesario para firmar una transacción.</li>
+          </ul>
+          <p>Ejemplos concretos:</p>
+          <ul>
+            <li><strong>2-de-3</strong>: existen 3 claves; cualquier 2 de ellas puede firmar. Si pierdes una, las otras 2 siguen siendo suficientes.</li>
+            <li><strong>3-de-5</strong>: existen 5 claves; necesitas 3 para firmar. Más redundante, más tolerante a pérdidas.</li>
+            <li><strong>2-de-2</strong>: existen 2 claves; necesitas las 2. Ninguna funciona sola, útil para cuentas compartidas o como segunda capa de seguridad.</li>
+          </ul>
+
+          <h3>La analogía de la caja fuerte</h3>
+          <p>Imagina una caja fuerte con 3 cerraduras distintas. Cada cerradura la abre una llave diferente, y las 3 llaves las guarda gente o lugares distintos. La caja se puede abrir con cualquiera 2 de las 3 llaves. Si pierdes una, aún tienes acceso con las otras dos. Si alguien roba una, no puede abrir la caja sin conseguir también la segunda.</p>
+
+          <h2>Los esquemas más comunes</h2>
+
+          <h3>2-de-3: el estándar para uso personal</h3>
+          <p>Es el esquema más utilizado por individuos con cantidades significativas de bitcoin. Una distribución típica:</p>
+          <ul>
+            <li><strong>Clave 1</strong>: hardware wallet que usas en casa.</li>
+            <li><strong>Clave 2</strong>: backup offline en metal o papel, en una ubicación física diferente (caja de seguridad bancaria, casa de un familiar de confianza).</li>
+            <li><strong>Clave 3</strong>: hardware wallet guardada en una tercera ubicación, o con un familiar de confianza.</li>
+          </ul>
+          <p>Para gastar, necesitas cualquier 2 de las 3. Para un atacante obtener acceso, necesita comprometer 2 ubicaciones físicas distintas simultáneamente, exponencialmente más difícil que atacar una sola seed.</p>
+
+          <h3>3-de-5: para cantidades mayores o empresas</h3>
+          <p>Añade redundancia adicional. Incluso si dos claves se ven comprometidas o se pierden, las tres restantes siguen siendo suficientes para recuperar los fondos. Frecuente en custodios institucionales y en la gestión de tesorería de empresas.</p>
+
+          <h3>2-de-2: cuentas conjuntas o doble aprobación</h3>
+          <p>Ambas claves deben estar presentes para firmar. Útil cuando dos personas deben aprobar cada gasto (tesorería compartida) o como mecanismo de doble verificación para un único usuario que quiere requerir aprobación desde dos dispositivos distintos.</p>
+
+          <h2>Por qué usar multisig</h2>
+
+          <h3>Elimina el punto único de fallo</h3>
+          <p>Con singlesig, un solo error (perder la seed, que te la roben, un incendio, un accidente) puede significar perder todo. Con multisig 2-de-3, necesitas perder o que te roben 2 de tus 3 claves para quedarte sin acceso. La probabilidad de ese escenario es órdenes de magnitud menor.</p>
+
+          <h3>Herencia y planificación</h3>
+          <p>¿Qué pasa con tu bitcoin cuando mueras? Con una wallet singlesig, tus herederos necesitan encontrar exactamente tu seed phrase. Con multisig, puedes distribuir las claves de forma que tus herederos puedan recuperar el acceso con M de N claves sin necesitar encontrarlas todas juntas. El artículo de herencia de Bitcoin profundiza en esta planificación.</p>
+
+          <h3>Protección contra robo dirigido</h3>
+          <p>Si alguien obtiene una de tus claves (por robo físico, por hackeo, por ingeniería social) no puede mover los fondos sin las demás. Tienes tiempo para reaccionar: mover los fondos a una nueva configuración usando las claves restantes.</p>
+
+          <div class="callout callout--info">
+            <span class="callout__icon" aria-hidden="true">ℹ️</span>
+            <div class="callout__content">
+              <div class="callout__title">Multisig no requiere confiar en nadie más.</div>
+              <p class="callout__text">Puedes tener las 3 claves tú mismo, en diferentes ubicaciones físicas. La seguridad viene de la distribución geográfica, no de repartir confianza con otras personas. Si quieres involucrar a un familiar de confianza, puedes, pero no es obligatorio.</p>
+            </div>
+          </div>
+
+          <h2>Qué necesitas para empezar</h2>
+          <ul>
+            <li><strong>Múltiples dispositivos de firma</strong>: hardware wallets. Pueden ser del mismo modelo o de fabricantes distintos (añadiendo diversificación de riesgo de hardware o firmware).</li>
+            <li><strong>Software coordinador</strong>: una aplicación que construya las transacciones multisig y gestione las firmas parciales. Las opciones más recomendadas en 2026 son Sparrow Wallet (escritorio), Nunchuk (móvil y escritorio) y Electrum (escritorio, interfaz más técnica).</li>
+            <li><strong>Entender la importancia del descriptor</strong>: en multisig, además de las seeds, existe un archivo de configuración (wallet descriptor) que describe la estructura de la wallet. Sin él, no puedes reconstruirla aunque tengas todas las seeds.</li>
+          </ul>
+
+          <h2>Los trade-offs</h2>
+          <p>Multisig no es la solución para todo el mundo ni para todas las situaciones. Tiene costes reales:</p>
+          <ul>
+            <li><strong>Mayor complejidad en el setup inicial</strong>: configurar una wallet multisig requiere más pasos y más cuidado que una singlesig.</li>
+            <li><strong>Mayor complejidad en cada transacción</strong>: firmar requiere coordinar M de N dispositivos. Si están en ubicaciones distintas, puede ser un proceso con varios pasos.</li>
+            <li><strong>Más responsabilidad en la gestión</strong>: ahora gestionas N claves y sus backups, más el descriptor. El sistema es más robusto, pero también más complejo de mantener correctamente.</li>
+            <li><strong>Fees ligeramente mayores</strong>: las transacciones multisig son más grandes en bytes que las singlesig, por lo que las comisiones son algo superiores.</li>
+          </ul>
+
+          <div class="callout callout--warning">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">Domina singlesig primero.</div>
+              <p class="callout__text">Antes de configurar multisig, asegúrate de entender bien la gestión de una wallet singlesig: cómo funciona la seed phrase, cómo hacer backup correcto y cómo restaurar. Si no dominas eso, multisig multiplicará la complejidad sin resolver el problema de base.</p>
+            </div>
+          </div>
+
+          <h2>Ver también</h2>
+          <ul>
+            <li><a href="/nivel-4/configurar-multisig.html">Configurar multisig con Sparrow Wallet (guía paso a paso)</a></li>
+            <li><a href="/nivel-4/distribucion-claves.html">Distribución geográfica de claves</a></li>
+            <li><a href="/nivel-4/herencia-bitcoin.html">Herencia Bitcoin</a></li>
+            <li><a href="/nivel-3/configurar-hardware-wallet.html">Configurar tu hardware wallet</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación de páginas">
+            <a href="/nivel-4/coinjoin.html" class="page-nav__item">
               <span class="page-nav__label">&larr; Anterior</span>
-              <span class="page-nav__title">Coinjoin</span>
+              <span class="page-nav__title">CoinJoin: privacidad colaborativa</span>
             </a>
-            <a href="configurar-multisig.html" class="page-nav__item page-nav__item--next">
+            <a href="/nivel-4/configurar-multisig.html" class="page-nav__item page-nav__item--next">
               <span class="page-nav__label">Siguiente &rarr;</span>
-              <span class="page-nav__title">Configurar multisig con Sparrow</span>
+              <span class="page-nav__title">Configurar multisig con Sparrow Wallet</span>
             </a>
           </nav>
         </article>

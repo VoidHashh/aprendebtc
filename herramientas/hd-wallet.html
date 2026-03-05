@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Explora extended keys (xpub/xprv/ypub/zpub). Analiza versión, red, profundidad y validez de checksum Base58Check." />
+  <meta name="description" content="Explorador de HD Wallet BIP32: deriva el árbol de claves desde tu semilla, navega rutas de derivación y visualiza xpub/xprv en cada nivel." />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aprendebtc.com/herramientas/hd-wallet.html" />
   <meta property="og:title" content="HD Wallet explorer — Herramientas | aprendebtc.com" />
-  <meta property="og:description" content="Explora extended keys (xpub/xprv/ypub/zpub). Analiza versión, red, profundidad y validez de checksum Base58Check." />
+  <meta property="og:description" content="Explorador de HD Wallet BIP32: deriva el árbol de claves desde tu semilla, navega rutas de derivación y visualiza xpub/xprv en cada nivel." />
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
   <meta property="og:site_name" content="aprendeBTC" />
   <meta property="og:locale" content="es_ES" />
@@ -16,7 +16,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="HD Wallet explorer — Herramientas | aprendebtc.com" />
-  <meta name="twitter:description" content="Explora extended keys (xpub/xprv/ypub/zpub). Analiza versión, red, profundidad y validez de checksum Base58Check." />
+  <meta name="twitter:description" content="Explorador de HD Wallet BIP32: deriva el árbol de claves desde tu semilla, navega rutas de derivación y visualiza xpub/xprv en cada nivel." />
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 
   <!-- Canonical -->
@@ -24,7 +24,7 @@
   <link rel="alternate" hreflang="es" href="https://aprendebtc.com/herramientas/hd-wallet.html" />
   <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/hd-wallet.html" />
 <meta property="og:url" content="https://aprendebtc.com/herramientas/hd-wallet.html" />
-<meta property="og:description" content="Explora extended keys (xpub/xprv/ypub/zpub). Analiza versión, red, profundidad y validez de checksum Base58Check." />
+<meta property="og:description" content="Explorador de HD Wallet BIP32: deriva el árbol de claves desde tu semilla, navega rutas de derivación y visualiza xpub/xprv en cada nivel." />
 <meta property="og:site_name" content="aprendeBTC" />
 <meta name="twitter:title" content="HD Wallet explorer — Herramientas | aprendebtc.com" />
 <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
@@ -146,9 +146,7 @@
 
         <article class="article">
           <h1>HD Wallet explorer</h1>
-          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.25rem;">
-            Centro de trabajo para extended keys y derivación HD (BIP32/BIP44/BIP84).
-          </p>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.25rem;">Las wallets HD (Hierarchical Deterministic) permiten derivar un árbol completo de claves desde una única semilla raíz, siguiendo el estándar BIP32. Esta herramienta toma una semilla (en hexadecimal o frase mnemónica BIP39) y permite explorar el árbol de derivación: ver la clave maestra privada y pública extendidas (xprv/xpub), navegar por ramas del árbol siguiendo rutas de derivación, y obtener las claves privadas y públicas de cada nodo. Es la herramienta más completa para entender la arquitectura interna de cualquier wallet moderna: cómo de una sola semilla emerge un número prácticamente ilimitado de pares de claves, cada uno determinista y reproducible.</p>
 
           <div class="tool-container">
             <h2 class="tool-container__title">Flujo recomendado</h2>
@@ -361,6 +359,7 @@
   </script>
 </body>
 </html>
+
 
 
 

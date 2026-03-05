@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Explora la derivación de claves BIP32. Navega el árbol de claves hijo paso a paso con child key derivation." />
+  <meta name="description" content="Rutas de derivación BIP32/44/84/86 explicadas. Entiende cómo tu wallet elige qué dirección generar y por qué la misma seed da resultados distintos." />
 
   <!-- Open Graph -->
 
@@ -13,7 +13,7 @@
 
   <meta property="og:title" content="Derivation Paths (BIP32) — Herramientas | aprendebtc.com" />
 
-  <meta property="og:description" content="Explora la derivación de claves BIP32. Navega el árbol de claves hijo paso a paso con child key derivation." />
+  <meta property="og:description" content="Rutas de derivación BIP32/44/84/86 explicadas. Entiende cómo tu wallet elige qué dirección generar y por qué la misma seed da resultados distintos." />
 
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
 
@@ -28,7 +28,7 @@
 
   <meta name="twitter:title" content="Derivation Paths (BIP32) — Herramientas | aprendebtc.com" />
 
-  <meta name="twitter:description" content="Explora la derivación de claves BIP32. Navega el árbol de claves hijo paso a paso con child key derivation." />
+  <meta name="twitter:description" content="Rutas de derivación BIP32/44/84/86 explicadas. Entiende cómo tu wallet elige qué dirección generar y por qué la misma seed da resultados distintos." />
 
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
 
@@ -41,7 +41,7 @@
 
   <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/derivation-paths.html" />
 <meta property="og:url" content="https://aprendebtc.com/herramientas/derivation-paths.html" />
-<meta property="og:description" content="Explora la derivación de claves BIP32. Navega el árbol de claves hijo paso a paso con child key derivation." />
+<meta property="og:description" content="Rutas de derivación BIP32/44/84/86 explicadas. Entiende cómo tu wallet elige qué dirección generar y por qué la misma seed da resultados distintos." />
 <meta property="og:site_name" content="aprendeBTC" />
 <meta name="twitter:title" content="Derivation Paths (BIP32) — Herramientas | aprendebtc.com" />
 <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
@@ -183,9 +183,7 @@
 
         <article class="article">
           <h1>Derivation Paths (BIP32)</h1>
-          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">
-            Navega el árbol jerárquico de claves BIP32 y entiende la derivación de child keys.
-          </p>
+          <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 1.5rem;">La ruta de derivación determina qué clave específica se genera dentro del árbol HD de una wallet. Los estándares BIP44, BIP49, BIP84 y BIP86 definen rutas canónicas para distintos tipos de direcciones Bitcoin: Legacy (P2PKH), SegWit envuelto (P2SH-P2WPKH), Native SegWit (P2WPKH) y Taproot (P2TR). Esta herramienta muestra las rutas estándar para cada tipo, explica cada componente de la ruta (purpose, coin type, account, change, index), y permite introducir rutas personalizadas para derivar la clave correspondiente. Imprescindible para entender por qué la misma semilla genera direcciones distintas en diferentes wallets, y cómo recuperar fondos si tu wallet usó una ruta no estándar.</p>
 
           <!-- Disclaimer educativo -->
           <div class="callout callout--warning" style="margin-bottom: 1.5rem;">
@@ -775,6 +773,7 @@
   </script>
 </body>
 </html>
+
 
 
 
