@@ -575,6 +575,18 @@
     "keywords": "Nostr y Bitcoin comparten valores: descentralización, resistencia a censura, soberanía. Descubre cómo se conectan. Qué es Nostr en una línea La conexión con Bitcoin Filosofía común Lightning como sistema de pagos nativo La comunidad se cruza Por qué debería importarte Cómo empezar La diferencia con otras redes Limitaciones honestas Guía completa Inicio &rsaquo; Comunidad &rsaquo; Nostr y Bitcoin: ecosistemas hermanos Nostr y Bitcoin: ecosistemas hermanos Dos protocolos abiertos que se complementan. Bitcoin mueve el valor, Nostr mueve la información. Qué es Nostr en una línea Nostr es un protocolo abierto para redes sociales descentralizadas. Sin censura, sin intermediarios, sin empresa que lo controle. Técnicamente: un conjunto de relays (servidores simples) que almacenan y retransmiten mensajes firmados criptográficamente por los usuarios. Cada usuario tiene un par de claves (como en Bitcoin) que le da control total sobre su identidad. La conexión con Bitcoin Nostr y Bitcoin no son el mismo proyecto, pero comparten ADN: Filosofía común Descentralización: No hay servidor central ni empresa detrás. Nadie puede \"apagar\" Nostr ni Bitcoin. Resistencia a censura: Nadie puede silenciarte ni congelar tu cuenta. Tu identidad y mensajes son tuyos. Código abierto: Cualquiera puede leer el código, contribuir, o crear su propia implementación. Sin permiso: No necesitas aprobación de nadie para participar. Lightning como sistema de pagos nativo Los \"zaps\" son micropagos en satoshis enviad"
   },
   {
+    "title": "Apoya aprendeBTC",
+    "url": "/donar.html",
+    "tags": [
+      "general",
+      "donar",
+      "lightning",
+      "factura lightning"
+    ],
+    "section": "General",
+    "keywords": "Apoya aprendeBTC con una donaci&oacute;n en Bitcoin. M&eacute;todo recomendado: Lightning. Tambi&eacute;n disponible on-chain y v&iacute;a Nostr. Lightning (recomendado) On-chain V&iacute;a Nostr Inicio &rsaquo; Proyecto &rsaquo; Apoya aprendeBTC Apoya aprendeBTC Este proyecto es gratuito y sin publicidad invasiva. Si te ha sido &uacute;til, puedes apoyarlo con una donaci&oacute;n. ❤ Gracias por tu apoyo Cada satoshi ayuda a mantener y mejorar el contenido educativo en espa&ntilde;ol para toda la comunidad. Lightning (recomendado) On-chain V&iacute;a Nostr Tambi&eacute;n puedes enviarnos un zap desde tu cliente Nostr favorito. Ir a nuestro perfil en Nostr Tambi&eacute;n puedes encontrarnos como voidhash@nostr.lol . Gracias por apoyar la educaci&oacute;n Bitcoin en espa&ntilde;ol. &larr; Volver Sobre aprendeBTC"
+  },
+  {
     "title": "¿Por dónde empiezo?",
     "url": "/empezar.html",
     "tags": [
@@ -1422,7 +1434,7 @@
       "factura lightning"
     ],
     "section": "La Madriguera",
-    "keywords": "Artículos avanzados de Bitcoin: historia, fundamentos y análisis profundo para entender el contexto completo de la red. Historia Fundamentos Análisis Inicio › La Madriguera La madriguera La Madriguera Ruta avanzada de contexto: historia, fundamentos y análisis para entender Bitcoin con profundidad. Esta sección está pensada para usuarios que ya dominan lo básico y quieren conectar los hechos históricos, las decisiones de diseño y los debates abiertos del ecosistema. Puedes leerla por tema o seguir el orden completo del 01 al 27 para una ruta progresiva. Historia Los primeros días de Bitcoin (2009) Bitcoin y WikiLeaks (2010) Silk Road y Ross Ulbricht (2013) Mt. Gox (2014) Guerra del tamaño de bloque (2015-2017) Crisis Terra/Luna (2022) Colapso de FTX (2022) Ordinals e Inscriptions (2023) Caso Samourai Wallet (2024) ETFs de Bitcoin (2024) Fundamentos El ataque del 51% Bloques huérfanos y reorgs El problema del General Bizantino El doble gasto La política monetaria de Bitcoin Los soft forks de Bitcoin Multisig y herencia según Satoshi Economía austríaca para bitcoiners Análisis Bitcoin y energía Geopolítica de la minería Lightning Network: estado actual Privacidad en Bitcoin: estado actual ¿Puede un gobierno prohibir Bitcoin? El debate de la osificación ¿Medio de pago o reserva de valor? Hiperinflaciones y Bitcoin El halving y los ciclos de precio 💡 Cómo leer esta sección Si quieres continuidad histórica, sigue del 01 al 10. Si quieres profundizar en diseño y seguridad, empieza"
+    "keywords": "Artículos avanzados de Bitcoin: historia, fundamentos y análisis profundo para entender el contexto completo de la red. HISTORIA FUNDAMENTOS ANÁLISIS Inicio › La Madriguera La madriguera La Madriguera Ruta avanzada de contexto: historia, fundamentos y análisis para entender Bitcoin con profundidad. Esta sección está pensada para usuarios que ya dominan lo básico y quieren conectar los hechos históricos, las decisiones de diseño y los debates abiertos del ecosistema. Puedes leerla por tema o seguir el orden completo del 01 al 27 para una ruta progresiva. HISTORIA 01 - Los primeros días de Bitcoin (2009) 02 - Bitcoin y WikiLeaks (2010) 03 - Silk Road y Ross Ulbricht (2013) 04 - Mt. Gox (2014) 05 - Guerra del tamaño de bloque (2015-17) 06 - Crisis Terra/Luna (2022) 07 - Colapso de FTX (2022) 08 - Ordinals e Inscriptions (2023) 09 - Caso Samourai Wallet (2024) 10 - ETFs de Bitcoin (2024) FUNDAMENTOS 11 - El ataque del 51% 12 - Bloques huérfanos y reorgs 13 - El Problema del General Bizantino 14 - El doble gasto 15 - La política monetaria de Bitcoin 16 - Los soft forks de Bitcoin 17 - Multisig y herencia según Satoshi 18 - Economía austríaca para bitcoiners ANÁLISIS 19 - Bitcoin y energía 20 - Geopolítica de la minería 21 - Lightning Network: estado actual 22 - Privacidad: estado actual 23 - ¿Puede un gobierno prohibir Bitcoin? 24 - El debate de la osificación 25 - ¿Medio de pago o reserva de valor? 26 - Hiperinflaciones y Bitcoin 27 - El halving y los ciclos de precio 💡 Cómo lee"
   },
   {
     "title": "La crisis de Terra/Luna: la \"stablecoin\" que no era estable",
@@ -2193,7 +2205,7 @@
     ],
     "section": "Nivel 3",
     "nivel": 3,
-    "keywords": "Fiscalidad de Bitcoin en el nivel 3 de aprendeBTC. Inicio &rsaquo; Nivel 3 &rsaquo; Fiscalidad de Bitcoin Nivel 3 Fiscalidad de Bitcoin Aspectos fiscales basicos para operar con Bitcoin. Esta página ya esta creada como placeholder para mantener la navegación sin enlaces rotos. El contenido didactico completo se añadir? en la siguiente iteracion. i Estado Ruta habilitada y estructura integrada en el sitio. &larr; Anterior Seguridad operativa Siguiente &rarr; Nivel 4 - En la madriguera"
+    "keywords": "Fiscalidad de Bitcoin en el nivel 3 de aprendeBTC. Inicio &rsaquo; Nivel 3 &rsaquo; Fiscalidad de Bitcoin Nivel 3 Fiscalidad de Bitcoin Aspectos fiscales basicos para operar con Bitcoin. Esta página ya está creada como placeholder para mantener la navegación sin enlaces rotos. El contenido didáctico completo se añadirá en la siguiente iteración. i Estado Ruta habilitada y estructura integrada en el sitio. &larr; Anterior Seguridad operativa Siguiente &rarr; Nivel 4 - En la madriguera"
   },
   {
     "title": "El halving",
@@ -2379,7 +2391,7 @@
     ],
     "section": "Nivel 3",
     "nivel": 3,
-    "keywords": "Seguridad operativa en el nivel 3 de aprendeBTC. Inicio &rsaquo; Nivel 3 &rsaquo; Seguridad operativa Nivel 3 Seguridad operativa Practicas de OpSec para reducir riesgos en el uso de Bitcoin. Esta página ya esta creada como placeholder para mantener la navegación sin enlaces rotos. El contenido didactico completo se añadir? en la siguiente iteracion. i Estado Ruta habilitada y estructura integrada en el sitio. &larr; Anterior Coin control Siguiente &rarr; Fiscalidad de Bitcoin"
+    "keywords": "Seguridad operativa en el nivel 3 de aprendeBTC. Inicio &rsaquo; Nivel 3 &rsaquo; Seguridad operativa Nivel 3 Seguridad operativa Practicas de OpSec para reducir riesgos en el uso de Bitcoin. Esta página ya está creada como placeholder para mantener la navegación sin enlaces rotos. El contenido didáctico completo se añadirá en la siguiente iteración. i Estado Ruta habilitada y estructura integrada en el sitio. &larr; Anterior Coin control Siguiente &rarr; Fiscalidad de Bitcoin"
   },
   {
     "title": "Tipos de direcciones Bitcoin",
@@ -2479,6 +2491,23 @@
     "keywords": "Cómo distribuir las llaves de un multisig en diferentes ubicaciones para proteger contra robo, desastres y coacción física. El principio Escenarios de amenaza Robo Desastre natural o incendio Coacción física (ataque de $5) Ejemplo de distribución 2-de-3 Ubicación 1: Tu casa Ubicación 2: Casa de familiar de confianza Ubicación 3: Caja de seguridad bancaria Variaciones según threat model Enfoque en conveniencia Enfoque en seguridad Inicio &rsaquo; Nivel 4 &rsaquo; Distribución geográfica de claves Nivel 4 Distribución geográfica de claves No guardes todas las llaves en el mismo sitio. Distribución geográfica como defensa contra múltiples amenazas. El principio De nada sirve un multisig 2-de-3 si las tres llaves están en el cajón de tu escritorio. Un ladrón, un incendio, o una confiscación se llevaría las tres simultáneamente. La distribución geográfica asegura que ningún evento único pueda comprometer suficientes llaves como para perder los fondos o permitir un robo. Escenarios de amenaza Robo Un ladrón entra en tu casa. Si encuentra una hardware wallet: Singlesig: Tiene acceso a todo (si también encuentra la seed o puede forzarte) Multisig con distribución: Solo tiene 1 de 3 llaves. Inútil. El ladrón necesitaría robar en múltiples ubicaciones, lo que es exponencialmente más difícil y arriesgado para él. Desastre natural o incendio Tu casa se destruye en un incendio: Todo en casa: Pierdes todas las llaves y seeds Distribución: Pierdes 1 de 3 ubicaciones. Las otras 2 son suficie"
   },
   {
+    "title": "Fedimint y Cashu: mints federados y eCash sobre Bitcoin",
+    "url": "/nivel-4/fedimint-y-cashu.html",
+    "tags": [
+      "nivel 4",
+      "nivel",
+      "fedimint",
+      "cashu",
+      "wallet",
+      "billetera",
+      "lightning",
+      "factura lightning"
+    ],
+    "section": "Nivel 4",
+    "nivel": 4,
+    "keywords": "Fedimint y Cashu traen eCash de David Chaum a Bitcoin. Privacidad extrema, custodia comunitaria y Lightning integrado. Qué problema resuelven Cashu: simple, portable y muy rápido Fedimint: custodia distribuida entre guardianes Integración con Lightning Trade-off principal: privacidad vs autocustodia Cashu vs Fedimint: cuándo usar cada uno Qué no debes esperar Modelo mental correcto para usar mints Prácticas recomendadas para usuarios Prácticas recomendadas para operadores de mint Amenazas reales y mitigaciones prácticas Casos de uso donde brillan Inicio › Nivel 4 › Fedimint y Cashu Nivel 4 Fedimint y Cashu: mints federados y eCash sobre Bitcoin La idea más antigua del dinero digital aplicada sobre Lightning: privacidad casi perfecta con custodia comunitaria. En 1982, David Chaum describió un modelo de dinero electrónico con firmas ciegas: el emisor puede validar el token sin conocer su historial de uso. Décadas después, esa idea revive sobre Bitcoin mediante mints federados y eCash integrado con Lightning. La clave es separar capas: Bitcoin como reserva, Lightning como rampa de entrada/salida y eCash como instrumento de pago privado para uso diario. Qué problema resuelven En sistemas bancarios y custodiales tradicionales, el operador conoce casi todo: saldos, contrapartes, frecuencia y horarios. Con eCash basado en firmas ciegas, ese operador pierde capacidad de vincular emisión y gasto individual. No es anonimato absoluto contra cualquier amenaza, pero sí un salto fuerte de "
+  },
+  {
     "title": "Guía de herencia paso a paso",
     "url": "/nivel-4/guia-herencia.html",
     "tags": [
@@ -2559,7 +2588,26 @@
     ],
     "section": "Nivel 4",
     "nivel": 4,
-    "keywords": "Nivel 4 de aprendeBTC: privacidad, multisig, herencia, Lightning avanzado y minería casera en una guia practica. Sección 2 &middot; Multisig Sección 3 &middot; Herencia Sección 4 &middot; Lightning avanzado Sección 5 &middot; Minería casera Inicio &rsaquo; Nivel 4 &mdash; En la madriguera Nivel 4 En la madriguera Por qu&eacute; En la madriguera: profundizas en privacidad, multisig y herencia. Privacidad, multisig, herencia, Lightning avanzado y minería casera para operar Bitcoin con criterio tecnico. i Como usar este nivel Este bloque profundiza en seguridad real, operacion avanzada y continuidad patrimonial. Avanza en orden para mantener contexto. Sección 2 &middot; Multisig 1 Distribución geográfica de claves No guardes todas las llaves en el mismo sitio. Distribución geográfica como defensa contra múltiples amenazas. &rarr; Sección 3 &middot; Herencia 2 Herencia de Bitcoin Si mueres sin preparación, tus bitcoin desaparecen para siempre. No hay \"departamento de herencias\" que ayude. &rarr; 3 Guía de herencia paso a paso Tres enfoques prácticos para asegurar que tus bitcoin lleguen a quien debe recibirlos. &rarr; 4 Herencia con multisig Multisig como solución elegante para herencia: control total en vida, acceso para herederos tras el fallecimiento. &rarr; Sección 4 &middot; Lightning avanzado 5 Canales de pago Conexiones bidireccionales entre nodos con bitcoin bloqueado. El fundamento técnico de Lightning. &rarr; 6 Gestión de liquidez El problema más complejo de Lightning: "
+    "keywords": "Nivel 4 de aprendeBTC: privacidad, multisig, herencia, Lightning avanzado, sidechains y minería casera. Sección 2 · Multisig Sección 3 · Herencia Sección 4 · Lightning avanzado Sección 5 · Sidechains y eCash Sección 6 · Minería casera Inicio › Nivel 4 — En la madriguera Nivel 4 En la madriguera Por qué En la madriguera: profundizas en privacidad, herencia, Lightning y capas avanzadas sobre Bitcoin. Privacidad, multisig, herencia, Lightning avanzado, sidechains y minería casera para operar Bitcoin con criterio técnico. i Cómo usar este nivel Avanza en orden para mantener contexto. Este bloque combina estrategia operativa, custodia avanzada y capas de extensión de Bitcoin. Sección 2 · Multisig 1 Distribución geográfica de claves No guardes todas las llaves en el mismo sitio. Distribución geográfica como defensa contra múltiples amenazas. &rarr; Sección 3 · Herencia 2 Herencia de Bitcoin Si mueres sin preparación, tus bitcoin pueden perderse para siempre. Aquí defines la estrategia correcta. &rarr; 3 Guía de herencia paso a paso Tres enfoques prácticos para asegurar transferencia de fondos sin exponer tu seguridad en vida. &rarr; 4 Herencia con multisig Multisig aplicado a sucesión patrimonial: control en vida y acceso ordenado para herederos. &rarr; Sección 4 · Lightning avanzado 5 Canales de pago Conexiones bidireccionales entre nodos con BTC bloqueado. Fundamento técnico de Lightning. &rarr; 6 Gestión de liquidez El problema más complejo de Lightning: balancear capacidad de e"
+  },
+  {
+    "title": "Liquid Network: la sidechain federada de Bitcoin",
+    "url": "/nivel-4/liquid-network.html",
+    "tags": [
+      "nivel 4",
+      "nivel",
+      "liquid",
+      "network",
+      "wallet",
+      "billetera",
+      "lightning",
+      "factura lightning",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "Nivel 4",
+    "nivel": 4,
+    "keywords": "Liquid Network de Blockstream: transacciones rápidas, confidenciales y emisión de activos sobre Bitcoin. Guía completa. Qué es L-BTC y cómo funciona el peg Federación de functionaries Confidential Transactions Finalidad rápida Emisión de activos sobre Liquid Para quién tiene sentido Lo que Liquid no resuelve Cómo decidir si Liquid encaja en tu operativa Riesgos operativos que debes modelar Buenas prácticas mínimas Liquid frente a on-chain y Lightning Escenarios donde Liquid destaca Inicio › Nivel 4 › Liquid Network Nivel 4 Liquid Network: la sidechain federada de Bitcoin Transacciones más rápidas, confidenciales y con activos tokenizados. Todo sobre la sidechain federada de Blockstream. Imagina que necesitas mover varios BTC de un exchange a otro para aprovechar una diferencia de precio. En Bitcoin capa base, esperar confirmaciones robustas puede llevar tiempo. Para ciertos flujos institucionales, ese tiempo cuesta dinero. Liquid se diseñó precisamente para ese escenario: mover BTC entre participantes del ecosistema con mayor velocidad operativa y con mayor privacidad de montos. Qué es L-BTC y cómo funciona el peg Liquid es una sidechain federada y su activo representativo es L-BTC . Igual que en otras sidechains, el modelo busca un respaldo 1:1 con BTC bloqueado en la cadena principal. Entras bloqueando BTC en capa base y recibes L-BTC. Operas dentro de Liquid con sus reglas de consenso y privacidad. Sales devolviendo L-BTC y recuperando BTC. Federación de functionaries La s"
   },
   {
     "title": "Gestión de liquidez",
@@ -2601,9 +2649,7 @@
       "mineria",
       "casera",
       "wallet",
-      "billetera",
-      "lightning",
-      "factura lightning"
+      "billetera"
     ],
     "section": "Nivel 4",
     "nivel": 4,
@@ -2658,6 +2704,38 @@
     "section": "Nivel 4",
     "nivel": 4,
     "keywords": "Contenido en preparacion para aprendeBTC. Inicio &rsaquo; Nivel 4 &rsaquo; Qué Es Multisig Qué Es Multisig Página en preparacion. Volvera pronto con contenido completo. Contenido en preparacion. &larr; Anterior Coinjoin Siguiente &rarr; Configurar multisig con Sparrow"
+  },
+  {
+    "title": "¿Qué son las sidechains de Bitcoin?",
+    "url": "/nivel-4/que-son-las-sidechains.html",
+    "tags": [
+      "nivel 4",
+      "nivel",
+      "que",
+      "son",
+      "las",
+      "sidechains",
+      "lightning",
+      "factura lightning",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "Nivel 4",
+    "nivel": 4,
+    "keywords": "Sidechains de Bitcoin: qué son, cómo funcionan los pegs bidireccionales, y por qué extienden Bitcoin sin cambiarlo. Una autopista con vías secundarias Cómo funciona el peg bidireccional Para entrar (peg-in) Para salir (peg-out) Diferencia clave frente a altcoins No toda la confianza es igual Qué puedes hacer en una sidechain El trade-off nunca desaparece Las capas que cubre aprendeBTC Cómo evaluar una sidechain sin marketing Checklist de uso responsable Cuándo NO usar sidechains Inicio › Nivel 4 › ¿Qué son las sidechains de Bitcoin? Nivel 4 ¿Qué son las sidechains de Bitcoin? Cadenas laterales que heredan la seguridad de Bitcoin y usan BTC como moneda. Lo mejor de dos mundos. Bitcoin es el protocolo más seguro, descentralizado y robusto de la historia del dinero digital. Pero esa robustez tiene un precio: es deliberadamente conservador. No puede ejecutar contratos complejos de forma nativa, sus transacciones tardan minutos en confirmarse y su privacidad no es perfecta. La pregunta natural es: ¿qué pasa cuando necesitas más funcionalidad sin renunciar al BTC que ya tienes? Ahí entran las sidechains. Una autopista con vías secundarias Imagina que Bitcoin es una gran autopista: fiable, segura, con reglas estrictas y miles de ojos vigilando que todo funcione bien. Las sidechains son vías secundarias que parten de esa autopista. Cada vía secundaria tiene reglas propias: puede ser más rápida, más privada o más flexible para contratos. Pero sigue conectada con la autopista principal"
+  },
+  {
+    "title": "Rootstock (RSK): contratos inteligentes sobre Bitcoin",
+    "url": "/nivel-4/rootstock-rsk.html",
+    "tags": [
+      "nivel 4",
+      "nivel",
+      "rootstock",
+      "rsk"
+    ],
+    "section": "Nivel 4",
+    "nivel": 4,
+    "keywords": "Rootstock (RSK) añade contratos inteligentes a Bitcoin usando minería fusionada y rBTC. Qué es, cómo funciona y para qué sirve. ¿Qué es rBTC? No es un token nuevo Minería fusionada: seguridad prestada de Bitcoin PowPeg: el puente entre Bitcoin y Rootstock Compatibilidad EVM: ventaja para desarrolladores ¿Para qué se usa Rootstock en la práctica? Un proyecto con historia Lo que Rootstock no es Checklist antes de mover BTC a Rootstock Errores comunes en usuarios avanzados Cuándo sí y cuándo no Gobernanza, roadmap y riesgos de evolución Enlaces internos Inicio › Nivel 4 › Rootstock (RSK) Nivel 4 Rootstock (RSK): contratos inteligentes sobre Bitcoin La sidechain que trae funcionalidad tipo Ethereum a Bitcoin, sin abandonar el ecosistema BTC. Bitcoin no puede ejecutar contratos inteligentes complejos de forma nativa. Eso está bien: la simplicidad es una virtud en capa base. Pero, al mismo tiempo, deja fuera casos de uso que sí son posibles en plataformas como Ethereum. Rootstock es la respuesta que más tiempo lleva en producción para cubrir ese hueco: una sidechain de Bitcoin que permite contratos inteligentes completos, usa BTC como moneda de referencia y hereda parte de la seguridad de Bitcoin mediante minería fusionada. ¿Qué es rBTC? No es un token nuevo Lo primero que hay que entender: rBTC no es una altcoin . Cuando mueves BTC a Rootstock, tus bitcoins quedan bloqueados en la cadena principal y recibes rBTC en Rootstock a razón 1:1. Cada rBTC en circulación corresponde a un B"
   },
   {
     "title": "Routing de pagos",
@@ -3227,17 +3305,122 @@
     "keywords": "Diferencia entre soft fork y hard fork en Bitcoin. Por qué Bitcoin prefiere soft forks, mecanismos de activación, y el caso Bitcoin Cash. Cambios de consenso Soft fork: endurecer las reglas Hard fork: relajar o cambiar las reglas Por qué Bitcoin evita hard forks Mecanismos de activación de soft forks BIP 9: Señalización de mineros BIP 8: Activación con opción de forzado UASF (User Activated Soft Fork) Speedy Trial La resistencia al cambio como feature Las excepciones necesarias Inicio &rsaquo; Nivel 6 &rsaquo; Soft fork vs Hard fork Nivel 6 Soft fork vs Hard fork Dos formas de cambiar las reglas del protocolo. Una mantiene la red unida, la otra la divide. Cambios de consenso Las reglas de consenso son las que determinan qué bloques y transacciones son válidos. Cambiarlas es el tipo de modificación más delicada en Bitcoin. Hay dos formas de hacer cambios de consenso: soft forks y hard forks. Soft fork: endurecer las reglas Un soft fork hace las reglas más restrictivas. Cosas que antes eran válidas dejan de serlo, pero todo lo que era inválido sigue siendo inválido. Propiedad clave: Los nodos que no actualicen siguen aceptando los bloques nuevos (porque son un subconjunto de lo que antes era válido). Ejemplo: SegWit Antes de SegWit, cualquier output con formato OP_0 <datos> era gastable por cualquiera (era un \"anyone-can-spend\" técnicamente). SegWit redefinió estos outputs: ahora solo son gastables si se cumplen las reglas de witness. Un nodo viejo ve una transacción SegWit y p"
   },
   {
-    "title": "Recursos imprescindibles sobre Bitcoin",
+    "title": "Recursos sobre Bitcoin",
     "url": "/recursos.html",
     "tags": [
       "recursos",
       "wallet",
       "billetera",
+      "lightning",
+      "factura lightning"
+    ],
+    "section": "Recursos",
+    "keywords": "Índice de recursos Bitcoin: libros, podcasts, documentales, webs, herramientas y hardware wallets. Libros Podcasts Documentales Webs de referencia Herramientas Hardware wallets Otros recursos Inicio &rsaquo; Recursos Recursos sobre Bitcoin Todo el material recomendado de aprendeBTC, ordenado por categoría para que encuentres lo que necesitas rápido. ❤ Gracias por apoyar aprendeBTC Algunos enlaces, especialmente en la sección de libros, son de afiliado de Amazon. Si compras usando esos enlaces apoyas este proyecto sin coste extra para ti. Libros Selección curada de libros clave para entender Bitcoin desde fundamentos, economía, técnica y narrativa. Ver libros recomendados &rarr; Podcasts Programas en español e inglés para mantenerte actualizado y escuchar conversaciones de alta señal. Ver podcasts recomendados &rarr; Documentales Documentales para reforzar contexto histórico, social y monetario del fenómeno Bitcoin. Ver documentales recomendados &rarr; Webs de referencia Fuentes para estudiar protocolo, desarrollo, mempool y mejores prácticas. Ver webs de referencia &rarr; Herramientas Herramientas externas útiles para analizar red, mejorar operativa y seguir actividad on-chain y Lightning. Ver herramientas recomendadas &rarr; Hardware wallets Opciones de dispositivos para autocustodia con enfoque en seguridad y compatibilidad. Ver hardware wallets &rarr; Otros recursos Material complementario: whitepaper, guías propias, comunidad y lecturas técnicas. Ver otros recursos &rarr;"
+  },
+  {
+    "title": "Documentales sobre Bitcoin",
+    "url": "/recursos/documentales.html",
+    "tags": [
+      "general",
+      "recursos",
+      "documentales"
+    ],
+    "section": "General",
+    "keywords": "Documentales recomendados para entender la historia y el contexto de Bitcoin. The Great Reset and the Rise of Bitcoin (2022) Human B (2023) God Bless Bitcoin (2024) Bitcoin: The End of Money as We Know It (2015) Banking on Bitcoin (2016) Inicio &rsaquo; Recursos &rsaquo; Documentales Documentales sobre Bitcoin Recursos audiovisuales para ganar contexto histórico y comprender el impacto social de Bitcoin. The Great Reset and the Rise of Bitcoin (2022) Contexto macroeconómico Economía Principiante Pone en perspectiva el entorno monetario global y por qué Bitcoin gana relevancia como alternativa. Ver documental Human B (2023) Adopción global Adopción Principiante Historias humanas de adopción en distintos países, con enfoque en soberanía financiera y libertad. Ver documental God Bless Bitcoin (2024) Valores y cultura Filosofía Intermedio Explora la intersección entre Bitcoin, valores personales y el debate cultural sobre el dinero. Ver documental Bitcoin: The End of Money as We Know It (2015) Historia temprana Historia Principiante Uno de los documentales clásicos para entender los orígenes y las primeras narrativas de Bitcoin. Ver documental Banking on Bitcoin (2016) Historia y regulación Historia Intermedio Recorre los primeros años del ecosistema, tensiones regulatorias y casos clave de la etapa pionera. Ver documental i Sugerencia Usa estos documentales como complemento. Para estudio profundo, prioriza libros y fuentes técnicas primarias. &larr; Volver Todos los recursos"
+  },
+  {
+    "title": "Hardware wallets recomendadas",
+    "url": "/recursos/hardware-wallets.html",
+    "tags": [
+      "general",
+      "recursos",
+      "hardware",
+      "wallets",
+      "frase semilla",
+      "seed phrase",
+      "mnemonic",
+      "bip39",
+      "wallet",
+      "billetera"
+    ],
+    "section": "General",
+    "keywords": "Hardware wallets recomendadas para autocustodia Bitcoin: enfoque en seguridad y buenas prácticas. Coldcard Trezor Ledger BitBox02 Blockstream Jade SeedSigner Inicio &rsaquo; Recursos &rsaquo; Hardware wallets Hardware wallets recomendadas Dispositivos para autocustodia. Prioriza siempre compra en tienda oficial, firmware verificado y backup seguro. ❤ Enlaces de afiliado Algunos enlaces de esta página son de afiliado. Si compras desde ellos, apoyas aprendeBTC sin coste adicional para ti. Coldcard Coinkite Bitcoin-only Avanzado Muy enfocada en seguridad operativa y airgap para usuarios que quieren control estricto. Ver oficial Trezor SatoshiLabs Fácil de usar Principiante Buena opción de entrada para autocustodia, con amplia documentación y soporte de software. Ver oficial Ledger Ledger Uso general Principiante Opción muy extendida para autocustodia. Revisa el modelo que mejor encaje con tu perfil y tu operativa. Ver oficial BitBox02 Shift Crypto Bitcoin-only Intermedio Dispositivo compacto y sólido para setups simples o avanzados con buenas prácticas de seguridad. Ver oficial Blockstream Jade Blockstream Open source Intermedio Alternativa con buena relación entre prestaciones y coste. Enlace a la tienda oficial de Blockstream. Ver oficial SeedSigner Proyecto DIY DIY Avanzado Proyecto para usuarios técnicos que quieren construir su propio signer en entorno airgapped. Ver oficial i Regla de oro Compra solo en tienda oficial, inicializa el dispositivo desde cero y guarda la seed "
+  },
+  {
+    "title": "Herramientas recomendadas",
+    "url": "/recursos/herramientas.html",
+    "tags": [
+      "general",
+      "recursos",
+      "herramientas",
+      "frase semilla",
+      "seed phrase",
+      "mnemonic",
+      "bip39",
+      "wallet",
+      "billetera",
+      "lightning",
+      "factura lightning",
       "utxo",
       "transacciones"
     ],
-    "section": "Recursos",
-    "keywords": "Los mejores libros, podcasts, documentales, webs y herramientas sobre Bitcoin en español e inglés. Selección curada. Libros Podcasts (español) Podcasts (inglés) Documentales Webs de referencia Herramientas Inicio &rsaquo; Recursos imprescindibles sobre Bitcoin Recursos imprescindibles sobre Bitcoin Una selección curada de los mejores recursos para profundizar en Bitcoin, en español e inglés. Libros The Bitcoin Standard — Saifedean Ammous El libro de referencia sobre Bitcoin como dinero sólido. Explica la historia del dinero, por qué el dinero fiat falla, y cómo Bitcoin resuelve esos problemas. Lectura obligatoria para entender el \"por qué\" de Bitcoin. Existe en español (\"El Patrón Bitcoin\"). Mastering Bitcoin — Andreas Antonopoulos La referencia técnica definitiva. Explica el protocolo en profundidad: transacciones, scripts, minería, claves. Ideal para desarrolladores y curiosos técnicos. Gratuito online en GitHub. The Blocksize War — Jonathan Bier La historia del debate del tamaño de bloque y el fork de Bitcoin Cash. Documenta uno de los conflictos más importantes en la historia de Bitcoin y cómo se resolvió mediante el mercado y los usuarios. 21 Lessons — Gigi Reflexiones filosóficas, económicas y técnicas sobre lo que Bitcoin enseña. Estructura única: 21 lecciones en 3 capítulos. Gratuito en 21lessons.com. Inventing Bitcoin — Yan Pritzker Explicación técnica accesible para no-programadores. Construye Bitcoin desde cero conceptualmente, explicando cada pieza del puzzle. The"
+    "section": "General",
+    "keywords": "Herramientas recomendadas para operativa, análisis y estudio de Bitcoin y Lightning. mempool.space Sparrow Wallet Ian Coleman BIP39 btcmap.org amboss.space 1ML Herramientas aprendeBTC Inicio &rsaquo; Recursos &rsaquo; Herramientas Herramientas recomendadas Recursos externos útiles para monitoreo de red, analítica y operativa diaria en Bitcoin y Lightning. mempool.space Explorador y mempool en tiempo real On-chain Principiante Consulta fees recomendadas, bloques pendientes y estado de confirmación de cualquier transacción. Abrir herramienta Sparrow Wallet Wallet de escritorio avanzada Autocustodia Intermedio Referencia para coin control, PSBT, multisig y trabajo profesional con hardware wallets. Abrir herramienta Ian Coleman BIP39 Herramienta educativa BIP39 Intermedio Útil para aprender seeds y derivación. Solo para laboratorio offline, nunca para generar seeds reales. Abrir herramienta btcmap.org Mapa de adopción Comercios Principiante Encuentra comercios que aceptan Bitcoin y Lightning en distintas ciudades del mundo. Abrir herramienta amboss.space Analítica Lightning Lightning Intermedio Explora nodos, canales, liquidez y datos clave para operar infraestructura Lightning. Abrir herramienta 1ML Explorador Lightning Lightning Principiante Vista rápida de canales y topología de red para complementar otros exploradores Lightning. Abrir herramienta Herramientas aprendeBTC Suite interna Práctica Principiante Calculadoras y utilidades para practicar conceptos de Bitcoin en un ent"
+  },
+  {
+    "title": "Libros recomendados sobre Bitcoin",
+    "url": "/recursos/libros.html",
+    "tags": [
+      "general",
+      "recursos",
+      "libros",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "General",
+    "keywords": "Libros recomendados sobre Bitcoin con enfoque en fundamentos, economía, técnica y soberanía. Imprescindibles El patrón Bitcoin: La alternativa descentralizada a los bancos centrales Inventemos Bitcoin: La explicación sobre el primer dinero verdaderamente escaso y descentralizado Bitcoinismo: La era de la riqueza inconfiscable Dinero roto: Por qué nuestro sistema financiero está fallando y cómo podemos mejorarlo Mastering Bitcoin Más libros recomendados El último Satoshi Finanzas descentralizadas: la nueva y definitiva libertad económica Del oro al Bitcoin: Cómo y por qué las criptomonedas harán desaparecer los sistemas monetarios tradicionales 21 Lecciones Lo Que He Aprendido Al Caer En La Madriguera De Bitcoin Internet del Dinero: Volumen 1 Inicio &rsaquo; Recursos &rsaquo; Libros Libros recomendados sobre Bitcoin Selección curada para construir criterio, comprender el protocolo y profundizar en la filosofía de Bitcoin. ❤ Gracias por apoyar aprendeBTC Los enlaces de esta página son de afiliado de Amazon. Si compras mediante ellos, apoyas este proyecto sin coste adicional para ti. Todos los libros listados aquí son materiales educativos. Este contenido no es asesoramiento financiero. Imprescindibles El patrón Bitcoin: La alternativa descentralizada a los bancos centrales Saifedean Ammous Economía monetaria Intermedio Una referencia clave para entender la historia del dinero, los límites del sistema fíat y por qué Bitcoin importa. Ver en Amazon Inventemos Bitcoin: La explicaci"
+  },
+  {
+    "title": "Otros recursos",
+    "url": "/recursos/otros-recursos.html",
+    "tags": [
+      "general",
+      "recursos",
+      "otros",
+      "lightning",
+      "factura lightning"
+    ],
+    "section": "General",
+    "keywords": "Otros recursos complementarios sobre Bitcoin: whitepaper, comunidad, glosario y lecturas técnicas. Documentos base Guías de aprendeBTC Comunidad Seguimiento técnico Inicio &rsaquo; Recursos &rsaquo; Otros recursos Otros recursos Material complementario para afianzar conceptos, profundizar en protocolo y conectar con la comunidad. Documentos base Fuentes primarias para estudiar el origen de Bitcoin y su diseño. Whitepaper de Bitcoin (español) &rarr; Whitepaper de Bitcoin (inglés) &rarr; Guías de aprendeBTC Contenido interno para reforzar términos, rutas de estudio y conceptos clave. ¿Por dónde empiezo? &rarr; Glosario Bitcoin &rarr; La Madriguera &rarr; Comunidad Canales para resolver dudas, seguir eventos y mantenerte activo en el ecosistema. Comunidades online &rarr; Nostr y Bitcoin &rarr; Conferencias &rarr; Seguimiento técnico Para usuarios y builders que quieren estar al día de cambios en protocolo y herramientas. Bitcoin Optech &rarr; Repositorio Bitcoin Core &rarr; Especificación Lightning (BOLTs) &rarr; &larr; Volver Todos los recursos"
+  },
+  {
+    "title": "Podcasts de Bitcoin",
+    "url": "/recursos/podcasts.html",
+    "tags": [
+      "general",
+      "recursos",
+      "podcasts"
+    ],
+    "section": "General",
+    "keywords": "Podcasts de Bitcoin en español e inglés para aprender, profundizar y seguir la actualidad. En español Lunaticoin Bitcoin en español Un Podcast Sobre Bitcoin En inglés What Bitcoin Did Stephan Livera Podcast Bitcoin Audible Citadel Dispatch The Bitcoin Standard Podcast Tales from the Crypt Inicio &rsaquo; Recursos &rsaquo; Podcasts Podcasts de Bitcoin Selección de podcasts para aprender de forma continua, con foco en educación, economía y desarrollo. En español Lunaticoin Podcast en español Divulgación Intermedio Entrevistas y episodios de alta calidad sobre fundamentos de Bitcoin, autocustodia y economía monetaria. Escuchar Bitcoin en español Podcast en español Divulgación Principiante Contenido para hispanohablantes sobre adopción, economía y fundamentos de Bitcoin con lenguaje claro. Escuchar Un Podcast Sobre Bitcoin Podcast en español Cultura y soberanía Intermedio Programa en español con enfoque en filosofía monetaria, actualidad y contexto de Bitcoin. Escuchar En inglés What Bitcoin Did Peter McCormack Entrevistas Principiante Conversaciones con referentes del ecosistema: desarrolladores, economistas y emprendedores. Escuchar Stephan Livera Podcast Stephan Livera Técnico Avanzado Profundidad técnica y económica: seguridad, arquitectura de Bitcoin y teoría monetaria. Escuchar Bitcoin Audible Guy Swann Lecturas técnicas Intermedio Formato ideal para consumir ensayos y artículos clave de la comunidad en audio. Escuchar Citadel Dispatch Marty Bent & Odell Privacidad Intermed"
+  },
+  {
+    "title": "Webs de referencia sobre Bitcoin",
+    "url": "/recursos/webs-referencia.html",
+    "tags": [
+      "general",
+      "recursos",
+      "webs",
+      "referencia",
+      "wallet",
+      "billetera",
+      "lightning",
+      "factura lightning",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "General",
+    "keywords": "Webs de referencia para estudiar Bitcoin: documentación, exploradores, desarrollo y comunidad. bitcoin.org learnmeabitcoin.com mempool.space bitcoinops.org aprendebtc.com nostrfacil.com bitcoin.design BDK y LDK Inicio &rsaquo; Recursos &rsaquo; Webs de referencia Webs de referencia sobre Bitcoin Fuentes recomendadas para consultar información primaria, documentación y seguimiento técnico de la red. bitcoin.org Sitio de referencia Fundamentos Principiante Punto de entrada histórico con explicaciones base, wallets y recursos para nuevos usuarios. Abrir web learnmeabitcoin.com Referencia técnica visual Técnico Intermedio Explicaciones visuales del protocolo: transacciones, scripts, bloques, direcciones y criptografía. Abrir web mempool.space Explorador on-chain Mempool Principiante Visualización de mempool y bloques en tiempo real para estimar fees y seguir transacciones. Abrir web bitcoinops.org Desarrollo Bitcoin Newsletter técnica Avanzado Resumen semanal de cambios en Bitcoin Core, Lightning, BIPs y discusiones de alto nivel técnico. Abrir web aprendebtc.com Guía progresiva en español Ruta de aprendizaje Principiante Contenido estructurado desde cero hasta nivel técnico avanzado, con herramientas y comunidad. Abrir web nostrfacil.com Proyecto hermano Nostr Principiante Guía en español para usar Nostr, un protocolo clave para comunidad, comunicación y soberanía digital. Abrir web bitcoin.design UX y producto Diseño Intermedio Guías de buenas prácticas para construir productos"
   },
   {
     "title": "Sobre aprendeBTC",

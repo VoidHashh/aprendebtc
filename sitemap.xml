@@ -186,6 +186,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://aprendebtc.com/donar.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://aprendebtc.com/empezar.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -781,6 +786,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://aprendebtc.com/nivel-4/fedimint-y-cashu.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://aprendebtc.com/nivel-4/guia-herencia.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -797,6 +807,11 @@
   </url>
   <url>
     <loc>https://aprendebtc.com/nivel-4/herencia-multisig.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aprendebtc.com/nivel-4/liquid-network.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -827,6 +842,16 @@
   </url>
   <url>
     <loc>https://aprendebtc.com/nivel-4/que-es-multisig.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aprendebtc.com/nivel-4/que-son-las-sidechains.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aprendebtc.com/nivel-4/rootstock-rsk.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1032,11 +1057,6 @@
   </url>
   <url>
     <loc>https://aprendebtc.com/recursos/webs-referencia.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://aprendebtc.com/donar.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

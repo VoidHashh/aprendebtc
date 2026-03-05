@@ -83,7 +83,11 @@
         { href: '/nivel-4/liquidez-lightning.html', text: 'Gestión de liquidez' },
         { href: '/nivel-4/routing-lightning.html', text: 'Routing de pagos' },
         { href: '/nivel-4/nodo-lightning.html', text: 'Montar tu nodo Lightning' },
-        { href: '/nivel-4/mineria-casera.html', text: 'Minería casera: tiene sentido' },
+        { href: '/nivel-4/que-son-las-sidechains.html', text: '¿Qué son las sidechains de Bitcoin?' },
+        { href: '/nivel-4/rootstock-rsk.html', text: 'Rootstock (RSK)' },
+        { href: '/nivel-4/liquid-network.html', text: 'Liquid Network' },
+        { href: '/nivel-4/fedimint-y-cashu.html', text: 'Fedimint y Cashu' },
+        { href: '/nivel-4/mineria-casera.html', text: 'Minería casera: ¿tiene sentido?' },
         { href: '/nivel-4/hardware-mineria.html', text: 'Hardware de minería' },
         { href: '/nivel-4/pools-mineria.html', text: 'Pools de minería' },
         { href: '/nivel-4/mineria-bitaxe.html', text: 'Minería con Bitaxe' },
@@ -313,6 +317,7 @@
     if (nivelMatch) return `Nivel ${nivelMatch[1]}`;
     if (path === '/base' || path.startsWith('/base/')) return 'Base de Conocimiento';
     if (path === '/la-madriguera' || path.startsWith('/la-madriguera/')) return 'La Madriguera';
+    if (path === '/sidechains' || path.startsWith('/sidechains/')) return 'Sidechains';
     if (path === '/comunidad' || path.startsWith('/comunidad/')) return 'Comunidad';
     if (path === '/herramientas' || path.startsWith('/herramientas/')) return 'Herramientas';
     if (path === '/glosario.html') return 'Glosario';

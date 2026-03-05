@@ -1,0 +1,301 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Sidechains de Bitcoin: qué son, cómo funcionan los pegs bidireccionales, y por qué extienden Bitcoin sin cambiarlo."
+  />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aprendebtc.com/sidechains/que-son-las-sidechains.html" />
+  <meta property="og:title" content="¿Qué son las sidechains de Bitcoin? — | Sidechains | aprendebtc.com" />
+  <meta property="og:description" content="Sidechains de Bitcoin: qué son, cómo funcionan los pegs bidireccionales, y por qué extienden Bitcoin sin cambiarlo." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="¿Qué son las sidechains de Bitcoin? — | Sidechains | aprendebtc.com" />
+  <meta name="twitter:description" content="Sidechains de Bitcoin: qué son, cómo funcionan los pegs bidireccionales, y por qué extienden Bitcoin sin cambiarlo." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://aprendebtc.com/sidechains/que-son-las-sidechains.html" />
+  <link rel="alternate" hreflang="es" href="https://aprendebtc.com/sidechains/que-son-las-sidechains.html" />
+  <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/sidechains/que-son-las-sidechains.html" />
+  <title>¿Qué son las sidechains de Bitcoin? — | Sidechains | aprendebtc.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+        <aside class="page-layout__sidebar" aria-label="Navegaci?n de sidechains">
+      <nav class="sidebar">
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Ruta Sidechains</div>
+          <a href="/sidechains/" class="sidebar__link">?ndice del pilar</a>
+          <a href="/sidechains/que-son-las-sidechains.html" class="sidebar__link">?Qu? son las sidechains de Bitcoin?</a>
+          <a href="/sidechains/rootstock-rsk.html" class="sidebar__link">Rootstock (RSK)</a>
+          <a href="/sidechains/liquid-network.html" class="sidebar__link">Liquid Network</a>
+          <a href="/sidechains/fedimint-y-cashu.html" class="sidebar__link">Fedimint y Cashu</a>
+        </div>
+
+        <div class="sidebar__section">
+          <div class="sidebar__section-title">Relacionado</div>
+          <a href="/nivel-4/" class="sidebar__link">Nivel 4 ? En la madriguera</a>
+          <a href="/la-madriguera/" class="sidebar__link">La Madriguera</a>
+        </div>
+
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-sidechains" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="/sidechains/" class="breadcrumb__item">Sidechains</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">¿Qué son las sidechains de Bitcoin?</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--4 article__badge">Sidechains</div>
+          <h1>¿Qué son las sidechains de Bitcoin?</h1>
+          <p class="article__subtitle">
+            Cadenas laterales que heredan la seguridad de Bitcoin y usan BTC como moneda. Lo mejor de dos mundos.
+          </p>
+
+          <p>
+            Bitcoin es el protocolo más seguro, descentralizado y robusto de la historia del dinero digital. Pero esa
+            robustez tiene un precio: es deliberadamente conservador. No puede ejecutar contratos complejos de forma
+            nativa, sus transacciones tardan minutos en confirmarse y su privacidad no es perfecta.
+          </p>
+          <p>
+            La pregunta natural es: ¿qué pasa cuando necesitas más funcionalidad sin renunciar al BTC que ya tienes?
+            Ahí entran las sidechains.
+          </p>
+
+          <h2>Una autopista con vías secundarias</h2>
+          <p>
+            Imagina que Bitcoin es una gran autopista: fiable, segura, con reglas estrictas y miles de ojos vigilando
+            que todo funcione bien. Las sidechains son vías secundarias que parten de esa autopista.
+          </p>
+          <p>
+            Cada vía secundaria tiene reglas propias: puede ser más rápida, más privada o más flexible para contratos.
+            Pero sigue conectada con la autopista principal mediante un peaje bidireccional.
+          </p>
+          <p>
+            Puedes llevar tu coche (tu BTC) a la vía secundaria, circular por ella y volver después a la principal. Lo
+            que no puedes hacer es crear coches nuevos de la nada. Cada unidad en la sidechain sale de BTC real
+            bloqueado en Bitcoin.
+          </p>
+
+          <h2>Cómo funciona el peg bidireccional</h2>
+          <p>
+            El mecanismo que conecta Bitcoin con una sidechain se llama <strong>peg bidireccional</strong> (two-way
+            peg). Es la pieza técnica y económica clave.
+          </p>
+
+          <h3>Para entrar (peg-in)</h3>
+          <ol>
+            <li>Envías BTC a una dirección especial en la cadena principal. Quedan bloqueados.</li>
+            <li>La sidechain detecta ese bloqueo y te acredita una cantidad equivalente en su propio activo.</li>
+            <li>Empiezas a operar dentro de la sidechain bajo sus reglas.</li>
+          </ol>
+
+          <h3>Para salir (peg-out)</h3>
+          <ol>
+            <li>Devuelves o quemas los tokens de la sidechain.</li>
+            <li>Ese evento se comunica al puente.</li>
+            <li>Los BTC bloqueados se desbloquean y vuelven a tu control en Bitcoin.</li>
+          </ol>
+
+          <p>
+            En ningún momento se crea BTC nuevo. Solo cambia de carril. La oferta de Bitcoin sigue siendo la misma.
+          </p>
+
+          <h2>Diferencia clave frente a altcoins</h2>
+          <p>
+            Una altcoin emite su propio token con su propia política monetaria. En una sidechain bien diseñada, en
+            cambio, cada unidad está respaldada 1:1 por BTC bloqueado.
+          </p>
+          <p>
+            Si hay 1.000 unidades del activo representativo de BTC en una sidechain, debe haber 1.000 BTC bloqueados
+            en la capa base. Esa diferencia cambia por completo el perfil de riesgo económico.
+          </p>
+
+          <h2>No toda la confianza es igual</h2>
+          <p>
+            El punto sensible de cualquier sidechain es el puente: ¿quién garantiza que el bloqueo y desbloqueo se
+            ejecuta correctamente?
+          </p>
+          <p>
+            Bitcoin no puede verificar por sí mismo todo lo que ocurre en otra cadena. Por eso siempre aparece un
+            modelo de confianza, y no todos los modelos son iguales.
+          </p>
+          <ul>
+            <li>
+              <strong>Peg federado</strong> (por ejemplo, Liquid): un conjunto de entidades custodia y valida el
+              puente.
+            </li>
+            <li>
+              <strong>Minería fusionada</strong> (por ejemplo, Rootstock): los mineros de Bitcoin ayudan a asegurar la
+              sidechain.
+            </li>
+            <li>
+              <strong>Pruebas criptográficas</strong> (objetivo futuro): puentes cada vez menos dependientes de
+              terceros.
+            </li>
+            <li>
+              <strong>Mints federados</strong> (Fedimint, Cashu): no son sidechains puras, pero siguen la lógica de
+              extender Bitcoin sin tocar el protocolo base.
+            </li>
+          </ul>
+
+          <div class="callout callout--info">
+            <span class="callout__icon" aria-hidden="true">💡</span>
+            <div class="callout__content">
+              <div class="callout__title">Lightning y sidechains no son lo mismo</div>
+              <p class="callout__text">
+                Lightning no es una sidechain, es una red de canales sobre Bitcoin. Aun así, comparte la misma
+                filosofía: ampliar capacidades sin modificar la capa base.
+              </p>
+            </div>
+          </div>
+
+          <h2>Qué puedes hacer en una sidechain</h2>
+          <p>Depende de la implementación concreta, pero los casos más habituales son:</p>
+          <ul>
+            <li><strong>Contratos inteligentes</strong> más expresivos que en Bitcoin Script clásico.</li>
+            <li><strong>Confirmaciones más rápidas</strong> para ciertos flujos de uso.</li>
+            <li><strong>Privacidad adicional</strong> de montos o estructura de transacción.</li>
+            <li><strong>Emisión de activos</strong> sobre infraestructura conectada a Bitcoin.</li>
+            <li><strong>Custodia comunitaria</strong> con modelos federados orientados a pagos diarios.</li>
+          </ul>
+
+          <h2>El trade-off nunca desaparece</h2>
+          <p>
+            Las sidechains no son Bitcoin capa base. Son extensiones con más funcionalidad y, normalmente, más
+            complejidad. Eso implica superficie de ataque adicional y suposiciones nuevas.
+          </p>
+          <p>
+            Bitcoin capa base sigue siendo el estándar máximo de neutralidad y robustez. Ninguna sidechain iguala hoy
+            ese perfil de seguridad y minimización de confianza.
+          </p>
+
+          <div class="callout callout--warning">
+            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <div class="callout__content">
+              <div class="callout__title">Riesgo operativo real</div>
+              <p class="callout__text">
+                Tu BTC en una sidechain depende de la seguridad del peg y del software de esa sidechain. Si el puente o
+                la gobernanza fallan, puedes perder fondos.
+              </p>
+            </div>
+          </div>
+
+          <h2>Las capas que cubre aprendeBTC</h2>
+          <p>
+            En aprendeBTC priorizamos capas que usan BTC como unidad y que conectan directamente con Bitcoin. En esta
+            ruta cubrimos:
+          </p>
+          <ul>
+            <li><strong>Rootstock (RSK)</strong>: contratos inteligentes con minería fusionada.</li>
+            <li><strong>Liquid Network</strong>: sidechain federada y transacciones confidenciales.</li>
+            <li><strong>Fedimint</strong>: custodia federada orientada a comunidad y privacidad.</li>
+            <li><strong>Cashu</strong>: eCash portable sobre Lightning con gran simplicidad.</li>
+          </ul>
+          <p>
+            No hay una respuesta universal. El mejor diseño depende de tu objetivo: pagos diarios, privacidad, trading,
+            tokenización o DeFi sobre BTC.
+          </p>
+
+          
+          <h2>Cómo evaluar una sidechain sin marketing</h2>
+          <p>
+            Cuando evalúas una sidechain, la pregunta correcta no es “qué promete”, sino “qué asunciones añade” frente
+            a BTC en capa base. Puedes usar este marco práctico:
+          </p>
+          <ol>
+            <li><strong>Modelo de puente:</strong> ¿federación, merge mining, pruebas criptográficas, híbrido?</li>
+            <li><strong>Quién puede censurar:</strong> ¿existe un grupo identificable que pueda bloquear salidas?</li>
+            <li><strong>Qué ocurre en caso de fallo:</strong> ¿hay mecanismo de recuperación o pérdida total?</li>
+            <li><strong>Liquidez real:</strong> ¿puedes entrar y salir sin fricción y sin depender de un solo actor?</li>
+            <li><strong>Riesgo legal:</strong> ¿la operación está concentrada en jurisdicciones concretas?</li>
+          </ol>
+          <p>
+            Si no puedes responder estos puntos con precisión, no deberías mover fondos relevantes. En sidechains, la
+            tecnología importa, pero la gobernanza y la operación diaria importan igual o más.
+          </p>
+
+          <h2>Checklist de uso responsable</h2>
+          <ul>
+            <li>Empieza con importes pequeños y prueba ciclo completo (entrar, operar, salir).</li>
+            <li>Separa fondos de experimentación y fondos de ahorro.</li>
+            <li>Documenta tiempos reales de peg-in y peg-out antes de necesitar liquidez urgente.</li>
+            <li>Evita concentrar todo en un único puente o una única app.</li>
+            <li>Revisa incidentes históricos del proyecto antes de confiar cantidades mayores.</li>
+          </ul>
+          <p>
+            La conclusión práctica es simple: sidechains pueden ser muy útiles, pero su lugar natural es la caja de
+            herramientas operativa, no el vault de largo plazo. Tu base sigue siendo BTC autocustodiado.
+          </p>
+
+
+          <h2>Cuándo NO usar sidechains</h2>
+          <p>
+            Si tu objetivo es conservar poder adquisitivo a largo plazo con máxima minimización de confianza, no
+            necesitas una sidechain: necesitas autocustodia en capa base. Sidechains encajan cuando buscas funciones
+            adicionales y aceptas explícitamente ese intercambio.
+          </p>
+          <p>
+            Esta distinción evita muchas decepciones. El problema no suele ser la herramienta, sino usar la herramienta
+            correcta en el contexto equivocado.
+          </p>
+
+          <p>
+            <strong>→ Para profundizar:</strong>
+            <a href="/sidechains/que-son-las-sidechains.html">Sidechains de Bitcoin: la guía completa</a>
+          </p>
+
+          <h3>Enlaces internos</h3>
+          <ul>
+            <li><a href="/nivel-2/que-es-lightning.html">¿Qué es Lightning Network?</a></li>
+            <li><a href="/nivel-3/que-es-un-nodo.html">¿Qué es un nodo de Bitcoin?</a></li>
+            <li><a href="/la-madriguera/el-debate-de-la-osificacion.html">El debate de la osificación</a></li>
+          </ul>
+
+          <div class="ad-slot ad-content" id="ad-content-4" aria-hidden="true"></div>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="nodo-lightning.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">Montar tu nodo Lightning</span>
+            </a>
+            <a href="rootstock-rsk.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">Rootstock (RSK)</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>
