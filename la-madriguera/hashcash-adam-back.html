@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Hashcash de Adam Back: la prueba de trabajo que inspiró directamente Bitcoin. Del anti-spam al consenso descentralizado." />
+  <meta property="og:title" content="Hashcash — Adam Back (1997) | aprendebtc.com" />
+  <meta property="og:description" content="La idea que Satoshi tomó directamente para Bitcoin: hacer que la computación cueste trabajo." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/la-madriguera/hashcash-adam-back.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hashcash — Adam Back (1997) | aprendebtc.com" />
+  <meta name="twitter:description" content="Del correo basura al consenso global: la prueba de trabajo que inspiró Bitcoin." />
+  <title>Hashcash — Adam Back (1997) | aprendebtc.com</title>
+  <link rel="canonical" href="https://aprendebtc.com/la-madriguera/hashcash-adam-back.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación de la madriguera"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-auto" aria-hidden="true"></div></div></nav></aside>
+    <main class="page-layout__content" id="main-content"><div class="content-inner">
+      <nav class="breadcrumb" aria-label="Ruta de navegación"><a href="/" class="breadcrumb__item">Inicio</a><span class="breadcrumb__separator" aria-hidden="true">›</span><a href="/la-madriguera/" class="breadcrumb__item">La Madriguera</a><span class="breadcrumb__separator" aria-hidden="true">›</span><span class="breadcrumb__current">Hashcash — Adam Back (1997)</span></nav>
+      <article class="article">
+        <div class="nivel-badge nivel-badge--4 article__badge">Precursores</div>
+        <h1>Hashcash — Adam Back (1997)</h1>
+        <p class="article__subtitle">La idea que Satoshi tomó directamente para Bitcoin: hacer que la computación cueste trabajo. Del correo basura al consenso global.</p>
+        <p><strong>Fecha:</strong> Marzo 2026</p>
+
+        <p>El gran aporte de Adam Back no empezó como teoría monetaria. Empezó como una defensa anti-spam: Hashcash imponía una pequeña prueba de trabajo al emisor de un correo. Mínimo coste para usuarios normales, coste prohibitivo para quien enviaba millones de mensajes.</p>
+        <p>Satoshi tomó esa primitiva y la convirtió en la base de seguridad de Bitcoin.</p>
+
+        <h2>Asimetría de costes</h2>
+        <p>El spam prosperaba porque enviar era casi gratis y filtrar lo pagaba el receptor. Hashcash invirtió ese incentivo: quien emite debe probar que gastó cómputo real.</p>
+
+        <h2>Cómo funciona</h2>
+        <p>El emisor busca un <em>nonce</em> que, al hashear junto a datos del mensaje, produzca un resultado con cierto prefijo (por ejemplo, varios ceros). Encontrarlo exige intentos masivos. Verificarlo es inmediato.</p>
+        <p>Esa asimetría —costoso producir, barato verificar— es el corazón de proof-of-work.</p>
+
+        <h2>De anti-spam a consenso</h2>
+        <p>Bitcoin añade tres piezas clave sobre Hashcash: encadenamiento de bloques, ajuste de dificultad y recompensa económica. Con eso, la prueba de trabajo deja de ser filtro local y pasa a ser mecanismo global de consenso e inmutabilidad.</p>
+
+        <h2>Energía: coste de seguridad</h2>
+        <p>La crítica energética a Bitcoin ignora la función del coste. Si producir bloques no costara recursos reales, alterar historia tampoco costaría. El gasto energético no es un accidente: es la barrera económica contra reescritura de la cadena.</p>
+
+        <h2>Adam Back en el ecosistema</h2>
+        <p>Back sigue activo en Bitcoin, incluida su labor en Blockstream. Su posición histórica es singular: referencia explícita en el whitepaper y continuidad práctica en infraestructura actual.</p>
+
+        <h2>Fuentes y referencias</h2>
+        <ul>
+          <li>“Hashcash — A Denial of Service Counter-Measure” — Adam Back (2002).</li>
+          <li>“Pricing via Processing...” — Dwork y Naor (1992).</li>
+          <li>Whitepaper de Bitcoin (2008), referencia #6.</li>
+          <li>Archivos de lista cypherpunk y documentación Blockstream.</li>
+        </ul>
+
+        <h2>Enlaces internos</h2>
+        <ul>
+          <li><a href="/la-madriguera/el-whitepaper-de-bitcoin.html">El Whitepaper de Bitcoin</a></li>
+          <li><a href="/nivel-5/proof-of-work.html">Proof of Work en detalle</a></li>
+          <li><a href="/la-madriguera/bitcoin-y-energia.html">Bitcoin y energía</a></li>
+          <li><a href="/la-madriguera/b-money-wei-dai.html">B-Money</a></li>
+          <li><a href="/la-madriguera/bit-gold-nick-szabo.html">Bit Gold</a></li>
+        </ul>
+
+        <div class="ad-slot ad-content" id="ad-content-auto" aria-hidden="true"></div>
+        <nav class="page-nav" aria-label="Navegación entre páginas">
+          <a href="/la-madriguera/declaracion-independencia-ciberespacio.html" class="page-nav__item"><span class="page-nav__label">← Anterior</span><span class="page-nav__title">05 - Declaración de Independencia del Ciberespacio — J.P. Barlow (1996)</span></a>
+          <a href="/la-madriguera/b-money-wei-dai.html" class="page-nav__item page-nav__item--next"><span class="page-nav__label">Siguiente →</span><span class="page-nav__title">07 - B-Money — Wei Dai (1998)</span></a>
+        </nav>
+      </article>
+    </div></main>
+  </div>
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * aprendebtc.com - nav.js
  * Handles: mobile menu, search overlay, active states,
  * smooth anchor scroll, contextual return links, and sidebar tree navigation.
@@ -179,47 +179,71 @@
       pages: [],
       groups: [
         {
+          title: 'PRECURSORES',
+          links: [
+            { href: '/la-madriguera/polis-paralela-vaclav-benda.html', text: '01 - Polis Paralela - Václav Benda (1978)' },
+            { href: '/la-madriguera/manifiesto-gnu-richard-stallman.html', text: '02 - Manifiesto GNU - Richard Stallman (1985)' },
+            { href: '/la-madriguera/manifiesto-cypherpunk.html', text: '03 - Manifiesto Cypherpunk - Eric Hughes (1993)' },
+            { href: '/la-madriguera/efectivo-digital-y-privacidad-hal-finney.html', text: '04 - Efectivo Digital y Privacidad - Hal Finney (1993)' },
+            { href: '/la-madriguera/declaracion-independencia-ciberespacio.html', text: '05 - Declaración de Independencia del Ciberespacio - J.P. Barlow (1996)' },
+            { href: '/la-madriguera/hashcash-adam-back.html', text: '06 - Hashcash - Adam Back (1997)' },
+            { href: '/la-madriguera/b-money-wei-dai.html', text: '07 - B-Money - Wei Dai (1998)' },
+            { href: '/la-madriguera/bit-gold-nick-szabo.html', text: '08 - Bit Gold - Nick Szabo (1998/2005)' },
+            { href: '/la-madriguera/el-whitepaper-de-bitcoin.html', text: '09 - El Whitepaper de Bitcoin - Satoshi Nakamoto (2008)' }
+          ]
+        },
+        {
           title: 'HISTORIA',
           links: [
-            { href: '/la-madriguera/los-primeros-dias-de-bitcoin.html', text: '01 - Los primeros días de Bitcoin (2009)' },
-            { href: '/la-madriguera/bitcoin-y-wikileaks.html', text: '02 - Bitcoin y WikiLeaks (2010)' },
-            { href: '/la-madriguera/silk-road-y-ross-ulbricht.html', text: '03 - Silk Road y Ross Ulbricht (2013)' },
-            { href: '/la-madriguera/el-hackeo-de-mt-gox.html', text: '04 - Mt. Gox (2014)' },
-            { href: '/la-madriguera/la-guerra-del-tamano-de-bloque.html', text: '05 - Guerra del tamaño de bloque (2015-17)' },
-            { href: '/la-madriguera/la-crisis-de-terra-luna.html', text: '06 - Crisis Terra/Luna (2022)' },
-            { href: '/la-madriguera/el-colapso-de-ftx.html', text: '07 - Colapso de FTX (2022)' },
-            { href: '/la-madriguera/ordinals-inscriptions-debate.html', text: '08 - Ordinals e Inscriptions (2023)' },
-            { href: '/la-madriguera/el-caso-samourai-wallet.html', text: '09 - Caso Samourai Wallet (2024)' },
-            { href: '/la-madriguera/los-etfs-de-bitcoin.html', text: '10 - ETFs de Bitcoin (2024)' }
+            { href: '/la-madriguera/los-primeros-dias-de-bitcoin.html', text: '10 - Los primeros días de Bitcoin (2009)' },
+            { href: '/la-madriguera/bitcoin-y-wikileaks.html', text: '11 - Bitcoin y WikiLeaks (2010)' },
+            { href: '/la-madriguera/silk-road-y-ross-ulbricht.html', text: '12 - Silk Road y Ross Ulbricht (2013)' },
+            { href: '/la-madriguera/el-hackeo-de-mt-gox.html', text: '13 - Mt. Gox (2014)' },
+            { href: '/la-madriguera/la-guerra-del-tamano-de-bloque.html', text: '14 - Guerra del tamaño de bloque (2015-17)' },
+            { href: '/la-madriguera/la-crisis-de-terra-luna.html', text: '15 - Crisis Terra/Luna (2022)' },
+            { href: '/la-madriguera/el-colapso-de-ftx.html', text: '16 - Colapso de FTX (2022)' },
+            { href: '/la-madriguera/ordinals-inscriptions-debate.html', text: '17 - Ordinals e Inscriptions (2023)' },
+            { href: '/la-madriguera/el-caso-samourai-wallet.html', text: '18 - Caso Samourai Wallet (2024)' },
+            { href: '/la-madriguera/los-etfs-de-bitcoin.html', text: '19 - ETFs de Bitcoin (2024)' }
           ]
         },
         {
           title: 'FUNDAMENTOS',
           links: [
-            { href: '/la-madriguera/el-ataque-del-51-por-ciento.html', text: '11 - El ataque del 51%' },
-            { href: '/la-madriguera/bloques-huerfanos-y-reorganizaciones.html', text: '12 - Bloques huérfanos y reorgs' },
-            { href: '/la-madriguera/el-problema-del-general-bizantino.html', text: '13 - El Problema del General Bizantino' },
-            { href: '/la-madriguera/el-doble-gasto.html', text: '14 - El doble gasto' },
-            { href: '/la-madriguera/la-politica-monetaria-de-bitcoin.html', text: '15 - La política monetaria de Bitcoin' },
-            { href: '/la-madriguera/soft-forks-de-bitcoin.html', text: '16 - Los soft forks de Bitcoin' },
-            { href: '/la-madriguera/multisig-custodia-y-herencia-segun-satoshi.html', text: '17 - Multisig y herencia según Satoshi' },
-            { href: '/la-madriguera/economia-austriaca-para-bitcoiners.html', text: '18 - Economía austríaca para bitcoiners' }
+            { href: '/la-madriguera/el-ataque-del-51-por-ciento.html', text: '20 - El ataque del 51%' },
+            { href: '/la-madriguera/bloques-huerfanos-y-reorganizaciones.html', text: '21 - Bloques huérfanos y reorgs' },
+            { href: '/la-madriguera/el-problema-del-general-bizantino.html', text: '22 - El Problema del General Bizantino' },
+            { href: '/la-madriguera/el-doble-gasto.html', text: '23 - El doble gasto' },
+            { href: '/la-madriguera/la-politica-monetaria-de-bitcoin.html', text: '24 - La política monetaria de Bitcoin' },
+            { href: '/la-madriguera/soft-forks-de-bitcoin.html', text: '25 - Los soft forks de Bitcoin' },
+            { href: '/la-madriguera/multisig-custodia-y-herencia-segun-satoshi.html', text: '26 - Multisig y herencia según Satoshi' },
+            { href: '/la-madriguera/economia-austriaca-para-bitcoiners.html', text: '27 - Economía austríaca para bitcoiners' }
           ]
         },
         {
           title: 'ANÁLISIS',
           links: [
-            { href: '/la-madriguera/bitcoin-y-energia.html', text: '19 - Bitcoin y energía' },
-            { href: '/la-madriguera/la-geopolitica-de-la-mineria.html', text: '20 - Geopolítica de la minería' },
-            { href: '/la-madriguera/lightning-network-estado-actual.html', text: '21 - Lightning Network: estado actual' },
-            { href: '/la-madriguera/privacidad-en-bitcoin-estado-actual.html', text: '22 - Privacidad: estado actual' },
-            { href: '/la-madriguera/puede-un-gobierno-prohibir-bitcoin.html', text: '23 - ¿Puede un gobierno prohibir Bitcoin?' },
-            { href: '/la-madriguera/el-debate-de-la-osificacion.html', text: '24 - El debate de la osificación' },
-            { href: '/la-madriguera/bitcoin-medio-de-pago-vs-reserva-de-valor.html', text: '25 - ¿Medio de pago o reserva de valor?' },
-            { href: '/la-madriguera/hiperinflaciones-y-bitcoin.html', text: '26 - Hiperinflaciones y Bitcoin' },
-            { href: '/la-madriguera/halving-y-ciclos-de-precio.html', text: '27 - El halving y los ciclos de precio' }
+            { href: '/la-madriguera/bitcoin-y-energia.html', text: '28 - Bitcoin y energía' },
+            { href: '/la-madriguera/la-geopolitica-de-la-mineria.html', text: '29 - Geopolítica de la minería' },
+            { href: '/la-madriguera/lightning-network-estado-actual.html', text: '30 - Lightning Network: estado actual' },
+            { href: '/la-madriguera/privacidad-en-bitcoin-estado-actual.html', text: '31 - Privacidad: estado actual' },
+            { href: '/la-madriguera/puede-un-gobierno-prohibir-bitcoin.html', text: '32 - ¿Puede un gobierno prohibir Bitcoin?' },
+            { href: '/la-madriguera/el-debate-de-la-osificacion.html', text: '33 - El debate de la osificación' },
+            { href: '/la-madriguera/bitcoin-medio-de-pago-vs-reserva-de-valor.html', text: '34 - ¿Medio de pago o reserva de valor?' },
+            { href: '/la-madriguera/hiperinflaciones-y-bitcoin.html', text: '35 - Hiperinflaciones y Bitcoin' },
+            { href: '/la-madriguera/halving-y-ciclos-de-precio.html', text: '36 - El halving y los ciclos de precio' }
           ]
         }
+      ]
+    },
+    {
+      title: 'Sidechains',
+      index: '/sidechains/',
+      pages: [
+        { href: '/sidechains/que-son-las-sidechains.html', text: '¿Qué son las sidechains?' },
+        { href: '/sidechains/rootstock-rsk.html', text: 'Rootstock (RSK)' },
+        { href: '/sidechains/liquid-network.html', text: 'Liquid Network' },
+        { href: '/sidechains/fedimint-y-cashu.html', text: 'Fedimint y Cashu' }
       ]
     },
     {
@@ -1384,6 +1408,8 @@
     document.addEventListener('DOMContentLoaded', () => setTimeout(init, 100));
   }
 })();
+
+
 
 
 

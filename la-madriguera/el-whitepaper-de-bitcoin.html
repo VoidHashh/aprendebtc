@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Análisis completo del whitepaper de Bitcoin: secciones, innovaciones clave y qué resolvió que nadie había logrado." />
+  <meta property="og:title" content="El Whitepaper de Bitcoin — Satoshi Nakamoto (2008) | aprendebtc.com" />
+  <meta property="og:description" content="9 páginas que cambiaron el mundo. Análisis sección por sección del documento fundacional de Bitcoin." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/la-madriguera/el-whitepaper-de-bitcoin.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="El Whitepaper de Bitcoin — Satoshi Nakamoto (2008) | aprendebtc.com" />
+  <meta name="twitter:description" content="Análisis del documento fundacional de Bitcoin, sección por sección." />
+  <title>El Whitepaper de Bitcoin — Satoshi Nakamoto (2008) | aprendebtc.com</title>
+  <link rel="canonical" href="https://aprendebtc.com/la-madriguera/el-whitepaper-de-bitcoin.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación de la madriguera"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-auto" aria-hidden="true"></div></div></nav></aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="/" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="/la-madriguera/" class="breadcrumb__item">La Madriguera</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">El Whitepaper de Bitcoin — Satoshi Nakamoto (2008)</span>
+        </nav>
+
+        <article class="article">
+          <div class="nivel-badge nivel-badge--4 article__badge">Precursores</div>
+          <h1>El Whitepaper de Bitcoin — Satoshi Nakamoto (2008)</h1>
+          <p class="article__subtitle">9 páginas que cambiaron el mundo. Análisis sección por sección del documento fundacional de Bitcoin.</p>
+          <p><strong>Fecha:</strong> Marzo 2026</p>
+
+          <p>El 31 de octubre de 2008, en plena crisis financiera global, Satoshi Nakamoto envió a una lista de correo de criptografía un PDF de nueve páginas titulado <em>Bitcoin: A Peer-to-Peer Electronic Cash System</em>. No lo presentó en un congreso. No lo publicó en una revista. Lo sometió al escrutinio técnico de una comunidad que llevaba años intentando resolver el mismo problema.</p>
+          <p>El paper no inventa todas sus piezas desde cero. Pero sí logra algo que nadie había logrado: combinar componentes existentes, resolver los huecos críticos y lanzar un sistema operativo real.</p>
+
+          <h2>El problema que enuncia</h2>
+          <p>Satoshi abre con una crítica precisa al pago online tradicional: depende de terceros de confianza. Eso introduce costes, fricción, reversibilidad obligada y censura potencial. La propuesta: efectivo electrónico peer-to-peer basado en prueba criptográfica, no en confianza institucional.</p>
+
+          <h2>Transacciones y doble gasto</h2>
+          <p>Las firmas digitales resuelven autenticidad, pero no doble gasto. El punto central del whitepaper es cómo impedir que una misma unidad se gaste dos veces sin un servidor central.</p>
+
+          <h2>Servidor de sellado temporal distribuido</h2>
+          <p>Satoshi propone agrupar transacciones en bloques con hash del bloque anterior. Alterar historia obliga a rehacer trabajo acumulado desde ese punto. Esta estructura es la blockchain, aunque el término aún no se popularizaba.</p>
+
+          <h2>Proof-of-Work (Hashcash adaptado)</h2>
+          <p>La sección 4 incorpora Hashcash de Adam Back: para producir un bloque válido hay que encontrar un nonce con coste computacional real. Verificar es barato; producir es caro. Esa asimetría vuelve costoso reescribir historia.</p>
+          <p>El ajuste de dificultad cada 2016 bloques estabiliza tiempo medio (~10 minutos) pese a cambios en hashrate.</p>
+
+          <h2>Consenso de Nakamoto</h2>
+          <p>La regla de la cadena con mayor trabajo acumulado resuelve bifurcaciones temporales sin coordinador central. No hay votación humana para decidir qué historia vale. Gana el trabajo verificable.</p>
+
+          <h2>Incentivos económicos</h2>
+          <p>La recompensa de bloque al minero honesto alinea seguridad y economía. No es un detalle menor: sin incentivo sostenido no hay seguridad sostenida. El paper también anticipa la transición gradual hacia comisiones.</p>
+
+          <h2>SPV y escalabilidad práctica</h2>
+          <p>La verificación simplificada (SPV) permite que clientes ligeros validen inclusión de pagos con cabeceras y pruebas de Merkle, sin descargar todo el historial.</p>
+
+          <h2>Privacidad: diseño y límites</h2>
+          <p>Bitcoin no ofrece anonimato perfecto en capa base. Ofrece pseudonimato con claves públicas y recomienda no reutilizar direcciones. El trade-off entre transparencia global y privacidad operativa queda planteado desde el inicio.</p>
+
+          <h2>Qué innovó realmente Satoshi</h2>
+          <p>Satoshi no inventa hash, firmas ni proof-of-work. Innova al integrarlos en un protocolo de consenso económico-técnico que funciona en red abierta y adversarial. Ese ensamblaje, más su lanzamiento en producción, es la ruptura histórica.</p>
+
+          <h2>Lo que no dice el whitepaper</h2>
+          <p>No describe Lightning, ni detalle completo de gobernanza, ni debates de escalado posteriores. Tampoco explica toda la economía social del ecosistema. Es un documento de base protocolaria, no una constitución total del futuro de Bitcoin.</p>
+
+          <h2>Por qué sigue siendo lectura obligatoria</h2>
+          <p>Porque permite distinguir Bitcoin de su narrativa comercial. El paper fija la lógica mínima: confianza minimizada, verificación independiente e incentivos alineados. Todo debate serio sobre Bitcoin vuelve a estas nueve páginas.</p>
+
+          <h2>Fuentes y referencias</h2>
+          <ul>
+            <li>“Bitcoin: A Peer-to-Peer Electronic Cash System” — Satoshi Nakamoto (2008), bitcoin.org/bitcoin.pdf.</li>
+            <li>Archivo de correos de Satoshi, nakamotoinstitute.org.</li>
+            <li>“Hashcash” — Adam Back (2002).</li>
+            <li>“b-money” — Wei Dai (1998).</li>
+            <li>“How to Time-Stamp a Digital Document” — Haber y Stornetta (1991).</li>
+          </ul>
+
+          <h2>Enlaces internos</h2>
+          <ul>
+            <li><a href="/la-madriguera/b-money-wei-dai.html">B-Money</a></li>
+            <li><a href="/la-madriguera/bit-gold-nick-szabo.html">Bit Gold</a></li>
+            <li><a href="/la-madriguera/hashcash-adam-back.html">Hashcash</a></li>
+            <li><a href="/la-madriguera/el-doble-gasto.html">El doble gasto</a></li>
+            <li><a href="/la-madriguera/el-ataque-del-51-por-ciento.html">El ataque del 51%</a></li>
+            <li><a href="/nivel-5/proof-of-work.html">Proof of Work</a></li>
+            <li><a href="/nivel-5/merkle-tree.html">Merkle Tree</a></li>
+            <li><a href="/nivel-3/modelo-utxo.html">UTXOs</a></li>
+            <li><a href="/la-madriguera/los-primeros-dias-de-bitcoin.html">Los primeros días de Bitcoin</a></li>
+            <li><a href="/la-madriguera/efectivo-digital-y-privacidad-hal-finney.html">Hal Finney</a></li>
+          </ul>
+
+          <div class="ad-slot ad-content" id="ad-content-auto" aria-hidden="true"></div>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/la-madriguera/bit-gold-nick-szabo.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">08 - Bit Gold — Nick Szabo (1998/2005)</span>
+            </a>
+            <a href="/la-madriguera/los-primeros-dias-de-bitcoin.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">10 - Los primeros días de Bitcoin (2009)</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

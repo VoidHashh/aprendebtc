@@ -1214,6 +1214,33 @@
     "keywords": "La guía educativa más completa sobre Bitcoin en español. Desde tu primera compra hasta criptografía avanzada. ¿Por dónde empiezo? Ruta personalizada en menos de 2 minutos Elige tu nivel Tu primera compra de bitcoin Toma el control de tus bitcoin Entiende lo que controlas Privacidad, herencia y minería Criptografía, scripts y protocolo Filosofía, contribución y educación Pilares del conocimiento Inicio › Landing ₿ Educación Bitcoin en español Aprende Bitcoin paso a paso La guía más completa en español. Desde tu primera compra hasta criptografía avanzada. 6 niveles para todos los conocimientos. Empezar desde cero → Hacer test rápido Test interactivo ¿Por dónde empiezo? Responde 8 preguntas y te recomendamos el nivel ideal para empezar hoy. Diagnóstico inicial Ruta personalizada en menos de 2 minutos El test cruza fundamentos, autocustodia, seed phrase, Lightning, UTXO y conocimientos técnicos. Frase semilla Wallets Lightning UTXO BIP Empezar test Incluye preguntas sobre: frase semilla, UTXO, Taproot, ECDSA/Schnorr, nodo, autocustodia y objetivo de aprendizaje. Ruta de aprendizaje Elige tu nivel Un camino progresivo desde cero hasta dominar Bitcoin a nivel técnico. 1 7 páginas Explorador Tu primera compra de bitcoin Entiende qué es Bitcoin, decide tu camino (KYC o no-KYC), y compra tus primeros sats. Empezar desde cero → 2 15 páginas Soberano Toma el control de tus bitcoin Autocustodia, wallets, Lightning Network, exchanges y seguridad esencial. Ir al nivel 2 → 3 18 páginas Anal"
   },
   {
+    "title": "B-Money — Wei Dai (1998)",
+    "url": "/la-madriguera/b-money-wei-dai.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "money",
+      "wei",
+      "dai"
+    ],
+    "section": "La Madriguera",
+    "keywords": "B-Money de Wei Dai: la primera propuesta de dinero digital descentralizado. La referencia #1 del whitepaper de Bitcoin. Contexto cypherpunk Los dos protocolos de Wei Dai Qué anticipó bien Qué quedó sin cerrar Correspondencia con Satoshi Legado Fuentes y referencias Enlaces internos Inicio › La Madriguera › B-Money — Wei Dai (1998) Precursores B-Money — Wei Dai (1998) La propuesta que Satoshi citó primero en el whitepaper. Dinero descentralizado, prueba de trabajo, y consenso en 1998. Fecha: Marzo 2026 El whitepaper de Bitcoin tiene ocho referencias. La primera es b-money. Ese orden no es decorativo: b-money formuló con mucha claridad el problema del dinero digital descentralizado una década antes de Bitcoin. Contexto cypherpunk En 1998, la comunidad cypherpunk ya había probado cifrado de uso civil, antispam con proof-of-work y experimentos de efectivo digital. Faltaba resolver un diseño operativo que evitara emisor central sin caer en caos de consenso. Los dos protocolos de Wei Dai Dai propone dos variantes. La primera, idealizada: todos los participantes mantienen el estado global y validan transferencias firmadas. La segunda, pragmática: un subconjunto de servidores mantiene estado con incentivos y depósitos de garantía. En ambos casos aparecen piezas clave que luego vemos en Bitcoin: firmas digitales, emisión ligada a trabajo y registro compartido. Qué anticipó bien Dinero sin banco emisor. Creación monetaria por trabajo computacional. Transferencia por firmas. Ejecución d"
+  },
+  {
+    "title": "Bit Gold — Nick Szabo (1998/2005)",
+    "url": "/la-madriguera/bit-gold-nick-szabo.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "bit",
+      "gold",
+      "nick",
+      "szabo"
+    ],
+    "section": "La Madriguera",
+    "keywords": "Bit Gold de Nick Szabo: el diseño más cercano a Bitcoin. Proof-of-work, cadena de pruebas y propiedad digital descentralizada. Szabo y el origen del dinero Qué proponía Bit Gold Qué faltaba La omisión famosa en el whitepaper Legado Fuentes y referencias Enlaces internos Inicio › La Madriguera › Bit Gold — Nick Szabo (1998/2005) Precursores Bit Gold — Nick Szabo (1998/2005) Si Bitcoin tiene un padre intelectual, es Bit Gold. El diseño de 1998 que anticipó casi todo lo que Satoshi construiría una década después. Fecha: Marzo 2026 Bit Gold es el antecesor técnico más cercano a Bitcoin. Nick Szabo planteó una cadena de pruebas de trabajo enlazadas, propiedad digital registrada y escasez sin emisor central. Conceptualmente, el plano estaba casi completo. Szabo y el origen del dinero Szabo no abordó el problema solo desde criptografía. Lo hizo desde historia monetaria. En “Shelling Out” analizó por qué ciertos bienes sirvieron como dinero: coste infalsificable, verificabilidad y durabilidad. Bit Gold intentaba trasladar esas propiedades al plano digital. Qué proponía Bit Gold Generar desafíos hash, resolverlos con prueba de trabajo, encadenar resultados y registrar propiedad mediante firmas digitales sobre un registro distribuido. La estructura es sorprendentemente parecida a Bitcoin. Qué faltaba Tres piezas quedaron abiertas: ajuste de dificultad robusto, mecanismo de consenso plenamente operativo en red abierta, e incentivos económicos sostenidos para asegurar la red. Bitcoin int"
+  },
+  {
     "title": "Bitcoin: ¿medio de pago o reserva de valor?",
     "url": "/la-madriguera/bitcoin-medio-de-pago-vs-reserva-de-valor.html",
     "tags": [
@@ -1276,6 +1303,19 @@
     "keywords": "Qué pasa cuando dos mineros encuentran un bloque casi a la vez. Bloques huérfanos, stale blocks y reorgs explicados. El escenario La resolución natural Terminología: huérfanos vs stale ¿Qué pasa con las transacciones? Lo que dijo Satoshi Reorganizaciones (reorgs) Mejoras técnicas El reorg más notable Implicaciones prácticas Fuentes y referencias: Enlaces internos: Inicio &rsaquo; La Madriguera &rsaquo; Bloques huérfanos, stale blocks y reorganizaciones de cadena La madriguera Bloques huérfanos, stale blocks y reorganizaciones de cadena Dos mineros, un bloque. ¿Cómo resuelve Bitcoin este conflicto sin un árbitro central? Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~6 minutos Imagina que dos mineros en lados opuestos del mundo encuentran un bloque válido casi simultáneamente. Ambos bloques son correctos según las reglas de consenso. Ambos extienden la misma cadena anterior. Pero solo uno puede ser parte de la historia oficial de Bitcoin. ¿Cómo resuelve Bitcoin este conflicto sin un árbitro central? La respuesta es elegante y fue diseñada por Satoshi desde el principio. El escenario La propagación de información por internet no es instantánea. Un bloque recién minado en Australia tarda varios segundos en llegar a Europa y América. Durante esos segundos, un minero en otro lugar podría encontrar también un bloque válido. Cuando esto ocurre, diferentes nodos de la red ven diferentes \"verdades\": Los nodos cercanos al minero A reciben primero el bloque A y lo acept"
   },
   {
+    "title": "Declaración de Independencia del Ciberespacio — John Perry Barlow (1996)",
+    "url": "/la-madriguera/declaracion-independencia-ciberespacio.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "declaracion",
+      "independencia",
+      "ciberespacio"
+    ],
+    "section": "La Madriguera",
+    "keywords": "La Declaración de Independencia del Ciberespacio de Barlow (1996): soberanía digital, libertad en internet y su conexión con Bitcoin. Qué estaba pasando en 1996 Barlow: poeta, activista y fundador de la EFF Lo que acertó la Declaración Lo que no acertó La respuesta cypherpunk: código Por qué sigue importando en 2026 Fuentes y referencias Enlaces internos Inicio › La Madriguera › Declaración de Independencia del Ciberespacio — John Perry Barlow (1996) Precursores Declaración de Independencia del Ciberespacio — John Perry Barlow (1996) “Gobiernos del mundo industrial, vengo del ciberespacio, el nuevo hogar de la mente. En nombre del futuro, os pido que nos dejéis en paz.” Fecha: Marzo 2026 En febrero de 1996, John Perry Barlow escribió en Davos uno de los textos políticos más citados de internet: la Declaración de Independencia del Ciberespacio. Nació como respuesta a la Communications Decency Act , una ley que amenazaba con extender censura amplia al ámbito digital. Barlow no respondió con una nota legalista. Respondió proclamando soberanía: el ciberespacio no era una extensión administrativa del mundo industrial, sino un entorno nuevo con reglas propias. Qué estaba pasando en 1996 La CDA intentaba regular internet con lógicas heredadas de medios centralizados. El problema era de arquitectura: internet distribuida no funciona como televisión. En 1997, el Tribunal Supremo de EEUU tumbó partes clave de la ley. Barlow: poeta, activista y fundador de la EFF John Perry Barlow no er"
+  },
+  {
     "title": "Economía austríaca para bitcoiners: Menger, Mises y Hayek",
     "url": "/la-madriguera/economia-austriaca-para-bitcoiners.html",
     "tags": [
@@ -1288,6 +1328,25 @@
     ],
     "section": "La Madriguera",
     "keywords": "Los fundamentos económicos de Bitcoin vienen de la escuela austríaca. Menger, Mises y Hayek explicados para bitcoiners. ¿Qué es la escuela austríaca? Carl Menger: el origen del valor y del dinero La teoría del valor subjetivo El origen espontáneo del dinero Ludwig von Mises: el cálculo económico y el dinero sólido La teoría del ciclo económico El teorema de la regresión Friedrich Hayek: la competencia de monedas y el conocimiento disperso El uso del conocimiento en la sociedad La desnacionalización del dinero Murray Rothbard y la tradición libertaria Los cypherpunks y la conexión austríaca Inicio &rsaquo; La Madriguera &rsaquo; Economía austríaca para bitcoiners: Menger, Mises y Hayek La madriguera Economía austríaca para bitcoiners: Menger, Mises y Hayek Bitcoin no nació en el vacío. Sus fundamentos económicos tienen 150 años. Aquí los explicamos. Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~9 minutos Cuando los bitcoiners hablan de \"dinero sólido\", \"valor subjetivo\" o \"los peligros de la expansión crediticia\", están usando conceptos que tienen más de un siglo de historia. No inventaron estas ideas — las heredaron de una tradición intelectual conocida como la escuela austríaca de economía. Entender esta tradición no es obligatorio para usar Bitcoin. Pero ayuda a entender por qué Bitcoin está diseñado como está, y por qué sus defensores más apasionados hablan de él en términos casi filosóficos. ¿Qué es la escuela austríaca? La escuela austríaca es una tradi"
+  },
+  {
+    "title": "Efectivo Digital y Privacidad — Hal Finney (1993)",
+    "url": "/la-madriguera/efectivo-digital-y-privacidad-hal-finney.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "efectivo",
+      "digital",
+      "privacidad",
+      "hal",
+      "finney",
+      "wallet",
+      "billetera",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "Digital Cash and Privacy de Hal Finney: la visión de dinero digital criptográfico que conectó privacidad con Bitcoin. 1993: antes del e-commerce masivo Hal Finney: rigor técnico y visión La tesis de “Digital Cash and Privacy” Firmas ciegas y límite del emisor central RPOW: el puente técnico Predicciones que se cumplieron Lección estratégica Fuentes y referencias Enlaces internos Inicio › La Madriguera › Efectivo Digital y Privacidad — Hal Finney (1993) Precursores Efectivo Digital y Privacidad — Hal Finney (1993) En 1993, Hal Finney advirtió que los pagos electrónicos destruirían la privacidad financiera. Propuso la solución antes de que existiera Bitcoin. Fecha: Marzo 2026 Hay personas que ven el futuro con décadas de antelación y dedican su vida a construirlo. Hal Finney fue una de ellas. En agosto de 1993 publicó Digital Cash and Privacy y dejó una advertencia clara: digitalizar pagos sin privacidad por diseño implicaba perder privacidad financiera a escala social. No se quedó en el diagnóstico. Exploró mecanismos criptográficos para preservar pagos privados y, años después, construyó RPOW, uno de los eslabones directos hacia Bitcoin. 1993: antes del e-commerce masivo En 1993 no existían Amazon, PayPal ni compras online cotidianas. Pero Finney vio la trayectoria: si la comunicación se digitalizaba, el dinero también. Y el dinero digital convencional deja rastro permanente. El efectivo físico protege una propiedad crítica: pagar sin generar una base de datos de comportamien"
   },
   {
     "title": "El ataque del 51%: qué puede y qué NO puede hacer",
@@ -1398,6 +1457,22 @@
     "keywords": "Bitcoin resuelve un problema clásico de la informática: ¿cómo lograr consenso sin confianza? La solución de Satoshi explicada. La analogía de los generales El problema formal Las soluciones clásicas La solución de Satoshi Por qué funciona Los intentos anteriores y por qué fallaron Proof-of-Stake: una solución diferente La elegancia de la solución Fuentes y referencias: Enlaces internos: Inicio &rsaquo; La Madriguera &rsaquo; El Problema del General Bizantino y cómo Bitcoin lo resuelve La madriguera El Problema del General Bizantino y cómo Bitcoin lo resuelve Un problema que los informáticos llevaban décadas sin resolver. Satoshi lo resolvió con proof-of-work. Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~7 minutos En 1982, tres investigadores de Microsoft y SRI International publicaron un paper que definiría uno de los problemas fundamentales de la informática distribuida. Leslie Lamport, Robert Shostak y Marshall Pease describieron lo que llamaron \"El Problema de los Generales Bizantinos\". El problema parecía abstracto, casi filosófico. Pero durante décadas, limitó lo que era posible construir en sistemas distribuidos. Todos los intentos de dinero digital previos a Bitcoin fracasaron, de una forma u otra, porque no podían resolver este problema sin depender de una autoridad central. Satoshi lo resolvió. Y la solución fue tan elegante que muchos criptógrafos tardaron años en entender por qué funcionaba. La analogía de los generales Imagina varios generales b"
   },
   {
+    "title": "El Whitepaper de Bitcoin — Satoshi Nakamoto (2008)",
+    "url": "/la-madriguera/el-whitepaper-de-bitcoin.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "whitepaper",
+      "bitcoin",
+      "lightning",
+      "factura lightning",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "Análisis completo del whitepaper de Bitcoin: secciones, innovaciones clave y qué resolvió que nadie había logrado. El problema que enuncia Transacciones y doble gasto Servidor de sellado temporal distribuido Proof-of-Work (Hashcash adaptado) Consenso de Nakamoto Incentivos económicos SPV y escalabilidad práctica Privacidad: diseño y límites Qué innovó realmente Satoshi Lo que no dice el whitepaper Por qué sigue siendo lectura obligatoria Fuentes y referencias Inicio › La Madriguera › El Whitepaper de Bitcoin — Satoshi Nakamoto (2008) Precursores El Whitepaper de Bitcoin — Satoshi Nakamoto (2008) 9 páginas que cambiaron el mundo. Análisis sección por sección del documento fundacional de Bitcoin. Fecha: Marzo 2026 El 31 de octubre de 2008, en plena crisis financiera global, Satoshi Nakamoto envió a una lista de correo de criptografía un PDF de nueve páginas titulado Bitcoin: A Peer-to-Peer Electronic Cash System . No lo presentó en un congreso. No lo publicó en una revista. Lo sometió al escrutinio técnico de una comunidad que llevaba años intentando resolver el mismo problema. El paper no inventa todas sus piezas desde cero. Pero sí logra algo que nadie había logrado: combinar componentes existentes, resolver los huecos críticos y lanzar un sistema operativo real. El problema que enuncia Satoshi abre con una crítica precisa al pago online tradicional: depende de terceros de confianza. Eso introduce costes, fricción, reversibilidad obligada y censura potencial. La propuesta: ef"
+  },
+  {
     "title": "El halving y los ciclos de precio: ¿correlación o causalidad?",
     "url": "/la-madriguera/halving-y-ciclos-de-precio.html",
     "tags": [
@@ -1409,6 +1484,19 @@
     ],
     "section": "La Madriguera",
     "keywords": "Análisis de la relación entre los halvings de Bitcoin y los ciclos de precio. Datos históricos, teorías, y por qué el pasado no predice el futuro. Qué es el halving (repaso rápido) Los datos históricos Halving 1 — 28 de noviembre de 2012 Halving 2 — 9 de julio de 2016 Halving 3 — 11 de mayo de 2020 Halving 4 — Abril 2024 La teoría del shock de oferta El modelo Stock-to-Flow La profecía autocumplida Rendimientos decrecientes Lo que no sabemos Lo que sí sabemos Inicio &rsaquo; La Madriguera &rsaquo; El halving y los ciclos de precio: ¿correlación o causalidad? La madriguera El halving y los ciclos de precio: ¿correlación o causalidad? Cada halving ha precedido un ciclo alcista. ¿Es inevitable o es una profecía autocumplida? Fecha de publicación: Febrero 2026 Autor: aprendeBTC Tiempo de lectura: ~14 minutos Cada cuatro años aproximadamente, la recompensa que reciben los mineros de Bitcoin se reduce a la mitad. Este evento — el halving — ha precedido históricamente a los mayores ciclos alcistas de Bitcoin. Pero, ¿es el halving la causa de las subidas, o es solo coincidencia? ¿O algo más complejo? Este artículo examina los datos, las teorías, y las limitaciones de lo que realmente sabemos. Qué es el halving (repaso rápido) Cada 210.000 bloques (aproximadamente 4 años), la recompensa por bloque se reduce a la mitad: 2009-2012: 50 BTC por bloque 2012-2016: 25 BTC por bloque 2016-2020: 12.5 BTC por bloque 2020-2024: 6.25 BTC por bloque 2024-2028: 3.125 BTC por bloque Esto continúa ha"
+  },
+  {
+    "title": "Hashcash — Adam Back (1997)",
+    "url": "/la-madriguera/hashcash-adam-back.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "hashcash",
+      "adam",
+      "back"
+    ],
+    "section": "La Madriguera",
+    "keywords": "Hashcash de Adam Back: la prueba de trabajo que inspiró directamente Bitcoin. Del anti-spam al consenso descentralizado. Asimetría de costes Cómo funciona De anti-spam a consenso Energía: coste de seguridad Adam Back en el ecosistema Fuentes y referencias Enlaces internos Inicio › La Madriguera › Hashcash — Adam Back (1997) Precursores Hashcash — Adam Back (1997) La idea que Satoshi tomó directamente para Bitcoin: hacer que la computación cueste trabajo. Del correo basura al consenso global. Fecha: Marzo 2026 El gran aporte de Adam Back no empezó como teoría monetaria. Empezó como una defensa anti-spam: Hashcash imponía una pequeña prueba de trabajo al emisor de un correo. Mínimo coste para usuarios normales, coste prohibitivo para quien enviaba millones de mensajes. Satoshi tomó esa primitiva y la convirtió en la base de seguridad de Bitcoin. Asimetría de costes El spam prosperaba porque enviar era casi gratis y filtrar lo pagaba el receptor. Hashcash invirtió ese incentivo: quien emite debe probar que gastó cómputo real. Cómo funciona El emisor busca un nonce que, al hashear junto a datos del mensaje, produzca un resultado con cierto prefijo (por ejemplo, varios ceros). Encontrarlo exige intentos masivos. Verificarlo es inmediato. Esa asimetría —costoso producir, barato verificar— es el corazón de proof-of-work. De anti-spam a consenso Bitcoin añade tres piezas clave sobre Hashcash: encadenamiento de bloques, ajuste de dificultad y recompensa económica. Con eso, la prueba d"
   },
   {
     "title": "Hiperinflaciones del mundo real y el caso de uso de Bitcoin",
@@ -1434,7 +1522,7 @@
       "factura lightning"
     ],
     "section": "La Madriguera",
-    "keywords": "Artículos avanzados de Bitcoin: historia, fundamentos y análisis profundo para entender el contexto completo de la red. HISTORIA FUNDAMENTOS ANÁLISIS Inicio › La Madriguera La madriguera La Madriguera Ruta avanzada de contexto: historia, fundamentos y análisis para entender Bitcoin con profundidad. Esta sección está pensada para usuarios que ya dominan lo básico y quieren conectar los hechos históricos, las decisiones de diseño y los debates abiertos del ecosistema. Puedes leerla por tema o seguir el orden completo del 01 al 27 para una ruta progresiva. HISTORIA 01 - Los primeros días de Bitcoin (2009) 02 - Bitcoin y WikiLeaks (2010) 03 - Silk Road y Ross Ulbricht (2013) 04 - Mt. Gox (2014) 05 - Guerra del tamaño de bloque (2015-17) 06 - Crisis Terra/Luna (2022) 07 - Colapso de FTX (2022) 08 - Ordinals e Inscriptions (2023) 09 - Caso Samourai Wallet (2024) 10 - ETFs de Bitcoin (2024) FUNDAMENTOS 11 - El ataque del 51% 12 - Bloques huérfanos y reorgs 13 - El Problema del General Bizantino 14 - El doble gasto 15 - La política monetaria de Bitcoin 16 - Los soft forks de Bitcoin 17 - Multisig y herencia según Satoshi 18 - Economía austríaca para bitcoiners ANÁLISIS 19 - Bitcoin y energía 20 - Geopolítica de la minería 21 - Lightning Network: estado actual 22 - Privacidad: estado actual 23 - ¿Puede un gobierno prohibir Bitcoin? 24 - El debate de la osificación 25 - ¿Medio de pago o reserva de valor? 26 - Hiperinflaciones y Bitcoin 27 - El halving y los ciclos de precio 💡 Cómo lee"
+    "keywords": "Artículos avanzados de Bitcoin en La Madriguera: precursores, historia, fundamentos y análisis para entender el contexto completo de la red. PRECURSORES HISTORIA FUNDAMENTOS ANÁLISIS Inicio › La Madriguera La Madriguera La Madriguera Ruta avanzada de contexto: precursores, historia, fundamentos y análisis para entender Bitcoin con profundidad. Esta sección está pensada para usuarios que ya dominan lo básico y quieren conectar textos fundacionales, hechos históricos, decisiones de diseño y debates abiertos del ecosistema. Puedes leerla por tema o seguir el orden completo del 01 al 36 para una ruta progresiva. PRECURSORES Antes de Bitcoin hubo ideas. Textos que identificaron los problemas, propusieron soluciones, y crearon las herramientas que Satoshi combinaría en 2008. Estos artículos analizan cada uno de esos textos fundacionales: qué proponían, qué aportaron, y cómo se ven hoy. 01 - Polis Paralela — Václav Benda (1978) 02 - Manifiesto GNU — Richard Stallman (1985) 03 - Manifiesto Cypherpunk — Eric Hughes (1993) 04 - Efectivo Digital y Privacidad — Hal Finney (1993) 05 - Declaración de Independencia del Ciberespacio — J.P. Barlow (1996) 06 - Hashcash — Adam Back (1997) 07 - B-Money — Wei Dai (1998) 08 - Bit Gold — Nick Szabo (1998/2005) 09 - El Whitepaper de Bitcoin — Satoshi Nakamoto (2008) HISTORIA 10 - Los primeros días de Bitcoin (2009) 11 - Bitcoin y WikiLeaks (2010) 12 - Silk Road y Ross Ulbricht (2013) 13 - Mt. Gox (2014) 14 - Guerra del tamaño de bloque (2015-17) 15 "
   },
   {
     "title": "La crisis de Terra/Luna: la \"stablecoin\" que no era estable",
@@ -1551,6 +1639,40 @@
     "keywords": "Los meses iniciales de Bitcoin: el software v0.1, los primeros mineros, la primera transacción, y cómo era usar Bitcoin en 2009. Antes del lanzamiento: el trabajo previo Las primeras reacciones El lanzamiento: enero 2009 Cómo era el software v0.1 Los primeros usuarios Los meses silenciosos El primer precio El Bitcoin Market y Mt. Gox Pizza Day El bug de agosto de 2010 La desaparición de Satoshi Lo que Satoshi dejó Inicio &rsaquo; La Madriguera &rsaquo; Los primeros días de Bitcoin: del whitepaper al bloque 1000 La madriguera Los primeros días de Bitcoin: del whitepaper al bloque 1000 Así era Bitcoin cuando solo lo usaban un puñado de personas. Una reconstrucción de los primeros meses. Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~8 minutos El 3 de enero de 2009, en algún lugar del mundo, una computadora minó el bloque génesis de Bitcoin. Dentro del bloque, codificado para siempre, estaba un mensaje del periódico The Times: \"Chancellor on brink of second bailout for banks.\" Era el comienzo de algo que cambiaría el mundo. Pero en ese momento, nadie lo sabía. Esta es la historia de los primeros meses de Bitcoin: cómo era el software, quiénes fueron los primeros usuarios, y cómo una idea en un whitepaper se convirtió en una red funcional. Antes del lanzamiento: el trabajo previo El whitepaper de Bitcoin se publicó el 31 de octubre de 2008 en la lista de correo de criptografía metzdowd.com. Pero Satoshi había estado trabajando en el código mucho antes. Lo sabemos"
   },
   {
+    "title": "El Manifiesto Cypherpunk — Eric Hughes (1993)",
+    "url": "/la-madriguera/manifiesto-cypherpunk.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "manifiesto",
+      "cypherpunk",
+      "wallet",
+      "billetera",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "El Manifiesto Cypherpunk de Eric Hughes (1993): privacidad, criptografía y código. El texto que definió el movimiento que creó Bitcoin. Crypto Wars: criptografía como “munición” Hughes, May y Gilmore Las ideas centrales del manifiesto “Los cypherpunks escriben código” Del manifiesto al whitepaper de Bitcoin Qué se cumplió y qué no Nostr y la dimensión comunicacional Fuentes y referencias Enlaces internos Inicio › La Madriguera › El Manifiesto Cypherpunk — Eric Hughes (1993) Precursores El Manifiesto Cypherpunk — Eric Hughes (1993) “Los cypherpunks escriben código.” El manifiesto de 1993 que definió el movimiento del que nació Bitcoin. Fecha: Marzo 2026 El 9 de marzo de 1993, Eric Hughes difundió un documento breve en la lista cypherpunk. Abría con una frase que sigue vigente: “La privacidad es necesaria para una sociedad abierta en la era electrónica.” Cerraba con otra que se volvió doctrina: “Los cypherpunks escriben código.” Entre esas dos líneas quedaba una tesis completa: la privacidad importa, el poder no la concederá por voluntad propia, y la única respuesta real es construir herramientas criptográficas que la hagan posible. Crypto Wars: criptografía como “munición” En los 90, EEUU trataba cierta criptografía como material de guerra. Exportar software criptográfico fuerte podía considerarse exportación de munición. Phil Zimmermann publicó PGP en 1991 y fue investigado durante años. En 1993, la administración Clinton impulsó el Clipper Chip: cifrado con acceso gubernamen"
+  },
+  {
+    "title": "El Manifiesto GNU — Richard Stallman (1985)",
+    "url": "/la-madriguera/manifiesto-gnu-richard-stallman.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "manifiesto",
+      "gnu",
+      "richard",
+      "stallman",
+      "wallet",
+      "billetera",
+      "claves",
+      "direcciones"
+    ],
+    "section": "La Madriguera",
+    "keywords": "El Manifiesto GNU de Stallman y la filosofía del software libre. El fundamento ideológico que hizo posible Bitcoin. El MIT AI Lab y el fin de la cultura hacker Proyecto GNU y manifiesto Las cuatro libertades GPL: libertades que no se revocan Cómo esto llega a Bitcoin Soberanía digital y soberanía financiera Tensiones reales Debate vigente: hardware abierto Fuentes y referencias Enlaces internos Inicio › La Madriguera › El Manifiesto GNU — Richard Stallman (1985) Precursores El Manifiesto GNU — Richard Stallman (1985) Sin software libre no habría Bitcoin. El manifiesto de 1985 que sentó las bases de un movimiento que cambió la tecnología. Fecha: Marzo 2026 Existe una pregunta que Bitcoin exige responder antes de confiar en él: ¿cómo sabes que hace lo que dice que hace? La respuesta tiene cuatro palabras: porque puedes leer el código. Y que puedas leerlo, modificarlo, distribuirlo y ejecutarlo sin pedir permiso a nadie no es una característica técnica accidental. Es el resultado de décadas de lucha filosófica, legal y política. Richard Stallman escribió el Manifiesto GNU en 1985. Bitcoin llegaría 23 años después. La conexión entre ambos no es anecdótica: es estructural. El MIT AI Lab y el fin de la cultura hacker A finales de los años 70, el MIT AI Lab funcionaba con una cultura donde compartir código era normal. Si un programa fallaba, alguien lo arreglaba y compartía la mejora. Esa cultura colisionó con el ascenso del software propietario. El episodio de la impresora Xerox 97"
+  },
+  {
     "title": "Multisig, custodia y herencia: lo que Satoshi ya anticipó",
     "url": "/la-madriguera/multisig-custodia-y-herencia-segun-satoshi.html",
     "tags": [
@@ -1585,6 +1707,20 @@
     ],
     "section": "La Madriguera",
     "keywords": "En 2023, aparecieron NFTs en Bitcoin. La comunidad se dividió. ¿Son spam o uso legítimo? El debate sobre el espacio de bloque. ¿Qué son los Ordinals? La explosión El debate Los defensores de Ordinals argumentaban: Los críticos de Ordinals argumentaban: Los intentos de filtrado Runes: el sucesor Las consecuencias económicas La conexión con el debate de osificación Estado actual Fuentes y referencias: Enlaces internos: Inicio &rsaquo; La Madriguera &rsaquo; Ordinals, Inscriptions y la guerra por el espacio de bloque La madriguera Ordinals, Inscriptions y la guerra por el espacio de bloque ¿Quién decide qué es una transacción legítima en Bitcoin? El debate más polarizado desde la Blocksize War. Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~7 minutos En enero de 2023, un desarrollador llamado Casey Rodarmor lanzó el protocolo Ordinals. La idea era simple pero provocadora: asignar un número único a cada satoshi individual, permitiendo \"inscribir\" datos arbitrarios en la blockchain de Bitcoin. En semanas, miles de imágenes, textos y hasta pequeños videojuegos estaban siendo grabados permanentemente en Bitcoin. Las fees se dispararon. La mempool se llenó. Y la comunidad se dividió de una forma que no se veía desde la Guerra del Tamaño de Bloque. ¿Eran los Ordinals una innovación legítima o spam que ensuciaba la blockchain? ¿Quién tiene autoridad para decidir qué es una \"transacción legítima\" en un sistema permissionless? El debate reveló tensiones profundas sobre l"
+  },
+  {
+    "title": "La Polis Paralela — Václav Benda (1978)",
+    "url": "/la-madriguera/polis-paralela-vaclav-benda.html",
+    "tags": [
+      "la madriguera",
+      "madriguera",
+      "polis",
+      "paralela",
+      "vaclav",
+      "benda"
+    ],
+    "section": "La Madriguera",
+    "keywords": "La Polis Paralela de Václav Benda: la idea de crear estructuras paralelas al poder. El antecedente filosófico de Bitcoin. Checoslovaquia, 1978: el arte de sobrevivir bajo la normalización El autor: matemático, filósofo, disidente La idea central: construir, no destruir Lo que Benda no podía saber: la polis paralela digital Václav Havel y el “poder de los sin poder” ¿Se cumplió la visión de Benda? La polis paralela en 2026: Bitcoin, Nostr y autonomía Fuentes y referencias Enlaces internos Inicio › La Madriguera › La Polis Paralela — Václav Benda (1978) Precursores La Polis Paralela — Václav Benda (1978) Un disidente checo propuso en 1978 que la resistencia más efectiva no era destruir el sistema, sino construir uno paralelo. Esa idea late en Bitcoin. Fecha: Marzo 2026 El antecedente filosófico más improbable de Bitcoin no es un paper de criptografía ni un manifiesto tecnológico. Es un ensayo escrito en la clandestinidad, en una Checoslovaquia sometida, por un matemático y filósofo católico que nunca usó un ordenador para pensar en dinero. Václav Benda propuso en 1978 algo que sonaba simple y resultó ser profundo: cuando el sistema te excluye, no peleas contra él. Construyes el tuyo propio. Esa idea, formulada para sobrevivir bajo el comunismo soviético, resuena con precisión llamativa en la filosofía de Bitcoin. No por casualidad histórica, sino porque ambos respondían al mismo problema fundamental: ¿qué haces cuando la infraestructura que necesitas para vivir con dignidad est"
   },
   {
     "title": "Privacidad en Bitcoin: el estado actual y las alternativas",
@@ -3421,6 +3557,76 @@
     ],
     "section": "General",
     "keywords": "Webs de referencia para estudiar Bitcoin: documentación, exploradores, desarrollo y comunidad. bitcoin.org learnmeabitcoin.com mempool.space bitcoinops.org aprendebtc.com nostrfacil.com bitcoin.design BDK y LDK Inicio &rsaquo; Recursos &rsaquo; Webs de referencia Webs de referencia sobre Bitcoin Fuentes recomendadas para consultar información primaria, documentación y seguimiento técnico de la red. bitcoin.org Sitio de referencia Fundamentos Principiante Punto de entrada histórico con explicaciones base, wallets y recursos para nuevos usuarios. Abrir web learnmeabitcoin.com Referencia técnica visual Técnico Intermedio Explicaciones visuales del protocolo: transacciones, scripts, bloques, direcciones y criptografía. Abrir web mempool.space Explorador on-chain Mempool Principiante Visualización de mempool y bloques en tiempo real para estimar fees y seguir transacciones. Abrir web bitcoinops.org Desarrollo Bitcoin Newsletter técnica Avanzado Resumen semanal de cambios en Bitcoin Core, Lightning, BIPs y discusiones de alto nivel técnico. Abrir web aprendebtc.com Guía progresiva en español Ruta de aprendizaje Principiante Contenido estructurado desde cero hasta nivel técnico avanzado, con herramientas y comunidad. Abrir web nostrfacil.com Proyecto hermano Nostr Principiante Guía en español para usar Nostr, un protocolo clave para comunidad, comunicación y soberanía digital. Abrir web bitcoin.design UX y producto Diseño Intermedio Guías de buenas prácticas para construir productos"
+  },
+  {
+    "title": "Fedimint y Cashu: mints federados y eCash sobre Bitcoin",
+    "url": "/sidechains/fedimint-y-cashu.html",
+    "tags": [
+      "sidechains",
+      "fedimint",
+      "cashu",
+      "wallet",
+      "billetera",
+      "lightning",
+      "factura lightning"
+    ],
+    "section": "Sidechains",
+    "keywords": "Fedimint y Cashu traen eCash de David Chaum a Bitcoin. Privacidad extrema, custodia comunitaria y Lightning integrado. Qué problema resuelven Cashu: simple, portable y muy rápido Fedimint: custodia distribuida entre guardianes Integración con Lightning Trade-off principal: privacidad vs autocustodia Cashu vs Fedimint: cuándo usar cada uno Qué no debes esperar Modelo mental correcto para usar mints Prácticas recomendadas para usuarios Prácticas recomendadas para operadores de mint Amenazas reales y mitigaciones prácticas Casos de uso donde brillan Inicio › Sidechains › Fedimint y Cashu Sidechains Fedimint y Cashu: mints federados y eCash sobre Bitcoin La idea más antigua del dinero digital aplicada sobre Lightning: privacidad casi perfecta con custodia comunitaria. En 1982, David Chaum describió un modelo de dinero electrónico con firmas ciegas: el emisor puede validar el token sin conocer su historial de uso. Décadas después, esa idea revive sobre Bitcoin mediante mints federados y eCash integrado con Lightning. La clave es separar capas: Bitcoin como reserva, Lightning como rampa de entrada/salida y eCash como instrumento de pago privado para uso diario. Qué problema resuelven En sistemas bancarios y custodiales tradicionales, el operador conoce casi todo: saldos, contrapartes, frecuencia y horarios. Con eCash basado en firmas ciegas, ese operador pierde capacidad de vincular emisión y gasto individual. No es anonimato absoluto contra cualquier amenaza, pero sí un salto fuer"
+  },
+  {
+    "title": "Sidechains de Bitcoin: gu?a extendida",
+    "url": "/sidechains/",
+    "tags": [
+      "sidechains",
+      "lightning",
+      "factura lightning"
+    ],
+    "section": "Sidechains",
+    "keywords": "Gu?a extendida de sidechains sobre Bitcoin: Rootstock, Liquid, Fedimint y Cashu, con foco en pegs, seguridad y trade-offs reales. Ruta recomendada Inicio ? Sidechains Sidechains Sidechains de Bitcoin: gu?a extendida Cadenas y capas sobre Bitcoin para ganar funcionalidad sin abandonar BTC: seguridad, privacidad, contratos y custodia comunitaria. Esta secci?n re?ne las versiones extendidas de sidechains de aprendeBTC. El objetivo es comparar dise?os con criterio t?cnico: qu? mejoras obtienes, qu? riesgo adicional introduces y para qu? casos de uso tiene sentido cada opci?n. ?? Regla operativa Las sidechains y mints no sustituyen la autocustodia en capa base. Son capas operativas para objetivos concretos. Ruta recomendada 1 ?Qu? son las sidechains de Bitcoin? Base conceptual: pegs, modelos de confianza y trade-offs. ? 2 Rootstock (RSK) Contratos inteligentes sobre BTC con miner?a fusionada. ? 3 Liquid Network Settlement r?pido, montos confidenciales y emisi?n de activos. ? 4 Fedimint y Cashu eCash sobre Lightning para privacidad y pagos diarios. ? Empezar ruta ? ?Qu? son las sidechains de Bitcoin?"
+  },
+  {
+    "title": "Liquid Network: la sidechain federada de Bitcoin",
+    "url": "/sidechains/liquid-network.html",
+    "tags": [
+      "sidechains",
+      "liquid",
+      "network",
+      "wallet",
+      "billetera",
+      "lightning",
+      "factura lightning",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "Sidechains",
+    "keywords": "Liquid Network de Blockstream: transacciones rápidas, confidenciales y emisión de activos sobre Bitcoin. Guía completa. Qué es L-BTC y cómo funciona el peg Federación de functionaries Confidential Transactions Finalidad rápida Emisión de activos sobre Liquid Para quién tiene sentido Lo que Liquid no resuelve Cómo decidir si Liquid encaja en tu operativa Riesgos operativos que debes modelar Buenas prácticas mínimas Liquid frente a on-chain y Lightning Escenarios donde Liquid destaca Inicio › Sidechains › Liquid Network Sidechains Liquid Network: la sidechain federada de Bitcoin Transacciones más rápidas, confidenciales y con activos tokenizados. Todo sobre la sidechain federada de Blockstream. Imagina que necesitas mover varios BTC de un exchange a otro para aprovechar una diferencia de precio. En Bitcoin capa base, esperar confirmaciones robustas puede llevar tiempo. Para ciertos flujos institucionales, ese tiempo cuesta dinero. Liquid se diseñó precisamente para ese escenario: mover BTC entre participantes del ecosistema con mayor velocidad operativa y con mayor privacidad de montos. Qué es L-BTC y cómo funciona el peg Liquid es una sidechain federada y su activo representativo es L-BTC . Igual que en otras sidechains, el modelo busca un respaldo 1:1 con BTC bloqueado en la cadena principal. Entras bloqueando BTC en capa base y recibes L-BTC. Operas dentro de Liquid con sus reglas de consenso y privacidad. Sales devolviendo L-BTC y recuperando BTC. Federación de functionarie"
+  },
+  {
+    "title": "¿Qué son las sidechains de Bitcoin?",
+    "url": "/sidechains/que-son-las-sidechains.html",
+    "tags": [
+      "sidechains",
+      "que",
+      "son",
+      "las",
+      "lightning",
+      "factura lightning",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "Sidechains",
+    "keywords": "Sidechains de Bitcoin: qué son, cómo funcionan los pegs bidireccionales, y por qué extienden Bitcoin sin cambiarlo. Una autopista con vías secundarias Cómo funciona el peg bidireccional Para entrar (peg-in) Para salir (peg-out) Diferencia clave frente a altcoins No toda la confianza es igual Qué puedes hacer en una sidechain El trade-off nunca desaparece Las capas que cubre aprendeBTC Cómo evaluar una sidechain sin marketing Checklist de uso responsable Cuándo NO usar sidechains Inicio › Sidechains › ¿Qué son las sidechains de Bitcoin? Sidechains ¿Qué son las sidechains de Bitcoin? Cadenas laterales que heredan la seguridad de Bitcoin y usan BTC como moneda. Lo mejor de dos mundos. Bitcoin es el protocolo más seguro, descentralizado y robusto de la historia del dinero digital. Pero esa robustez tiene un precio: es deliberadamente conservador. No puede ejecutar contratos complejos de forma nativa, sus transacciones tardan minutos en confirmarse y su privacidad no es perfecta. La pregunta natural es: ¿qué pasa cuando necesitas más funcionalidad sin renunciar al BTC que ya tienes? Ahí entran las sidechains. Una autopista con vías secundarias Imagina que Bitcoin es una gran autopista: fiable, segura, con reglas estrictas y miles de ojos vigilando que todo funcione bien. Las sidechains son vías secundarias que parten de esa autopista. Cada vía secundaria tiene reglas propias: puede ser más rápida, más privada o más flexible para contratos. Pero sigue conectada con la autopista pri"
+  },
+  {
+    "title": "Rootstock (RSK): contratos inteligentes sobre Bitcoin",
+    "url": "/sidechains/rootstock-rsk.html",
+    "tags": [
+      "sidechains",
+      "rootstock",
+      "rsk"
+    ],
+    "section": "Sidechains",
+    "keywords": "Rootstock (RSK) añade contratos inteligentes a Bitcoin usando minería fusionada y rBTC. Qué es, cómo funciona y para qué sirve. ¿Qué es rBTC? No es un token nuevo Minería fusionada: seguridad prestada de Bitcoin PowPeg: el puente entre Bitcoin y Rootstock Compatibilidad EVM: ventaja para desarrolladores ¿Para qué se usa Rootstock en la práctica? Un proyecto con historia Lo que Rootstock no es Checklist antes de mover BTC a Rootstock Errores comunes en usuarios avanzados Cuándo sí y cuándo no Gobernanza, roadmap y riesgos de evolución Enlaces internos Inicio › Sidechains › Rootstock (RSK) Sidechains Rootstock (RSK): contratos inteligentes sobre Bitcoin La sidechain que trae funcionalidad tipo Ethereum a Bitcoin, sin abandonar el ecosistema BTC. Bitcoin no puede ejecutar contratos inteligentes complejos de forma nativa. Eso está bien: la simplicidad es una virtud en capa base. Pero, al mismo tiempo, deja fuera casos de uso que sí son posibles en plataformas como Ethereum. Rootstock es la respuesta que más tiempo lleva en producción para cubrir ese hueco: una sidechain de Bitcoin que permite contratos inteligentes completos, usa BTC como moneda de referencia y hereda parte de la seguridad de Bitcoin mediante minería fusionada. ¿Qué es rBTC? No es un token nuevo Lo primero que hay que entender: rBTC no es una altcoin . Cuando mueves BTC a Rootstock, tus bitcoins quedan bloqueados en la cadena principal y recibes rBTC en Rootstock a razón 1:1. Cada rBTC en circulación corresponde "
   },
   {
     "title": "Sobre aprendeBTC",
