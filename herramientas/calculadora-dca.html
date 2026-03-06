@@ -210,7 +210,9 @@
 
     // === CONSTANTES ===
     const SATS_PER_BTC = 100000000;
-    const PRICE_API_BASE = 'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range';
+    const COINGECKO_RANGE_API = 'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range';
+    const CRYPTOCOMPARE_HISTODAY_API = 'https://min-api.cryptocompare.com/data/v2/histoday';
+    const COINGECKO_MAX_RANGE_SECONDS = 365 * 24 * 60 * 60;
     const PRICE_CACHE_KEY = 'dca-btc-eur-prices-v1';
     const PRICE_CACHE_TTL_MS = 6 * 60 * 60 * 1000;
     
@@ -315,10 +317,9 @@
       return filtered.length > 0 ? filtered : null;
     }
 
-    function fetchPriceRangeFromApi(fromTimestamp, toTimestamp) {
-      const url = `${PRICE_API_BASE}?vs_currency=eur&from=${fromTimestamp}&to=${toTimestamp}`;
+    function fetchJsonWithTimeout(url, timeoutMs = 12000) {
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 12000);
+      const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
       return fetch(url, { signal: controller.signal })
         .then((response) => {
@@ -328,6 +329,106 @@
         .finally(() => {
           clearTimeout(timeout);
         });
+    }
+
+    function normalizeAndSortPricePoints(points) {
+      const map = new Map();
+
+      for (const point of points || []) {
+        if (!Array.isArray(point) || point.length < 2) continue;
+        const timestamp = Number(point[0]);
+        const price = Number(point[1]);
+
+        if (!Number.isFinite(timestamp) || !Number.isFinite(price) || price <= 0) continue;
+        map.set(timestamp, price);
+      }
+
+      return Array.from(map.entries()).sort((a, b) => a[0] - b[0]);
+    }
+
+    async function fetchPriceRangeFromCryptoCompare(fromTimestamp, toTimestamp) {
+      const DAY_SECONDS = 24 * 60 * 60;
+      const MAX_LIMIT_DAYS = 2000;
+      const points = [];
+      let cursorTo = toTimestamp;
+
+      while (cursorTo >= fromTimestamp) {
+        const remainingDays = Math.ceil((cursorTo - fromTimestamp) / DAY_SECONDS);
+        const limit = Math.min(Math.max(1, remainingDays + 1), MAX_LIMIT_DAYS);
+        const url = `${CRYPTOCOMPARE_HISTODAY_API}?fsym=BTC&tsym=EUR&limit=${limit}&toTs=${cursorTo}`;
+        const data = await fetchJsonWithTimeout(url);
+
+        if (!data || data.Response !== 'Success' || !Array.isArray(data.Data?.Data)) {
+          throw new Error('CC_API_ERROR');
+        }
+
+        let earliestSec = Number.POSITIVE_INFINITY;
+
+        for (const row of data.Data.Data) {
+          const timeSec = Number(row && row.time);
+          const close = Number(row && row.close);
+          const open = Number(row && row.open);
+          const price = Number.isFinite(close) && close > 0
+            ? close
+            : (Number.isFinite(open) && open > 0 ? open : NaN);
+
+          if (!Number.isFinite(timeSec) || !Number.isFinite(price) || price <= 0) continue;
+
+          earliestSec = Math.min(earliestSec, timeSec);
+          points.push([timeSec * 1000, price]);
+        }
+
+        if (!Number.isFinite(earliestSec)) {
+          throw new Error('CC_NO_DATA');
+        }
+
+        if (earliestSec <= fromTimestamp || limit < MAX_LIMIT_DAYS) {
+          break;
+        }
+
+        cursorTo = earliestSec - DAY_SECONDS;
+      }
+
+      const fromMs = fromTimestamp * 1000;
+      const toMs = toTimestamp * 1000;
+      const normalized = normalizeAndSortPricePoints(points)
+        .filter(([ts]) => ts >= fromMs && ts <= toMs);
+
+      if (!normalized.length) {
+        throw new Error('CC_NO_DATA');
+      }
+
+      return normalized;
+    }
+
+    async function fetchPriceRangeFromCoinGeckoChunked(fromTimestamp, toTimestamp) {
+      const points = [];
+      let cursor = fromTimestamp;
+
+      while (cursor <= toTimestamp) {
+        const chunkFrom = cursor;
+        const chunkTo = Math.min(toTimestamp, chunkFrom + COINGECKO_MAX_RANGE_SECONDS - 1);
+        const url = `${COINGECKO_RANGE_API}?vs_currency=eur&from=${chunkFrom}&to=${chunkTo}`;
+        const data = await fetchJsonWithTimeout(url);
+
+        if (!data || !Array.isArray(data.prices) || data.prices.length === 0) {
+          throw new Error('CG_NO_DATA');
+        }
+
+        points.push(...data.prices);
+        cursor = chunkTo + 1;
+      }
+
+      const fromMs = fromTimestamp * 1000;
+      const toMs = toTimestamp * 1000;
+      const normalized = normalizeAndSortPricePoints(points)
+        .filter(([ts]) => ts >= fromMs && ts <= toMs);
+
+      if (!normalized.length) {
+        throw new Error('CG_NO_DATA');
+      }
+
+      return normalized;
     }
     // === OBTENER DATOS DE PRECIO ===
     async function fetchPriceData(startDate, endDate) {
@@ -348,22 +449,27 @@
       }
 
       try {
-        const data = await fetchPriceRangeFromApi(fromTimestamp, toTimestamp);
-
-        if (!data || !Array.isArray(data.prices) || data.prices.length === 0) {
-          throw new Error('Sin datos de precio');
-        }
-
-        savePriceCache(fromMs, toMs, data.prices);
-        return data.prices;
+        const prices = await fetchPriceRangeFromCryptoCompare(fromTimestamp, toTimestamp);
+        savePriceCache(fromMs, toMs, prices);
+        return prices;
       } catch (error) {
-        console.warn('Error obteniendo precios DCA:', error);
-        const fallbackCache = getCachedPricesForRange(fromMs, toMs, false);
-        if (fallbackCache) {
-          return fallbackCache;
-        }
-        throw new Error('Error al obtener datos de precio');
+        console.warn('CryptoCompare fallo en DCA:', error);
       }
+
+      try {
+        const prices = await fetchPriceRangeFromCoinGeckoChunked(fromTimestamp, toTimestamp);
+        savePriceCache(fromMs, toMs, prices);
+        return prices;
+      } catch (error) {
+        console.warn('CoinGecko fallo en DCA:', error);
+      }
+
+      const fallbackCache = getCachedPricesForRange(fromMs, toMs, false);
+      if (fallbackCache) {
+        return fallbackCache;
+      }
+
+      throw new Error('Error al obtener datos de precio');
     }
 
     // === GENERAR FECHAS DE COMPRA ===
