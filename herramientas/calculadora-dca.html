@@ -210,6 +210,9 @@
 
     // === CONSTANTES ===
     const SATS_PER_BTC = 100000000;
+    const PRICE_API_BASE = 'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range';
+    const PRICE_CACHE_KEY = 'dca-btc-eur-prices-v1';
+    const PRICE_CACHE_TTL_MS = 6 * 60 * 60 * 1000;
     
     // === ELEMENTOS DEL DOM ===
     const amountInput = document.getElementById('amount');
@@ -267,21 +270,100 @@
       return Math.round(sats).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     }
 
+    function readPriceCache() {
+      try {
+        const raw = localStorage.getItem(PRICE_CACHE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (!parsed || !Array.isArray(parsed.prices) || parsed.prices.length === 0) return null;
+        return parsed;
+      } catch (error) {
+        console.warn('No se pudo leer cache de precios DCA:', error);
+        return null;
+      }
+    }
+
+    function savePriceCache(fromMs, toMs, prices) {
+      try {
+        localStorage.setItem(PRICE_CACHE_KEY, JSON.stringify({
+          from: fromMs,
+          to: toMs,
+          prices,
+          savedAt: Date.now()
+        }));
+      } catch (error) {
+        console.warn('No se pudo guardar cache de precios DCA:', error);
+      }
+    }
+
+    function getCachedPricesForRange(fromMs, toMs, preferFresh) {
+      const cache = readPriceCache();
+      if (!cache) return null;
+
+      const coversRange = Number(cache.from) <= fromMs && Number(cache.to) >= toMs;
+      if (!coversRange) return null;
+
+      const cacheAge = Date.now() - Number(cache.savedAt || 0);
+      const isFresh = cacheAge >= 0 && cacheAge <= PRICE_CACHE_TTL_MS;
+      if (preferFresh && !isFresh) return null;
+
+      const filtered = cache.prices.filter((point) => {
+        const ts = Number(point && point[0]);
+        return Number.isFinite(ts) && ts >= fromMs && ts <= toMs;
+      });
+
+      return filtered.length > 0 ? filtered : null;
+    }
+
+    function fetchPriceRangeFromApi(fromTimestamp, toTimestamp) {
+      const url = `${PRICE_API_BASE}?vs_currency=eur&from=${fromTimestamp}&to=${toTimestamp}`;
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 12000);
+
+      return fetch(url, { signal: controller.signal })
+        .then((response) => {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response.json();
+        })
+        .finally(() => {
+          clearTimeout(timeout);
+        });
+    }
     // === OBTENER DATOS DE PRECIO ===
     async function fetchPriceData(startDate, endDate) {
-      // Convertir a timestamps Unix (segundos)
-      const fromTimestamp = Math.floor(startDate.getTime() / 1000);
-      const toTimestamp = Math.floor(endDate.getTime() / 1000);
+      const fromDate = new Date(startDate);
+      fromDate.setHours(0, 0, 0, 0);
 
-      const url = `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=eur&from=${fromTimestamp}&to=${toTimestamp}`;
+      const toDate = new Date(endDate);
+      toDate.setHours(23, 59, 59, 999);
 
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error('Error al obtener datos de precio');
+      const fromMs = fromDate.getTime();
+      const toMs = toDate.getTime();
+      const fromTimestamp = Math.floor(fromMs / 1000);
+      const toTimestamp = Math.floor(toMs / 1000);
+
+      const freshCache = getCachedPricesForRange(fromMs, toMs, true);
+      if (freshCache) {
+        return freshCache;
       }
 
-      const data = await response.json();
-      return data.prices; // Array de [timestamp, price]
+      try {
+        const data = await fetchPriceRangeFromApi(fromTimestamp, toTimestamp);
+
+        if (!data || !Array.isArray(data.prices) || data.prices.length === 0) {
+          throw new Error('Sin datos de precio');
+        }
+
+        savePriceCache(fromMs, toMs, data.prices);
+        return data.prices;
+      } catch (error) {
+        console.warn('Error obteniendo precios DCA:', error);
+        const fallbackCache = getCachedPricesForRange(fromMs, toMs, false);
+        if (fallbackCache) {
+          return fallbackCache;
+        }
+        throw new Error('Error al obtener datos de precio');
+      }
     }
 
     // === GENERAR FECHAS DE COMPRA ===

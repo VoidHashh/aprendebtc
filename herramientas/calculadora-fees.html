@@ -220,13 +220,16 @@
     };
 
     let btcPrice = null; // Precio en EUR
+    let lastPriceFetchAt = 0;
 
     // === CONSTANTES ===
     const FEES_API = 'https://mempool.space/api/v1/fees/recommended';
     const MEMPOOL_API = 'https://mempool.space/api/mempool';
     const PRICE_API = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=eur';
     const SATS_PER_BTC = 100000000;
-    const REFRESH_INTERVAL = 30000; // 30 segundos
+    const REFRESH_INTERVAL = 120000; // 2 minutos
+    const PRICE_REFRESH_INTERVAL = 300000; // 5 minutos
+    const PRICE_CACHE_KEY = 'fees-btc-price-eur-v1';
 
     // === ELEMENTOS DEL DOM ===
     const mempoolDot = document.getElementById('mempool-dot');
@@ -264,47 +267,107 @@
       return Math.round(sats).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     }
 
+    function fetchJson(url, timeoutMs = 10000) {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+      return fetch(url, { signal: controller.signal })
+        .then((response) => {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response.json();
+        })
+        .finally(() => {
+          clearTimeout(timeout);
+        });
+    }
+
+    function loadCachedPrice() {
+      try {
+        const raw = localStorage.getItem(PRICE_CACHE_KEY);
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        const cachedPrice = Number(parsed && parsed.price);
+        const cachedTs = Number(parsed && parsed.ts);
+
+        if (Number.isFinite(cachedPrice) && cachedPrice > 0) {
+          btcPrice = cachedPrice;
+        }
+        if (Number.isFinite(cachedTs) && cachedTs > 0) {
+          lastPriceFetchAt = cachedTs;
+        }
+      } catch (error) {
+        console.warn('No se pudo leer precio en cache:', error);
+      }
+    }
+
+    function saveCachedPrice(priceValue) {
+      try {
+        localStorage.setItem(PRICE_CACHE_KEY, JSON.stringify({
+          price: priceValue,
+          ts: Date.now()
+        }));
+      } catch (error) {
+        console.warn('No se pudo guardar precio en cache:', error);
+      }
+    }
     // === OBTENER DATOS ===
 
-    async function fetchFees() {
-      try {
-        const [feesResponse, mempoolResponse, priceResponse] = await Promise.all([
-          fetch(FEES_API),
-          fetch(MEMPOOL_API),
-          fetch(PRICE_API)
-        ]);
+    async function fetchFees(options = {}) {
+      const forcePrice = Boolean(options.forcePrice);
+      const now = Date.now();
+      const shouldRefreshPrice = forcePrice || !btcPrice || (now - lastPriceFetchAt) >= PRICE_REFRESH_INTERVAL;
 
-        if (!feesResponse.ok) throw new Error('Fees API error');
+      const [feesResult, mempoolResult] = await Promise.allSettled([
+        fetchJson(FEES_API),
+        fetchJson(MEMPOOL_API)
+      ]);
 
-        const feesData = await feesResponse.json();
+      let hasFreshFees = false;
+
+      if (feesResult.status === 'fulfilled') {
+        const feesData = feesResult.value;
         feeData.fastestFee = feesData.fastestFee;
         feeData.halfHourFee = feesData.halfHourFee;
         feeData.hourFee = feesData.hourFee;
         feeData.economyFee = feesData.economyFee;
         feeData.minimumFee = feesData.minimumFee;
-
-        if (mempoolResponse.ok) {
-          const mempoolData = await mempoolResponse.json();
-          feeData.mempoolSize = mempoolData.count;
-        }
-
-        if (priceResponse.ok) {
-          const priceData = await priceResponse.json();
-          btcPrice = priceData.bitcoin.eur;
-        }
-
         feeData.lastUpdated = new Date();
-        feeData.error = false;
-
-        updateUI();
-
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        feeData.error = true;
-        mempoolDot.classList.add('tool-price-ticker__dot--error');
-        mempoolText.textContent = 'Error de conexión';
-        apiError.style.display = 'block';
+        hasFreshFees = true;
+      } else {
+        console.error('Error fetching fee data:', feesResult.reason);
       }
+
+      if (mempoolResult.status === 'fulfilled') {
+        feeData.mempoolSize = mempoolResult.value.count;
+      } else {
+        console.warn('Error fetching mempool stats:', mempoolResult.reason);
+      }
+
+      if (shouldRefreshPrice) {
+        try {
+          const priceData = await fetchJson(PRICE_API, 8000);
+          const nextPrice = Number(priceData && priceData.bitcoin && priceData.bitcoin.eur);
+          if (Number.isFinite(nextPrice) && nextPrice > 0) {
+            btcPrice = nextPrice;
+            lastPriceFetchAt = now;
+            saveCachedPrice(nextPrice);
+          }
+        } catch (error) {
+          console.warn('Error fetching BTC price:', error);
+        }
+      }
+
+      const hasAnyFeeData = feeData.fastestFee !== null;
+      feeData.error = !hasFreshFees;
+
+      if (hasAnyFeeData) {
+        updateUI();
+        return;
+      }
+
+      mempoolDot.classList.add('tool-price-ticker__dot--error');
+      mempoolText.textContent = 'Error de conexion';
+      apiError.style.display = 'block';
     }
 
     // === ACTUALIZAR UI ===
@@ -428,14 +491,16 @@
     // Botón de actualizar
     refreshBtn.addEventListener('click', () => {
       mempoolText.textContent = 'Actualizando...';
-      fetchFees();
+      fetchFees({ forcePrice: true });
     });
 
     // === INICIALIZACIÓN ===
 
+    loadCachedPrice();
+    calculateFee();
     fetchFees();
 
-    // Auto-refresh cada 30 segundos
+    // Auto-refresh
     setInterval(fetchFees, REFRESH_INTERVAL);
 
   })();
