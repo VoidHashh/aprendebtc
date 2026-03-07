@@ -1,4 +1,4 @@
-﻿/**
+/**
  * aprendebtc.com - search.js
  * Client-side search with static fallback + dynamic site/base indexes.
  */
@@ -67,10 +67,10 @@
     { title: 'GestiÃ³n de liquidez', url: '/nivel-4/liquidez-lightning.html', tags: ['nivel 4', 'lightning', 'liquidez'], section: 'Nivel 4', nivel: 4 },
     { title: 'Routing de pagos', url: '/nivel-4/routing-lightning.html', tags: ['nivel 4', 'lightning', 'routing'], section: 'Nivel 4', nivel: 4 },
     { title: 'Montar tu nodo Lightning', url: '/nivel-4/nodo-lightning.html', tags: ['nivel 4', 'lightning', 'nodo'], section: 'Nivel 4', nivel: 4 },
-    { title: 'Â¿QuÃ© son las sidechains de Bitcoin?', url: '/nivel-4/que-son-las-sidechains.html', tags: ['nivel 4', 'sidechains', 'peg', 'layers'], section: 'Nivel 4', nivel: 4 },
-    { title: 'Rootstock (RSK): contratos inteligentes sobre Bitcoin', url: '/nivel-4/rootstock-rsk.html', tags: ['nivel 4', 'rootstock', 'rsk', 'smart contracts', 'rbtc'], section: 'Nivel 4', nivel: 4 },
-    { title: 'Liquid Network: la sidechain federada de Bitcoin', url: '/nivel-4/liquid-network.html', tags: ['nivel 4', 'liquid', 'l-btc', 'confidential transactions'], section: 'Nivel 4', nivel: 4 },
-    { title: 'Fedimint y Cashu: mints federados y eCash', url: '/nivel-4/fedimint-y-cashu.html', tags: ['nivel 4', 'fedimint', 'cashu', 'ecash', 'privacy'], section: 'Nivel 4', nivel: 4 },
+    { title: 'Que son las sidechains de Bitcoin', url: '/nivel-4/que-son-las-sidechains.html', tags: ['nivel 4', 'sidechains', 'peg', 'capas'], section: 'Sidechains y capas', nivel: 4 },
+    { title: 'Rootstock (RSK): contratos inteligentes sobre Bitcoin', url: '/nivel-4/rootstock-rsk.html', tags: ['nivel 4', 'rootstock', 'rsk', 'powpeg', 'rbtc'], section: 'Sidechains y capas', nivel: 4 },
+    { title: 'Liquid Network: la sidechain federada de Bitcoin', url: '/nivel-4/liquid-network.html', tags: ['nivel 4', 'liquid', 'l-btc', 'confidential transactions'], section: 'Sidechains y capas', nivel: 4 },
+    { title: 'Fedimint y Cashu: eCash, mints federados y privacidad sobre Bitcoin', url: '/nivel-4/fedimint-y-cashu.html', tags: ['nivel 4', 'fedimint', 'cashu', 'ecash', 'privacidad'], section: 'Sidechains y capas', nivel: 4 },
     { title: 'MinerÃ­a casera: Â¿tiene sentido?', url: '/nivel-4/mineria-casera.html', tags: ['nivel 4', 'minerÃ­a', 'casa'], section: 'Nivel 4', nivel: 4 },
     { title: 'Hardware de minerÃ­a', url: '/nivel-4/hardware-mineria.html', tags: ['nivel 4', 'minerÃ­a', 'asic'], section: 'Nivel 4', nivel: 4 },
     { title: 'Pools de minerÃ­a', url: '/nivel-4/pools-mineria.html', tags: ['nivel 4', 'minerÃ­a', 'pools'], section: 'Nivel 4', nivel: 4 },
@@ -199,8 +199,41 @@
   let mergedIndex = [];
   let indexLoaded = false;
 
+  function collapseWhitespace(value) {
+    return String(value || '').replace(/\s+/g, ' ').trim();
+  }
+
+  function textScore(value) {
+    const ok = (value.match(/[A-Za-z0-9ÁÉÍÓÚáéíóúÑñÜü¿¡]/g) || []).length;
+    const bad = (value.match(/[ÃÂâ?]/g) || []).length;
+    return ok - (bad * 3);
+  }
+
+  function maybeDecodeMojibake(value) {
+    const raw = collapseWhitespace(value);
+    if (!raw || !/[ÃÂâ]/.test(raw)) return raw;
+
+    try {
+      const bytes = Uint8Array.from(Array.from(raw).map((ch) => ch.charCodeAt(0) & 0xff));
+      const decoded = new TextDecoder('utf-8', { fatal: false }).decode(bytes);
+      if (decoded && textScore(decoded) >= textScore(raw)) {
+        return collapseWhitespace(decoded);
+      }
+    } catch (_) {
+      // noop
+    }
+
+    return raw;
+  }
+
+  function sanitizeText(value) {
+    return maybeDecodeMojibake(collapseWhitespace(value))
+      .replace(/\uFFFD/g, '')
+      .trim();
+  }
+
   function normalize(text) {
-    return (text || '')
+    return sanitizeText(text)
       .toLowerCase()
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
@@ -251,12 +284,14 @@
   }
 
   function prepareItem(raw) {
-    const title = String(raw?.title || 'Sin titulo').trim();
+    const title = sanitizeText(raw?.title || 'Sin titulo');
     const url = String(raw?.url || '#').trim();
-    const tags = Array.isArray(raw?.tags) ? raw.tags.map((tag) => String(tag).trim()).filter(Boolean) : [];
-    const section = String(raw?.section || 'Contenido').trim();
+    const tags = Array.isArray(raw?.tags)
+      ? raw.tags.map((tag) => sanitizeText(tag)).filter(Boolean)
+      : [];
+    const section = sanitizeText(raw?.section || 'Contenido');
     const nivel = Number(raw?.nivel) || detectNivelFromUrl(url);
-    const keywords = String(raw?.keywords || '').trim();
+    const keywords = sanitizeText(raw?.keywords || '');
 
     const titleNorm = normalize(title);
     const tagsNorm = normalize(tags.join(' '));

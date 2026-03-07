@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Liquid Network de Blockstream: transacciones rápidas, confidenciales y emisión de activos sobre Bitcoin. Guía completa." />
+  <meta name="description" content="Liquid Network: transacciones rapidas, confidenciales y emision de activos sobre Bitcoin. Analisis completo de la sidechain de Blockstream." />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://aprendebtc.com/sidechains/liquid-network.html" />
-  <meta property="og:title" content="Liquid Network: la sidechain federada de Bitcoin — Nivel 4 | aprendebtc.com" />
-  <meta property="og:description" content="Liquid Network de Blockstream: transacciones rápidas, confidenciales y emisión de activos sobre Bitcoin. Guía completa." />
+  <meta property="og:url" content="https://aprendebtc.com/nivel-4/liquid-network.html" />
+  <meta property="og:title" content="Liquid Network: la sidechain federada de Bitcoin - Nivel 4 | aprendebtc.com" />
+  <meta property="og:description" content="Liquid Network: transacciones rapidas, confidenciales y emision de activos sobre Bitcoin. Analisis completo de la sidechain de Blockstream." />
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
   <meta property="og:site_name" content="aprendeBTC" />
   <meta property="og:locale" content="es_ES" />
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Liquid Network: la sidechain federada de Bitcoin — Nivel 4 | aprendebtc.com" />
-  <meta name="twitter:description" content="Liquid Network de Blockstream: transacciones rápidas, confidenciales y emisión de activos sobre Bitcoin. Guía completa." />
+  <meta name="twitter:title" content="Liquid Network: la sidechain federada de Bitcoin - Nivel 4 | aprendebtc.com" />
+  <meta name="twitter:description" content="Liquid Network: transacciones rapidas, confidenciales y emision de activos sobre Bitcoin. Analisis completo de la sidechain de Blockstream." />
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
   <!-- Canonical -->
-  <link rel="canonical" href="https://aprendebtc.com/sidechains/liquid-network.html" />
-  <link rel="alternate" hreflang="es" href="https://aprendebtc.com/sidechains/liquid-network.html" />
-  <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/sidechains/liquid-network.html" />
-  <title>Liquid Network: la sidechain federada de Bitcoin — Nivel 4 | aprendebtc.com</title>
+  <link rel="canonical" href="https://aprendebtc.com/nivel-4/liquid-network.html" />
+  <link rel="alternate" hreflang="es" href="https://aprendebtc.com/nivel-4/liquid-network.html" />
+  <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/nivel-4/liquid-network.html" />
+  <title>Liquid Network: la sidechain federada de Bitcoin - Nivel 4 | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="../css/main.css" />
@@ -72,211 +72,103 @@
 
     <main class="page-layout__content" id="main-content">
       <div class="content-inner">
-        <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <nav class="breadcrumb" aria-label="Ruta de navegacion">
           <a href="../" class="breadcrumb__item">Inicio</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__separator" aria-hidden="true">></span>
           <a href="./" class="breadcrumb__item">Nivel 4</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__separator" aria-hidden="true">></span>
           <span class="breadcrumb__current">Liquid Network</span>
         </nav>
 
         <article class="article">
           <div class="nivel-badge nivel-badge--4 article__badge">Nivel 4</div>
           <h1>Liquid Network: la sidechain federada de Bitcoin</h1>
-          <p class="article__subtitle">Transacciones más rápidas, confidenciales y con activos tokenizados. Todo sobre la sidechain federada de Blockstream.</p>
-
-          <p>
-            Imagina que necesitas mover varios BTC de un exchange a otro para aprovechar una diferencia de precio. En
-            Bitcoin capa base, esperar confirmaciones robustas puede llevar tiempo. Para ciertos flujos institucionales,
-            ese tiempo cuesta dinero.
-          </p>
-          <p>
-            Liquid se diseñó precisamente para ese escenario: mover BTC entre participantes del ecosistema con mayor
-            velocidad operativa y con mayor privacidad de montos.
-          </p>
-
-          <h2>Qué es L-BTC y cómo funciona el peg</h2>
-          <p>
-            Liquid es una sidechain federada y su activo representativo es <strong>L-BTC</strong>. Igual que en otras
-            sidechains, el modelo busca un respaldo 1:1 con BTC bloqueado en la cadena principal.
-          </p>
-          <ul>
-            <li>Entras bloqueando BTC en capa base y recibes L-BTC.</li>
-            <li>Operas dentro de Liquid con sus reglas de consenso y privacidad.</li>
-            <li>Sales devolviendo L-BTC y recuperando BTC.</li>
-          </ul>
-
-          <h2>Federación de functionaries</h2>
-          <p>
-            La seguridad de Liquid depende de una federación de entidades del ecosistema con dos funciones:
-          </p>
-          <ul>
-            <li><strong>Block signers</strong>: firman y producen bloques en intervalos cortos.</li>
-            <li><strong>Watchmen</strong>: custodian y operan el puente de entrada/salida de BTC.</li>
-          </ul>
-          <p>
-            Este modelo es un trade-off explícito. Ganas velocidad y funcionalidades prácticas, pero aceptas un modelo
-            de confianza superior al de Bitcoin capa base.
-          </p>
+          <p class="article__subtitle">La sidechain federada en produccion para settlement rapido y privacidad de montos.</p>
 
           <div class="callout callout--warning">
-            <span class="callout__icon" aria-hidden="true">⚠️</span>
+            <span class="callout__icon" aria-hidden="true">!</span>
             <div class="callout__content">
-              <div class="callout__title">Menos descentralizado que Bitcoin</div>
-              <p class="callout__text">Liquid no busca reemplazar la capa base de Bitcoin, sino ofrecer una ruta operativa más rápida para casos concretos con una federación de confianza.</p>
+              <div class="callout__title">Estado</div>
+              <p class="callout__text">Actualizado a marzo de 2026. Verifica datos vigentes en liquid.net.</p>
             </div>
           </div>
+
+          <h2>El problema que Liquid vino a resolver</h2>
+          <p>Liquid nacio para resolver una necesidad operativa real del ecosistema: mover BTC entre instituciones con rapidez y con menor exposicion publica de montos que en Bitcoin on-chain. Su foco historico no fue retail masivo, sino settlement entre exchanges y mesas de tesoreria.</p>
+
+          <h2>Arquitectura</h2>
+          <p>Liquid funciona como sidechain federada con <em>functionaries</em> que cumplen dos roles: firmar bloques y custodiar el puente con Bitcoin. Es un modelo explicitamente mas coordinado que Bitcoin, a cambio de bloques rapidos y finalidad operacional en minutos.</p>
+          <p>La red produce bloques en torno a un minuto y evita reorganizaciones tipicas de mineria competitiva mediante firmas de umbral.</p>
 
           <h2>Confidential Transactions</h2>
-          <p>
-            Una de las funciones más relevantes de Liquid es la privacidad de montos: las cantidades se mantienen
-            ocultas para observadores externos mientras la red puede validar la consistencia matemática de la
-            transacción.
-          </p>
-          <p>
-            Para empresas, market makers y equipos de tesorería, esto evita exponer tamaño de operaciones en tiempo
-            real y reduce fugas de información competitiva.
-          </p>
+          <p>Es la pieza tecnica diferencial de Liquid: oculta montos con compromisos criptograficos, manteniendo verificabilidad de que no se crea ni destruye valor fuera de reglas. Para tesorerias institucionales esto reduce leakage de informacion frente a competidores.</p>
+          <p>Importante: CT oculta montos, pero no vuelve invisible toda la topologia de transacciones. Mejora privacidad financiera, no anonimato total.</p>
 
-          <h2>Finalidad rápida</h2>
-          <p>
-            En Liquid, el ritmo de bloque es más rápido que en capa base, y la finalidad práctica suele considerarse en
-            pocos minutos para muchos usos. Esta latencia menor resulta crítica en arbitraje, liquidaciones y gestión
-            de posiciones entre plataformas.
-          </p>
+          <h2>L-BTC y puente</h2>
+          <p>L-BTC mantiene paridad 1:1 con BTC en custodia de la federacion. El peg-in directo exige confirmaciones profundas en Bitcoin (tipicamente 102), por lo que es lento por diseno. El peg-out depende del procesamiento de watchmen y de la congestion on-chain.</p>
+          <p>En operativa diaria, muchos usuarios entran y salen mediante exchanges compatibles con Liquid para evitar el peg manual.</p>
 
-          <h2>Emisión de activos sobre Liquid</h2>
-          <p>
-            Además de L-BTC, Liquid permite emitir activos personalizados: stablecoins, instrumentos financieros o
-            tokens de uso interno. Esta capacidad convierte a Liquid en una capa orientada a settlement profesional,
-            más que en una red de pagos minoristas global.
-          </p>
-
-          <h2>Para quién tiene sentido</h2>
+          <h2>Casos de uso reales</h2>
           <ul>
-            <li>Exchanges que necesitan mover colateral con baja latencia.</li>
-            <li>Operadores profesionales que priorizan privacidad de montos.</li>
-            <li>Proyectos que requieren emisión y transferencia de activos sobre stack Bitcoin.</li>
+            <li><strong>Settlement inter-exchange:</strong> mover colateral y liquidez en minutos.</li>
+            <li><strong>Privacidad de montos:</strong> transferencias institucionales sin exponer volumen exacto.</li>
+            <li><strong>Issued assets:</strong> emision de activos como USDT en infraestructura anclada a Bitcoin.</li>
+            <li><strong>Operativa profesional:</strong> backoffice y tesoreria donde la finalidad rapida pesa mas que la minima confianza absoluta.</li>
           </ul>
 
-          <h2>Lo que Liquid no resuelve</h2>
-          <ul>
-            <li>No elimina la dependencia de una federación en el peg.</li>
-            <li>No sustituye autocustodia base para ahorro de largo plazo.</li>
-            <li>No compite con Lightning en micropagos cotidianos.</li>
-          </ul>
-          <p>
-            Lightning y Liquid no son rivales directos. Son capas con objetivos distintos: Lightning optimiza pagos,
-            Liquid optimiza settlement y privacidad operativa para perfiles avanzados.
-          </p>
+          <h2>Trade-off de confianza</h2>
+          <p>Liquid no intenta reemplazar Bitcoin base. Es una capa operativa con modelo federado: ganas velocidad, finalidad y privacidad de montos; sacrificas parte de la minimizacion de confianza que ofrece la capa base.</p>
+          <p>Para ahorro de largo plazo, mainchain sigue siendo referencia. Para settlement entre actores conocidos, Liquid cumple bien su objetivo.</p>
 
-          <div class="callout callout--info">
-            <span class="callout__icon" aria-hidden="true">ℹ️</span>
+          <h2>El estado real de la adopcion</h2>
+          <p>Liquid opera en produccion desde 2018. Su adopcion se mantiene en nichos institucionales: transacciones diarias modestas frente a Bitcoin mainchain, pero con utilidad clara para movimientos de tesoreria y activos emitidos.</p>
+          <p>El L-BTC en circulacion fluctua con el ciclo de mercado. En picos de actividad ha superado varios miles de BTC, y en fases de menor actividad cae. El patron confirma su rol: capa de operacion, no capa de ahorro masivo.</p>
+
+          <h2>Riesgos concretos para el usuario</h2>
+          <ul>
+            <li><strong>Riesgo de peg:</strong> si una mayoria de watchmen actuara de forma coordinada y maliciosa, el riesgo existe.</li>
+            <li><strong>Riesgo de bug:</strong> mayor complejidad tecnica que Bitcoin puro implica mas superficie de fallo.</li>
+            <li><strong>Riesgo de censura:</strong> al haber entidades identificables, hay vector de presion regulatoria.</li>
+            <li><strong>Riesgo de continuidad:</strong> coordinacion federada requiere mantenimiento operativo sostenido.</li>
+          </ul>
+
+          <div class="callout callout--danger">
+            <span class="callout__icon" aria-hidden="true">!!</span>
             <div class="callout__content">
-              <div class="callout__title">Estado de la información</div>
-              <p class="callout__text">Datos revisados a marzo de 2026. Comprueba composición federada e integraciones vigentes en liquid.net antes de operar.</p>
+              <div class="callout__title">Regla operativa</div>
+              <p class="callout__text">No almacenes ahorro de largo plazo en Liquid. Usalo para operacion. La reserva estrategica debe estar en mainchain con autocustodia.</p>
             </div>
           </div>
 
-          
-          <h2>Cómo decidir si Liquid encaja en tu operativa</h2>
-          <p>
-            Liquid tiene sentido cuando la latencia y la privacidad de montos son críticas. Si tu flujo no depende de
-            eso, capa base o Lightning suelen ofrecer una relación riesgo-beneficio más simple.
-          </p>
-          <ol>
-            <li><strong>Necesidad de velocidad:</strong> ¿realmente pierdes valor esperando confirmaciones en capa base?</li>
-            <li><strong>Necesidad de confidencialidad:</strong> ¿te afecta que terceros vean montos y patrones?</li>
-            <li><strong>Dependencia de terceros:</strong> ¿asumes conscientemente el modelo federado?</li>
-            <li><strong>Liquidez de salida:</strong> ¿puedes volver a BTC base sin fricción cuando lo necesites?</li>
-          </ol>
+          <h2>Quien deberia usar Liquid</h2>
+          <p>Tiene sentido para operacion profesional con necesidades de settlement rapido y privacidad de montos. Tambien para usuarios que necesitan activos emitidos en infraestructura Bitcoin y aceptan el modelo federado.</p>
+          <p>No es la mejor capa para quien solo necesita ahorro soberano de largo plazo o pagos diarios de bajo importe (ahi Lightning suele ser mejor ajuste).</p>
 
-          <h2>Riesgos operativos que debes modelar</h2>
+          <h2>Fuentes y referencias</h2>
           <ul>
-            <li>Congestión o incidencias en servicios que hacen bridge.</li>
-            <li>Cambios de política o soporte en plataformas donde operas.</li>
-            <li>Riesgo de contraparte si mantienes L-BTC en custodios centralizados.</li>
-            <li>Errores de compatibilidad al mover activos emitidos entre wallets y servicios.</li>
-          </ul>
-          <p>
-            Ninguno de estos puntos invalida Liquid, pero sí obliga a diseñar procedimientos. En perfiles
-            institucionales, la diferencia entre una herramienta útil y una mala experiencia suele estar en esa
-            disciplina operativa.
-          </p>
-
-          <h2>Buenas prácticas mínimas</h2>
-          <ul>
-            <li>Usa listas blancas de direcciones y prueba con importes pequeños primero.</li>
-            <li>Documenta tiempos de ida y vuelta para evitar sorpresas en mercado volátil.</li>
-            <li>No mezcles ahorro de largo plazo con saldo operativo de settlement.</li>
-            <li>Revisa periódicamente exposición total a capa federada.</li>
+            <li>docs.liquid.net</li>
+            <li>Blockstream Liquid / Elements</li>
+            <li>Documentacion de Confidential Transactions</li>
           </ul>
 
-
-          <h2>Liquid frente a on-chain y Lightning</h2>
-          <p>
-            Una forma útil de ubicar Liquid es compararlo con las otras dos capas principales de operación con BTC:
-            capa base y Lightning.
-          </p>
+          <h2>Enlaces internos</h2>
           <ul>
-            <li><strong>On-chain:</strong> máxima descentralización y seguridad, menor velocidad operativa.</li>
-            <li><strong>Lightning:</strong> excelente para pagos frecuentes y pequeños, con fuerte eficiencia.</li>
-            <li><strong>Liquid:</strong> settlement profesional, privacidad de montos y emisión de activos.</li>
-          </ul>
-          <p>
-            No hay un ganador universal. Son herramientas distintas para objetivos distintos. El error típico es usar
-            una capa para un caso de uso que no fue diseñado para ella.
-          </p>
-
-          <h2>Escenarios donde Liquid destaca</h2>
-          <ol>
-            <li>Transferencias rápidas entre entidades con necesidad de ejecución en minutos.</li>
-            <li>Operativa donde revelar tamaño de órdenes o movimientos daña estrategia.</li>
-            <li>Infraestructura que requiere activos emitidos y settlement coordinado.</li>
-          </ol>
-          <p>
-            En todos estos escenarios, Liquid puede aportar ventaja concreta. Fuera de ellos, la complejidad añadida
-            puede no compensar.
-          </p>
-
-          <h2>Política de exposición recomendada</h2>
-          <p>
-            Una práctica robusta es tratar Liquid como capa de tránsito y no de almacenamiento prolongado: entra,
-            ejecuta, y vuelve a capa base cuando termines. Esta disciplina reduce exposición a riesgo federado y
-            mantiene clara la separación entre ahorro y operativa.
-          </p>
-
-
-          <h2>Riesgo regulatorio y de contraparte</h2>
-          <p>
-            En operación profesional, los riesgos no son solo técnicos. También existen riesgos de contraparte y de
-            jurisdicción: cambios de cumplimiento, restricciones de servicio o desconexiones entre proveedores pueden
-            afectar la operativa de forma inmediata.
-          </p>
-          <p>
-            Por eso conviene documentar rutas alternativas de salida, proveedores de respaldo y políticas de ejecución
-            en caso de contingencia. En términos prácticos: no diseñes procesos donde Liquid sea un punto único sin
-            plan B.
-          </p>
-
-<p><strong>→ Para profundizar:</strong> <a href="/sidechains/liquid-network.html">Liquid Network: análisis completo</a></p>
-
-          <h3>Enlaces internos</h3>
-          <ul>
-            <li><a href="/sidechains/que-son-las-sidechains.html">¿Qué son las sidechains de Bitcoin?</a></li>
+            <li><a href="/nivel-4/que-son-las-sidechains.html">Que son las sidechains</a></li>
+            <li><a href="/nivel-4/rootstock-rsk.html">Rootstock (RSK)</a></li>
             <li><a href="/la-madriguera/el-caso-samourai-wallet.html">El caso Samourai Wallet</a></li>
-            <li><a href="/nivel-2/que-es-lightning.html">¿Qué es Lightning Network?</a></li>
+            <li><a href="/la-madriguera/privacidad-en-bitcoin-estado-actual.html">Privacidad en Bitcoin</a></li>
+            <li><a href="/nivel-2/que-es-lightning.html">Que es Lightning</a></li>
           </ul>
 
           <div class="ad-slot ad-content" id="ad-content-4" aria-hidden="true"></div>
 
-          <nav class="page-nav" aria-label="Navegación entre páginas">
+          <nav class="page-nav" aria-label="Navegacion entre paginas">
             <a href="rootstock-rsk.html" class="page-nav__item">
-              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__label"><- Anterior</span>
               <span class="page-nav__title">Rootstock (RSK)</span>
             </a>
             <a href="fedimint-y-cashu.html" class="page-nav__item page-nav__item--next">
-              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__label">Siguiente -></span>
               <span class="page-nav__title">Fedimint y Cashu</span>
             </a>
           </nav>

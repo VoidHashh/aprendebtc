@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Fedimint y Cashu traen eCash de David Chaum a Bitcoin. Privacidad extrema, custodia comunitaria y Lightning integrado." />
+  <meta name="description" content="Fedimint y Cashu: eCash de David Chaum aplicado a Bitcoin. Privacidad extrema, custodia comunitaria y Lightning integrado." />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://aprendebtc.com/sidechains/fedimint-y-cashu.html" />
-  <meta property="og:title" content="Fedimint y Cashu: mints federados y eCash sobre Bitcoin — Nivel 4 | aprendebtc.com" />
-  <meta property="og:description" content="Fedimint y Cashu traen eCash de David Chaum a Bitcoin. Privacidad extrema, custodia comunitaria y Lightning integrado." />
+  <meta property="og:url" content="https://aprendebtc.com/nivel-4/fedimint-y-cashu.html" />
+  <meta property="og:title" content="Fedimint y Cashu: eCash, mints federados y privacidad sobre Bitcoin - Nivel 4 | aprendebtc.com" />
+  <meta property="og:description" content="Fedimint y Cashu: eCash de David Chaum aplicado a Bitcoin. Privacidad extrema, custodia comunitaria y Lightning integrado." />
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
   <meta property="og:site_name" content="aprendeBTC" />
   <meta property="og:locale" content="es_ES" />
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Fedimint y Cashu: mints federados y eCash sobre Bitcoin — Nivel 4 | aprendebtc.com" />
-  <meta name="twitter:description" content="Fedimint y Cashu traen eCash de David Chaum a Bitcoin. Privacidad extrema, custodia comunitaria y Lightning integrado." />
+  <meta name="twitter:title" content="Fedimint y Cashu: eCash, mints federados y privacidad sobre Bitcoin - Nivel 4 | aprendebtc.com" />
+  <meta name="twitter:description" content="Fedimint y Cashu: eCash de David Chaum aplicado a Bitcoin. Privacidad extrema, custodia comunitaria y Lightning integrado." />
   <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
   <!-- Canonical -->
-  <link rel="canonical" href="https://aprendebtc.com/sidechains/fedimint-y-cashu.html" />
-  <link rel="alternate" hreflang="es" href="https://aprendebtc.com/sidechains/fedimint-y-cashu.html" />
-  <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/sidechains/fedimint-y-cashu.html" />
-  <title>Fedimint y Cashu: mints federados y eCash sobre Bitcoin — Nivel 4 | aprendebtc.com</title>
+  <link rel="canonical" href="https://aprendebtc.com/nivel-4/fedimint-y-cashu.html" />
+  <link rel="alternate" hreflang="es" href="https://aprendebtc.com/nivel-4/fedimint-y-cashu.html" />
+  <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/nivel-4/fedimint-y-cashu.html" />
+  <title>Fedimint y Cashu: eCash, mints federados y privacidad sobre Bitcoin - Nivel 4 | aprendebtc.com</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="../css/main.css" />
@@ -45,218 +45,103 @@
 
     <main class="page-layout__content" id="main-content">
       <div class="content-inner">
-        <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <nav class="breadcrumb" aria-label="Ruta de navegacion">
           <a href="../" class="breadcrumb__item">Inicio</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__separator" aria-hidden="true">></span>
           <a href="./" class="breadcrumb__item">Nivel 4</a>
-          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__separator" aria-hidden="true">></span>
           <span class="breadcrumb__current">Fedimint y Cashu</span>
         </nav>
 
         <article class="article">
           <div class="nivel-badge nivel-badge--4 article__badge">Nivel 4</div>
-          <h1>Fedimint y Cashu: mints federados y eCash sobre Bitcoin</h1>
-          <p class="article__subtitle">La idea más antigua del dinero digital aplicada sobre Lightning: privacidad casi perfecta con custodia comunitaria.</p>
+          <h1>Fedimint y Cashu: eCash, mints federados y privacidad sobre Bitcoin</h1>
+          <p class="article__subtitle">La idea de eCash aplicada a Bitcoin: privacidad fuerte con custodia local o comunitaria.</p>
 
-          <p>
-            En 1982, David Chaum describió un modelo de dinero electrónico con firmas ciegas: el emisor puede validar
-            el token sin conocer su historial de uso. Décadas después, esa idea revive sobre Bitcoin mediante mints
-            federados y eCash integrado con Lightning.
-          </p>
-          <p>
-            La clave es separar capas: Bitcoin como reserva, Lightning como rampa de entrada/salida y eCash como
-            instrumento de pago privado para uso diario.
-          </p>
+          <h2>Una idea de 1982 que espero cuarenta anos</h2>
+          <p>En 1982, David Chaum publico las <em>blind signatures</em>: una forma de firmar dinero digital sin que el emisor pueda vincular emision y gasto. La idea no cuajo comercialmente en los 90 (DigiCash), pero tecnicamente era correcta.</p>
+          <p>Bitcoin y Lightning cambiaron el contexto: ahora existe un activo base sin emisor central (BTC) y una capa de liquidez instantanea (Lightning). Eso hizo viable retomar eCash con nueva arquitectura.</p>
 
-          <h2>Qué problema resuelven</h2>
-          <p>
-            En sistemas bancarios y custodiales tradicionales, el operador conoce casi todo: saldos, contrapartes,
-            frecuencia y horarios. Con eCash basado en firmas ciegas, ese operador pierde capacidad de vincular emisión
-            y gasto individual.
-          </p>
-          <p>
-            No es anonimato absoluto contra cualquier amenaza, pero sí un salto fuerte de privacidad operacional para
-            pagos pequeños y frecuentes.
-          </p>
-
-          <h2>Cashu: simple, portable y muy rápido</h2>
-          <p>Cashu usa mints que emiten tokens eCash respaldados por sats depositados por Lightning:</p>
-          <ol>
-            <li>Depositas sats en un mint.</li>
-            <li>Recibes tokens firmados ciegamente.</li>
-            <li>Transfieres esos tokens como texto a otra persona.</li>
-            <li>El receptor decide si canjear o reutilizar.</li>
-          </ol>
-          <p>
-            El flujo es extremadamente simple para propinas y micropagos. El costo de esa simplicidad es custodial: si
-            el mint falla o cierra, puedes perder saldo.
-          </p>
-
-          <h2>Fedimint: custodia distribuida entre guardianes</h2>
-          <p>
-            Fedimint adopta una arquitectura similar de eCash, pero con federación de guardianes y umbral de firmas.
-            Así evita punto único de fallo y encaja mejor con comunidades locales.
-          </p>
+          <h2>Por que eCash sobre Bitcoin tiene sentido hoy</h2>
           <ul>
-            <li>Si un guardián cae, no necesariamente se rompe el sistema.</li>
-            <li>La confianza se reparte entre varias partes.</li>
-            <li>Es ideal cuando hay tejido social fuerte (familia, cooperativa, meetup local).</li>
+            <li>Privacidad fuerte en pagos de baja cuantia.</li>
+            <li>Experiencia de usuario simple para micropagos.</li>
+            <li>Unidad economica en sats.</li>
+            <li>Entrada y salida rapida via Lightning.</li>
           </ul>
 
-          <h2>Integración con Lightning</h2>
-          <p>
-            Tanto Cashu como Fedimint se conectan a Lightning para depósitos y retiros. Eso evita quedar aislado: puedes
-            entrar y salir del ecosistema global de pagos de Bitcoin sin fricción excesiva.
-          </p>
-          <p>
-            En Fedimint suele existir un gateway Lightning que hace de puente entre usuarios del mint y la red global.
-            En Cashu, cada mint define su operativa concreta, pero el patrón de entrada/salida es comparable.
-          </p>
+          <h2>Cashu: implementacion minimalista</h2>
+          <p>Cashu prioriza simplicidad: un mint emite tokens de eCash tras recibir sats por Lightning. El usuario transfiere tokens y puede canjearlos de vuelta por sats. El mint valida firma y doble gasto, pero no puede vincular facilmente flujo completo de emision y uso.</p>
+          <p>Trade-off central: cada mint suele ser custodio unico. Si el operador falla o desaparece, los tokens pendientes en ese mint pueden perderse.</p>
 
-          <h2>Trade-off principal: privacidad vs autocustodia</h2>
-          <p>
-            Esta es la parte importante: Fedimint y Cashu <strong>no son autocustodia pura</strong>. Delegas custodia a
-            cambio de privacidad y experiencia de uso muy fluida.
-          </p>
+          <h2>Fedimint: custodia comunitaria distribuida</h2>
+          <p>Fedimint distribuye custodia entre guardianes con quorum (por ejemplo 3-de-5 o 4-de-7). Mantiene propiedades de privacidad del eCash, reduciendo el punto unico de fallo de un custodio individual.</p>
+          <p>Su modelo encaja especialmente en comunidades locales donde los guardianes son conocidos y tienen reputacion que perder.</p>
 
-          <div class="callout callout--warning">
-            <span class="callout__icon" aria-hidden="true">⚠️</span>
-            <div class="callout__content">
-              <div class="callout__title">Riesgo custodial</div>
-              <p class="callout__text">Si un mint desaparece o la mayoría de la federación actúa mal, puedes perder fondos. Mantén saldos pequeños y rotación frecuente hacia autocustodia.</p>
-            </div>
-          </div>
-
-          <div class="callout callout--danger">
-            <span class="callout__icon" aria-hidden="true">🚨</span>
-            <div class="callout__content">
-              <div class="callout__title">Regla de oro</div>
-              <p class="callout__text">Nunca uses mints para ahorro de largo plazo. Para patrimonio, BTC en autocustodia con hardware wallet y plan de herencia.</p>
-            </div>
-          </div>
-
-          <h2>Cashu vs Fedimint: cuándo usar cada uno</h2>
+          <h2>Cashu vs Fedimint</h2>
           <table>
-            <thead>
-              <tr><th>Aspecto</th><th>Cashu</th><th>Fedimint</th></tr>
-            </thead>
+            <thead><tr><th>Aspecto</th><th>Cashu</th><th>Fedimint</th></tr></thead>
             <tbody>
-              <tr><td>Custodia</td><td>Mint único</td><td>Federación de guardianes</td></tr>
-              <tr><td>Simplicidad</td><td>Muy alta</td><td>Media</td></tr>
-              <tr><td>Riesgo principal</td><td>Punto único de fallo</td><td>Colusión de mayoría</td></tr>
-              <tr><td>Perfil ideal</td><td>Micropagos, propinas</td><td>Comunidades organizadas</td></tr>
+              <tr><td>Custodia</td><td>Mint unico</td><td>Federacion</td></tr>
+              <tr><td>Complejidad</td><td>Baja</td><td>Media/Alta</td></tr>
+              <tr><td>Riesgo de contraparte</td><td>Concentrado</td><td>Distribuido por quorum</td></tr>
+              <tr><td>Caso tipico</td><td>Micropagos y propinas</td><td>Banca comunitaria y economia local</td></tr>
             </tbody>
           </table>
 
-          <h2>Qué no debes esperar</h2>
-          <ul>
-            <li>No son sustituto de nodo propio para verificar capa base.</li>
-            <li>No son almacenamiento seguro para grandes sumas.</li>
-            <li>No eliminan riesgo regulatorio o de operador local.</li>
-          </ul>
+          <h2>El debate filosofico: privacidad vs autocustodia</h2>
+          <p>La tension es real: <em>not your keys, not your coins</em> sigue siendo cierto. eCash no sustituye autocustodia de patrimonio. Pero para pagos cotidianos privados, ofrece propiedades que on-chain y Lightning no siempre dan con la misma UX.</p>
+          <p>Modelo practico por capas: ahorro principal en mainchain autocustodiada; liquidez operativa en Lightning; privacidad de baja cuantia en mints (con limites de riesgo estrictos).</p>
 
-          <div class="callout callout--info">
-            <span class="callout__icon" aria-hidden="true">ℹ️</span>
+          <div class="callout callout--danger">
+            <span class="callout__icon" aria-hidden="true">!!</span>
             <div class="callout__content">
-              <div class="callout__title">Estado de la información</div>
-              <p class="callout__text">Actualizado a marzo de 2026. Fedimint y Cashu evolucionan rápido; verifica cambios recientes en documentación oficial.</p>
+              <div class="callout__title">Regla de oro</div>
+              <p class="callout__text">No guardes ahorro de largo plazo en mints. Usalos para importes pequenos y rotacion rapida.</p>
             </div>
           </div>
 
-          
-          <h2>Modelo mental correcto para usar mints</h2>
-          <p>
-            Piensa en Fedimint y Cashu como “monedero de bolsillo privado”, no como bóveda. Ese cambio mental evita el
-            error más común: dejar demasiado saldo en una capa custodial por comodidad.
-          </p>
-          <p>
-            Si usas mints con ese encuadre, obtienes ventajas reales: pagos privados, UX fluida y distribución social
-            de confianza. Si los usas como ahorro principal, estás ignorando el diseño original del sistema.
-          </p>
-
-          <h2>Prácticas recomendadas para usuarios</h2>
-          <ol>
-            <li>Define un límite máximo de saldo por mint (por ejemplo, presupuesto mensual).</li>
-            <li>Retira excedentes regularmente a autocustodia on-chain.</li>
-            <li>Diversifica entre mints cuando sea razonable.</li>
-            <li>Prioriza mints operados por comunidades o equipos con reputación verificable.</li>
-            <li>No guardes secretos críticos en el mismo dispositivo donde usas wallets experimentales.</li>
-          </ol>
-
-          <h2>Prácticas recomendadas para operadores de mint</h2>
+          <h2>Casos de uso concretos</h2>
           <ul>
-            <li>Políticas públicas de custodia, uptime y manejo de incidencias.</li>
-            <li>Separación estricta de funciones y rotación de claves en operación.</li>
-            <li>Transparencia sobre límites de capacidad y ventanas de mantenimiento.</li>
-            <li>Canales claros de comunicación para usuarios en caso de emergencia.</li>
-          </ul>
-          <p>
-            En resumen: Fedimint y Cashu son capas poderosas cuando se usan con expectativas correctas. Privacidad y
-            usabilidad mejoran mucho, pero la disciplina de gestión de riesgo sigue siendo obligatoria.
-          </p>
-
-
-          <h2>Amenazas reales y mitigaciones prácticas</h2>
-          <p>
-            El riesgo en mints no es teórico. Puede venir por cierre de operador, incidentes de infraestructura,
-            presión regulatoria local o mala gestión de claves. Por eso, usar eCash con criterio requiere políticas
-            concretas y no solo confianza social.
-          </p>
-          <ul>
-            <li><strong>Límite de saldo:</strong> nunca mantengas más de lo que gastarías en corto plazo.</li>
-            <li><strong>Rotación de fondos:</strong> mueve excedentes regularmente a autocustodia.</li>
-            <li><strong>Diversificación:</strong> evita concentración total en un único mint.</li>
-            <li><strong>Verificación social:</strong> prioriza mints con operadores identificables y reputación.</li>
+            <li>Propinas y micropagos en redes sociales (especialmente en integraciones con Nostr).</li>
+            <li>Pagos privados de baja cuantia con friccion minima.</li>
+            <li>Economias comunitarias con guardianes conocidos y reglas locales.</li>
+            <li>Remesas y circulacion local en entornos con banca limitada.</li>
           </ul>
 
-          <h2>Casos de uso donde brillan</h2>
-          <p>
-            Fedimint y Cashu funcionan especialmente bien en comunidades activas: meetups, economías circulares locales,
-            propinas online y pagos de baja cuantía con fricción mínima. Ahí su valor es inmediato: privacidad,
-            portabilidad y UX sencilla.
-          </p>
-          <p>
-            También son una herramienta pedagógica potente: enseñan por contraste qué aporta Bitcoin capa base y qué
-            compromisos aparecen cuando delegas custodia para ganar experiencia de usuario.
-          </p>
-
-          <h2>Regla final de diseño personal</h2>
-          <p>
-            Si tu estrategia es "base para ahorrar, Lightning para pagar, mint para privacidad diaria", normalmente
-            estarás usando cada capa en su zona de fortaleza. Esa arquitectura por capas reduce errores y mejora la
-            resiliencia de tu operativa a largo plazo.
-          </p>
-
-
-          <h2>Qué sí guardar y qué no guardar en un mint</h2>
-          <p>
-            Regla práctica: en un mint guarda saldo operativo, no patrimonio. Eso incluye presupuesto de gastos diarios,
-            propinas y pagos recurrentes de baja cuantía. No incluye reserva de emergencia ni ahorro de largo plazo.
-          </p>
-          <p>
-            Esta separación te permite aprovechar privacidad y usabilidad sin comprometer la seguridad estructural de tu
-            patrimonio bitcoin. Cuando combines capas con esta disciplina, el resultado es mucho más robusto.
-          </p>
-
-<p><strong>→ Para profundizar:</strong> <a href="/sidechains/fedimint-y-cashu.html">Fedimint y Cashu: análisis completo</a></p>
-
-          <h3>Enlaces internos</h3>
+          <h2>Riesgos que debes conocer</h2>
           <ul>
-            <li><a href="/sidechains/que-son-las-sidechains.html">¿Qué son las sidechains de Bitcoin?</a></li>
-            <li><a href="/nivel-2/que-es-lightning.html">¿Qué es Lightning Network?</a></li>
+            <li><strong>Custodia:</strong> en Cashu depende del mint; en Fedimint depende de quorum de guardianes.</li>
+            <li><strong>Experimentalidad:</strong> protocolos jovenes, con riesgo de bugs y cambios de implementacion.</li>
+            <li><strong>Regulacion:</strong> presion regulatoria puede forzar KYC o cierre de operadores.</li>
+            <li><strong>Operacion:</strong> gateways Lightning, disponibilidad y seguridad operacional importan mucho.</li>
+          </ul>
+
+          <h2>Fuentes y referencias</h2>
+          <ul>
+            <li>Chaum (1982), blind signatures.</li>
+            <li>fedimint.org/docs</li>
+            <li>github.com/cashubtc/nuts</li>
+          </ul>
+
+          <h2>Enlaces internos</h2>
+          <ul>
+            <li><a href="/nivel-4/que-son-las-sidechains.html">Que son las sidechains</a></li>
+            <li><a href="/nivel-2/que-es-lightning.html">Que es Lightning</a></li>
             <li><a href="/la-madriguera/el-caso-samourai-wallet.html">El caso Samourai Wallet</a></li>
+            <li><a href="/la-madriguera/efectivo-digital-y-privacidad-hal-finney.html">Hal Finney</a></li>
           </ul>
 
           <div class="ad-slot ad-content" id="ad-content-4" aria-hidden="true"></div>
 
-          <nav class="page-nav" aria-label="Navegación entre páginas">
+          <nav class="page-nav" aria-label="Navegacion entre paginas">
             <a href="liquid-network.html" class="page-nav__item">
-              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__label"><- Anterior</span>
               <span class="page-nav__title">Liquid Network</span>
             </a>
             <a href="mineria-casera.html" class="page-nav__item page-nav__item--next">
-              <span class="page-nav__label">Siguiente →</span>
-              <span class="page-nav__title">Minería casera: ¿tiene sentido?</span>
+              <span class="page-nav__label">Siguiente -></span>
+              <span class="page-nav__title">Mineria casera: tiene sentido?</span>
             </a>
           </nav>
         </article>

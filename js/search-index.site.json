@@ -2627,7 +2627,7 @@
     "keywords": "Cómo distribuir las llaves de un multisig en diferentes ubicaciones para proteger contra robo, desastres y coacción física. El principio Escenarios de amenaza Robo Desastre natural o incendio Coacción física (ataque de $5) Ejemplo de distribución 2-de-3 Ubicación 1: Tu casa Ubicación 2: Casa de familiar de confianza Ubicación 3: Caja de seguridad bancaria Variaciones según threat model Enfoque en conveniencia Enfoque en seguridad Inicio &rsaquo; Nivel 4 &rsaquo; Distribución geográfica de claves Nivel 4 Distribución geográfica de claves No guardes todas las llaves en el mismo sitio. Distribución geográfica como defensa contra múltiples amenazas. El principio De nada sirve un multisig 2-de-3 si las tres llaves están en el cajón de tu escritorio. Un ladrón, un incendio, o una confiscación se llevaría las tres simultáneamente. La distribución geográfica asegura que ningún evento único pueda comprometer suficientes llaves como para perder los fondos o permitir un robo. Escenarios de amenaza Robo Un ladrón entra en tu casa. Si encuentra una hardware wallet: Singlesig: Tiene acceso a todo (si también encuentra la seed o puede forzarte) Multisig con distribución: Solo tiene 1 de 3 llaves. Inútil. El ladrón necesitaría robar en múltiples ubicaciones, lo que es exponencialmente más difícil y arriesgado para él. Desastre natural o incendio Tu casa se destruye en un incendio: Todo en casa: Pierdes todas las llaves y seeds Distribución: Pierdes 1 de 3 ubicaciones. Las otras 2 son suficie"
   },
   {
-    "title": "Fedimint y Cashu: mints federados y eCash sobre Bitcoin",
+    "title": "Fedimint y Cashu: eCash, mints federados y privacidad sobre Bitcoin",
     "url": "/nivel-4/fedimint-y-cashu.html",
     "tags": [
       "nivel 4",
@@ -2637,11 +2637,14 @@
       "wallet",
       "billetera",
       "lightning",
-      "factura lightning"
+      "factura lightning",
+      "sidechains",
+      "capas",
+      "bitcoin"
     ],
-    "section": "Nivel 4",
+    "section": "Sidechains y capas",
     "nivel": 4,
-    "keywords": "Fedimint y Cashu traen eCash de David Chaum a Bitcoin. Privacidad extrema, custodia comunitaria y Lightning integrado. Qué problema resuelven Cashu: simple, portable y muy rápido Fedimint: custodia distribuida entre guardianes Integración con Lightning Trade-off principal: privacidad vs autocustodia Cashu vs Fedimint: cuándo usar cada uno Qué no debes esperar Modelo mental correcto para usar mints Prácticas recomendadas para usuarios Prácticas recomendadas para operadores de mint Amenazas reales y mitigaciones prácticas Casos de uso donde brillan Inicio › Nivel 4 › Fedimint y Cashu Nivel 4 Fedimint y Cashu: mints federados y eCash sobre Bitcoin La idea más antigua del dinero digital aplicada sobre Lightning: privacidad casi perfecta con custodia comunitaria. En 1982, David Chaum describió un modelo de dinero electrónico con firmas ciegas: el emisor puede validar el token sin conocer su historial de uso. Décadas después, esa idea revive sobre Bitcoin mediante mints federados y eCash integrado con Lightning. La clave es separar capas: Bitcoin como reserva, Lightning como rampa de entrada/salida y eCash como instrumento de pago privado para uso diario. Qué problema resuelven En sistemas bancarios y custodiales tradicionales, el operador conoce casi todo: saldos, contrapartes, frecuencia y horarios. Con eCash basado en firmas ciegas, ese operador pierde capacidad de vincular emisión y gasto individual. No es anonimato absoluto contra cualquier amenaza, pero sí un salto fuerte de "
+    "keywords": "Fedimint y Cashu: eCash de David Chaum aplicado a Bitcoin. Privacidad extrema, custodia comunitaria y Lightning integrado."
   },
   {
     "title": "Guía de herencia paso a paso",
@@ -2739,11 +2742,14 @@
       "lightning",
       "factura lightning",
       "utxo",
-      "transacciones"
+      "transacciones",
+      "sidechains",
+      "capas",
+      "bitcoin"
     ],
-    "section": "Nivel 4",
+    "section": "Sidechains y capas",
     "nivel": 4,
-    "keywords": "Liquid Network de Blockstream: transacciones rápidas, confidenciales y emisión de activos sobre Bitcoin. Guía completa. Qué es L-BTC y cómo funciona el peg Federación de functionaries Confidential Transactions Finalidad rápida Emisión de activos sobre Liquid Para quién tiene sentido Lo que Liquid no resuelve Cómo decidir si Liquid encaja en tu operativa Riesgos operativos que debes modelar Buenas prácticas mínimas Liquid frente a on-chain y Lightning Escenarios donde Liquid destaca Inicio › Nivel 4 › Liquid Network Nivel 4 Liquid Network: la sidechain federada de Bitcoin Transacciones más rápidas, confidenciales y con activos tokenizados. Todo sobre la sidechain federada de Blockstream. Imagina que necesitas mover varios BTC de un exchange a otro para aprovechar una diferencia de precio. En Bitcoin capa base, esperar confirmaciones robustas puede llevar tiempo. Para ciertos flujos institucionales, ese tiempo cuesta dinero. Liquid se diseñó precisamente para ese escenario: mover BTC entre participantes del ecosistema con mayor velocidad operativa y con mayor privacidad de montos. Qué es L-BTC y cómo funciona el peg Liquid es una sidechain federada y su activo representativo es L-BTC . Igual que en otras sidechains, el modelo busca un respaldo 1:1 con BTC bloqueado en la cadena principal. Entras bloqueando BTC en capa base y recibes L-BTC. Operas dentro de Liquid con sus reglas de consenso y privacidad. Sales devolviendo L-BTC y recuperando BTC. Federación de functionaries La s"
+    "keywords": "Liquid Network: transacciones rapidas, confidenciales y emision de activos sobre Bitcoin. Analisis completo de la sidechain de Blockstream."
   },
   {
     "title": "Gestión de liquidez",
@@ -2842,7 +2848,7 @@
     "keywords": "Contenido en preparacion para aprendeBTC. Inicio &rsaquo; Nivel 4 &rsaquo; Qué Es Multisig Qué Es Multisig Página en preparacion. Volvera pronto con contenido completo. Contenido en preparacion. &larr; Anterior Coinjoin Siguiente &rarr; Configurar multisig con Sparrow"
   },
   {
-    "title": "¿Qué son las sidechains de Bitcoin?",
+    "title": "Que son las sidechains de Bitcoin",
     "url": "/nivel-4/que-son-las-sidechains.html",
     "tags": [
       "nivel 4",
@@ -2854,11 +2860,13 @@
       "lightning",
       "factura lightning",
       "utxo",
-      "transacciones"
+      "transacciones",
+      "capas",
+      "bitcoin"
     ],
-    "section": "Nivel 4",
+    "section": "Sidechains y capas",
     "nivel": 4,
-    "keywords": "Sidechains de Bitcoin: qué son, cómo funcionan los pegs bidireccionales, y por qué extienden Bitcoin sin cambiarlo. Una autopista con vías secundarias Cómo funciona el peg bidireccional Para entrar (peg-in) Para salir (peg-out) Diferencia clave frente a altcoins No toda la confianza es igual Qué puedes hacer en una sidechain El trade-off nunca desaparece Las capas que cubre aprendeBTC Cómo evaluar una sidechain sin marketing Checklist de uso responsable Cuándo NO usar sidechains Inicio › Nivel 4 › ¿Qué son las sidechains de Bitcoin? Nivel 4 ¿Qué son las sidechains de Bitcoin? Cadenas laterales que heredan la seguridad de Bitcoin y usan BTC como moneda. Lo mejor de dos mundos. Bitcoin es el protocolo más seguro, descentralizado y robusto de la historia del dinero digital. Pero esa robustez tiene un precio: es deliberadamente conservador. No puede ejecutar contratos complejos de forma nativa, sus transacciones tardan minutos en confirmarse y su privacidad no es perfecta. La pregunta natural es: ¿qué pasa cuando necesitas más funcionalidad sin renunciar al BTC que ya tienes? Ahí entran las sidechains. Una autopista con vías secundarias Imagina que Bitcoin es una gran autopista: fiable, segura, con reglas estrictas y miles de ojos vigilando que todo funcione bien. Las sidechains son vías secundarias que parten de esa autopista. Cada vía secundaria tiene reglas propias: puede ser más rápida, más privada o más flexible para contratos. Pero sigue conectada con la autopista principal"
+    "keywords": "Sidechains de Bitcoin: que son, como funcionan los pegs bidireccionales, tipos, trade-offs y comparativa completa."
   },
   {
     "title": "Rootstock (RSK): contratos inteligentes sobre Bitcoin",
@@ -2867,11 +2875,14 @@
       "nivel 4",
       "nivel",
       "rootstock",
-      "rsk"
+      "rsk",
+      "sidechains",
+      "capas",
+      "bitcoin"
     ],
-    "section": "Nivel 4",
+    "section": "Sidechains y capas",
     "nivel": 4,
-    "keywords": "Rootstock (RSK) añade contratos inteligentes a Bitcoin usando minería fusionada y rBTC. Qué es, cómo funciona y para qué sirve. ¿Qué es rBTC? No es un token nuevo Minería fusionada: seguridad prestada de Bitcoin PowPeg: el puente entre Bitcoin y Rootstock Compatibilidad EVM: ventaja para desarrolladores ¿Para qué se usa Rootstock en la práctica? Un proyecto con historia Lo que Rootstock no es Checklist antes de mover BTC a Rootstock Errores comunes en usuarios avanzados Cuándo sí y cuándo no Gobernanza, roadmap y riesgos de evolución Enlaces internos Inicio › Nivel 4 › Rootstock (RSK) Nivel 4 Rootstock (RSK): contratos inteligentes sobre Bitcoin La sidechain que trae funcionalidad tipo Ethereum a Bitcoin, sin abandonar el ecosistema BTC. Bitcoin no puede ejecutar contratos inteligentes complejos de forma nativa. Eso está bien: la simplicidad es una virtud en capa base. Pero, al mismo tiempo, deja fuera casos de uso que sí son posibles en plataformas como Ethereum. Rootstock es la respuesta que más tiempo lleva en producción para cubrir ese hueco: una sidechain de Bitcoin que permite contratos inteligentes completos, usa BTC como moneda de referencia y hereda parte de la seguridad de Bitcoin mediante minería fusionada. ¿Qué es rBTC? No es un token nuevo Lo primero que hay que entender: rBTC no es una altcoin . Cuando mueves BTC a Rootstock, tus bitcoins quedan bloqueados en la cadena principal y recibes rBTC en Rootstock a razón 1:1. Cada rBTC en circulación corresponde a un B"
+    "keywords": "Rootstock: contratos inteligentes en Bitcoin con mineria fusionada. Arquitectura, PowPeg, rBTC, DeFi y analisis completo."
   },
   {
     "title": "Routing de pagos",
@@ -3557,76 +3568,6 @@
     ],
     "section": "General",
     "keywords": "Webs de referencia para estudiar Bitcoin: documentación, exploradores, desarrollo y comunidad. bitcoin.org learnmeabitcoin.com mempool.space bitcoinops.org aprendebtc.com nostrfacil.com bitcoin.design BDK y LDK Inicio &rsaquo; Recursos &rsaquo; Webs de referencia Webs de referencia sobre Bitcoin Fuentes recomendadas para consultar información primaria, documentación y seguimiento técnico de la red. bitcoin.org Sitio de referencia Fundamentos Principiante Punto de entrada histórico con explicaciones base, wallets y recursos para nuevos usuarios. Abrir web learnmeabitcoin.com Referencia técnica visual Técnico Intermedio Explicaciones visuales del protocolo: transacciones, scripts, bloques, direcciones y criptografía. Abrir web mempool.space Explorador on-chain Mempool Principiante Visualización de mempool y bloques en tiempo real para estimar fees y seguir transacciones. Abrir web bitcoinops.org Desarrollo Bitcoin Newsletter técnica Avanzado Resumen semanal de cambios en Bitcoin Core, Lightning, BIPs y discusiones de alto nivel técnico. Abrir web aprendebtc.com Guía progresiva en español Ruta de aprendizaje Principiante Contenido estructurado desde cero hasta nivel técnico avanzado, con herramientas y comunidad. Abrir web nostrfacil.com Proyecto hermano Nostr Principiante Guía en español para usar Nostr, un protocolo clave para comunidad, comunicación y soberanía digital. Abrir web bitcoin.design UX y producto Diseño Intermedio Guías de buenas prácticas para construir productos"
-  },
-  {
-    "title": "Fedimint y Cashu: mints federados y eCash sobre Bitcoin",
-    "url": "/sidechains/fedimint-y-cashu.html",
-    "tags": [
-      "sidechains",
-      "fedimint",
-      "cashu",
-      "wallet",
-      "billetera",
-      "lightning",
-      "factura lightning"
-    ],
-    "section": "Sidechains",
-    "keywords": "Fedimint y Cashu traen eCash de David Chaum a Bitcoin. Privacidad extrema, custodia comunitaria y Lightning integrado. Qué problema resuelven Cashu: simple, portable y muy rápido Fedimint: custodia distribuida entre guardianes Integración con Lightning Trade-off principal: privacidad vs autocustodia Cashu vs Fedimint: cuándo usar cada uno Qué no debes esperar Modelo mental correcto para usar mints Prácticas recomendadas para usuarios Prácticas recomendadas para operadores de mint Amenazas reales y mitigaciones prácticas Casos de uso donde brillan Inicio › Sidechains › Fedimint y Cashu Sidechains Fedimint y Cashu: mints federados y eCash sobre Bitcoin La idea más antigua del dinero digital aplicada sobre Lightning: privacidad casi perfecta con custodia comunitaria. En 1982, David Chaum describió un modelo de dinero electrónico con firmas ciegas: el emisor puede validar el token sin conocer su historial de uso. Décadas después, esa idea revive sobre Bitcoin mediante mints federados y eCash integrado con Lightning. La clave es separar capas: Bitcoin como reserva, Lightning como rampa de entrada/salida y eCash como instrumento de pago privado para uso diario. Qué problema resuelven En sistemas bancarios y custodiales tradicionales, el operador conoce casi todo: saldos, contrapartes, frecuencia y horarios. Con eCash basado en firmas ciegas, ese operador pierde capacidad de vincular emisión y gasto individual. No es anonimato absoluto contra cualquier amenaza, pero sí un salto fuer"
-  },
-  {
-    "title": "Sidechains de Bitcoin: gu?a extendida",
-    "url": "/sidechains/",
-    "tags": [
-      "sidechains",
-      "lightning",
-      "factura lightning"
-    ],
-    "section": "Sidechains",
-    "keywords": "Gu?a extendida de sidechains sobre Bitcoin: Rootstock, Liquid, Fedimint y Cashu, con foco en pegs, seguridad y trade-offs reales. Ruta recomendada Inicio ? Sidechains Sidechains Sidechains de Bitcoin: gu?a extendida Cadenas y capas sobre Bitcoin para ganar funcionalidad sin abandonar BTC: seguridad, privacidad, contratos y custodia comunitaria. Esta secci?n re?ne las versiones extendidas de sidechains de aprendeBTC. El objetivo es comparar dise?os con criterio t?cnico: qu? mejoras obtienes, qu? riesgo adicional introduces y para qu? casos de uso tiene sentido cada opci?n. ?? Regla operativa Las sidechains y mints no sustituyen la autocustodia en capa base. Son capas operativas para objetivos concretos. Ruta recomendada 1 ?Qu? son las sidechains de Bitcoin? Base conceptual: pegs, modelos de confianza y trade-offs. ? 2 Rootstock (RSK) Contratos inteligentes sobre BTC con miner?a fusionada. ? 3 Liquid Network Settlement r?pido, montos confidenciales y emisi?n de activos. ? 4 Fedimint y Cashu eCash sobre Lightning para privacidad y pagos diarios. ? Empezar ruta ? ?Qu? son las sidechains de Bitcoin?"
-  },
-  {
-    "title": "Liquid Network: la sidechain federada de Bitcoin",
-    "url": "/sidechains/liquid-network.html",
-    "tags": [
-      "sidechains",
-      "liquid",
-      "network",
-      "wallet",
-      "billetera",
-      "lightning",
-      "factura lightning",
-      "utxo",
-      "transacciones"
-    ],
-    "section": "Sidechains",
-    "keywords": "Liquid Network de Blockstream: transacciones rápidas, confidenciales y emisión de activos sobre Bitcoin. Guía completa. Qué es L-BTC y cómo funciona el peg Federación de functionaries Confidential Transactions Finalidad rápida Emisión de activos sobre Liquid Para quién tiene sentido Lo que Liquid no resuelve Cómo decidir si Liquid encaja en tu operativa Riesgos operativos que debes modelar Buenas prácticas mínimas Liquid frente a on-chain y Lightning Escenarios donde Liquid destaca Inicio › Sidechains › Liquid Network Sidechains Liquid Network: la sidechain federada de Bitcoin Transacciones más rápidas, confidenciales y con activos tokenizados. Todo sobre la sidechain federada de Blockstream. Imagina que necesitas mover varios BTC de un exchange a otro para aprovechar una diferencia de precio. En Bitcoin capa base, esperar confirmaciones robustas puede llevar tiempo. Para ciertos flujos institucionales, ese tiempo cuesta dinero. Liquid se diseñó precisamente para ese escenario: mover BTC entre participantes del ecosistema con mayor velocidad operativa y con mayor privacidad de montos. Qué es L-BTC y cómo funciona el peg Liquid es una sidechain federada y su activo representativo es L-BTC . Igual que en otras sidechains, el modelo busca un respaldo 1:1 con BTC bloqueado en la cadena principal. Entras bloqueando BTC en capa base y recibes L-BTC. Operas dentro de Liquid con sus reglas de consenso y privacidad. Sales devolviendo L-BTC y recuperando BTC. Federación de functionarie"
-  },
-  {
-    "title": "¿Qué son las sidechains de Bitcoin?",
-    "url": "/sidechains/que-son-las-sidechains.html",
-    "tags": [
-      "sidechains",
-      "que",
-      "son",
-      "las",
-      "lightning",
-      "factura lightning",
-      "utxo",
-      "transacciones"
-    ],
-    "section": "Sidechains",
-    "keywords": "Sidechains de Bitcoin: qué son, cómo funcionan los pegs bidireccionales, y por qué extienden Bitcoin sin cambiarlo. Una autopista con vías secundarias Cómo funciona el peg bidireccional Para entrar (peg-in) Para salir (peg-out) Diferencia clave frente a altcoins No toda la confianza es igual Qué puedes hacer en una sidechain El trade-off nunca desaparece Las capas que cubre aprendeBTC Cómo evaluar una sidechain sin marketing Checklist de uso responsable Cuándo NO usar sidechains Inicio › Sidechains › ¿Qué son las sidechains de Bitcoin? Sidechains ¿Qué son las sidechains de Bitcoin? Cadenas laterales que heredan la seguridad de Bitcoin y usan BTC como moneda. Lo mejor de dos mundos. Bitcoin es el protocolo más seguro, descentralizado y robusto de la historia del dinero digital. Pero esa robustez tiene un precio: es deliberadamente conservador. No puede ejecutar contratos complejos de forma nativa, sus transacciones tardan minutos en confirmarse y su privacidad no es perfecta. La pregunta natural es: ¿qué pasa cuando necesitas más funcionalidad sin renunciar al BTC que ya tienes? Ahí entran las sidechains. Una autopista con vías secundarias Imagina que Bitcoin es una gran autopista: fiable, segura, con reglas estrictas y miles de ojos vigilando que todo funcione bien. Las sidechains son vías secundarias que parten de esa autopista. Cada vía secundaria tiene reglas propias: puede ser más rápida, más privada o más flexible para contratos. Pero sigue conectada con la autopista pri"
-  },
-  {
-    "title": "Rootstock (RSK): contratos inteligentes sobre Bitcoin",
-    "url": "/sidechains/rootstock-rsk.html",
-    "tags": [
-      "sidechains",
-      "rootstock",
-      "rsk"
-    ],
-    "section": "Sidechains",
-    "keywords": "Rootstock (RSK) añade contratos inteligentes a Bitcoin usando minería fusionada y rBTC. Qué es, cómo funciona y para qué sirve. ¿Qué es rBTC? No es un token nuevo Minería fusionada: seguridad prestada de Bitcoin PowPeg: el puente entre Bitcoin y Rootstock Compatibilidad EVM: ventaja para desarrolladores ¿Para qué se usa Rootstock en la práctica? Un proyecto con historia Lo que Rootstock no es Checklist antes de mover BTC a Rootstock Errores comunes en usuarios avanzados Cuándo sí y cuándo no Gobernanza, roadmap y riesgos de evolución Enlaces internos Inicio › Sidechains › Rootstock (RSK) Sidechains Rootstock (RSK): contratos inteligentes sobre Bitcoin La sidechain que trae funcionalidad tipo Ethereum a Bitcoin, sin abandonar el ecosistema BTC. Bitcoin no puede ejecutar contratos inteligentes complejos de forma nativa. Eso está bien: la simplicidad es una virtud en capa base. Pero, al mismo tiempo, deja fuera casos de uso que sí son posibles en plataformas como Ethereum. Rootstock es la respuesta que más tiempo lleva en producción para cubrir ese hueco: una sidechain de Bitcoin que permite contratos inteligentes completos, usa BTC como moneda de referencia y hereda parte de la seguridad de Bitcoin mediante minería fusionada. ¿Qué es rBTC? No es un token nuevo Lo primero que hay que entender: rBTC no es una altcoin . Cuando mueves BTC a Rootstock, tus bitcoins quedan bloqueados en la cadena principal y recibes rBTC en Rootstock a razón 1:1. Cada rBTC en circulación corresponde "
   },
   {
     "title": "Sobre aprendeBTC",

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
+    <url>
     <loc>https://aprendebtc.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -160,7 +160,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-    <url>
+  <url>
     <loc>https://aprendebtc.com/comunidad/</loc>
     <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
@@ -191,7 +191,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-    <url>
+  <url>
     <loc>https://aprendebtc.com/empezar.html</loc>
     <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
@@ -722,7 +722,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-    <url>
+  <url>
     <loc>https://aprendebtc.com/nivel-3/fiscalidad-bitcoin.html</loc>
     <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
@@ -768,7 +768,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-    <url>
+  <url>
     <loc>https://aprendebtc.com/nivel-3/seguridad-operativa.html</loc>
     <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
@@ -799,13 +799,13 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-    <url>
+  <url>
     <loc>https://aprendebtc.com/nivel-4/coinjoin.html</loc>
     <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-    <url>
+  <url>
     <loc>https://aprendebtc.com/nivel-4/configurar-multisig.html</loc>
     <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
@@ -818,8 +818,9 @@
   </url>
   <url>
     <loc>https://aprendebtc.com/nivel-4/fedimint-y-cashu.html</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://aprendebtc.com/nivel-4/guia-herencia.html</loc>
@@ -843,8 +844,9 @@
   </url>
   <url>
     <loc>https://aprendebtc.com/nivel-4/liquid-network.html</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://aprendebtc.com/nivel-4/liquidez-lightning.html</loc>
@@ -871,7 +873,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-    <url>
+  <url>
     <loc>https://aprendebtc.com/nivel-4/que-es-multisig.html</loc>
     <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
@@ -879,13 +881,15 @@
   </url>
   <url>
     <loc>https://aprendebtc.com/nivel-4/que-son-las-sidechains.html</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://aprendebtc.com/nivel-4/rootstock-rsk.html</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://aprendebtc.com/nivel-4/routing-lightning.html</loc>
@@ -1047,7 +1051,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-    <url>
+  <url>
     <loc>https://aprendebtc.com/privacidad.html</loc>
     <lastmod>2026-03-01</lastmod>
     <changefreq>yearly</changefreq>
@@ -1092,31 +1096,6 @@
     <loc>https://aprendebtc.com/recursos/webs-referencia.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://aprendebtc.com/sidechains/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://aprendebtc.com/sidechains/fedimint-y-cashu.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://aprendebtc.com/sidechains/liquid-network.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://aprendebtc.com/sidechains/que-son-las-sidechains.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://aprendebtc.com/sidechains/rootstock-rsk.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aprendebtc.com/sobre.html</loc>

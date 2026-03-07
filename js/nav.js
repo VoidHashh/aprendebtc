@@ -17,314 +17,337 @@
 
   const LEVEL_TREE = [
     {
-      title: 'Nivel 1 - Explorador',
-      index: '/nivel-1/',
+      id: 'nivel-1',
+      label: 'Nivel 1',
+      sublabel: 'Nocoinero Curioso',
+      href: '/nivel-1/',
       pages: [
-        { href: '/nivel-1/antes-de-empezar.html', text: 'Antes de empezar' },
+        { href: '/nivel-1/que-es-bitcoin.html', text: '?Qu? es Bitcoin?' },
+        { href: '/nivel-1/por-que-existe-bitcoin.html', text: '?Por qu? existe Bitcoin?' },
+        { href: '/nivel-1/como-funciona-bitcoin.html', text: '?C?mo funciona Bitcoin?' },
+        { href: '/nivel-1/bitcoin-vs-dinero-fiat.html', text: 'Bitcoin vs dinero fiat' },
+        { href: '/nivel-1/quien-controla-bitcoin.html', text: '?Qui?n controla Bitcoin?' },
         { href: '/nivel-1/el-problema-del-kyc.html', text: 'El problema del KYC' },
-        { href: '/nivel-1/dos-caminos.html', text: 'Dos caminos: KYC o no-KYC' },
-        { href: '/nivel-1/registrarte-en-un-exchange.html', text: 'Registrarte en un exchange' },
-        { href: '/nivel-1/tu-primera-compra.html', text: 'Tu primera compra' },
-        { href: '/nivel-1/que-has-hecho.html', text: 'Qué acabas de hacer' }
+        { href: '/nivel-1/donde-comprar-bitcoin.html', text: '?D?nde comprar Bitcoin?' },
+        { href: '/nivel-1/primera-compra.html', text: 'Tu primera compra' },
+        { href: '/nivel-1/que-es-una-wallet.html', text: '?Qu? es una wallet?' },
+        { href: '/nivel-1/satoshis-y-unidades.html', text: 'Satoshis y unidades' },
+        { href: '/nivel-1/preguntas-frecuentes.html', text: 'Preguntas frecuentes' },
       ]
     },
     {
-      title: 'Nivel 2 - Soberano',
-      index: '/nivel-2/',
+      id: 'nivel-2',
+      label: 'Nivel 2',
+      sublabel: 'Soberano',
+      href: '/nivel-2/',
       pages: [
+        { sectionTitle: 'Autocustodia' },
         { href: '/nivel-2/crear-tu-wallet.html', text: 'Paso 1: Crea tu wallet propia' },
         { href: '/nivel-2/retirar-del-exchange.html', text: 'Paso 2: Retirar del exchange' },
-        { href: '/nivel-2/tu-seed-phrase.html', text: 'Paso 3: Protege tu seed phrase' },
-        { href: '/nivel-2/comprar-en-dex-p2p.html', text: 'Comprar en DEX/P2P' },
-        { href: '/nivel-2/cajeros-bitcoin.html', text: 'Comprar en cajeros Bitcoin' },
-        { href: '/nivel-2/wallet-y-seed-nokyc.html', text: 'Wallet y seed (no-KYC)' },
+        { href: '/nivel-2/protege-tu-seed-phrase.html', text: 'Paso 3: Protege tu seed phrase' },
+        { href: '/nivel-2/backup-y-recuperacion.html', text: 'C?mo hacer backup correctamente' },
+        { href: '/nivel-2/wallets-software.html', text: 'Wallets recomendadas' },
+
+        { sectionTitle: 'Comprar Bitcoin' },
         { href: '/nivel-2/exchanges-comparativa.html', text: 'Comparativa de exchanges' },
-        { href: '/nivel-2/que-es-lightning.html', text: 'Lightning: qué es' },
-        { href: '/nivel-2/usar-lightning.html', text: 'Cómo usar Lightning' },
+        { href: '/nivel-2/comprar-dex-p2p.html', text: 'Comprar en DEX/P2P' },
+        { href: '/nivel-2/comprar-sin-kyc.html', text: 'Wallet y seed (no-KYC)' },
+        { href: '/nivel-2/cajeros-bitcoin.html', text: 'Cajeros Bitcoin' },
+
+        { sectionTitle: 'Lightning Network' },
+        { href: '/nivel-2/que-es-lightning.html', text: 'Lightning: qu? es' },
+        { href: '/nivel-2/como-usar-lightning.html', text: 'C?mo usar Lightning' },
         { href: '/nivel-2/wallets-lightning.html', text: 'Wallets Lightning recomendadas' },
-        { href: '/nivel-2/lightning-address.html', text: 'Lightning Address e invoices' },
-        { href: '/nivel-2/como-hacer-backup.html', text: 'Cómo hacer backup correctamente' },
-        { href: '/nivel-2/wallets-recomendadas.html', text: 'Wallets recomendadas' }
+        { href: '/nivel-2/lightning-address-e-invoices.html', text: 'Lightning Address e invoices' },
       ]
     },
     {
-      title: 'Nivel 3 - Analista',
-      index: '/nivel-3/',
+      id: 'nivel-3',
+      label: 'Nivel 3',
+      sublabel: 'Analista',
+      href: '/nivel-3/',
       pages: [
-        { href: '/nivel-3/modelo-utxo.html', text: 'El modelo UTXO' },
-        { href: '/nivel-3/anatomia-transaccion.html', text: 'Anatomía de una transacción' },
-        { href: '/nivel-3/mempool.html', text: 'La mempool' },
-        { href: '/nivel-3/rbf-cpfp.html', text: 'RBF y CPFP' },
+        { sectionTitle: 'Transacciones' },
+        { href: '/nivel-3/utxo-el-modelo-de-bitcoin.html', text: 'El modelo UTXO' },
+        { href: '/nivel-3/anatomia-de-una-transaccion.html', text: 'Anatom?a de una transacci?n' },
+        { href: '/nivel-3/fees-y-mempool.html', text: 'La mempool' },
+        { href: '/nivel-3/rbf-y-cpfp.html', text: 'RBF y CPFP' },
         { href: '/nivel-3/utxos-y-privacidad.html', text: 'Tus UTXOs y tu privacidad' },
+
+        { sectionTitle: 'Claves y direcciones' },
         { href: '/nivel-3/clave-privada.html', text: 'Clave privada' },
-        { href: '/nivel-3/clave-publica.html', text: 'Clave pública' },
+        { href: '/nivel-3/clave-publica.html', text: 'Clave p?blica' },
         { href: '/nivel-3/tipos-de-direcciones.html', text: 'Tipos de direcciones Bitcoin' },
-        { href: '/nivel-3/hd-wallets.html', text: 'HD wallets y derivation paths' },
+        { href: '/nivel-3/hd-wallets-y-derivation-paths.html', text: 'HD wallets y derivation paths' },
         { href: '/nivel-3/firma-digital.html', text: 'Firma digital' },
-        { href: '/nivel-3/que-es-un-nodo.html', text: 'Qué es un nodo' },
-        { href: '/nivel-3/montar-tu-nodo.html', text: 'Monta tu propio nodo' },
-        { href: '/nivel-3/mineria-en-detalle.html', text: 'Minería en detalle' },
-        { href: '/nivel-3/halving.html', text: 'El halving' },
+
+        { sectionTitle: 'Nodos y miner?a' },
+        { href: '/nivel-3/que-es-un-nodo.html', text: 'Qu? es un nodo' },
+        { href: '/nivel-3/instalar-nodo.html', text: 'Monta tu propio nodo' },
+        { href: '/nivel-3/mineria-en-detalle.html', text: 'Miner?a en detalle' },
+        { href: '/nivel-3/el-halving.html', text: 'El halving' },
+
+        { sectionTitle: 'Hardware wallets' },
         { href: '/nivel-3/configurar-hardware-wallet.html', text: 'Configura tu hardware wallet' },
         { href: '/nivel-3/comparativa-hardware-wallets.html', text: 'Comparativa hardware wallets' },
         { href: '/nivel-3/coin-control.html', text: 'Coin control' },
+
+        { sectionTitle: 'Seguridad' },
         { href: '/nivel-3/seguridad-operativa.html', text: 'Seguridad operativa (OpSec)' },
-        { href: '/nivel-3/fiscalidad-bitcoin.html', text: 'Fiscalidad de Bitcoin' }
+        { href: '/nivel-3/fiscalidad-bitcoin.html', text: 'Fiscalidad de Bitcoin' },
       ]
     },
     {
-      title: 'Nivel 4 - En la madriguera',
-      index: '/nivel-4/',
+      id: 'nivel-4',
+      label: 'Nivel 4',
+      sublabel: 'En la madriguera',
+      href: '/nivel-4/',
       pages: [
+        { sectionTitle: 'Privacidad' },
         { href: '/nivel-4/coinjoin.html', text: 'CoinJoin: privacidad colaborativa' },
-        { href: '/nivel-4/que-es-multisig.html', text: '¿Qué es multisig?' },
+
+        { sectionTitle: 'Custodia avanzada' },
+        { href: '/nivel-4/que-es-multisig.html', text: '?Qu? es multisig?' },
         { href: '/nivel-4/configurar-multisig.html', text: 'Configurar multisig con Sparrow' },
-        { href: '/nivel-4/distribucion-claves.html', text: 'Distribución geográfica de claves' },
+        { href: '/nivel-4/distribucion-claves.html', text: 'Distribuci?n geogr?fica de claves' },
         { href: '/nivel-4/herencia-bitcoin.html', text: 'Herencia de Bitcoin' },
-        { href: '/nivel-4/guia-herencia.html', text: 'Guía de herencia paso a paso' },
-        { href: '/nivel-4/herencia-multisig.html', text: 'Herencia con multisig' },
-        { href: '/nivel-4/canales-lightning.html', text: 'Canales de pago' },
-        { href: '/nivel-4/liquidez-lightning.html', text: 'Gestión de liquidez' },
-        { href: '/nivel-4/routing-lightning.html', text: 'Routing de pagos' },
-        { href: '/nivel-4/nodo-lightning.html', text: 'Montar tu nodo Lightning' },
-        { href: '/nivel-4/que-son-las-sidechains.html', text: '¿Qué son las sidechains de Bitcoin?' },
+        { href: '/nivel-4/guia-herencia-paso-a-paso.html', text: 'Gu?a de herencia paso a paso' },
+        { href: '/nivel-4/herencia-con-multisig.html', text: 'Herencia con multisig' },
+
+        { sectionTitle: 'Lightning avanzado' },
+        { href: '/nivel-4/canales-lightning.html', text: 'Canales Lightning' },
+        { href: '/nivel-4/routing-lightning.html', text: 'Routing Lightning' },
+        { href: '/nivel-4/liquidez-lightning.html', text: 'Liquidez Lightning' },
+        { href: '/nivel-4/tu-nodo-lightning.html', text: 'Tu nodo Lightning' },
+
+        { sectionTitle: 'Miner?a casera' },
+        { href: '/nivel-4/mineria-casera.html', text: 'Miner?a casera' },
+        { href: '/nivel-4/mineria-con-bitaxe.html', text: 'Miner?a con Bitaxe' },
+        { href: '/nivel-4/hardware-de-mineria.html', text: 'Hardware de miner?a' },
+        { href: '/nivel-4/pools-de-mineria.html', text: 'Pools de miner?a' },
+        { href: '/nivel-4/calefaccion-con-bitcoin.html', text: 'Calefacci?n con Bitcoin' },
+
+        { sectionTitle: 'Sidechains y capas' },
+        { href: '/nivel-4/que-son-las-sidechains.html', text: '?Qu? son las sidechains?' },
         { href: '/nivel-4/rootstock-rsk.html', text: 'Rootstock (RSK)' },
         { href: '/nivel-4/liquid-network.html', text: 'Liquid Network' },
         { href: '/nivel-4/fedimint-y-cashu.html', text: 'Fedimint y Cashu' },
-        { href: '/nivel-4/mineria-casera.html', text: 'Minería casera: ¿tiene sentido?' },
-        { href: '/nivel-4/hardware-mineria.html', text: 'Hardware de minería' },
-        { href: '/nivel-4/pools-mineria.html', text: 'Pools de minería' },
-        { href: '/nivel-4/mineria-bitaxe.html', text: 'Minería con Bitaxe' },
-        { href: '/nivel-4/calefaccion-bitcoin.html', text: 'Bitcoin como calefacción' }
       ]
     },
     {
-      title: 'Nivel 5 - Mentor',
-      index: '/nivel-5/',
+      id: 'nivel-5',
+      label: 'Nivel 5',
+      sublabel: 'Mentor',
+      href: '/nivel-5/',
       pages: [
-        { href: '/nivel-5/funciones-hash.html', text: 'Funciones hash' },
-        { href: '/nivel-5/curva-eliptica.html', text: 'Criptografia de curva eliptica' },
-        { href: '/nivel-5/ecdsa.html', text: 'ECDSA' },
-        { href: '/nivel-5/schnorr.html', text: 'Firmas Schnorr' },
-        { href: '/nivel-5/estructura-transaccion.html', text: 'Estructura de una transaccion' },
-        { href: '/nivel-5/segwit-internals.html', text: 'SegWit por dentro' },
-        { href: '/nivel-5/taproot-internals.html', text: 'Taproot por dentro' },
+        { href: '/nivel-5/criptografia-clave-publica.html', text: 'Criptograf?a de clave p?blica' },
+        { href: '/nivel-5/curva-eliptica-secp256k1.html', text: 'Curva el?ptica secp256k1' },
+        { href: '/nivel-5/ecdsa-en-detalle.html', text: 'ECDSA en detalle' },
+        { href: '/nivel-5/schnorr-y-musig.html', text: 'Schnorr y MuSig' },
+        { href: '/nivel-5/proof-of-work.html', text: 'Proof of Work' },
+        { href: '/nivel-5/merkle-tree.html', text: 'Merkle Tree' },
+        { href: '/nivel-5/bitcoin-script-avanzado.html', text: 'Bitcoin Script avanzado' },
         { href: '/nivel-5/psbt.html', text: 'PSBT' },
-        { href: '/nivel-5/locktime-sequence.html', text: 'Locktime y Sequence' },
-        { href: '/nivel-5/bitcoin-script.html', text: 'Bitcoin Script' },
-        { href: '/nivel-5/p2pkh.html', text: 'P2PKH' },
-        { href: '/nivel-5/p2sh.html', text: 'P2SH' },
-        { href: '/nivel-5/p2wpkh-p2wsh.html', text: 'P2WPKH y P2WSH' },
-        { href: '/nivel-5/p2tr.html', text: 'P2TR' },
-        { href: '/nivel-5/op-return.html', text: 'OP_RETURN' },
-        { href: '/nivel-5/estructura-bloque.html', text: 'Estructura de un bloque' },
-        { href: '/nivel-5/merkle-tree.html', text: 'Arbol de Merkle' },
-        { href: '/nivel-5/proof-of-work.html', text: 'Proof of Work en detalle' },
-        { href: '/nivel-5/protocolo-p2p.html', text: 'Protocolo P2P' }
+        { href: '/nivel-5/mineria-tecnica.html', text: 'Miner?a t?cnica' },
+        { href: '/nivel-5/gossip-y-p2p.html', text: 'Protocolo P2P y gossip' },
+        { href: '/nivel-5/lightning-htlc.html', text: 'Lightning: HTLCs' },
+        { href: '/nivel-5/lightning-onion.html', text: 'Lightning: onion routing' },
+        { href: '/nivel-5/sidechains.html', text: 'Sidechains' },
+        { href: '/nivel-5/covenant-opcodes.html', text: 'Covenants y nuevos opcodes' },
       ]
     },
     {
-      title: 'Nivel 6 - Satoshi',
-      index: '/nivel-6/',
+      id: 'nivel-6',
+      label: 'Nivel 6',
+      sublabel: 'Satoshi',
+      href: '/nivel-6/',
       pages: [
-        { href: '/nivel-6/por-que-bitcoin-importa.html', text: 'Por que Bitcoin importa de verdad' },
         { href: '/nivel-6/bitcoin-y-libertad.html', text: 'Bitcoin y libertad financiera' },
-        { href: '/nivel-6/bitcoin-game-theory.html', text: 'Teoría de juegos de Bitcoin' },
-        { href: '/nivel-6/criticas-a-bitcoin.html', text: 'Las críticas a Bitcoin y las respuestas' },
-        { href: '/nivel-6/contribuir-bitcoin-core.html', text: 'Cómo contribuir a Bitcoin Core' },
-        { href: '/nivel-6/que-es-un-bip.html', text: 'Qué es un BIP' },
-        { href: '/nivel-6/soft-fork-hard-fork.html', text: 'Soft fork vs Hard fork' },
-        { href: '/nivel-6/contribuir-sin-codigo.html', text: 'Contribuir sin saber programar' },
-        { href: '/nivel-6/como-explicar-bitcoin.html', text: 'Cómo explicar Bitcoin sin que te miren raro' },
-        { href: '/nivel-6/bitcoinizar-tu-entorno.html', text: 'Cómo bitcoinizar tu entorno' }
+        { href: '/nivel-6/contribuir-bitcoin-core.html', text: 'Contribuir a Bitcoin Core' },
+        { href: '/nivel-6/bips-y-gobernanza.html', text: 'BIPs y gobernanza de Bitcoin' },
+        { href: '/nivel-6/bitcoin-como-capa-base.html', text: 'Bitcoin como capa base' },
+        { href: '/nivel-6/full-stack-bitcoiner.html', text: 'El full-stack bitcoiner' },
       ]
-    }
-  ];
-
-  const PILLAR_TREE = [
+    },
     {
-      title: 'Base de Conocimiento',
-      index: '/base/',
+      id: 'base',
+      label: 'Base de Conocimiento',
+      sublabel: '',
+      href: '/base/',
       pages: [
-        { href: '/base/que-es-bitcoin.html', text: 'Qué es Bitcoin' },
-        { href: '/base/como-funciona-bitcoin.html', text: 'Cómo funciona Bitcoin' },
-        { href: '/base/que-es-blockchain.html', text: 'Qué es la blockchain' },
-        { href: '/base/que-es-la-mineria.html', text: 'Qué es la minería' },
+        { sectionTitle: 'Fundamentos Bitcoin' },
+        { href: '/base/que-es-bitcoin.html', text: 'Qu? es Bitcoin' },
+        { href: '/base/como-funciona-bitcoin.html', text: 'C?mo funciona Bitcoin' },
+        { href: '/base/que-es-la-blockchain.html', text: 'Qu? es la blockchain' },
+        { href: '/base/que-es-la-mineria.html', text: 'Qu? es la miner?a' },
         { href: '/base/los-21-millones.html', text: 'Los 21 millones y la oferta fija' },
-        { href: '/base/que-es-un-satoshi.html', text: 'Qué es un satoshi' },
-        { href: '/base/historia-bitcoin.html', text: 'Historia de Bitcoin' },
-        { href: '/base/quien-es-satoshi.html', text: 'Quién es Satoshi Nakamoto' },
-        { href: '/base/el-whitepaper.html', text: 'El whitepaper de Bitcoin' },
-        { href: '/base/problema-del-dinero-tradicional.html', text: 'El problema del dinero tradicional' },
-        { href: '/base/bitcoin-vs-dinero-tradicional.html', text: 'Bitcoin vs dinero tradicional' },
+        { href: '/base/que-es-un-satoshi.html', text: 'Qu? es un satoshi' },
+        { href: '/base/que-es-una-confirmacion.html', text: 'Qu? es una confirmaci?n' },
+        { href: '/base/que-son-las-fees.html', text: 'Qu? son las fees' },
+        { href: '/base/que-es-una-direccion.html', text: 'Qu? es una direcci?n' },
+        { href: '/base/que-es-seed-phrase.html', text: 'Qu? es seed phrase' },
+
+        { sectionTitle: 'Historia y personas' },
+        { href: '/base/historia-de-bitcoin.html', text: 'Historia de Bitcoin' },
+        { href: '/base/quien-es-satoshi-nakamoto.html', text: 'Qui?n es Satoshi Nakamoto' },
+        { href: '/base/el-whitepaper.html', text: 'El whitepaper' },
         { href: '/base/historia-del-dinero.html', text: 'Historia del dinero' },
-        { href: '/base/inflacion-y-bitcoin.html', text: 'Inflación y Bitcoin' },
-        { href: '/base/austrian-economics.html', text: 'Economía Austríaca y Bitcoin' },
-        { href: '/base/bitcoin-vs-oro.html', text: 'Bitcoin vs Oro' },
-        { href: '/base/bitcoin-reserva-de-valor.html', text: 'Bitcoin como reserva de valor' },
-        { href: '/base/bitcoin-vs-altcoins.html', text: 'Bitcoin vs altcoins' },
-        { href: '/base/exchange-centralizado-cex.html', text: 'Exchange centralizado (CEX)' },
-        { href: '/base/exchange-descentralizado-dex.html', text: 'Exchange descentralizado (DEX)' },
-        { href: '/base/kyc-vs-no-kyc.html', text: 'KYC y no-KYC' },
-        { href: '/base/dca-compras-periodicas.html', text: 'DCA: compras periódicas' },
-        { href: '/base/tipos-de-wallet.html', text: 'Tipos de wallet' },
-        { href: '/base/que-es-seed-phrase.html', text: 'Qué es la seed phrase' },
+
+        { sectionTitle: 'Dinero y econom?a' },
+        { href: '/base/problema-del-dinero-tradicional.html', text: 'Problema del dinero tradicional' },
+        { href: '/base/inflacion-y-bitcoin.html', text: 'Inflaci?n y Bitcoin' },
+        { href: '/base/bitcoin-vs-dinero-tradicional.html', text: 'Bitcoin vs dinero tradicional' },
+        { href: '/base/bitcoin-vs-oro.html', text: 'Bitcoin vs oro' },
+        { href: '/base/bitcoin-como-reserva-de-valor.html', text: 'Bitcoin como reserva de valor' },
+        { href: '/base/economia-austriaca.html', text: 'Econom?a austr?aca' },
+        { href: '/base/dca-compras-periodicas.html', text: 'DCA: compras peri?dicas' },
+
+        { sectionTitle: 'Exchanges y compra' },
+        { href: '/base/que-es-un-exchange.html', text: 'Qu? es un exchange' },
+        { href: '/base/exchange-centralizado.html', text: 'Exchange centralizado (CEX)' },
+        { href: '/base/exchange-descentralizado.html', text: 'Exchange descentralizado (DEX)' },
+        { href: '/base/kyc-vs-no-kyc.html', text: 'KYC vs no-KYC' },
+        { href: '/base/estafas-comunes.html', text: 'Estafas comunes' },
         { href: '/base/on-chain-vs-lightning.html', text: 'On-chain vs Lightning' },
-        { href: '/base/que-es-una-direccion.html', text: 'Qué es una dirección Bitcoin' },
-        { href: '/base/que-es-una-confirmacion.html', text: 'Qué es una confirmación' },
-        { href: '/base/que-son-las-fees.html', text: 'Qué son las comisiones (fees)' },
-        { href: '/base/seguridad-basica.html', text: 'Seguridad básica' },
-        { href: '/base/estafas-comunes.html', text: 'Estafas comunes en Bitcoin' }
+
+        { sectionTitle: 'Wallets y seguridad' },
+        { href: '/base/que-es-una-wallet.html', text: 'Qu? es una wallet' },
+        { href: '/base/tipos-de-wallet.html', text: 'Tipos de wallet' },
+        { href: '/base/que-es-la-autocustodia.html', text: 'Qu? es la autocustodia' },
+        { href: '/base/seguridad-basica.html', text: 'Seguridad b?sica' },
+        { href: '/base/bitcoin-vs-altcoins.html', text: 'Bitcoin vs altcoins' },
       ]
     },
     {
-      title: 'La Madriguera',
-      index: '/la-madriguera/',
-      pages: [],
-      groups: [
-        {
-          title: 'PRECURSORES',
-          links: [
-            { href: '/la-madriguera/polis-paralela-vaclav-benda.html', text: '01 - Polis Paralela - Václav Benda (1978)' },
-            { href: '/la-madriguera/manifiesto-gnu-richard-stallman.html', text: '02 - Manifiesto GNU - Richard Stallman (1985)' },
-            { href: '/la-madriguera/manifiesto-cypherpunk.html', text: '03 - Manifiesto Cypherpunk - Eric Hughes (1993)' },
-            { href: '/la-madriguera/efectivo-digital-y-privacidad-hal-finney.html', text: '04 - Efectivo Digital y Privacidad - Hal Finney (1993)' },
-            { href: '/la-madriguera/declaracion-independencia-ciberespacio.html', text: '05 - Declaración de Independencia del Ciberespacio - J.P. Barlow (1996)' },
-            { href: '/la-madriguera/hashcash-adam-back.html', text: '06 - Hashcash - Adam Back (1997)' },
-            { href: '/la-madriguera/b-money-wei-dai.html', text: '07 - B-Money - Wei Dai (1998)' },
-            { href: '/la-madriguera/bit-gold-nick-szabo.html', text: '08 - Bit Gold - Nick Szabo (1998/2005)' },
-            { href: '/la-madriguera/el-whitepaper-de-bitcoin.html', text: '09 - El Whitepaper de Bitcoin - Satoshi Nakamoto (2008)' }
-          ]
-        },
-        {
-          title: 'HISTORIA',
-          links: [
-            { href: '/la-madriguera/los-primeros-dias-de-bitcoin.html', text: '10 - Los primeros días de Bitcoin (2009)' },
-            { href: '/la-madriguera/bitcoin-y-wikileaks.html', text: '11 - Bitcoin y WikiLeaks (2010)' },
-            { href: '/la-madriguera/silk-road-y-ross-ulbricht.html', text: '12 - Silk Road y Ross Ulbricht (2013)' },
-            { href: '/la-madriguera/el-hackeo-de-mt-gox.html', text: '13 - Mt. Gox (2014)' },
-            { href: '/la-madriguera/la-guerra-del-tamano-de-bloque.html', text: '14 - Guerra del tamaño de bloque (2015-17)' },
-            { href: '/la-madriguera/la-crisis-de-terra-luna.html', text: '15 - Crisis Terra/Luna (2022)' },
-            { href: '/la-madriguera/el-colapso-de-ftx.html', text: '16 - Colapso de FTX (2022)' },
-            { href: '/la-madriguera/ordinals-inscriptions-debate.html', text: '17 - Ordinals e Inscriptions (2023)' },
-            { href: '/la-madriguera/el-caso-samourai-wallet.html', text: '18 - Caso Samourai Wallet (2024)' },
-            { href: '/la-madriguera/los-etfs-de-bitcoin.html', text: '19 - ETFs de Bitcoin (2024)' }
-          ]
-        },
-        {
-          title: 'FUNDAMENTOS',
-          links: [
-            { href: '/la-madriguera/el-ataque-del-51-por-ciento.html', text: '20 - El ataque del 51%' },
-            { href: '/la-madriguera/bloques-huerfanos-y-reorganizaciones.html', text: '21 - Bloques huérfanos y reorgs' },
-            { href: '/la-madriguera/el-problema-del-general-bizantino.html', text: '22 - El Problema del General Bizantino' },
-            { href: '/la-madriguera/el-doble-gasto.html', text: '23 - El doble gasto' },
-            { href: '/la-madriguera/la-politica-monetaria-de-bitcoin.html', text: '24 - La política monetaria de Bitcoin' },
-            { href: '/la-madriguera/soft-forks-de-bitcoin.html', text: '25 - Los soft forks de Bitcoin' },
-            { href: '/la-madriguera/multisig-custodia-y-herencia-segun-satoshi.html', text: '26 - Multisig y herencia según Satoshi' },
-            { href: '/la-madriguera/economia-austriaca-para-bitcoiners.html', text: '27 - Economía austríaca para bitcoiners' }
-          ]
-        },
-        {
-          title: 'ANÁLISIS',
-          links: [
-            { href: '/la-madriguera/bitcoin-y-energia.html', text: '28 - Bitcoin y energía' },
-            { href: '/la-madriguera/la-geopolitica-de-la-mineria.html', text: '29 - Geopolítica de la minería' },
-            { href: '/la-madriguera/lightning-network-estado-actual.html', text: '30 - Lightning Network: estado actual' },
-            { href: '/la-madriguera/privacidad-en-bitcoin-estado-actual.html', text: '31 - Privacidad: estado actual' },
-            { href: '/la-madriguera/puede-un-gobierno-prohibir-bitcoin.html', text: '32 - ¿Puede un gobierno prohibir Bitcoin?' },
-            { href: '/la-madriguera/el-debate-de-la-osificacion.html', text: '33 - El debate de la osificación' },
-            { href: '/la-madriguera/bitcoin-medio-de-pago-vs-reserva-de-valor.html', text: '34 - ¿Medio de pago o reserva de valor?' },
-            { href: '/la-madriguera/hiperinflaciones-y-bitcoin.html', text: '35 - Hiperinflaciones y Bitcoin' },
-            { href: '/la-madriguera/halving-y-ciclos-de-precio.html', text: '36 - El halving y los ciclos de precio' }
-          ]
-        }
-      ]
-    },
-    {
-      title: 'Sidechains',
-      index: '/sidechains/',
+      id: 'la-madriguera',
+      label: 'La Madriguera',
+      sublabel: '',
+      href: '/la-madriguera/',
       pages: [
-        { href: '/sidechains/que-son-las-sidechains.html', text: '¿Qué son las sidechains?' },
-        { href: '/sidechains/rootstock-rsk.html', text: 'Rootstock (RSK)' },
-        { href: '/sidechains/liquid-network.html', text: 'Liquid Network' },
-        { href: '/sidechains/fedimint-y-cashu.html', text: 'Fedimint y Cashu' }
+        { sectionTitle: 'PRECURSORES', accent: true },
+        { href: '/la-madriguera/polis-paralela-vaclav-benda.html', text: 'La Polis Paralela ? Benda (1978)' },
+        { href: '/la-madriguera/manifiesto-gnu-richard-stallman.html', text: 'El Manifiesto GNU ? Stallman (1985)' },
+        { href: '/la-madriguera/manifiesto-cypherpunk.html', text: 'El Manifiesto Cypherpunk ? Hughes (1993)' },
+        { href: '/la-madriguera/efectivo-digital-y-privacidad-hal-finney.html', text: 'Efectivo Digital y Privacidad ? Finney (1993)' },
+        { href: '/la-madriguera/declaracion-independencia-ciberespacio.html', text: 'Declaraci?n del Ciberespacio ? Barlow (1996)' },
+        { href: '/la-madriguera/hashcash-adam-back.html', text: 'Hashcash ? Adam Back (1997)' },
+        { href: '/la-madriguera/b-money-wei-dai.html', text: 'B-Money ? Wei Dai (1998)' },
+        { href: '/la-madriguera/bit-gold-nick-szabo.html', text: 'Bit Gold ? Nick Szabo (1998/2005)' },
+        { href: '/la-madriguera/el-whitepaper-de-bitcoin.html', text: 'El Whitepaper ? Satoshi (2008)' },
+
+        { sectionTitle: 'HISTORIA', accent: true },
+        { href: '/la-madriguera/los-primeros-dias-de-bitcoin.html', text: 'Los primeros d?as de Bitcoin (2009)' },
+        { href: '/la-madriguera/bitcoin-y-wikileaks.html', text: 'Bitcoin y WikiLeaks (2010)' },
+        { href: '/la-madriguera/silk-road-y-ross-ulbricht.html', text: 'Silk Road y Ross Ulbricht (2013)' },
+        { href: '/la-madriguera/mt-gox.html', text: 'Mt. Gox (2014)' },
+        { href: '/la-madriguera/guerra-tamano-de-bloque.html', text: 'Guerra del tama?o de bloque (2015-17)' },
+        { href: '/la-madriguera/crisis-terra-luna.html', text: 'Crisis Terra/Luna (2022)' },
+        { href: '/la-madriguera/colapso-ftx.html', text: 'Colapso de FTX (2022)' },
+        { href: '/la-madriguera/ordinals-e-inscriptions.html', text: 'Ordinals e Inscriptions (2023)' },
+        { href: '/la-madriguera/el-caso-samourai-wallet.html', text: 'Caso Samourai Wallet (2024)' },
+        { href: '/la-madriguera/etfs-de-bitcoin.html', text: 'ETFs de Bitcoin (2024)' },
+
+        { sectionTitle: 'FUNDAMENTOS', accent: true },
+        { href: '/la-madriguera/el-ataque-del-51.html', text: 'El ataque del 51%' },
+        { href: '/la-madriguera/bloques-huerfanos-y-reorgs.html', text: 'Bloques hu?rfanos y reorgs' },
+        { href: '/la-madriguera/el-problema-del-general-bizantino.html', text: 'El Problema del General Bizantino' },
+        { href: '/la-madriguera/el-doble-gasto.html', text: 'El doble gasto' },
+        { href: '/la-madriguera/politica-monetaria-de-bitcoin.html', text: 'La pol?tica monetaria de Bitcoin' },
+        { href: '/la-madriguera/los-soft-forks-de-bitcoin.html', text: 'Los soft forks de Bitcoin' },
+        { href: '/la-madriguera/multisig-y-herencia-segun-satoshi.html', text: 'Multisig y herencia seg?n Satoshi' },
+        { href: '/la-madriguera/economia-austriaca-para-bitcoiners.html', text: 'Econom?a austr?aca para bitcoiners' },
+
+        { sectionTitle: 'AN?LISIS', accent: true },
+        { href: '/la-madriguera/bitcoin-y-energia.html', text: 'Bitcoin y energ?a' },
+        { href: '/la-madriguera/geopolitica-de-la-mineria.html', text: 'Geopol?tica de la miner?a' },
+        { href: '/la-madriguera/lightning-network-estado-actual.html', text: 'Lightning Network: estado actual' },
+        { href: '/la-madriguera/privacidad-en-bitcoin-estado-actual.html', text: 'Privacidad: estado actual' },
+        { href: '/la-madriguera/puede-un-gobierno-prohibir-bitcoin.html', text: '?Puede un gobierno prohibir Bitcoin?' },
+        { href: '/la-madriguera/el-debate-de-la-osificacion.html', text: 'El debate de la osificaci?n' },
+        { href: '/la-madriguera/medio-de-pago-o-reserva-de-valor.html', text: '?Medio de pago o reserva de valor?' },
+        { href: '/la-madriguera/hiperinflaciones-y-bitcoin.html', text: 'Hiperinflaciones y Bitcoin' },
+        { href: '/la-madriguera/el-halving-y-los-ciclos-de-precio.html', text: 'El halving y los ciclos de precio' },
       ]
     },
     {
-      title: 'Herramientas',
-      index: '/herramientas/',
+      id: 'herramientas',
+      label: 'Herramientas',
+      sublabel: '',
+      href: '/herramientas/',
       pages: [
-        { href: '/herramientas/conversor.html', text: 'Conversor BTC / EUR / sats' },
-        { href: '/herramientas/calculadora-dca.html', text: 'Calculadora DCA' },
-        { href: '/herramientas/calculadora-fees.html', text: 'Calculadora de fees' },
-        { href: '/herramientas/calculadora-impuestos.html', text: 'Calculadora de impuestos (ES)' },
-        { href: '/herramientas/comparador-exchanges.html', text: 'Comparador de exchanges' },
-        { href: '/herramientas/calculadora-herencia.html', text: 'Calculadora de herencia' },
-        { href: '/herramientas/hash.html', text: 'Calculadora de hash' },
-        { href: '/herramientas/mining-simulator.html', text: 'Simulador de minería' },
-        { href: '/herramientas/difficulty-converter.html', text: 'Conversor de dificultad y target' },
-        { href: '/herramientas/merkle-tree.html', text: 'Generador de Merkle Tree' },
-        { href: '/herramientas/block-tools.html', text: 'Herramientas de bloques' },
+        { href: '/herramientas/hash.html', text: 'Funciones hash (SHA-256, RIPEMD-160)' },
         { href: '/herramientas/private-key.html', text: 'Generador de clave privada' },
-        { href: '/herramientas/public-key.html', text: 'Derivar clave pública' },
-        { href: '/herramientas/wif.html', text: 'Codificador/decodificador WIF' },
-        { href: '/herramientas/address-base58.html', text: 'Dirección Bitcoin (Base58)' },
-        { href: '/herramientas/address-bech32.html', text: 'Dirección Bitcoin (Bech32)' },
-        { href: '/herramientas/checksum-base58.html', text: 'Base58Check y checksum' },
-        { href: '/herramientas/multisig-address.html', text: 'Generador de dirección multisig' },
-        { href: '/herramientas/mnemonic-seed.html', text: 'Mnemonic y seed (BIP39)' },
-        { href: '/herramientas/extended-keys.html', text: 'Extended keys (xpub/xprv)' },
-        { href: '/herramientas/derivation-paths.html', text: 'Derivation paths (BIP32)' },
-        { href: '/herramientas/address-from-xpub.html', text: 'Direcciones desde xpub' },
-        { href: '/herramientas/hd-wallet.html', text: 'HD Wallet explorer' },
+        { href: '/herramientas/public-key.html', text: 'Derivar clave p?blica' },
+        { href: '/herramientas/wif.html', text: 'Conversor WIF' },
+        { href: '/herramientas/mnemonic-seed.html', text: 'Generador semilla BIP39' },
+        { href: '/herramientas/seed-validator.html', text: 'Validador semilla BIP39' },
+        { href: '/herramientas/entropy-analyzer.html', text: 'Analizador de entrop?a' },
+        { href: '/herramientas/hd-wallet.html', text: 'Explorador HD Wallet' },
+        { href: '/herramientas/derivation-paths.html', text: 'Rutas de derivaci?n BIP32/44/84/86' },
+        { href: '/herramientas/extended-keys.html', text: 'Claves extendidas (xpub/xprv)' },
+        { href: '/herramientas/address-base58.html', text: 'Generador direcciones Base58' },
+        { href: '/herramientas/address-bech32.html', text: 'Generador direcciones Bech32' },
+        { href: '/herramientas/address-from-xpub.html', text: 'Derivar direcciones desde xpub' },
+        { href: '/herramientas/checksum-base58.html', text: 'Verificador checksum Base58' },
+        { href: '/herramientas/ec-calculator.html', text: 'Calculadora curva el?ptica' },
+        { href: '/herramientas/ecdsa-schnorr.html', text: 'Firma ECDSA y Schnorr' },
+        { href: '/herramientas/script-interpreter.html', text: 'Int?rprete Bitcoin Script' },
         { href: '/herramientas/tx-decoder.html', text: 'Decodificador de transacciones' },
-        { href: '/herramientas/tx-splitter.html', text: 'TX splitter (byte a byte)' },
-        { href: '/herramientas/tx-builder.html', text: 'Constructor de transacciones (raw)' },
-        { href: '/herramientas/script-interpreter.html', text: 'Interprete de Bitcoin Script' },
-        { href: '/herramientas/psbt-decoder.html', text: 'Decodificador PSBT (BIP174)' },
-        { href: '/herramientas/ecdsa-schnorr.html', text: 'Firma digital: ECDSA y Schnorr' },
-        { href: '/herramientas/ec-calculator.html', text: 'Calculadora de curva eliptica' },
-        { href: '/herramientas/compact-size.html', text: 'Compact Size (VarInt)' },
-        { href: '/herramientas/ascii-hex.html', text: 'ASCII y hexadecimal' },
-        { href: '/herramientas/unix-time.html', text: 'Tiempo Unix' },
-        { href: '/herramientas/timelock-decoder.html', text: 'Decodificador de timelocks' },
-        { href: '/herramientas/lightning-invoice.html', text: 'Decodificador de factura Lightning' },
-        { href: '/herramientas/entropy-analyzer.html', text: 'Analizador de entropía' },
-        { href: '/herramientas/seed-validator.html', text: 'Validador de seed phrase' },
-
-
-
+        { href: '/herramientas/tx-builder.html', text: 'Constructor de transacciones' },
+        { href: '/herramientas/tx-splitter.html', text: 'Splitter de transacciones' },
+        { href: '/herramientas/psbt-decoder.html', text: 'Decodificador PSBT' },
+        { href: '/herramientas/timelock-decoder.html', text: 'Decodificador timelocks' },
+        { href: '/herramientas/multisig-address.html', text: 'Generador direcciones multisig' },
+        { href: '/herramientas/merkle-tree.html', text: 'Visualizador Merkle Tree' },
+        { href: '/herramientas/block-tools.html', text: 'Herramientas de bloques' },
+        { href: '/herramientas/mining-simulator.html', text: 'Simulador de miner?a' },
+        { href: '/herramientas/difficulty-converter.html', text: 'Conversor de dificultad' },
+        { href: '/herramientas/lightning-invoice.html', text: 'Decodificador invoices Lightning' },
+        { href: '/herramientas/calculadora-fees.html', text: 'Calculadora de comisiones' },
+        { href: '/herramientas/calculadora-herencia.html', text: 'Calculadora de herencia' },
+        { href: '/herramientas/calculadora-impuestos.html', text: 'Calculadora de impuestos' },
+        { href: '/herramientas/conversor.html', text: 'Conversor BTC/sats/fiat' },
+        { href: '/herramientas/ascii-hex.html', text: 'Conversor ASCII/Hex' },
+        { href: '/herramientas/compact-size.html', text: 'Conversor CompactSize' },
+        { href: '/herramientas/unix-time.html', text: 'Conversor Unix Timestamp' },
       ]
     },
     {
-      title: 'Comunidad',
-      index: '/comunidad/',
+      id: 'comunidad',
+      label: 'Comunidad',
+      sublabel: '',
+      href: '/comunidad/',
       pages: [
         { href: '/comunidad/comunidades-online.html', text: 'Comunidades online' },
-        { href: '/comunidad/meetups-presenciales.html', text: 'Meetups presenciales' },
+        { href: '/comunidad/meetups.html', text: 'Meetups presenciales' },
         { href: '/comunidad/conferencias.html', text: 'Conferencias' },
-        { href: '/comunidad/nostr-y-bitcoin.html', text: 'Nostr y Bitcoin' }
+        { href: '/comunidad/nostr-y-bitcoin.html', text: 'Nostr y Bitcoin' },
       ]
     },
-    {
-      title: 'Glosario',
-      index: '/glosario.html',
-      pages: []
-    },
-    {
-      title: 'Recursos',
-      index: '/recursos.html',
-      pages: [
-        { href: '/recursos/libros.html', text: 'Libros' },
-        { href: '/recursos/podcasts.html', text: 'Podcasts' },
-        { href: '/recursos/documentales.html', text: 'Documentales' },
-        { href: '/recursos/webs-referencia.html', text: 'Webs de referencia' },
-        { href: '/recursos/herramientas.html', text: 'Herramientas recomendadas' },
-        { href: '/recursos/hardware-wallets.html', text: 'Hardware wallets' },
-        { href: '/recursos/otros-recursos.html', text: 'Otros recursos' }
-      ]
-    }
   ];
+
+  // ============================================================
+  // Renderer del sidebar ? detecta sectionTitle y accent
+  // ============================================================
+  // El renderer debe implementar esta l?gica al construir los <li>:
+  //
+  // pages.forEach(page => {
+  //   if (page.sectionTitle) {
+  //     const cls = page.accent
+  //       ? 'nav-section-title nav-section-title--accent'
+  //       : 'nav-section-title';
+  //     li.className = cls;
+  //     li.textContent = page.sectionTitle;
+  //     // NO a?adir href ni event listeners
+  //   } else {
+  //     // render normal de enlace
+  //     const a = document.createElement('a');
+  //     a.href = page.href;
+  //     a.textContent = page.text;
+  //     li.appendChild(a);
+  //   }
+  // });
+  // ============================================================
 
   function normalizePath(pathname) {
     if (!pathname) return '/';
@@ -345,7 +368,6 @@
     if (nivelMatch) return `Nivel ${nivelMatch[1]}`;
     if (path === '/base' || path.startsWith('/base/')) return 'Base de Conocimiento';
     if (path === '/la-madriguera' || path.startsWith('/la-madriguera/')) return 'La Madriguera';
-    if (path === '/sidechains' || path.startsWith('/sidechains/')) return 'Sidechains';
     if (path === '/comunidad' || path.startsWith('/comunidad/')) return 'Comunidad';
     if (path === '/herramientas' || path.startsWith('/herramientas/')) return 'Herramientas';
     if (path === '/glosario.html') return 'Glosario';
@@ -702,7 +724,7 @@
   }
 
   function sanitizeSidebarTexts() {
-    document.querySelectorAll('.sidebar__section-title, .sidebar__link, .sidebar__subgroup-title').forEach((node) => {
+    document.querySelectorAll('.sidebar__section-title, .sidebar__link, .sidebar__subgroup-title, .nav-section-title').forEach((node) => {
       const cleaned = sanitizeLabel(node.textContent);
       if (cleaned) node.textContent = cleaned;
     });
@@ -713,20 +735,73 @@
     });
   }
 
-  function createSidebarSection(title, links, sectionClass) {
+  function isLevelNode(item) {
+    return /^nivel-[1-6]$/.test(String(item && item.id ? item.id : ''));
+  }
+
+  function splitPrimaryTree() {
+    const levels = [];
+    const pillars = [];
+
+    LEVEL_TREE.forEach((item) => {
+      if (isLevelNode(item)) {
+        levels.push(item);
+      } else {
+        pillars.push(item);
+      }
+    });
+
+    return { levels, pillars };
+  }
+
+  function getItemTitle(item) {
+    const parts = [item && item.label ? item.label : '', item && item.sublabel ? item.sublabel : '']
+      .map((value) => collapseWhitespace(value))
+      .filter(Boolean);
+
+    return parts.join(' - ');
+  }
+
+  function createSidebarSection(item, sectionClass, rootLabel) {
     const section = document.createElement('div');
     section.className = `sidebar__section ${sectionClass || ''}`.trim();
 
     const titleNode = document.createElement('div');
     titleNode.className = 'sidebar__section-title';
-    titleNode.textContent = sanitizeLabel(title);
+    titleNode.textContent = sanitizeLabel(getItemTitle(item));
     section.appendChild(titleNode);
 
-    links.forEach((item) => {
+    const rootLink = document.createElement('a');
+    rootLink.className = 'sidebar__link';
+    rootLink.href = item.href;
+    rootLink.textContent = sanitizeLabel(rootLabel);
+    section.appendChild(rootLink);
+
+    let insideSubsection = false;
+
+    (item.pages || []).forEach((page) => {
+      if (!page) return;
+
+      if (page.sectionTitle) {
+        insideSubsection = true;
+
+        const sectionTitle = document.createElement('div');
+        sectionTitle.className = page.accent
+          ? 'nav-section-title nav-section-title--accent'
+          : 'nav-section-title';
+        sectionTitle.textContent = sanitizeLabel(page.sectionTitle);
+        section.appendChild(sectionTitle);
+        return;
+      }
+
+      if (!page.href || !page.text) return;
+
       const link = document.createElement('a');
-      link.className = 'sidebar__link';
-      link.href = item.href;
-      link.textContent = sanitizeLabel(item.text);
+      link.className = insideSubsection
+        ? 'sidebar__link sidebar__link--subgroup'
+        : 'sidebar__link';
+      link.href = page.href;
+      link.textContent = sanitizeLabel(page.text);
       section.appendChild(link);
     });
 
@@ -734,56 +809,17 @@
   }
 
   function createLevelSidebarSection(levelItem) {
-    const links = [{ href: levelItem.index, text: 'Indice del nivel' }, ...levelItem.pages];
-    const levelMatch = levelItem.index.match(/\/nivel-(\d)\//);
+    const levelMatch = String(levelItem.id || '').match(/^nivel-(\d)$/);
     const levelClass = levelMatch ? ` sidebar__section--nivel-${levelMatch[1]}` : '';
-    return createSidebarSection(levelItem.title, links, `sidebar__section--primary sidebar__section--level${levelClass}`);
+    return createSidebarSection(levelItem, `sidebar__section--primary sidebar__section--level${levelClass}`, 'Indice del nivel');
   }
 
   function createPillarSidebarSection(pillarItem) {
-    const grouped = Array.isArray(pillarItem.groups) && pillarItem.groups.some((group) => Array.isArray(group.links) && group.links.length > 0);
-    const rootLabel = grouped || pillarItem.pages.length > 0 ? 'Indice del pilar' : 'Abrir página';
-
-    if (!grouped) {
-      const links = [{ href: pillarItem.index, text: rootLabel }, ...pillarItem.pages];
-      return createSidebarSection(pillarItem.title, links, 'sidebar__section--primary sidebar__section--pillar');
-    }
-
-    const section = document.createElement('div');
-    section.className = 'sidebar__section sidebar__section--primary sidebar__section--pillar';
-
-    const titleNode = document.createElement('div');
-    titleNode.className = 'sidebar__section-title';
-    titleNode.textContent = sanitizeLabel(pillarItem.title);
-    section.appendChild(titleNode);
-
-    const rootLink = document.createElement('a');
-    rootLink.className = 'sidebar__link';
-    rootLink.href = pillarItem.index;
-    rootLink.textContent = sanitizeLabel(rootLabel);
-    section.appendChild(rootLink);
-
-    pillarItem.groups.forEach((group) => {
-      if (!group || !Array.isArray(group.links) || group.links.length === 0) return;
-
-      const subgroupTitle = document.createElement('div');
-      subgroupTitle.className = 'sidebar__subgroup-title';
-      subgroupTitle.textContent = sanitizeLabel(group.title);
-      section.appendChild(subgroupTitle);
-
-      group.links.forEach((item) => {
-        const link = document.createElement('a');
-        link.className = 'sidebar__link sidebar__link--subgroup';
-        link.href = item.href;
-        link.textContent = sanitizeLabel(item.text);
-        section.appendChild(link);
-      });
-    });
-
-    return section;
+    return createSidebarSection(pillarItem, 'sidebar__section--primary sidebar__section--pillar', 'Indice del pilar');
   }
 
   function createSidebarGroupHeading(title, sectionClass) {
+
     const section = document.createElement('div');
     section.className = `sidebar__section sidebar__section--locked ${sectionClass || ''}`.trim();
 
@@ -827,16 +863,19 @@
       });
 
       const fragment = document.createDocumentFragment();
+      const { levels, pillars } = splitPrimaryTree();
 
-      LEVEL_TREE.forEach((levelItem) => {
+      levels.forEach((levelItem) => {
         fragment.appendChild(createLevelSidebarSection(levelItem));
       });
 
-      fragment.appendChild(createSidebarGroupHeading('Pilares', 'sidebar__section--primary sidebar__section--pillars-heading'));
+      if (pillars.length > 0) {
+        fragment.appendChild(createSidebarGroupHeading('Pilares', 'sidebar__section--primary sidebar__section--pillars-heading'));
 
-      PILLAR_TREE.forEach((pillarItem) => {
-        fragment.appendChild(createPillarSidebarSection(pillarItem));
-      });
+        pillars.forEach((pillarItem) => {
+          fragment.appendChild(createPillarSidebarSection(pillarItem));
+        });
+      }
 
       if (adWrap) {
         sidebar.insertBefore(fragment, adWrap);
@@ -850,6 +889,7 @@
     // Hide legacy static blocks (Nivel actual / secciones) if any remain in DOM.
     sidebar.classList.add('sidebar--primary-tree-ready');
   }
+
 
   function markActiveNavLinks() {
     const path = currentPath();
@@ -1019,40 +1059,31 @@
     host.innerHTML = '';
 
     const path = currentPath();
+    const { levels, pillars } = splitPrimaryTree();
+
     const groups = [
       {
         title: 'Niveles',
-        items: LEVEL_TREE.map((level) => {
-          const levelMatch = level.index.match(/\/nivel-(\d)\//);
-          const levelNum = levelMatch ? levelMatch[1] : '';
+        items: levels.map((item) => {
+          const levelMatch = String(item.id || '').match(/^nivel-(\d)$/);
           return {
-            title: level.title,
-            levelNum,
-            links: [{ href: level.index, text: 'Indice del nivel' }, ...level.pages]
+            title: getItemTitle(item),
+            levelNum: levelMatch ? levelMatch[1] : '',
+            indexHref: item.href,
+            indexText: 'Indice del nivel',
+            pages: item.pages || []
           };
         })
       },
       {
         title: 'Pilares',
-        items: PILLAR_TREE.map((pillar) => {
-          const grouped = Array.isArray(pillar.groups) && pillar.groups.some((group) => Array.isArray(group.links) && group.links.length > 0);
-          const hasChildren = grouped || pillar.pages.length > 0;
-          const groups = grouped
-            ? pillar.groups
-                .filter((group) => Array.isArray(group.links) && group.links.length > 0)
-                .map((group) => ({
-                  title: group.title,
-                  links: group.links
-                }))
-            : [];
-
-          return {
-            title: pillar.title,
-            levelNum: '',
-            links: [{ href: pillar.index, text: hasChildren ? 'Indice del pilar' : 'Abrir página' }, ...pillar.pages],
-            groups
-          };
-        })
+        items: pillars.map((item) => ({
+          title: getItemTitle(item),
+          levelNum: '',
+          indexHref: item.href,
+          indexText: 'Indice del pilar',
+          pages: item.pages || []
+        }))
       }
     ];
 
@@ -1116,6 +1147,7 @@
         itemChildren.className = 'mobile-tree__children';
 
         let itemHasActive = false;
+        let insideSubsection = false;
 
         const appendMobileTreeLink = (linkData, extraClass) => {
           const link = document.createElement('a');
@@ -1139,24 +1171,26 @@
           itemChildren.appendChild(link);
         };
 
-        item.links.forEach((linkData) => {
-          appendMobileTreeLink(linkData);
-        });
+        appendMobileTreeLink({ href: item.indexHref, text: item.indexText });
 
-        if (Array.isArray(item.groups) && item.groups.length > 0) {
-          item.groups.forEach((subgroup) => {
-            if (!subgroup || !Array.isArray(subgroup.links) || subgroup.links.length === 0) return;
+        item.pages.forEach((entry) => {
+          if (!entry) return;
+
+          if (entry.sectionTitle) {
+            insideSubsection = true;
 
             const subgroupTitle = document.createElement('div');
-            subgroupTitle.className = 'mobile-tree__subgroup-title';
-            subgroupTitle.textContent = sanitizeLabel(subgroup.title);
+            subgroupTitle.className = entry.accent
+              ? 'mobile-tree__subgroup-title nav-section-title--accent'
+              : 'mobile-tree__subgroup-title';
+            subgroupTitle.textContent = sanitizeLabel(entry.sectionTitle);
             itemChildren.appendChild(subgroupTitle);
+            return;
+          }
 
-            subgroup.links.forEach((linkData) => {
-              appendMobileTreeLink(linkData, 'mobile-tree__link--subgroup');
-            });
-          });
-        }
+          if (!entry.href || !entry.text) return;
+          appendMobileTreeLink(entry, insideSubsection ? 'mobile-tree__link--subgroup' : '');
+        });
 
         itemNode.appendChild(itemChildren);
         groupChildren.appendChild(itemNode);
@@ -1412,6 +1446,8 @@
     document.addEventListener('DOMContentLoaded', () => setTimeout(init, 100));
   }
 })();
+
+
 
 
 
