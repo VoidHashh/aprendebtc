@@ -74,10 +74,20 @@ Botón contextual volver (global):
 
 - Toda nueva página de `la-madriguera/` debe clasificarse en:
   - Ruta histórica (orden recomendado), o
-  - Debates y analisis.
-- En el menu lateral, las páginas historicas van primero y numeradas (`01`, `02`, ...), manteniendo orden cronologico/logico de lectura.
-- Despues van los articulos de debate/analisis.
+  - Debates y análisis.
+- En el menú lateral, las páginas históricas van primero y numeradas (`01`, `02`, ...), manteniendo orden cronológico/lógico de lectura.
+- Después van los artículos de debate/análisis.
 - Al actualizar el contenido, mantener coherencia en:
   - `la-madriguera/index.html`
   - bloque `La Madriguera` de `js/nav.js`
-  - navegación Anterior/Siguiente de los articulos
+  - navegación Anterior/Siguiente de los artículos
+
+## 11) Regla de codificación y caracteres (obligatoria)
+
+- Guardar siempre archivos de texto en UTF-8.
+- No aceptar mojibake (secuencias UTF-8 mal decodificadas) ni caracteres perdidos (`?` dentro de palabras en español).
+- Antes de cerrar cambios, ejecutar:
+  - `node scripts/check-encoding.js`
+- Si hay incidencias, corregirlas antes de commit.
+- Corrección asistida disponible:
+  - `node scripts/fix-mojibake-map.js`

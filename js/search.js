@@ -45,7 +45,7 @@
     { title: 'Firma digital', url: '/nivel-3/firma-digital.html', tags: ['nivel 3', 'firmas', 'criptografia'], section: 'Nivel 3', nivel: 3 },
     { title: '\u00bfQu\u00e9 es un nodo?', url: '/nivel-3/que-es-un-nodo.html', tags: ['nivel 3', 'nodo', 'validacion'], section: 'Nivel 3', nivel: 3 },
     { title: 'Monta tu propio nodo', url: '/nivel-3/montar-tu-nodo.html', tags: ['nivel 3', 'nodo', 'instalacion'], section: 'Nivel 3', nivel: 3 },
-    { title: 'Miner\u00eda en detalle', url: '/nivel-3/mineria-en-detalle.html', tags: ['nivel 3', 'minerÃ­a', 'pow'], section: 'Nivel 3', nivel: 3 },
+    { title: 'Miner\u00eda en detalle', url: '/nivel-3/mineria-en-detalle.html', tags: ['nivel 3', 'mineria', 'pow'], section: 'Nivel 3', nivel: 3 },
     { title: 'El halving', url: '/nivel-3/halving.html', tags: ['nivel 3', 'halving', 'emision'], section: 'Nivel 3', nivel: 3 },
     { title: 'Configura tu hardware wallet', url: '/nivel-3/configurar-hardware-wallet.html', tags: ['nivel 3', 'hardware wallet', 'custodia'], section: 'Nivel 3', nivel: 3 },
     { title: 'Comparativa de hardware wallets', url: '/nivel-3/comparativa-hardware-wallets.html', tags: ['nivel 3', 'hardware wallet', 'comparativa'], section: 'Nivel 3', nivel: 3 },
@@ -55,41 +55,41 @@
 
 
 
-    { title: 'Nivel 4 - En la madriguera', url: '/nivel-4/', tags: ['nivel 4', 'privacidad', 'multisig', 'herencia', 'lightning', 'minerÃ­a'], section: 'Niveles', nivel: 4 },
+    { title: 'Nivel 4 - En la madriguera', url: '/nivel-4/', tags: ['nivel 4', 'privacidad', 'multisig', 'herencia', 'lightning', 'mineria'], section: 'Niveles', nivel: 4 },
     { title: 'CoinJoin: privacidad colaborativa', url: '/nivel-4/coinjoin.html', tags: ['nivel 4', 'coinjoin', 'privacidad', 'utxo'], section: 'Nivel 4', nivel: 4 },
     { title: '¿Qué es multisig?', url: '/nivel-4/que-es-multisig.html', tags: ['nivel 4', 'multisig', 'custodia', 'm de n'], section: 'Nivel 4', nivel: 4 },
     { title: 'Configurar multisig con Sparrow Wallet', url: '/nivel-4/configurar-multisig.html', tags: ['nivel 4', 'multisig', 'sparrow', 'psbt'], section: 'Nivel 4', nivel: 4 },
-    { title: 'DistribuciÃ³n geogrÃ¡fica de claves', url: '/nivel-4/distribucion-claves.html', tags: ['nivel 4', 'multisig', 'claves'], section: 'Nivel 4', nivel: 4 },
+    { title: 'Distribucion geografica de claves', url: '/nivel-4/distribucion-claves.html', tags: ['nivel 4', 'multisig', 'claves'], section: 'Nivel 4', nivel: 4 },
     { title: 'Herencia de Bitcoin', url: '/nivel-4/herencia-bitcoin.html', tags: ['nivel 4', 'herencia', 'planificacion'], section: 'Nivel 4', nivel: 4 },
-    { title: 'GuÃ­a de herencia paso a paso', url: '/nivel-4/guia-herencia.html', tags: ['nivel 4', 'herencia', 'guia'], section: 'Nivel 4', nivel: 4 },
+    { title: 'Guia de herencia paso a paso', url: '/nivel-4/guia-herencia.html', tags: ['nivel 4', 'herencia', 'guia'], section: 'Nivel 4', nivel: 4 },
     { title: 'Herencia con multisig', url: '/nivel-4/herencia-multisig.html', tags: ['nivel 4', 'herencia', 'multisig'], section: 'Nivel 4', nivel: 4 },
     { title: 'Canales de pago', url: '/nivel-4/canales-lightning.html', tags: ['nivel 4', 'lightning', 'canales'], section: 'Nivel 4', nivel: 4 },
-    { title: 'GestiÃ³n de liquidez', url: '/nivel-4/liquidez-lightning.html', tags: ['nivel 4', 'lightning', 'liquidez'], section: 'Nivel 4', nivel: 4 },
+    { title: 'Gestion de liquidez', url: '/nivel-4/liquidez-lightning.html', tags: ['nivel 4', 'lightning', 'liquidez'], section: 'Nivel 4', nivel: 4 },
     { title: 'Routing de pagos', url: '/nivel-4/routing-lightning.html', tags: ['nivel 4', 'lightning', 'routing'], section: 'Nivel 4', nivel: 4 },
     { title: 'Montar tu nodo Lightning', url: '/nivel-4/nodo-lightning.html', tags: ['nivel 4', 'lightning', 'nodo'], section: 'Nivel 4', nivel: 4 },
     { title: 'Que son las sidechains de Bitcoin', url: '/nivel-4/que-son-las-sidechains.html', tags: ['nivel 4', 'sidechains', 'peg', 'capas'], section: 'Sidechains y capas', nivel: 4 },
     { title: 'Rootstock (RSK): contratos inteligentes sobre Bitcoin', url: '/nivel-4/rootstock-rsk.html', tags: ['nivel 4', 'rootstock', 'rsk', 'powpeg', 'rbtc'], section: 'Sidechains y capas', nivel: 4 },
     { title: 'Liquid Network: la sidechain federada de Bitcoin', url: '/nivel-4/liquid-network.html', tags: ['nivel 4', 'liquid', 'l-btc', 'confidential transactions'], section: 'Sidechains y capas', nivel: 4 },
     { title: 'Fedimint y Cashu: eCash, mints federados y privacidad sobre Bitcoin', url: '/nivel-4/fedimint-y-cashu.html', tags: ['nivel 4', 'fedimint', 'cashu', 'ecash', 'privacidad'], section: 'Sidechains y capas', nivel: 4 },
-    { title: 'MinerÃ­a casera: Â¿tiene sentido?', url: '/nivel-4/mineria-casera.html', tags: ['nivel 4', 'minerÃ­a', 'casa'], section: 'Nivel 4', nivel: 4 },
-    { title: 'Hardware de minerÃ­a', url: '/nivel-4/hardware-mineria.html', tags: ['nivel 4', 'minerÃ­a', 'asic'], section: 'Nivel 4', nivel: 4 },
-    { title: 'Pools de minerÃ­a', url: '/nivel-4/pools-mineria.html', tags: ['nivel 4', 'minerÃ­a', 'pools'], section: 'Nivel 4', nivel: 4 },
-    { title: 'MinerÃ­a con Bitaxe', url: '/nivel-4/mineria-bitaxe.html', tags: ['nivel 4', 'bitaxe', 'minerÃ­a'], section: 'Nivel 4', nivel: 4 },
-    { title: 'Bitcoin como calefacciÃ³n', url: '/nivel-4/calefaccion-bitcoin.html', tags: ['nivel 4', 'minerÃ­a', 'calefaccion'], section: 'Nivel 4', nivel: 4 },
+    { title: 'Mineria casera: tiene sentido?', url: '/nivel-4/mineria-casera.html', tags: ['nivel 4', 'mineria', 'casa'], section: 'Nivel 4', nivel: 4 },
+    { title: 'Hardware de mineria', url: '/nivel-4/hardware-mineria.html', tags: ['nivel 4', 'mineria', 'asic'], section: 'Nivel 4', nivel: 4 },
+    { title: 'Pools de mineria', url: '/nivel-4/pools-mineria.html', tags: ['nivel 4', 'mineria', 'pools'], section: 'Nivel 4', nivel: 4 },
+    { title: 'Mineria con Bitaxe', url: '/nivel-4/mineria-bitaxe.html', tags: ['nivel 4', 'bitaxe', 'mineria'], section: 'Nivel 4', nivel: 4 },
+    { title: 'Bitcoin como calefaccion', url: '/nivel-4/calefaccion-bitcoin.html', tags: ['nivel 4', 'mineria', 'calefaccion'], section: 'Nivel 4', nivel: 4 },
 
     { title: 'Nivel 5 - Mentor', url: '/nivel-5/', tags: ['nivel 5', 'criptografia', 'script', 'protocolo'], section: 'Niveles', nivel: 5 },
 
     { title: 'Nivel 6 - Satoshi', url: '/nivel-6/', tags: ['nivel 6', 'filosofia', 'contribucion', 'educacion'], section: 'Niveles', nivel: 6 },
     { title: 'Por que Bitcoin importa de verdad', url: '/nivel-6/por-que-bitcoin-importa.html', tags: ['nivel 6', 'filosofia'], section: 'Nivel 6', nivel: 6 },
     { title: 'Bitcoin y libertad financiera', url: '/nivel-6/bitcoin-y-libertad.html', tags: ['nivel 6', 'libertad', 'soberania'], section: 'Nivel 6', nivel: 6 },
-    { title: 'TeorÃ­a de juegos de Bitcoin', url: '/nivel-6/bitcoin-game-theory.html', tags: ['nivel 6', 'game theory', 'incentivos'], section: 'Nivel 6', nivel: 6 },
-    { title: 'Las crÃ­ticas a Bitcoin y las respuestas', url: '/nivel-6/criticas-a-bitcoin.html', tags: ['nivel 6', 'criticas', 'objeciones'], section: 'Nivel 6', nivel: 6 },
-    { title: 'CÃ³mo contribuir a Bitcoin Core', url: '/nivel-6/contribuir-bitcoin-core.html', tags: ['nivel 6', 'bitcoin core', 'contribuir'], section: 'Nivel 6', nivel: 6 },
-    { title: 'QuÃ© es un BIP', url: '/nivel-6/que-es-un-bip.html', tags: ['nivel 6', 'bip', 'protocolo'], section: 'Nivel 6', nivel: 6 },
+    { title: 'Teoria de juegos de Bitcoin', url: '/nivel-6/bitcoin-game-theory.html', tags: ['nivel 6', 'game theory', 'incentivos'], section: 'Nivel 6', nivel: 6 },
+    { title: 'Las criticas a Bitcoin y las respuestas', url: '/nivel-6/criticas-a-bitcoin.html', tags: ['nivel 6', 'criticas', 'objeciones'], section: 'Nivel 6', nivel: 6 },
+    { title: 'Como contribuir a Bitcoin Core', url: '/nivel-6/contribuir-bitcoin-core.html', tags: ['nivel 6', 'bitcoin core', 'contribuir'], section: 'Nivel 6', nivel: 6 },
+    { title: 'Que es un BIP', url: '/nivel-6/que-es-un-bip.html', tags: ['nivel 6', 'bip', 'protocolo'], section: 'Nivel 6', nivel: 6 },
     { title: 'Soft fork vs Hard fork', url: '/nivel-6/soft-fork-hard-fork.html', tags: ['nivel 6', 'fork', 'consenso'], section: 'Nivel 6', nivel: 6 },
     { title: 'Contribuir a Bitcoin sin saber programar', url: '/nivel-6/contribuir-sin-codigo.html', tags: ['nivel 6', 'contribuir', 'comunidad'], section: 'Nivel 6', nivel: 6 },
-    { title: 'CÃ³mo explicar Bitcoin sin que te miren raro', url: '/nivel-6/como-explicar-bitcoin.html', tags: ['nivel 6', 'educacion', 'comunicacion'], section: 'Nivel 6', nivel: 6 },
-    { title: 'CÃ³mo bitcoinizar tu entorno', url: '/nivel-6/bitcoinizar-tu-entorno.html', tags: ['nivel 6', 'adopcion', 'educacion'], section: 'Nivel 6', nivel: 6 },
+    { title: 'Como explicar Bitcoin sin que te miren raro', url: '/nivel-6/como-explicar-bitcoin.html', tags: ['nivel 6', 'educacion', 'comunicacion'], section: 'Nivel 6', nivel: 6 },
+    { title: 'Como bitcoinizar tu entorno', url: '/nivel-6/bitcoinizar-tu-entorno.html', tags: ['nivel 6', 'adopcion', 'educacion'], section: 'Nivel 6', nivel: 6 },
 
     { title: 'Funciones hash', url: '/nivel-5/funciones-hash.html', tags: ['nivel 5', 'hash', 'sha-256'], section: 'Nivel 5', nivel: 5 },
     { title: 'Criptografia de curva eliptica', url: '/nivel-5/curva-eliptica.html', tags: ['nivel 5', 'criptografia', 'secp256k1'], section: 'Nivel 5', nivel: 5 },
@@ -108,22 +108,22 @@
     { title: 'OP_RETURN', url: '/nivel-5/op-return.html', tags: ['nivel 5', 'op_return', 'datos'], section: 'Nivel 5', nivel: 5 },
     { title: 'Estructura de un bloque', url: '/nivel-5/estructura-bloque.html', tags: ['nivel 5', 'bloques', 'header'], section: 'Nivel 5', nivel: 5 },
     { title: 'Arbol de Merkle', url: '/nivel-5/merkle-tree.html', tags: ['nivel 5', 'merkle', 'root'], section: 'Nivel 5', nivel: 5 },
-    { title: 'Proof of Work en detalle', url: '/nivel-5/proof-of-work.html', tags: ['nivel 5', 'pow', 'minerÃ­a'], section: 'Nivel 5', nivel: 5 },
+    { title: 'Proof of Work en detalle', url: '/nivel-5/proof-of-work.html', tags: ['nivel 5', 'pow', 'mineria'], section: 'Nivel 5', nivel: 5 },
     { title: 'Protocolo P2P', url: '/nivel-5/protocolo-p2p.html', tags: ['nivel 5', 'p2p', 'red'], section: 'Nivel 5', nivel: 5 },
 
     { title: 'Base de Conocimiento', url: '/base/', tags: ['base', 'referencia'], section: 'Pilares' },
-    { title: 'QuiÃ©n es Satoshi Nakamoto', url: '/base/quien-es-satoshi.html', tags: ['satoshi', 'creador de bitcoin', 'identidad'], section: 'Base' },
+    { title: 'Quien es Satoshi Nakamoto', url: '/base/quien-es-satoshi.html', tags: ['satoshi', 'creador de bitcoin', 'identidad'], section: 'Base' },
     { title: 'El whitepaper de Bitcoin', url: '/base/el-whitepaper.html', tags: ['whitepaper', 'peer to peer electronic cash system', 'paper original'], section: 'Base' },
-    { title: 'La Madriguera', url: '/la-madriguera/', tags: ['anÃ¡lisis', 'profundidad', 'historia bitcoin'], section: 'Pilares' },
-    { title: 'La guerra del tamaÃ±o de bloque', url: '/la-madriguera/la-guerra-del-tamano-de-bloque.html', tags: ['madriguera', 'blocksize war', 'segwit', 'uasf'], section: 'La Madriguera' },
+    { title: 'La Madriguera', url: '/la-madriguera/', tags: ['analisis', 'profundidad', 'historia bitcoin'], section: 'Pilares' },
+    { title: 'La guerra del tamano de bloque', url: '/la-madriguera/la-guerra-del-tamano-de-bloque.html', tags: ['madriguera', 'blocksize war', 'segwit', 'uasf'], section: 'La Madriguera' },
     { title: 'El colapso de FTX', url: '/la-madriguera/el-colapso-de-ftx.html', tags: ['madriguera', 'ftx', 'custodia', 'riesgo contraparte'], section: 'La Madriguera' },
-    { title: 'Bitcoin y energia', url: '/la-madriguera/bitcoin-y-energia.html', tags: ['madriguera', 'energia', 'minerÃ­a', 'pow'], section: 'La Madriguera' },
+    { title: 'Bitcoin y energia', url: '/la-madriguera/bitcoin-y-energia.html', tags: ['madriguera', 'energia', 'mineria', 'pow'], section: 'La Madriguera' },
     { title: 'El caso Samourai Wallet', url: '/la-madriguera/el-caso-samourai-wallet.html', tags: ['madriguera', 'privacidad', 'samourai', 'coinjoin'], section: 'La Madriguera' },
     { title: 'Lightning: estado actual', url: '/la-madriguera/lightning-network-estado-actual.html', tags: ['madriguera', 'lightning', 'liquidez'], section: 'La Madriguera' },
     { title: 'Soft forks de Bitcoin', url: '/la-madriguera/soft-forks-de-bitcoin.html', tags: ['madriguera', 'soft fork', 'consenso'], section: 'La Madriguera' },
     { title: 'Puede un gobierno prohibir Bitcoin', url: '/la-madriguera/puede-un-gobierno-prohibir-bitcoin.html', tags: ['madriguera', 'regulacion', 'censura'], section: 'La Madriguera' },
     { title: 'Halving y ciclos de precio', url: '/la-madriguera/halving-y-ciclos-de-precio.html', tags: ['madriguera', 'halving', 'ciclos'], section: 'La Madriguera' },
-    { title: 'Empieza aqu?', url: '/empezar.html', tags: ['empezar', 'por donde empiezo', 'test de nivel', 'frase semilla', 'seed phrase', 'wallet', 'utxo', 'nodo', 'lightning'], section: 'Proyecto' },
+    { title: 'Empieza aqui', url: '/empezar.html', tags: ['empezar', 'por donde empiezo', 'test de nivel', 'frase semilla', 'seed phrase', 'wallet', 'utxo', 'nodo', 'lightning'], section: 'Proyecto' },
     { title: 'Sobre aprendeBTC', url: '/sobre.html', tags: ['proyecto', 'sobre nosotros'], section: 'Proyecto' },
     { title: 'Apoya aprendeBTC', url: '/donar.html', tags: ['proyecto', 'donaciones', 'lightning', 'on-chain', 'zaps'], section: 'Proyecto' },
     { title: 'Actualizaciones y changelog', url: '/actualizaciones.html', tags: ['proyecto', 'changelog', 'actualizaciones'], section: 'Proyecto' },
@@ -132,8 +132,8 @@
     { title: 'Libros recomendados sobre Bitcoin', url: '/recursos/libros.html', tags: ['recursos', 'libros', 'amazon', 'lecturas bitcoin'], section: 'Recursos' },
     { title: 'Podcasts de Bitcoin', url: '/recursos/podcasts.html', tags: ['recursos', 'podcasts', 'audio', 'entrevistas'], section: 'Recursos' },
     { title: 'Documentales sobre Bitcoin', url: '/recursos/documentales.html', tags: ['recursos', 'documentales', 'historia bitcoin', 'videos'], section: 'Recursos' },
-    { title: 'Webs de referencia sobre Bitcoin', url: '/recursos/webs-referencia.html', tags: ['recursos', 'referencia', 'documentaciÃ³n', 'webs'], section: 'Recursos' },
-    { title: 'Herramientas recomendadas', url: '/recursos/herramientas.html', tags: ['recursos', 'herramientas', 'mempool', 'lightning', 'analÃ­tica'], section: 'Recursos' },
+    { title: 'Webs de referencia sobre Bitcoin', url: '/recursos/webs-referencia.html', tags: ['recursos', 'referencia', 'documentacion', 'webs'], section: 'Recursos' },
+    { title: 'Herramientas recomendadas', url: '/recursos/herramientas.html', tags: ['recursos', 'herramientas', 'mempool', 'lightning', 'analitica'], section: 'Recursos' },
     { title: 'Hardware wallets recomendadas', url: '/recursos/hardware-wallets.html', tags: ['recursos', 'hardware wallet', 'autocustodia', 'seguridad'], section: 'Recursos' },
     { title: 'Otros recursos de Bitcoin', url: '/recursos/otros-recursos.html', tags: ['recursos', 'whitepaper', 'comunidad', 'bitcoin core'], section: 'Recursos' },
     { title: 'Herramientas', url: '/herramientas/', tags: ['tools', 'hash'], section: 'Pilares' },
@@ -144,17 +144,17 @@
     { title: 'Comparador de exchanges', url: '/herramientas/comparador-exchanges.html', tags: ['herramientas', 'exchanges', 'comparativa', 'kyc'], section: 'Herramientas' },
     { title: 'Calculadora de herencia', url: '/herramientas/calculadora-herencia.html', tags: ['herramientas', 'herencia', 'multisig', 'planificacion'], section: 'Herramientas' },
     { title: 'Calculadora de hash', url: '/herramientas/hash.html', tags: ['herramientas', 'hash', 'sha256', 'hash160', 'ripemd160'], section: 'Herramientas' },
-    { title: 'Simulador de minerÃ­a', url: '/herramientas/mining-simulator.html', tags: ['herramientas', 'minerÃ­a', 'pow', 'nonce'], section: 'Herramientas' },
+    { title: 'Simulador de mineria', url: '/herramientas/mining-simulator.html', tags: ['herramientas', 'mineria', 'pow', 'nonce'], section: 'Herramientas' },
     { title: 'Conversor de dificultad y target', url: '/herramientas/difficulty-converter.html', tags: ['herramientas', 'dificultad', 'target', 'bits'], section: 'Herramientas' },
     { title: 'Generador de Merkle Tree', url: '/herramientas/merkle-tree.html', tags: ['herramientas', 'merkle', 'txid', 'arbol'], section: 'Herramientas' },
     { title: 'Herramientas de bloques', url: '/herramientas/block-tools.html', tags: ['herramientas', 'block header', 'bloques', 'hash'], section: 'Herramientas' },
     { title: 'Generador de clave privada', url: '/herramientas/private-key.html', tags: ['herramientas', 'clave privada', 'wif', 'hex'], section: 'Herramientas' },
-    { title: 'Derivar clave pÃºblica', url: '/herramientas/public-key.html', tags: ['herramientas', 'clave pÃºblica', 'secp256k1', 'comprimida'], section: 'Herramientas' },
+    { title: 'Derivar clave publica', url: '/herramientas/public-key.html', tags: ['herramientas', 'clave publica', 'secp256k1', 'comprimida'], section: 'Herramientas' },
     { title: 'Codificador/decodificador WIF', url: '/herramientas/wif.html', tags: ['herramientas', 'wif', 'wallet import format', 'base58check'], section: 'Herramientas' },
-    { title: 'DirecciÃ³n Bitcoin (Base58)', url: '/herramientas/address-base58.html', tags: ['herramientas', 'direccion', 'p2pkh', 'p2sh', 'base58'], section: 'Herramientas' },
-    { title: 'DirecciÃ³n Bitcoin (Bech32)', url: '/herramientas/address-bech32.html', tags: ['herramientas', 'direccion', 'bech32', 'bech32m', 'segwit', 'taproot'], section: 'Herramientas' },
+    { title: 'Direccion Bitcoin (Base58)', url: '/herramientas/address-base58.html', tags: ['herramientas', 'direccion', 'p2pkh', 'p2sh', 'base58'], section: 'Herramientas' },
+    { title: 'Direccion Bitcoin (Bech32)', url: '/herramientas/address-bech32.html', tags: ['herramientas', 'direccion', 'bech32', 'bech32m', 'segwit', 'taproot'], section: 'Herramientas' },
     { title: 'Base58Check y checksum', url: '/herramientas/checksum-base58.html', tags: ['herramientas', 'base58', 'base58check', 'checksum'], section: 'Herramientas' },
-    { title: 'Generador de direcciÃ³n multisig', url: '/herramientas/multisig-address.html', tags: ['herramientas', 'multisig', 'p2sh', 'p2wsh', 'n-de-m'], section: 'Herramientas' },
+    { title: 'Generador de direccion multisig', url: '/herramientas/multisig-address.html', tags: ['herramientas', 'multisig', 'p2sh', 'p2wsh', 'n-de-m'], section: 'Herramientas' },
     { title: 'Mnemonic y seed (BIP39)', url: '/herramientas/mnemonic-seed.html', tags: ['herramientas', 'mnemonic', 'seed', 'bip39'], section: 'Herramientas' },
     { title: 'Extended keys (xpub/xprv)', url: '/herramientas/extended-keys.html', tags: ['herramientas', 'xpub', 'xprv', 'bip32'], section: 'Herramientas' },
     { title: 'Derivation paths (BIP32)', url: '/herramientas/derivation-paths.html', tags: ['herramientas', 'derivation path', 'bip32'], section: 'Herramientas' },
@@ -182,7 +182,7 @@
 
   const nivelLabels = { 1: 'N1', 2: 'N2', 3: 'N3', 4: 'N4', 5: 'N5', 6: 'N6' };
   const synonymMap = {
-    'frase semilla': ['seed phrase', 'seed', 'semilla', 'mnemonic', 'bip39', 'palabras de recuperaciÃ³n'],
+    'frase semilla': ['seed phrase', 'seed', 'semilla', 'mnemonic', 'bip39', 'palabras de recuperacion'],
     'seed phrase': ['frase semilla', 'seed', 'mnemonic', 'bip39'],
     semilla: ['seed', 'mnemonic', 'bip39'],
     mnemonic: ['frase semilla', 'seed', 'semilla', 'bip39'],
@@ -205,13 +205,13 @@
 
   function textScore(value) {
     const ok = (value.match(/[A-Za-z0-9ÁÉÍÓÚáéíóúÑñÜü¿¡]/g) || []).length;
-    const bad = (value.match(/[ÃÂâ?]/g) || []).length;
+    const bad = (value.match(/[\u00C3\u00C2\u00E2\uFFFD]/g) || []).length;
     return ok - (bad * 3);
   }
 
   function maybeDecodeMojibake(value) {
     const raw = collapseWhitespace(value);
-    if (!raw || !/[ÃÂâ]/.test(raw)) return raw;
+    if (!raw || !/[\u00C3\u00C2\u00E2]/.test(raw)) return raw;
 
     try {
       const bytes = Uint8Array.from(Array.from(raw).map((ch) => ch.charCodeAt(0) & 0xff));
@@ -409,7 +409,7 @@
 
     const cleanQuery = (query || '').trim();
     if (cleanQuery.length < 2) {
-      container.innerHTML = '<p class="search-hint">Escribe para buscar artÃ­culos, conceptos y niveles...</p>';
+      container.innerHTML = '<p class="search-hint">Escribe para buscar articulos, conceptos y niveles...</p>';
       return;
     }
 

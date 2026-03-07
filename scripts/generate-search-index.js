@@ -156,7 +156,7 @@ function buildSemanticTags(title, description, bodyText) {
 function cleanTitle(rawTitle) {
   const text = stripTags(rawTitle);
   return text
-    .replace(/\s+â€”\s+(Nivel|Base|Herramientas|Comunidad)\b.*$/i, '')
+    .replace(/\s+\u2014\s+(Nivel|Base|Herramientas|Comunidad)\b.*$/i, '')
     .replace(/\s+\|\s+aprendebtc\.com$/i, '')
     .trim();
 }
