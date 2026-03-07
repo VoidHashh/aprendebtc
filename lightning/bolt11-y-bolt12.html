@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="BOLT11 vs BOLT12 Offers: cómo funcionan las invoices de Lightning, qué cambia con Offers, y por qué importa para el futuro." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/bolt11-y-bolt12.html" />
+  <meta property="og:title" content="BOLT11 y BOLT12: las invoices de Lightning | aprendebtc.com" />
+  <meta property="og:description" content="BOLT11 vs BOLT12 Offers: cómo funcionan las invoices de Lightning, qué cambia con Offers, y por qué importa para el futuro." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="BOLT11 y BOLT12: las invoices de Lightning | aprendebtc.com" />
+  <meta name="twitter:description" content="BOLT11 vs BOLT12 Offers: cómo funcionan las invoices de Lightning, qué cambia con Offers, y por qué importa para el futuro." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/bolt11-y-bolt12.html" />
+  <title>BOLT11 y BOLT12: las invoices de Lightning | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-bolt" aria-hidden="true"></div></div></nav></aside>
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">BOLT11 y BOLT12</span>
+        </nav>
+
+        <article class="article">
+          <h1>BOLT11 y BOLT12: las invoices de Lightning</h1>
+          <p class="article__subtitle">La invoice es el corazón de cada pago Lightning. BOLT12 cambia las reglas del juego.</p>
+
+          <h2>Qué es un BOLT</h2>
+          <p>Los BOLTs (Basis of Lightning Technology) son las especificaciones que permiten interoperabilidad entre implementaciones de Lightning. BOLT11 define el formato clásico de invoice; BOLT12 define offers e invoices de nueva generación.</p>
+
+          <h2>BOLT11: estándar actual en producción</h2>
+          <p>Una invoice BOLT11 codifica en formato bech32 información crítica del pago: red, monto, payment hash, expiración, descripción y firma del receptor. Es robusto y universal, pero tiene límites:</p>
+          <ul>
+            <li>Una invoice sirve para un solo pago.</li>
+            <li>Expira en tiempo relativamente corto.</li>
+            <li>Para direcciones estáticas suele necesitar LNURL/servidor web.</li>
+            <li>Expone más metadatos del receptor que BOLT12.</li>
+          </ul>
+
+          <h2>BOLT12 (Offers): evolución del modelo</h2>
+          <p>BOLT12 separa la oferta del pago concreto. Publicas un <em>offer</em> reutilizable y el pagador solicita una invoice dinámica a través del propio protocolo Lightning, sin depender de HTTP para el flujo principal.</p>
+          <p>Además introduce <em>blinded paths</em>, mejorando privacidad del receptor, y abre puerta a pagos recurrentes de forma nativa.</p>
+
+          <table>
+            <thead>
+              <tr><th>Característica</th><th>BOLT11</th><th>BOLT12</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Reutilizable</td><td>No</td><td>Sí (offers)</td></tr>
+              <tr><td>Necesita servidor web</td><td>No (flujo básico)</td><td>No</td></tr>
+              <tr><td>Privacidad receptor</td><td>Media/Baja</td><td>Alta (blinded paths)</td></tr>
+              <tr><td>Pagos recurrentes</td><td>No nativo</td><td>Sí nativo</td></tr>
+            </tbody>
+          </table>
+
+          <div class="callout callout--info">
+            <span class="callout__icon" aria-hidden="true">i</span>
+            <div class="callout__content">
+              <div class="callout__title">Transición gradual</div>
+              <p class="callout__text">BOLT12 no sustituye BOLT11 de un día para otro. Ambos convivirán varios años mientras wallets y servicios completan adopción.</p>
+            </div>
+          </div>
+
+          <h2>¿Cuándo usar cada uno hoy?</h2>
+          <p>Para compatibilidad máxima inmediata, BOLT11 sigue siendo la opción segura. Para nuevos flujos de cobro persistente y privacidad mejorada, BOLT12 es el rumbo técnico recomendado.</p>
+
+          <h2>Estado (marzo 2026)</h2>
+          <ul>
+            <li>Core Lightning: soporte sólido de BOLT12.</li>
+            <li>Phoenix: soporte relevante, especialmente en recepción.</li>
+            <li>LND/Eclair: adopción progresiva por funcionalidades.</li>
+          </ul>
+
+          <h2>Enlaces</h2>
+          <ul>
+            <li><a href="/lightning/lnurl.html">LNURL</a></li>
+            <li><a href="/lightning/lightning-address.html">Lightning Address</a></li>
+            <li><a href="/herramientas/lightning-invoice.html">Herramienta: decodificador de invoice</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/glosario-lightning.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">Glosario Lightning</span>
+            </a>
+            <a href="/lightning/lnurl.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">LNURL</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>
+

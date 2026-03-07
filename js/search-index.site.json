@@ -538,13 +538,15 @@
     "keywords": "Las principales conferencias de Bitcoin en el mundo: BTC Prague, Baltic Honeybadger, Adopting Bitcoin, Plan B Forum, LABITCONF y más. Europa BTC Prague (Praga, Chequia) Baltic Honeybadger (Riga, Letonia) Plan ₿ Forum (Lugano, Suiza) Surfin' Bitcoin (Biarritz, Francia) Bitcoin FilmFest (Varsovia, Polonia) Bitcoin Amsterdam (Ámsterdam, Países Bajos) Mad Bitcoin Summit (Madrid, España) Watch Out, Bitcoin! / World of Bitcoin (Madrid, España) European Blockchain Convention (Barcelona, España) bitcoin++ (Varias ciudades) Otras en Europa Inicio &rsaquo; Comunidad &rsaquo; Conferencias Bitcoin Conferencias Bitcoin Los eventos anuales donde la comunidad Bitcoin global se reúne. Las conferencias de Bitcoin son el punto de encuentro anual de la comunidad global. Desde mega-eventos con miles de asistentes hasta encuentros íntimos de desarrolladores, hay opciones para todos los perfiles. Europa BTC Prague (Praga, Chequia) Cuándo: Junio (2026: 11-13 junio) Qué es: La mayor conferencia de Bitcoin en Europa. Tres días de charlas, expo, y networking en una de las ciudades más bitcoiner del continente. Perfil: Equilibrio entre contenido técnico, empresarial y comunitario. Muy orientada a Bitcoin-only (sin altcoins). Atrae tanto a principiantes curiosos como a desarrolladores avanzados. Destacado: Expo con más de 90 empresas, múltiples escenarios simultáneos, excelente ambiente comunitario. Chequia tiene una escena Bitcoin muy activa y muchos proyectos nacidos allí. Precios: Desde ~67€ (expo) h"
   },
   {
-    "title": "Comunidad",
+    "title": "Comunidad Bitcoin",
     "url": "/comunidad/",
     "tags": [
-      "comunidad"
+      "comunidad",
+      "lightning",
+      "factura lightning"
     ],
     "section": "Comunidad",
-    "keywords": "Comunidad Bitcoin en espanol: online, meetups y conferencias. Inicio &rsaquo; Comunidad Comunidad Punto de entrada a comunidades y eventos. Comunidades online Meetups presenciales Conferencias Nostr y Bitcoin"
+    "keywords": "Comunidad Bitcoin en español: meetups, conferencias, comunidades online y cómo conectar con otros bitcoiners. Comunidades online Meetups presenciales Conferencias Nostr y Bitcoin Inicio &rsaquo; Comunidad Comunidad Bitcoin Bitcoin no es solo tecnología, es una comunidad global Aprender Bitcoin en solitario funciona, pero aprender con otros va mucho más rápido. La comunidad bitcoiner en español es activa, dispersa por muchos canales, y más acogedora de lo que parece desde fuera. Aquí encontrarás los lugares donde ocurre la conversación. Comunidades online Grupos de Telegram, servidores de Discord, foros y subreddits donde bitcoiners en español debaten, preguntan y comparten recursos. Meetups presenciales Encuentros locales en ciudades de España y Latinoamérica. Hablar de Bitcoin en persona, con conversación real, tiene un valor que ningún foro online puede replicar. Conferencias Los grandes eventos del ecosistema Bitcoin en español: fechas, ubicaciones y qué esperar de cada uno. Nostr y Bitcoin La red social descentralizada donde la comunidad bitcoiner más técnica tiene su base. Sin censura, con zaps Lightning integrados. ℹ️ Proyecto hermano Si quieres entender qué es Nostr y cómo empezar, visita nostrfacil.com , la guía en español sobre el protocolo de comunicación descentralizada que usa la comunidad Bitcoin más técnica."
   },
   {
     "title": "Meetups y eventos presenciales",
@@ -587,15 +589,11 @@
     "keywords": "Apoya aprendeBTC con una donaci&oacute;n en Bitcoin. M&eacute;todo recomendado: Lightning. Tambi&eacute;n disponible on-chain y v&iacute;a Nostr. Lightning (recomendado) On-chain V&iacute;a Nostr Inicio &rsaquo; Proyecto &rsaquo; Apoya aprendeBTC Apoya aprendeBTC Este proyecto es gratuito y sin publicidad invasiva. Si te ha sido &uacute;til, puedes apoyarlo con una donaci&oacute;n. ❤ Gracias por tu apoyo Cada satoshi ayuda a mantener y mejorar el contenido educativo en espa&ntilde;ol para toda la comunidad. Lightning (recomendado) On-chain V&iacute;a Nostr Tambi&eacute;n puedes enviarnos un zap desde tu cliente Nostr favorito. Ir a nuestro perfil en Nostr Tambi&eacute;n puedes encontrarnos como voidhash@nostr.lol . Gracias por apoyar la educaci&oacute;n Bitcoin en espa&ntilde;ol. &larr; Volver Sobre aprendeBTC"
   },
   {
-    "title": "¿Por dónde empiezo?",
+    "title": "¿Por dónde empezar?",
     "url": "/empezar.html",
     "tags": [
       "proyecto",
       "empezar",
-      "frase semilla",
-      "seed phrase",
-      "mnemonic",
-      "bip39",
       "wallet",
       "billetera",
       "lightning",
@@ -604,7 +602,7 @@
       "transacciones"
     ],
     "section": "Proyecto",
-    "keywords": "Descubre tu punto de partida en aprendeBTC. Test interactivo de 8 preguntas para recomendarte el nivel ideal. 8 preguntas para recomendarte tu nivel Inicio › ¿Por dónde empiezo? Ruta sugerida ¿Por dónde empiezo? aprendeBTC tiene 6 niveles, desde primeros pasos hasta protocolo. Responde este test y te recomendamos un punto de inicio realista según tu conocimiento actual. Test interactivo 8 preguntas para recomendarte tu nivel Evalúa fundamentos, autocustodia, seed phrase, Lightning, UTXO y conceptos técnicos. Seed phrase Lightning UTXO Nodos Taproot Empezar test Prefiero empezar desde cero Incluye preguntas sobre: frase semilla, wallets, autocustodia, nodos, UTXO, Taproot, ECDSA/Schnorr y BIP."
+    "keywords": "No sabes nada de Bitcoin? Empieza aquí. Te guiamos paso a paso desde cero hasta tu primera compra. ¿Qué nivel eres? No sé nada de Bitcoin Ya tengo bitcoin en un exchange Ya tengo mi propia wallet Quiero profundizar ¿Buscas algo concreto? Respuestas rápidas Análisis en profundidad Aprender haciendo Comunidad Inicio &rsaquo; ¿Por dónde empezar? ¿Por dónde empezar? Tu punto de partida en aprendeBTC Bienvenido. aprendeBTC está diseñado para acompañarte desde la primera pregunta (¿qué es esto?) hasta los conceptos más técnicos del protocolo. No hace falta saber nada de antemano. Solo necesitas curiosidad. ¿Qué nivel eres? No sé nada de Bitcoin Perfecto punto de partida. El Nivel 1 te explica qué es Bitcoin, por qué existe y cómo funciona de forma sencilla, sin tecnicismos. Empieza por el Nivel 1 → Ya tengo bitcoin en un exchange Buen comienzo, pero tus bitcoin aún no son realmente tuyos. El Nivel 2 te enseña a tomar el control real: tu propia wallet, tu propia clave. Ir al Nivel 2 → Ya tengo mi propia wallet Vas por buen camino. En el Nivel 3 profundizamos: transacciones, privacidad, seguridad operativa, Lightning Network y más. Ir al Nivel 3 → Quiero profundizar Los niveles 4, 5 y 6 cubren multisig, criptografía, minería, scripting y los fundamentos del protocolo. Elige el que encaje con tu nivel actual. Nivel 4 · Nivel 5 · Nivel 6 ¿Buscas algo concreto? Respuestas rápidas Consulta la Base de Conocimiento para definiciones, conceptos básicos y preguntas frecuentes sobre Bitcoin. "
   },
   {
     "title": "Glosario de Bitcoin",
@@ -634,7 +632,7 @@
       "direcciones"
     ],
     "section": "Herramientas",
-    "keywords": "Genera direcciones Bitcoin P2PKH y P2SH desde una clave pública. Entiende el proceso de hashing y Base58Check. Entrada Direcciones generadas Proceso paso a paso (P2PKH) ¿Cómo funciona? Inicio › Herramientas › Dirección Base58 Dirección Bitcoin (Base58) Convierte una clave pública en una dirección Bitcoin legacy (Base58Check). ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para generar direcciones para fondos reales. Entrada Clave pública (hex) Public Key Hash (20 bytes) Clave pública (comprimida 66 o no comprimida 130 hex) Introduce una clave pública Public Key Hash (40 hex = 20 bytes) 0 / 40 caracteres 📋 Cargar ejemplo 🏠 Generar direcciones Direcciones generadas Public Key Hash (HASH160) — 20 bytes 📋 — Dirección P2PKH — empieza por 1 📋 — Pay-to-Public-Key-Hash (legacy) Dirección P2SH-P2WPKH — empieza por 3 📋 — SegWit envuelto en P2SH (compatibilidad) Proceso paso a paso (P2PKH) ¿Cómo funciona? Una dirección Bitcoin no es la clave pública directamente. Es un hash de la clave pública, codificado con Base58Check para ser más corto y detectar errores de copia. Tipo Prefijo Empieza por Uso P2PKH 0x00 1 Direcciones legacy originales P2SH 0x05 3 Scripts (multisig, SegWit wrapped) El checksum (últimos 4 bytes) permite detectar errores tipográficos antes de enviar fondos a una dirección incorrecta. Aprende más sobre direcciones Bitcoin Tipos de direcciones → · Direcciones Bech32 (SegWit nativo) →"
+    "keywords": "Genera direcciones Bitcoin Legacy (Base58Check) desde una clave pública. Visualiza paso a paso SHA-256, RIPEMD-160 y el checksum de la dirección. Entrada Direcciones generadas Proceso paso a paso (P2PKH) ¿Cómo funciona? Inicio › Herramientas › Dirección Base58 Dirección Bitcoin (Base58) Las direcciones Legacy de Bitcoin (formato P2PKH, que empiezan por 1) y las direcciones P2SH (que empiezan por 3) usan la codificación Base58Check para representar datos binarios en un formato legible y con detección de errores. Esta herramienta genera direcciones Bitcoin Legacy desde una clave pública, mostrando cada paso del proceso: hash SHA-256, hash RIPEMD-160, prefijo de versión, cálculo del checksum doble SHA-256, y codificación final en Base58. Es la forma más directa de entender qué hay dentro de una dirección Bitcoin clásica y por qué el checksum permite detectar errores de transcripción antes de enviar fondos. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para generar direcciones para fondos reales. Entrada Clave pública (hex) Public Key Hash (20 bytes) Clave pública (comprimida 66 o no comprimida 130 hex) Introduce una clave pública Public Key Hash (40 hex = 20 bytes) 0 / 40 caracteres 📋 Cargar ejemplo 🏠 Generar direcciones Direcciones generadas Public Key Hash (HASH160) — 20 bytes 📋 — Dirección P2PKH — empieza por 1 📋 — Pay-to-Public-Key-Hash (legacy) Dirección P2SH-P2WPKH — empieza por 3 📋 — SegWit envuelto en P2SH (compatibilidad) Proceso paso a "
   },
   {
     "title": "Dirección Bitcoin (Bech32 / Bech32m)",
@@ -647,7 +645,7 @@
       "direcciones"
     ],
     "section": "Herramientas",
-    "keywords": "Genera direcciones SegWit nativas (bc1q) y Taproot (bc1p) desde una clave pública. Encoding Bech32 y Bech32m. Clave pública comprimida Direcciones generadas Decodificar dirección Bech32 Bech32 vs Bech32m ¿Cómo se generan? Inicio › Herramientas › Dirección Bech32 Dirección Bitcoin (Bech32 / Bech32m) Genera direcciones Native SegWit (bc1q...) y Taproot (bc1p...) desde tu clave pública. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para generar direcciones para fondos reales. Clave pública comprimida Clave pública (66 hex, prefijo 02 o 03) 0 / 66 caracteres 📋 Cargar ejemplo 🏠 Generar direcciones Direcciones generadas ⚡ P2WPKH (Native SegWit) Bech32 · Witness version 0 · empieza por bc1q — 📋 Witness Program (20 bytes) — 🌳 P2TR (Taproot) Bech32m · Witness version 1 · empieza por bc1p — 📋 Witness Program (32 bytes) — x-only pubkey — Decodificar dirección Bech32 Introduce una dirección bc1... para ver sus componentes internos. Dirección Bech32 / Bech32m 🎲 Generar ejemplo 🔍 Decodificar HRP — Version — Encoding — Witness Program — Bech32 vs Bech32m Especificación BIP Witness Version Uso Bech32 BIP 173 0 P2WPKH, P2WSH (SegWit v0) Bech32m BIP 350 1+ P2TR (Taproot) y futuras versiones Bech32m corrige un edge case de Bech32 que podía causar problemas con ciertos patrones de datos. La única diferencia técnica es la constante usada en el checksum. ¿Cómo se generan? P2WPKH (bc1q...) pubkey → HASH160 → witness program (20 bytes) → Bech32(\"bc\", 0, program) P2"
+    "keywords": "Genera y verifica direcciones Bitcoin Bech32 (bc1q) y Bech32m (bc1p). Entiende el formato SegWit nativo y Taproot con validación de checksum. Clave pública comprimida Direcciones generadas Decodificar dirección Bech32 Bech32 vs Bech32m ¿Cómo se generan? Inicio › Herramientas › Dirección Bech32 Dirección Bitcoin (Bech32 / Bech32m) Bech32 (y su actualización Bech32m) es el formato de codificación de las direcciones SegWit nativas de Bitcoin. Las direcciones Native SegWit (P2WPKH, que empiezan por bc1q) y Taproot (P2TR, que empiezan por bc1p) usan este formato, que tiene ventajas sobre Base58: solo usa letras minúsculas y números, lo que facilita la lectura en voz alta y la detección de errores, y tiene una capacidad de corrección de errores superior. Esta herramienta genera direcciones Bech32 y Bech32m desde una clave pública, muestra el proceso de codificación (witness version, witness program, checksum Bech32) y permite verificar si una dirección dada es válida. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para generar direcciones para fondos reales. Clave pública comprimida Clave pública (66 hex, prefijo 02 o 03) 0 / 66 caracteres 📋 Cargar ejemplo 🏠 Generar direcciones Direcciones generadas ⚡ P2WPKH (Native SegWit) Bech32 · Witness version 0 · empieza por bc1q — 📋 Witness Program (20 bytes) — 🌳 P2TR (Taproot) Bech32m · Witness version 1 · empieza por bc1p — 📋 Witness Program (32 bytes) — x-only pubkey — Decodificar dirección Bech32 Introduce"
   },
   {
     "title": "Direcciones desde Extended Key",
@@ -660,10 +658,12 @@
       "wallet",
       "billetera",
       "xprv",
-      "bip32"
+      "bip32",
+      "claves",
+      "direcciones"
     ],
     "section": "Herramientas",
-    "keywords": "Genera listas de direcciones Bitcoin desde una xpub, ypub o zpub. Visualiza las direcciones de tu wallet sin exponer claves privadas. Extended Key Direcciones generadas Tipos de Extended Keys Inicio › Herramientas › Direcciones desde xpub Direcciones desde Extended Key Genera las direcciones de una wallet a partir de su extended public key. 🚨 Precaución con extended keys Si introduces una xprv, esta herramienta puede mostrar tus claves privadas. NO uses extended keys de wallets con fondos reales en una web. Extended Key xpub, ypub, zpub (o sus equivalentes privados) — — Tipo de direcciones Recepción (change=0) Cambio (change=1) Cantidad 📋 Cargar ejemplo 🏠 Generar direcciones Derivando direcciones... Direcciones generadas 📥 Exportar CSV # Path Dirección Public Key Private Key Tipos de Extended Keys Prefijo BIP Tipo de dirección Empieza por xpub / xprv BIP44 P2PKH (Legacy) 1... ypub / yprv BIP49 P2SH-P2WPKH (SegWit wrapped) 3... zpub / zprv BIP84 P2WPKH (Native SegWit) bc1q... Aprende más sobre HD Wallets HD Wallets en detalle → · Derivation Paths → · Extended Keys →"
+    "keywords": "Deriva direcciones Bitcoin desde un xpub sin exponer claves privadas. Genera direcciones de recepción para wallets de solo lectura (watch-only). Extended Key Direcciones generadas Tipos de Extended Keys Inicio › Herramientas › Direcciones desde xpub Direcciones desde Extended Key Dado el xpub (clave pública extendida) de una cuenta, es posible derivar matemáticamente todas sus direcciones de recepción sin necesidad de conocer ninguna clave privada. Esta herramienta toma un xpub y genera las N primeras direcciones de la cadena externa (change=0) o interna (change=1), en el formato correspondiente al tipo de clave (xpub a Legacy, ypub a P2SH-SegWit, zpub a Native SegWit). Es la base de los watch-only wallets (monitorear fondos sin riesgo de exposición de claves privadas) y una forma práctica de entender cómo una sola clave pública extendida da lugar a cientos de direcciones únicas. 🚨 Precaución con extended keys Si introduces una xprv, esta herramienta puede mostrar tus claves privadas. NO uses extended keys de wallets con fondos reales en una web. Extended Key xpub, ypub, zpub (o sus equivalentes privados) — — Tipo de direcciones Recepción (change=0) Cambio (change=1) Cantidad 📋 Cargar ejemplo 🏠 Generar direcciones Derivando direcciones... Direcciones generadas 📥 Exportar CSV # Path Dirección Public Key Private Key Tipos de Extended Keys Prefijo BIP Tipo de dirección Empieza por xpub / xprv BIP44 P2PKH (Legacy) 1... ypub / yprv BIP49 P2SH-P2WPKH (SegWit wrapped) 3... zpub "
   },
   {
     "title": "ASCII ↔ Hexadecimal",
@@ -676,7 +676,7 @@
       "transacciones"
     ],
     "section": "Herramientas",
-    "keywords": "Convierte entre texto ASCII y hexadecimal. Útil para decodificar OP_RETURN y mensajes en la blockchain. Desglose carácter a carácter Ejemplos famosos OP_RETURN y datos en la blockchain Inicio › Herramientas › ASCII y hexadecimal ASCII ↔ Hexadecimal Convierte texto a hexadecimal y viceversa. Útil para leer datos OP_RETURN. 📝 Texto ASCII ↔ 🔢 Hexadecimal Desglose carácter a carácter Caracteres 0 Bytes 0 Ejemplos famosos Mensaje del bloque génesis \"Hello Bitcoin!\" (hex) Prefijo OMNI Layer OP_RETURN y datos en la blockchain OP_RETURN permite almacenar hasta 80 bytes de datos arbitrarios en una transacción Bitcoin. Estos datos se codifican en hexadecimal y pueden contener: Mensajes de texto (como el mensaje del bloque génesis) Hashes de documentos (proof of existence) Metadata de protocolos (Ordinals, OMNI, etc.) Identificadores de timestamping ScriptPubKey con OP_RETURN: 6a 28 5468652054696d65732030332f... 6a = OP_RETURN, 28 = 40 bytes de datos, resto = mensaje en hex Relacionado Decodificador de transacciones → · Compact Size (VarInt) →"
+    "keywords": "Convierte texto ASCII/UTF-8 a hexadecimal y viceversa. También Base64. Útil para trabajar con Bitcoin Script, datos raw y firmas de mensajes. Desglose carácter a carácter Ejemplos famosos OP_RETURN y datos en la blockchain Inicio › Herramientas › ASCII y hexadecimal ASCII ↔ Hexadecimal En Bitcoin y en la criptografía en general, los datos se representan frecuentemente en hexadecimal (base 16), mientras que los mensajes legibles usan ASCII o UTF-8. Esta herramienta convierte entre ambas representaciones: de texto ASCII/UTF-8 a su representación hexadecimal y viceversa. Es útil cuando trabajas con Bitcoin Script (donde los datos se introducen en hex), cuando necesitas codificar mensajes para firmarlos, o cuando analizas el contenido de transacciones raw. También muestra la representación en Base64, útil para PSBTs y otros formatos de intercambio de datos en el ecosistema Bitcoin. 📝 Texto ASCII ↔ 🔢 Hexadecimal Desglose carácter a carácter Caracteres 0 Bytes 0 Ejemplos famosos Mensaje del bloque génesis \"Hello Bitcoin!\" (hex) Prefijo OMNI Layer OP_RETURN y datos en la blockchain OP_RETURN permite almacenar hasta 80 bytes de datos arbitrarios en una transacción Bitcoin. Estos datos se codifican en hexadecimal y pueden contener: Mensajes de texto (como el mensaje del bloque génesis) Hashes de documentos (proof of existence) Metadata de protocolos (Ordinals, OMNI, etc.) Identificadores de timestamping ScriptPubKey con OP_RETURN: 6a 28 5468652054696d65732030332f... 6a = OP_RETURN, "
   },
   {
     "title": "Herramientas de bloques",
@@ -689,7 +689,7 @@
       "transacciones"
     ],
     "section": "Herramientas",
-    "keywords": "Decodifica y analiza block headers de Bitcoin. Calcula el block hash y explora la estructura byte a byte. Bloques históricos Block Header (80 bytes) Header decodificado Cargar bloque histórico Campos del Block Header Resultado Estructura del Block Header Inicio › Herramientas › Herramientas de bloques Herramientas de bloques Explora la estructura de un bloque Bitcoin: decodifica headers y calcula hashes. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para generar datos criptográficos para fondos reales. Decodificar block header Calcular hash de bloque Bloques históricos Bloque #0 El bloque génesis (2009) Bloque #210.000 Primer halving (2012) Bloque #840.000 Cuarto halving (2024) Block Header (80 bytes) Header en hexadecimal (160 caracteres) 0 / 160 caracteres Decodificar block header Header decodificado Version Prev Block Merkle Root Timestamp Bits Nonce Block Hash (HASH256 reversed) — Cargar bloque histórico Bloque #0 El bloque génesis Bloque #210.000 Primer halving Bloque #840.000 Cuarto halving Campos del Block Header Version (4 bytes hex, little-endian) Versión del formato de bloque Previous Block Hash (32 bytes hex) Hash del bloque anterior (0 para el génesis) Merkle Root (32 bytes hex) Raíz del árbol de Merkle de las transacciones Timestamp Unix: — Momento de creación del bloque (UTC) Bits (4 bytes hex) Target en formato compacto. Ver conversor → Nonce (número decimal) Valor que los mineros modifican para encontrar un hash válido (0 - 4.294.96"
+    "keywords": "Herramientas de bloques Bitcoin: decodifica cabeceras, calcula el hash del bloque, verifica el target de dificultad y entiende la estructura de cada bloque. Bloques históricos Block Header (80 bytes) Header decodificado Cargar bloque histórico Campos del Block Header Resultado Estructura del Block Header Inicio › Herramientas › Herramientas de bloques Herramientas de bloques Un bloque de Bitcoin es más que una lista de transacciones: tiene una estructura binaria precisa con una cabecera de 80 bytes que contiene la versión, el hash del bloque anterior, el Merkle root, el timestamp, el bits (target de dificultad codificado) y el nonce. Esta colección de herramientas permite decodificar cabeceras de bloque en hexadecimal, calcular el hash de una cabecera (doble SHA-256), verificar si el hash cumple el target de dificultad, y convertir el campo bits al target completo de 256 bits. Es el conjunto de operaciones que realiza cada nodo Bitcoin cuando verifica la validez de un bloque recibido. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para generar datos criptográficos para fondos reales. Decodificar block header Calcular hash de bloque Bloques históricos Bloque #0 El bloque génesis (2009) Bloque #210.000 Primer halving (2012) Bloque #840.000 Cuarto halving (2024) Block Header (80 bytes) Header en hexadecimal (160 caracteres) 0 / 160 caracteres Decodificar block header Header decodificado Version Prev Block Merkle Root Timestamp Bits Nonce Block Hash (HA"
   },
   {
     "title": "Calculadora DCA de Bitcoin",
@@ -713,7 +713,7 @@
       "transacciones"
     ],
     "section": "Herramientas",
-    "keywords": "Estima la comisión de tu transacción Bitcoin. Datos de la mempool en tiempo real y recomendaciones de fee. Tarifas recomendadas (sat/vB) Calcular coste de tu transacción Inicio &rsaquo; Herramientas &rsaquo; Calculadora de fees Calculadora de fees Bitcoin Calcula cuánto costará tu próxima transacción Bitcoin según la congestión de la red. Conectando con mempool... Actualizar No se pudieron obtener datos de la mempool. Inténtalo de nuevo. Tarifas recomendadas (sat/vB) Prioridad alta — ~10 min Media — ~30 min Baja — ~1 hora Económica — Sin prisa Calcular coste de tu transacción Tipo de transacción Simple (1→1) Típica (1→2) Compleja (2→2) Personalizado Tamaño (vBytes) Una transacción típica ocupa ~225 vB Tarifa (sat/vB) Fee total — sats En euros — € Cantidad a enviar (opcional, en €) Para calcular la fee como % de tu envío Fee como % del envío — Ver mempool en tiempo real → mempool.space ↗ ¿Cómo funcionan las fees? Las fees de Bitcoin no dependen del monto enviado, sino del tamaño de tu transacción en bytes. Aprende más sobre fees →"
+    "keywords": "Calcula comisiones de transacciones Bitcoin en sat/vbyte. Estima el fee según tipo de inputs/outputs (Legacy, SegWit, Taproot, multisig). Tarifas recomendadas (sat/vB) Calcular coste de tu transacción Inicio &rsaquo; Herramientas &rsaquo; Calculadora de fees Calculadora de fees Bitcoin Las comisiones de transacción en Bitcoin no se calculan sobre el importe enviado sino sobre el tamaño de la transacción en bytes virtuales (vbytes). Esta calculadora estima el fee total de una transacción a partir de sus características: número y tipo de inputs, número y tipo de outputs, y el fee rate actual en sat/vbyte. También funciona en inverso: dado un fee total que quieres pagar, calcula el fee rate equivalente. Los diferentes tipos de inputs y outputs (Legacy, SegWit, Taproot, multisig) tienen pesos distintos en vbytes, lo que explica por qué transacciones con el mismo número de inputs y outputs pueden costar diferente según el tipo de script utilizado. Conectando con mempool... Actualizar No se pudieron obtener datos de la mempool. Inténtalo de nuevo. Tarifas recomendadas (sat/vB) Prioridad alta — ~10 min Media — ~30 min Baja — ~1 hora Económica — Sin prisa Calcular coste de tu transacción Tipo de transacción Simple (1→1) Típica (1→2) Compleja (2→2) Personalizado Tamaño (vBytes) Una transacción típica ocupa ~225 vB Tarifa (sat/vB) Fee total — sats En euros — € Cantidad a enviar (opcional, en €) Para calcular la fee como % de tu envío Fee como % del envío — Ver mempool en tiempo real → "
   },
   {
     "title": "Calculadora de herencia Bitcoin",
@@ -728,7 +728,7 @@
       "bip39"
     ],
     "section": "Herramientas",
-    "keywords": "Planifica la herencia de tus bitcoin. Calcula la distribucion por herederos y revisa un checklist de seguridad y documentacion. 1. Patrimonio Bitcoin 2. Esquema de custodia 3. Distribucion por herederos Distribucion calculada 4. Checklist Inicio &rsaquo; Herramientas &rsaquo; Calculadora de herencia Calculadora de herencia Bitcoin Planifica una distribucion clara para que tus bitcoin lleguen a tus herederos. 1. Patrimonio Bitcoin Cantidad de BTC Valor estimado - EUR Cargando precio... 2. Esquema de custodia K1 Single key Una seed phrase M23 Multisig 2-de-3 2 firmas de 3 M35 Multisig 3-de-5 3 firmas de 5 EX Custodia en exchange Tercero con control 3. Distribucion por herederos Añadir heredero Total asignado: 0% Distribucion calculada 4. Checklist Marca lo que ya has dejado resuelto para reducir riesgo operativo. 📥 Descargar plan Aviso: Esta herramienta es educativa y orientativa. La herencia de Bitcoin tiene implicaciones legales y fiscales diferentes segun tu jurisdiccion. Consulta profesionales antes de ejecutar un plan final. Profundiza en herencia Revisa primero conceptos y riesgos. Herencia de Bitcoin -> Guia paso a paso ->"
+    "keywords": "Planifica la herencia de tus bitcoin: calcula esquemas de distribución de claves para herederos y entiende las opciones según tu configuración de custodia. 1. Patrimonio Bitcoin 2. Esquema de custodia 3. Distribucion por herederos Distribucion calculada 4. Checklist Inicio &rsaquo; Herramientas &rsaquo; Calculadora de herencia Calculadora de herencia Bitcoin Planificar la herencia de bitcoin requiere pensar en cómo tus herederos podrán acceder a los fondos sin que tú estés presente para guiarlos. Esta calculadora te ayuda a diseñar un esquema de herencia: introduce el valor aproximado de tus holdings, el número de herederos, el esquema de custodia que usas (singlesig, multisig 2-de-3, etc.) y tu situación familiar, y la herramienta genera recomendaciones sobre cómo distribuir la información de acceso. No almacena ningún dato: todo el cálculo es local. El objetivo es ayudarte a pensar el problema sistemáticamente antes de consultar con un abogado especializado para la implementación legal. 1. Patrimonio Bitcoin Cantidad de BTC Valor estimado - EUR Cargando precio... 2. Esquema de custodia K1 Single key Una seed phrase M23 Multisig 2-de-3 2 firmas de 3 M35 Multisig 3-de-5 3 firmas de 5 EX Custodia en exchange Tercero con control 3. Distribucion por herederos Añadir heredero Total asignado: 0% Distribucion calculada 4. Checklist Marca lo que ya has dejado resuelto para reducir riesgo operativo. 📥 Descargar plan Aviso: Esta herramienta es educativa y orientativa. La herencia de "
   },
   {
     "title": "Calculadora de impuestos Bitcoin",
@@ -739,7 +739,7 @@
       "impuestos"
     ],
     "section": "Herramientas",
-    "keywords": "Estima los impuestos sobre tus ganancias con Bitcoin en España. Tramos IRPF actualizados para ganancias patrimoniales. Datos de tu operación Resultado Desglose por tramos IRPF Tramos IRPF España 2026 (Ganancias patrimoniales) Inicio &rsaquo; Herramientas &rsaquo; Calculadora de impuestos Calculadora de impuestos Bitcoin Calcula cuánto deberás pagar a Hacienda por tus ganancias con Bitcoin (España). Datos de tu operación Introducir por precio unitario (€/BTC) Precio de compra (€/BTC) Precio de venta (€/BTC) Cantidad vendida (BTC) Importe total de compra (€) Importe total de venta (€) Calcular impuestos Limpiar Resultado Ganancia patrimonial — Impuesto a pagar — Tipo efectivo — Ganancia neta — Desglose por tramos IRPF Tramo Base imponible Tipo Impuesto Total — No hay impuesto a pagar Puedes compensar esta pérdida con ganancias patrimoniales de los próximos 4 años. Tramos IRPF España 2026 (Ganancias patrimoniales) Base imponible Tipo impositivo Hasta 6.000 € 19% 6.001 € – 50.000 € 21% 50.001 € – 200.000 € 23% 200.001 € – 300.000 € 27% Más de 300.000 € 28% Aviso importante: Esta calculadora aplica los tramos de IRPF de España para ganancias patrimoniales. Para otros países, la fiscalidad puede ser completamente diferente. Consulta con un asesor fiscal de tu jurisdicción. Nota legal: Esta herramienta proporciona una estimación orientativa y NO constituye asesoramiento fiscal. Cada situación personal puede tener particularidades (otras ganancias/pérdidas, deducciones, etc.). Consul"
+    "keywords": "Calculadora de impuestos Bitcoin con método FIFO. Estima ganancias patrimoniales para IRPF España y otros países. Solo orientativo, no es asesoría fiscal. Datos de tu operación Resultado Desglose por tramos IRPF Tramos IRPF España 2026 (Ganancias patrimoniales) Inicio &rsaquo; Herramientas &rsaquo; Calculadora de impuestos Calculadora de impuestos Bitcoin Esta calculadora estima la carga fiscal de tus operaciones con Bitcoin usando el método FIFO (First In, First Out), el más habitual en España y en varios países latinoamericanos. Introduce tu historial de compras y ventas (fecha, cantidad, precio en fiat) y la calculadora determina qué unidades se consideran vendidas en cada operación, calcula la ganancia o pérdida patrimonial resultante, y aplica los tramos del IRPF español o los tipos impositivos de otros países disponibles. El resultado es una estimación orientativa, no sustituye a un asesor fiscal. Útil para tener una primera aproximación antes de consultar a un profesional o usar software fiscal especializado. Datos de tu operación Introducir por precio unitario (€/BTC) Precio de compra (€/BTC) Precio de venta (€/BTC) Cantidad vendida (BTC) Importe total de compra (€) Importe total de venta (€) Calcular impuestos Limpiar Resultado Ganancia patrimonial — Impuesto a pagar — Tipo efectivo — Ganancia neta — Desglose por tramos IRPF Tramo Base imponible Tipo Impuesto Total — No hay impuesto a pagar Puedes compensar esta pérdida con ganancias patrimoniales de los próximos 4 a"
   },
   {
     "title": "Base58Check y Checksum",
@@ -755,7 +755,7 @@
       "direcciones"
     ],
     "section": "Herramientas",
-    "keywords": "Codifica y decodifica datos en Base58Check. Calcula checksums para direcciones y claves Bitcoin. Alfabeto Base58 1. Base58 (sin checksum) 2. Base58Check Encoder 3. Base58Check Decoder 4. Tabla de Version Bytes Inicio › Herramientas › Base58Check Base58Check y Checksum Explora el encoding Base58Check que Bitcoin usa para direcciones y claves WIF. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para datos de fondos reales. Alfabeto Base58 123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz 58 caracteres. Faltan: 0 , O , I , l — eliminados para evitar confusión visual entre caracteres similares. 1. Base58 (sin checksum) Hexadecimal Base58 📋 Cargar ejemplo 🔐 Codificar Base58 🔓 Decodificar Base58 2. Base58Check Encoder Version (hex) Datos (hex) 0x00 P2PKH 0x05 P2SH 0x80 WIF 0x6F Testnet 📋 Cargar ejemplo 🔐 Codificar Base58Check Payload (version + data) — Checksum (SHA256² primeros 4 bytes) — Resultado Base58Check — 📋 3. Base58Check Decoder String Base58Check 📋 Cargar ejemplo Decodificar Base58Check Version — Checksum — Datos (hex) — 4. Tabla de Version Bytes Version (hex) Prefijo Uso 0x00 1 Dirección P2PKH mainnet 0x05 3 Dirección P2SH mainnet 0x6F m o n Dirección P2PKH testnet 0xC4 2 Dirección P2SH testnet 0x80 5 , K , L WIF mainnet 0xEF c WIF testnet 0x0488B21E xpub Extended public key (BIP32) 0x0488ADE4 xprv Extended private key (BIP32) Aprende más sobre direcciones Tipos de direcciones → · WIF encoding →"
+    "keywords": "Verifica el checksum Base58Check de direcciones Bitcoin, claves WIF y xpub/xprv. Detecta errores de transcripción antes de usar los datos. Alfabeto Base58 1. Base58 (sin checksum) 2. Base58Check Encoder 3. Base58Check Decoder 4. Tabla de Version Bytes Inicio › Herramientas › Base58Check Base58Check y Checksum El checksum de Base58Check es el mecanismo que protege las direcciones Bitcoin y las claves en formato WIF contra errores de transcripción. Se calcula tomando los primeros 4 bytes del doble hash SHA-256 del payload y añadiéndolos al final antes de codificar. Esta herramienta verifica el checksum de cualquier dato en formato Base58Check: direcciones Legacy, claves WIF, claves extendidas (xpub/xprv). Si el checksum no coincide, indica que hubo un error al copiar o transcribir el dato, un mecanismo de seguridad que previene envíos accidentales a direcciones erróneas. También permite calcular el checksum para datos arbitrarios. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para datos de fondos reales. Alfabeto Base58 123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz 58 caracteres. Faltan: 0 , O , I , l — eliminados para evitar confusión visual entre caracteres similares. 1. Base58 (sin checksum) Hexadecimal Base58 📋 Cargar ejemplo 🔐 Codificar Base58 🔓 Decodificar Base58 2. Base58Check Encoder Version (hex) Datos (hex) 0x00 P2PKH 0x05 P2SH 0x80 WIF 0x6F Testnet 📋 Cargar ejemplo 🔐 Codificar Base58Check Payload (version + data) — Checks"
   },
   {
     "title": "Redireccion automatica",
@@ -778,7 +778,7 @@
       "transacciones"
     ],
     "section": "Herramientas",
-    "keywords": "Codifica y decodifica integers en formato Compact Size (VarInt) usado en transacciones Bitcoin. Reglas de codificación Ejemplos ¿Dónde se usa? Inicio › Herramientas › Compact Size (VarInt) Compact Size (VarInt) Convierte entre integers y el formato Compact Size que Bitcoin usa en transacciones. 📥 Integer → Compact Size Número decimal Codificar → Compact Size (hex) — — 📤 Compact Size → Integer Compact Size (hex) ← Decodificar Número decimal — — Reglas de codificación Rango Prefijo Tamaño total Formato 0 – 252 — 1 byte Valor directo 253 – 65.535 fd 3 bytes fd + 2 bytes LE 65.536 – 4.294.967.295 fe 5 bytes fe + 4 bytes LE > 4.294.967.295 ff 9 bytes ff + 8 bytes LE ℹ️ LE = Little-Endian: el byte menos significativo va primero. Por ejemplo, 253 (0x00FD) se codifica como fd fd00 . Ejemplos 1 252 (máx 1 byte) 253 (mín 3 bytes) 255 65.535 (máx 3 bytes) 65.536 (mín 5 bytes) 70.000 4.294.967.295 (máx 5 bytes) ¿Dónde se usa? Compact Size se usa en muchos lugares dentro de las transacciones Bitcoin: Input count — número de inputs en la transacción Output count — número de outputs Script length — longitud del scriptSig o scriptPubKey Witness item count — número de elementos en el witness Witness item length — longitud de cada elemento witness Relacionado Decodificador de transacciones → · TX splitter (byte a byte) → · ASCII y hexadecimal →"
+    "keywords": "Codifica y decodifica enteros en formato CompactSize (VarInt) de Bitcoin. Esencial para trabajar con transacciones y bloques a nivel de serialización raw. Reglas de codificación Ejemplos ¿Dónde se usa Inicio › Herramientas › Compact Size (VarInt) Compact Size (VarInt) CompactSize (también llamado VarInt en algunos contextos) es el formato de codificación de enteros variables que Bitcoin usa en la serialización de transacciones y bloques para indicar longitudes y conteos: número de inputs, número de outputs, longitud de scripts, etc. No usa un número fijo de bytes; usa 1, 3, 5 o 9 bytes según el valor a representar, lo que ahorra espacio para los valores más comunes (menores de 253). Esta herramienta codifica cualquier número entero en formato CompactSize y decodifica cualquier CompactSize a su valor numérico. Imprescindible para quienes trabajan con transacciones Bitcoin a nivel de bytes. 📥 Integer → Compact Size Número decimal Codificar → Compact Size (hex) — — 📤 Compact Size → Integer Compact Size (hex) ← Decodificar Número decimal — — Reglas de codificación Rango Prefijo Tamaño total Formato 0 – 252 — 1 byte Valor directo 253 – 65.535 fd 3 bytes fd + 2 bytes LE 65.536 – 4.294.967.295 fe 5 bytes fe + 4 bytes LE > 4.294.967.295 ff 9 bytes ff + 8 bytes LE ℹ️ LE = Little-Endian: el byte menos significativo va primero. Por ejemplo, 253 (0x00FD) se codifica como fd fd00 . Ejemplos 1 252 (máx 1 byte) 253 (mín 3 bytes) 255 65.535 (máx 3 bytes) 65.536 (mín 5 bytes) 70.000 4.294.9"
   },
   {
     "title": "Comparador de exchanges Bitcoin",
@@ -796,10 +796,12 @@
     "url": "/herramientas/conversor.html",
     "tags": [
       "herramientas",
-      "conversor"
+      "conversor",
+      "lightning",
+      "factura lightning"
     ],
     "section": "Herramientas",
-    "keywords": "Convierte entre BTC, satoshis, mBTC, EUR y USD en tiempo real. Precio actualizado automáticamente. Inicio &rsaquo; Herramientas &rsaquo; Conversor BTC / EUR / sats Conversor BTC / EUR / sats Convierte entre cualquier unidad de Bitcoin y monedas fiat al instante. Cargando precio... Actualizar Cantidad BTC sats mBTC EUR USD Escribe una cantidad y selecciona la unidad Bitcoin 0 BTC Satoshis 0 sats Milibitcoin 0 mBTC Euros — € Dólares — $ Precio no disponible — las conversiones BTC/sats/mBTC siguen funcionando. ¿Qué es un satoshi? Un satoshi (sat) es la unidad más pequeña de bitcoin: 1 BTC = 100.000.000 sats. Aprende más sobre satoshis →"
+    "keywords": "Conversor BTC, satoshis y fiat en tiempo real. Convierte entre bitcoin, sats, milisatoshis y tu moneda local con tipo de cambio actualizado. Inicio &rsaquo; Herramientas &rsaquo; Conversor BTC / EUR / sats Conversor BTC / EUR / sats Bitcoin existe en tres unidades de medida que necesitas manejar con fluidez: BTC (la unidad base), satoshis (la unidad más pequeña, 1 BTC = 100.000.000 satoshis) y el equivalente en moneda fiat al tipo de cambio actual. Esta herramienta convierte instantáneamente entre las tres: introduce un valor en cualquiera de ellas y obtén el equivalente en las demás. También muestra la representación en milisatoshis (msat, usada en Lightning Network) y en bits (100 satoshis, una unidad menos común pero útil para importes intermedios). El tipo de cambio se actualiza periódicamente desde una fuente pública de precios. Cargando precio... Actualizar Cantidad BTC sats mBTC EUR USD Escribe una cantidad y selecciona la unidad Bitcoin 0 BTC Satoshis 0 sats Milibitcoin 0 mBTC Euros — € Dólares — $ Precio no disponible — las conversiones BTC/sats/mBTC siguen funcionando. ¿Qué es un satoshi? Un satoshi (sat) es la unidad más pequeña de bitcoin: 1 BTC = 100.000.000 sats. Aprende más sobre satoshis →"
   },
   {
     "title": "Derivation Paths (BIP32)",
@@ -808,6 +810,10 @@
       "herramientas",
       "derivation",
       "paths",
+      "frase semilla",
+      "seed phrase",
+      "mnemonic",
+      "bip39",
       "wallet",
       "billetera",
       "xpub",
@@ -815,7 +821,7 @@
       "bip32"
     ],
     "section": "Herramientas",
-    "keywords": "Explora la derivación de claves BIP32. Navega el árbol de claves hijo paso a paso con child key derivation. Extended Key de partida Proceso de derivación Clave derivada en Hardened vs Normal Child Key Derivation (CKD) Inicio › Herramientas › Derivation Paths Derivation Paths (BIP32) Navega el árbol jerárquico de claves BIP32 y entiende la derivación de child keys. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO uses extended keys de wallets con fondos reales. Extended Key de partida Extended Key (xprv o xpub) Introduce una extended key Derivation Path BIP44 (Legacy) m/44'/0'/0' BIP49 (P2SH-SegWit) m/49'/0'/0' BIP84 (Native SegWit) m/84'/0'/0' BIP86 (Taproot) m/86'/0'/0' 📋 Cargar ejemplo 🔑 Derivar Proceso de derivación Clave derivada en Depth — Tipo dirección — Private Key (si disponible) 📋 — Public Key (comprimida) 📋 — Dirección 📋 — Hardened vs Normal Hardened (índice ≥ 2³¹) Notación: 44' o 44h Usa la private key para derivar ❌ No se puede hacer desde una xpub Normal (índice Notación: 0 Usa la public key para derivar ✓ Se puede hacer desde una xpub Por eso las xpub solo pueden derivar children a partir del nivel no-hardened . En m/44'/0'/0'/0/0 , los tres primeros niveles son hardened (requieren xprv) y los dos últimos son normales (se pueden derivar desde la xpub de m/44'/0'/0' ). Child Key Derivation (CKD) Hardened: HMAC-SHA512(chaincode, 0x00 + privateKey + index) Normal: HMAC-SHA512(chaincode, publicKey + index) El resultado de 64 bytes se divide: p"
+    "keywords": "Rutas de derivación BIP32/44/84/86 explicadas. Entiende cómo tu wallet elige qué dirección generar y por qué la misma seed da resultados distintos. Extended Key de partida Proceso de derivación Clave derivada en Hardened vs Normal Child Key Derivation (CKD) Inicio › Herramientas › Derivation Paths Derivation Paths (BIP32) La ruta de derivación determina qué clave específica se genera dentro del árbol HD de una wallet. Los estándares BIP44, BIP49, BIP84 y BIP86 definen rutas canónicas para distintos tipos de direcciones Bitcoin: Legacy (P2PKH), SegWit envuelto (P2SH-P2WPKH), Native SegWit (P2WPKH) y Taproot (P2TR). Esta herramienta muestra las rutas estándar para cada tipo, explica cada componente de la ruta (purpose, coin type, account, change, index), y permite introducir rutas personalizadas para derivar la clave correspondiente. Imprescindible para entender por qué la misma semilla genera direcciones distintas en diferentes wallets, y cómo recuperar fondos si tu wallet usó una ruta no estándar. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO uses extended keys de wallets con fondos reales. Extended Key de partida Extended Key (xprv o xpub) Introduce una extended key Derivation Path BIP44 (Legacy) m/44'/0'/0' BIP49 (P2SH-SegWit) m/49'/0'/0' BIP84 (Native SegWit) m/84'/0'/0' BIP86 (Taproot) m/86'/0'/0' 📋 Cargar ejemplo 🔑 Derivar Proceso de derivación Clave derivada en Depth — Tipo dirección — Private Key (si disponible) 📋 — Public Key (comprimida) 📋 — D"
   },
   {
     "title": "Conversor de dificultad y target",
@@ -826,7 +832,7 @@
       "converter"
     ],
     "section": "Herramientas",
-    "keywords": "Convierte entre dificultad, target y bits (compact) de Bitcoin. Entiende cómo se codifica la dificultad de minería. Valores históricos Conversión de formatos Visualización del target Fórmulas de conversión El ajuste de dificultad Inicio › Herramientas › Conversor de dificultad Conversor de dificultad y target Convierte entre los tres formatos que expresan la dificultad de minería en Bitcoin. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para generar datos criptográficos para fondos reales. Valores históricos Bloque génesis (2009) Primer halving (2012) Halving 2024 Récord 2024 Conversión de formatos Modifica cualquiera de los tres campos y los demás se actualizarán automáticamente. Bits (compact) — 4 bytes hexadecimales Campo \"bits\" del block header. Formato: exponente (1 byte) + coeficiente (3 bytes) Dificultad — número decimal Ratio entre el target máximo (dificultad 1) y el target actual Target — 256 bits hexadecimales El hash del bloque debe ser menor que este valor para ser válido Visualización del target Los ceros iniciales (en verde) indican cuántos ceros debe tener el hash del bloque como mínimo. — Ceros iniciales — Probabilidad — Fórmulas de conversión Bits → Target exponente = bits[0] coeficiente = bits[1:4] target = coeficiente × 2^(8 × (exponente - 3)) El primer byte indica el tamaño, los siguientes 3 son el valor significativo. Target → Dificultad target_max = 0x00000000FFFF0000...0000 (dificultad 1) dificultad = target_max / target_act"
+    "keywords": "Convierte entre nBits, target hash y dificultad de minado Bitcoin. Entiende cómo la red ajusta la dificultad cada 2016 bloques. Valores históricos Conversión de formatos Visualización del target Fórmulas de conversión El ajuste de dificultad Inicio › Herramientas › Conversor de dificultad Conversor de dificultad y target La dificultad de minado en Bitcoin se almacena en la cabecera de cada bloque en un formato compacto de 4 bytes llamado bits (o nBits). Este formato codifica el target hash que los mineros deben alcanzar: cuanto menor es el target, más difícil es encontrar un hash válido. Esta herramienta convierte entre los tres formatos relacionados con la dificultad: el valor compacto nBits tal como aparece en la cabecera del bloque, el target hash completo de 256 bits en hexadecimal, y el número de dificultad relativa (la métrica más usada en los exploradores de bloques, que expresa cuántas veces más difícil es minar ahora que en el bloque génesis). ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para generar datos criptográficos para fondos reales. Valores históricos Bloque génesis (2009) Primer halving (2012) Halving 2024 Récord 2024 Conversión de formatos Modifica cualquiera de los tres campos y los demás se actualizarán automáticamente. Bits (compact) — 4 bytes hexadecimales Campo \"bits\" del block header. Formato: exponente (1 byte) + coeficiente (3 bytes) Dificultad — número decimal Ratio entre el target máximo (dificultad 1) y el target actu"
   },
   {
     "title": "Calculadora de curva elíptica",
@@ -838,7 +844,7 @@
       "direcciones"
     ],
     "section": "Herramientas",
-    "keywords": "Opera sobre la curva secp256k1: suma, multiplicación de puntos e inverso modular. Visualiza las matemáticas de Bitcoin. 1. Multiplicación escalar (k × P) 2. Suma de puntos (P₁ + P₂) 3. Duplicación de punto (2P) 4. Inverso modular (a⁻¹ mod m) 5. Parámetros secp256k1 Inicio › Herramientas › Calculadora de curva el&iacute;ptica Calculadora de curva elíptica Realiza operaciones sobre la curva elíptica secp256k1: las matemáticas que aseguran Bitcoin. ℹ️ Herramienta educativa Explora las operaciones fundamentales de la criptografía de curva elíptica usada en Bitcoin. 1. Multiplicación escalar (k × P) Multiplica un escalar por un punto de la curva. Así es como se deriva una clave pública: k × G = P Clave pública = private_key × G Escalar k (hex o decimal) Punto P (x, y en hex) 🎯 Usar punto generador G 📋 Cargar ejemplo ✖️ Multiplicar Resultado: k × P x: — y: — Punto comprimido (33 bytes) — 2. Suma de puntos (P₁ + P₂) Suma dos puntos de la curva. Geométricamente: traza una línea entre P₁ y P₂, encuentra la tercera intersección con la curva, y refleja sobre el eje x. Punto P₁ (x, y en hex) 🎯 Usar G Punto P₂ (x, y en hex) 🎯 Usar G 📋 Cargar ejemplo ➕ Sumar Resultado: P₁ + P₂ x: — y: — 3. Duplicación de punto (2P) Caso especial de la suma cuando P₁ = P₂. La fórmula usa la tangente en lugar de la secante. Punto P (x, y en hex) 🎯 Usar G 📋 Cargar ejemplo ×2 Duplicar Resultado: 2P x: — y: — 4. Inverso modular (a⁻¹ mod m) Encuentra el número que multiplicado por a da 1 módulo m . Esenci"
+    "keywords": "Calculadora de curva elíptica secp256k1: suma de puntos, multiplicación escalar y negación. Entiende la criptografía de clave pública de Bitcoin. 1. Multiplicación escalar (k × P) 2. Suma de puntos (P₁ + P₂) 3. Duplicación de punto (2P) 4. Inverso modular (a⁻¹ mod m) 5. Parámetros secp256k1 Inicio › Herramientas › Calculadora de curva el&iacute;ptica Calculadora de curva elíptica Bitcoin usa la curva elíptica secp256k1 para toda su criptografía de clave pública. Esta calculadora permite realizar las operaciones matemáticas fundamentales sobre la curva directamente: suma de puntos, multiplicación escalar de un punto, y negación de punto. Puedes introducir coordenadas (x, y) de puntos de la curva y ver el resultado de cada operación. La multiplicación de un escalar por el punto generador G es exactamente la operación que convierte una clave privada en una clave pública. Visualizar estas operaciones ayuda a entender por qué la criptografía de curva elíptica es segura: la multiplicación es trivial de calcular en un sentido y computacionalmente inviable de revertir. ℹ️ Herramienta educativa Explora las operaciones fundamentales de la criptografía de curva elíptica usada en Bitcoin. 1. Multiplicación escalar (k × P) Multiplica un escalar por un punto de la curva. Así es como se deriva una clave pública: k × G = P Clave pública = private_key × G Escalar k (hex o decimal) Punto P (x, y en hex) 🎯 Usar punto generador G 📋 Cargar ejemplo ✖️ Multiplicar Resultado: k × P x: — y: — Punto"
   },
   {
     "title": "Firma digital: ECDSA y Schnorr",
@@ -847,11 +853,13 @@
       "herramientas",
       "ecdsa",
       "schnorr",
+      "utxo",
+      "transacciones",
       "claves",
       "direcciones"
     ],
     "section": "Herramientas",
-    "keywords": "Firma y verifica mensajes con ECDSA y Schnorr sobre secp256k1. Decodifica firmas DER. Herramienta educativa Bitcoin. Firmar con ECDSA Verificar firma ECDSA Firmar con Schnorr (BIP340) Verificar firma Schnorr Decodificar firma DER Firma coloreada Estructura DER Inicio › Herramientas › ECDSA y Schnorr Firma digital: ECDSA y Schnorr Firma, verifica y analiza firmas digitales ECDSA y Schnorr sobre la curva secp256k1. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO uses claves privadas reales con fondos. ECDSA Sign ECDSA Verify Schnorr Sign Schnorr Verify DER Decoder Firmar con ECDSA Mensaje Hello Bitcoin! El mensaje ya es un hash de 32 bytes (hex) Clave privada (hex, 32 bytes) 🎲 Generar aleatoria ✍️ Firmar Message Hash (SHA-256) — Clave pública derivada — Firma r (32 bytes) 📋 — Firma s (32 bytes) 📋 — Firma DER encoded 📋 — Verificar firma ECDSA Mensaje El mensaje ya es un hash de 32 bytes (hex) Firma (DER o r,s hex separados por coma) Clave pública (hex, comprimida o sin comprimir) 📋 Cargar ejemplo ✓ Verificar Firmar con Schnorr (BIP340) ℹ️ BIP340 (Schnorr para Bitcoin) requiere un mensaje de exactamente 32 bytes y usa x-only public keys. Mensaje (32 bytes hex) 🎲 Generar mensaje aleatorio Clave privada (hex, 32 bytes) 🎲 Generar aleatoria ✍️ Firmar X-only Public Key (32 bytes) — Firma Schnorr (64 bytes: R.x || s) 📋 — R.x (32 bytes) — s (32 bytes) — Verificar firma Schnorr Mensaje (32 bytes hex) Firma Schnorr (64 bytes hex) X-only Public Key (32 bytes hex) "
+    "keywords": "Crea y verifica firmas ECDSA y Schnorr en Bitcoin. Compara ambos esquemas y entiende cómo se autoriza criptográficamente cada transacción. Firmar con ECDSA Verificar firma ECDSA Firmar con Schnorr (BIP340) Verificar firma Schnorr Decodificar firma DER Firma coloreada Estructura DER Inicio › Herramientas › ECDSA y Schnorr Firma digital: ECDSA y Schnorr Bitcoin usa dos esquemas de firma digital: ECDSA (Elliptic Curve Digital Signature Algorithm), el esquema original, y Schnorr, introducido con Taproot en 2021. Esta herramienta permite crear y verificar firmas con ambos algoritmos. Introduce una clave privada y un mensaje (o su hash), y la herramienta genera la firma correspondiente y verifica que sea válida con la clave pública derivada. También muestra las diferencias entre ambos esquemas: las firmas Schnorr son más cortas, permiten agregación de firmas (múltiples firmantes en una sola firma) y tienen propiedades matemáticas más limpias que ECDSA. Imprescindible para entender cómo Bitcoin autoriza transacciones criptográficamente. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO uses claves privadas reales con fondos. ECDSA Sign ECDSA Verify Schnorr Sign Schnorr Verify DER Decoder Firmar con ECDSA Mensaje Hello Bitcoin! El mensaje ya es un hash de 32 bytes (hex) Clave privada (hex, 32 bytes) 🎲 Generar aleatoria ✍️ Firmar Message Hash (SHA-256) — Clave pública derivada — Firma r (32 bytes) 📋 — Firma s (32 bytes) 📋 — Firma DER encoded 📋 — Verificar firma ECD"
   },
   {
     "title": "Analizador de entropía",
@@ -868,7 +876,7 @@
       "direcciones"
     ],
     "section": "Herramientas",
-    "keywords": "Analiza la calidad de la entropía de datos hexadecimales. Evalúa aleatoriedad para claves privadas y seeds. Datos a analizar ¿Por qué importa la entropía? Inicio › Herramientas › Analizador de entrop&iacute;a Analizador de entropía Evalúa la calidad de la aleatoriedad de datos criptográficos. ⚠️ Limitaciones Esta herramienta realiza tests estadísticos básicos. NO es un reemplazo de un test de aleatoriedad criptográfico profesional (como NIST SP 800-22). Úsala como referencia educativa. Datos a analizar Hexadecimal (típicamente 32 bytes para clave privada, 16-32 bytes para entropía BIP39) Entrop&iacute;a pobre Entrop&iacute;a fuerte 🔬 Analizar — — — 📊 Entropía Shannon — Máximo teórico: 8 bits/byte para datos aleatorios perfectos 📈 Distribución de bytes (0x00 - 0xFF) Una distribución plana indica buena aleatoriedad 0x00 0x80 0xFF 📉 Distribución de nibbles (0-F) Cada dígito hex debería aparecer ~6.25% de las veces 0 8 F 🔍 Análisis detallado Bytes — Bits — Bytes únicos — ¿Por qué importa la entropía? La entropía mide la imprevisibilidad de los datos. En criptografía, una entropía alta es esencial porque significa que un atacante no puede predecir los valores. Ejemplos de mala entropía: Claves privadas derivadas de frases simples (\"password123\") Números con muchos ceros (0x00000...0001) Patrones repetitivos (0xABABABAB...) Números secuenciales (0x0102030405...) Bitcoin usa crypto.getRandomValues() (o equivalente del sistema operativo) para generar entropía criptográficamente "
+    "keywords": "Analiza la entropía de cualquier dato: bits de Shannon, distribución de bytes y estimación de seguridad criptográfica. Aprende por qué importa el azar. Datos a analizar ¿Por qué importa la entropía Inicio › Herramientas › Analizador de entrop&iacute;a Analizador de entropía La entropía es la medida del azar en un sistema, y en criptografía es sinónimo de seguridad: una clave privada o semilla con baja entropía es predecible y vulnerable. Esta herramienta analiza cualquier entrada de texto o datos y calcula métricas de entropía: entropía de Shannon en bits, frecuencia de caracteres, distribución de bytes, y una estimación de cuánta entropía efectiva aporta. Es útil para entender por qué el azar genuino (generado por hardware) es superior a cualquier secuencia inventada por un humano, y por qué frases como \"bitcoin bitcoin bitcoin\" son criptográficamente débiles aunque técnicamente sean frases BIP39 válidas. ⚠️ Limitaciones Esta herramienta realiza tests estadísticos básicos. NO es un reemplazo de un test de aleatoriedad criptográfico profesional (como NIST SP 800-22). Úsala como referencia educativa. Datos a analizar Hexadecimal (típicamente 32 bytes para clave privada, 16-32 bytes para entropía BIP39) Entrop&iacute;a pobre Entrop&iacute;a fuerte 🔬 Analizar — — — 📊 Entropía Shannon — Máximo teórico: 8 bits/byte para datos aleatorios perfectos 📈 Distribución de bytes (0x00 - 0xFF) Una distribución plana indica buena aleatoriedad 0x00 0x80 0xFF 📉 Distribución de nibbles (0-F"
   },
   {
     "title": "Extended Keys (xpub / xprv)",
@@ -885,10 +893,12 @@
       "billetera",
       "xpub",
       "xprv",
-      "bip32"
+      "bip32",
+      "claves",
+      "direcciones"
     ],
     "section": "Herramientas",
-    "keywords": "Genera y decodifica extended keys (xpub, xprv, ypub, zpub, tpub). Entiende las master keys BIP32. Seed hexadecimal Master Keys (depth 0) Extended Keys serializadas Decodificar Extended Key Campos decodificados Version Bytes para Extended Keys Derivación de Master Key (BIP32) Inicio › Herramientas › Extended Keys Extended Keys (xpub / xprv) Deriva master keys desde la seed y explora el formato de extended keys BIP32. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO uses seeds de wallets con fondos reales. Derivar desde Seed Decodificar xkey Seed hexadecimal Seed (64 bytes / 128 hex chars) 0 / 128 caracteres 📋 Cargar ejemplo 🎲 Generar seed aleatoria 🔑 Derivar claves maestras Master Keys (depth 0) Master Private Key (32 bytes) — Master Chain Code (32 bytes) — Master Public Key (33 bytes, comprimida) — Extended Keys serializadas xprv (BIP32 mainnet) 📋 — xpub (BIP32 mainnet) 📋 — Decodificar Extended Key Extended Key (xpub, xprv, ypub, zpub, etc.) 🔍 Decodificar Campos decodificados Version — Tipo — Red — Depth — Child Index — Fingerprint (parent) — Chain Code (32 bytes) — Key (33 bytes) — Version Bytes para Extended Keys Version (hex) Prefix Tipo Red BIP 0488ADE4 xprv Private Mainnet BIP44 0488B21E xpub Public Mainnet BIP44 049D7878 yprv Private Mainnet BIP49 049D7CB2 ypub Public Mainnet BIP49 04B2430C zprv Private Mainnet BIP84 04B24746 zpub Public Mainnet BIP84 045F18BC tprv Private Testnet — 045F1CF6 tpub Public Testnet — Derivación de Master Key (BIP32) H"
+    "keywords": "Claves extendidas Bitcoin (xpub/xprv): convierte formatos, decodifica estructura y entiende cómo las wallets HD exportan conjuntos de claves. Seed hexadecimal Master Keys (depth 0) Extended Keys serializadas Decodificar Extended Key Campos decodificados Version Bytes para Extended Keys Derivación de Master Key (BIP32) Inicio › Herramientas › Extended Keys Extended Keys (xpub / xprv) Las claves extendidas (xpub/xprv, ypub/yprv, zpub/zprv) son la forma en que las wallets HD exportan e importan conjuntos completos de claves sin compartir la clave maestra. Una xpub permite generar todas las direcciones de recepción de una cuenta sin exponer ninguna clave privada, es la base del watch-only wallet. Esta herramienta convierte entre los diferentes formatos de claves extendidas (x/y/z para mainnet, t/u/v para testnet), decodifica el contenido de una clave extendida (profundidad, fingerprint del padre, índice de hijo) y muestra la clave pública o privada subyacente. Fundamental para configurar wallets de solo lectura y para entender cómo los multisig coordinan las firmas. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO uses seeds de wallets con fondos reales. Derivar desde Seed Decodificar xkey Seed hexadecimal Seed (64 bytes / 128 hex chars) 0 / 128 caracteres 📋 Cargar ejemplo 🎲 Generar seed aleatoria 🔑 Derivar claves maestras Master Keys (depth 0) Master Private Key (32 bytes) — Master Chain Code (32 bytes) — Master Public Key (33 bytes, comprimida) — Extended Ke"
   },
   {
     "title": "Redireccion automatica",
@@ -910,7 +920,7 @@
       "transacciones"
     ],
     "section": "Herramientas",
-    "keywords": "Calcula hashes SHA-256, doble SHA-256, RIPEMD-160 y HASH160 de cualquier texto o hexadecimal. Herramienta educativa Bitcoin. Datos de entrada Hashes calculados Efecto avalancha ¿Qué hash se usa para qué en Bitcoin? Inicio › Herramientas › Hash functions Calculadora de hash Calcula los hashes que Bitcoin usa internamente: SHA-256, HASH256, HASH160 y RIPEMD-160. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para generar datos criptográficos para fondos reales. Datos de entrada Texto (UTF-8) Hexadecimal Texto a hashear aprendeBTC 10 bytes de entrada Hashes calculados SHA-256 32 bytes (64 hex) — 📋 HASH256 (SHA-256²) 32 bytes — TXIDs, bloques — 📋 HASH256 (reversed bytes) Formato display de TXIDs — 📋 RIPEMD-160 20 bytes (40 hex) — 📋 HASH160 (RIPEMD-160(SHA-256)) 20 bytes — Direcciones P2PKH — 📋 Efecto avalancha Observa cómo un pequeño cambio en la entrada produce un hash completamente diferente. Caracteres diferentes vs hash anterior (SHA-256) — / 64 — Hash anterior — ¿Qué hash se usa para qué en Bitcoin? Hash Uso en Bitcoin SHA-256 Base de todo. Minería, árboles de Merkle, firmas HASH256 TXIDs (identificadores de transacción), block hashes RIPEMD-160 Combinado con SHA-256 para acortar hashes de claves públicas HASH160 Derivar direcciones P2PKH y P2SH (legacy) Aprende más sobre funciones hash Las funciones hash son fundamentales para la seguridad de Bitcoin. Funciones hash en detalle →"
+    "keywords": "Calcula hashes SHA-256 y RIPEMD-160 en tu navegador. Aprende cómo Bitcoin usa las funciones hash para bloques y direcciones. Datos de entrada Hashes calculados Efecto avalancha ¿Qué hash se usa para qué en Bitcoin Inicio › Herramientas › Hash functions Calculadora de hash Las funciones hash son el componente criptográfico más fundamental de Bitcoin. Esta herramienta te permite calcular el hash SHA-256 y RIPEMD-160 de cualquier texto o dato que introduzcas y observar el resultado en tiempo real. SHA-256 se usa en Bitcoin para el minado, la construcción de bloques y la derivación de direcciones; RIPEMD-160 se aplica sobre el resultado de SHA-256 para generar las claves públicas comprimidas que dan lugar a las direcciones. Prueba a cambiar un solo carácter de la entrada: el hash resultante será completamente diferente. Esa propiedad (pequeños cambios producen outputs radicalmente distintos) es lo que hace a las funciones hash tan útiles para garantizar integridad. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para generar datos criptográficos para fondos reales. Datos de entrada Texto (UTF-8) Hexadecimal Texto a hashear aprendeBTC 10 bytes de entrada Hashes calculados SHA-256 32 bytes (64 hex) — 📋 HASH256 (SHA-256²) 32 bytes — TXIDs, bloques — 📋 HASH256 (reversed bytes) Formato display de TXIDs — 📋 RIPEMD-160 20 bytes (40 hex) — 📋 HASH160 (RIPEMD-160(SHA-256)) 20 bytes — Direcciones P2PKH — 📋 Efecto avalancha Observa cómo un pequeño cambio en la "
   },
   {
     "title": "HD Wallet explorer",
@@ -918,15 +928,17 @@
     "tags": [
       "herramientas",
       "wallet",
+      "frase semilla",
+      "seed phrase",
+      "mnemonic",
+      "bip39",
       "billetera",
       "xpub",
       "xprv",
-      "bip32",
-      "claves",
-      "direcciones"
+      "bip32"
     ],
     "section": "Herramientas",
-    "keywords": "Explora extended keys (xpub/xprv/ypub/zpub). Analiza versión, red, profundidad y validez de checksum Base58Check. Flujo recomendado Analizador rápido de extended key Inicio › Herramientas › HD Wallet explorer HD Wallet explorer Centro de trabajo para extended keys y derivación HD (BIP32/BIP44/BIP84). Flujo recomendado Extended Keys Genera y decodifica xpub/xprv, ypub/zpub y versiones testnet. Derivation Paths Prueba rutas m/.. y entiende hardened vs no-hardened. Direcciones desde xpub Deriva direcciones de forma segura sin exponer claves privadas. Analizador rápido de extended key Extended key (xpub/xprv/ypub/yprv/zpub/zprv/tpub/tprv) 📋 Cargar ejemplo 🔍 Analizar Checksum válido — Versión (hex) — Formato — Red — Profundidad — Fingerprint padre — Child number — Chain code — Key data — Relacionado HD Wallets en detalle → · Extended keys → · Direcciones desde xpub →"
+    "keywords": "Explorador de HD Wallet BIP32: deriva el árbol de claves desde tu semilla, navega rutas de derivación y visualiza xpub/xprv en cada nivel. Flujo recomendado Analizador rápido de extended key Inicio › Herramientas › HD Wallet explorer HD Wallet explorer Las wallets HD (Hierarchical Deterministic) permiten derivar un árbol completo de claves desde una única semilla raíz, siguiendo el estándar BIP32. Esta herramienta toma una semilla (en hexadecimal o frase mnemónica BIP39) y permite explorar el árbol de derivación: ver la clave maestra privada y pública extendidas (xprv/xpub), navegar por ramas del árbol siguiendo rutas de derivación, y obtener las claves privadas y públicas de cada nodo. Es la herramienta más completa para entender la arquitectura interna de cualquier wallet moderna: cómo de una sola semilla emerge un número prácticamente ilimitado de pares de claves, cada uno determinista y reproducible. Flujo recomendado Extended Keys Genera y decodifica xpub/xprv, ypub/zpub y versiones testnet. Derivation Paths Prueba rutas m/.. y entiende hardened vs no-hardened. Direcciones desde xpub Deriva direcciones de forma segura sin exponer claves privadas. Analizador rápido de extended key Extended key (xpub/xprv/ypub/yprv/zpub/zprv/tpub/tprv) 📋 Cargar ejemplo 🔍 Analizar Checksum válido — Versión (hex) — Formato — Red — Profundidad — Fingerprint padre — Child number — Chain code — Key data — Relacionado HD Wallets en detalle → · Extended keys → · Direcciones desde xpub →"
   },
   {
     "title": "Herramientas",
@@ -959,10 +971,12 @@
       "herramientas",
       "lightning",
       "invoice",
-      "factura lightning"
+      "factura lightning",
+      "claves",
+      "direcciones"
     ],
     "section": "Herramientas",
-    "keywords": "Decodifica facturas Lightning (BOLT11). Visualiza destino, cantidad, descripción, expiry y route hints. Factura BOLT11 Sobre BOLT11 Inicio › Herramientas › Decodificador de factura Lightning Decodificador de factura Lightning Analiza una factura Lightning (BOLT11) y visualiza todos sus campos. Factura BOLT11 Pega aquí una factura Lightning 📋 Cargar ejemplo 🔍 Decodificar — — Estado — — Información básica Red — Descripción — Creado — Expira — Detalles de pago Payment Hash — Nodo destino — Min CLTV expiry — Datos raw Tags decodificados — Sobre BOLT11 BOLT11 es el estándar para facturas de pago en Lightning Network. Una factura contiene toda la información necesaria para que un pagador envíe fondos. Estructura de una invoice: Prefijo — lnbc (mainnet), lntb (testnet), lnbcrt (regtest) Cantidad — Opcional, con multiplicador (m, u, n, p) Timestamp — Fecha de creación (Unix) Tags — Payment hash, descripción, expiry, route hints, etc. Firma — Del nodo que genera la factura Multiplicadores de cantidad: m = milli (0.001) · u = micro (0.000001) · n = nano (0.000000001) · p = pico (0.000000000001) Aprende más Lightning Address → · Canales Lightning →"
+    "keywords": "Decodifica invoices Lightning Network BOLT-11: visualiza destino, cantidad, expiración y hash del pago. Verifica cualquier invoice antes de pagar. Factura BOLT11 Sobre BOLT11 Inicio › Herramientas › Decodificador de factura Lightning Decodificador de factura Lightning Una invoice de Lightning Network es una solicitud de pago codificada en formato Bech32 que contiene toda la información necesaria para realizar el pago: la cantidad en milisatoshis, el nodo destino (su clave pública), el hash del pago, la fecha de expiración, y opcionalmente un mensaje descriptivo. Esta herramienta decodifica cualquier invoice Lightning (los que empiezan por lnbc, lntb, etc.) y muestra todos sus campos de forma legible. Es especialmente útil para verificar el destino y la cantidad de un pago antes de ejecutarlo, y para entender la estructura técnica del protocolo BOLT-11 que define el formato de las invoices. Factura BOLT11 Pega aquí una factura Lightning 📋 Cargar ejemplo 🔍 Decodificar — — Estado — — Información básica Red — Descripción — Creado — Expira — Detalles de pago Payment Hash — Nodo destino — Min CLTV expiry — Datos raw Tags decodificados — Sobre BOLT11 BOLT11 es el estándar para facturas de pago en Lightning Network. Una factura contiene toda la información necesaria para que un pagador envíe fondos. Estructura de una invoice: Prefijo — lnbc (mainnet), lntb (testnet), lnbcrt (regtest) Cantidad — Opcional, con multiplicador (m, u, n, p) Timestamp — Fecha de creación (Unix) Tags — Pay"
   },
   {
     "title": "Generador de Merkle Tree",
@@ -975,7 +989,7 @@
       "transacciones"
     ],
     "section": "Herramientas",
-    "keywords": "Construye un árbol de Merkle visualmente. Introduce transacciones y ve cómo se calcula la Merkle root paso a paso. Transacciones Árbol de Merkle Merkle Root Merkle Proof ¿Cómo funciona? Inicio › Herramientas › Merkle Tree Generador de Merkle Tree Visualiza cómo se construye el árbol de Merkle que resume todas las transacciones de un bloque. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para generar datos criptográficos para fondos reales. Transacciones Hashear texto como TXIDs Usar como TXIDs hex + Añadir TX - Eliminar última 📋 Cargar ejemplo (4 tx) 📋 Cargar ejemplo (7 tx) 🌳 Construir árbol ▶ Paso a paso Árbol de Merkle Introduce transacciones y pulsa \"Construir árbol\" Nodo seleccionado — — Merkle Root — Este hash se incluye en el block header y resume todas las transacciones. Merkle Proof Selecciona una transacción para ver qué hashes necesitas para demostrar que pertenece al árbol. Transacción a verificar — Selecciona una transacción — 📜 Merkle Proof Solo necesitas X hashes de Y totales para verificar esta transacción. ¿Cómo funciona? El árbol de Merkle combina los hashes de las transacciones en parejas, subiendo nivel por nivel hasta llegar a un único hash: la Merkle Root . Este proceso permite verificar si una transacción pertenece a un bloque sin necesidad de descargar todas las transacciones. En Bitcoin, cada combinación usa HASH256 (doble SHA-256) sobre la concatenación de dos hashes, con los bytes invertidos (little-endian). Si hay un n"
+    "keywords": "Visualiza la construcción de árboles de Merkle Bitcoin. Genera pruebas de inclusión de transacciones sin necesitar el bloque completo (SPV). Transacciones Árbol de Merkle Merkle Root Merkle Proof ¿Cómo funciona Inicio › Herramientas › Merkle Tree Generador de Merkle Tree El árbol de Merkle es la estructura de datos que permite a Bitcoin comprimir todas las transacciones de un bloque en un único hash de 32 bytes (el Merkle root), incluido en la cabecera del bloque. Esta herramienta visualiza la construcción del árbol: introduce una lista de txids (o cualquier conjunto de datos) y observa cómo se combinan por pares mediante hashes SHA-256 hasta llegar a la raíz. También genera pruebas de Merkle: dado un txid concreto, calcula el camino mínimo de hashes que permite demostrar que esa transacción está incluida en el árbol sin necesidad de conocer todas las demás transacciones. Es la base técnica de los nodos SPV y de los filtros de Bloom. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para generar datos criptográficos para fondos reales. Transacciones Hashear texto como TXIDs Usar como TXIDs hex + Añadir TX - Eliminar última 📋 Cargar ejemplo (4 tx) 📋 Cargar ejemplo (7 tx) 🌳 Construir árbol ▶ Paso a paso Árbol de Merkle Introduce transacciones y pulsa \"Construir árbol\" Nodo seleccionado — — Merkle Root — Este hash se incluye en el block header y resume todas las transacciones. Merkle Proof Selecciona una transacción para ver qué hashes necesitas para d"
   },
   {
     "title": "Simulador de minería",
@@ -986,7 +1000,7 @@
       "simulator"
     ],
     "section": "Herramientas",
-    "keywords": "Simula el proceso de minería Bitcoin. Busca un nonce que produzca un hash por debajo del target. Visualiza Proof of Work. Block header simplificado Minería Estadísticas en tiempo real ¿Cómo funciona la minería real? Inicio › Herramientas › Simulador de minería Simulador de minería Experimenta cómo funciona la minería: busca un hash válido cambiando el nonce. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para generar datos criptográficos para fondos reales. Block header simplificado Datos del bloque Simula el contenido del bloque (en Bitcoin real sería el header de 80 bytes) Dificultad: 4 ceros hexadecimales 1 (fácil) 4 8 (difícil) El hash debe empezar con 0000 para ser válido Minería Nonce actual 0 Hash resultante (SHA-256) — ▶ Paso a paso ⏩ Minar automático 🚀 Máxima velocidad Reiniciar ⛏️ ¡Bloque encontrado! Has encontrado un hash válido que cumple el target. Nonce ganador — Intentos — Tiempo — Estadísticas en tiempo real Intentos 0 Hash rate 0 H/s Tiempo 0.0s Probabilidad — ¿Cómo funciona la minería real? En Bitcoin real, los mineros hacen exactamente esto pero con SHA-256 doble sobre un block header de 80 bytes . El target es un número de 256 bits definido por la dificultad de la red, que se ajusta cada 2016 bloques (~2 semanas) para mantener un tiempo promedio de 10 minutos entre bloques. A fecha de hoy, la red Bitcoin calcula aproximadamente ~600 exahashes por segundo (600.000.000.000.000.000.000 hashes/s). Tu navegador puede calcular unos po"
+    "keywords": "Simulador de minería Bitcoin: encuentra nonces válidos con dificultad ajustable y comprende el proof-of-work, el hashrate y el ajuste de dificultad. Block header simplificado Minería Estadísticas en tiempo real ¿Cómo funciona la minería real? Inicio › Herramientas › Simulador de minería Simulador de minería El minado de Bitcoin es esencialmente un proceso de fuerza bruta: modificar el nonce de un bloque millones de veces hasta encontrar uno cuyo hash resultante empiece con suficientes ceros para cumplir el target de dificultad actual. Este simulador te permite experimentar ese proceso a pequeña escala: configura una dificultad reducida y observa cómo el simulador prueba nonces secuencialmente hasta encontrar una solución válida, mostrando cuántos intentos fueron necesarios y cuánto tiempo tomó. Es la forma más intuitiva de entender por qué el minado requiere tanta energía y por qué la dificultad es el mecanismo que mantiene el ritmo de producción de bloques constante en ~10 minutos. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para generar datos criptográficos para fondos reales. Block header simplificado Datos del bloque Simula el contenido del bloque (en Bitcoin real sería el header de 80 bytes) Dificultad: 4 ceros hexadecimales 1 (fácil) 4 8 (difícil) El hash debe empezar con 0000 para ser válido Minería Nonce actual 0 Hash resultante (SHA-256) — ▶ Paso a paso ⏩ Minar automático 🚀 Máxima velocidad Reiniciar ⛏️ ¡Bloque encontrado! Has encontrad"
   },
   {
     "title": "Generador de Mnemonic Seed (BIP39)",
@@ -1005,7 +1019,7 @@
       "bip32"
     ],
     "section": "Herramientas",
-    "keywords": "Genera frases semilla BIP39 de 12 o 24 palabras. Verifica checksums y convierte a seed hexadecimal. Generar nueva frase semilla Verificación Frase semilla ( 12 palabras) Datos técnicos Seed (512 bits) Proceso BIP39 Inicio › Herramientas › Mnemonic Seed Generador de Mnemonic Seed (BIP39) Genera y verifica frases semilla (mnemonic) según el estándar BIP39. 🚨 Herramienta educativa — NO para fondos reales NUNCA uses una seed generada en una web para fondos reales. Para seeds reales, usa un hardware wallet o software offline. Generar nueva frase semilla 🎲 Generar 12 palabras 🎲 Generar 24 palabras O introduce una frase existente para verificar ✓ Verificar frase Verificación Frase semilla ( 12 palabras) 📋 Copiar frase Datos técnicos Entropía ( 128 bits) 📋 — Checksum ( 4 bits) — Primeros 4 bits de SHA-256(entropía) Entropía + Checksum en binario (grupos de 11 bits = 1 palabra) — Seed (512 bits) Passphrase opcional (25ª palabra) La passphrase cambia completamente la seed resultante Seed (64 bytes hex) 📋 — PBKDF2(mnemonic, \"mnemonic\" + passphrase, 2048 iteraciones, 512 bits) Calculando seed (2048 iteraciones PBKDF2)... Proceso BIP39 1 Generar entropía aleatoria 128 bits (12 palabras) o 256 bits (24 palabras) usando crypto.getRandomValues() 2 Calcular checksum SHA-256(entropía) → tomar los primeros 4 bits (12 palabras) u 8 bits (24 palabras) 3 Concatenar entropía + checksum 128 + 4 = 132 bits (12 palabras) o 256 + 8 = 264 bits (24 palabras) 4 Dividir en grupos de 11 bits 132 / 11 "
+    "keywords": "Generador de semilla BIP39 en tu navegador. Crea frases de 12 o 24 palabras con entropía segura. Proceso 100% local y privado. Generar nueva frase semilla Verificación Frase semilla ( 12 palabras) Datos técnicos Seed (512 bits) Proceso BIP39 Inicio › Herramientas › Mnemonic Seed Generador de Mnemonic Seed (BIP39) Esta herramienta genera frases semilla BIP39 (12 o 24 palabras) directamente en tu navegador, usando la Web Crypto API para garantizar entropía criptográficamente segura. La frase semilla es el punto de partida de cualquier wallet HD moderna: de ella se derivan todas las claves privadas y direcciones de la wallet. Puedes seleccionar el número de palabras, ver la entropía en hexadecimal, el checksum y la semilla binaria resultante. Todo el proceso ocurre localmente, ningún dato sale de tu navegador. Úsala para entender cómo se generan las semillas, el papel del checksum BIP39, y la relación entre entropía y longitud de la frase. 🚨 Herramienta educativa — NO para fondos reales NUNCA uses una seed generada en una web para fondos reales. Para seeds reales, usa un hardware wallet o software offline. Generar nueva frase semilla 🎲 Generar 12 palabras 🎲 Generar 24 palabras O introduce una frase existente para verificar ✓ Verificar frase Verificación Frase semilla ( 12 palabras) 📋 Copiar frase Datos técnicos Entropía ( 128 bits) 📋 — Checksum ( 4 bits) — Primeros 4 bits de SHA-256(entropía) Entropía + Checksum en binario (grupos de 11 bits = 1 palabra) — Seed (512 bits) P"
   },
   {
     "title": "Generador de dirección multisig",
@@ -1013,10 +1027,12 @@
     "tags": [
       "herramientas",
       "multisig",
-      "address"
+      "address",
+      "claves",
+      "direcciones"
     ],
     "section": "Herramientas",
-    "keywords": "Genera direcciones Bitcoin multisig (P2SH y P2WSH). Configura esquemas N-de-M con múltiples claves públicas. Esquemas comunes Configuración Direcciones multisig ¿Por qué multisig? Inicio › Herramientas › Multisig Generador de dirección multisig Crea una dirección multisig N-de-M a partir de varias claves públicas. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para generar direcciones para fondos reales. Esquemas comunes 1-de-2 Acceso compartido 2-de-3 El más popular 3-de-5 Empresas Configuración N (firmas requeridas) 1 2 3 4 5 M (claves totales) 2 3 4 5 Claves públicas (comprimidas, 66 hex cada una) 🎲 Generar claves aleatorias 🏠 Generar dirección multisig Direcciones multisig Dirección P2SH — empieza por 3 📋 — Dirección P2WSH — empieza por bc1q 📋 — Script Hash (P2SH) — Witness Script Hash (P2WSH) — Redeem Script (legible) — Redeem Script (hex) 📋 — ¿Por qué multisig? 🔒 Seguridad Un atacante necesita comprometer múltiples llaves en múltiples ubicaciones. 💾 Redundancia Puedes perder una llave y seguir accediendo a tus fondos. 👨‍👩‍👧 Herencia Distribuye llaves entre herederos y personas de confianza. 🏢 Governance Decisiones colectivas sobre fondos compartidos de empresas o DAOs. Aprende más sobre multisig ¿Qué es multisig? → · Configurar multisig paso a paso →"
+    "keywords": "Genera direcciones multisig Bitcoin M-de-N desde claves públicas. Verifica P2SH, P2WSH y Taproot multisig con el redeemScript visible. Esquemas comunes Configuración Direcciones multisig ¿Por qué multisig? Inicio › Herramientas › Multisig Generador de dirección multisig Una dirección multisig de Bitcoin se construye combinando N claves públicas en un script P2SH o P2WSH que requiere M firmas para gastar. Esta herramienta genera direcciones multisig M-de-N a partir de las claves públicas que introduces: soporta P2SH (direcciones que empiezan por 3), P2WSH (direcciones Native SegWit bech32 que empiezan por bc1q) y P2TR con MuSig2 para Taproot. Muestra el redeemScript o witnessScript resultante, el hash del script, y la dirección final. Es la forma más directa de verificar que la dirección multisig que estás usando corresponde exactamente a las claves que crees que la controlan, una verificación recomendable antes de enviar fondos a un vault multisig nuevo. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para generar direcciones para fondos reales. Esquemas comunes 1-de-2 Acceso compartido 2-de-3 El más popular 3-de-5 Empresas Configuración N (firmas requeridas) 1 2 3 4 5 M (claves totales) 2 3 4 5 Claves públicas (comprimidas, 66 hex cada una) 🎲 Generar claves aleatorias 🏠 Generar dirección multisig Direcciones multisig Dirección P2SH — empieza por 3 📋 — Dirección P2WSH — empieza por bc1q 📋 — Script Hash (P2SH) — Witness Script Hash (P2WSH) — Redee"
   },
   {
     "title": "Generador de clave privada",
@@ -1031,7 +1047,7 @@
       "direcciones"
     ],
     "section": "Herramientas",
-    "keywords": "Genera y analiza claves privadas Bitcoin. Entiende el formato hexadecimal, decimal y WIF. Herramienta educativa. Clave privada Formatos de la clave privada Rango válido ¿Qué es WIF? Inicio › Herramientas › Clave privada Generador de clave privada Genera una clave privada aleatoria y explora sus diferentes formatos. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para generar claves para fondos reales. Clave privada Generar clave privada O introduce una clave privada (64 hex) 0 / 64 caracteres Formatos de la clave privada Hexadecimal (32 bytes) 📋 — Decimal 📋 — Binario (256 bits) 📋 — WIF (comprimida) — empieza por K o L 📋 — WIF (no comprimida) — empieza por 5 📋 — Rango válido Una clave privada válida debe ser un número entre 1 y n-1, donde n es el orden de la curva secp256k1: Mínimo (1) 0000000000000000000000000000000000000000000000000000000000000001 Máximo (n-1) FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364140 Esto representa aproximadamente 2 256 posibles claves privadas — un número tan grande que es prácticamente imposible generar la misma clave dos veces por casualidad. ¿Qué es WIF? WIF (Wallet Import Format) codifica la clave privada en Base58Check, añadiendo un prefijo de versión y un checksum para detectar errores de copia. 0x80 prefix + key 32 bytes + 0x01 compressed? → SHA256² checksum → Base58 encode → WIF K... o L... El prefijo 0x80 indica mainnet. El flag 0x01 solo se añade si la clave corresponde a una public key compr"
+    "keywords": "Genera claves privadas Bitcoin en tu navegador con entropía segura. Visualiza el formato hexadecimal y WIF. Solo para aprendizaje. Clave privada Formatos de la clave privada Rango válido ¿Qué es WIF Inicio › Herramientas › Clave privada Generador de clave privada En Bitcoin, todo comienza con una clave privada: un número de 256 bits generado aleatoriamente que es el origen de tu identidad en la red. Esta herramienta genera claves privadas usando la API de criptografía segura de tu navegador (Web Crypto API), garantizando que la entropía sea adecuada. Puedes ver la clave en hexadecimal, en formato WIF (Wallet Import Format) y verificar su validez en la curva elíptica secp256k1. Úsala para entender qué es realmente una clave privada, no para generar claves para uso real en producción; para eso usa siempre un hardware wallet o software de confianza con fuente de entropía verificada. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para generar claves para fondos reales. Clave privada Generar clave privada O introduce una clave privada (64 hex) 0 / 64 caracteres Formatos de la clave privada Hexadecimal (32 bytes) 📋 — Decimal 📋 — Binario (256 bits) 📋 — WIF (comprimida) — empieza por K o L 📋 — WIF (no comprimida) — empieza por 5 📋 — Rango válido Una clave privada válida debe ser un número entre 1 y n-1, donde n es el orden de la curva secp256k1: Mínimo (1) 0000000000000000000000000000000000000000000000000000000000000001 Máximo (n-1) FFFFFFFFFFFFFFFFFFF"
   },
   {
     "title": "Decodificador PSBT (BIP174)",
@@ -1049,7 +1065,7 @@
       "bip32"
     ],
     "section": "Herramientas",
-    "keywords": "Decodifica PSBTs (BIP174). Analiza transacciones parcialmente firmadas, inputs, outputs, firmas y metadata. PSBT Estructura de un PSBT Tipos de claves PSBT Inicio › Herramientas › Decodificador PSBT Decodificador PSBT (BIP174) Analiza transacciones parcialmente firmadas (Partially Signed Bitcoin Transactions). ℹ️ ¿Qué es un PSBT? Un formato estándar (BIP174) para intercambiar transacciones sin firmar o parcialmente firmadas entre wallets, hardware wallets y coordinadores multisig. PSBT Base64 o Hexadecimal 📋 PSBT de ejemplo 🔍 Decodificar Estructura de un PSBT 70736274ff — Magic bytes \"psbt\" + separator Global Map key_len + key + value_len + value ... más pares key-value ... 00 — separador Input Maps (uno por cada input) key_len + key + value_len + value ... 00 — separador Output Maps (uno por cada output) key_len + key + value_len + value ... 00 — separador Tipos de claves PSBT Tipo Ámbito Descripción 0x00 Global Unsigned TX 0x01 Global Extended public key (xpub) 0xfb Global PSBT version 0x00 Input Non-witness UTXO (tx completa) 0x01 Input Witness UTXO (output previo) 0x02 Input Partial signature 0x03 Input Sighash type 0x04 Input Redeem script 0x05 Input Witness script 0x06 Input BIP32 derivation 0x07 Input Final scriptSig 0x08 Input Final scriptWitness 0x00 Output Redeem script 0x01 Output Witness script 0x02 Output BIP32 derivation Aprende más sobre PSBT PSBT en detalle → · Decodificador de TX → · Constructor de TX →"
+    "keywords": "Decodifica PSBTs (Partially Signed Bitcoin Transactions): visualiza inputs, firmas parciales y metadatos. Imprescindible para flujos multisig y hardware wallets. PSBT Estructura de un PSBT Tipos de claves PSBT Inicio › Herramientas › Decodificador PSBT Decodificador PSBT (BIP174) PSBT (Partially Signed Bitcoin Transaction, BIP174/370) es el formato estándar para intercambiar transacciones Bitcoin que aún no han sido completamente firmadas. Es la base del flujo de firma en wallets multisig y en los hardware wallets modernos: el coordinador construye la transacción, la empaqueta como PSBT, y la envía a cada firmante para que añada su firma parcial. Esta herramienta decodifica cualquier PSBT (en Base64 o hexadecimal) y muestra su estructura completa: transacción global, inputs con sus UTXOs de referencia y firmas parciales existentes, outputs, y metadatos de derivación. Esencial para auditar el estado de una transacción multisig en proceso de firma. ℹ️ ¿Qué es un PSBT Un formato estándar (BIP174) para intercambiar transacciones sin firmar o parcialmente firmadas entre wallets, hardware wallets y coordinadores multisig. PSBT Base64 o Hexadecimal 📋 PSBT de ejemplo 🔍 Decodificar Estructura de un PSBT 70736274ff — Magic bytes \"psbt\" + separator Global Map key_len + key + value_len + value ... más pares key-value ... 00 — separador Input Maps (uno por cada input) key_len + key + value_len + value ... 00 — separador Output Maps (uno por cada output) key_len + key + value_len + value"
   },
   {
     "title": "Derivar clave pública",
@@ -1064,7 +1080,7 @@
       "direcciones"
     ],
     "section": "Herramientas",
-    "keywords": "Deriva la clave pública desde una clave privada Bitcoin. Formato comprimido y no comprimido sobre secp256k1. Clave privada Clave pública derivada El proceso de derivación Parámetros de secp256k1 ¿Comprimida vs no comprimida? Inicio › Herramientas › Clave pública Derivar clave pública Multiplica tu clave privada por el punto generador G para obtener la clave pública. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para generar claves para fondos reales. Clave privada Clave privada en hexadecimal (64 caracteres) 0 / 64 caracteres 🎲 Generar clave privada 🔑 Derivar clave pública Clave pública derivada Comprimida (33 bytes) — prefijo 02 o 03 📋 — Formato estándar actual. Más eficiente. No comprimida (65 bytes) — prefijo 04 📋 — Formato legacy. Contiene X e Y completas. Coordenada X (32 bytes) 📋 — Coordenada Y (32 bytes) 📋 — Paridad de Y: — El proceso de derivación k Clave privada (escalar) × G Punto generador (constante) = P Clave pública (punto en curva) Esta multiplicación tarda milisegundos. El proceso inverso (encontrar k dado P) es computacionalmente imposible — esa asimetría es la base de la seguridad de Bitcoin. Parámetros de secp256k1 p (campo primo) FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F G x (coordenada X del generador) 79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798 G y (coordenada Y del generador) 483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8 n (orden de la curva) FFFFFFFFFFFFFFF"
+    "keywords": "Deriva la clave pública Bitcoin desde una clave privada. Visualiza el punto en secp256k1 en formatos comprimido y sin comprimir. Clave privada Clave pública derivada El proceso de derivación Parámetros de secp256k1 ¿Comprimida vs no comprimida Inicio › Herramientas › Clave pública Derivar clave pública A partir de una clave privada, Bitcoin deriva matemáticamente una clave pública usando la multiplicación de punto en la curva elíptica secp256k1. Esta herramienta toma una clave privada (en hexadecimal o WIF) y calcula su clave pública correspondiente, tanto en formato sin comprimir (prefijo 04, 65 bytes) como comprimido (prefijo 02 o 03, 33 bytes). El proceso es irreversible: con la clave pública no puedes calcular la privada. Esta propiedad asimétrica es la base de la seguridad de Bitcoin. La herramienta también muestra las coordenadas (x, y) del punto en la curva, permitiendo ver la geometría subyacente de las operaciones criptográficas. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para generar claves para fondos reales. Clave privada Clave privada en hexadecimal (64 caracteres) 0 / 64 caracteres 🎲 Generar clave privada 🔑 Derivar clave pública Clave pública derivada Comprimida (33 bytes) — prefijo 02 o 03 📋 — Formato estándar actual. Más eficiente. No comprimida (65 bytes) — prefijo 04 📋 — Formato legacy. Contiene X e Y completas. Coordenada X (32 bytes) 📋 — Coordenada Y (32 bytes) 📋 — Paridad de Y: — El proceso de derivación k Clave privad"
   },
   {
     "title": "Intérprete de Bitcoin Script",
@@ -1077,7 +1093,7 @@
       "transacciones"
     ],
     "section": "Herramientas",
-    "keywords": "Ejecuta Bitcoin Script paso a paso. Visualiza la pila (stack) y entiende cómo se validan las transacciones. Script Script tokenizado Pila (Stack) (0 items) Inicio › Herramientas › Int&eacute;rprete de Bitcoin Script Intérprete de Bitcoin Script Escribe o carga un script y ejecútalo paso a paso viendo cómo evoluciona la pila. Script Escribe opcodes en mayúsculas y datos hex entre < > . Ejemplo: <02> <03> OP_ADD <05> OP_EQUAL OP_2 OP_3 OP_ADD OP_5 OP_EQUAL Matemático simple OP_DUP OP_HASH160 OP_EQUALVERIFY OP_CHECKSIG\">P2PKH (simplificado) OP_2 OP_3 OP_CHECKMULTISIG\">Multisig 2-de-3 OP_SHA256 OP_EQUAL\">Hash preimage IF/ELSE Reiniciar Paso siguiente ▶️ Ejecutar todo Script tokenizado Pila (Stack) (0 items) La pila está vacía Referencia de opcodes soportados Opcode Descripción OP_0 - OP_16 Push números 0-16 OP_1NEGATE Push -1 OP_DUP Duplica el top OP_DROP Elimina el top OP_SWAP Intercambia los 2 superiores OP_OVER Copia el segundo al top OP_ROT Rota los 3 superiores OP_2DUP Duplica los 2 superiores OP_ADD Suma los 2 superiores OP_SUB Resta: segundo - primero OP_1ADD Suma 1 al top OP_1SUB Resta 1 al top OP_NEGATE Invierte signo OP_ABS Valor absoluto OP_EQUAL ¿Iguales? → 1 o 0 OP_EQUALVERIFY EQUAL + falla si falso OP_VERIFY Falla si top es falso OP_NOT NOT lógico OP_SHA256 SHA-256 del top OP_HASH160 RIPEMD160(SHA256(top)) OP_HASH256 SHA256(SHA256(top)) OP_CHECKSIG Verifica firma (simulado: siempre OK) OP_CHECKMULTISIG Multisig (simulado) OP_IF/ELSE/ENDIF Control de flujo OP_RETURN "
+    "keywords": "Intérprete de Bitcoin Script paso a paso: ejecuta scriptPubKey y scriptSig, visualiza la pila y entiende cómo Bitcoin define las condiciones de gasto. Script Script tokenizado Pila (Stack) (0 items) Inicio › Herramientas › Int&eacute;rprete de Bitcoin Script Intérprete de Bitcoin Script Bitcoin Script es el lenguaje de programación de pila que define las condiciones bajo las que se pueden gastar los fondos de cada output. No es Turing-completo por diseño, es intencionalmente limitado para garantizar que la ejecución siempre termina y es predecible. Esta herramienta interpreta y ejecuta fragmentos de Bitcoin Script paso a paso: introduce un scriptPubKey (la condición de gasto) y un scriptSig o witness (los datos que satisfacen la condición) y observa cómo se ejecuta la pila operación por operación. Soporta los tipos de script más comunes: P2PKH, P2SH, P2WPKH, P2WSH y P2TR. Esencial para entender cómo funciona realmente el smart contracting nativo de Bitcoin. Script Escribe opcodes en mayúsculas y datos hex entre < > . Ejemplo: <02> <03> OP_ADD <05> OP_EQUAL OP_2 OP_3 OP_ADD OP_5 OP_EQUAL Matemático simple OP_DUP OP_HASH160 OP_EQUALVERIFY OP_CHECKSIG\">P2PKH (simplificado) OP_2 OP_3 OP_CHECKMULTISIG\">Multisig 2-de-3 OP_SHA256 OP_EQUAL\">Hash preimage IF/ELSE Reiniciar Paso siguiente ▶️ Ejecutar todo Script tokenizado Pila (Stack) (0 items) La pila está vacía Referencia de opcodes soportados Opcode Descripción OP_0 - OP_16 Push números 0-16 OP_1NEGATE Push -1 OP_DUP Duplica el top"
   },
   {
     "title": "Redireccion automatica",
@@ -1104,7 +1120,7 @@
       "billetera"
     ],
     "section": "Herramientas",
-    "keywords": "Verifica el checksum de una frase semilla BIP39. Comprueba si tu seed phrase es válida sin revelar información. Frase semilla Verificaciones Palabras ¿Qué valida esta herramienta? Inicio › Herramientas › Validador de seed phrase Validador de seed phrase Comprueba si una frase semilla BIP39 tiene un checksum válido y todas las palabras son correctas. 🚨 ¡Atención! NUNCA introduzcas tu seed phrase real en una web. Esta herramienta es para verificar seeds de prueba o educación. Para seeds reales, usa tu hardware wallet. Frase semilla Escribe 12, 15, 18, 21 o 24 palabras separadas por espacios Ejemplo 12 palabras Ejemplo 15 palabras Ejemplo 18 palabras Ejemplo 21 palabras Ejemplo 24 palabras Ejemplo v&aacute;lido Ejemplo inv&aacute;lido Validar — — — Verificaciones Palabras ¿Qué valida esta herramienta? Esta herramienta verifica: Número de palabras: Debe ser 12, 15, 18, 21 o 24 Wordlist: Cada palabra debe existir en la wordlist BIP39 inglés Checksum: Los últimos bits deben coincidir con el hash SHA-256 de la entropía No deriva seeds ni claves. Solo valida la estructura de la frase semilla. Longitudes válidas: 12 palabras = 128 bits entropía + 4 bits checksum 15 palabras = 160 bits entropía + 5 bits checksum 18 palabras = 192 bits entropía + 6 bits checksum 21 palabras = 224 bits entropía + 7 bits checksum 24 palabras = 256 bits entropía + 8 bits checksum Relacionado Generador de mnemonic → · Analizador de entropía → · ¿Qué es una seed phrase? →"
+    "keywords": "Valida frases semilla BIP39: comprueba palabras, checksum y genera la semilla binaria. Proceso local, tu seed nunca sale del navegador. Frase semilla Verificaciones Palabras ¿Qué valida esta herramienta Inicio › Herramientas › Validador de seed phrase Validador de seed phrase Introduce una frase semilla BIP39 de 12 o 24 palabras y esta herramienta verifica si es válida: comprueba que cada palabra existe en el wordlist oficial BIP39 inglés, que el número de palabras es correcto, y que el checksum embebido en la última palabra (o palabras) es coherente con la entropía de las demás. Un checksum inválido indica que la frase fue transcrita con errores. La herramienta también calcula la semilla binaria resultante (512 bits, derivada con PBKDF2-HMAC-SHA512) para quien quiera ver el paso intermedio entre la frase mnemónica y las claves derivadas. Todo el proceso es local: tu frase nunca abandona el navegador. 🚨 ¡Atención! NUNCA introduzcas tu seed phrase real en una web. Esta herramienta es para verificar seeds de prueba o educación. Para seeds reales, usa tu hardware wallet. Frase semilla Escribe 12, 15, 18, 21 o 24 palabras separadas por espacios Ejemplo 12 palabras Ejemplo 15 palabras Ejemplo 18 palabras Ejemplo 21 palabras Ejemplo 24 palabras Ejemplo v&aacute;lido Ejemplo inv&aacute;lido Validar — — — Verificaciones Palabras ¿Qué valida esta herramienta Esta herramienta verifica: Número de palabras: Debe ser 12, 15, 18, 21 o 24 Wordlist: Cada palabra debe existir en la wordlist "
   },
   {
     "title": "Decodificador de Timelocks",
@@ -1117,7 +1133,7 @@
       "transacciones"
     ],
     "section": "Herramientas",
-    "keywords": "Decodifica nLocktime y nSequence de transacciones Bitcoin. Entiende timelocks absolutos y relativos. Referencia rápida Inicio › Herramientas › Decodificador de timelocks Decodificador de Timelocks Interpreta los campos nLocktime y nSequence que controlan cuándo se puede gastar una transacción. 🔒 nLocktime (Timelock absoluto) Campo de 4 bytes al final de cada transacción. Define cuándo la TX puede ser incluida en un bloque. Valor nLocktime (decimal o hex) 0 (sin restricción) Bloque 500.000 499.999.999 (máx bloque) 500.000.000 (mín timestamp) Timestamp 2023 ⏱️ nSequence (BIP68 - Timelock relativo) Campo de 4 bytes en cada input. Si el bit 31 = 0, activa timelock relativo desde la confirmación del output previo. Valor nSequence (hex, 4 bytes) 0xFFFFFFFF (final) 0xFFFFFFFE (RBF) 1 bloque relativo 144 bloques (~1 día) 1 unidad de tiempo (512s) 176 × 512s (~1 día) 🔄 Detección RBF (Replace-By-Fee) Una transacción señala RBF si al menos un input tiene sequence < 0xFFFFFFFE (BIP125). Valor nSequence (hex) Ejemplo aleatorio Referencia rápida Campo Valor Significado nLocktime 0 Sin restricción temporal nLocktime 1 – 499.999.999 Altura de bloque mínima nLocktime ≥ 500.000.000 Unix timestamp mínimo nSequence 0xFFFFFFFF Final (sin RBF, sin timelock relativo) nSequence 0xFFFFFFFE No-RBF pero permite nLocktime nSequence < 0xFFFFFFFE RBF señalado + posible timelock relativo Aprende más Locktime y Sequence en detalle → · Decodificador de transacciones → · Unix timestamp →"
+    "keywords": "Decodifica timelocks Bitcoin: nLocktime, nSequence, OP_CLTV y OP_CSV. Entiende qué bloque o fecha permite gastar cada output restringido. Referencia rápida Inicio › Herramientas › Decodificador de timelocks Decodificador de Timelocks Los timelocks son restricciones temporales que impiden que un output de Bitcoin sea gastado antes de cierto momento. Existen cuatro tipos: nLocktime y nSequence (a nivel de transacción e input) y OP_CHECKLOCKTIMEVERIFY / OP_CHECKSEQUENCEVERIFY (a nivel de script). Los valores pueden expresar tiempo como número de bloque (absoluto o relativo) o como timestamp Unix, y la interpretación depende del tipo de timelock y del valor específico. Esta herramienta decodifica cualquier valor de timelock y explica exactamente qué restricción impone: a partir de qué bloque o fecha el output puede gastarse. Fundamental para auditar transacciones con timelocks y para diseñar contratos Bitcoin con restricciones temporales. 🔒 nLocktime (Timelock absoluto) Campo de 4 bytes al final de cada transacción. Define cuándo la TX puede ser incluida en un bloque. Valor nLocktime (decimal o hex) 0 (sin restricción) Bloque 500.000 499.999.999 (máx bloque) 500.000.000 (mín timestamp) Timestamp 2023 ⏱️ nSequence (BIP68 - Timelock relativo) Campo de 4 bytes en cada input. Si el bit 31 = 0, activa timelock relativo desde la confirmación del output previo. Valor nSequence (hex, 4 bytes) 0xFFFFFFFF (final) 0xFFFFFFFE (RBF) 1 bloque relativo 144 bloques (~1 día) 1 unidad de tiempo ("
   },
   {
     "title": "Redireccion automatica",
@@ -1137,11 +1153,13 @@
     "tags": [
       "herramientas",
       "builder",
+      "wallet",
+      "billetera",
       "utxo",
       "transacciones"
     ],
     "section": "Herramientas",
-    "keywords": "Construye transacciones Bitcoin sin firmar (PSBT conceptual). Define inputs, outputs y visualiza el raw hex resultante. Metadatos Inputs (1) Outputs (1) Transacción raw (sin firma) Conversión de direcciones a ScriptPubKey Inicio › Herramientas › Constructor de transacciones (raw) Constructor de transacciones Construye una transacción Bitcoin campo a campo y genera el hex resultante (sin firma). ⚠️ Transacción sin firmar Esta herramienta construye transacciones SIN FIRMA. No se pueden emitir a la red. Es para entender la estructura. Metadatos Version 1 = legacy, 2 = permite OP_CSV Locktime 0 = sin restricción Inputs (1) + Añadir input Outputs (1) + Añadir output Generar ejemplo Construir transaccion Transacción raw (sin firma) Size estimado — vSize estimado — Raw hex 📋 Copiar 🔍 Abrir en decodificador Conversión de direcciones a ScriptPubKey Tipo Dirección empieza ScriptPubKey P2PKH 1... 76a914{hash}88ac P2SH 3... a914{hash}87 P2WPKH bc1q... 0014{program} P2WSH bc1q... (largo) 0020{program} P2TR bc1p... 5120{program} Aprende más sobre transacciones Estructura de transacciones → · Decodificador → · PSBT decoder →"
+    "keywords": "Construye transacciones Bitcoin manualmente: selecciona UTXOs, define outputs, calcula fees y genera el raw hex. Aprende el modelo UTXO en la práctica. Metadatos Inputs (1) Outputs (1) Transacción raw (sin firma) Conversión de direcciones a ScriptPubKey Inicio › Herramientas › Constructor de transacciones (raw) Constructor de transacciones Esta herramienta te guía en la construcción manual de una transacción Bitcoin desde sus componentes básicos: selección de UTXOs como inputs, definición de outputs (dirección destino y cantidad), cálculo de fees, y generación del raw hex sin firmar. El proceso ilustra concretamente el modelo UTXO de Bitcoin: cómo las transacciones consumen outputs previos y crean nuevos, cómo se calcula el peso en vbytes para estimar comisiones, y cómo el fee es simplemente la diferencia entre el total de inputs y el total de outputs. La transacción generada es una PSBT (Partially Signed Bitcoin Transaction) lista para ser firmada con un hardware wallet o firmante externo. ⚠️ Transacción sin firmar Esta herramienta construye transacciones SIN FIRMA. No se pueden emitir a la red. Es para entender la estructura. Metadatos Version 1 = legacy, 2 = permite OP_CSV Locktime 0 = sin restricción Inputs (1) + Añadir input Outputs (1) + Añadir output Generar ejemplo Construir transaccion Transacción raw (sin firma) Size estimado — vSize estimado — Raw hex 📋 Copiar 🔍 Abrir en decodificador Conversión de direcciones a ScriptPubKey Tipo Dirección empieza ScriptPubKey P2"
   },
   {
     "title": "Decodificador de transacciones",
@@ -1153,7 +1171,7 @@
       "transacciones"
     ],
     "section": "Herramientas",
-    "keywords": "Decodifica transacciones Bitcoin raw. Visualiza inputs, outputs, scripts y witness data byte a byte con colores. Transacción raw (hex) Transacción coloreada Estadísticas Estructura Inicio › Herramientas › Decodificador de transacciones Decodificador de transacciones Pega una transacción raw en hexadecimal y visualiza su estructura completa. Transacción raw (hex) P2PKH simple SegWit P2WPKH Taproot P2TR 🔍 Decodificar Transacción coloreada ■ Version ■ Marker/Flag ■ Counts ■ Input TXID ■ Vout ■ ScriptSig ■ Sequence ■ Value ■ ScriptPubKey ■ Witness ■ Locktime Estadísticas TXID — Size — vSize — Weight — SegWit — Estructura Versión — Locktime — Inputs 0 Outputs 0 Witness Data SegWit Aprende más sobre transacciones Estructura de transacciones → · Constructor de transacciones → · Análisis byte a byte →"
+    "keywords": "Decodifica cualquier transacción Bitcoin en hexadecimal: visualiza inputs, outputs, scripts, witness y locktime. Entiende la estructura interna de una TX. Transacción raw (hex) Transacción coloreada Estadísticas Estructura Inicio › Herramientas › Decodificador de transacciones Decodificador de transacciones Cada transacción de Bitcoin es una cadena de bytes codificada en un formato específico. Esta herramienta decodifica el hexadecimal raw de cualquier transacción y muestra su estructura completa: versión, número de inputs, cada input (txid referenciado, índice vout, scriptSig o witness), número de outputs, cada output (valor en satoshis, scriptPubKey), locktime, y el txid resultante. Es la forma más directa de entender qué contiene realmente una transacción de Bitcoin más allá de lo que muestra un explorador de bloques. Puedes obtener el raw hex de cualquier transacción desde un explorador de bloques como mempool.space. Transacción raw (hex) P2PKH simple SegWit P2WPKH Taproot P2TR 🔍 Decodificar Transacción coloreada ■ Version ■ Marker/Flag ■ Counts ■ Input TXID ■ Vout ■ ScriptSig ■ Sequence ■ Value ■ ScriptPubKey ■ Witness ■ Locktime Estadísticas TXID — Size — vSize — Weight — SegWit — Estructura Versión — Locktime — Inputs 0 Outputs 0 Witness Data SegWit Aprende más sobre transacciones Estructura de transacciones → · Constructor de transacciones → · Análisis byte a byte →"
   },
   {
     "title": "Transaction Splitter (byte a byte)",
@@ -1165,7 +1183,7 @@
       "transacciones"
     ],
     "section": "Herramientas",
-    "keywords": "Descompón una transacción Bitcoin byte a byte. Cada campo identificado, coloreado y explicado. Transacción raw (hex) Hex interactivo Desglose por campos Leyenda de colores Inicio › Herramientas › TX splitter (byte a byte) Transaction Splitter (byte a byte) Explora cada byte de una transacción Bitcoin con explicaciones detalladas. Transacción raw (hex) Transacción simple SegWit 🔬 Analizar byte a byte Hex interactivo Haz clic en cualquier byte para resaltarlo en la tabla, o en cualquier fila de la tabla para resaltarlo aquí. Desglose por campos Offset Bytes (hex) Campo Valor Notas Leyenda de colores Version Marker/Flag Counts Inputs Outputs Witness Locktime Aprende más sobre transacciones Estructura de transacciones → · Decodificador visual → · SegWit internals →"
+    "keywords": "Planifica la división o consolidación de UTXOs Bitcoin. Calcula el coste en fees y entiende la gestión del coin set para privacidad y eficiencia. Transacción raw (hex) Hex interactivo Desglose por campos Leyenda de colores Inicio › Herramientas › TX splitter (byte a byte) Transaction Splitter (byte a byte) El coin splitting es la práctica de dividir un UTXO en múltiples outputs más pequeños, o de consolidar varios UTXOs pequeños en uno mayor. Esta herramienta ayuda a planificar esas operaciones: introduce tus UTXOs disponibles y define cómo quieres dividirlos o agruparlos, y calcula el coste en fees de la operación al tipo de fee actual. La gestión del tamaño de los UTXOs tiene implicaciones tanto en privacidad (UTXOs muy grandes son más fáciles de identificar) como en eficiencia (muchos UTXOs pequeños generan transacciones grandes y costosas cuando los gastas juntos). Una herramienta práctica para bitcoiners que gestionan activamente su set de UTXOs. Transacción raw (hex) Transacción simple SegWit 🔬 Analizar byte a byte Hex interactivo Haz clic en cualquier byte para resaltarlo en la tabla, o en cualquier fila de la tabla para resaltarlo aquí. Desglose por campos Offset Bytes (hex) Campo Valor Notas Leyenda de colores Version Marker/Flag Counts Inputs Outputs Witness Locktime Aprende más sobre transacciones Estructura de transacciones → · Decodificador visual → · SegWit internals →"
   },
   {
     "title": "Tiempo Unix",
@@ -1178,7 +1196,7 @@
       "transacciones"
     ],
     "section": "Herramientas",
-    "keywords": "Convierte entre Unix timestamp y fecha legible. Los block headers y timelocks de Bitcoin usan timestamps Unix. Momentos históricos de Bitcoin Unix timestamp en Bitcoin Inicio › Herramientas › Tiempo Unix Tiempo Unix Convierte entre timestamps Unix (como los que usa Bitcoin) y fechas legibles. Timestamp actual — 📅 Timestamp → Fecha Unix timestamp (segundos) ⏱️ Usar ahora UTC — Hora local — ISO 8601 — Hex (4 bytes LE) — 🔢 Fecha → Timestamp Fecha Hora (UTC) Unix timestamp — Hex (4 bytes LE) — Momentos históricos de Bitcoin Bloque génesis (3 Ene 2009) Primer halving (28 Nov 2012) Segundo halving (9 Jul 2016) Tercer halving (11 May 2020) Cuarto halving (20 Abr 2024) Taproot activation (14 Nov 2021) Unix timestamp en Bitcoin El Unix timestamp es el número de segundos desde el 1 de enero de 1970 00:00:00 UTC (la \"época Unix\"). En Bitcoin se usa en varios lugares: Block header — campo time (4 bytes, little-endian) nLocktime — si ≥ 500.000.000, se interpreta como timestamp OP_CHECKLOCKTIMEVERIFY — para timelocks absolutos Ejemplo: timestamp del bloque génesis Decimal: 1231006505 Hex: 495fab29 Little-endian: 29ab5f49 Relacionado Decodificador de timelocks → · Decodificador de transacciones → · Compact Size (VarInt) →"
+    "keywords": "Convierte timestamps Unix a fecha legible y viceversa. Referencia para timelocks Bitcoin, cabeceras de bloque y planificación de transacciones con restricción temporal. Momentos históricos de Bitcoin Unix timestamp en Bitcoin Inicio › Herramientas › Tiempo Unix Tiempo Unix Los bloques de Bitcoin incluyen un timestamp en formato Unix time: el número de segundos transcurridos desde el 1 de enero de 1970 (la época Unix). Este timestamp no es perfectamente preciso, los mineros tienen cierta libertad para ajustarlo dentro de márgenes, pero sirve como referencia temporal para los timelocks y para el ajuste de dificultad. Esta herramienta convierte entre timestamp Unix y fecha/hora legible en ambas direcciones, muestra el timestamp del bloque génesis (1231006505, correspondiente al 3 de enero de 2009 a las 18:15:05 UTC) como referencia, y calcula cuántos segundos o bloques estimados faltan hasta una fecha futura, útil para planificar timelocks. Timestamp actual — 📃 Timestamp → Fecha Unix timestamp (segundos) ⏱️ Usar ahora UTC — Hora local — ISO 8601 — Hex (4 bytes LE) — 🔢 Fecha → Timestamp Fecha Hora (UTC) Unix timestamp — Hex (4 bytes LE) — Momentos históricos de Bitcoin Bloque génesis (3 Ene 2009) Primer halving (28 Nov 2012) Segundo halving (9 Jul 2016) Tercer halving (11 May 2020) Cuarto halving (20 Abr 2024) Taproot activation (14 Nov 2021) Unix timestamp en Bitcoin El Unix timestamp es el número de segundos desde el 1 de enero de 1970 00:00:00 UTC (la \"época Unix\"). En Bitco"
   },
   {
     "title": "WIF Private Key",
@@ -1192,7 +1210,7 @@
       "direcciones"
     ],
     "section": "Herramientas",
-    "keywords": "Codifica y decodifica claves privadas Bitcoin en formato WIF (Wallet Import Format). Base58Check encoding. Clave privada hexadecimal WIF resultante Clave WIF Clave privada decodificada Prefijos WIF Inicio › Herramientas › WIF WIF Private Key Convierte entre clave privada hexadecimal y formato WIF (Wallet Import Format). ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para claves de fondos reales. Codificar (Hex → WIF) Decodificar (WIF → Hex) Clave privada hexadecimal Clave privada (64 hex) 0 / 64 caracteres Comprimida (añade flag 0x01) Mainnet (testnet si off) 🎲 Generar clave privada 🔐 Codificar a WIF WIF resultante — 📋 Proceso de codificación Clave WIF WIF (empieza por 5, K, L, o c) 🔓 Decodificar Clave privada decodificada Red — Comprimida — Clave privada (hex) 📋 — Checksum en WIF — Checksum calculado — Prefijos WIF Red Comprimida Prefix hex Empieza por Mainnet Sí 0x80 + key + 0x01 K o L Mainnet No 0x80 + key 5 Testnet Sí 0xEF + key + 0x01 c Testnet No 0xEF + key 9 Aprende más sobre claves privadas Claves privadas en detalle → · Base58Check encoding →"
+    "keywords": "Conversor WIF (Wallet Import Format) de Bitcoin. Convierte claves privadas entre hexadecimal y WIF. Verifica checksums Base58Check. Clave privada hexadecimal WIF resultante Clave WIF Clave privada decodificada Prefijos WIF Inicio › Herramientas › WIF WIF Private Key WIF (Wallet Import Format) es la codificación estándar que Bitcoin usa para representar claves privadas en un formato legible e importable por wallets. Toma la clave privada en hexadecimal puro (32 bytes) y añade un prefijo de versión, un sufijo indicando si la clave pública correspondiente es comprimida, y un checksum; todo codificado en Base58Check. El resultado es una cadena de entre 51 y 52 caracteres que empieza por 5 (sin comprimir) o por K/L (comprimida). Esta herramienta convierte en ambas direcciones: de hexadecimal a WIF y de WIF a hexadecimal, y verifica el checksum para detectar errores de transcripción. ⚠️ Herramienta educativa Esta herramienta es para aprendizaje. NO la uses para claves de fondos reales. Codificar (Hex → WIF) Decodificar (WIF → Hex) Clave privada hexadecimal Clave privada (64 hex) 0 / 64 caracteres Comprimida (añade flag 0x01) Mainnet (testnet si off) 🎲 Generar clave privada 🔐 Codificar a WIF WIF resultante — 📋 Proceso de codificación Clave WIF WIF (empieza por 5, K, L, o c) 🔓 Decodificar Clave privada decodificada Red — Comprimida — Clave privada (hex) 📋 — Checksum en WIF — Checksum calculado — Prefijos WIF Red Comprimida Prefix hex Empieza por Mainnet Sí 0x80 + key + 0x01 K o "
   },
   {
     "title": "Aprende Bitcoin paso a paso",
@@ -1796,6 +1814,185 @@
     "keywords": "Todos los soft forks de Bitcoin desde 2012. P2SH, CLTV, CSV, SegWit, Taproot. Qué cambió cada uno y cómo se activaron. Qué es un soft fork BIP 16 — Pay to Script Hash (P2SH) — Abril 2012 BIP 65 — OP_CHECKLOCKTIMEVERIFY (CLTV) — Diciembre 2015 BIP 68, 112, 113 — Relative Timelocks (CSV) — Julio 2016 BIP 141, 143, 147 — Segregated Witness (SegWit) — Agosto 2017 BIP 340, 341, 342 — Taproot — Noviembre 2021 El debate sobre futuros soft forks El debate de la osificación Lecciones de gobernanza Fuentes Enlaces relacionados en aprendeBTC Inicio &rsaquo; La Madriguera &rsaquo; Los soft forks de Bitcoin: historia de cada cambio de consenso La madriguera Los soft forks de Bitcoin: historia de cada cambio de consenso Una cronología completa de los cambios de consenso en Bitcoin y las lecciones de gobernanza que dejaron. Fecha de publicación: Febrero 2026 Autor: aprendeBTC Tiempo de lectura: ~19 minutos Bitcoin tiene fama de ser imposible de cambiar. Es parcialmente cierto: cambiar las reglas de consenso de Bitcoin es extraordinariamente difícil. Pero no es imposible. Desde 2012, Bitcoin ha tenido varios \"soft forks\" — cambios compatibles hacia atrás que añaden nuevas funcionalidades sin romper el software existente. Cada soft fork cuenta una historia sobre cómo se gobierna Bitcoin, qué prioriza la comunidad, y qué tan difícil es llegar a consenso. Esta es la historia completa. Qué es un soft fork Un soft fork es un cambio en las reglas de Bitcoin que hace válidas menos cosas que antes. "
   },
   {
+    "title": "BOLT11 y BOLT12: las invoices de Lightning",
+    "url": "/lightning/bolt11-y-bolt12.html",
+    "tags": [
+      "lightning",
+      "bolt11",
+      "bolt12",
+      "wallet",
+      "billetera",
+      "factura lightning",
+      "claves",
+      "direcciones"
+    ],
+    "section": "Lightning",
+    "keywords": "BOLT11 vs BOLT12 Offers: cómo funcionan las invoices de Lightning, qué cambia con Offers, y por qué importa para el futuro. Qué es un BOLT BOLT11: estándar actual en producción BOLT12 (Offers): evolución del modelo ¿Cuándo usar cada uno hoy? Estado (marzo 2026) Enlaces Inicio › Lightning › BOLT11 y BOLT12 BOLT11 y BOLT12: las invoices de Lightning La invoice es el corazón de cada pago Lightning. BOLT12 cambia las reglas del juego. Qué es un BOLT Los BOLTs (Basis of Lightning Technology) son las especificaciones que permiten interoperabilidad entre implementaciones de Lightning. BOLT11 define el formato clásico de invoice; BOLT12 define offers e invoices de nueva generación. BOLT11: estándar actual en producción Una invoice BOLT11 codifica en formato bech32 información crítica del pago: red, monto, payment hash, expiración, descripción y firma del receptor. Es robusto y universal, pero tiene límites: Una invoice sirve para un solo pago. Expira en tiempo relativamente corto. Para direcciones estáticas suele necesitar LNURL/servidor web. Expone más metadatos del receptor que BOLT12. BOLT12 (Offers): evolución del modelo BOLT12 separa la oferta del pago concreto. Publicas un offer reutilizable y el pagador solicita una invoice dinámica a través del propio protocolo Lightning, sin depender de HTTP para el flujo principal. Además introduce blinded paths , mejorando privacidad del receptor, y abre puerta a pagos recurrentes de forma nativa. Característica BOLT11 BOLT12 Reutilizable "
+  },
+  {
+    "title": "Cómo funciona un pago Lightning: canales, liquidez y routing",
+    "url": "/lightning/como-funciona-un-pago.html",
+    "tags": [
+      "lightning",
+      "como",
+      "funciona",
+      "pago",
+      "wallet",
+      "billetera",
+      "factura lightning",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "Lightning",
+    "keywords": "Cómo funciona un pago Lightning paso a paso: canales de pago, liquidez entrante y saliente, routing entre nodos y comisiones. El viaje real de un pago Canal de pago: la unidad base Liquidez entrante y saliente Routing: encontrar camino en un grafo vivo HTLC: atomicidad del pago Comisiones de routing Qué cambia con MPP, splicing y LSP Enlaces relacionados Inicio › Lightning › Cómo funciona un pago Cómo funciona un pago Lightning: canales, liquidez y routing Todo el viaje de un pago Lightning, desde que pulsas enviar hasta que llega al destino en milisegundos. El viaje real de un pago Cuando envías sats por Lightning, no estás escribiendo una transacción nueva en la blockchain. Estás actualizando estados de canales ya abiertos entre nodos. Tu wallet calcula una ruta, reserva liquidez en cada salto y ejecuta un flujo atómico basado en HTLCs. El receptor solo cobra si el pago llega completo; si no llega, todos recuperan su saldo original. El pago suele tardar menos de un segundo, pero internamente ocurren varios pasos: búsqueda de ruta, validación de capacidad, negociación de condiciones y propagación del preimage de vuelta. Canal de pago: la unidad base Un canal Lightning nace con una transacción on-chain 2-de-2 multisig. Dentro del canal, dos partes intercambian nuevos estados firmados sin tocar la cadena base en cada pago. Solo apertura y cierre son on-chain. Cada actualización invalida el estado anterior. Si una parte intenta publicar un estado antiguo para robar saldo, la co"
+  },
+  {
+    "title": "Glosario Lightning: todos los términos del ecosistema",
+    "url": "/lightning/glosario-lightning.html",
+    "tags": [
+      "lightning",
+      "glosario",
+      "wallet",
+      "billetera",
+      "factura lightning",
+      "utxo",
+      "transacciones",
+      "claves",
+      "direcciones"
+    ],
+    "section": "Lightning",
+    "keywords": "Glosario Lightning Network: de BOLT a HTLC, de LSP a Keysend. Todos los términos del ecosistema Lightning explicados. Diccionario Enlaces útiles Inicio › Lightning › Glosario Lightning Glosario Lightning: todos los términos del ecosistema Referencia rápida de los términos que encontrarás en esta sección y en el ecosistema Lightning. Este glosario cubre términos específicos de Lightning. Para conceptos base de Bitcoin (UTXO, clave privada, bloque, mempool), consulta también /glosario.html . Diccionario AMP: variante de pagos multipath con hashes independientes por fragmento, impulsada en el ecosistema LND. BOLT: especificaciones técnicas de Lightning (equivalente conceptual a los BIP en Bitcoin). BOLT11: formato clásico de invoice que empieza por lnbc/lntb. BOLT12 (Offers): evolución de invoices con offers reutilizables y mejor privacidad. Base fee: comisión fija por salto de routing. Blinded path: ruta ofuscada para ocultar identidad del receptor (BOLT12). Canal de pago: relación bilateral Lightning respaldada por multisig on-chain. Capacidad: total de sats bloqueados en un canal. Channel factory: esquema para abrir varios canales con menor uso on-chain (investigación). Commitment transaction: estado firmado del canal que puede publicarse para cierre. Fee rate (ppm): comisión proporcional por volumen enrutado. HTLC: contrato hash + timelock que asegura atomicidad en cada salto. Invoice: solicitud de pago Lightning, normalmente en BOLT11. JIT channel: canal abierto justo al re"
+  },
+  {
+    "title": "Lightning Network: el ecosistema completo",
+    "url": "/lightning/",
+    "tags": [
+      "lightning",
+      "wallet",
+      "billetera",
+      "factura lightning"
+    ],
+    "section": "Lightning",
+    "keywords": "Lightning Network más allá de los pagos: protocolos, infraestructura, IA, Nostr y aplicaciones. La guía más completa en español. Qué encontrarás aquí Dos rutas de lectura Una nota sobre el ritmo de cambio Cómo encaja con el resto de aprendeBTC Enlaces de continuidad Inicio › Lightning Lightning Network: el ecosistema completo Lightning no es solo pagos rápidos. Es una plataforma sobre la que se está construyendo el futuro de internet. Lightning Network nació en 2015 como respuesta a un problema concreto: Bitcoin es lento y caro para pagos cotidianos cuando todo ocurre en la capa base. La solución fue construir canales de pago off-chain que se abren y cierran en Bitcoin, pero permiten miles de movimientos intermedios instantáneos. Esa arquitectura, que en su origen era solo un sistema de pagos, hoy sostiene una capa completa de protocolos y aplicaciones. En 2026 ya no hablamos de Lightning únicamente como \"pagar un café\". Sobre Lightning se ejecutan modelos de autenticación web, pagos máquina a máquina, micropagos en contenido digital, identidad social en Nostr, e incluso infraestructura para agentes de IA que compran servicios sin cuenta bancaria ni identidad humana. Esta sección está diseñada para ver el stack completo, no solo la parte de usuario final. i Punto de partida recomendado Si todavía no has hecho tu primer pago Lightning, empieza por Nivel 2 . Esta sección asume base práctica y se centra en el ecosistema completo. Qué encontrarás aquí Fundamentos: cómo funciona u"
+  },
+  {
+    "title": "Keysend, MPP y AMP: pagos sin invoice y multipath",
+    "url": "/lightning/keysend-mpp-amp.html",
+    "tags": [
+      "lightning",
+      "keysend",
+      "mpp",
+      "amp",
+      "wallet",
+      "billetera",
+      "factura lightning"
+    ],
+    "section": "Lightning",
+    "keywords": "Keysend, MPP y AMP en Lightning: pagos espontáneos sin invoice, pagos divididos en partes, y cómo funcionan técnicamente. Modelo clásico y fricción Keysend: pagos espontáneos push MPP: dividir para enrutar mejor AMP: variante multipath avanzada Enlaces Inicio › Lightning › Keysend, MPP y AMP Keysend, MPP y AMP: pagos sin invoice y multipath No siempre necesitas una invoice. Y a veces un pago necesita viajar por varios caminos a la vez. Modelo clásico y fricción El flujo clásico de Lightning es pull: el receptor crea invoice y el pagador la paga. Es sólido, pero en algunos casos es ineficiente, como pagos automáticos de streaming, sistemas machine-to-machine o montos grandes con rutas fragmentadas. Keysend: pagos espontáneos push Con Keysend, el emisor puede enviar sats sin invoice previa del receptor. El preimage se transporta en el onion del pago y el receptor cobra al validarlo. Esto habilita flujos continuos como Podcasting 2.0. i Caso estrella El streaming de sats en podcasting usa Keysend para pagar al creador por minuto escuchado sin generar invoices manuales. MPP: dividir para enrutar mejor Multi-Path Payments divide un pago en varias partes que viajan por rutas distintas y se recomponen en destino. Permite enviar montos que no caben por una sola ruta de liquidez. MPP es estándar en implementaciones principales y muchas wallets lo aplican automáticamente para mejorar tasa de éxito. AMP: variante multipath avanzada AMP extiende la idea multipath con hashes por fragmento"
+  },
+  {
+    "title": "Lightning Address: recibir sats como recibir un email",
+    "url": "/lightning/lightning-address.html",
+    "tags": [
+      "lightning",
+      "address",
+      "wallet",
+      "billetera",
+      "factura lightning"
+    ],
+    "section": "Lightning",
+    "keywords": "Lightning Address: qué es, cómo funciona, por qué parece un email, y la relación con LNURL-pay. Guía completa. Qué es y por qué importa Cómo funciona por debajo Quién custodia realmente Relación con Nostr ¿La reemplazará BOLT12? Enlaces Inicio › Lightning › Lightning Address Lightning Address: recibir sats como recibir un email usuario@dominio.com pero para recibir bitcoin. Así de simple, así de potente. Qué es y por qué importa Lightning Address es una convención de UX que hace que cobrar en Lightning sea memorable. En vez de enviar QR o invoice temporal, compartes una dirección legible tipo email. La wallet del pagador resuelve esa dirección y obtiene una invoice válida automáticamente. Cómo funciona por debajo El pagador introduce usuario@dominio.com . La wallet consulta el endpoint /.well-known/lnurlp/usuario . El servidor responde parámetros de cobro. La wallet pide invoice para el monto elegido. Se paga la invoice y el receptor cobra en Lightning. Lightning Address es, en esencia, LNURL-pay con un formato humano estandarizado. Quién custodia realmente La dirección no determina custodia. Depende del backend que genera y cobra invoices: Si usas proveedor custodial, confías en ese proveedor. Si usas nodo propio y dominio propio, mantienes control operativo y de fondos. ! Dependencia de infraestructura Tu Lightning Address es tan fiable como el dominio y servidor que la resuelven. Si caen, dejas de cobrar temporalmente. Relación con Nostr Lightning Address y NIP-05 (identid"
+  },
+  {
+    "title": "LNURL: la suite que hace Lightning usable",
+    "url": "/lightning/lnurl.html",
+    "tags": [
+      "lightning",
+      "lnurl",
+      "wallet",
+      "billetera",
+      "factura lightning",
+      "claves",
+      "direcciones"
+    ],
+    "section": "Lightning",
+    "keywords": "LNURL explicado: pay, withdraw, auth y channel. El paraguas de protocolos que simplifica Lightning para humanos. Por qué nació LNURL Base técnica Variantes principales LNURL-pay LNURL-withdraw LNURL-auth LNURL-channel LNURL vs BOLT12 Enlaces Inicio › Lightning › LNURL LNURL: la suite que hace Lightning usable LNURL no es un protocolo único: es una familia de protocolos que resuelven fricción real de usabilidad. Por qué nació LNURL El flujo Lightning clásico basado en invoice única era potente pero poco práctico para casos cotidianos. LNURL apareció como capa pragmática para simplificar interacciones mediante endpoints web y respuestas JSON estandarizadas. Base técnica Una cadena LNURL codifica una URL HTTPS en bech32. La wallet decodifica, consulta el endpoint y ejecuta la acción indicada. Esto exige servidor disponible, pero reduce pasos manuales para el usuario. Variantes principales LNURL-pay Permite cobrar con endpoint estático que genera invoices dinámicas. Es la base de Lightning Address. LNURL-withdraw Permite que un servicio pague al usuario: este entrega invoice y el servidor la paga. LNURL-auth Autenticación sin contraseña. La wallet firma un desafío derivado por dominio; el servicio valida sin almacenar email/password. LNURL-channel Flujo para solicitar apertura de canal. Hoy es menos común por el avance de LSP automáticos. i Contexto de diseño LNURL fue creado por fiatjaf, también creador de Nostr. La convergencia Lightning + Nostr en identidad, pagos y UX no es c"
+  },
+  {
+    "title": "Nostr Wallet Connect (NWC): conecta tu wallet a cualquier app",
+    "url": "/lightning/nwc.html",
+    "tags": [
+      "lightning",
+      "nwc",
+      "frase semilla",
+      "seed phrase",
+      "mnemonic",
+      "bip39",
+      "wallet",
+      "billetera",
+      "factura lightning",
+      "claves",
+      "direcciones"
+    ],
+    "section": "Lightning",
+    "keywords": "Nostr Wallet Connect: cómo funciona NWC, por qué usa Nostr como transporte, y cómo conecta tu wallet Lightning a apps remotas. Qué problema resuelve Flujo operativo Por qué Nostr como transporte Permisos granulares NWC vs WebLN Enlaces Inicio › Lightning › NWC Nostr Wallet Connect (NWC): conecta tu wallet a cualquier app Un protocolo que usa Nostr para conectar tu wallet Lightning con apps, sin entregar tus claves. Qué problema resuelve Muchas apps necesitan ejecutar pagos Lightning en tu nombre: zaps, suscripciones, micropagos o consumo de APIs. Dar seed phrase o permisos de administrador a cada app no es aceptable. NWC (NIP-47) permite delegar operaciones concretas con límites claros, usando relays de Nostr como canal de transporte cifrado entre app y wallet. Flujo operativo Tu wallet genera un connection string con relay, clave pública y permisos. La app recibe ese string y envía solicitudes cifradas. Tu wallet valida permisos, ejecuta y responde. La app nunca toca tu seed ni claves de firma del nodo. Por qué Nostr como transporte Infraestructura distribuida ya existente. Cifrado de mensajes y modelo asíncrono robusto. No requiere abrir tu nodo al internet público con endpoints directos. Resiliencia: si un relay falla, puedes cambiar de relay. Permisos granulares NWC permite recortar superficie de riesgo con límites por método y por presupuesto: pay_invoice , make_invoice , get_balance , etc. tope diario/mensual de gasto. expiración de credenciales. i Valor práctico NWC es"
+  },
+  {
+    "title": "¿Qué es Lightning Network? La visión completa",
+    "url": "/lightning/que-es-lightning.html",
+    "tags": [
+      "lightning",
+      "que",
+      "wallet",
+      "billetera",
+      "factura lightning",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "Lightning",
+    "keywords": "Lightning Network: qué es, cómo nació, qué problema resuelve y por qué se ha convertido en una plataforma, no solo un sistema de pagos. El problema que Lightning vino a resolver El diseño original de 2015 De experimento a red operativa Estado general en marzo de 2026 Por qué hoy se habla de plataforma Lightning frente a otras capas de Bitcoin Lectura recomendada según objetivo Fuente principal Inicio › Lightning › ¿Qué es Lightning Network? ¿Qué es Lightning Network? La visión completa De solución de pagos a plataforma completa. La historia y la visión de Lightning. El problema que Lightning vino a resolver Bitcoin prioriza seguridad, descentralización e inmutabilidad. Esa elección tiene un coste de capacidad: la capa base no está pensada para competir en volumen con redes de tarjetas tradicionales. Pedir bloques cada vez más grandes parece una solución fácil, pero en la práctica encarece la operación de nodos y empuja a la centralización. Lightning nace como respuesta técnica a esa tensión: mantener a Bitcoin como capa de liquidación final y mover pagos frecuentes a una capa de canales off-chain, sin cambiar reglas de consenso de Bitcoin. El diseño original de 2015 En el whitepaper de Joseph Poon y Thaddeus Dryja (2015), Lightning se describe como una red de canales de pago bidireccionales. Dos partes abren un canal con una transacción multisig en Bitcoin, actualizan saldos entre ellas fuera de cadena, y solo vuelven on-chain para cerrar con el estado final. Si esa lógica se"
+  },
+  {
+    "title": "Ventajas y límites reales de Lightning",
+    "url": "/lightning/ventajas-y-limites.html",
+    "tags": [
+      "lightning",
+      "ventajas",
+      "limites",
+      "wallet",
+      "billetera",
+      "factura lightning"
+    ],
+    "section": "Lightning",
+    "keywords": "Lightning Network: ventajas reales (velocidad, coste, privacidad) y límites honestos (liquidez, complejidad, custodia). Lo que hace mejor que alternativas tradicionales Velocidad operativa Coste marginal muy bajo Micropagos nativos Privacidad comparativa mejor que on-chain Límites estructurales que no desaparecen por marketing Liquidez Dependencia de conectividad Complejidad de backups y estado No es bóveda de ahorro Pagos muy grandes Centralización práctica vs diseño teórico Inicio › Lightning › Ventajas y límites Ventajas y límites reales de Lightning Lo que Lightning hace bien, lo que todavía no resuelve, y lo que probablemente nunca resolverá. Lo que hace mejor que alternativas tradicionales Velocidad operativa Para pagos cotidianos, Lightning ofrece una experiencia casi instantánea. El usuario no espera confirmaciones on-chain para cada compra. Esto cambia por completo la usabilidad en comercio físico y digital. Coste marginal muy bajo Las comisiones de routing suelen ser de pocos sats o fracciones, especialmente en pagos pequeños y medianos. Esto habilita modelos de micropago inviables con tarjetas o transferencias bancarias. Micropagos nativos Lightning permite enviar importes extremadamente bajos (incluso en milisatoshis internamente). Esto abre casos de uso de pago por segundo, por evento o por consumo real de API. Privacidad comparativa mejor que on-chain Los pagos no se publican uno a uno en blockchain. No es anonimato perfecto, pero reduce exposición frente a la t"
+  },
+  {
+    "title": "Wallets Lightning: tipos, trade-offs y cómo elegir",
+    "url": "/lightning/wallets-lightning.html",
+    "tags": [
+      "lightning",
+      "wallets",
+      "wallet",
+      "billetera",
+      "factura lightning"
+    ],
+    "section": "Lightning",
+    "keywords": "Wallets Lightning: custodiales vs no-custodiales, LSP, canales embebidos. Cómo elegir la wallet correcta para tu caso de uso. Custodia en Lightning: más matices que en on-chain Modelo 1: custodial total Modelo 2: LSP-assisted (claves tuyas, liquidez delegada) Modelo 3: nodo propio Modelo 4: eCash integrado con Lightning Comparativa rápida Recomendación práctica por perfil Enlaces Inicio › Lightning › Wallets Lightning Wallets Lightning: tipos, trade-offs y cómo elegir No todas las wallets Lightning son iguales. Las diferencias importan más de lo que parece. Custodia en Lightning: más matices que en on-chain En Bitcoin on-chain la frontera suele ser binaria: tienes tú las claves o las tiene un tercero. En Lightning hay más capas: además de claves, importa quién gestiona canales, liquidez, backups de estado y conectividad. Por eso conviene pensar en espectro, no en etiqueta simple. Modelo 1: custodial total Ejemplos típicos: Wallet of Satoshi o saldos Lightning de ciertas plataformas. El proveedor opera canales, custodia fondos y decide políticas de acceso. Ventaja: experiencia inmediata. Riesgo: congelación, KYC forzado, quiebra o cierre del servicio. Uso recomendado: importes pequeños y operativos. Modelo 2: LSP-assisted (claves tuyas, liquidez delegada) Wallets como Phoenix o Breez te dan autocustodia de claves, pero un LSP te facilita canales y liquidez. Es el punto de equilibrio más útil para la mayoría: soberanía real con fricción baja. Ventaja: buen balance entre control"
+  },
+  {
+    "title": "WebLN: Lightning nativo en el navegador",
+    "url": "/lightning/webln.html",
+    "tags": [
+      "lightning",
+      "webln",
+      "wallet",
+      "billetera",
+      "factura lightning"
+    ],
+    "section": "Lightning",
+    "keywords": "WebLN: el estándar que integra pagos Lightning directamente en el navegador web. Qué es, cómo funciona y quién lo implementa. Qué resuelve WebLN Flujo básico Quién lo implementa Ejemplo de integración Límite estructural Enlaces Inicio › Lightning › WebLN WebLN: Lightning nativo en el navegador Un estándar para que cualquier web pueda cobrar y pagar en Lightning sin que el usuario salga de la página. Qué resuelve WebLN Antes de WebLN, pagar en web implicaba copiar/pegar invoices o escanear QR con otro dispositivo. WebLN define una interfaz JavaScript para que la web hable con la wallet del usuario mediante una extensión del navegador. Flujo básico El sitio detecta si existe window.webln . Solicita permiso con enable() . Dispara pago con sendPayment(invoice) o crea invoice con makeInvoice() . La extensión muestra confirmación y ejecuta. Quién lo implementa La implementación de referencia más usada es Alby Extension. Muchos servicios Lightning-first en desktop (contenido premium, props, trading, herramientas web) ya soportan este flujo. Ejemplo de integración if (window.webln) { await window.webln.enable(); const result = await window.webln.sendPayment(invoice); console.log(result.preimage); } else { // fallback: QR o invoice copiable } Límite estructural WebLN depende de extensiones de navegador, por eso funciona mejor en desktop. En móvil, donde las extensiones son limitadas, NWC suele ser el complemento más práctico. Protocolo Contexto ideal Dependencia clave WebLN Web deskto"
+  },
+  {
     "title": "Antes de empezar: qué vas a hacer y por qué",
     "url": "/nivel-1/antes-de-empezar.html",
     "tags": [
@@ -2337,11 +2534,13 @@
       "nivel 3",
       "nivel",
       "fiscalidad",
-      "bitcoin"
+      "bitcoin",
+      "wallet",
+      "billetera"
     ],
     "section": "Nivel 3",
     "nivel": 3,
-    "keywords": "Fiscalidad de Bitcoin en el nivel 3 de aprendeBTC. Inicio &rsaquo; Nivel 3 &rsaquo; Fiscalidad de Bitcoin Nivel 3 Fiscalidad de Bitcoin Aspectos fiscales basicos para operar con Bitcoin. Esta página ya está creada como placeholder para mantener la navegación sin enlaces rotos. El contenido didáctico completo se añadirá en la siguiente iteración. i Estado Ruta habilitada y estructura integrada en el sitio. &larr; Anterior Seguridad operativa Siguiente &rarr; Nivel 4 - En la madriguera"
+    "keywords": "Aspectos fiscales de Bitcoin: qué operaciones tributan, cómo declarar en España y Latinoamérica, y errores comunes a evitar. La pregunta incómoda que todos evitan Qué eventos generan obligación fiscal Qué generalmente NO tributa El modelo general: cómo se calcula la ganancia FIFO vs LIFO: el orden importa España: IRPF y modelo 721 Modelo 721: la declaración informativa Latinoamérica: panorama general El KYC y la trazabilidad: lo que ya sabe Hacienda Herramientas de seguimiento Ver también Inicio &rsaquo; Nivel 3 &rsaquo; Fiscalidad de Bitcoin Nivel 3 — Rabbit Hole Fiscalidad de Bitcoin Lo que necesitas saber sobre impuestos y Bitcoin antes de que Hacienda te lo recuerde. ⚠️ Esto NO es asesoría fiscal. Cada país, cada situación personal y cada ejercicio fiscal es diferente. El contenido de esta página es informativo y refleja el estado general a marzo de 2026. Las leyes fiscales sobre Bitcoin cambian constantemente. Consulta siempre con un profesional cualificado antes de tomar decisiones. La pregunta incómoda que todos evitan Muchas personas empiezan a usar Bitcoin sin pensar en las implicaciones fiscales. Compran, venden, intercambian, y un día llega la carta de Hacienda. El problema no es que Bitcoin tribute (en la mayoría de países lo hace) sino que la mayoría de usuarios no lo sabe, o prefiere no pensarlo. La buena noticia: entender los principios básicos es sencillo. Lo complicado es la implementación concreta según tu país y situación. Qué eventos generan obligación fis"
   },
   {
     "title": "El halving",
@@ -2517,17 +2716,25 @@
     "keywords": "Cómo acelerar una transacción Bitcoin atascada usando RBF (Replace-By-Fee) o CPFP (Child-Pays-For-Parent). Guía práctica. El problema: transacción atascada RBF: Replace-By-Fee Cómo funciona Requisitos Cómo hacerlo en Sparrow Cuánto aumentar CPFP: Child-Pays-For-Parent Cómo funciona Cuándo usar CPFP Cómo hacerlo El cálculo de fee Comparación Inicio &rsaquo; Nivel 3 &rsaquo; RBF y CPFP: acelerar transacciones Nivel 3 RBF y CPFP: acelerar transacciones Tu transacción está atascada en la mempool. Dos técnicas para acelararla sin perder los fondos. El problema: transacción atascada Has enviado una transacción con una fee que parecía razonable, pero la mempool se ha congestionado y llevas horas (o días) esperando confirmación. Tu wallet muestra la transacción como \"pendiente\" y no hay señales de que vaya a confirmar pronto. Esto no significa que hayas perdido tus bitcoin. La transacción está en la mempool, esperando. Pero necesitas acelararla para que se confirme en tiempo razonable. Tienes dos herramientas: RBF y CPFP. RBF: Replace-By-Fee RBF significa literalmente \"reemplazar por fee\". Consiste en enviar una nueva versión de la misma transacción, pero con una fee más alta. La versión antigua queda invalidada. Cómo funciona Tu wallet crea una transacción que gasta exactamente los mismos UTXOs que la original La nueva transacción paga una fee significativamente mayor Los nodos y mineros ven la nueva transacción y descartan la antigua La versión con fee alta se confirma; la antigua "
   },
   {
-    "title": "Seguridad operativa",
+    "title": "Seguridad operativa (OpSec)",
     "url": "/nivel-3/seguridad-operativa.html",
     "tags": [
       "nivel 3",
       "nivel",
       "seguridad",
-      "operativa"
+      "operativa",
+      "frase semilla",
+      "seed phrase",
+      "mnemonic",
+      "bip39",
+      "wallet",
+      "billetera",
+      "utxo",
+      "transacciones"
     ],
     "section": "Nivel 3",
     "nivel": 3,
-    "keywords": "Seguridad operativa en el nivel 3 de aprendeBTC. Inicio &rsaquo; Nivel 3 &rsaquo; Seguridad operativa Nivel 3 Seguridad operativa Practicas de OpSec para reducir riesgos en el uso de Bitcoin. Esta página ya está creada como placeholder para mantener la navegación sin enlaces rotos. El contenido didáctico completo se añadirá en la siguiente iteración. i Estado Ruta habilitada y estructura integrada en el sitio. &larr; Anterior Coin control Siguiente &rarr; Fiscalidad de Bitcoin"
+    "keywords": "Seguridad operativa para bitcoiners: protege tus datos, evita phishing, SIM swap y errores que pueden costarte tus bitcoin. Qué es la seguridad operativa Las amenazas reales Phishing: el ataque más común SIM swap: el ataque al 2FA por SMS Ingeniería social El ataque de los 5 dólares (o la llave inglesa) Malware y keyloggers Las reglas básicas de OpSec para bitcoiners 1. No hables de cuánto tienes 2. 2FA con app, nunca por SMS 3. Verifica siempre la URL 4. Tu seed nunca en formato digital Inicio &rsaquo; Nivel 3 &rsaquo; Seguridad operativa (OpSec) Nivel 3 — Rabbit Hole Seguridad operativa (OpSec) Las amenazas no siempre vienen de hackers sofisticados. A veces basta un SMS falso o una foto de tu seed. A medida que acumulas bitcoin y tomas el control de tus claves privadas, tu perfil de riesgo cambia. Ya no dependes de que un exchange falle; dependes de que tú no cometas errores. La seguridad operativa (OpSec) es el conjunto de hábitos y prácticas que reducen la superficie de ataque en tu vida cotidiana. El enemigo no siempre es un hacker en una sala oscura. A veces eres tú, con un momento de descuido. Qué es la seguridad operativa El término OpSec (Operational Security) viene del ámbito militar, donde describe el proceso de identificar qué información propia podría ser útil para un adversario y tomar medidas para protegerla. Aplicado a Bitcoin: ¿qué sabe el mundo sobre tu situación con bitcoin? ¿Quién sabe que tienes? ¿Cuánto? ¿Dónde guardas las claves? La OpSec no es paranoia"
   },
   {
     "title": "Tipos de direcciones Bitcoin",
@@ -2579,31 +2786,44 @@
     "keywords": "Cómo funcionan los canales de pago en Lightning Network: apertura, balance local/remoto, cierre cooperativo y forzado. El modelo técnico. El concepto de canal Abrir un canal Balance local y remoto Pagos dentro del canal Cerrar un canal Cierre cooperativo Cierre forzado (unilateral) Penalización por fraude Canales y enrutamiento Liquidez Implicaciones prácticas Para usuarios con wallet (Phoenix, Breez) Inicio &rsaquo; Nivel 4 &rsaquo; Canales de pago Nivel 4 Canales de pago Conexiones bidireccionales entre nodos con bitcoin bloqueado. El fundamento técnico de Lightning. El concepto de canal Un canal de pago Lightning es una conexión directa entre dos nodos con una cantidad de bitcoin bloqueada que puede moverse instantáneamente entre ellos. Imagina un tubo entre Alice y Bob con 1 BTC dentro. Ese bitcoin puede deslizarse hacia Alice o hacia Bob infinitas veces, de forma instantánea, sin tocar la blockchain. Solo cuando quieren \"cerrar el tubo\" y extraer su parte, vuelven a la blockchain. Abrir un canal Para abrir un canal, se crea una transacción on-chain que: Bloquea bitcoin en una dirección multisig 2-de-2 (ambas partes deben firmar para gastar) Define la capacidad total del canal Establece el balance inicial de cada lado Ejemplo: Alice abre canal de 0.1 BTC con Bob. Transacción on-chain bloquea 0.1 BTC en multisig Balance inicial: Alice 0.1 BTC, Bob 0 BTC Capacidad total del canal: 0.1 BTC Esta transacción se confirma en la blockchain. Ahora el canal está abierto. Balance lo"
   },
   {
-    "title": "Coinjoin",
+    "title": "CoinJoin: transacciones colaborativas para privacidad",
     "url": "/nivel-4/coinjoin.html",
     "tags": [
       "nivel 4",
       "nivel",
-      "coinjoin"
+      "coinjoin",
+      "wallet",
+      "billetera",
+      "utxo",
+      "transacciones"
     ],
     "section": "Nivel 4",
     "nivel": 4,
-    "keywords": "Contenido en preparacion para aprendeBTC. Inicio &rsaquo; Nivel 4 &rsaquo; Coinjoin Coinjoin Página en preparacion. Volvera pronto con contenido completo. Contenido en preparacion. Siguiente &rarr; Qué es multisig"
+    "keywords": "CoinJoin en Bitcoin: qué es, cómo funciona, implementaciones actuales y el debate legal tras el caso Samourai Wallet. Qué es CoinJoin Cómo funciona (paso a paso) El conjunto de anonimato (anonymity set) Implementaciones: qué existe y en qué estado Samourai Wallet / Whirlpool Wasabi Wallet / WabiSabi JoinMarket El debate legal: el caso Samourai Wallet Trade-offs: qué ganas y qué sacrificas Ver también Inicio &rsaquo; Nivel 4 &rsaquo; CoinJoin Nivel 4 — Down the Rabbit Hole CoinJoin: transacciones colaborativas para privacidad La técnica que permite mezclar tus transacciones con las de otros para ganar privacidad en Bitcoin. Bitcoin es pseudónimo, no anónimo. Todas las transacciones son públicas en la blockchain, y con suficiente análisis es posible conectar UTXOs con identidades reales. CoinJoin es la principal técnica nativa de Bitcoin para romper esa trazabilidad, sin necesidad de cambios al protocolo y sin que nadie pueda robar tus fondos en el proceso. Qué es CoinJoin CoinJoin es una técnica propuesta por Gregory Maxwell en 2013 en el foro BitcoinTalk. La idea es simple: si múltiples usuarios combinan sus inputs y outputs en una sola transacción, un observador externo no puede determinar con certeza qué input corresponde a qué output. No es un protocolo nuevo ni un cambio al protocolo de Bitcoin, es simplemente una forma de construir transacciones que siempre ha sido posible. Lo que hizo Maxwell fue sistematizarla y articularla como herramienta de privacidad. ℹ️ CoinJoin n"
   },
   {
-    "title": "Configurar multisig con Sparrow",
+    "title": "Configurar multisig con Sparrow Wallet",
     "url": "/nivel-4/configurar-multisig.html",
     "tags": [
       "nivel 4",
       "nivel",
       "configurar",
       "multisig",
+      "frase semilla",
+      "seed phrase",
+      "mnemonic",
+      "bip39",
       "wallet",
-      "billetera"
+      "billetera",
+      "xpub",
+      "xprv",
+      "bip32",
+      "claves",
+      "direcciones"
     ],
     "section": "Nivel 4",
     "nivel": 4,
-    "keywords": "Configurar multisig con Sparrow en el nivel 4 de aprendeBTC. Inicio &rsaquo; Nivel 4 &rsaquo; Configurar multisig con Sparrow Nivel 4 Configurar multisig con Sparrow Guía base para montar una wallet multisig de forma segura. Ruta habilitada para continuidad de navegacion. El contenido completo se publicara en el siguiente bloque. &larr; Anterior Qué es multisig Siguiente &rarr; Distribución geográfica de claves"
+    "keywords": "Guía paso a paso para configurar una wallet multisig 2-de-3 con Sparrow Wallet y hardware wallets. Protege tu bitcoin. Antes de empezar: qué necesitas Paso 1: Crear la nueva wallet en Sparrow Paso 2: Configurar los tres cosignatarios (keystores) Keystore 1: primer hardware wallet Keystore 2: segundo hardware wallet Keystore 3: tercera clave Paso 3: Seleccionar el tipo de script Paso 4: Aplicar y verificar la wallet Verificación crítica: confirmar la dirección en los dispositivos Paso 5: Prueba con fondos pequeños Paso 6: El backup del descriptor, tan importante como las seeds Cómo exportar el descriptor en Sparrow Inicio &rsaquo; Nivel 4 &rsaquo; Configurar multisig con Sparrow Wallet Nivel 4 — Down the Rabbit Hole Configurar multisig con Sparrow Wallet Guía práctica para crear tu primera wallet multisig 2-de-3 usando Sparrow y tus hardware wallets. ⚠️ Versión y cambios de interfaz. Esta guía usa Sparrow Wallet en su versión disponible a marzo de 2026. La interfaz puede variar en versiones futuras. Consulta siempre sparrowwallet.com/docs para la documentación más actualizada antes de proceder. Antes de empezar: qué necesitas 2 o 3 hardware wallets : pueden ser del mismo modelo o de fabricantes distintos. Usar dispositivos de diferentes fabricantes (por ejemplo, una Coldcard y una Trezor) añade diversificación: si se descubre una vulnerabilidad en el firmware de uno, el otro no se ve afectado. Sparrow Wallet instalada : descárgala desde sparrowwallet.com . Verifica siempre la "
   },
   {
     "title": "Distribución geográfica de claves",
@@ -2637,14 +2857,11 @@
       "wallet",
       "billetera",
       "lightning",
-      "factura lightning",
-      "sidechains",
-      "capas",
-      "bitcoin"
+      "factura lightning"
     ],
-    "section": "Sidechains y capas",
+    "section": "Nivel 4",
     "nivel": 4,
-    "keywords": "Fedimint y Cashu: eCash de David Chaum aplicado a Bitcoin. Privacidad extrema, custodia comunitaria y Lightning integrado."
+    "keywords": "Fedimint y Cashu: eCash de David Chaum aplicado a Bitcoin. Privacidad extrema, custodia comunitaria y Lightning integrado. Una idea de 1982 que espero cuarenta anos Por que eCash sobre Bitcoin tiene sentido hoy Cashu: implementacion minimalista Fedimint: custodia comunitaria distribuida Cashu vs Fedimint El debate filosofico: privacidad vs autocustodia Casos de uso concretos Riesgos que debes conocer Fuentes y referencias Enlaces internos Inicio > Nivel 4 > Fedimint y Cashu Nivel 4 Fedimint y Cashu: eCash, mints federados y privacidad sobre Bitcoin La idea de eCash aplicada a Bitcoin: privacidad fuerte con custodia local o comunitaria. Una idea de 1982 que espero cuarenta anos En 1982, David Chaum publico las blind signatures : una forma de firmar dinero digital sin que el emisor pueda vincular emision y gasto. La idea no cuajo comercialmente en los 90 (DigiCash), pero tecnicamente era correcta. Bitcoin y Lightning cambiaron el contexto: ahora existe un activo base sin emisor central (BTC) y una capa de liquidez instantanea (Lightning). Eso hizo viable retomar eCash con nueva arquitectura. Por que eCash sobre Bitcoin tiene sentido hoy Privacidad fuerte en pagos de baja cuantia. Experiencia de usuario simple para micropagos. Unidad economica en sats. Entrada y salida rapida via Lightning. Cashu: implementacion minimalista Cashu prioriza simplicidad: un mint emite tokens de eCash tras recibir sats por Lightning. El usuario transfiere tokens y puede canjearlos de vuelta por sats"
   },
   {
     "title": "Guía de herencia paso a paso",
@@ -2742,14 +2959,11 @@
       "lightning",
       "factura lightning",
       "utxo",
-      "transacciones",
-      "sidechains",
-      "capas",
-      "bitcoin"
+      "transacciones"
     ],
-    "section": "Sidechains y capas",
+    "section": "Nivel 4",
     "nivel": 4,
-    "keywords": "Liquid Network: transacciones rapidas, confidenciales y emision de activos sobre Bitcoin. Analisis completo de la sidechain de Blockstream."
+    "keywords": "Liquid Network: transacciones rapidas, confidenciales y emision de activos sobre Bitcoin. Analisis completo de la sidechain de Blockstream. El problema que Liquid vino a resolver Arquitectura Confidential Transactions L-BTC y puente Casos de uso reales Trade-off de confianza El estado real de la adopcion Riesgos concretos para el usuario Quien deberia usar Liquid Fuentes y referencias Enlaces internos Inicio > Nivel 4 > Liquid Network Nivel 4 Liquid Network: la sidechain federada de Bitcoin La sidechain federada en produccion para settlement rapido y privacidad de montos. ! Estado Actualizado a marzo de 2026. Verifica datos vigentes en liquid.net. El problema que Liquid vino a resolver Liquid nacio para resolver una necesidad operativa real del ecosistema: mover BTC entre instituciones con rapidez y con menor exposicion publica de montos que en Bitcoin on-chain. Su foco historico no fue retail masivo, sino settlement entre exchanges y mesas de tesoreria. Arquitectura Liquid funciona como sidechain federada con functionaries que cumplen dos roles: firmar bloques y custodiar el puente con Bitcoin. Es un modelo explicitamente mas coordinado que Bitcoin, a cambio de bloques rapidos y finalidad operacional en minutos. La red produce bloques en torno a un minuto y evita reorganizaciones tipicas de mineria competitiva mediante firmas de umbral. Confidential Transactions Es la pieza tecnica diferencial de Liquid: oculta montos con compromisos criptograficos, manteniendo verificabilid"
   },
   {
     "title": "Gestión de liquidez",
@@ -2835,17 +3049,27 @@
     "keywords": "Qué son los pools de minería, cómo funcionan, principales opciones (Ocean, Braiins), modelos de pago (PPLNS, PPS), y por qué importa la descentralización. El problema del minero solitario La solución: pools Cómo funciona técnicamente Modelos de pago PPLNS (Pay Per Last N Shares) PPS (Pay Per Share) FPPS (Full Pay Per Share) Pools relevantes Ocean Pool Braiins Pool (antes Slush Pool) Foundry USA F2Pool, ViaBTC, Antpool Inicio &rsaquo; Nivel 4 &rsaquo; Pools de minería Nivel 4 Pools de minería Mineros que combinan fuerzas para obtener recompensas regulares. Cómo elegir pool y por qué la descentralización importa. El problema del minero solitario La probabilidad de que un minero individual encuentre un bloque es proporcional a su hash rate dividido por el hash rate total de la red. Con la dificultad actual, un Antminer S21 (~200 TH/s) encontraría un bloque aproximadamente cada... varios años. Quizás décadas. Es como una lotería donde compras un boleto cada pocos años. Podrías ganar el premio gordo (6.25 BTC + fees), pero probablemente no. La varianza es enorme. Puedes tener suerte rápida o nunca encontrar nada. La solución: pools Un pool de minería agrupa el hash rate de muchos mineros. El pool encuentra bloques con regularidad (proporcional a su hash rate total) y reparte las recompensas entre los participantes según su contribución. En vez de esperar años por un premio gordo improbable, recibes pequeños pagos regulares proporcionales a tu trabajo. Es como formar un sindicato d"
   },
   {
-    "title": "Qué Es Multisig",
+    "title": "¿Qué es multisig?",
     "url": "/nivel-4/que-es-multisig.html",
     "tags": [
       "nivel 4",
       "nivel",
       "que",
-      "multisig"
+      "multisig",
+      "frase semilla",
+      "seed phrase",
+      "mnemonic",
+      "bip39",
+      "wallet",
+      "billetera",
+      "utxo",
+      "transacciones",
+      "claves",
+      "direcciones"
     ],
     "section": "Nivel 4",
     "nivel": 4,
-    "keywords": "Contenido en preparacion para aprendeBTC. Inicio &rsaquo; Nivel 4 &rsaquo; Qué Es Multisig Qué Es Multisig Página en preparacion. Volvera pronto con contenido completo. Contenido en preparacion. &larr; Anterior Coinjoin Siguiente &rarr; Configurar multisig con Sparrow"
+    "keywords": "Multisig en Bitcoin: qué es, cómo funciona la firma múltiple, esquemas 2-de-3 y 3-de-5, y por qué mejora tu seguridad. La mecánica: M de N La analogía de la caja fuerte Los esquemas más comunes 2-de-3: el estándar para uso personal 3-de-5: para cantidades mayores o empresas 2-de-2: cuentas conjuntas o doble aprobación Por qué usar multisig Elimina el punto único de fallo Herencia y planificación Protección contra robo dirigido Qué necesitas para empezar Los trade-offs Inicio &rsaquo; Nivel 4 &rsaquo; ¿Qué es multisig? Nivel 4 — Down the Rabbit Hole ¿Qué es multisig? Una wallet que necesita más de una llave para firmar. La diferencia entre perderlo todo por un fallo y tener un plan B. Con una wallet estándar (lo que se llama singlesig) hay una sola clave privada que lo controla todo. Si la pierdes, pierdes el acceso. Si alguien la roba, pierde el acceso. Es el punto único de fallo que hace que muchas personas pierdan bitcoin para siempre. Multisig (firma múltiple) elimina ese punto único de fallo. En lugar de una sola clave, la wallet requiere que un número mínimo de claves de un conjunto mayor firmen cualquier transacción. Perder una no es el fin. La mecánica: M de N Multisig se describe siempre con la notación M-de-N : N es el número total de claves que existen para esa wallet. M es el número mínimo de esas claves necesario para firmar una transacción. Ejemplos concretos: 2-de-3 : existen 3 claves; cualquier 2 de ellas puede firmar. Si pierdes una, las otras 2 siguen siendo "
   },
   {
     "title": "Que son las sidechains de Bitcoin",
@@ -2860,13 +3084,11 @@
       "lightning",
       "factura lightning",
       "utxo",
-      "transacciones",
-      "capas",
-      "bitcoin"
+      "transacciones"
     ],
-    "section": "Sidechains y capas",
+    "section": "Nivel 4",
     "nivel": 4,
-    "keywords": "Sidechains de Bitcoin: que son, como funcionan los pegs bidireccionales, tipos, trade-offs y comparativa completa."
+    "keywords": "Sidechains de Bitcoin: que son, como funcionan los pegs bidireccionales, tipos, trade-offs y comparativa completa. El problema que las sidechains intentan resolver El paper que lo inicio todo Como funciona un peg bidireccional Peg-in (entrar a la sidechain) Peg-out (salir a Bitcoin) Tipos de peg por modelo de confianza Peg federado Merge mining Pruebas criptograficas nativas (ideal aun no activado) Mints federados: Fedimint y Cashu Comparativa: Liquid, Rootstock, Lightning, Fedimint y Cashu Drivechains (BIP-300/301): el debate mas profundo Inicio > Nivel 4 > Que son las sidechains de Bitcoin Nivel 4 Que son las sidechains de Bitcoin Cadenas laterales que heredan la seguridad de Bitcoin y usan BTC como moneda. Lo mejor de dos mundos, con matices. El problema que las sidechains intentan resolver Bitcoin es deliberadamente conservador. Su protocolo cambia despacio, con consenso amplio, y las propuestas que anaden funcionalidad nueva enfrentan anos de debate antes de considerarse. Eso es una virtud para proteger el ahorro, pero tiene un coste: hay funcionalidades que Bitcoin no hace de forma nativa o que haria de forma ineficiente en capa base. Contratos inteligentes complejos, transacciones confidenciales que ocultan montos, transferencias rapidas entre exchanges, emision de activos, o experimentos tecnicos que todavia no estan listos para la capa base. La pregunta es directa: ¿como anades funcionalidad a un sistema que no quiere cambiar su nucleo con rapidez? Una respuesta es L"
   },
   {
     "title": "Rootstock (RSK): contratos inteligentes sobre Bitcoin",
@@ -2876,13 +3098,12 @@
       "nivel",
       "rootstock",
       "rsk",
-      "sidechains",
-      "capas",
-      "bitcoin"
+      "lightning",
+      "factura lightning"
     ],
-    "section": "Sidechains y capas",
+    "section": "Nivel 4",
     "nivel": 4,
-    "keywords": "Rootstock: contratos inteligentes en Bitcoin con mineria fusionada. Arquitectura, PowPeg, rBTC, DeFi y analisis completo."
+    "keywords": "Rootstock: contratos inteligentes en Bitcoin con mineria fusionada. Arquitectura, PowPeg, rBTC, DeFi y analisis completo. De una idea en un foro a una mainnet en produccion Arquitectura tecnica: los tres pilares 1) RVM compatible con EVM 2) Merge mining con Bitcoin 3) PowPeg para el puente BTC-rBTC rBTC: el flujo de peg-in y peg-out Ecosistema DeFi sobre BTC Casos de uso reales Criticas y riesgos reales Rootstock vs Liquid vs Lightning vs Stacks Roadmap y futuro Fuentes y referencias Inicio > Nivel 4 > Rootstock (RSK) Nivel 4 Rootstock (RSK): contratos inteligentes sobre Bitcoin La sidechain con mas recorrido para smart contracts sobre BTC. Que logra y que limita. ! Estado Contenido actualizado a marzo de 2026. Verifica roadmap y estado de red en rootstock.io. De una idea en un foro a una mainnet en produccion La raiz de Rootstock se remonta a 2013, cuando Sergio Lerner publico una propuesta para ejecutar contratos avanzados con mineria fusionada junto a Bitcoin. Esa linea evoluciono hasta RSK Labs y culmino en la mainnet de Rootstock en enero de 2018. La tesis fue clara desde el inicio: llevar contratos inteligentes al ecosistema Bitcoin sin crear una moneda base separada, usando BTC como activo economico del sistema mediante rBTC. Arquitectura tecnica: los tres pilares 1) RVM compatible con EVM Rootstock Virtual Machine mantiene compatibilidad practica con EVM para que equipos de Solidity reutilicen tooling conocido (Hardhat, Truffle, MetaMask) con cambios reducidos. No es "
   },
   {
     "title": "Routing de pagos",
@@ -3568,6 +3789,60 @@
     ],
     "section": "General",
     "keywords": "Webs de referencia para estudiar Bitcoin: documentación, exploradores, desarrollo y comunidad. bitcoin.org learnmeabitcoin.com mempool.space bitcoinops.org aprendebtc.com nostrfacil.com bitcoin.design BDK y LDK Inicio &rsaquo; Recursos &rsaquo; Webs de referencia Webs de referencia sobre Bitcoin Fuentes recomendadas para consultar información primaria, documentación y seguimiento técnico de la red. bitcoin.org Sitio de referencia Fundamentos Principiante Punto de entrada histórico con explicaciones base, wallets y recursos para nuevos usuarios. Abrir web learnmeabitcoin.com Referencia técnica visual Técnico Intermedio Explicaciones visuales del protocolo: transacciones, scripts, bloques, direcciones y criptografía. Abrir web mempool.space Explorador on-chain Mempool Principiante Visualización de mempool y bloques en tiempo real para estimar fees y seguir transacciones. Abrir web bitcoinops.org Desarrollo Bitcoin Newsletter técnica Avanzado Resumen semanal de cambios en Bitcoin Core, Lightning, BIPs y discusiones de alto nivel técnico. Abrir web aprendebtc.com Guía progresiva en español Ruta de aprendizaje Principiante Contenido estructurado desde cero hasta nivel técnico avanzado, con herramientas y comunidad. Abrir web nostrfacil.com Proyecto hermano Nostr Principiante Guía en español para usar Nostr, un protocolo clave para comunidad, comunicación y soberanía digital. Abrir web bitcoin.design UX y producto Diseño Intermedio Guías de buenas prácticas para construir productos"
+  },
+  {
+    "title": "Redirigiendo...",
+    "url": "/sidechains/fedimint-y-cashu.html",
+    "tags": [
+      "sidechains",
+      "fedimint",
+      "cashu"
+    ],
+    "section": "Sidechains",
+    "keywords": "Redirigiendo... Esta página se ha movido. Ir a la nueva ubicación ."
+  },
+  {
+    "title": "Redirigiendo...",
+    "url": "/sidechains/",
+    "tags": [
+      "sidechains"
+    ],
+    "section": "Sidechains",
+    "keywords": "Redirigiendo... Esta página se ha movido. Ir a la nueva ubicación ."
+  },
+  {
+    "title": "Redirigiendo...",
+    "url": "/sidechains/liquid-network.html",
+    "tags": [
+      "sidechains",
+      "liquid",
+      "network"
+    ],
+    "section": "Sidechains",
+    "keywords": "Redirigiendo... Esta página se ha movido. Ir a la nueva ubicación ."
+  },
+  {
+    "title": "Redirigiendo...",
+    "url": "/sidechains/que-son-las-sidechains.html",
+    "tags": [
+      "sidechains",
+      "que",
+      "son",
+      "las"
+    ],
+    "section": "Sidechains",
+    "keywords": "Redirigiendo... Esta página se ha movido. Ir a la nueva ubicación ."
+  },
+  {
+    "title": "Redirigiendo...",
+    "url": "/sidechains/rootstock-rsk.html",
+    "tags": [
+      "sidechains",
+      "rootstock",
+      "rsk"
+    ],
+    "section": "Sidechains",
+    "keywords": "Redirigiendo... Esta página se ha movido. Ir a la nueva ubicación ."
   },
   {
     "title": "Sobre aprendeBTC",

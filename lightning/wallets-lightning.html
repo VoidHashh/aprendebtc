@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Wallets Lightning: custodiales vs no-custodiales, LSP, canales embebidos. Cómo elegir la wallet correcta para tu caso de uso." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/wallets-lightning.html" />
+  <meta property="og:title" content="Wallets Lightning: tipos, trade-offs y cómo elegir | aprendebtc.com" />
+  <meta property="og:description" content="Wallets Lightning: custodiales vs no-custodiales, LSP, canales embebidos. Cómo elegir la wallet correcta para tu caso de uso." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Wallets Lightning: tipos, trade-offs y cómo elegir | aprendebtc.com" />
+  <meta name="twitter:description" content="Wallets Lightning: custodiales vs no-custodiales, LSP, canales embebidos. Cómo elegir la wallet correcta para tu caso de uso." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/wallets-lightning.html" />
+  <link rel="alternate" hreflang="es" href="https://aprendebtc.com/lightning/wallets-lightning.html" />
+  <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/lightning/wallets-lightning.html" />
+  <title>Wallets Lightning: tipos, trade-offs y cómo elegir | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-wallets" aria-hidden="true"></div></div></nav></aside>
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Wallets Lightning</span>
+        </nav>
+
+        <article class="article">
+          <h1>Wallets Lightning: tipos, trade-offs y cómo elegir</h1>
+          <p class="article__subtitle">No todas las wallets Lightning son iguales. Las diferencias importan más de lo que parece.</p>
+
+          <h2>Custodia en Lightning: más matices que en on-chain</h2>
+          <p>En Bitcoin on-chain la frontera suele ser binaria: tienes tú las claves o las tiene un tercero. En Lightning hay más capas: además de claves, importa quién gestiona canales, liquidez, backups de estado y conectividad. Por eso conviene pensar en espectro, no en etiqueta simple.</p>
+
+          <h2>Modelo 1: custodial total</h2>
+          <p>Ejemplos típicos: Wallet of Satoshi o saldos Lightning de ciertas plataformas. El proveedor opera canales, custodia fondos y decide políticas de acceso.</p>
+          <ul>
+            <li><strong>Ventaja:</strong> experiencia inmediata.</li>
+            <li><strong>Riesgo:</strong> congelación, KYC forzado, quiebra o cierre del servicio.</li>
+            <li><strong>Uso recomendado:</strong> importes pequeños y operativos.</li>
+          </ul>
+
+          <h2>Modelo 2: LSP-assisted (claves tuyas, liquidez delegada)</h2>
+          <p>Wallets como Phoenix o Breez te dan autocustodia de claves, pero un LSP te facilita canales y liquidez. Es el punto de equilibrio más útil para la mayoría: soberanía real con fricción baja.</p>
+          <ul>
+            <li><strong>Ventaja:</strong> buen balance entre control y usabilidad.</li>
+            <li><strong>Riesgo:</strong> dependencia operativa del LSP para disponibilidad y visibilidad de flujo.</li>
+          </ul>
+
+          <h2>Modelo 3: nodo propio</h2>
+          <p>Corres LND/CLN/Eclair por tu cuenta y conectas apps como Zeus, Alby Hub, Start9 o Umbrel. Tienes control total de política de canales, peers, fees y enrutamiento.</p>
+          <ul>
+            <li><strong>Ventaja:</strong> máxima soberanía.</li>
+            <li><strong>Coste:</strong> mantenimiento, backups y atención continua.</li>
+          </ul>
+
+          <h2>Modelo 4: eCash integrado con Lightning</h2>
+          <p>Cashu y Fedimint no son wallets Lightning puras, pero operan sobre Lightning para entrada/salida. Aportan privacidad fuerte para gastos diarios con un trade-off: custodia del mint o de la federación.</p>
+
+          <h2>Comparativa rápida</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Modelo</th>
+                <th>Custodia</th>
+                <th>Facilidad</th>
+                <th>Soberanía</th>
+                <th>Caso ideal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Custodial</td><td>Proveedor</td><td>Muy alta</td><td>Baja</td><td>Microimportes y onboarding</td></tr>
+              <tr><td>LSP-assisted</td><td>Usuario</td><td>Alta</td><td>Alta</td><td>Uso diario general</td></tr>
+              <tr><td>Nodo propio</td><td>Usuario</td><td>Media/Baja</td><td>Muy alta</td><td>Operación avanzada</td></tr>
+              <tr><td>eCash</td><td>Mint/Federación</td><td>Alta</td><td>Media/Baja</td><td>Privacidad de gasto</td></tr>
+            </tbody>
+          </table>
+
+          <div class="callout callout--danger">
+            <span class="callout__icon" aria-hidden="true">!</span>
+            <div class="callout__content">
+              <div class="callout__title">Regla operativa</div>
+              <p class="callout__text">Lightning es para gastar. On-chain es para guardar. No uses saldo Lightning como bóveda de ahorro a largo plazo.</p>
+            </div>
+          </div>
+
+          <h2>Recomendación práctica por perfil</h2>
+          <p><strong>Nuevo usuario:</strong> empieza con LSP-assisted para entender flujo real sin fricción excesiva.</p>
+          <p><strong>Usuario técnico:</strong> migra a nodo propio cuando ya domines liquidez, backups y apertura/cierre de canales.</p>
+          <p><strong>Privacidad cotidiana:</strong> combina wallet Lightning con eCash para montos pequeños.</p>
+
+          <h2>Enlaces</h2>
+          <ul>
+            <li><a href="/nivel-2/wallets-lightning.html">Nivel 2: wallets Lightning recomendadas</a></li>
+            <li><a href="/nivel-2/usar-lightning.html">Nivel 2: primera wallet Lightning</a></li>
+            <li><a href="/nivel-4/nodo-lightning.html">Nivel 4: operar tu nodo Lightning</a></li>
+            <li><a href="/base/tipos-de-wallet.html">Custodia vs autocustodia (próximamente)</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/como-funciona-un-pago.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">Cómo funciona un pago Lightning</span>
+            </a>
+            <a href="/lightning/ventajas-y-limites.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">Ventajas y límites reales de Lightning</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lightning Network: ventajas reales (velocidad, coste, privacidad) y límites honestos (liquidez, complejidad, custodia)." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/ventajas-y-limites.html" />
+  <meta property="og:title" content="Ventajas y límites reales de Lightning | aprendebtc.com" />
+  <meta property="og:description" content="Lightning Network: ventajas reales (velocidad, coste, privacidad) y límites honestos (liquidez, complejidad, custodia)." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ventajas y límites reales de Lightning | aprendebtc.com" />
+  <meta name="twitter:description" content="Lightning Network: ventajas reales (velocidad, coste, privacidad) y límites honestos (liquidez, complejidad, custodia)." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/ventajas-y-limites.html" />
+  <title>Ventajas y límites reales de Lightning | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-limites" aria-hidden="true"></div></div></nav></aside>
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Ventajas y límites</span>
+        </nav>
+
+        <article class="article">
+          <h1>Ventajas y límites reales de Lightning</h1>
+          <p class="article__subtitle">Lo que Lightning hace bien, lo que todavía no resuelve, y lo que probablemente nunca resolverá.</p>
+
+          <h2>Lo que hace mejor que alternativas tradicionales</h2>
+          <h3>Velocidad operativa</h3>
+          <p>Para pagos cotidianos, Lightning ofrece una experiencia casi instantánea. El usuario no espera confirmaciones on-chain para cada compra. Esto cambia por completo la usabilidad en comercio físico y digital.</p>
+
+          <h3>Coste marginal muy bajo</h3>
+          <p>Las comisiones de routing suelen ser de pocos sats o fracciones, especialmente en pagos pequeños y medianos. Esto habilita modelos de micropago inviables con tarjetas o transferencias bancarias.</p>
+
+          <h3>Micropagos nativos</h3>
+          <p>Lightning permite enviar importes extremadamente bajos (incluso en milisatoshis internamente). Esto abre casos de uso de pago por segundo, por evento o por consumo real de API.</p>
+
+          <h3>Privacidad comparativa mejor que on-chain</h3>
+          <p>Los pagos no se publican uno a uno en blockchain. No es anonimato perfecto, pero reduce exposición frente a la trazabilidad completa de pagos on-chain.</p>
+
+          <h2>Límites estructurales que no desaparecen por marketing</h2>
+          <h3>Liquidez</h3>
+          <p>Sin capacidad en la dirección correcta, el pago falla. Este límite es parte del diseño de canales, no un bug temporal. LSP y mejoras de UX lo mitigan, no lo eliminan.</p>
+
+          <h3>Dependencia de conectividad</h3>
+          <p>Para recibir de forma fiable necesitas nodo/LSP disponible. En práctica moderna esto lo cubren proveedores bien operados, pero sigue siendo dependencia operativa.</p>
+
+          <h3>Complejidad de backups y estado</h3>
+          <p>A diferencia de una wallet on-chain simple, Lightning añade estado de canal. Herramientas modernas simplifican recuperación, pero la capa técnica existe y debe respetarse.</p>
+
+          <h3>No es bóveda de ahorro</h3>
+          <p>Lightning está optimizado para flujo, no para almacenamiento de gran patrimonio. El ahorro de largo plazo sigue siendo mejor en capa base bajo autocustodia robusta.</p>
+
+          <h3>Pagos muy grandes</h3>
+          <p>A medida que sube el importe, la probabilidad de fallo por liquidez y el coste de ruta pueden aumentar. Para transferencias institucionales de gran tamaño, otras capas pueden ser más adecuadas.</p>
+
+          <h2>Centralización práctica vs diseño teórico</h2>
+          <p>Aunque el protocolo es abierto, la topología real puede concentrarse alrededor de nodos y LSP grandes por eficiencia de rutas. Esto no invalida Lightning, pero obliga a mirar datos reales y no solo el ideal de arquitectura.</p>
+
+          <div class="callout callout--info">
+            <span class="callout__icon" aria-hidden="true">i</span>
+            <div class="callout__content">
+              <div class="callout__title">Regla de uso por capas</div>
+              <p class="callout__text">Lightning para gastar. On-chain para guardar. Sidechains para casos específicos. Mezclar propósitos genera riesgos innecesarios.</p>
+            </div>
+          </div>
+
+          <h2>Qué probablemente no va a hacer Lightning</h2>
+          <ul>
+            <li>No va a sustituir la capa base como registro de liquidación final.</li>
+            <li>No va a resolver todos los casos de smart contracts complejos.</li>
+            <li>No va a eliminar por completo la necesidad de gestionar liquidez.</li>
+          </ul>
+
+          <h2>Enlaces</h2>
+          <ul>
+            <li><a href="/base/on-chain-vs-lightning.html">On-chain vs Lightning</a></li>
+            <li><a href="/la-madriguera/lightning-network-estado-actual.html">Lightning: estado actual</a></li>
+            <li><a href="/nivel-4/liquid-network.html">Liquid Network</a></li>
+            <li><a href="/lightning/wallets-lightning.html">Wallets Lightning</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/wallets-lightning.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">Wallets Lightning</span>
+            </a>
+            <a href="/lightning/glosario-lightning.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">Glosario Lightning</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>
+

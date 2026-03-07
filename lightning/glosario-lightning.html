@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Glosario Lightning Network: de BOLT a HTLC, de LSP a Keysend. Todos los términos del ecosistema Lightning explicados." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/glosario-lightning.html" />
+  <meta property="og:title" content="Glosario Lightning: todos los términos del ecosistema | aprendebtc.com" />
+  <meta property="og:description" content="Glosario Lightning Network: de BOLT a HTLC, de LSP a Keysend. Todos los términos del ecosistema Lightning explicados." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Glosario Lightning: todos los términos del ecosistema | aprendebtc.com" />
+  <meta name="twitter:description" content="Glosario Lightning Network: de BOLT a HTLC, de LSP a Keysend. Todos los términos del ecosistema Lightning explicados." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/glosario-lightning.html" />
+  <title>Glosario Lightning: todos los términos del ecosistema | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-glosario" aria-hidden="true"></div></div></nav></aside>
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Glosario Lightning</span>
+        </nav>
+
+        <article class="article">
+          <h1>Glosario Lightning: todos los términos del ecosistema</h1>
+          <p class="article__subtitle">Referencia rápida de los términos que encontrarás en esta sección y en el ecosistema Lightning.</p>
+
+          <p>Este glosario cubre términos específicos de Lightning. Para conceptos base de Bitcoin (UTXO, clave privada, bloque, mempool), consulta también <a href="/glosario.html">/glosario.html</a>.</p>
+
+          <h2>Diccionario</h2>
+          <p><strong>AMP:</strong> variante de pagos multipath con hashes independientes por fragmento, impulsada en el ecosistema LND.</p>
+          <p><strong>BOLT:</strong> especificaciones técnicas de Lightning (equivalente conceptual a los BIP en Bitcoin).</p>
+          <p><strong>BOLT11:</strong> formato clásico de invoice que empieza por lnbc/lntb.</p>
+          <p><strong>BOLT12 (Offers):</strong> evolución de invoices con offers reutilizables y mejor privacidad.</p>
+          <p><strong>Base fee:</strong> comisión fija por salto de routing.</p>
+          <p><strong>Blinded path:</strong> ruta ofuscada para ocultar identidad del receptor (BOLT12).</p>
+          <p><strong>Canal de pago:</strong> relación bilateral Lightning respaldada por multisig on-chain.</p>
+          <p><strong>Capacidad:</strong> total de sats bloqueados en un canal.</p>
+          <p><strong>Channel factory:</strong> esquema para abrir varios canales con menor uso on-chain (investigación).</p>
+          <p><strong>Commitment transaction:</strong> estado firmado del canal que puede publicarse para cierre.</p>
+          <p><strong>Fee rate (ppm):</strong> comisión proporcional por volumen enrutado.</p>
+          <p><strong>HTLC:</strong> contrato hash + timelock que asegura atomicidad en cada salto.</p>
+          <p><strong>Invoice:</strong> solicitud de pago Lightning, normalmente en BOLT11.</p>
+          <p><strong>JIT channel:</strong> canal abierto justo al recibir para aportar liquidez entrante.</p>
+          <p><strong>Keysend:</strong> pago espontáneo sin invoice previa del receptor.</p>
+          <p><strong>L402:</strong> autenticación y acceso de API mediante pago Lightning.</p>
+          <p><strong>Lightning Address:</strong> alias tipo usuario@dominio para recibir pagos vía LNURL-pay.</p>
+          <p><strong>Liquidez entrante:</strong> capacidad de recibir.</p>
+          <p><strong>Liquidez saliente:</strong> capacidad de enviar.</p>
+          <p><strong>LNURL:</strong> familia de protocolos (pay, withdraw, auth, channel) basada en endpoints web.</p>
+          <p><strong>LNURL-auth:</strong> login sin password usando firma derivada por dominio.</p>
+          <p><strong>LSP:</strong> proveedor que opera liquidez y conectividad para usuarios finales.</p>
+          <p><strong>LSPS:</strong> especificaciones para estandarizar servicios LSP.</p>
+          <p><strong>Macaroon:</strong> token de permisos granulares en ecosistema LND.</p>
+          <p><strong>MPP:</strong> pago dividido en múltiples rutas para aumentar éxito.</p>
+          <p><strong>NWC (NIP-47):</strong> conexión de apps a wallet Lightning vía Nostr, con permisos.</p>
+          <p><strong>Onion routing:</strong> cifrado por capas donde cada salto conoce solo vecino anterior y siguiente.</p>
+          <p><strong>Pathfinding:</strong> cálculo de rutas viables en la red.</p>
+          <p><strong>Payment hash:</strong> hash del secreto que desbloquea el cobro.</p>
+          <p><strong>Preimage:</strong> secreto revelado por el receptor para completar el pago.</p>
+          <p><strong>Penalty transaction:</strong> castigo por intento de cierre fraudulento con estado antiguo.</p>
+          <p><strong>PTLC:</strong> evolución propuesta de HTLC con mejoras de privacidad basadas en Schnorr.</p>
+          <p><strong>Routing node:</strong> nodo especializado en enrutar y cobrar fees.</p>
+          <p><strong>Splicing:</strong> añadir o retirar fondos de canal sin cerrarlo completamente.</p>
+          <p><strong>Submarine swap:</strong> intercambio atómico entre saldo Lightning y on-chain.</p>
+          <p><strong>Taproot Assets:</strong> protocolo para emitir activos y moverlos por rails Lightning.</p>
+          <p><strong>Trampoline routing:</strong> delegación de cálculo de ruta para clientes ligeros.</p>
+          <p><strong>Watchtower:</strong> servicio que vigila cierres fraudulentos si tu nodo está offline.</p>
+          <p><strong>WebLN:</strong> interfaz JavaScript para conectar webs con wallet Lightning en navegador.</p>
+          <p><strong>Zap:</strong> pago Lightning vinculado a contenido social en Nostr.</p>
+
+          <h2>Enlaces útiles</h2>
+          <ul>
+            <li><a href="/glosario.html">Glosario general</a></li>
+            <li><a href="/lightning/bolt11-y-bolt12.html">BOLT11 y BOLT12</a></li>
+            <li><a href="/lightning/lnurl.html">LNURL</a></li>
+            <li><a href="/lightning/como-funciona-un-pago.html">Cómo funciona un pago Lightning</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/ventajas-y-limites.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">Ventajas y límites reales de Lightning</span>
+            </a>
+            <a href="/lightning/bolt11-y-bolt12.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">BOLT11 y BOLT12</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>
+

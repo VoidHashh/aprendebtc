@@ -313,6 +313,33 @@
       ]
     },
     {
+      id: 'lightning',
+      label: 'Lightning',
+      sublabel: '',
+      href: '/lightning/',
+      pages: [
+        { sectionTitle: 'Fundamentos' },
+        { href: '/lightning/que-es-lightning.html', text: '¿Qué es Lightning Network?' },
+        { href: '/lightning/como-funciona-un-pago.html', text: 'Cómo funciona un pago Lightning' },
+        { href: '/lightning/wallets-lightning.html', text: 'Wallets Lightning: tipos y trade-offs' },
+        { href: '/lightning/ventajas-y-limites.html', text: 'Ventajas y límites reales de Lightning' },
+        { href: '/lightning/glosario-lightning.html', text: 'Glosario Lightning' },
+
+        { sectionTitle: 'Protocolos' },
+        { href: '/lightning/bolt11-y-bolt12.html', text: 'BOLT11 y BOLT12' },
+        { href: '/lightning/lnurl.html', text: 'LNURL' },
+        { href: '/lightning/lightning-address.html', text: 'Lightning Address' },
+        { href: '/lightning/keysend-mpp-amp.html', text: 'Keysend, MPP y AMP' },
+        { href: '/lightning/nwc.html', text: 'Nostr Wallet Connect (NWC)' },
+        { href: '/lightning/webln.html', text: 'WebLN' },
+
+        { sectionTitle: 'Infraestructura' },
+        { sectionTitle: 'Aplicaciones' },
+        { sectionTitle: 'Extensiones' },
+        { sectionTitle: 'Seguridad' },
+      ]
+    },
+    {
       id: 'comunidad',
       label: 'Comunidad',
       sublabel: '',
@@ -322,6 +349,28 @@
         { href: '/comunidad/meetups.html', text: 'Meetups presenciales' },
         { href: '/comunidad/conferencias.html', text: 'Conferencias' },
         { href: '/comunidad/nostr-y-bitcoin.html', text: 'Nostr y Bitcoin' },
+      ]
+    },
+    {
+      id: 'glosario',
+      label: 'Glosario',
+      sublabel: '',
+      href: '/glosario.html',
+      pages: []
+    },
+    {
+      id: 'recursos',
+      label: 'Recursos',
+      sublabel: '',
+      href: '/recursos.html',
+      pages: [
+        { href: '/recursos/libros.html', text: 'Libros' },
+        { href: '/recursos/podcasts.html', text: 'Podcasts' },
+        { href: '/recursos/documentales.html', text: 'Documentales' },
+        { href: '/recursos/webs-referencia.html', text: 'Webs de referencia' },
+        { href: '/recursos/herramientas.html', text: 'Herramientas recomendadas' },
+        { href: '/recursos/hardware-wallets.html', text: 'Hardware wallets' },
+        { href: '/recursos/otros-recursos.html', text: 'Otros recursos' },
       ]
     },
   ];
@@ -370,6 +419,7 @@
     if (path === '/la-madriguera' || path.startsWith('/la-madriguera/')) return 'La Madriguera';
     if (path === '/comunidad' || path.startsWith('/comunidad/')) return 'Comunidad';
     if (path === '/herramientas' || path.startsWith('/herramientas/')) return 'Herramientas';
+    if (path === '/lightning' || path.startsWith('/lightning/')) return 'Lightning';
     if (path === '/glosario.html') return 'Glosario';
     if (path === '/recursos.html' || path.startsWith('/recursos/')) return 'Recursos';
     if (path === '/sobre.html' || path === '/actualizaciones.html' || path === '/donar.html') return 'Proyecto';

@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="LNURL explicado: pay, withdraw, auth y channel. El paraguas de protocolos que simplifica Lightning para humanos." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/lnurl.html" />
+  <meta property="og:title" content="LNURL: la suite que hace Lightning usable | aprendebtc.com" />
+  <meta property="og:description" content="LNURL explicado: pay, withdraw, auth y channel. El paraguas de protocolos que simplifica Lightning para humanos." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LNURL: la suite que hace Lightning usable | aprendebtc.com" />
+  <meta name="twitter:description" content="LNURL explicado: pay, withdraw, auth y channel. El paraguas de protocolos que simplifica Lightning para humanos." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/lnurl.html" />
+  <title>LNURL: la suite que hace Lightning usable | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-lnurl" aria-hidden="true"></div></div></nav></aside>
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">LNURL</span>
+        </nav>
+
+        <article class="article">
+          <h1>LNURL: la suite que hace Lightning usable</h1>
+          <p class="article__subtitle">LNURL no es un protocolo único: es una familia de protocolos que resuelven fricción real de usabilidad.</p>
+
+          <h2>Por qué nació LNURL</h2>
+          <p>El flujo Lightning clásico basado en invoice única era potente pero poco práctico para casos cotidianos. LNURL apareció como capa pragmática para simplificar interacciones mediante endpoints web y respuestas JSON estandarizadas.</p>
+
+          <h2>Base técnica</h2>
+          <p>Una cadena LNURL codifica una URL HTTPS en bech32. La wallet decodifica, consulta el endpoint y ejecuta la acción indicada. Esto exige servidor disponible, pero reduce pasos manuales para el usuario.</p>
+
+          <h2>Variantes principales</h2>
+          <h3>LNURL-pay</h3>
+          <p>Permite cobrar con endpoint estático que genera invoices dinámicas. Es la base de Lightning Address.</p>
+
+          <h3>LNURL-withdraw</h3>
+          <p>Permite que un servicio pague al usuario: este entrega invoice y el servidor la paga.</p>
+
+          <h3>LNURL-auth</h3>
+          <p>Autenticación sin contraseña. La wallet firma un desafío derivado por dominio; el servicio valida sin almacenar email/password.</p>
+
+          <h3>LNURL-channel</h3>
+          <p>Flujo para solicitar apertura de canal. Hoy es menos común por el avance de LSP automáticos.</p>
+
+          <div class="callout callout--info">
+            <span class="callout__icon" aria-hidden="true">i</span>
+            <div class="callout__content">
+              <div class="callout__title">Contexto de diseño</div>
+              <p class="callout__text">LNURL fue creado por fiatjaf, también creador de Nostr. La convergencia Lightning + Nostr en identidad, pagos y UX no es casualidad.</p>
+            </div>
+          </div>
+
+          <h2>LNURL vs BOLT12</h2>
+          <p>BOLT12 resuelve de forma nativa parte del problema de direcciones reutilizables sin dependencia HTTP, con mejor privacidad. LNURL, sin embargo, está ampliamente desplegado hoy y cubre casos donde BOLT12 no sustituye directamente (por ejemplo ciertas variantes de auth/withdraw).</p>
+
+          <table>
+            <thead><tr><th>Aspecto</th><th>LNURL</th><th>BOLT12</th></tr></thead>
+            <tbody>
+              <tr><td>Dependencia web</td><td>Sí</td><td>No (flujo base)</td></tr>
+              <tr><td>Adopción actual</td><td>Muy alta</td><td>Creciente</td></tr>
+              <tr><td>Privacidad receptor</td><td>Media</td><td>Alta</td></tr>
+            </tbody>
+          </table>
+
+          <div class="callout callout--warning">
+            <span class="callout__icon" aria-hidden="true">!</span>
+            <div class="callout__content">
+              <div class="callout__title">Riesgo operativo</div>
+              <p class="callout__text">Si el servidor de tu endpoint LNURL cae, no podrás cobrar aunque tu nodo Lightning esté funcionando.</p>
+            </div>
+          </div>
+
+          <h2>Enlaces</h2>
+          <ul>
+            <li><a href="/lightning/lightning-address.html">Lightning Address</a></li>
+            <li><a href="/lightning/bolt11-y-bolt12.html">BOLT11 y BOLT12</a></li>
+            <li><a href="/lightning/nwc.html">NWC</a></li>
+            <li><a href="/lightning/webln.html">WebLN</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/bolt11-y-bolt12.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">BOLT11 y BOLT12</span>
+            </a>
+            <a href="/lightning/lightning-address.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">Lightning Address</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>
+

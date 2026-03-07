@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Nostr Wallet Connect: cómo funciona NWC, por qué usa Nostr como transporte, y cómo conecta tu wallet Lightning a apps remotas." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/nwc.html" />
+  <meta property="og:title" content="Nostr Wallet Connect (NWC): conecta tu wallet a cualquier app | aprendebtc.com" />
+  <meta property="og:description" content="Nostr Wallet Connect: cómo funciona NWC, por qué usa Nostr como transporte, y cómo conecta tu wallet Lightning a apps remotas." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Nostr Wallet Connect (NWC): conecta tu wallet a cualquier app | aprendebtc.com" />
+  <meta name="twitter:description" content="Nostr Wallet Connect: cómo funciona NWC, por qué usa Nostr como transporte, y cómo conecta tu wallet Lightning a apps remotas." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/nwc.html" />
+  <title>Nostr Wallet Connect (NWC): conecta tu wallet a cualquier app | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-nwc" aria-hidden="true"></div></div></nav></aside>
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">NWC</span>
+        </nav>
+
+        <article class="article">
+          <h1>Nostr Wallet Connect (NWC): conecta tu wallet a cualquier app</h1>
+          <p class="article__subtitle">Un protocolo que usa Nostr para conectar tu wallet Lightning con apps, sin entregar tus claves.</p>
+
+          <h2>Qué problema resuelve</h2>
+          <p>Muchas apps necesitan ejecutar pagos Lightning en tu nombre: zaps, suscripciones, micropagos o consumo de APIs. Dar seed phrase o permisos de administrador a cada app no es aceptable.</p>
+          <p>NWC (NIP-47) permite delegar operaciones concretas con límites claros, usando relays de Nostr como canal de transporte cifrado entre app y wallet.</p>
+
+          <h2>Flujo operativo</h2>
+          <ol>
+            <li>Tu wallet genera un connection string con relay, clave pública y permisos.</li>
+            <li>La app recibe ese string y envía solicitudes cifradas.</li>
+            <li>Tu wallet valida permisos, ejecuta y responde.</li>
+            <li>La app nunca toca tu seed ni claves de firma del nodo.</li>
+          </ol>
+
+          <h2>Por qué Nostr como transporte</h2>
+          <ul>
+            <li>Infraestructura distribuida ya existente.</li>
+            <li>Cifrado de mensajes y modelo asíncrono robusto.</li>
+            <li>No requiere abrir tu nodo al internet público con endpoints directos.</li>
+            <li>Resiliencia: si un relay falla, puedes cambiar de relay.</li>
+          </ul>
+
+          <h2>Permisos granulares</h2>
+          <p>NWC permite recortar superficie de riesgo con límites por método y por presupuesto:</p>
+          <ul>
+            <li><code>pay_invoice</code>, <code>make_invoice</code>, <code>get_balance</code>, etc.</li>
+            <li>tope diario/mensual de gasto.</li>
+            <li>expiración de credenciales.</li>
+          </ul>
+
+          <div class="callout callout--info">
+            <span class="callout__icon" aria-hidden="true">i</span>
+            <div class="callout__content">
+              <div class="callout__title">Valor práctico</div>
+              <p class="callout__text">NWC es clave para Nostr: puedes enviar zaps desde múltiples clientes sin repartir fondos ni exponer custodia en cada uno.</p>
+            </div>
+          </div>
+
+          <h2>NWC vs WebLN</h2>
+          <table>
+            <thead><tr><th>Aspecto</th><th>NWC</th><th>WebLN</th></tr></thead>
+            <tbody>
+              <tr><td>Contexto</td><td>Apps móviles/escritorio/web</td><td>Navegador desktop</td></tr>
+              <tr><td>Transporte</td><td>Nostr relays</td><td>API del navegador</td></tr>
+              <tr><td>Permisos persistentes</td><td>Sí, granulares</td><td>Normalmente por sesión/confirmación</td></tr>
+            </tbody>
+          </table>
+
+          <h2>Enlaces</h2>
+          <ul>
+            <li><a href="/lightning/webln.html">WebLN</a></li>
+            <li><a href="/comunidad/nostr-y-bitcoin.html">Nostr Zaps y Lightning (próximamente)</a></li>
+            <li><a href="/nivel-4/nodo-lightning.html">Nivel 4: tu nodo Lightning</a></li>
+            <li><a href="https://nostrfacil.com" rel="noopener" target="_blank">nostrfacil.com</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/keysend-mpp-amp.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">Keysend, MPP y AMP</span>
+            </a>
+            <a href="/lightning/webln.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">WebLN</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>
+

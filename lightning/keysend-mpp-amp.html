@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Keysend, MPP y AMP en Lightning: pagos espontáneos sin invoice, pagos divididos en partes, y cómo funcionan técnicamente." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/keysend-mpp-amp.html" />
+  <meta property="og:title" content="Keysend, MPP y AMP: pagos sin invoice y multipath | aprendebtc.com" />
+  <meta property="og:description" content="Keysend, MPP y AMP en Lightning: pagos espontáneos sin invoice, pagos divididos en partes, y cómo funcionan técnicamente." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Keysend, MPP y AMP: pagos sin invoice y multipath | aprendebtc.com" />
+  <meta name="twitter:description" content="Keysend, MPP y AMP en Lightning: pagos espontáneos sin invoice, pagos divididos en partes, y cómo funcionan técnicamente." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/keysend-mpp-amp.html" />
+  <title>Keysend, MPP y AMP: pagos sin invoice y multipath | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-keysend" aria-hidden="true"></div></div></nav></aside>
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Keysend, MPP y AMP</span>
+        </nav>
+
+        <article class="article">
+          <h1>Keysend, MPP y AMP: pagos sin invoice y multipath</h1>
+          <p class="article__subtitle">No siempre necesitas una invoice. Y a veces un pago necesita viajar por varios caminos a la vez.</p>
+
+          <h2>Modelo clásico y fricción</h2>
+          <p>El flujo clásico de Lightning es pull: el receptor crea invoice y el pagador la paga. Es sólido, pero en algunos casos es ineficiente, como pagos automáticos de streaming, sistemas machine-to-machine o montos grandes con rutas fragmentadas.</p>
+
+          <h2>Keysend: pagos espontáneos push</h2>
+          <p>Con Keysend, el emisor puede enviar sats sin invoice previa del receptor. El preimage se transporta en el onion del pago y el receptor cobra al validarlo. Esto habilita flujos continuos como Podcasting 2.0.</p>
+
+          <div class="callout callout--info">
+            <span class="callout__icon" aria-hidden="true">i</span>
+            <div class="callout__content">
+              <div class="callout__title">Caso estrella</div>
+              <p class="callout__text">El streaming de sats en podcasting usa Keysend para pagar al creador por minuto escuchado sin generar invoices manuales.</p>
+            </div>
+          </div>
+
+          <h2>MPP: dividir para enrutar mejor</h2>
+          <p>Multi-Path Payments divide un pago en varias partes que viajan por rutas distintas y se recomponen en destino. Permite enviar montos que no caben por una sola ruta de liquidez.</p>
+          <p>MPP es estándar en implementaciones principales y muchas wallets lo aplican automáticamente para mejorar tasa de éxito.</p>
+
+          <h2>AMP: variante multipath avanzada</h2>
+          <p>AMP extiende la idea multipath con hashes por fragmento y lógica criptográfica adicional. Tiene más tracción en algunos stacks (especialmente LND), pero menor adopción universal que MPP estándar.</p>
+
+          <table>
+            <thead><tr><th>Tecnología</th><th>Invoice requerida</th><th>Multipath</th><th>Caso típico</th></tr></thead>
+            <tbody>
+              <tr><td>Keysend</td><td>No</td><td>No (base)</td><td>Pagos espontáneos y streaming</td></tr>
+              <tr><td>MPP</td><td>Sí</td><td>Sí</td><td>Pagos grandes y robustez de ruta</td></tr>
+              <tr><td>AMP</td><td>No</td><td>Sí</td><td>Push multipath avanzado</td></tr>
+            </tbody>
+          </table>
+
+          <h2>Enlaces</h2>
+          <ul>
+            <li><a href="/lightning/bolt11-y-bolt12.html">BOLT11 y BOLT12</a></li>
+            <li><a href="/la-madriguera/lightning-network-estado-actual.html">Podcasting Value4Value (próximamente)</a></li>
+            <li><a href="/nivel-4/routing-lightning.html">Nivel 4: routing Lightning</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/lightning-address.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">Lightning Address</span>
+            </a>
+            <a href="/lightning/nwc.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">Nostr Wallet Connect (NWC)</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>
+

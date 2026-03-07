@@ -100,6 +100,7 @@ function inferSectionAndNivel(route) {
   if (pathName.startsWith('/base/')) return { section: 'Base de Conocimiento', nivel: undefined };
   if (pathName.startsWith('/la-madriguera/')) return { section: 'La Madriguera', nivel: undefined };
   if (pathName.startsWith('/sidechains/')) return { section: 'Sidechains', nivel: undefined };
+  if (pathName.startsWith('/lightning/')) return { section: 'Lightning', nivel: undefined };
   if (pathName.startsWith('/herramientas/')) return { section: 'Herramientas', nivel: undefined };
   if (pathName.startsWith('/comunidad/')) return { section: 'Comunidad', nivel: undefined };
   if (pathName === '/glosario.html') return { section: 'Glosario', nivel: undefined };

@@ -10,8 +10,25 @@
 | /sidechains/liquid-network.html | /nivel-4/liquid-network.html | 🔄 |
 | /sidechains/fedimint-y-cashu.html | /nivel-4/fedimint-y-cashu.html | 🔄 |
 
+## Sección Lightning (hub temático)
+
+| Ruta | Tipo | Estado |
+| --- | --- | --- |
+| /lightning/ | Índice | ✅ |
+| /lightning/que-es-lightning.html | Fundamentos | ✅ |
+| /lightning/como-funciona-un-pago.html | Fundamentos | ✅ |
+| /lightning/wallets-lightning.html | Fundamentos | ✅ |
+| /lightning/ventajas-y-limites.html | Fundamentos | ✅ |
+| /lightning/glosario-lightning.html | Fundamentos | ✅ |
+| /lightning/bolt11-y-bolt12.html | Protocolos | ✅ |
+| /lightning/lnurl.html | Protocolos | ✅ |
+| /lightning/lightning-address.html | Protocolos | ✅ |
+| /lightning/keysend-mpp-amp.html | Protocolos | ✅ |
+| /lightning/nwc.html | Protocolos | ✅ |
+| /lightning/webln.html | Protocolos | ✅ |
+
 ## Totales del proyecto
 
 - Total redirects del sitio: 9 (antes: 4)
-- Total archivos en el repositorio: 173 (antes: 168)
-- Total páginas indexables: sin cambios (las 4 páginas de nivel-4 ya estaban contadas)
+- Total archivos rastreados (rg --files): 283
+- Total páginas indexables: +12 (nueva sección /lightning/)

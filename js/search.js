@@ -77,6 +77,19 @@
     { title: 'Mineria con Bitaxe', url: '/nivel-4/mineria-bitaxe.html', tags: ['nivel 4', 'bitaxe', 'mineria'], section: 'Nivel 4', nivel: 4 },
     { title: 'Bitcoin como calefaccion', url: '/nivel-4/calefaccion-bitcoin.html', tags: ['nivel 4', 'mineria', 'calefaccion'], section: 'Nivel 4', nivel: 4 },
 
+    { title: 'Lightning Network: el ecosistema completo', url: '/lightning/', tags: ['lightning', 'ecosistema', 'index'], section: 'Lightning' },
+    { title: '¿Qué es Lightning Network? La visión completa', url: '/lightning/que-es-lightning.html', tags: ['lightning', 'fundamentos', 'historia'], section: 'Lightning' },
+    { title: 'Cómo funciona un pago Lightning: canales, liquidez y routing', url: '/lightning/como-funciona-un-pago.html', tags: ['lightning', 'canales', 'htlc', 'routing', 'liquidez'], section: 'Lightning' },
+    { title: 'Wallets Lightning: tipos, trade-offs y cómo elegir', url: '/lightning/wallets-lightning.html', tags: ['lightning', 'wallets', 'custodia', 'lsp'], section: 'Lightning' },
+    { title: 'Ventajas y límites reales de Lightning', url: '/lightning/ventajas-y-limites.html', tags: ['lightning', 'ventajas', 'limites', 'pagos'], section: 'Lightning' },
+    { title: 'Glosario Lightning: todos los términos del ecosistema', url: '/lightning/glosario-lightning.html', tags: ['lightning', 'glosario', 'terminos', 'bolts'], section: 'Lightning' },
+    { title: 'BOLT11 y BOLT12: las invoices de Lightning', url: '/lightning/bolt11-y-bolt12.html', tags: ['lightning', 'bolt11', 'bolt12', 'invoice'], section: 'Lightning' },
+    { title: 'LNURL: la suite que hace Lightning usable', url: '/lightning/lnurl.html', tags: ['lightning', 'lnurl', 'lnurl-pay', 'lnurl-auth'], section: 'Lightning' },
+    { title: 'Lightning Address: recibir sats como recibir un email', url: '/lightning/lightning-address.html', tags: ['lightning', 'lightning address', 'lnurl'], section: 'Lightning' },
+    { title: 'Keysend, MPP y AMP: pagos sin invoice y multipath', url: '/lightning/keysend-mpp-amp.html', tags: ['lightning', 'keysend', 'mpp', 'amp'], section: 'Lightning' },
+    { title: 'Nostr Wallet Connect (NWC): conecta tu wallet a cualquier app', url: '/lightning/nwc.html', tags: ['lightning', 'nwc', 'nostr', 'nip47'], section: 'Lightning' },
+    { title: 'WebLN: Lightning nativo en el navegador', url: '/lightning/webln.html', tags: ['lightning', 'webln', 'navegador', 'pagos web'], section: 'Lightning' },
+
     { title: 'Nivel 5 - Mentor', url: '/nivel-5/', tags: ['nivel 5', 'criptografia', 'script', 'protocolo'], section: 'Niveles', nivel: 5 },
 
     { title: 'Nivel 6 - Satoshi', url: '/nivel-6/', tags: ['nivel 6', 'filosofia', 'contribucion', 'educacion'], section: 'Niveles', nivel: 6 },

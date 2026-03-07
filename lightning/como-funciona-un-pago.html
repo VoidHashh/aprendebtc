@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cómo funciona un pago Lightning paso a paso: canales de pago, liquidez entrante y saliente, routing entre nodos y comisiones." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/como-funciona-un-pago.html" />
+  <meta property="og:title" content="Cómo funciona un pago Lightning: canales, liquidez y routing | aprendebtc.com" />
+  <meta property="og:description" content="Cómo funciona un pago Lightning paso a paso: canales de pago, liquidez entrante y saliente, routing entre nodos y comisiones." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Cómo funciona un pago Lightning: canales, liquidez y routing | aprendebtc.com" />
+  <meta name="twitter:description" content="Cómo funciona un pago Lightning paso a paso: canales de pago, liquidez entrante y saliente, routing entre nodos y comisiones." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/como-funciona-un-pago.html" />
+  <link rel="alternate" hreflang="es" href="https://aprendebtc.com/lightning/como-funciona-un-pago.html" />
+  <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/lightning/como-funciona-un-pago.html" />
+  <title>Cómo funciona un pago Lightning: canales, liquidez y routing | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral">
+      <nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-pago" aria-hidden="true"></div></div></nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Cómo funciona un pago</span>
+        </nav>
+
+        <article class="article">
+          <h1>Cómo funciona un pago Lightning: canales, liquidez y routing</h1>
+          <p class="article__subtitle">Todo el viaje de un pago Lightning, desde que pulsas enviar hasta que llega al destino en milisegundos.</p>
+
+          <h2>El viaje real de un pago</h2>
+          <p>Cuando envías sats por Lightning, no estás escribiendo una transacción nueva en la blockchain. Estás actualizando estados de canales ya abiertos entre nodos. Tu wallet calcula una ruta, reserva liquidez en cada salto y ejecuta un flujo atómico basado en HTLCs. El receptor solo cobra si el pago llega completo; si no llega, todos recuperan su saldo original.</p>
+          <p>El pago suele tardar menos de un segundo, pero internamente ocurren varios pasos: búsqueda de ruta, validación de capacidad, negociación de condiciones y propagación del preimage de vuelta.</p>
+
+          <h2>Canal de pago: la unidad base</h2>
+          <p>Un canal Lightning nace con una transacción on-chain 2-de-2 multisig. Dentro del canal, dos partes intercambian nuevos estados firmados sin tocar la cadena base en cada pago. Solo apertura y cierre son on-chain.</p>
+          <p>Cada actualización invalida el estado anterior. Si una parte intenta publicar un estado antiguo para robar saldo, la contraparte puede ejecutar penalización y quedarse con todos los fondos del canal. Esa amenaza económica protege el protocolo.</p>
+
+          <h2>Liquidez entrante y saliente</h2>
+          <p>La liquidez define si puedes enviar o recibir. Si abres un canal con 500.000 sats desde tu lado, inicialmente tienes casi toda la liquidez para enviar y casi nada para recibir. Para recibir, necesitas que parte del saldo esté del lado remoto o que un LSP te abra capacidad entrante.</p>
+
+          <div class="callout callout--warning">
+            <span class="callout__icon" aria-hidden="true">!</span>
+            <div class="callout__content">
+              <div class="callout__title">Concepto crítico</div>
+              <p class="callout__text">Abrir un canal no significa automáticamente poder recibir. Sin liquidez entrante, el pago fallará aunque tengas saldo total suficiente en Lightning.</p>
+            </div>
+          </div>
+
+          <h2>Routing: encontrar camino en un grafo vivo</h2>
+          <p>La red pública de Lightning es un grafo de nodos y canales. El emisor calcula rutas probables según capacidad, coste y fiabilidad histórica. Si una ruta falla, la wallet intenta otra automáticamente.</p>
+          <p>En móviles se usan estrategias como <em>trampoline routing</em> para delegar parte del cálculo a nodos bien conectados, reduciendo coste computacional local.</p>
+
+          <h2>HTLC: atomicidad del pago</h2>
+          <p>El receptor define un secreto (preimage) y publica su hash en la invoice. Cada salto de la ruta bloquea el monto bajo la condición “te pago si presentas el preimage antes de cierto tiempo”. Cuando el receptor revela el preimage para cobrar, el secreto vuelve por la ruta y cada nodo libera su tramo. Si no aparece el preimage a tiempo, los contratos expiran y cada salto recupera su saldo.</p>
+
+          <h2>Comisiones de routing</h2>
+          <p>Cada nodo intermedio puede cobrar una comisión fija (base fee) y otra proporcional (fee rate en ppm). Para pagos cotidianos, el coste suele ser muy bajo. Para pagos grandes, la liquidez necesaria en cada salto y el coste acumulado pueden crecer de forma relevante.</p>
+
+          <h2>Qué cambia con MPP, splicing y LSP</h2>
+          <ul>
+            <li><strong>MPP:</strong> divide un pago grande en varias rutas más pequeñas para elevar probabilidad de éxito.</li>
+            <li><strong>Splicing:</strong> ajusta fondos de canal sin cerrar y abrir de cero.</li>
+            <li><strong>LSP:</strong> abstrae la gestión de liquidez para usuarios no técnicos.</li>
+          </ul>
+
+          <h2>Enlaces relacionados</h2>
+          <ul>
+            <li><a href="/nivel-4/canales-lightning.html">Nivel 4: canales Lightning</a></li>
+            <li><a href="/nivel-4/liquidez-lightning.html">Nivel 4: liquidez Lightning</a></li>
+            <li><a href="/nivel-4/routing-lightning.html">Nivel 4: routing Lightning</a></li>
+            <li><a href="/nivel-4/liquidez-lightning.html">LSP y liquidez (próximamente)</a></li>
+            <li><a href="/la-madriguera/lightning-network-estado-actual.html">PTLCs y futuro (próximamente)</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/que-es-lightning.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">¿Qué es Lightning Network? La visión completa</span>
+            </a>
+            <a href="/lightning/wallets-lightning.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">Wallets Lightning: tipos, trade-offs y cómo elegir</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>
+

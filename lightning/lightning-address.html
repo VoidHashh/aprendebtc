@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lightning Address: qué es, cómo funciona, por qué parece un email, y la relación con LNURL-pay. Guía completa." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/lightning-address.html" />
+  <meta property="og:title" content="Lightning Address: recibir sats como recibir un email | aprendebtc.com" />
+  <meta property="og:description" content="Lightning Address: qué es, cómo funciona, por qué parece un email, y la relación con LNURL-pay. Guía completa." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Lightning Address: recibir sats como recibir un email | aprendebtc.com" />
+  <meta name="twitter:description" content="Lightning Address: qué es, cómo funciona, por qué parece un email, y la relación con LNURL-pay. Guía completa." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/lightning-address.html" />
+  <title>Lightning Address: recibir sats como recibir un email | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-address" aria-hidden="true"></div></div></nav></aside>
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Lightning Address</span>
+        </nav>
+
+        <article class="article">
+          <h1>Lightning Address: recibir sats como recibir un email</h1>
+          <p class="article__subtitle">usuario@dominio.com pero para recibir bitcoin. Así de simple, así de potente.</p>
+
+          <h2>Qué es y por qué importa</h2>
+          <p>Lightning Address es una convención de UX que hace que cobrar en Lightning sea memorable. En vez de enviar QR o invoice temporal, compartes una dirección legible tipo email. La wallet del pagador resuelve esa dirección y obtiene una invoice válida automáticamente.</p>
+
+          <h2>Cómo funciona por debajo</h2>
+          <ol>
+            <li>El pagador introduce <code>usuario@dominio.com</code>.</li>
+            <li>La wallet consulta el endpoint <code>/.well-known/lnurlp/usuario</code>.</li>
+            <li>El servidor responde parámetros de cobro.</li>
+            <li>La wallet pide invoice para el monto elegido.</li>
+            <li>Se paga la invoice y el receptor cobra en Lightning.</li>
+          </ol>
+          <p>Lightning Address es, en esencia, LNURL-pay con un formato humano estandarizado.</p>
+
+          <h2>Quién custodia realmente</h2>
+          <p>La dirección no determina custodia. Depende del backend que genera y cobra invoices:</p>
+          <ul>
+            <li>Si usas proveedor custodial, confías en ese proveedor.</li>
+            <li>Si usas nodo propio y dominio propio, mantienes control operativo y de fondos.</li>
+          </ul>
+
+          <div class="callout callout--warning">
+            <span class="callout__icon" aria-hidden="true">!</span>
+            <div class="callout__content">
+              <div class="callout__title">Dependencia de infraestructura</div>
+              <p class="callout__text">Tu Lightning Address es tan fiable como el dominio y servidor que la resuelven. Si caen, dejas de cobrar temporalmente.</p>
+            </div>
+          </div>
+
+          <h2>Relación con Nostr</h2>
+          <p>Lightning Address y NIP-05 (identidad verificable de Nostr) comparten formato usuario@dominio. Esa convergencia facilita que una misma identidad legible sirva para capa social y capa de pagos.</p>
+
+          <h2>¿La reemplazará BOLT12?</h2>
+          <p>BOLT12 ofrece mejor privacidad y menos dependencia web, pero Lightning Address tiene una ventaja de usabilidad masiva evidente. Lo más probable es coexistencia: alias humano arriba, protocolo más robusto debajo.</p>
+
+          <h2>Enlaces</h2>
+          <ul>
+            <li><a href="/lightning/lnurl.html">LNURL</a></li>
+            <li><a href="/lightning/bolt11-y-bolt12.html">BOLT11 y BOLT12</a></li>
+            <li><a href="/nivel-2/lightning-address.html">Nivel 2: guía práctica</a></li>
+            <li><a href="/comunidad/nostr-y-bitcoin.html">Nostr Zaps y Lightning (próximamente)</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/lnurl.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">LNURL</span>
+            </a>
+            <a href="/lightning/keysend-mpp-amp.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">Keysend, MPP y AMP</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>
+

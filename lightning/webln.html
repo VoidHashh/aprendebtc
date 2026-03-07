@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="WebLN: el estándar que integra pagos Lightning directamente en el navegador web. Qué es, cómo funciona y quién lo implementa." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/webln.html" />
+  <meta property="og:title" content="WebLN: Lightning nativo en el navegador | aprendebtc.com" />
+  <meta property="og:description" content="WebLN: el estándar que integra pagos Lightning directamente en el navegador web. Qué es, cómo funciona y quién lo implementa." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="WebLN: Lightning nativo en el navegador | aprendebtc.com" />
+  <meta name="twitter:description" content="WebLN: el estándar que integra pagos Lightning directamente en el navegador web. Qué es, cómo funciona y quién lo implementa." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/webln.html" />
+  <title>WebLN: Lightning nativo en el navegador | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-webln" aria-hidden="true"></div></div></nav></aside>
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">WebLN</span>
+        </nav>
+
+        <article class="article">
+          <h1>WebLN: Lightning nativo en el navegador</h1>
+          <p class="article__subtitle">Un estándar para que cualquier web pueda cobrar y pagar en Lightning sin que el usuario salga de la página.</p>
+
+          <h2>Qué resuelve WebLN</h2>
+          <p>Antes de WebLN, pagar en web implicaba copiar/pegar invoices o escanear QR con otro dispositivo. WebLN define una interfaz JavaScript para que la web hable con la wallet del usuario mediante una extensión del navegador.</p>
+
+          <h2>Flujo básico</h2>
+          <ol>
+            <li>El sitio detecta si existe <code>window.webln</code>.</li>
+            <li>Solicita permiso con <code>enable()</code>.</li>
+            <li>Dispara pago con <code>sendPayment(invoice)</code> o crea invoice con <code>makeInvoice()</code>.</li>
+            <li>La extensión muestra confirmación y ejecuta.</li>
+          </ol>
+
+          <h2>Quién lo implementa</h2>
+          <p>La implementación de referencia más usada es Alby Extension. Muchos servicios Lightning-first en desktop (contenido premium, props, trading, herramientas web) ya soportan este flujo.</p>
+
+          <h2>Ejemplo de integración</h2>
+          <pre><code>if (window.webln) {
+  await window.webln.enable();
+  const result = await window.webln.sendPayment(invoice);
+  console.log(result.preimage);
+} else {
+  // fallback: QR o invoice copiable
+}
+</code></pre>
+
+          <h2>Límite estructural</h2>
+          <p>WebLN depende de extensiones de navegador, por eso funciona mejor en desktop. En móvil, donde las extensiones son limitadas, NWC suele ser el complemento más práctico.</p>
+
+          <table>
+            <thead><tr><th>Protocolo</th><th>Contexto ideal</th><th>Dependencia clave</th></tr></thead>
+            <tbody>
+              <tr><td>WebLN</td><td>Web desktop</td><td>Extensión</td></tr>
+              <tr><td>NWC</td><td>Apps y móvil</td><td>Relay Nostr + wallet server</td></tr>
+              <tr><td>LNURL</td><td>Cobro universal</td><td>Servidor web</td></tr>
+            </tbody>
+          </table>
+
+          <div class="callout callout--info">
+            <span class="callout__icon" aria-hidden="true">i</span>
+            <div class="callout__content">
+              <div class="callout__title">No compiten entre sí</div>
+              <p class="callout__text">WebLN, NWC y LNURL cubren contextos distintos. En producción suelen convivir en la misma aplicación para cubrir todos los dispositivos.</p>
+            </div>
+          </div>
+
+          <h2>Enlaces</h2>
+          <ul>
+            <li><a href="/lightning/nwc.html">NWC</a></li>
+            <li><a href="/lightning/lnurl.html">LNURL</a></li>
+            <li><a href="/la-madriguera/lightning-network-estado-actual.html">L402 (próximamente)</a></li>
+            <li><a href="/nivel-2/usar-lightning.html">Micropagos web (próximamente)</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/nwc.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">Nostr Wallet Connect (NWC)</span>
+            </a>
+            <a href="/lightning/" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">Volver al índice Lightning</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>
+
