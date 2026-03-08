@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Riesgos de Lightning Network: ataques de canal, privacidad de pagos, análisis de rutas, y cómo protegerte." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/seguridad-y-riesgos.html" />
+  <meta property="og:title" content="Riesgos reales y privacidad en Lightning | aprendebtc.com" />
+  <meta property="og:description" content="Riesgos de Lightning Network: ataques de canal, privacidad de pagos, análisis de rutas, y cómo protegerte." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Riesgos reales y privacidad en Lightning | aprendebtc.com" />
+  <meta name="twitter:description" content="Riesgos de Lightning Network: ataques de canal, privacidad de pagos, análisis de rutas, y cómo protegerte." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/seguridad-y-riesgos.html" />
+  <title>Riesgos reales y privacidad en Lightning | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-seguridad-riesgos" aria-hidden="true"></div></div></nav></aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Riesgos y privacidad</span>
+        </nav>
+
+        <article class="article">
+          <h1>Riesgos reales y privacidad en Lightning</h1>
+          <p class="article__subtitle">Lightning mejora la privacidad respecto a on-chain, pero no es anónimo. Estos son los riesgos reales.</p>
+
+          <h2>Qué mejora respecto a on-chain</h2>
+          <ul>
+            <li>Los pagos internos de canal no se publican en blockchain.</li>
+            <li>Onion routing reduce visibilidad de ruta completa por salto.</li>
+            <li>Menor trazabilidad directa que una transacción UTXO pública.</li>
+          </ul>
+
+          <h2>Qué riesgos siguen existiendo</h2>
+          <h3>Análisis de graph público</h3>
+          <p>Canales anunciados permiten inferencias de topología y relaciones de nodo.</p>
+
+          <h3>Balance probing</h3>
+          <p>Pagos de prueba pueden estimar liquidez de un canal en ciertos escenarios.</p>
+
+          <h3>Correlación por LSP</h3>
+          <p>Si usas wallet LSP-assisted, el proveedor observa metadatos relevantes de pago.</p>
+
+          <h3>Jamming y degradación</h3>
+          <p>Ataques de disponibilidad pueden bloquear liquidez temporalmente sin robar fondos.</p>
+
+          <h3>Vectores avanzados</h3>
+          <p>Investigaciones como replacement cycling muestran que la seguridad operacional depende también de mempool y políticas de cierre.</p>
+
+          <div class="callout callout--warning">
+            <span class="callout__icon" aria-hidden="true">!</span>
+            <div class="callout__content">
+              <div class="callout__title">Modelo de amenaza</div>
+              <p class="callout__text">Para uso cotidiano, Lightning ofrece privacidad práctica superior a banca/tarjeta. Para adversarios de alto nivel, necesitas capas extra como eCash y buen opsec.</p>
+            </div>
+          </div>
+
+          <h2>Recomendaciones por perfil</h2>
+          <ul>
+            <li>Usuario medio: wallet LSP reputada y hábitos de verificación básica.</li>
+            <li>Perfil privacidad alta: nodo propio + Tor + canales privados + eCash en casos sensibles.</li>
+            <li>Operador de routing: límites HTLC, watchtower, peers diversificados y software actualizado.</li>
+          </ul>
+
+          <h2>Enlaces</h2>
+          <ul>
+            <li><a href="/lightning/wallets-lightning.html">Wallets Lightning</a></li>
+            <li><a href="/lightning/ecash-cashu-fedimint.html">eCash sobre Lightning</a></li>
+            <li><a href="/lightning/custodia-vs-autocustodia.html">Custodia vs autocustodia</a></li>
+            <li><a href="/la-madriguera/privacidad-en-bitcoin-estado-actual.html">Privacidad en Bitcoin</a></li>
+            <li><a href="/nivel-3/seguridad-operativa.html">Seguridad operativa</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/mas-que-sats.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">Cuando Lightning mueve más que sats</span>
+            </a>
+            <a href="/lightning/custodia-vs-autocustodia.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">Custodia en Lightning</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

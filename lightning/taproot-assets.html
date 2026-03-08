@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Taproot Assets: cómo emitir tokens, stablecoins y activos digitales directamente sobre Lightning Network usando Taproot." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/taproot-assets.html" />
+  <meta property="og:title" content="Taproot Assets: tokens y stablecoins sobre Lightning | aprendebtc.com" />
+  <meta property="og:description" content="Taproot Assets: cómo emitir tokens, stablecoins y activos digitales directamente sobre Lightning Network usando Taproot." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Taproot Assets: tokens y stablecoins sobre Lightning | aprendebtc.com" />
+  <meta name="twitter:description" content="Taproot Assets: cómo emitir tokens, stablecoins y activos digitales directamente sobre Lightning Network usando Taproot." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/taproot-assets.html" />
+  <title>Taproot Assets: tokens y stablecoins sobre Lightning | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-taproot-assets" aria-hidden="true"></div></div></nav></aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Taproot Assets</span>
+        </nav>
+
+        <article class="article">
+          <h1>Taproot Assets: tokens y stablecoins sobre Lightning</h1>
+          <p class="article__subtitle">Lightning no solo mueve sats. Con Taproot Assets puede mover dólares, euros, y cualquier activo digital.</p>
+
+          <h2>El problema de las stablecoins</h2>
+          <p>Bitcoin aporta escasez y soberanía, pero tiene volatilidad. En pagos diarios, comercio o remesas, mucha gente sigue pensando en dólares o moneda local. Taproot Assets nace para cubrir esa demanda sin salir del stack Bitcoin + Lightning.</p>
+
+          <h2>Qué es Taproot Assets</h2>
+          <p>Es un protocolo impulsado por Lightning Labs para emitir y transferir activos sobre Bitcoin y moverlos por Lightning. La emisión se ancla en Bitcoin usando Taproot; la transferencia aprovecha la red Lightning existente.</p>
+
+          <h2>Arquitectura en tres capas</h2>
+          <h3>1. Emisión en Bitcoin</h3>
+          <p>El activo se acuña en una transacción Taproot en capa base. El anclaje criptográfico asegura su existencia y reglas de emisión.</p>
+
+          <h3>2. Transporte por Lightning (edge liquidity)</h3>
+          <p>Los nodos intermedios siguen viendo sats normales. La conversión activo↔sats ocurre en los nodos de borde (origen y destino). Esto evita tener que actualizar toda la red para que un activo nuevo circule.</p>
+
+          <h3>3. Mercado de tipo de cambio</h3>
+          <p>Los nodos edge publican liquidez y precio de conversión. El wallet selecciona combinación de ruta y tipo de cambio según coste y probabilidad de éxito.</p>
+
+          <h2>USDt sobre Lightning</h2>
+          <p>Tether emitió USDt como Taproot Asset. El caso de uso fuerte es remesas y comercio con unidad de cuenta estable, manteniendo velocidad y coste de Lightning.</p>
+
+          <div class="callout callout--info">
+            <span class="callout__icon" aria-hidden="true">i</span>
+            <div class="callout__content">
+              <div class="callout__title">Compatibilidad de red desde el primer día</div>
+              <p class="callout__text">Los nodos intermedios no necesitan entender Taproot Assets para rutear pagos. El transporte sigue siendo Lightning en sats y la conversión se hace en los extremos.</p>
+            </div>
+          </div>
+
+          <h2>Qué no es Taproot Assets</h2>
+          <ul>
+            <li>No es una plataforma DeFi de propósito general.</li>
+            <li>No reemplaza a Bitcoin ni a los sats como unidad base de enrutamiento.</li>
+            <li>No obliga a nadie: es una capa opcional encima del stack existente.</li>
+          </ul>
+
+          <div class="callout callout--warning">
+            <span class="callout__icon" aria-hidden="true">!</span>
+            <div class="callout__content">
+              <div class="callout__title">Adopción temprana</div>
+              <p class="callout__text">A marzo de 2026 ya hay infraestructura real, pero soporte de wallets, exchanges y custodios todavía es limitado comparado con Lightning de sats.</p>
+            </div>
+          </div>
+
+          <p><strong>Fuentes:</strong> <a href="https://docs.lightning.engineering/the-lightning-network/taproot-assets" target="_blank" rel="noopener">Taproot Assets Protocol</a>.</p>
+
+          <h2>Enlaces</h2>
+          <ul>
+            <li><a href="/nivel-5/schnorr-y-taproot.html">Schnorr y Taproot</a></li>
+            <li><a href="/lightning/como-funciona-un-pago.html">Cómo funciona un pago</a></li>
+            <li><a href="/lightning/l402.html">L402</a></li>
+            <li><a href="/nivel-4/que-son-las-sidechains.html">Qué son las sidechains</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/micropagos-web.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">Micropagos web y paywalls</span>
+            </a>
+            <a href="/lightning/ecash-cashu-fedimint.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">eCash sobre Lightning</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

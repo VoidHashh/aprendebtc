@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Agentes de IA que pagan con Lightning: toolkit de Lightning Labs, MCP servers, L402, y el nacimiento del comercio máquina-a-máquina." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/agentes-ia-y-lightning.html" />
+  <meta property="og:title" content="Agentes de IA y Lightning: la economía autónoma | aprendebtc.com" />
+  <meta property="og:description" content="Agentes de IA que pagan con Lightning: toolkit de Lightning Labs, MCP servers, L402, y el nacimiento del comercio máquina-a-máquina." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Agentes de IA y Lightning: la economía autónoma | aprendebtc.com" />
+  <meta name="twitter:description" content="Agentes de IA que pagan con Lightning: toolkit de Lightning Labs, MCP servers, L402, y el nacimiento del comercio máquina-a-máquina." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/agentes-ia-y-lightning.html" />
+  <title>Agentes de IA y Lightning: la economía autónoma | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-ia" aria-hidden="true"></div></div></nav></aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Agentes de IA y Lightning</span>
+        </nav>
+
+        <article class="article">
+          <h1>Agentes de IA y Lightning: la economía autónoma</h1>
+          <p class="article__subtitle">Los agentes de IA ya escriben código y llaman APIs. Lo que les faltaba era poder pagar. Lightning resuelve eso.</p>
+
+          <h2>El problema base</h2>
+          <p>Un agente puede ejecutar tareas complejas, pero normalmente depende de credenciales, cuentas y tarjetas provisionadas por humanos para acceder a recursos de pago. Eso limita autonomía real y escalabilidad operativa.</p>
+
+          <h2>Lightning como capa económica para agentes</h2>
+          <p>Con Lightning, un agente puede recibir sats por servicios y pagar otros servicios de forma programática. Sin necesidad de identidad bancaria tradicional, con settlement instantáneo y granularidad de micropago.</p>
+
+          <h2>Toolkit de Lightning Labs</h2>
+          <p>El stack publicado en 2026 introduce piezas prácticas:</p>
+          <ul>
+            <li>gestión de nodo y balance</li>
+            <li>remote signer para aislar claves</li>
+            <li>macaroons con permisos limitados</li>
+            <li>acceso a endpoints L402</li>
+            <li>orquestación comprador/vendedor</li>
+          </ul>
+
+          <h2>MCP servers y ecosistema</h2>
+          <p>Con MCP, asistentes y agentes pueden usar herramientas Lightning de forma más nativa. Surgen integraciones de Alby, ZBD y otros componentes operativos sobre Nostr/Lightning.</p>
+
+          <h2>Comercio máquina-a-máquina</h2>
+          <p>El loop completo es viable: agente A cobra por análisis, paga compute a agente B, y reinyecta ingresos en nuevos servicios. Esto abre una economía algorítmica donde el activo de liquidación es sats.</p>
+
+          <div class="callout callout--info">
+            <span class="callout__icon" aria-hidden="true">i</span>
+            <div class="callout__content">
+              <div class="callout__title">Interoperabilidad práctica</div>
+              <p class="callout__text">El enfoque por herramientas de shell permite integrar estas capacidades tanto en Claude Code como en Codex u orquestadores propios sin lock-in fuerte de framework.</p>
+            </div>
+          </div>
+
+          <div class="callout callout--warning">
+            <span class="callout__icon" aria-hidden="true">!</span>
+            <div class="callout__content">
+              <div class="callout__title">Riesgo operativo</div>
+              <p class="callout__text">Es tecnología de frontera (marzo 2026). Hay que imponer límites de presupuesto, remote signer y auditoría de pagos antes de usarla en producción crítica.</p>
+            </div>
+          </div>
+
+          <h2>Enlaces</h2>
+          <ul>
+            <li><a href="/lightning/l402.html">L402</a></li>
+            <li><a href="/lightning/nwc.html">NWC</a></li>
+            <li><a href="/lightning/micropagos-web.html">Micropagos web</a></li>
+            <li><a href="/lightning/ecash-cashu-fedimint.html">eCash (Cashu/Fedimint)</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/l402.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">L402</span>
+            </a>
+            <a href="/lightning/podcasting-value4value.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">Podcasting 2.0 y Value4Value</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

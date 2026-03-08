@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Custodia en Lightning: de custodial total a nodo propio. Espectro completo de opciones, trade-offs y cuándo usar cada una." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/custodia-vs-autocustodia.html" />
+  <meta property="og:title" content="Custodia en Lightning: el espectro completo | aprendebtc.com" />
+  <meta property="og:description" content="Custodia en Lightning: de custodial total a nodo propio. Espectro completo de opciones, trade-offs y cuándo usar cada una." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Custodia en Lightning: el espectro completo | aprendebtc.com" />
+  <meta name="twitter:description" content="Custodia en Lightning: de custodial total a nodo propio. Espectro completo de opciones, trade-offs y cuándo usar cada una." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/custodia-vs-autocustodia.html" />
+  <title>Custodia en Lightning: el espectro completo | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-custodia" aria-hidden="true"></div></div></nav></aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Custodia en Lightning</span>
+        </nav>
+
+        <article class="article">
+          <h1>Custodia en Lightning: el espectro completo</h1>
+          <p class="article__subtitle">En Lightning, la custodia no es blanco o negro. Hay un espectro con matices importantes.</p>
+
+          <h2>Por qué es más complejo que on-chain</h2>
+          <p>En on-chain, la pregunta principal es quién tiene las claves. En Lightning además entran estado de canal, backups, disponibilidad y dependencia operativa de terceros.</p>
+
+          <h2>Las 5 posiciones del espectro</h2>
+          <ol>
+            <li><strong>Custodial total:</strong> máxima comodidad, mínima soberanía.</li>
+            <li><strong>eCash mint:</strong> privacidad alta, custodia del mint.</li>
+            <li><strong>LSP-assisted:</strong> claves tuyas, operación asistida.</li>
+            <li><strong>Nodo propio con interfaz:</strong> más control, más responsabilidad.</li>
+            <li><strong>Nodo propio completo:</strong> control total y carga operativa total.</li>
+          </ol>
+
+          <h2>Backups: el error más costoso</h2>
+          <p>El seed por sí solo no cubre todo en Lightning. El estado de canal y los backups de recuperación importan. Wallets modernas automatizan parte de esto, pero en nodo propio debes asumir proceso y verificación.</p>
+
+          <div class="callout callout--danger">
+            <span class="callout__icon" aria-hidden="true">!</span>
+            <div class="callout__content">
+              <div class="callout__title">Regla operativa</div>
+              <p class="callout__text">Lightning para gastar, on-chain para guardar. No uses wallets custodiales Lightning para ahorro significativo.</p>
+            </div>
+          </div>
+
+          <h2>Regla práctica de asignación de fondos</h2>
+          <ul>
+            <li>On-chain autocustodia: ahorro y largo plazo.</li>
+            <li>Lightning LSP-assisted: gasto habitual.</li>
+            <li>Custodial/eCash: importe pequeño tipo bolsillo.</li>
+          </ul>
+
+          <h2>Enlaces</h2>
+          <ul>
+            <li><a href="/lightning/wallets-lightning.html">Wallets Lightning</a></li>
+            <li><a href="/lightning/lsp-y-liquidez.html">LSP y liquidez</a></li>
+            <li><a href="/base/que-es-la-autocustodia.html">Qué es la autocustodia</a></li>
+            <li><a href="/nivel-4/que-es-multisig.html">Qué es multisig</a></li>
+            <li><a href="/lightning/errores-comunes.html">Errores comunes</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/seguridad-y-riesgos.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">Riesgos reales y privacidad</span>
+            </a>
+            <a href="/lightning/errores-comunes.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">Errores comunes y scams</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

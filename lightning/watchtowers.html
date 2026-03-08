@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Watchtowers en Lightning: qué son, por qué los necesitas, cómo protegen tus canales cuando estás offline, y opciones disponibles." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/watchtowers.html" />
+  <meta property="og:title" content="Watchtowers: vigilantes de tus canales Lightning | aprendebtc.com" />
+  <meta property="og:description" content="Watchtowers en Lightning: qué son, por qué los necesitas, cómo protegen tus canales cuando estás offline, y opciones disponibles." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Watchtowers: vigilantes de tus canales Lightning | aprendebtc.com" />
+  <meta name="twitter:description" content="Watchtowers en Lightning: qué son, por qué los necesitas, cómo protegen tus canales cuando estás offline, y opciones disponibles." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/watchtowers.html" />
+  <title>Watchtowers: vigilantes de tus canales Lightning | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-watchtower" aria-hidden="true"></div></div></nav></aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Watchtowers</span>
+        </nav>
+
+        <article class="article">
+          <h1>Watchtowers: vigilantes de tus canales Lightning</h1>
+          <p class="article__subtitle">¿Qué pasa si tu contraparte intenta cerrar con un estado antiguo mientras estás offline? Los watchtowers te protegen.</p>
+
+          <h2>Modelo de seguridad de canales</h2>
+          <p>Lightning penaliza intentos de cierre fraudulento con estados antiguos. Ese modelo requiere que la parte afectada detecte a tiempo la publicación y responda dentro del timelock.</p>
+          <p>Si estás offline durante esa ventana, aumenta riesgo operativo. Ahí entran los watchtowers.</p>
+
+          <h2>Qué es un watchtower</h2>
+          <p>Es un servicio que monitoriza la cadena en tu nombre y, si detecta un cierre inválido contra tu canal, publica la transacción de justicia para proteger tus fondos.</p>
+          <p>Las implementaciones están diseñadas para minimizar exposición de datos y limitar capacidad del watchtower a funciones concretas de defensa, no de custodia.</p>
+
+          <h2>Cuándo los necesitas de verdad</h2>
+          <ul>
+            <li><strong>Nodo propio con posibles downtimes:</strong> recomendable.</li>
+            <li><strong>Wallet LSP-assisted:</strong> suele venir cubierto por infraestructura del proveedor.</li>
+            <li><strong>Custodial:</strong> no gestionas canales directamente.</li>
+          </ul>
+
+          <h2>Opciones en el ecosistema</h2>
+          <ul>
+            <li>LND con soporte nativo.</li>
+            <li>TEOS (ecosistema CLN).</li>
+            <li>Servicios integrados en stacks como Alby/LSP.</li>
+          </ul>
+
+          <div class="callout callout--info">
+            <span class="callout__icon" aria-hidden="true">i</span>
+            <div class="callout__content">
+              <div class="callout__title">Contexto realista</div>
+              <p class="callout__text">La mayoría de usuarios no configura watchtowers manualmente porque ya usa wallets con operación asistida. Donde sí importan mucho es en nodo propio no siempre online.</p>
+            </div>
+          </div>
+
+          <div class="callout callout--warning">
+            <span class="callout__icon" aria-hidden="true">!</span>
+            <div class="callout__content">
+              <div class="callout__title">Timelock importa</div>
+              <p class="callout__text">Canales con ventanas cortas frente a peers desconocidos elevan riesgo si no tienes vigilancia activa. El parámetro negociado de retraso no es un detalle menor.</p>
+            </div>
+          </div>
+
+          <h2>Evolución futura</h2>
+          <p>Modelos como eltoo/ANYPREVOUT podrían reducir necesidad de penalización agresiva en el largo plazo, pero no es una realidad desplegada hoy. En 2026, watchtowers siguen siendo parte útil de seguridad operativa Lightning.</p>
+
+          <h2>Enlaces</h2>
+          <ul>
+            <li><a href="/lightning/como-funciona-un-pago.html">Cómo funciona un pago Lightning</a></li>
+            <li><a href="/lightning/ventajas-y-limites.html">Ventajas y límites</a></li>
+            <li><a href="/lightning/seguridad-y-riesgos.html">Seguridad y riesgos</a></li>
+            <li><a href="/nivel-4/tu-nodo-lightning.html">Nivel 4: tu nodo Lightning</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/splicing-y-channel-factories.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">Splicing y channel factories</span>
+            </a>
+            <a href="/lightning/ptlcs-y-futuro.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">PTLCs y evolución técnica</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

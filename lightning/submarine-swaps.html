@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Submarine swaps: cómo mover fondos entre Lightning y on-chain de forma trustless. Loop In, Loop Out y chain swaps explicados." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/submarine-swaps.html" />
+  <meta property="og:title" content="Submarine swaps y chain swaps: entre Lightning y on-chain | aprendebtc.com" />
+  <meta property="og:description" content="Submarine swaps: cómo mover fondos entre Lightning y on-chain de forma trustless. Loop In, Loop Out y chain swaps explicados." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Submarine swaps y chain swaps: entre Lightning y on-chain | aprendebtc.com" />
+  <meta name="twitter:description" content="Submarine swaps: cómo mover fondos entre Lightning y on-chain de forma trustless. Loop In, Loop Out y chain swaps explicados." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/submarine-swaps.html" />
+  <title>Submarine swaps y chain swaps: entre Lightning y on-chain | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-swaps" aria-hidden="true"></div></div></nav></aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Submarine swaps</span>
+        </nav>
+
+        <article class="article">
+          <h1>Submarine swaps y chain swaps: entre Lightning y on-chain</h1>
+          <p class="article__subtitle">A veces necesitas pasar fondos de Lightning a on-chain (o viceversa) sin cerrar canales. Los swaps lo hacen posible.</p>
+
+          <h2>Por qué cerrar un canal no siempre es la respuesta</h2>
+          <p>Cerrar y reabrir canales para mover liquidez entre capas implica más fricción: múltiples transacciones, esperas y coste on-chain extra. Los swaps atómicos evitan esa secuencia para muchos casos operativos.</p>
+
+          <h2>Qué significa “swap atómico”</h2>
+          <p>En un swap atómico, o ambas partes cumplen o ninguna pierde fondos. La seguridad se basa en HTLCs/timelocks coordinados entre Lightning y Bitcoin on-chain. El proveedor puede fallar en disponibilidad, pero no debería poder apropiarse de fondos si el flujo se implementa correctamente.</p>
+
+          <h2>Loop Out (Lightning → on-chain)</h2>
+          <p>Convierte saldo Lightning en BTC on-chain sin cerrar canal. Casos típicos: retirar beneficios de routing, mover fondos a cold storage, o reequilibrar capacidad.</p>
+          <ol>
+            <li>Indicas dirección on-chain de destino.</li>
+            <li>Pagas invoice Lightning del proveedor.</li>
+            <li>Recibes BTC on-chain con confirmaciones.</li>
+          </ol>
+
+          <h2>Loop In (on-chain → Lightning)</h2>
+          <p>Convierte BTC on-chain en saldo Lightning utilizable. Útil para recargar capacidad de envío o mover liquidez a capa de pagos activa.</p>
+
+          <h2>Proveedores habituales</h2>
+          <ul>
+            <li><strong>Lightning Labs Loop</strong> (integrado en stack LND).</li>
+            <li><strong>Boltz</strong> (swap no-custodial y open source, también con Liquid).</li>
+            <li><strong>Phoenix</strong> (swaps integrados de forma transparente en UX).</li>
+          </ul>
+
+          <div class="callout callout--info">
+            <span class="callout__icon" aria-hidden="true">i</span>
+            <div class="callout__content">
+              <div class="callout__title">Transparencia en wallets modernas</div>
+              <p class="callout__text">En Phoenix, parte de los swaps ocurre “bajo el capó”: el usuario ve un balance único y la wallet resuelve la ruta de liquidez automáticamente.</p>
+            </div>
+          </div>
+
+          <h2>Chain swaps entre capas</h2>
+          <p>El mismo patrón se extiende a intercambios entre Lightning y Liquid (L-BTC), o entre on-chain Bitcoin y Liquid, según proveedor.</p>
+
+          <h2>Cuándo tiene sentido usar swaps</h2>
+          <ul>
+            <li>cuando quieres evitar cierre/apertura de canal</li>
+            <li>cuando necesitas rapidez operativa</li>
+            <li>cuando el coste total es menor que reestructurar canales</li>
+          </ul>
+          <p>Para montos muy pequeños o bajo ciertas condiciones de fee on-chain, puede no compensar.</p>
+
+          <div class="callout callout--warning">
+            <span class="callout__icon" aria-hidden="true">!</span>
+            <div class="callout__content">
+              <div class="callout__title">Timelocks y disponibilidad</div>
+              <p class="callout__text">Un swap tiene ventanas temporales. Si el proveedor falla o la cadena se congestiona, el proceso puede alargarse y requerir que el cliente esté online para completar resolución.</p>
+            </div>
+          </div>
+
+          <p><strong>Estado (marzo 2026):</strong> tecnología madura, útil para gestión de liquidez en operación real de nodos y wallets avanzadas.</p>
+
+          <h2>Enlaces</h2>
+          <ul>
+            <li><a href="/lightning/lsp-y-liquidez.html">LSP y liquidez</a></li>
+            <li><a href="/lightning/como-funciona-un-pago.html">Cómo funciona un pago Lightning</a></li>
+            <li><a href="/nivel-4/liquid-network.html">Liquid Network</a></li>
+            <li><a href="/nivel-4/liquidez-lightning.html">Nivel 4: liquidez Lightning</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/lsp-y-liquidez.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">LSP, liquidez y canales JIT</span>
+            </a>
+            <a href="/lightning/splicing-y-channel-factories.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">Splicing y channel factories</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

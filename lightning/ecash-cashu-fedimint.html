@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="eCash sobre Lightning: Cashu y Fedimint como capas de privacidad. Resumen y enlace a la guía completa en Nivel 4." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/ecash-cashu-fedimint.html" />
+  <meta property="og:title" content="eCash sobre Lightning: Cashu, Fedimint y privacidad radical | aprendebtc.com" />
+  <meta property="og:description" content="eCash sobre Lightning: Cashu y Fedimint como capas de privacidad. Resumen y enlace a la guía completa en Nivel 4." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="eCash sobre Lightning: Cashu, Fedimint y privacidad radical | aprendebtc.com" />
+  <meta name="twitter:description" content="eCash sobre Lightning: Cashu y Fedimint como capas de privacidad. Resumen y enlace a la guía completa en Nivel 4." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/ecash-cashu-fedimint.html" />
+  <title>eCash sobre Lightning: Cashu, Fedimint y privacidad radical | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-ecash" aria-hidden="true"></div></div></nav></aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">eCash sobre Lightning</span>
+        </nav>
+
+        <article class="article">
+          <h1>eCash sobre Lightning: Cashu, Fedimint y privacidad radical</h1>
+          <p class="article__subtitle">Tokens anónimos respaldados por sats, transferibles como texto, integrados con Lightning.</p>
+
+          <h2>La idea original de eCash</h2>
+          <p>El diseño de Chaum en los 80 ya proponía efectivo digital privado con blind signatures. Falló por centralización operativa, no por criptografía. Cashu y Fedimint recuperan esa idea sobre rails de Bitcoin y Lightning.</p>
+
+          <h2>Cómo funciona el ciclo básico</h2>
+          <ol>
+            <li>Depositas sats en un mint vía Lightning.</li>
+            <li>Recibes tokens eCash firmados ciegamente.</li>
+            <li>Transfieres esos tokens como texto/QR.</li>
+            <li>El receptor los redime por sats o por nuevos tokens.</li>
+          </ol>
+          <p>El mint no puede enlazar emisor y receptor con la precisión que sí existe en pagos directos sin capa eCash.</p>
+
+          <h2>Cashu</h2>
+          <p>Protocolo abierto de mints individuales. Máxima flexibilidad, riesgo de custodio por mint. Estrategia práctica: repartir fondos en varios mints y usar cantidades pequeñas.</p>
+
+          <h2>Fedimint</h2>
+          <p>Modelo federado con guardianes y quórum de firmas. Reduce riesgo de actor único, pero sigue siendo custodia. Encaja bien en comunidades concretas.</p>
+
+          <h2>Integración con Lightning</h2>
+          <ul>
+            <li>Zaps con más privacidad en Nostr.</li>
+            <li>Micropagos de alto volumen sin exponer tantos metadatos.</li>
+            <li>Casos IA + pagos con mints intermedios.</li>
+          </ul>
+
+          <div class="callout callout--warning">
+            <span class="callout__icon" aria-hidden="true">!</span>
+            <div class="callout__content">
+              <div class="callout__title">Trade-off no negociable</div>
+              <p class="callout__text">eCash siempre implica custodia del mint. Úsalo como efectivo de bolsillo, no como ahorro.</p>
+            </div>
+          </div>
+
+          <p>Para el análisis técnico detallado de blind signatures, federaciones y modelos de riesgo, continúa en la guía larga de Nivel 4.</p>
+
+          <h2>Enlaces</h2>
+          <ul>
+            <li><a href="/nivel-4/fedimint-y-cashu.html">Nivel 4: Fedimint y Cashu</a></li>
+            <li><a href="/lightning/nostr-zaps-y-lightning.html">Nostr Zaps y Lightning</a></li>
+            <li><a href="/lightning/agentes-ia-y-lightning.html">Agentes de IA y Lightning</a></li>
+            <li><a href="/la-madriguera/efectivo-digital-privacidad-hal-finney.html">Hal Finney y efectivo digital</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/taproot-assets.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">Taproot Assets</span>
+            </a>
+            <a href="/lightning/ark.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">Ark</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

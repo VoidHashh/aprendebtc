@@ -26,9 +26,27 @@
 | /lightning/keysend-mpp-amp.html | Protocolos | ✅ |
 | /lightning/nwc.html | Protocolos | ✅ |
 | /lightning/webln.html | Protocolos | ✅ |
+| /lightning/lsp-y-liquidez.html | Infraestructura | ✅ |
+| /lightning/submarine-swaps.html | Infraestructura | ✅ |
+| /lightning/splicing-y-channel-factories.html | Infraestructura | ✅ |
+| /lightning/watchtowers.html | Infraestructura | ✅ |
+| /lightning/ptlcs-y-futuro.html | Infraestructura | ✅ |
+| /lightning/l402.html | Aplicaciones | ✅ |
+| /lightning/agentes-ia-y-lightning.html | Aplicaciones | ✅ |
+| /lightning/podcasting-value4value.html | Aplicaciones | ✅ |
+| /lightning/nostr-zaps-y-lightning.html | Aplicaciones | ✅ |
+| /lightning/gaming-streaming-comercio.html | Aplicaciones | ✅ |
+| /lightning/micropagos-web.html | Aplicaciones | ✅ |
+| /lightning/taproot-assets.html | Extensiones | ✅ |
+| /lightning/ecash-cashu-fedimint.html | Extensiones | ✅ |
+| /lightning/ark.html | Extensiones | ✅ |
+| /lightning/mas-que-sats.html | Extensiones | ✅ |
+| /lightning/seguridad-y-riesgos.html | Seguridad | ✅ |
+| /lightning/custodia-vs-autocustodia.html | Seguridad | ✅ |
+| /lightning/errores-comunes.html | Seguridad | ✅ |
 
 ## Totales del proyecto
 
 - Total redirects del sitio: 9 (antes: 4)
-- Total archivos rastreados (rg --files): 283
-- Total páginas indexables: +12 (nueva sección /lightning/)
+- Total archivos rastreados (rg --files): 301
+- Total páginas indexables: +30 (sección /lightning/ completa)

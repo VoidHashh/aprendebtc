@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="PTLCs, Taproot en Lightning, trampoline routing y más: las mejoras técnicas que vienen para Lightning Network." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/ptlcs-y-futuro.html" />
+  <meta property="og:title" content="PTLCs y la evolución técnica de Lightning | aprendebtc.com" />
+  <meta property="og:description" content="PTLCs, Taproot en Lightning, trampoline routing y más: las mejoras técnicas que vienen para Lightning Network." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="PTLCs y la evolución técnica de Lightning | aprendebtc.com" />
+  <meta name="twitter:description" content="PTLCs, Taproot en Lightning, trampoline routing y más: las mejoras técnicas que vienen para Lightning Network." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/ptlcs-y-futuro.html" />
+  <title>PTLCs y la evolución técnica de Lightning | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-ptlcs" aria-hidden="true"></div></div></nav></aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">PTLCs y futuro</span>
+        </nav>
+
+        <article class="article">
+          <h1>PTLCs y la evolución técnica de Lightning</h1>
+          <p class="article__subtitle">Lightning no está terminado. Estas son las piezas que faltan y las mejoras que vienen.</p>
+
+          <h2>Protocolo en evolución activa</h2>
+          <p>Lightning está en producción desde 2018, pero su arquitectura sigue evolucionando. A diferencia de capa base Bitcoin, la adopción de mejoras en Lightning puede ser incremental por implementación y por nodo.</p>
+
+          <h2>HTLCs vs PTLCs</h2>
+          <p>El modelo HTLC actual reutiliza hash de pago entre saltos, lo que deja espacio para correlación en escenarios adversos. PTLCs reemplaza esa mecánica con puntos/adaptor signatures de Schnorr, mejorando privacidad y flexibilidad de construcción de pagos.</p>
+
+          <h2>Taproot channels</h2>
+          <p>Canales sobre P2TR mejoran eficiencia y privacidad on-chain frente a esquemas anteriores. También son base técnica para despliegues más amplios de PTLC.</p>
+
+          <h2>Trampoline routing</h2>
+          <p>Permite delegar cálculo pesado de rutas en nodos mejor conectados, facilitando UX móvil y reduciendo carga local de wallet ligera.</p>
+
+          <h2>Pagos asíncronos</h2>
+          <p>Una de las limitaciones actuales es necesidad de receptor online en muchos flujos. Los pagos asíncronos buscan aliviar esa restricción, pero siguen en fase de propuesta/investigación para despliegue general.</p>
+
+          <h2>Dual-funded channels y liquidity ads</h2>
+          <p>Canales con financiación dual y mercados de liquidez estandarizados buscan reducir fricción de bootstrap y mejorar equilibrio de canales desde apertura.</p>
+
+          <h2>Simplicity y horizonte largo</h2>
+          <p>Investigaciones de scripting formal y nuevas primitivas podrían abrir capacidades adicionales para contratos y seguridad en capas superiores, con horizonte temporal de largo plazo.</p>
+
+          <table>
+            <thead>
+              <tr><th>Mejora</th><th>Estado marzo 2026</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Taproot channels</td><td>Producción gradual</td></tr>
+              <tr><td>PTLCs</td><td>Experimental / en desarrollo</td></tr>
+              <tr><td>Trampoline routing</td><td>Producción en algunos stacks</td></tr>
+              <tr><td>Splicing</td><td>Producción en wallets concretas</td></tr>
+              <tr><td>Async payments</td><td>Investigación</td></tr>
+              <tr><td>Channel factories</td><td>Investigación</td></tr>
+            </tbody>
+          </table>
+
+          <div class="callout callout--info">
+            <span class="callout__icon" aria-hidden="true">i</span>
+            <div class="callout__content">
+              <div class="callout__title">Adopción incremental</div>
+              <p class="callout__text">Estas mejoras no exigen migración instantánea de toda la red. Se adoptan por fases, y nodos no actualizados siguen operando con funcionalidad previa.</p>
+            </div>
+          </div>
+
+          <h2>Enlaces</h2>
+          <ul>
+            <li><a href="/lightning/como-funciona-un-pago.html">Cómo funciona un pago</a></li>
+            <li><a href="/lightning/splicing-y-channel-factories.html">Splicing y channel factories</a></li>
+            <li><a href="/nivel-5/schnorr-y-taproot.html">Schnorr y Taproot</a></li>
+            <li><a href="/la-madriguera/debate-ossification-vs-extensibilidad.html">Debate ossification vs extensibilidad</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/watchtowers.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">Watchtowers</span>
+            </a>
+            <a href="/lightning/l402.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">L402</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

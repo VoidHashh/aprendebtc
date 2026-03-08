@@ -1814,6 +1814,30 @@
     "keywords": "Todos los soft forks de Bitcoin desde 2012. P2SH, CLTV, CSV, SegWit, Taproot. Qué cambió cada uno y cómo se activaron. Qué es un soft fork BIP 16 — Pay to Script Hash (P2SH) — Abril 2012 BIP 65 — OP_CHECKLOCKTIMEVERIFY (CLTV) — Diciembre 2015 BIP 68, 112, 113 — Relative Timelocks (CSV) — Julio 2016 BIP 141, 143, 147 — Segregated Witness (SegWit) — Agosto 2017 BIP 340, 341, 342 — Taproot — Noviembre 2021 El debate sobre futuros soft forks El debate de la osificación Lecciones de gobernanza Fuentes Enlaces relacionados en aprendeBTC Inicio &rsaquo; La Madriguera &rsaquo; Los soft forks de Bitcoin: historia de cada cambio de consenso La madriguera Los soft forks de Bitcoin: historia de cada cambio de consenso Una cronología completa de los cambios de consenso en Bitcoin y las lecciones de gobernanza que dejaron. Fecha de publicación: Febrero 2026 Autor: aprendeBTC Tiempo de lectura: ~19 minutos Bitcoin tiene fama de ser imposible de cambiar. Es parcialmente cierto: cambiar las reglas de consenso de Bitcoin es extraordinariamente difícil. Pero no es imposible. Desde 2012, Bitcoin ha tenido varios \"soft forks\" — cambios compatibles hacia atrás que añaden nuevas funcionalidades sin romper el software existente. Cada soft fork cuenta una historia sobre cómo se gobierna Bitcoin, qué prioriza la comunidad, y qué tan difícil es llegar a consenso. Esta es la historia completa. Qué es un soft fork Un soft fork es un cambio en las reglas de Bitcoin que hace válidas menos cosas que antes. "
   },
   {
+    "title": "Agentes de IA y Lightning: la economía autónoma",
+    "url": "/lightning/agentes-ia-y-lightning.html",
+    "tags": [
+      "lightning",
+      "agentes",
+      "factura lightning"
+    ],
+    "section": "Lightning",
+    "keywords": "Agentes de IA que pagan con Lightning: toolkit de Lightning Labs, MCP servers, L402, y el nacimiento del comercio máquina-a-máquina. El problema base Lightning como capa económica para agentes Toolkit de Lightning Labs MCP servers y ecosistema Comercio máquina-a-máquina Enlaces Inicio › Lightning › Agentes de IA y Lightning Agentes de IA y Lightning: la economía autónoma Los agentes de IA ya escriben código y llaman APIs. Lo que les faltaba era poder pagar. Lightning resuelve eso. El problema base Un agente puede ejecutar tareas complejas, pero normalmente depende de credenciales, cuentas y tarjetas provisionadas por humanos para acceder a recursos de pago. Eso limita autonomía real y escalabilidad operativa. Lightning como capa económica para agentes Con Lightning, un agente puede recibir sats por servicios y pagar otros servicios de forma programática. Sin necesidad de identidad bancaria tradicional, con settlement instantáneo y granularidad de micropago. Toolkit de Lightning Labs El stack publicado en 2026 introduce piezas prácticas: gestión de nodo y balance remote signer para aislar claves macaroons con permisos limitados acceso a endpoints L402 orquestación comprador/vendedor MCP servers y ecosistema Con MCP, asistentes y agentes pueden usar herramientas Lightning de forma más nativa. Surgen integraciones de Alby, ZBD y otros componentes operativos sobre Nostr/Lightning. Comercio máquina-a-máquina El loop completo es viable: agente A cobra por análisis, paga compute a a"
+  },
+  {
+    "title": "Ark: la nueva propuesta para escalar Lightning",
+    "url": "/lightning/ark.html",
+    "tags": [
+      "lightning",
+      "ark",
+      "factura lightning",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "Lightning",
+    "keywords": "Ark protocol: qué es, cómo funciona, en qué se diferencia de Lightning y por qué podría complementarlo. Por qué surge Ark Modelo base: vTXOs y ASPs Ventajas prometidas Trade-offs Enlaces Inicio › Lightning › Ark Ark: la nueva propuesta para escalar Lightning Un protocolo nuevo que promete resolver algunos de los problemas de Lightning. Todavía en desarrollo temprano. Por qué surge Ark Lightning funciona, pero mantiene fricciones estructurales: liquidez entrante, gestión de canales y dependencia de disponibilidad del receptor. Ark aparece como propuesta alternativa para ciertos escenarios. Modelo base: vTXOs y ASPs Ark usa vTXOs (UTXOs virtuales) dentro de pools gestionados por un ASP (Ark Service Provider). Los usuarios transfieren vTXOs off-chain y el ASP liquida estados periódicamente on-chain. Ventajas prometidas Recibir sin necesidad de liquidez entrante clásica. Menos coordinación previa en pagos. Posible mejora de UX para usuarios pasivos. Trade-offs Dependencia operativa más fuerte del ASP. Necesidad de refrescar/gestionar expiración de vTXOs. Interoperar con Lightning implica fricción adicional. i Relación con Lightning Ark no está planteado como reemplazo universal, sino como posible complemento para casos donde Lightning + LSP no optimiza bien la experiencia. ! Estado experimental A marzo de 2026 hay trabajo activo e implementaciones de prueba, pero no una capa mainnet de uso general para usuario final. Enlaces Splicing y channel factories LSP y liquidez Ventajas y "
+  },
+  {
     "title": "BOLT11 y BOLT12: las invoices de Lightning",
     "url": "/lightning/bolt11-y-bolt12.html",
     "tags": [
@@ -1845,6 +1869,72 @@
     ],
     "section": "Lightning",
     "keywords": "Cómo funciona un pago Lightning paso a paso: canales de pago, liquidez entrante y saliente, routing entre nodos y comisiones. El viaje real de un pago Canal de pago: la unidad base Liquidez entrante y saliente Routing: encontrar camino en un grafo vivo HTLC: atomicidad del pago Comisiones de routing Qué cambia con MPP, splicing y LSP Enlaces relacionados Inicio › Lightning › Cómo funciona un pago Cómo funciona un pago Lightning: canales, liquidez y routing Todo el viaje de un pago Lightning, desde que pulsas enviar hasta que llega al destino en milisegundos. El viaje real de un pago Cuando envías sats por Lightning, no estás escribiendo una transacción nueva en la blockchain. Estás actualizando estados de canales ya abiertos entre nodos. Tu wallet calcula una ruta, reserva liquidez en cada salto y ejecuta un flujo atómico basado en HTLCs. El receptor solo cobra si el pago llega completo; si no llega, todos recuperan su saldo original. El pago suele tardar menos de un segundo, pero internamente ocurren varios pasos: búsqueda de ruta, validación de capacidad, negociación de condiciones y propagación del preimage de vuelta. Canal de pago: la unidad base Un canal Lightning nace con una transacción on-chain 2-de-2 multisig. Dentro del canal, dos partes intercambian nuevos estados firmados sin tocar la cadena base en cada pago. Solo apertura y cierre son on-chain. Cada actualización invalida el estado anterior. Si una parte intenta publicar un estado antiguo para robar saldo, la co"
+  },
+  {
+    "title": "Custodia en Lightning: el espectro completo",
+    "url": "/lightning/custodia-vs-autocustodia.html",
+    "tags": [
+      "lightning",
+      "custodia",
+      "autocustodia",
+      "frase semilla",
+      "seed phrase",
+      "mnemonic",
+      "bip39",
+      "wallet",
+      "billetera",
+      "factura lightning"
+    ],
+    "section": "Lightning",
+    "keywords": "Custodia en Lightning: de custodial total a nodo propio. Espectro completo de opciones, trade-offs y cuándo usar cada una. Por qué es más complejo que on-chain Las 5 posiciones del espectro Backups: el error más costoso Regla práctica de asignación de fondos Enlaces Inicio › Lightning › Custodia en Lightning Custodia en Lightning: el espectro completo En Lightning, la custodia no es blanco o negro. Hay un espectro con matices importantes. Por qué es más complejo que on-chain En on-chain, la pregunta principal es quién tiene las claves. En Lightning además entran estado de canal, backups, disponibilidad y dependencia operativa de terceros. Las 5 posiciones del espectro Custodial total: máxima comodidad, mínima soberanía. eCash mint: privacidad alta, custodia del mint. LSP-assisted: claves tuyas, operación asistida. Nodo propio con interfaz: más control, más responsabilidad. Nodo propio completo: control total y carga operativa total. Backups: el error más costoso El seed por sí solo no cubre todo en Lightning. El estado de canal y los backups de recuperación importan. Wallets modernas automatizan parte de esto, pero en nodo propio debes asumir proceso y verificación. ! Regla operativa Lightning para gastar, on-chain para guardar. No uses wallets custodiales Lightning para ahorro significativo. Regla práctica de asignación de fondos On-chain autocustodia: ahorro y largo plazo. Lightning LSP-assisted: gasto habitual. Custodial/eCash: importe pequeño tipo bolsillo. Enlaces Wallet"
+  },
+  {
+    "title": "eCash sobre Lightning: Cashu, Fedimint y privacidad radical",
+    "url": "/lightning/ecash-cashu-fedimint.html",
+    "tags": [
+      "lightning",
+      "ecash",
+      "cashu",
+      "fedimint",
+      "factura lightning"
+    ],
+    "section": "Lightning",
+    "keywords": "eCash sobre Lightning: Cashu y Fedimint como capas de privacidad. Resumen y enlace a la guía completa en Nivel 4. La idea original de eCash Cómo funciona el ciclo básico Cashu Fedimint Integración con Lightning Enlaces Inicio › Lightning › eCash sobre Lightning eCash sobre Lightning: Cashu, Fedimint y privacidad radical Tokens anónimos respaldados por sats, transferibles como texto, integrados con Lightning. La idea original de eCash El diseño de Chaum en los 80 ya proponía efectivo digital privado con blind signatures. Falló por centralización operativa, no por criptografía. Cashu y Fedimint recuperan esa idea sobre rails de Bitcoin y Lightning. Cómo funciona el ciclo básico Depositas sats en un mint vía Lightning. Recibes tokens eCash firmados ciegamente. Transfieres esos tokens como texto/QR. El receptor los redime por sats o por nuevos tokens. El mint no puede enlazar emisor y receptor con la precisión que sí existe en pagos directos sin capa eCash. Cashu Protocolo abierto de mints individuales. Máxima flexibilidad, riesgo de custodio por mint. Estrategia práctica: repartir fondos en varios mints y usar cantidades pequeñas. Fedimint Modelo federado con guardianes y quórum de firmas. Reduce riesgo de actor único, pero sigue siendo custodia. Encaja bien en comunidades concretas. Integración con Lightning Zaps con más privacidad en Nostr. Micropagos de alto volumen sin exponer tantos metadatos. Casos IA + pagos con mints intermedios. ! Trade-off no negociable eCash siempre i"
+  },
+  {
+    "title": "Errores comunes y scams en Lightning",
+    "url": "/lightning/errores-comunes.html",
+    "tags": [
+      "lightning",
+      "errores",
+      "comunes",
+      "frase semilla",
+      "seed phrase",
+      "mnemonic",
+      "bip39",
+      "wallet",
+      "billetera",
+      "factura lightning"
+    ],
+    "section": "Lightning",
+    "keywords": "Errores comunes al usar Lightning Network y cómo evitar scams, wallets falsas y estafas con invoices. Errores de usuario nuevo Errores de usuario intermedio Scams específicos Enlaces Inicio › Lightning › Errores comunes Errores comunes y scams en Lightning Los errores más frecuentes que cometen usuarios nuevos y veteranos de Lightning, y cómo evitarlos. Errores de usuario nuevo Confundir dirección on-chain con invoice Lightning. Pagar invoices expiradas. No revisar monto antes de confirmar. Guardar demasiado saldo en servicios custodiales. Errores de usuario intermedio Abrir canales con peers de baja calidad. No gestionar liquidez ni rebalanceos. Cerrar canales con fees on-chain altas sin necesidad. No tener backup operativo de channel state. Scams específicos Wallets falsas en app stores. Soporte técnico falso que pide seed phrase. Invoices con monto inflado. “Duplicadores de sats” y rendimientos garantizados. ! Regla absoluta Si alguien te pide la seed phrase para “soporte”, es estafa. Sin excepciones. i La mayoría de pérdidas son evitables Verifica URL oficial, monto e identidad del canal de soporte antes de cualquier acción. Enlaces Estafas comunes Seguridad básica Seguridad operativa Custodia en Lightning ← Anterior Custodia en Lightning Siguiente → Volver al índice Lightning"
+  },
+  {
+    "title": "Gaming, streaming y comercio: Lightning en aplicaciones reales",
+    "url": "/lightning/gaming-streaming-comercio.html",
+    "tags": [
+      "lightning",
+      "gaming",
+      "streaming",
+      "comercio",
+      "wallet",
+      "billetera",
+      "factura lightning",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "Lightning",
+    "keywords": "Lightning Network en gaming, streaming, comercio y punto de venta. Aplicaciones reales que usan micropagos Bitcoin hoy. Estado real de adopción Gaming: donde más tracción hay Streaming y economía de creadores Comercio y punto de venta Trade-offs frente a tarjetas Enlaces Inicio › Lightning › Gaming, streaming y comercio Gaming, streaming y comercio: Lightning en aplicaciones reales No es teoría. Hay gente jugando, comprando café y viendo vídeos con Lightning ahora mismo. Estado real de adopción La adopción masiva global todavía no existe, pero ya hay verticales con uso real y recurrente. El punto importante es separar “no universal” de “no existe”. Lightning sí existe en producción para casos concretos. Gaming: donde más tracción hay El gaming encaja con Lightning por naturaleza de microtransacciones. Empresas y proyectos como ZEBEDEE, Thndr y otros han demostrado pagos y recompensas en sats con volumen sostenido. Streaming y economía de creadores Modelos Value4Value, zaps y plataformas especializadas (música, vídeo, social) muestran monetización directa creador-audiencia con menos intermediación. Comercio y punto de venta Herramientas como BTCPay Server y soluciones POS móviles permiten aceptar Lightning sin comisiones de red de tarjetas tradicionales. En escenarios internacionales y de remesas, el diferencial de coste/velocidad es claro. Trade-offs frente a tarjetas Lightning gana en coste marginal y final settlement. Tarjetas ganan en penetración de usuario final hoy. Vola"
   },
   {
     "title": "Glosario Lightning: todos los términos del ecosistema",
@@ -1891,6 +1981,17 @@
     "keywords": "Keysend, MPP y AMP en Lightning: pagos espontáneos sin invoice, pagos divididos en partes, y cómo funcionan técnicamente. Modelo clásico y fricción Keysend: pagos espontáneos push MPP: dividir para enrutar mejor AMP: variante multipath avanzada Enlaces Inicio › Lightning › Keysend, MPP y AMP Keysend, MPP y AMP: pagos sin invoice y multipath No siempre necesitas una invoice. Y a veces un pago necesita viajar por varios caminos a la vez. Modelo clásico y fricción El flujo clásico de Lightning es pull: el receptor crea invoice y el pagador la paga. Es sólido, pero en algunos casos es ineficiente, como pagos automáticos de streaming, sistemas machine-to-machine o montos grandes con rutas fragmentadas. Keysend: pagos espontáneos push Con Keysend, el emisor puede enviar sats sin invoice previa del receptor. El preimage se transporta en el onion del pago y el receptor cobra al validarlo. Esto habilita flujos continuos como Podcasting 2.0. i Caso estrella El streaming de sats en podcasting usa Keysend para pagar al creador por minuto escuchado sin generar invoices manuales. MPP: dividir para enrutar mejor Multi-Path Payments divide un pago en varias partes que viajan por rutas distintas y se recomponen en destino. Permite enviar montos que no caben por una sola ruta de liquidez. MPP es estándar en implementaciones principales y muchas wallets lo aplican automáticamente para mejorar tasa de éxito. AMP: variante multipath avanzada AMP extiende la idea multipath con hashes por fragmento"
   },
   {
+    "title": "L402: pagos nativos en la web y APIs monetizadas",
+    "url": "/lightning/l402.html",
+    "tags": [
+      "lightning",
+      "l402",
+      "factura lightning"
+    ],
+    "section": "Lightning",
+    "keywords": "L402 (HTTP 402): el protocolo que convierte Lightning en sistema de autenticación y pago nativo para la web. APIs de pago por uso. El código que nadie usaba Cómo funciona L402 Por qué es distinto a modelos tradicionales Aperture y despliegue práctico Macaroons en L402 Enlaces Inicio › Lightning › L402 L402: pagos nativos en la web y APIs monetizadas El código HTTP 402 \"Payment Required\" llevaba 30 años sin uso real. L402 le da vida con Lightning. El código que nadie usaba HTTP 402 existía en la especificación, pero sin una infraestructura de micropagos viable no tenía uso real. Con Lightning y Macaroons, L402 convierte ese código en un estándar práctico para acceso de pago a recursos web y APIs. Cómo funciona L402 Cliente solicita recurso protegido. Servidor responde 402 con invoice Lightning + macaroon. Cliente paga invoice y obtiene preimage. Cliente reintenta con macaroon + prueba de pago. Servidor valida criptográficamente y sirve recurso. Por qué es distinto a modelos tradicionales Pago = autenticación: no necesitas cuenta ni sesión clásica. Micropagos reales: precios por petición en sats. Pay-per-use puro: pagas lo que consumes. Machine-native: agentes pueden operar sin tarjeta ni KYC. Aperture y despliegue práctico Aperture (reverse proxy) permite poner L402 delante de servicios HTTP existentes sin reescribir el backend de negocio. El proxy gestiona negociación 402, validación y forwarding. Macaroons en L402 Los macaroons aportan permisos granulares y verificación stat"
+  },
+  {
     "title": "Lightning Address: recibir sats como recibir un email",
     "url": "/lightning/lightning-address.html",
     "tags": [
@@ -1919,6 +2020,61 @@
     "keywords": "LNURL explicado: pay, withdraw, auth y channel. El paraguas de protocolos que simplifica Lightning para humanos. Por qué nació LNURL Base técnica Variantes principales LNURL-pay LNURL-withdraw LNURL-auth LNURL-channel LNURL vs BOLT12 Enlaces Inicio › Lightning › LNURL LNURL: la suite que hace Lightning usable LNURL no es un protocolo único: es una familia de protocolos que resuelven fricción real de usabilidad. Por qué nació LNURL El flujo Lightning clásico basado en invoice única era potente pero poco práctico para casos cotidianos. LNURL apareció como capa pragmática para simplificar interacciones mediante endpoints web y respuestas JSON estandarizadas. Base técnica Una cadena LNURL codifica una URL HTTPS en bech32. La wallet decodifica, consulta el endpoint y ejecuta la acción indicada. Esto exige servidor disponible, pero reduce pasos manuales para el usuario. Variantes principales LNURL-pay Permite cobrar con endpoint estático que genera invoices dinámicas. Es la base de Lightning Address. LNURL-withdraw Permite que un servicio pague al usuario: este entrega invoice y el servidor la paga. LNURL-auth Autenticación sin contraseña. La wallet firma un desafío derivado por dominio; el servicio valida sin almacenar email/password. LNURL-channel Flujo para solicitar apertura de canal. Hoy es menos común por el avance de LSP automáticos. i Contexto de diseño LNURL fue creado por fiatjaf, también creador de Nostr. La convergencia Lightning + Nostr en identidad, pagos y UX no es c"
   },
   {
+    "title": "LSP, liquidez y canales JIT: cómo funciona la infraestructura Lightning",
+    "url": "/lightning/lsp-y-liquidez.html",
+    "tags": [
+      "lightning",
+      "lsp",
+      "liquidez",
+      "wallet",
+      "billetera",
+      "factura lightning"
+    ],
+    "section": "Lightning",
+    "keywords": "LSP en Lightning: qué son, cómo gestionan liquidez, canales JIT, rebalanceo, y por qué son clave para la experiencia de usuario. El problema de liquidez que los LSP resuelven Qué servicios proporciona un LSP Apertura de canales Canales JIT (Just-in-Time) Rebalanceo y mantenimiento de liquidez Routing Backups de estado LSPS: estandarización en marcha Rebalanceo cuando la liquidez se agota Modelo económico del LSP Trade-off clave: conveniencia vs privacidad Enlaces Inicio › Lightning › LSP, liquidez y canales JIT LSP, liquidez y canales JIT: cómo funciona la infraestructura Lightning La mayoría de usuarios Lightning no gestionan canales. Los LSP lo hacen por ellos. Así funciona. El problema de liquidez que los LSP resuelven Cuando alguien instala Phoenix o Breez y recibe su primer pago sin haber configurado canales, parece magia. No lo es. Hay un LSP trabajando en segundo plano. Lightning, en su modelo puro, exige gestionar canales, capacidad y rebalanceo. Para un usuario técnico es trabajo continuo. Para el usuario medio es fricción excesiva. Los LSP (Lightning Service Providers) resuelven ese gap: no son bancos custodios por definición, son proveedores de infraestructura de liquidez y conectividad. Tú mantienes control de claves; ellos operan la capa de canales para que la experiencia sea utilizable. Qué servicios proporciona un LSP Apertura de canales El LSP abre canales hacia tu wallet o nodo para darte liquidez entrante desde el inicio. Sin esto, un usuario nuevo suele ten"
+  },
+  {
+    "title": "Cuando Lightning mueve más que sats",
+    "url": "/lightning/mas-que-sats.html",
+    "tags": [
+      "lightning",
+      "mas",
+      "que",
+      "sats",
+      "factura lightning"
+    ],
+    "section": "Lightning",
+    "keywords": "Lightning como infraestructura para mover valor, datos, activos y pagos de IA. Qué cambia cuando Lightning es más que Bitcoin. Evolución en tres fases Capas construidas encima Internet of value en términos prácticos Riesgos de la expansión Enlaces Inicio › Lightning › Más que sats Cuando Lightning mueve más que sats Lightning empezó moviendo sats. Ahora mueve dólares, datos, y pronto podría mover cualquier cosa de valor. Evolución en tres fases 2018-2022: pagos rápidos de bitcoin. 2022-2024: plataforma de micropagos (podcasting, zaps, apps). 2025-2026: capa económica de internet (L402, IA, activos, eCash). Capas construidas encima Pagos: BOLT11, BOLT12, LNURL, Lightning Address. Autenticación: LNURL-auth y L402. Activos: Taproot Assets. Privacidad: Cashu y Fedimint. Apps: NWC y WebLN. Internet of value en términos prácticos No es eslogan si hay capacidad real de enviar valor entre humanos y máquinas, en segundos, con coste mínimo y sin pedir un banco en medio. Lightning está más cerca de ese modelo que los sistemas legacy. Riesgos de la expansión Más complejidad de implementación. Más superficie de ataque. Posible centralización en ciertos actores (LSP, edge liquidity, mints). Riesgo regulatorio en capas de activos. i Base sólida, capas heterogéneas Todo se apoya en Bitcoin, pero no todas las capas tienen la misma madurez ni el mismo perfil de riesgo. Conviene separar núcleo consolidado de experimentación. Enlaces L402 Taproot Assets Agentes de IA y Lightning Nostr, Zaps y Li"
+  },
+  {
+    "title": "Micropagos web y paywalls: monetización nativa con Lightning",
+    "url": "/lightning/micropagos-web.html",
+    "tags": [
+      "lightning",
+      "micropagos",
+      "web",
+      "wallet",
+      "billetera",
+      "factura lightning"
+    ],
+    "section": "Lightning",
+    "keywords": "Micropagos web con Lightning: paywalls por sats, APIs pay-per-use, y el fin de los modelos de suscripción forzada. Cómo monetiza la web hoy Modelos técnicos L402 (HTTP 402) WebLN en desktop LNURL + QR universal eCash para alta frecuencia Dónde ya funciona Límites actuales Enlaces Inicio › Lightning › Micropagos web Micropagos web y paywalls: monetización nativa con Lightning ¿Y si en vez de suscribirte a un medio por €10/mes pudieras pagar 5 sats por cada artículo que lees? Cómo monetiza la web hoy La web vive entre publicidad invasiva, suscripciones forzadas y paywalls rígidos. En esos tres modelos, el usuario no paga por valor consumido real: paga con datos, con cuota fija o con bloqueo total. Lightning añade una cuarta vía: pagar exactamente por uso. Un artículo, un endpoint de API, un minuto de audio o una consulta concreta pueden tener precio en sats sin pedir cuenta, tarjeta ni KYC. Modelos técnicos L402 (HTTP 402) El servidor responde 402 Payment Required con invoice Lightning. El cliente paga y reintenta con credencial criptográfica. Es el modelo más sólido para APIs y paywalls programables. WebLN en desktop Con extensión compatible (por ejemplo Alby), el pago se confirma sin salir de la página. Flujo corto y buena UX para escritorio. LNURL + QR universal Más fricción que WebLN, pero máxima compatibilidad. Sirve para cualquier wallet Lightning incluso cuando no hay extensiones. eCash para alta frecuencia En casos de microimportes extremos, los tokens eCash pueden redu"
+  },
+  {
+    "title": "Nostr, Zaps y Lightning: pagos como capa social",
+    "url": "/lightning/nostr-zaps-y-lightning.html",
+    "tags": [
+      "lightning",
+      "nostr",
+      "zaps",
+      "wallet",
+      "billetera",
+      "factura lightning"
+    ],
+    "section": "Lightning",
+    "keywords": "Nostr Zaps: cómo Lightning se integra en la red social descentralizada. Pagos como likes, propinas como interacción social. Incentivos en redes tradicionales Qué es un Zap Flujo técnico (NIP-57) Por qué cambia incentivos Convergencia identidad + pagos Enlaces Inicio › Lightning › Nostr, Zaps y Lightning Nostr, Zaps y Lightning: pagos como capa social En Nostr, los likes cuestan sats. Y eso cambia todo sobre cómo funciona una red social. Incentivos en redes tradicionales Cuando interactuar es gratis (likes, comentarios, cuentas), el sistema incentiva ruido y manipulación de atención. Nostr + Lightning introduce coste económico opcional en interacción y mejora señal de valor. Qué es un Zap Un zap es un pago Lightning vinculado a un evento de Nostr. No reemplaza al like: lo complementa con señal económica real. Flujo técnico (NIP-57) Cliente crea zap request. Resuelve lud16/lud06 del receptor. Obtiene invoice específica LNURL-pay. Paga (normalmente vía NWC/WebLN). Se publica zap receipt verificable en relays. Por qué cambia incentivos señal de valor más fuerte que interacción gratuita spam económico más caro monetización directa sin plataforma intermediaria i NWC como pieza clave Sin NWC, zappear sería mucho más lento. Con NWC, el pago ocurre desde el cliente Nostr con permisos controlados en tu wallet. Convergencia identidad + pagos Nostr y Lightning comparten diseño compatible: identidad portable, capa de publicación abierta y pagos nativos en sats. Para guía completa de Nostr"
+  },
+  {
     "title": "Nostr Wallet Connect (NWC): conecta tu wallet a cualquier app",
     "url": "/lightning/nwc.html",
     "tags": [
@@ -1938,6 +2094,32 @@
     "keywords": "Nostr Wallet Connect: cómo funciona NWC, por qué usa Nostr como transporte, y cómo conecta tu wallet Lightning a apps remotas. Qué problema resuelve Flujo operativo Por qué Nostr como transporte Permisos granulares NWC vs WebLN Enlaces Inicio › Lightning › NWC Nostr Wallet Connect (NWC): conecta tu wallet a cualquier app Un protocolo que usa Nostr para conectar tu wallet Lightning con apps, sin entregar tus claves. Qué problema resuelve Muchas apps necesitan ejecutar pagos Lightning en tu nombre: zaps, suscripciones, micropagos o consumo de APIs. Dar seed phrase o permisos de administrador a cada app no es aceptable. NWC (NIP-47) permite delegar operaciones concretas con límites claros, usando relays de Nostr como canal de transporte cifrado entre app y wallet. Flujo operativo Tu wallet genera un connection string con relay, clave pública y permisos. La app recibe ese string y envía solicitudes cifradas. Tu wallet valida permisos, ejecuta y responde. La app nunca toca tu seed ni claves de firma del nodo. Por qué Nostr como transporte Infraestructura distribuida ya existente. Cifrado de mensajes y modelo asíncrono robusto. No requiere abrir tu nodo al internet público con endpoints directos. Resiliencia: si un relay falla, puedes cambiar de relay. Permisos granulares NWC permite recortar superficie de riesgo con límites por método y por presupuesto: pay_invoice , make_invoice , get_balance , etc. tope diario/mensual de gasto. expiración de credenciales. i Valor práctico NWC es"
   },
   {
+    "title": "Podcasting 2.0 y Value4Value: streaming de sats",
+    "url": "/lightning/podcasting-value4value.html",
+    "tags": [
+      "lightning",
+      "podcasting",
+      "value4value",
+      "factura lightning"
+    ],
+    "section": "Lightning",
+    "keywords": "Podcasting 2.0 y Value4Value: cómo Lightning permite pagar al creador directamente mientras escuchas. Streaming de sats explicado. El problema del modelo de monetización clásico Podcasting 2.0 como estándar Cómo funciona el streaming de sats Splits automáticos Estado de ecosistema (marzo 2026) Convergencia con Nostr Enlaces Inicio › Lightning › Podcasting 2.0 y Value4Value Podcasting 2.0 y Value4Value: streaming de sats Escuchas un podcast, te gusta, y automáticamente envías sats al creador cada minuto. Sin intermediarios, sin suscripción. El problema del modelo de monetización clásico El podcasting tradicional depende de sponsors o suscripciones con fricción alta. Value4Value propone otro esquema: contenido abierto y pago voluntario directo, granular y continuo por parte de la audiencia. Podcasting 2.0 como estándar Las extensiones RSS (como <podcast:value> ) permiten definir destinos Lightning y reparto automático de ingresos (splits) entre host, equipo y colaboradores. Cómo funciona el streaming de sats Oyente configura sats/min en app compatible. La app envía pagos Keysend mientras se reproduce episodio. El creador recibe flujo continuo y boosts puntuales con mensaje. Splits automáticos El feed puede definir porcentajes para múltiples participantes. La app distribuye cada pago sin backoffice manual. i Más que propinas V4V convierte valoración de audiencia en señal económica directa, no solo interacción gratuita. Estado de ecosistema (marzo 2026) Apps como Fountain, Breez "
+  },
+  {
+    "title": "PTLCs y la evolución técnica de Lightning",
+    "url": "/lightning/ptlcs-y-futuro.html",
+    "tags": [
+      "lightning",
+      "ptlcs",
+      "futuro",
+      "wallet",
+      "billetera",
+      "factura lightning"
+    ],
+    "section": "Lightning",
+    "keywords": "PTLCs, Taproot en Lightning, trampoline routing y más: las mejoras técnicas que vienen para Lightning Network. Protocolo en evolución activa HTLCs vs PTLCs Taproot channels Trampoline routing Pagos asíncronos Dual-funded channels y liquidity ads Simplicity y horizonte largo Enlaces Inicio › Lightning › PTLCs y futuro PTLCs y la evolución técnica de Lightning Lightning no está terminado. Estas son las piezas que faltan y las mejoras que vienen. Protocolo en evolución activa Lightning está en producción desde 2018, pero su arquitectura sigue evolucionando. A diferencia de capa base Bitcoin, la adopción de mejoras en Lightning puede ser incremental por implementación y por nodo. HTLCs vs PTLCs El modelo HTLC actual reutiliza hash de pago entre saltos, lo que deja espacio para correlación en escenarios adversos. PTLCs reemplaza esa mecánica con puntos/adaptor signatures de Schnorr, mejorando privacidad y flexibilidad de construcción de pagos. Taproot channels Canales sobre P2TR mejoran eficiencia y privacidad on-chain frente a esquemas anteriores. También son base técnica para despliegues más amplios de PTLC. Trampoline routing Permite delegar cálculo pesado de rutas en nodos mejor conectados, facilitando UX móvil y reduciendo carga local de wallet ligera. Pagos asíncronos Una de las limitaciones actuales es necesidad de receptor online en muchos flujos. Los pagos asíncronos buscan aliviar esa restricción, pero siguen en fase de propuesta/investigación para despliegue general. Du"
+  },
+  {
     "title": "¿Qué es Lightning Network? La visión completa",
     "url": "/lightning/que-es-lightning.html",
     "tags": [
@@ -1951,6 +2133,71 @@
     ],
     "section": "Lightning",
     "keywords": "Lightning Network: qué es, cómo nació, qué problema resuelve y por qué se ha convertido en una plataforma, no solo un sistema de pagos. El problema que Lightning vino a resolver El diseño original de 2015 De experimento a red operativa Estado general en marzo de 2026 Por qué hoy se habla de plataforma Lightning frente a otras capas de Bitcoin Lectura recomendada según objetivo Fuente principal Inicio › Lightning › ¿Qué es Lightning Network? ¿Qué es Lightning Network? La visión completa De solución de pagos a plataforma completa. La historia y la visión de Lightning. El problema que Lightning vino a resolver Bitcoin prioriza seguridad, descentralización e inmutabilidad. Esa elección tiene un coste de capacidad: la capa base no está pensada para competir en volumen con redes de tarjetas tradicionales. Pedir bloques cada vez más grandes parece una solución fácil, pero en la práctica encarece la operación de nodos y empuja a la centralización. Lightning nace como respuesta técnica a esa tensión: mantener a Bitcoin como capa de liquidación final y mover pagos frecuentes a una capa de canales off-chain, sin cambiar reglas de consenso de Bitcoin. El diseño original de 2015 En el whitepaper de Joseph Poon y Thaddeus Dryja (2015), Lightning se describe como una red de canales de pago bidireccionales. Dos partes abren un canal con una transacción multisig en Bitcoin, actualizan saldos entre ellas fuera de cadena, y solo vuelven on-chain para cerrar con el estado final. Si esa lógica se"
+  },
+  {
+    "title": "Riesgos reales y privacidad en Lightning",
+    "url": "/lightning/seguridad-y-riesgos.html",
+    "tags": [
+      "lightning",
+      "seguridad",
+      "riesgos",
+      "wallet",
+      "billetera",
+      "factura lightning",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "Lightning",
+    "keywords": "Riesgos de Lightning Network: ataques de canal, privacidad de pagos, análisis de rutas, y cómo protegerte. Qué mejora respecto a on-chain Qué riesgos siguen existiendo Análisis de graph público Balance probing Correlación por LSP Jamming y degradación Vectores avanzados Recomendaciones por perfil Enlaces Inicio › Lightning › Riesgos y privacidad Riesgos reales y privacidad en Lightning Lightning mejora la privacidad respecto a on-chain, pero no es anónimo. Estos son los riesgos reales. Qué mejora respecto a on-chain Los pagos internos de canal no se publican en blockchain. Onion routing reduce visibilidad de ruta completa por salto. Menor trazabilidad directa que una transacción UTXO pública. Qué riesgos siguen existiendo Análisis de graph público Canales anunciados permiten inferencias de topología y relaciones de nodo. Balance probing Pagos de prueba pueden estimar liquidez de un canal en ciertos escenarios. Correlación por LSP Si usas wallet LSP-assisted, el proveedor observa metadatos relevantes de pago. Jamming y degradación Ataques de disponibilidad pueden bloquear liquidez temporalmente sin robar fondos. Vectores avanzados Investigaciones como replacement cycling muestran que la seguridad operacional depende también de mempool y políticas de cierre. ! Modelo de amenaza Para uso cotidiano, Lightning ofrece privacidad práctica superior a banca/tarjeta. Para adversarios de alto nivel, necesitas capas extra como eCash y buen opsec. Recomendaciones por perfil Usuario medio:"
+  },
+  {
+    "title": "Splicing y channel factories: el futuro de la gestión de canales",
+    "url": "/lightning/splicing-y-channel-factories.html",
+    "tags": [
+      "lightning",
+      "splicing",
+      "channel",
+      "factories",
+      "wallet",
+      "billetera",
+      "factura lightning",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "Lightning",
+    "keywords": "Splicing y channel factories: cómo mejorarán la gestión de canales Lightning, reducirán costes on-chain y harán Lightning más eficiente. El problema que ambas innovaciones atacan Splicing: canales que respiran Splice-in Splice-out Channel factories: escalabilidad on-chain de canales Ventaja Coste técnico Relación con PTLCs y evolución de protocolo Enlaces Inicio › Lightning › Splicing y channel factories Splicing y channel factories: el futuro de la gestión de canales Dos innovaciones que cambiarán fundamentalmente cómo funcionan los canales Lightning. El problema que ambas innovaciones atacan En el modelo clásico, los canales tienen capacidad fija: si quieres modificar capacidad, cierras y vuelves a abrir. Eso consume espacio on-chain y eleva coste operativo, especialmente para LSP y operadores de gran volumen. Splicing: canales que respiran Splicing permite modificar capacidad de un canal existente con una transacción on-chain de actualización, sin el ciclo completo de cierre/reapertura tradicional. El canal puede seguir operativo durante el proceso según implementación. Splice-in Añades fondos al canal para ganar capacidad de envío/recepción según distribución. Splice-out Retiras parte de la capacidad del canal hacia una salida on-chain, manteniendo el canal vivo con menor capacidad. i Impacto en UX Phoenix usa splicing desde 2023: para el usuario parece un único balance funcional entre on-chain y Lightning, sin “gestión de canales” explícita. Channel factories: escalabili"
+  },
+  {
+    "title": "Submarine swaps y chain swaps: entre Lightning y on-chain",
+    "url": "/lightning/submarine-swaps.html",
+    "tags": [
+      "lightning",
+      "submarine",
+      "swaps",
+      "wallet",
+      "billetera",
+      "factura lightning",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "Lightning",
+    "keywords": "Submarine swaps: cómo mover fondos entre Lightning y on-chain de forma trustless. Loop In, Loop Out y chain swaps explicados. Por qué cerrar un canal no siempre es la respuesta Qué significa “swap atómico” Loop Out (Lightning → on-chain) Loop In (on-chain → Lightning) Proveedores habituales Chain swaps entre capas Cuándo tiene sentido usar swaps Enlaces Inicio › Lightning › Submarine swaps Submarine swaps y chain swaps: entre Lightning y on-chain A veces necesitas pasar fondos de Lightning a on-chain (o viceversa) sin cerrar canales. Los swaps lo hacen posible. Por qué cerrar un canal no siempre es la respuesta Cerrar y reabrir canales para mover liquidez entre capas implica más fricción: múltiples transacciones, esperas y coste on-chain extra. Los swaps atómicos evitan esa secuencia para muchos casos operativos. Qué significa “swap atómico” En un swap atómico, o ambas partes cumplen o ninguna pierde fondos. La seguridad se basa en HTLCs/timelocks coordinados entre Lightning y Bitcoin on-chain. El proveedor puede fallar en disponibilidad, pero no debería poder apropiarse de fondos si el flujo se implementa correctamente. Loop Out (Lightning → on-chain) Convierte saldo Lightning en BTC on-chain sin cerrar canal. Casos típicos: retirar beneficios de routing, mover fondos a cold storage, o reequilibrar capacidad. Indicas dirección on-chain de destino. Pagas invoice Lightning del proveedor. Recibes BTC on-chain con confirmaciones. Loop In (on-chain → Lightning) Convierte BTC on-c"
+  },
+  {
+    "title": "Taproot Assets: tokens y stablecoins sobre Lightning",
+    "url": "/lightning/taproot-assets.html",
+    "tags": [
+      "lightning",
+      "taproot",
+      "assets",
+      "wallet",
+      "billetera",
+      "factura lightning",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "Lightning",
+    "keywords": "Taproot Assets: cómo emitir tokens, stablecoins y activos digitales directamente sobre Lightning Network usando Taproot. El problema de las stablecoins Qué es Taproot Assets Arquitectura en tres capas 1. Emisión en Bitcoin 2. Transporte por Lightning (edge liquidity) 3. Mercado de tipo de cambio USDt sobre Lightning Qué no es Taproot Assets Enlaces Inicio › Lightning › Taproot Assets Taproot Assets: tokens y stablecoins sobre Lightning Lightning no solo mueve sats. Con Taproot Assets puede mover dólares, euros, y cualquier activo digital. El problema de las stablecoins Bitcoin aporta escasez y soberanía, pero tiene volatilidad. En pagos diarios, comercio o remesas, mucha gente sigue pensando en dólares o moneda local. Taproot Assets nace para cubrir esa demanda sin salir del stack Bitcoin + Lightning. Qué es Taproot Assets Es un protocolo impulsado por Lightning Labs para emitir y transferir activos sobre Bitcoin y moverlos por Lightning. La emisión se ancla en Bitcoin usando Taproot; la transferencia aprovecha la red Lightning existente. Arquitectura en tres capas 1. Emisión en Bitcoin El activo se acuña en una transacción Taproot en capa base. El anclaje criptográfico asegura su existencia y reglas de emisión. 2. Transporte por Lightning (edge liquidity) Los nodos intermedios siguen viendo sats normales. La conversión activo↔sats ocurre en los nodos de borde (origen y destino). Esto evita tener que actualizar toda la red para que un activo nuevo circule. 3. Mercado de tipo "
   },
   {
     "title": "Ventajas y límites reales de Lightning",
@@ -1978,6 +2225,21 @@
     ],
     "section": "Lightning",
     "keywords": "Wallets Lightning: custodiales vs no-custodiales, LSP, canales embebidos. Cómo elegir la wallet correcta para tu caso de uso. Custodia en Lightning: más matices que en on-chain Modelo 1: custodial total Modelo 2: LSP-assisted (claves tuyas, liquidez delegada) Modelo 3: nodo propio Modelo 4: eCash integrado con Lightning Comparativa rápida Recomendación práctica por perfil Enlaces Inicio › Lightning › Wallets Lightning Wallets Lightning: tipos, trade-offs y cómo elegir No todas las wallets Lightning son iguales. Las diferencias importan más de lo que parece. Custodia en Lightning: más matices que en on-chain En Bitcoin on-chain la frontera suele ser binaria: tienes tú las claves o las tiene un tercero. En Lightning hay más capas: además de claves, importa quién gestiona canales, liquidez, backups de estado y conectividad. Por eso conviene pensar en espectro, no en etiqueta simple. Modelo 1: custodial total Ejemplos típicos: Wallet of Satoshi o saldos Lightning de ciertas plataformas. El proveedor opera canales, custodia fondos y decide políticas de acceso. Ventaja: experiencia inmediata. Riesgo: congelación, KYC forzado, quiebra o cierre del servicio. Uso recomendado: importes pequeños y operativos. Modelo 2: LSP-assisted (claves tuyas, liquidez delegada) Wallets como Phoenix o Breez te dan autocustodia de claves, pero un LSP te facilita canales y liquidez. Es el punto de equilibrio más útil para la mayoría: soberanía real con fricción baja. Ventaja: buen balance entre control"
+  },
+  {
+    "title": "Watchtowers: vigilantes de tus canales Lightning",
+    "url": "/lightning/watchtowers.html",
+    "tags": [
+      "lightning",
+      "watchtowers",
+      "wallet",
+      "billetera",
+      "factura lightning",
+      "utxo",
+      "transacciones"
+    ],
+    "section": "Lightning",
+    "keywords": "Watchtowers en Lightning: qué son, por qué los necesitas, cómo protegen tus canales cuando estás offline, y opciones disponibles. Modelo de seguridad de canales Qué es un watchtower Cuándo los necesitas de verdad Opciones en el ecosistema Evolución futura Enlaces Inicio › Lightning › Watchtowers Watchtowers: vigilantes de tus canales Lightning ¿Qué pasa si tu contraparte intenta cerrar con un estado antiguo mientras estás offline? Los watchtowers te protegen. Modelo de seguridad de canales Lightning penaliza intentos de cierre fraudulento con estados antiguos. Ese modelo requiere que la parte afectada detecte a tiempo la publicación y responda dentro del timelock. Si estás offline durante esa ventana, aumenta riesgo operativo. Ahí entran los watchtowers. Qué es un watchtower Es un servicio que monitoriza la cadena en tu nombre y, si detecta un cierre inválido contra tu canal, publica la transacción de justicia para proteger tus fondos. Las implementaciones están diseñadas para minimizar exposición de datos y limitar capacidad del watchtower a funciones concretas de defensa, no de custodia. Cuándo los necesitas de verdad Nodo propio con posibles downtimes: recomendable. Wallet LSP-assisted: suele venir cubierto por infraestructura del proveedor. Custodial: no gestionas canales directamente. Opciones en el ecosistema LND con soporte nativo. TEOS (ecosistema CLN). Servicios integrados en stacks como Alby/LSP. i Contexto realista La mayoría de usuarios no configura watchtowers ma"
   },
   {
     "title": "WebLN: Lightning nativo en el navegador",

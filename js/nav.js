@@ -334,9 +334,30 @@
         { href: '/lightning/webln.html', text: 'WebLN' },
 
         { sectionTitle: 'Infraestructura' },
+        { href: '/lightning/lsp-y-liquidez.html', text: 'LSP, liquidez y canales JIT' },
+        { href: '/lightning/submarine-swaps.html', text: 'Submarine swaps y chain swaps' },
+        { href: '/lightning/splicing-y-channel-factories.html', text: 'Splicing y channel factories' },
+        { href: '/lightning/watchtowers.html', text: 'Watchtowers' },
+        { href: '/lightning/ptlcs-y-futuro.html', text: 'PTLCs y evolución técnica' },
+
         { sectionTitle: 'Aplicaciones' },
+        { href: '/lightning/l402.html', text: 'L402' },
+        { href: '/lightning/agentes-ia-y-lightning.html', text: 'Agentes de IA y Lightning' },
+        { href: '/lightning/podcasting-value4value.html', text: 'Podcasting 2.0 y Value4Value' },
+        { href: '/lightning/nostr-zaps-y-lightning.html', text: 'Nostr, Zaps y Lightning' },
+        { href: '/lightning/gaming-streaming-comercio.html', text: 'Gaming, streaming y comercio' },
+        { href: '/lightning/micropagos-web.html', text: 'Micropagos web y paywalls' },
+
         { sectionTitle: 'Extensiones' },
+        { href: '/lightning/taproot-assets.html', text: 'Taproot Assets' },
+        { href: '/lightning/ecash-cashu-fedimint.html', text: 'eCash: Cashu y Fedimint' },
+        { href: '/lightning/ark.html', text: 'Ark' },
+        { href: '/lightning/mas-que-sats.html', text: 'Cuando Lightning mueve más que sats' },
+
         { sectionTitle: 'Seguridad' },
+        { href: '/lightning/seguridad-y-riesgos.html', text: 'Riesgos reales y privacidad' },
+        { href: '/lightning/custodia-vs-autocustodia.html', text: 'Custodia en Lightning' },
+        { href: '/lightning/errores-comunes.html', text: 'Errores comunes y scams' },
       ]
     },
     {

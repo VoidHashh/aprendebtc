@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="LSP en Lightning: qué son, cómo gestionan liquidez, canales JIT, rebalanceo, y por qué son clave para la experiencia de usuario." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/lsp-y-liquidez.html" />
+  <meta property="og:title" content="LSP, liquidez y canales JIT: cómo funciona la infraestructura Lightning | aprendebtc.com" />
+  <meta property="og:description" content="LSP en Lightning: qué son, cómo gestionan liquidez, canales JIT, rebalanceo, y por qué son clave para la experiencia de usuario." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LSP, liquidez y canales JIT: cómo funciona la infraestructura Lightning | aprendebtc.com" />
+  <meta name="twitter:description" content="LSP en Lightning: qué son, cómo gestionan liquidez, canales JIT, rebalanceo, y por qué son clave para la experiencia de usuario." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/lsp-y-liquidez.html" />
+  <title>LSP, liquidez y canales JIT: cómo funciona la infraestructura Lightning | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-lsp" aria-hidden="true"></div></div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">LSP, liquidez y canales JIT</span>
+        </nav>
+
+        <article class="article">
+          <h1>LSP, liquidez y canales JIT: cómo funciona la infraestructura Lightning</h1>
+          <p class="article__subtitle">La mayoría de usuarios Lightning no gestionan canales. Los LSP lo hacen por ellos. Así funciona.</p>
+
+          <h2>El problema de liquidez que los LSP resuelven</h2>
+          <p>Cuando alguien instala Phoenix o Breez y recibe su primer pago sin haber configurado canales, parece magia. No lo es. Hay un LSP trabajando en segundo plano. Lightning, en su modelo puro, exige gestionar canales, capacidad y rebalanceo. Para un usuario técnico es trabajo continuo. Para el usuario medio es fricción excesiva.</p>
+          <p>Los LSP (Lightning Service Providers) resuelven ese gap: no son bancos custodios por definición, son proveedores de infraestructura de liquidez y conectividad. Tú mantienes control de claves; ellos operan la capa de canales para que la experiencia sea utilizable.</p>
+
+          <h2>Qué servicios proporciona un LSP</h2>
+          <h3>Apertura de canales</h3>
+          <p>El LSP abre canales hacia tu wallet o nodo para darte liquidez entrante desde el inicio. Sin esto, un usuario nuevo suele tener capacidad de envío pero no de recepción.</p>
+
+          <h3>Canales JIT (Just-in-Time)</h3>
+          <p>Si te envían sats y no tienes capacidad entrante suficiente, el LSP puede abrir canal en el mismo flujo de pago y entregar fondos en ese momento. El coste de apertura se descuenta del pago. Para el usuario, solo “llega”.</p>
+
+          <h3>Rebalanceo y mantenimiento de liquidez</h3>
+          <p>Con el uso, los canales se desequilibran. El LSP ajusta topología y flujos para mantener rutas útiles en ambos sentidos, evitando degradación de experiencia.</p>
+
+          <h3>Routing</h3>
+          <p>Los LSP suelen estar bien conectados a nodos con alta centralidad de red. Eso mejora probabilidad de éxito y coste medio de pagos.</p>
+
+          <h3>Backups de estado</h3>
+          <p>Algunos LSP guardan estado cifrado de canal para recuperación más segura tras pérdida de dispositivo.</p>
+
+          <h2>LSPS: estandarización en marcha</h2>
+          <p>Históricamente, cada LSP operaba con APIs propietarias. LSPS busca interoperabilidad:</p>
+          <ul>
+            <li><strong>LSPS0:</strong> transporte base cliente ↔ LSP.</li>
+            <li><strong>LSPS1:</strong> compra estandarizada de canales.</li>
+            <li><strong>LSPS2:</strong> canales JIT estandarizados.</li>
+          </ul>
+          <p>La adopción avanza gradualmente y reduce lock-in por proveedor.</p>
+
+          <h2>Rebalanceo cuando la liquidez se agota</h2>
+          <p>Para nodos propios, el rebalanceo es parte de operación:</p>
+          <ul>
+            <li><strong>Rebalanceo circular:</strong> mover saldo entre tus canales pagando fees de ruta.</li>
+            <li><strong>Submarine swaps:</strong> desplazar liquidez entre Lightning y on-chain sin cerrar canal.</li>
+            <li><strong>Liquidez ads:</strong> mercados de apertura/capacidad entre nodos.</li>
+          </ul>
+
+          <h2>Modelo económico del LSP</h2>
+          <p>El servicio no es altruista. Ingresan por:</p>
+          <ul>
+            <li>fees de apertura JIT</li>
+            <li>fees de routing</li>
+            <li>servicios de liquidez/operación</li>
+          </ul>
+          <p>El usuario paga por simplicidad operativa y menos fricción.</p>
+
+          <h2>Trade-off clave: conveniencia vs privacidad</h2>
+          <p>Un LSP puede observar metadatos de flujo (montos, tiempos, rutas parciales) según su posición de red. No implica custodia automática, pero sí dependencia de infraestructura y exposición de metadatos operativos.</p>
+
+          <div class="callout callout--warning">
+            <span class="callout__icon" aria-hidden="true">!</span>
+            <div class="callout__content">
+              <div class="callout__title">Riesgo de correlación</div>
+              <p class="callout__text">Un LSP puede correlacionar pagos entrantes con identidad si usas Lightning Address en su propio dominio. Si tu prioridad es privacidad fuerte, evalúa topología, canales privados y capas eCash para pagos sensibles.</p>
+            </div>
+          </div>
+
+          <p><strong>Estado (marzo 2026):</strong> ecosistema LSP maduro para uso cotidiano, con estandarización en progreso vía LSPS.</p>
+
+          <h2>Enlaces</h2>
+          <ul>
+            <li><a href="/lightning/como-funciona-un-pago.html">Cómo funciona un pago Lightning</a></li>
+            <li><a href="/lightning/wallets-lightning.html">Wallets Lightning</a></li>
+            <li><a href="/lightning/submarine-swaps.html">Submarine swaps</a></li>
+            <li><a href="/lightning/splicing-y-channel-factories.html">Splicing y channel factories</a></li>
+            <li><a href="/nivel-4/tu-nodo-lightning.html">Nivel 4: tu nodo Lightning</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/webln.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">WebLN</span>
+            </a>
+            <a href="/lightning/submarine-swaps.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">Submarine swaps y chain swaps</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

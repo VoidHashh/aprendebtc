@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Splicing y channel factories: cómo mejorarán la gestión de canales Lightning, reducirán costes on-chain y harán Lightning más eficiente." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/splicing-y-channel-factories.html" />
+  <meta property="og:title" content="Splicing y channel factories: el futuro de la gestión de canales | aprendebtc.com" />
+  <meta property="og:description" content="Splicing y channel factories: cómo mejorarán la gestión de canales Lightning, reducirán costes on-chain y harán Lightning más eficiente." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Splicing y channel factories: el futuro de la gestión de canales | aprendebtc.com" />
+  <meta name="twitter:description" content="Splicing y channel factories: cómo mejorarán la gestión de canales Lightning, reducirán costes on-chain y harán Lightning más eficiente." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/splicing-y-channel-factories.html" />
+  <title>Splicing y channel factories: el futuro de la gestión de canales | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-splicing" aria-hidden="true"></div></div></nav></aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Splicing y channel factories</span>
+        </nav>
+
+        <article class="article">
+          <h1>Splicing y channel factories: el futuro de la gestión de canales</h1>
+          <p class="article__subtitle">Dos innovaciones que cambiarán fundamentalmente cómo funcionan los canales Lightning.</p>
+
+          <h2>El problema que ambas innovaciones atacan</h2>
+          <p>En el modelo clásico, los canales tienen capacidad fija: si quieres modificar capacidad, cierras y vuelves a abrir. Eso consume espacio on-chain y eleva coste operativo, especialmente para LSP y operadores de gran volumen.</p>
+
+          <h2>Splicing: canales que respiran</h2>
+          <p>Splicing permite modificar capacidad de un canal existente con una transacción on-chain de actualización, sin el ciclo completo de cierre/reapertura tradicional. El canal puede seguir operativo durante el proceso según implementación.</p>
+
+          <h3>Splice-in</h3>
+          <p>Añades fondos al canal para ganar capacidad de envío/recepción según distribución.</p>
+
+          <h3>Splice-out</h3>
+          <p>Retiras parte de la capacidad del canal hacia una salida on-chain, manteniendo el canal vivo con menor capacidad.</p>
+
+          <div class="callout callout--info">
+            <span class="callout__icon" aria-hidden="true">i</span>
+            <div class="callout__content">
+              <div class="callout__title">Impacto en UX</div>
+              <p class="callout__text">Phoenix usa splicing desde 2023: para el usuario parece un único balance funcional entre on-chain y Lightning, sin “gestión de canales” explícita.</p>
+            </div>
+          </div>
+
+          <h2>Channel factories: escalabilidad on-chain de canales</h2>
+          <p>Las channel factories buscan que múltiples participantes compartan una sola apertura on-chain para luego gestionar varios canales off-chain dentro de ese marco. Potencialmente reduce de forma significativa footprint en la capa base.</p>
+
+          <h3>Ventaja</h3>
+          <p>Menos transacciones on-chain por número de relaciones de canal.</p>
+
+          <h3>Coste técnico</h3>
+          <p>Más complejidad de coordinación, firma y cierre bajo escenarios de no cooperación. A marzo de 2026 sigue en investigación y diseño avanzado, no en uso masivo de producción.</p>
+
+          <div class="callout callout--warning">
+            <span class="callout__icon" aria-hidden="true">!</span>
+            <div class="callout__content">
+              <div class="callout__title">Estado real</div>
+              <p class="callout__text">Channel factories tienen potencial alto, pero no son una herramienta operativa estándar hoy. No conviene diseñar arquitectura crítica asumiendo disponibilidad inmediata.</p>
+            </div>
+          </div>
+
+          <h2>Relación con PTLCs y evolución de protocolo</h2>
+          <p>PTLCs, Taproot channels y propuestas de mejora en scripting/protocolo base pueden facilitar o potenciar algunas de estas técnicas en próximos ciclos de adopción.</p>
+
+          <p><strong>Estado (marzo 2026):</strong> splicing ya es producción en algunos stacks; factories siguen en fase de investigación.</p>
+
+          <h2>Enlaces</h2>
+          <ul>
+            <li><a href="/lightning/lsp-y-liquidez.html">LSP y liquidez</a></li>
+            <li><a href="/lightning/como-funciona-un-pago.html">Cómo funciona un pago Lightning</a></li>
+            <li><a href="/lightning/ptlcs-y-futuro.html">PTLCs y futuro</a></li>
+            <li><a href="/lightning/wallets-lightning.html">Wallets Lightning</a></li>
+            <li><a href="/nivel-4/tu-nodo-lightning.html">Nivel 4: tu nodo Lightning</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/submarine-swaps.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">Submarine swaps y chain swaps</span>
+            </a>
+            <a href="/lightning/watchtowers.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">Watchtowers</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

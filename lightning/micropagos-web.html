@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Micropagos web con Lightning: paywalls por sats, APIs pay-per-use, y el fin de los modelos de suscripción forzada." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/micropagos-web.html" />
+  <meta property="og:title" content="Micropagos web y paywalls: monetización nativa con Lightning | aprendebtc.com" />
+  <meta property="og:description" content="Micropagos web con Lightning: paywalls por sats, APIs pay-per-use, y el fin de los modelos de suscripción forzada." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Micropagos web y paywalls: monetización nativa con Lightning | aprendebtc.com" />
+  <meta name="twitter:description" content="Micropagos web con Lightning: paywalls por sats, APIs pay-per-use, y el fin de los modelos de suscripción forzada." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/micropagos-web.html" />
+  <title>Micropagos web y paywalls: monetización nativa con Lightning | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-micropagos" aria-hidden="true"></div></div></nav></aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Micropagos web</span>
+        </nav>
+
+        <article class="article">
+          <h1>Micropagos web y paywalls: monetización nativa con Lightning</h1>
+          <p class="article__subtitle">¿Y si en vez de suscribirte a un medio por €10/mes pudieras pagar 5 sats por cada artículo que lees?</p>
+
+          <h2>Cómo monetiza la web hoy</h2>
+          <p>La web vive entre publicidad invasiva, suscripciones forzadas y paywalls rígidos. En esos tres modelos, el usuario no paga por valor consumido real: paga con datos, con cuota fija o con bloqueo total.</p>
+          <p>Lightning añade una cuarta vía: pagar exactamente por uso. Un artículo, un endpoint de API, un minuto de audio o una consulta concreta pueden tener precio en sats sin pedir cuenta, tarjeta ni KYC.</p>
+
+          <h2>Modelos técnicos</h2>
+          <h3>L402 (HTTP 402)</h3>
+          <p>El servidor responde <code>402 Payment Required</code> con invoice Lightning. El cliente paga y reintenta con credencial criptográfica. Es el modelo más sólido para APIs y paywalls programables.</p>
+
+          <h3>WebLN en desktop</h3>
+          <p>Con extensión compatible (por ejemplo Alby), el pago se confirma sin salir de la página. Flujo corto y buena UX para escritorio.</p>
+
+          <h3>LNURL + QR universal</h3>
+          <p>Más fricción que WebLN, pero máxima compatibilidad. Sirve para cualquier wallet Lightning incluso cuando no hay extensiones.</p>
+
+          <h3>eCash para alta frecuencia</h3>
+          <p>En casos de microimportes extremos, los tokens eCash pueden reducir fricción adicional al agrupar valor fuera del flujo Lightning directo.</p>
+
+          <h2>Dónde ya funciona</h2>
+          <ul>
+            <li>Stacker News como caso de comunidad con incentivos económicos.</li>
+            <li>APIs de IA en modo pay-per-use con L402.</li>
+            <li>Paywalls independientes sobre BTCPay y componentes Lightning.</li>
+          </ul>
+
+          <h2>Límites actuales</h2>
+          <ul>
+            <li>La mayoría de usuarios de internet todavía no usa wallet Lightning.</li>
+            <li>En móvil hay más fricción que en escritorio.</li>
+            <li>No todos los medios necesitan ni quieren pricing por unidad.</li>
+          </ul>
+
+          <div class="callout callout--info">
+            <span class="callout__icon" aria-hidden="true">i</span>
+            <div class="callout__content">
+              <div class="callout__title">No sustituye todo, abre una opción nueva</div>
+              <p class="callout__text">Micropagos Lightning no eliminan suscripciones o publicidad en todos los casos. Pero sí habilitan modelos que antes eran económicamente inviables.</p>
+            </div>
+          </div>
+
+          <p><strong>Estado (marzo 2026):</strong> adopción real en nichos técnicos y comunidades Bitcoin-first; expansión gradual en APIs y casos machine-to-machine.</p>
+
+          <h2>Enlaces</h2>
+          <ul>
+            <li><a href="/lightning/l402.html">L402</a></li>
+            <li><a href="/lightning/webln.html">WebLN</a></li>
+            <li><a href="/lightning/agentes-ia-y-lightning.html">Agentes de IA y Lightning</a></li>
+            <li><a href="/lightning/gaming-streaming-comercio.html">Gaming, streaming y comercio</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/gaming-streaming-comercio.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">Gaming, streaming y comercio</span>
+            </a>
+            <a href="/lightning/taproot-assets.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">Taproot Assets</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

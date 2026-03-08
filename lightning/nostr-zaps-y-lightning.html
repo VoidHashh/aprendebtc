@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Nostr Zaps: cómo Lightning se integra en la red social descentralizada. Pagos como likes, propinas como interacción social." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/nostr-zaps-y-lightning.html" />
+  <meta property="og:title" content="Nostr, Zaps y Lightning: pagos como capa social | aprendebtc.com" />
+  <meta property="og:description" content="Nostr Zaps: cómo Lightning se integra en la red social descentralizada. Pagos como likes, propinas como interacción social." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Nostr, Zaps y Lightning: pagos como capa social | aprendebtc.com" />
+  <meta name="twitter:description" content="Nostr Zaps: cómo Lightning se integra en la red social descentralizada. Pagos como likes, propinas como interacción social." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/nostr-zaps-y-lightning.html" />
+  <title>Nostr, Zaps y Lightning: pagos como capa social | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-zaps" aria-hidden="true"></div></div></nav></aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Nostr, Zaps y Lightning</span>
+        </nav>
+
+        <article class="article">
+          <h1>Nostr, Zaps y Lightning: pagos como capa social</h1>
+          <p class="article__subtitle">En Nostr, los likes cuestan sats. Y eso cambia todo sobre cómo funciona una red social.</p>
+
+          <h2>Incentivos en redes tradicionales</h2>
+          <p>Cuando interactuar es gratis (likes, comentarios, cuentas), el sistema incentiva ruido y manipulación de atención. Nostr + Lightning introduce coste económico opcional en interacción y mejora señal de valor.</p>
+
+          <h2>Qué es un Zap</h2>
+          <p>Un zap es un pago Lightning vinculado a un evento de Nostr. No reemplaza al like: lo complementa con señal económica real.</p>
+
+          <h2>Flujo técnico (NIP-57)</h2>
+          <ol>
+            <li>Cliente crea zap request.</li>
+            <li>Resuelve <code>lud16/lud06</code> del receptor.</li>
+            <li>Obtiene invoice específica LNURL-pay.</li>
+            <li>Paga (normalmente vía NWC/WebLN).</li>
+            <li>Se publica zap receipt verificable en relays.</li>
+          </ol>
+
+          <h2>Por qué cambia incentivos</h2>
+          <ul>
+            <li>señal de valor más fuerte que interacción gratuita</li>
+            <li>spam económico más caro</li>
+            <li>monetización directa sin plataforma intermediaria</li>
+          </ul>
+
+          <div class="callout callout--info">
+            <span class="callout__icon" aria-hidden="true">i</span>
+            <div class="callout__content">
+              <div class="callout__title">NWC como pieza clave</div>
+              <p class="callout__text">Sin NWC, zappear sería mucho más lento. Con NWC, el pago ocurre desde el cliente Nostr con permisos controlados en tu wallet.</p>
+            </div>
+          </div>
+
+          <h2>Convergencia identidad + pagos</h2>
+          <p>Nostr y Lightning comparten diseño compatible: identidad portable, capa de publicación abierta y pagos nativos en sats. Para guía completa de Nostr, ver nostrfacil.com.</p>
+
+          <h2>Enlaces</h2>
+          <ul>
+            <li><a href="/lightning/nwc.html">NWC</a></li>
+            <li><a href="/lightning/podcasting-value4value.html">Podcasting 2.0 y Value4Value</a></li>
+            <li><a href="/lightning/lightning-address.html">Lightning Address</a></li>
+            <li><a href="https://nostrfacil.com" rel="noopener" target="_blank">nostrfacil.com</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/podcasting-value4value.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">Podcasting 2.0 y Value4Value</span>
+            </a>
+            <a href="/lightning/gaming-streaming-comercio.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">Gaming, streaming y comercio</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

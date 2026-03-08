@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ark protocol: qué es, cómo funciona, en qué se diferencia de Lightning y por qué podría complementarlo." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/ark.html" />
+  <meta property="og:title" content="Ark: la nueva propuesta para escalar Lightning | aprendebtc.com" />
+  <meta property="og:description" content="Ark protocol: qué es, cómo funciona, en qué se diferencia de Lightning y por qué podría complementarlo." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ark: la nueva propuesta para escalar Lightning | aprendebtc.com" />
+  <meta name="twitter:description" content="Ark protocol: qué es, cómo funciona, en qué se diferencia de Lightning y por qué podría complementarlo." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/ark.html" />
+  <title>Ark: la nueva propuesta para escalar Lightning | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-ark" aria-hidden="true"></div></div></nav></aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">Ark</span>
+        </nav>
+
+        <article class="article">
+          <h1>Ark: la nueva propuesta para escalar Lightning</h1>
+          <p class="article__subtitle">Un protocolo nuevo que promete resolver algunos de los problemas de Lightning. Todavía en desarrollo temprano.</p>
+
+          <h2>Por qué surge Ark</h2>
+          <p>Lightning funciona, pero mantiene fricciones estructurales: liquidez entrante, gestión de canales y dependencia de disponibilidad del receptor. Ark aparece como propuesta alternativa para ciertos escenarios.</p>
+
+          <h2>Modelo base: vTXOs y ASPs</h2>
+          <p>Ark usa <strong>vTXOs</strong> (UTXOs virtuales) dentro de pools gestionados por un <strong>ASP</strong> (Ark Service Provider). Los usuarios transfieren vTXOs off-chain y el ASP liquida estados periódicamente on-chain.</p>
+
+          <h2>Ventajas prometidas</h2>
+          <ul>
+            <li>Recibir sin necesidad de liquidez entrante clásica.</li>
+            <li>Menos coordinación previa en pagos.</li>
+            <li>Posible mejora de UX para usuarios pasivos.</li>
+          </ul>
+
+          <h2>Trade-offs</h2>
+          <ul>
+            <li>Dependencia operativa más fuerte del ASP.</li>
+            <li>Necesidad de refrescar/gestionar expiración de vTXOs.</li>
+            <li>Interoperar con Lightning implica fricción adicional.</li>
+          </ul>
+
+          <div class="callout callout--info">
+            <span class="callout__icon" aria-hidden="true">i</span>
+            <div class="callout__content">
+              <div class="callout__title">Relación con Lightning</div>
+              <p class="callout__text">Ark no está planteado como reemplazo universal, sino como posible complemento para casos donde Lightning + LSP no optimiza bien la experiencia.</p>
+            </div>
+          </div>
+
+          <div class="callout callout--danger">
+            <span class="callout__icon" aria-hidden="true">!</span>
+            <div class="callout__content">
+              <div class="callout__title">Estado experimental</div>
+              <p class="callout__text">A marzo de 2026 hay trabajo activo e implementaciones de prueba, pero no una capa mainnet de uso general para usuario final.</p>
+            </div>
+          </div>
+
+          <h2>Enlaces</h2>
+          <ul>
+            <li><a href="/lightning/splicing-y-channel-factories.html">Splicing y channel factories</a></li>
+            <li><a href="/lightning/lsp-y-liquidez.html">LSP y liquidez</a></li>
+            <li><a href="/lightning/ventajas-y-limites.html">Ventajas y límites</a></li>
+            <li><a href="/la-madriguera/debate-ossification-vs-extensibilidad.html">Debate de extensibilidad</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/ecash-cashu-fedimint.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">eCash sobre Lightning</span>
+            </a>
+            <a href="/lightning/mas-que-sats.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">Cuando Lightning mueve más que sats</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>

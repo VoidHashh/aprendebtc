@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="L402 (HTTP 402): el protocolo que convierte Lightning en sistema de autenticación y pago nativo para la web. APIs de pago por uso." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://aprendebtc.com/lightning/l402.html" />
+  <meta property="og:title" content="L402: pagos nativos en la web y APIs monetizadas | aprendebtc.com" />
+  <meta property="og:description" content="L402 (HTTP 402): el protocolo que convierte Lightning en sistema de autenticación y pago nativo para la web. APIs de pago por uso." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="L402: pagos nativos en la web y APIs monetizadas | aprendebtc.com" />
+  <meta name="twitter:description" content="L402 (HTTP 402): el protocolo que convierte Lightning en sistema de autenticación y pago nativo para la web. APIs de pago por uso." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <link rel="canonical" href="https://aprendebtc.com/lightning/l402.html" />
+  <title>L402: pagos nativos en la web y APIs monetizadas | aprendebtc.com</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral"><nav class="sidebar"><div class="sidebar__ad-wrap"><div class="ad-slot ad-sidebar" id="ad-sidebar-lightning-l402" aria-hidden="true"></div></div></nav></aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <a href="./" class="breadcrumb__item">Lightning</a>
+          <span class="breadcrumb__separator" aria-hidden="true">›</span>
+          <span class="breadcrumb__current">L402</span>
+        </nav>
+
+        <article class="article">
+          <h1>L402: pagos nativos en la web y APIs monetizadas</h1>
+          <p class="article__subtitle">El código HTTP 402 "Payment Required" llevaba 30 años sin uso real. L402 le da vida con Lightning.</p>
+
+          <h2>El código que nadie usaba</h2>
+          <p>HTTP 402 existía en la especificación, pero sin una infraestructura de micropagos viable no tenía uso real. Con Lightning y Macaroons, L402 convierte ese código en un estándar práctico para acceso de pago a recursos web y APIs.</p>
+
+          <h2>Cómo funciona L402</h2>
+          <ol>
+            <li>Cliente solicita recurso protegido.</li>
+            <li>Servidor responde 402 con invoice Lightning + macaroon.</li>
+            <li>Cliente paga invoice y obtiene preimage.</li>
+            <li>Cliente reintenta con macaroon + prueba de pago.</li>
+            <li>Servidor valida criptográficamente y sirve recurso.</li>
+          </ol>
+
+          <h2>Por qué es distinto a modelos tradicionales</h2>
+          <ul>
+            <li><strong>Pago = autenticación:</strong> no necesitas cuenta ni sesión clásica.</li>
+            <li><strong>Micropagos reales:</strong> precios por petición en sats.</li>
+            <li><strong>Pay-per-use puro:</strong> pagas lo que consumes.</li>
+            <li><strong>Machine-native:</strong> agentes pueden operar sin tarjeta ni KYC.</li>
+          </ul>
+
+          <h2>Aperture y despliegue práctico</h2>
+          <p>Aperture (reverse proxy) permite poner L402 delante de servicios HTTP existentes sin reescribir el backend de negocio. El proxy gestiona negociación 402, validación y forwarding.</p>
+
+          <h2>Macaroons en L402</h2>
+          <p>Los macaroons aportan permisos granulares y verificación stateless. Permiten restringir alcance temporal, capacidades y presupuesto sin depender de sesiones tradicionales.</p>
+
+          <div class="callout callout--info">
+            <span class="callout__icon" aria-hidden="true">i</span>
+            <div class="callout__content">
+              <div class="callout__title">IA y comercio máquina-a-máquina</div>
+              <p class="callout__text">L402 es una pieza clave para que agentes de IA paguen APIs autónomamente usando sats como credencial económica nativa.</p>
+            </div>
+          </div>
+
+          <div class="callout callout--warning">
+            <span class="callout__icon" aria-hidden="true">!</span>
+            <div class="callout__content">
+              <div class="callout__title">Adopción</div>
+              <p class="callout__text">La tecnología está en producción, pero la adopción fuera del ecosistema Lightning todavía es parcial. Convive con API keys y suscripciones tradicionales.</p>
+            </div>
+          </div>
+
+          <h2>Enlaces</h2>
+          <ul>
+            <li><a href="/lightning/agentes-ia-y-lightning.html">Agentes de IA y Lightning</a></li>
+            <li><a href="/lightning/bolt11-y-bolt12.html">BOLT11 y BOLT12</a></li>
+            <li><a href="/lightning/webln.html">WebLN</a></li>
+            <li><a href="/lightning/micropagos-web.html">Micropagos web</a></li>
+          </ul>
+
+          <nav class="page-nav" aria-label="Navegación entre páginas">
+            <a href="/lightning/ptlcs-y-futuro.html" class="page-nav__item">
+              <span class="page-nav__label">← Anterior</span>
+              <span class="page-nav__title">PTLCs y evolución técnica</span>
+            </a>
+            <a href="/lightning/agentes-ia-y-lightning.html" class="page-nav__item page-nav__item--next">
+              <span class="page-nav__label">Siguiente →</span>
+              <span class="page-nav__title">Agentes de IA y Lightning</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+</html>
