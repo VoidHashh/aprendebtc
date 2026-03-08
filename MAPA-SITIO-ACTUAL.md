@@ -1,14 +1,18 @@
 ﻿# MAPA-SITIO-ACTUAL
 
-## Redirects Nivel 4 (Sidechains)
+## Redirects eliminados
 
-| Ruta antigua | Destino actual | Estado |
-| --- | --- | --- |
-| /sidechains/index.html | /nivel-4/que-son-las-sidechains.html | 🔄 |
-| /sidechains/que-son-las-sidechains.html | /nivel-4/que-son-las-sidechains.html | 🔄 |
-| /sidechains/rootstock-rsk.html | /nivel-4/rootstock-rsk.html | 🔄 |
-| /sidechains/liquid-network.html | /nivel-4/liquid-network.html | 🔄 |
-| /sidechains/fedimint-y-cashu.html | /nivel-4/fedimint-y-cashu.html | 🔄 |
+Se eliminaron los redirects legacy de `/sidechains/` y de herramientas legacy:
+
+- `/sidechains/index.html`
+- `/sidechains/que-son-las-sidechains.html`
+- `/sidechains/rootstock-rsk.html`
+- `/sidechains/liquid-network.html`
+- `/sidechains/fedimint-y-cashu.html`
+- `/herramientas/claves.html`
+- `/herramientas/firma.html`
+- `/herramientas/script.html`
+- `/herramientas/transaccion.html`
 
 ## Sección Lightning (hub temático)
 
@@ -47,6 +51,6 @@
 
 ## Totales del proyecto
 
-- Total redirects del sitio: 9 (antes: 4)
-- Total archivos rastreados (rg --files): 301
-- Total páginas indexables: +30 (sección /lightning/ completa)
+- Total redirects del sitio: 0
+- Total archivos rastreados (`rg --files`): 292
+- Total páginas indexables en `/lightning/`: 30
