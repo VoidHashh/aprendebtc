@@ -128,7 +128,7 @@
 
 <ul>
 
-<li>Qué UTXOs se gastan (inputs)</li>
+<li>Qué <a href="/nivel-3/modelo-utxo.html">UTXOs</a> se gastan (inputs)</li>
 
 <li>Qué nuevos UTXOs se crean (outputs)</li>
 
@@ -140,7 +140,7 @@
 
 <h2>Anatomía completa</h2>
 
-<p>Una transacción SegWit tiene la siguiente estructura: [Version]           4 bytes [Marker]            1 byte (0x00) - solo SegWit [Flag]              1 byte (0x01) - solo SegWit [Input Count]       varint [Inputs]            variable [Output Count]      varint [Outputs]           variable [Witness]           variable - solo SegWit [Locktime]          4 bytes</p>
+<p>Una transacción <a href="/nivel-5/segwit-internals.html">SegWit</a> tiene la siguiente estructura: [Version]           4 bytes [Marker]            1 byte (0x00) - solo SegWit [Flag]              1 byte (0x01) - solo SegWit [Input Count]       varint [Inputs]            variable [Output Count]      varint [Outputs]           variable [Witness]           variable - solo SegWit [Locktime]          4 bytes</p>
 
 <p>Vamos campo por campo.</p>
 
@@ -200,9 +200,9 @@
 
 <h2>Outputs</h2>
 
-<p>Cada output tiene: [Value]             8 bytes (satoshis, little-endian) [ScriptPubKey size] varint [ScriptPubKey]      variable (el script que bloquea este output)</p>
+<p>Cada output tiene: [Value]             8 bytes (satoshis, little-endian) [ScriptPubKey size] varint [ScriptPubKey]      variable (el <a href="/nivel-5/bitcoin-script.html">script</a> que bloquea este output)</p>
 
-<p>El valor en satoshis usa 8 bytes little-endian. Por ejemplo, 100.000 sats = <code>A086010000000000</code>.</p>
+<p>El valor en satoshis usa 8 bytes little-endian. Por ejemplo, 100.000 <a href="/base/que-es-un-satoshi.html">sats</a> = <code>A086010000000000</code>.</p>
 
 <h2>Witness (SegWit)</h2>
 

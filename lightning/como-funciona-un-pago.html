@@ -45,15 +45,15 @@
           <p class="article__subtitle">Todo el viaje de un pago Lightning, desde que pulsas enviar hasta que llega al destino en milisegundos.</p>
 
           <h2>El viaje real de un pago</h2>
-          <p>Cuando envías sats por Lightning, no estás escribiendo una transacción nueva en la blockchain. Estás actualizando estados de canales ya abiertos entre nodos. Tu wallet calcula una ruta, reserva liquidez en cada salto y ejecuta un flujo atómico basado en HTLCs. El receptor solo cobra si el pago llega completo; si no llega, todos recuperan su saldo original.</p>
+          <p>Cuando envías <a href="/base/que-es-un-satoshi.html">sats</a> por Lightning, no estás escribiendo una transacción nueva en la blockchain. Estás actualizando estados de canales ya abiertos entre nodos. Tu wallet calcula una ruta, reserva liquidez en cada salto y ejecuta un flujo atómico basado en HTLCs. El receptor solo cobra si el pago llega completo; si no llega, todos recuperan su saldo original.</p>
           <p>El pago suele tardar menos de un segundo, pero internamente ocurren varios pasos: búsqueda de ruta, validación de capacidad, negociación de condiciones y propagación del preimage de vuelta.</p>
 
           <h2>Canal de pago: la unidad base</h2>
-          <p>Un canal Lightning nace con una transacción on-chain 2-de-2 multisig. Dentro del canal, dos partes intercambian nuevos estados firmados sin tocar la cadena base en cada pago. Solo apertura y cierre son on-chain.</p>
+          <p>Un canal Lightning nace con una transacción <a href="/base/on-chain-vs-lightning.html">on-chain</a> 2-de-2 multisig. Dentro del canal, dos partes intercambian nuevos estados firmados sin tocar la cadena base en cada pago. Solo apertura y cierre son on-chain.</p>
           <p>Cada actualización invalida el estado anterior. Si una parte intenta publicar un estado antiguo para robar saldo, la contraparte puede ejecutar penalización y quedarse con todos los fondos del canal. Esa amenaza económica protege el protocolo.</p>
 
           <h2>Liquidez entrante y saliente</h2>
-          <p>La liquidez define si puedes enviar o recibir. Si abres un canal con 500.000 sats desde tu lado, inicialmente tienes casi toda la liquidez para enviar y casi nada para recibir. Para recibir, necesitas que parte del saldo esté del lado remoto o que un LSP te abra capacidad entrante.</p>
+          <p>La liquidez define si puedes enviar o recibir. Si abres un canal con 500.000 sats desde tu lado, inicialmente tienes casi toda la liquidez para enviar y casi nada para recibir. Para recibir, necesitas que parte del saldo esté del lado remoto o que un <a href="/lightning/lsp-y-liquidez.html">LSP</a> te abra capacidad entrante.</p>
 
           <div class="callout callout--warning">
             <span class="callout__icon" aria-hidden="true">!</span>
@@ -65,7 +65,7 @@
 
           <h2>Routing: encontrar camino en un grafo vivo</h2>
           <p>La red pública de Lightning es un grafo de nodos y canales. El emisor calcula rutas probables según capacidad, coste y fiabilidad histórica. Si una ruta falla, la wallet intenta otra automáticamente.</p>
-          <p>En móviles se usan estrategias como <em>trampoline routing</em> para delegar parte del cálculo a nodos bien conectados, reduciendo coste computacional local.</p>
+          <p>En móviles se usan estrategias como <em><a href="/lightning/ptlcs-y-futuro.html">trampoline routing</a></em> para delegar parte del cálculo a nodos bien conectados, reduciendo coste computacional local.</p>
 
           <h2>HTLC: atomicidad del pago</h2>
           <p>El receptor define un secreto (preimage) y publica su hash en la invoice. Cada salto de la ruta bloquea el monto bajo la condición “te pago si presentas el preimage antes de cierto tiempo”. Cuando el receptor revela el preimage para cobrar, el secreto vuelve por la ruta y cada nodo libera su tramo. Si no aparece el preimage a tiempo, los contratos expiran y cada salto recupera su saldo.</p>
@@ -76,7 +76,7 @@
           <h2>Qué cambia con MPP, splicing y LSP</h2>
           <ul>
             <li><strong>MPP:</strong> divide un pago grande en varias rutas más pequeñas para elevar probabilidad de éxito.</li>
-            <li><strong>Splicing:</strong> ajusta fondos de canal sin cerrar y abrir de cero.</li>
+            <li><strong><a href="/lightning/splicing-y-channel-factories.html">Splicing</a>:</strong> ajusta fondos de canal sin cerrar y abrir de cero.</li>
             <li><strong>LSP:</strong> abstrae la gestión de liquidez para usuarios no técnicos.</li>
           </ul>
 

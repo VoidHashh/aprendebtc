@@ -56,15 +56,15 @@
 
 <p>Antes de hablar de soluciones, es importante entender el problema.</p>
 
-<p>Bitcoin es pseudónimo, no anónimo. Cada transacción es pública y permanente, registrada en una blockchain que cualquiera puede examinar. Las direcciones no tienen nombres, pero con suficiente análisis (especialmente cuando se cruzan con datos de exchanges que requieren identificación), se pueden vincular transacciones a personas reales.</p>
+<p>Bitcoin es pseudónimo, no anónimo. Cada transacción es pública y permanente, registrada en una <a href="/base/que-es-blockchain.html">blockchain</a> que cualquiera puede examinar. Las direcciones no tienen nombres, pero con suficiente análisis (especialmente cuando se cruzan con datos de exchanges que requieren identificación), se pueden vincular transacciones a personas reales.</p>
 
 <p>Empresas como Chainalysis, Elliptic y CipherTrace han construido negocios multimillonarios analizando la blockchain de Bitcoin para gobiernos, exchanges y entidades financieras. Sus técnicas incluyen:</p>
 
-<p><strong>Clustering de direcciones</strong>: si dos UTXOs se gastan juntos en una transacción, probablemente pertenecen al mismo dueño. Este simple principio permite agrupar direcciones en &quot;clusters&quot; que representan a una misma entidad.</p>
+<p><strong>Clustering de direcciones</strong>: si dos <a href="/nivel-3/modelo-utxo.html">UTXOs</a> se gastan juntos en una transacción, probablemente pertenecen al mismo dueño. Este simple principio permite agrupar direcciones en &quot;clusters&quot; que representan a una misma entidad.</p>
 
 <p><strong>Análisis de flujo</strong>: siguiendo el movimiento de fondos a través de múltiples transacciones, se puede rastrear el origen y destino de bitcoin.</p>
 
-<p><strong>Puntos de entrada/salida</strong>: los exchanges con KYC (Know Your Customer) son puntos donde las direcciones se vinculan a identidades reales. Una vez que sabes que una dirección pertenece a Juan, puedes seguir todo lo que Juan hace con esos fondos.</p>
+<p><strong>Puntos de entrada/salida</strong>: los exchanges con <a href="/base/kyc-vs-no-kyc.html">KYC</a> (Know Your Customer) son puntos donde las direcciones se vinculan a identidades reales. Una vez que sabes que una dirección pertenece a Juan, puedes seguir todo lo que Juan hace con esos fondos.</p>
 
 <p><strong>Heurísticas de cambio</strong>: en una transacción típica, un output va al destinatario y otro vuelve al emisor como &quot;cambio&quot;. Identificar cuál es cuál revela información sobre ambas partes.</p>
 
@@ -116,7 +116,7 @@
 
 <p>No es mezcla, pero es defensa básica.</p>
 
-<p>Coin control significa gestionar manualmente qué UTXOs usas en cada transacción. La mayoría de wallets avanzadas (Sparrow, Electrum, Bitcoin Core) permiten esto.</p>
+<p><a href="/nivel-3/coin-control.html">Coin control</a> significa gestionar manualmente qué UTXOs usas en cada transacción. La mayoría de wallets avanzadas (Sparrow, Electrum, Bitcoin Core) permiten esto.</p>
 
 <p>¿Por qué importa? Si tienes un UTXO de un exchange KYC y otro de una fuente anónima, gastarlos juntos vincula ambos a tu identidad. Coin control te permite mantenerlos separados.</p>
 
@@ -126,7 +126,7 @@
 
 <p>Cuando usas un wallet que se conecta a servidores de terceros, esos servidores ven tus direcciones y pueden vincularlas a tu IP.</p>
 
-<p>Ejecutar tu propio nodo Bitcoin (Bitcoin Core, o un nodo en Umbrel/RaspiBlitz/etc.) y conectar tu wallet a él elimina este vector de fuga de información.</p>
+<p>Ejecutar tu propio <a href="/nivel-3/que-es-un-nodo.html">nodo Bitcoin</a> (Bitcoin Core, o un nodo en Umbrel/RaspiBlitz/etc.) y conectar tu wallet a él elimina este vector de fuga de información.</p>
 
 <p>Hacerlo sobre Tor añade otra capa: incluso si alguien observa tu tráfico de red, no puede ver que estás usando Bitcoin.</p>
 
@@ -134,7 +134,7 @@
 
 <h2>Lightning Network</h2>
 
-<p>Lightning ofrece mejor privacidad que las transacciones on-chain, con matices importantes.</p>
+<p>Lightning ofrece mejor privacidad que las transacciones <a href="/base/on-chain-vs-lightning.html">on-chain</a>, con matices importantes.</p>
 
 <p>Los pagos Lightning no se registran en la blockchain pública. Solo el emisor, el receptor y los nodos intermedios ven el pago. Y los nodos intermedios solo ven que están enrutando un pago, no los detalles de emisor/receptor.</p>
 
@@ -192,7 +192,7 @@
 
 <p>Nostr es un protocolo de comunicación descentralizado que muchos bitcoiners usan. La conexión con la privacidad de Bitcoin es relevante:</p>
 
-<p><strong>Zaps</strong>: Nostr integra &quot;zaps&quot;, propinas en satoshis enviadas vía Lightning. Esto permite micropagos con la privacidad mejorada de Lightning.</p>
+<p><strong><a href="/lightning/nostr-zaps-y-lightning.html">Zaps</a></strong>: Nostr integra &quot;zaps&quot;, propinas en satoshis enviadas vía Lightning. Esto permite micropagos con la privacidad mejorada de Lightning.</p>
 
 <p><strong>Identidad pseudónima</strong>: Nostr permite crear identidades pseudónimas no vinculadas a identidad real. Combinado con Lightning, permite recibir pagos sin revelar quién eres.</p>
 
@@ -210,7 +210,7 @@
 
 <p>Las herramientas con coordinadores centrales (como Samourai y Wasabi) son vulnerables a presión legal. Los creadores pueden ser arrestados. Los servidores pueden ser cerrados.</p>
 
-<p>El objetivo a largo plazo de muchos desarrolladores es la &quot;privacidad por defecto&quot;: que las transacciones de Bitcoin sean indistinguibles entre sí sin esfuerzo del usuario. Taproot fue un paso en esta dirección (las transacciones P2TR parecen iguales sean singlesig, multisig o scripts complejos).</p>
+<p>El objetivo a largo plazo de muchos desarrolladores es la &quot;privacidad por defecto&quot;: que las transacciones de Bitcoin sean indistinguibles entre sí sin esfuerzo del usuario. <a href="/nivel-5/taproot-internals.html">Taproot</a> fue un paso en esta dirección (las transacciones P2TR parecen iguales sean singlesig, multisig o scripts complejos).</p>
 
 <p>Pero estamos lejos de ese objetivo. Mientras tanto, la privacidad en Bitcoin requiere esfuerzo activo, conocimiento técnico, y aceptar que las herramientas más fáciles han desaparecido.</p>
 

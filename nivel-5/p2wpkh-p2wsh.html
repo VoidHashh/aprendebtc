@@ -124,7 +124,7 @@
 
 <h2>SegWit nativo vs envuelto</h2>
 
-<p>SegWit puede usarse de dos formas:</p>
+<p><a href="/nivel-5/segwit-internals.html">SegWit</a> puede usarse de dos formas:</p>
 
 <ul>
 
@@ -134,7 +134,7 @@
 
 </ul>
 
-<p>Esta página cubre SegWit nativo, definido en BIP 141 y BIP 143.</p>
+<p>Esta página cubre SegWit nativo, definido en <a href="/nivel-6/que-es-un-bip.html">BIP</a> 141 y BIP 143.</p>
 
 <h2>P2WPKH: el equivalente SegWit de P2PKH</h2>
 
@@ -172,7 +172,7 @@
 
 <p>En P2WPKH, van en el witness, contando 1 WU por byte.</p>
 
-<p>Resultado: ~30% menos fees para la misma operación.</p>
+<p>Resultado: ~30% menos <a href="/base/que-son-las-fees.html">fees</a> para la misma operación.</p>
 
 <h2>P2WSH: scripts complejos en SegWit</h2>
 
@@ -182,7 +182,7 @@
 
 <p>OP_0 &lt;32 bytes: witnessScriptHash&gt;</p>
 
-<p>Nota: P2WSH usa SHA256 directamente (32 bytes), no HASH160 (20 bytes). Esto aumenta la seguridad del hash.</p>
+<p>Nota: P2WSH usa <a href="/nivel-5/funciones-hash.html">SHA256</a> directamente (32 bytes), no HASH160 (20 bytes). Esto aumenta la seguridad del hash.</p>
 
 <p>En hexadecimal: 0020&lt;32 bytes witnessScriptHash&gt;</p>
 
@@ -234,7 +234,7 @@
 
 <p>bc1q[datos codificados][checksum de 6 caracteres]</p>
 
-<p>El <code>q</code> después de <code>bc1</code> indica witness version 0. Las direcciones Taproot usan <code>p</code> (version 1).</p>
+<p>El <code>q</code> después de <code>bc1</code> indica witness version 0. Las direcciones <a href="/nivel-5/taproot-internals.html">Taproot</a> usan <code>p</code> (version 1).</p>
 
 <h3>Ejemplo</h3>
 
@@ -262,7 +262,7 @@
 
 <p><strong>P2WPKH:</strong> Para pagos simples a una sola clave. Es el estándar actual para uso general.</p>
 
-<p><strong>P2WSH:</strong> Para scripts complejos: multisig, timelocks, contratos.</p>
+<p><strong>P2WSH:</strong> Para scripts complejos: <a href="/nivel-4/que-es-multisig.html">multisig</a>, timelocks, contratos.</p>
 
 <p><strong>P2TR (Taproot):</strong> La evolución más reciente. Mejor privacidad y eficiencia para casos complejos. Debería preferirse cuando está soportado.</p>
 

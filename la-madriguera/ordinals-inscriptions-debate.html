@@ -46,9 +46,9 @@
           <p class="article__subtitle">¿Quién decide qué es una transacción legítima en Bitcoin? El debate más polarizado desde la Blocksize War.</p>
           <p style="color: var(--text-secondary);">Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~7 minutos</p>
 
-<p>En enero de 2023, un desarrollador llamado Casey Rodarmor lanzó el protocolo Ordinals. La idea era simple pero provocadora: asignar un número único a cada satoshi individual, permitiendo &quot;inscribir&quot; datos arbitrarios en la blockchain de Bitcoin.</p>
+<p>En enero de 2023, un desarrollador llamado Casey Rodarmor lanzó el protocolo Ordinals. La idea era simple pero provocadora: asignar un número único a cada satoshi individual, permitiendo &quot;inscribir&quot; datos arbitrarios en la <a href="/base/que-es-blockchain.html">blockchain</a> de Bitcoin.</p>
 
-<p>En semanas, miles de imágenes, textos y hasta pequeños videojuegos estaban siendo grabados permanentemente en Bitcoin. Las fees se dispararon. La mempool se llenó. Y la comunidad se dividió de una forma que no se veía desde la Guerra del Tamaño de Bloque.</p>
+<p>En semanas, miles de imágenes, textos y hasta pequeños videojuegos estaban siendo grabados permanentemente en Bitcoin. Las <a href="/base/que-son-las-fees.html">fees</a> se dispararon. La mempool se llenó. Y la comunidad se dividió de una forma que no se veía desde la Guerra del Tamaño de Bloque.</p>
 
 <p>¿Eran los Ordinals una innovación legítima o spam que ensuciaba la blockchain? ¿Quién tiene autoridad para decidir qué es una &quot;transacción legítima&quot; en un sistema permissionless? El debate reveló tensiones profundas sobre la identidad de Bitcoin.</p>
 
@@ -86,7 +86,7 @@
 
 <p>Las consecuencias fueron inmediatas:</p>
 
-<p>Las fees se dispararon. Transacciones que costaban 2-5 sat/vB pasaron a costar 200-500 sat/vB en picos. Usuarios que querían hacer transacciones financieras normales tenían que competir con inscribers dispuestos a pagar fees altas.</p>
+<p>Las fees se dispararon. Transacciones que costaban 2-5 <a href="/herramientas/calculadora-fees.html">sat/vB</a> pasaron a costar 200-500 sat/vB en picos. Usuarios que querían hacer transacciones financieras normales tenían que competir con inscribers dispuestos a pagar fees altas.</p>
 
 <p>La mempool se llenó. Decenas de miles de transacciones pendientes acumuladas, algunas esperando días para confirmarse.</p>
 
@@ -100,15 +100,15 @@
 
 <p>Las transacciones de inscriptions son válidas según las reglas de consenso de Bitcoin. No hay ningún hackeo ni exploit. Simplemente usan las capacidades que SegWit y Taproot habilitaron.</p>
 
-<p>Pagan fees como cualquier otra transacción. De hecho, pagan fees altas. Esto es bueno para la seguridad a largo plazo de Bitcoin: a medida que el subsidy de bloque disminuye con cada halving, las fees deben compensar. Ordinals demuestran que hay demanda de espacio de bloque.</p>
+<p>Pagan fees como cualquier otra transacción. De hecho, pagan fees altas. Esto es bueno para la seguridad a largo plazo de Bitcoin: a medida que el subsidy de bloque disminuye con cada <a href="/nivel-3/halving.html">halving</a>, las fees deben compensar. Ordinals demuestran que hay demanda de espacio de bloque.</p>
 
 <p>Bitcoin es permissionless. No hay un comité que decida qué transacciones son &quot;legítimas&quot;. Si pagas la fee y la transacción es válida, se incluye. Esa es la promesa fundamental de Bitcoin.</p>
 
-<p>Los mineros tienen incentivos para incluir transacciones que pagan fees altas. Filtrar Ordinals iría contra sus intereses económicos.</p>
+<p>Los <a href="/base/que-es-la-mineria.html">mineros</a> tienen incentivos para incluir transacciones que pagan fees altas. Filtrar Ordinals iría contra sus intereses económicos.</p>
 
 <h2>Los críticos de Ordinals argumentaban:</h2>
 
-<p>Los Ordinals ensucian la blockchain con datos basura que hay que almacenar para siempre. Cada nodo completo debe descargar y almacenar cada JPEG inscrito hasta el fin de los tiempos.</p>
+<p>Los Ordinals ensucian la blockchain con datos basura que hay que almacenar para siempre. Cada <a href="/nivel-3/que-es-un-nodo.html">nodo completo</a> debe descargar y almacenar cada JPEG inscrito hasta el fin de los tiempos.</p>
 
 <p>Encarecen las transacciones financieras reales. Cuando un salvadoreño quiere enviar una remesa, tiene que competir con especuladores de JPEGs. Esto pervierte el propósito de Bitcoin.</p>
 
@@ -130,13 +130,13 @@
 
 <p>Los defensores del filtrado argumentaban que los operadores de nodos tienen libertad para configurar su software como quieran. Si no quieren propagar inscriptions, es su derecho. Los mineros pueden incluir lo que quieran en sus bloques. La libertad individual incluye la libertad de no participar en algo que consideras dañino.</p>
 
-<p>Los críticos del filtrado argumentaban que, aunque técnicamente legal, era contrario al espíritu de Bitcoin. Si suficientes nodos y mineros filtran cierto tipo de transacciones, se crea censura efectiva. Hoy son inscriptions; mañana podrían ser transacciones de CoinJoin o transacciones a ciertas direcciones.</p>
+<p>Los críticos del filtrado argumentaban que, aunque técnicamente legal, era contrario al espíritu de Bitcoin. Si suficientes nodos y mineros filtran cierto tipo de transacciones, se crea censura efectiva. Hoy son inscriptions; mañana podrían ser transacciones de <a href="/nivel-4/coinjoin.html">CoinJoin</a> o transacciones a ciertas direcciones.</p>
 
 <p>En la práctica, el filtrado no tuvo impacto significativo. La gran mayoría de nodos y pools no filtraron. Las inscriptions se siguieron incluyendo normalmente.</p>
 
 <h2>Runes: el sucesor</h2>
 
-<p>Casey Rodarmor, el creador de Ordinals, era consciente de las críticas sobre BRC-20. El protocolo era ineficiente: creaba muchos UTXOs pequeños (&quot;UTXO dust&quot;) que congestionaban la red.</p>
+<p>Casey Rodarmor, el creador de Ordinals, era consciente de las críticas sobre BRC-20. El protocolo era ineficiente: creaba muchos <a href="/nivel-3/modelo-utxo.html">UTXOs</a> pequeños (&quot;UTXO dust&quot;) que congestionaban la red.</p>
 
 <p>En abril de 2024, coincidiendo con el halving, Rodarmor lanzó Runes, un protocolo de tokens fungibles diseñado para ser más eficiente que BRC-20. Runes usa OP_RETURN en lugar de inscriptions completas, reduciendo la huella en la blockchain.</p>
 

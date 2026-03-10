@@ -46,7 +46,7 @@
           <p class="article__subtitle">En 2010, Satoshi ya describió esquemas de custodia compartida y transacciones multifirma. Estaban en el código desde el día 1.</p>
           <p style="color: var(--text-secondary);">Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~7 minutos</p>
 
-<p>Una de las características más útiles de Bitcoin para la seguridad avanzada — las transacciones multifirma o &quot;multisig&quot; — no fue un añadido posterior. Satoshi lo incluyó en el código original desde el primer día.</p>
+<p>Una de las características más útiles de Bitcoin para la seguridad avanzada — las transacciones multifirma o &quot;multisig&quot; — no fue un añadido posterior. <a href="/base/que-es-un-satoshi.html">Satoshi</a> lo incluyó en el código original desde el primer día.</p>
 
 <p>En el capítulo 54 del Libro de Satoshi (&quot;Custodia de Depósitos y Transacciones Multi-Firma&quot;), discutió exactamente cómo funcionarían estos esquemas y para qué servirían. Sus ideas, escritas en 2010, describen con precisión los productos que empresas como Casa, Unchained y Nunchuk ofrecen hoy.</p>
 
@@ -88,7 +88,7 @@
 
 <p>Un esquema 2-de-3 donde tú controlas las 3 claves, pero las guardas en diferentes ubicaciones:</p>
 
-<ul><li>Clave 1: en tu hardware wallet en casa</li><li>Clave 2: en un hardware wallet diferente en una caja de seguridad bancaria</li><li>Clave 3: en otro hardware wallet guardado por un familiar de confianza</li></ul>
+<ul><li>Clave 1: en tu <a href="/nivel-3/configurar-hardware-wallet.html">hardware wallet</a> en casa</li><li>Clave 2: en un hardware wallet diferente en una caja de seguridad bancaria</li><li>Clave 3: en otro hardware wallet guardado por un familiar de confianza</li></ul>
 
 <p>Para gastar, necesitas 2 de las 3. Esto significa:</p>
 
@@ -176,7 +176,7 @@
 
 <p><strong>Compatibilidad.</strong> No todas las wallets soportan multisig bien. Las que lo hacen pueden no ser compatibles entre sí.</p>
 
-<p><strong>Privacidad.</strong> Hasta Taproot, las transacciones multisig eran visiblemente diferentes de las transacciones normales en la blockchain. Taproot mejora esto significativamente.</p>
+<p><strong>Privacidad.</strong> Hasta <a href="/nivel-5/taproot-internals.html">Taproot</a>, las transacciones multisig eran visiblemente diferentes de las transacciones normales en la <a href="/base/que-es-blockchain.html">blockchain</a>. Taproot mejora esto significativamente.</p>
 
 <h2>Taproot y el futuro del multisig</h2>
 
@@ -186,7 +186,7 @@
 
 <p><strong>Mejor privacidad.</strong> Con Taproot, nadie puede saber mirando la blockchain si una transacción era multisig o no (asumiendo el &quot;happy path&quot; donde todos los firmantes cooperan).</p>
 
-<p><strong>Menor tamaño.</strong> Las firmas Schnorr (que Taproot usa) son más pequeñas y se agregan mejor que ECDSA.</p>
+<p><strong>Menor tamaño.</strong> Las firmas <a href="/nivel-5/schnorr.html">Schnorr</a> (que Taproot usa) son más pequeñas y se agregan mejor que ECDSA.</p>
 
 <p>La adopción de Taproot multisig está creciendo pero aún es minoritaria. Las herramientas necesitan tiempo para actualizarse.</p>
 
@@ -214,7 +214,7 @@
 
 <h2>Fuentes y referencias:</h2>
 
-<ul><li>El Libro de Satoshi, capítulo 54 (&quot;Custodia de Depósitos y Transacciones Multi-Firma&quot;)</li><li>Código fuente de Bitcoin v0.1 (OP_CHECKMULTISIG)</li><li>Documentación de Casa, Unchained y Nunchuk</li><li>BIP 340 (firmas Schnorr), BIP 341 (Taproot)</li><li>Propuestas de BIP para OP_VAULT y OP_CTV</li></ul>
+<ul><li>El Libro de Satoshi, capítulo 54 (&quot;Custodia de Depósitos y Transacciones Multi-Firma&quot;)</li><li>Código fuente de Bitcoin v0.1 (OP_CHECKMULTISIG)</li><li>Documentación de Casa, Unchained y Nunchuk</li><li><a href="/nivel-6/que-es-un-bip.html">BIP</a> 340 (firmas Schnorr), BIP 341 (Taproot)</li><li>Propuestas de BIP para OP_VAULT y OP_CTV</li></ul>
 
 <h2>Enlaces internos:</h2>
 

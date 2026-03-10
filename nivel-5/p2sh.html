@@ -124,13 +124,13 @@
 
 <h2>El concepto</h2>
 
-<p>P2SH (Pay-to-Script-Hash), definido en BIP 16, introdujo una idea elegante: en vez de poner el script de bloqueo completo en el output, se pone solo su hash. El script completo (llamado redeemScript) se revela al gastar.</p>
+<p>P2SH (Pay-to-<a href="/nivel-5/bitcoin-script.html">Script</a>-Hash), definido en <a href="/nivel-6/que-es-un-bip.html">BIP</a> 16, introdujo una idea elegante: en vez de poner el script de bloqueo completo en el output, se pone solo su hash. El script completo (llamado redeemScript) se revela al gastar.</p>
 
 <p>Las direcciones P2SH empiezan por &quot;3&quot; (como <code>3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy</code>).</p>
 
 <h2>El problema que resuelve</h2>
 
-<p>Imagina un multisig 2-de-3. El script de bloqueo sería largo: OP_2 &lt;pubKey1&gt; &lt;pubKey2&gt; &lt;pubKey3&gt; OP_3 OP_CHECKMULTISIG</p>
+<p>Imagina un <a href="/nivel-4/que-es-multisig.html">multisig</a> 2-de-3. El script de bloqueo sería largo: OP_2 &lt;pubKey1&gt; &lt;pubKey2&gt; &lt;pubKey3&gt; OP_3 OP_CHECKMULTISIG</p>
 
 <p>Son ~105 bytes solo para el scriptPubKey. El emisor tendría que conocer todas las claves públicas y construir este script.</p>
 
@@ -200,7 +200,7 @@
 
 <h2>P2SH-P2WPKH: SegWit envuelto</h2>
 
-<p>Cuando SegWit se activó, muchas wallets y servicios no lo soportaban. P2SH permitió una transición gradual:</p>
+<p>Cuando <a href="/nivel-5/segwit-internals.html">SegWit</a> se activó, muchas wallets y servicios no lo soportaban. P2SH permitió una transición gradual:</p>
 
 <p>El redeemScript es simplemente: OP_0 &lt;20 bytes pubKeyHash&gt;</p>
 
@@ -220,11 +220,11 @@
 
 <p>Al gastar, revelas TODO el redeemScript. Si tienes un esquema con múltiples condiciones alternativas, todas se revelan aunque solo uses una.</p>
 
-<p>Taproot resuelve esto con MAST: solo revelas la rama que usas.</p>
+<p><a href="/nivel-5/taproot-internals.html">Taproot</a> resuelve esto con MAST: solo revelas la rama que usas.</p>
 
 <h3>Fees</h3>
 
-<p>El redeemScript va en el scriptSig, que cuenta como datos &quot;base&quot; (4 WU/byte). P2WSH (SegWit nativo) pone el script en el witness (1 WU/byte), resultando en fees menores.</p>
+<p>El redeemScript va en el scriptSig, que cuenta como datos &quot;base&quot; (4 WU/byte). P2WSH (SegWit nativo) pone el script en el witness (1 WU/byte), resultando en <a href="/base/que-son-las-fees.html">fees</a> menores.</p>
 
 <h2>Direcciones P2SH</h2>
 

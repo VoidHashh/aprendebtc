@@ -64,7 +64,7 @@
 
 <p>Los últimos cambios de consenso fueron:</p>
 
-<ul><li>SegWit (2017): arregló transaction malleability, aumentó capacidad efectiva de bloques</li><li>Taproot (2021): mejoró privacidad y eficiencia mediante firmas Schnorr y MAST</li></ul>
+<ul><li><a href="/nivel-5/segwit-internals.html">SegWit</a> (2017): arregló transaction malleability, aumentó capacidad efectiva de bloques</li><li><a href="/nivel-5/taproot-internals.html">Taproot</a> (2021): mejoró privacidad y eficiencia mediante firmas <a href="/nivel-5/schnorr.html">Schnorr</a> y MAST</li></ul>
 
 <p>Desde Taproot, no ha habido nuevos soft forks. Han pasado más de cuatro años. ¿Es esto osificación de facto, o simplemente un proceso deliberativo lento?</p>
 
@@ -100,9 +100,9 @@
 
 <h2>Bitcoin tiene problemas reales sin resolver.</h2>
 
-<p>La privacidad on-chain es deficiente. Las empresas de análisis de blockchain pueden rastrear transacciones con precisión preocupante. Silent Payments y otras mejoras de privacidad requerirían cambios de consenso.</p>
+<p>La privacidad <a href="/base/on-chain-vs-lightning.html">on-chain</a> es deficiente. Las empresas de análisis de <a href="/base/que-es-blockchain.html">blockchain</a> pueden rastrear transacciones con precisión preocupante. Silent Payments y otras mejoras de privacidad requerirían cambios de consenso.</p>
 
-<p>Los covenants (restricciones programáticas sobre cómo pueden gastarse los bitcoin) no existen actualmente. Habilitarían casos de uso importantes: bóvedas de seguridad, canales Lightning mejorados, escalado más eficiente.</p>
+<p>Los covenants (restricciones programáticas sobre cómo pueden gastarse los bitcoin) no existen actualmente. Habilitarían casos de uso importantes: bóvedas de seguridad, <a href="/nivel-4/canales-lightning.html">canales Lightning</a> mejorados, escalado más eficiente.</p>
 
 <p>Lightning tiene limitaciones que solo pueden resolverse con cambios base. Eltoo/LN-Symmetry, channel factories, y otras mejoras requieren cambios en el protocolo base.</p>
 
@@ -132,13 +132,13 @@
 
 <p>Propuesto por Jeremy Rubin en 2019. Permite crear &quot;covenants&quot; simples: outputs que restringen las transacciones que pueden gastarlos.</p>
 
-<p>Casos de uso: vaults (bóvedas con periodo de espera), canales de pago mejorados, &quot;congestion control&quot; (pre-comprometer transacciones futuras cuando las fees son bajas).</p>
+<p>Casos de uso: vaults (bóvedas con periodo de espera), canales de pago mejorados, &quot;congestion control&quot; (pre-comprometer transacciones futuras cuando las <a href="/base/que-son-las-fees.html">fees</a> son bajas).</p>
 
 <p>Estado: años de discusión, código revisado, pero sin consenso para activación.</p>
 
 <h2>OP_CAT</h2>
 
-<p>Rehabilitar un opcode que Satoshi deshabilitó tempranamente. Permitiría concatenar datos en scripts, habilitando muchas construcciones que actualmente son imposibles.</p>
+<p>Rehabilitar un opcode que <a href="/base/que-es-un-satoshi.html">Satoshi</a> deshabilitó tempranamente. Permitiría concatenar datos en scripts, habilitando muchas construcciones que actualmente son imposibles.</p>
 
 <p>Controversia: algunos lo ven como peligrosamente poderoso — abre posibilidades que no están completamente analizadas. Otros lo ven como exactamente lo que Bitcoin necesita.</p>
 

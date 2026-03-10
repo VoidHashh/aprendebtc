@@ -124,7 +124,7 @@
 
 <h2>Qué es Bitcoin Script</h2>
 
-<p>Bitcoin tiene su propio lenguaje de programación llamado Script. Cada UTXO está bloqueado por un script (scriptPubKey) que define las condiciones para gastarlo. Para gastar, el input proporciona datos (scriptSig o witness) que satisfacen esas condiciones.</p>
+<p>Bitcoin tiene su propio lenguaje de programación llamado Script. Cada <a href="/nivel-3/modelo-utxo.html">UTXO</a> está bloqueado por un script (scriptPubKey) que define las condiciones para gastarlo. Para gastar, el input proporciona datos (scriptSig o witness) que satisfacen esas condiciones.</p>
 
 <p>Script no es como los lenguajes de programación convencionales. Es intencionalmente limitado para minimizar la superficie de ataque y garantizar que la ejecución siempre termine.</p>
 
@@ -198,7 +198,7 @@
 
 <ul>
 
-<li><code>OP_HASH160</code>: Aplica RIPEMD160(SHA256(x)) al tope de la pila</li>
+<li><code>OP_HASH160</code>: Aplica RIPEMD160(<a href="/nivel-5/funciones-hash.html">SHA256</a>(x)) al tope de la pila</li>
 
 <li><code>OP_SHA256</code>: Aplica SHA256</li>
 
@@ -206,7 +206,7 @@
 
 <li><code>OP_CHECKMULTISIG</code>: Verifica múltiples firmas contra múltiples claves</li>
 
-<li><code>OP_CHECKSIGADD</code>: Versión Tapscript para multisig eficiente</li>
+<li><code>OP_CHECKSIGADD</code>: Versión Tapscript para <a href="/nivel-4/que-es-multisig.html">multisig</a> eficiente</li>
 
 </ul>
 
@@ -252,7 +252,7 @@
 
 <p><strong>Tamaño limitado:</strong> Los scripts tienen límite de tamaño y de operaciones. Previene ataques de complejidad.</p>
 
-<p><strong>Opcodes deshabilitados:</strong> Satoshi deshabilitó varios opcodes originales (OP_CAT, OP_MUL, etc.) por precaución ante posibles vulnerabilidades. Algunos están siendo reconsiderados para futuras actualizaciones.</p>
+<p><strong>Opcodes deshabilitados:</strong> <a href="/base/que-es-un-satoshi.html">Satoshi</a> deshabilitó varios opcodes originales (OP_CAT, OP_MUL, etc.) por precaución ante posibles vulnerabilidades. Algunos están siendo reconsiderados para futuras actualizaciones.</p>
 
 <h2>Script en la práctica</h2>
 

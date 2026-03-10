@@ -45,11 +45,11 @@
 
 <p>El primer soft fork significativo de Bitcoin introdujo P2SH, una forma de crear direcciones para scripts arbitrarios.</p>
 
-<p><strong>El problema</strong>: antes de P2SH, si querías que alguien te pagara a un script complejo (por ejemplo, multisig 2-de-3), tenías que darles el script entero. Esto era largo, propenso a errores, y revelaba las condiciones de gasto antes de usarlas.</p>
+<p><strong>El problema</strong>: antes de P2SH, si querías que alguien te pagara a un <a href="/nivel-5/bitcoin-script.html">script</a> complejo (por ejemplo, <a href="/nivel-4/que-es-multisig.html">multisig</a> 2-de-3), tenías que darles el script entero. Esto era largo, propenso a errores, y revelaba las condiciones de gasto antes de usarlas.</p>
 
 <p><strong>La solución</strong>: P2SH permite representar cualquier script como un hash de 20 bytes. El pagador solo ve una dirección normal (empezando por 3). El receptor proporciona el script original solo cuando gasta los fondos.</p>
 
-<p><strong>Cómo se activó</strong>: mediante señalización de mineros. Si el 55% de los bloques en una ventana de 7 días señalizaban soporte, el soft fork se activaba. Fue el primer soft fork con este mecanismo.</p>
+<p><strong>Cómo se activó</strong>: mediante señalización de <a href="/base/que-es-la-mineria.html">mineros</a>. Si el 55% de los bloques en una ventana de 7 días señalizaban soporte, el soft fork se activaba. Fue el primer soft fork con este mecanismo.</p>
 
 <p><strong>Controversia</strong>: Gavin Andresen impulsó P2SH. Hubo alternativas propuestas (OP_EVAL, OP_CHECKMULTISIG nativo) que algunos consideraban técnicamente superiores. P2SH ganó por ser más pragmático y tener apoyo de Gavin, quien entonces lideraba el desarrollo.</p>
 
@@ -77,7 +77,7 @@
 
 <p><strong>BIP 113</strong>: cambió cómo se calcula el tiempo en timelocks (usando tiempo medio de bloques anteriores en lugar del timestamp del bloque actual).</p>
 
-<p><strong>Por qué importa</strong>: los timelocks relativos son esenciales para Lightning Network. Los canales Lightning usan CSV para dar tiempo a detectar intentos de fraude: si tu contraparte intenta cerrar el canal con un estado antiguo, tienes un periodo (definido por CSV) para publicar la transacción de penalización.</p>
+<p><strong>Por qué importa</strong>: los timelocks relativos son esenciales para Lightning Network. Los <a href="/nivel-4/canales-lightning.html">canales Lightning</a> usan CSV para dar tiempo a detectar intentos de fraude: si tu contraparte intenta cerrar el canal con un estado antiguo, tienes un periodo (definido por CSV) para publicar la transacción de penalización.</p>
 
 <p>Sin CSV, Lightning no funcionaría como lo conocemos.</p>
 
@@ -99,7 +99,7 @@
 
 <p>Ante la amenaza de división, los mineros capitularon. SegWit se activó el 24 de agosto de 2017.</p>
 
-<p><strong>Legado</strong>: SegWit habilitó Lightning Network, mejoró la privacidad futura con Taproot, y demostró que los usuarios tienen poder sobre los mineros.</p>
+<p><strong>Legado</strong>: SegWit habilitó Lightning Network, mejoró la privacidad futura con <a href="/nivel-5/taproot-internals.html">Taproot</a>, y demostró que los usuarios tienen poder sobre los mineros.</p>
 
 <p><a href="/la-madriguera/la-guerra-del-tamano-de-bloque.html">Para más contexto, ver</a></p>
 
@@ -107,7 +107,7 @@
 
 <p>El soft fork más reciente, y probablemente el más ambicioso técnicamente.</p>
 
-<p><strong>BIP 340 — Firmas Schnorr</strong>: reemplazó las firmas ECDSA por firmas Schnorr para outputs Taproot. Schnorr tiene propiedades matemáticas superiores: las firmas son más pequeñas, y múltiples firmas pueden agregarse en una sola (útil para multisig).</p>
+<p><strong>BIP 340 — Firmas <a href="/nivel-5/schnorr.html">Schnorr</a></strong>: reemplazó las firmas <a href="/nivel-5/ecdsa.html">ECDSA</a> por firmas Schnorr para outputs Taproot. Schnorr tiene propiedades matemáticas superiores: las firmas son más pequeñas, y múltiples firmas pueden agregarse en una sola (útil para multisig).</p>
 
 <p><strong>BIP 341 — Taproot</strong>: introdujo un nuevo tipo de output (P2TR) que puede gastarse de dos formas:</p>
 
@@ -131,7 +131,7 @@
 
 <p><strong>OP_CTV (CheckTemplateVerify)</strong>: permite crear &quot;covenants&quot; — outputs que restringen a qué direcciones pueden ir los fondos. Casos de uso incluyen bóvedas de seguridad, canales de pago mejorados, y &quot;congestion control&quot; (pre-comprometer transacciones futuras).</p>
 
-<p><strong>OP_CAT</strong>: un opcode antiguo que Satoshi deshabilitó por preocupaciones de seguridad. Rehabilitarlo permitiría concatenar datos en scripts, habilitando muchas construcciones nuevas. Algunos lo ven como peligrosamente poderoso.</p>
+<p><strong>OP_CAT</strong>: un opcode antiguo que <a href="/base/que-es-un-satoshi.html">Satoshi</a> deshabilitó por preocupaciones de seguridad. Rehabilitarlo permitiría concatenar datos en scripts, habilitando muchas construcciones nuevas. Algunos lo ven como peligrosamente poderoso.</p>
 
 <p><strong>OP_VAULT</strong>: diseñado específicamente para crear bóvedas de seguridad donde los fondos tienen un &quot;periodo de enfriamiento&quot; antes de poder gastarse, con opción de cancelar durante ese periodo.</p>
 

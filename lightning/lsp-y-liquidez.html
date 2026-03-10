@@ -50,10 +50,10 @@
 
           <h2>Qué servicios proporciona un LSP</h2>
           <h3>Apertura de canales</h3>
-          <p>El LSP abre canales hacia tu wallet o nodo para darte liquidez entrante desde el inicio. Sin esto, un usuario nuevo suele tener capacidad de envío pero no de recepción.</p>
+          <p>El LSP abre canales hacia tu wallet o nodo para darte <a href="/nivel-4/liquidez-lightning.html">liquidez entrante</a> desde el inicio. Sin esto, un usuario nuevo suele tener capacidad de envío pero no de recepción.</p>
 
           <h3>Canales JIT (Just-in-Time)</h3>
-          <p>Si te envían sats y no tienes capacidad entrante suficiente, el LSP puede abrir canal en el mismo flujo de pago y entregar fondos en ese momento. El coste de apertura se descuenta del pago. Para el usuario, solo “llega”.</p>
+          <p>Si te envían <a href="/base/que-es-un-satoshi.html">sats</a> y no tienes capacidad entrante suficiente, el LSP puede <a href="/nivel-4/canales-lightning.html">abrir canal</a> en el mismo flujo de pago y entregar fondos en ese momento. El coste de apertura se descuenta del pago. Para el usuario, solo “llega”.</p>
 
           <h3>Rebalanceo y mantenimiento de liquidez</h3>
           <p>Con el uso, los canales se desequilibran. El LSP ajusta topología y flujos para mantener rutas útiles en ambos sentidos, evitando degradación de experiencia.</p>
@@ -76,8 +76,8 @@
           <h2>Rebalanceo cuando la liquidez se agota</h2>
           <p>Para nodos propios, el rebalanceo es parte de operación:</p>
           <ul>
-            <li><strong>Rebalanceo circular:</strong> mover saldo entre tus canales pagando fees de ruta.</li>
-            <li><strong>Submarine swaps:</strong> desplazar liquidez entre Lightning y on-chain sin cerrar canal.</li>
+            <li><strong>Rebalanceo circular:</strong> mover saldo entre tus canales pagando <a href="/base/que-son-las-fees.html">fees</a> de ruta.</li>
+            <li><strong>Submarine swaps:</strong> desplazar liquidez entre Lightning y <a href="/base/on-chain-vs-lightning.html">on-chain</a> sin cerrar canal.</li>
             <li><strong>Liquidez ads:</strong> mercados de apertura/capacidad entre nodos.</li>
           </ul>
 

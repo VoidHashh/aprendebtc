@@ -27,7 +27,7 @@
       <article class="article"><div class="nivel-badge nivel-badge--4 article__badge">La madriguera</div><h1>Lightning Network: dónde estamos y hacia dónde vamos</h1><p class="article__subtitle">Lightning ha crecido enormemente, pero tiene retos importantes por delante. Un análisis honesto.</p>
 <p>Fecha de publicación: Febrero 2026 Autor: aprendeBTC Tiempo de lectura: ~17 minutos</p>
 
-<p>Lightning Network es la principal solución de escalado de Bitcoin. Permite pagos instantáneos con comisiones de fracciones de céntimo, sin esperar confirmaciones en la blockchain. Es lo que hace posible pagar un café con bitcoin sin pagar más en fees que el precio del café.</p>
+<p><a href="/lightning/que-es-lightning.html">Lightning Network</a> es la principal solución de escalado de Bitcoin. Permite pagos instantáneos con <a href="/base/que-son-las-fees.html">comisiones</a> de fracciones de céntimo, sin esperar confirmaciones en la blockchain. Es lo que hace posible pagar un café con bitcoin sin pagar más en fees que el precio del café.</p>
 
 <p>Después de años de desarrollo, Lightning ha alcanzado adopción significativa. Millones de personas la usan. Comercios la aceptan. Aplicaciones enteras se construyen sobre ella. Pero también tiene limitaciones y retos que no siempre se discuten honestamente.</p>
 
@@ -39,7 +39,7 @@
 
 <p>Una vez abierto el canal, pueden intercambiar bitcoin entre sí instantáneamente, actualizando el balance del canal sin tocar la blockchain. Cuando quieren cerrar el canal, una transacción final registra el balance resultante on-chain.</p>
 
-<p>La magia está en el enrutamiento: no necesitas un canal directo con alguien para pagarle. Si Alice tiene un canal con Bob, y Bob tiene uno con Carol, Alice puede pagar a Carol a través de Bob. Lightning encuentra rutas a través de la red de canales.</p>
+<p>La magia está en el <a href="/nivel-4/routing-lightning.html">enrutamiento</a>: no necesitas un canal directo con alguien para pagarle. Si Alice tiene un canal con Bob, y Bob tiene uno con Carol, Alice puede pagar a Carol a través de Bob. Lightning encuentra rutas a través de la red de canales.</p>
 
 <p>Para más detalle técnico, consulta → /nivel-2/que-es-lightning.html y /nivel-4/canales-lightning.html</p>
 
@@ -57,9 +57,9 @@
 
 <p>¿Quién usa Lightning realmente?</p>
 
-<p><strong>Wallet of Satoshi</strong>: la wallet Lightning más popular por volumen de usuarios. Es custodial — la empresa controla las claves — pero extremadamente fácil de usar. Descargas la app, recibes bitcoin, pagas bitcoin. Sin configuración de canales, sin gestión de liquidez. La facilidad tiene un coste: dependes de una empresa.</p>
+<p><strong>Wallet of Satoshi</strong>: la <a href="/nivel-2/wallets-lightning.html">wallet Lightning</a> más popular por volumen de usuarios. Es custodial — la empresa controla las claves — pero extremadamente fácil de usar. Descargas la app, recibes bitcoin, pagas bitcoin. Sin configuración de canales, sin gestión de liquidez. La facilidad tiene un coste: dependes de una empresa.</p>
 
-<p><strong>Phoenix Wallet</strong>: desarrollada por ACINQ, es la wallet no-custodial más usable. Gestiona canales automáticamente usando un modelo de LSP (Lightning Service Provider). Tú controlas las claves, pero ACINQ proporciona liquidez y enrutamiento. Es un punto medio entre custodia total y auto-gestión completa. Phoenix se retiró de EEUU en 2024 por preocupaciones regulatorias.</p>
+<p><strong>Phoenix Wallet</strong>: desarrollada por ACINQ, es la <a href="/base/tipos-de-wallet.html">wallet no-custodial</a> más usable. Gestiona canales automáticamente usando un modelo de <a href="/lightning/lsp-y-liquidez.html">LSP</a> (Lightning Service Provider). Tú controlas las claves, pero ACINQ proporciona liquidez y enrutamiento. Es un punto medio entre custodia total y auto-gestión completa. Phoenix se retiró de EEUU en 2024 por preocupaciones regulatorias.</p>
 
 <p><strong>Muun</strong>: wallet que combina on-chain y Lightning de forma transparente. Técnicamente usa submarine swaps para simular Lightning, lo que tiene implicaciones de fees diferentes a Lightning puro.</p>
 
@@ -67,7 +67,7 @@
 
 <p><strong>Cash App</strong>: la app de pagos de Block (empresa de Jack Dorsey) integró Lightning, exponiendo a millones de usuarios a pagos Bitcoin instantáneos.</p>
 
-<p><strong>Zaps en Nostr</strong>: el protocolo de redes sociales descentralizadas Nostr integró &quot;zaps&quot; — propinas en satoshis vía Lightning. Millones de zaps se envían cada mes, demostrando que micropagos son viables cuando la infraestructura lo permite.</p>
+<p><strong><a href="/lightning/nostr-zaps-y-lightning.html">Zaps</a> en Nostr</strong>: el protocolo de redes sociales descentralizadas Nostr integró &quot;zaps&quot; — propinas en satoshis vía Lightning. Millones de zaps se envían cada mes, demostrando que micropagos son viables cuando la infraestructura lo permite.</p>
 
 <p><strong>Comercios</strong>: desde El Salvador (donde Bitcoin es moneda legal) hasta Costa Rica (con comunidades Bitcoin activas) hasta comercios individuales en todo el mundo, Lightning se acepta cada vez más. La adopción es desigual pero creciente.</p>
 
@@ -79,7 +79,7 @@
 
 <p>Este es el problema más grande para usuarios no técnicos.</p>
 
-<p>En Lightning, solo puedes recibir bitcoin si tienes &quot;liquidez entrante&quot; — es decir, si alguien tiene un canal hacia ti con balance de su lado. Si abres un canal con 100.000 sats y los envías todos, tu canal está &quot;vacío&quot; de tu lado pero &quot;lleno&quot; del otro. Ahora puedes recibir, pero no puedes enviar.</p>
+<p>En Lightning, solo puedes recibir bitcoin si tienes &quot;<a href="/nivel-4/liquidez-lightning.html">liquidez entrante</a>&quot; — es decir, si alguien tiene un canal hacia ti con balance de su lado. Si abres un canal con 100.000 sats y los envías todos, tu canal está &quot;vacío&quot; de tu lado pero &quot;lleno&quot; del otro. Ahora puedes recibir, pero no puedes enviar.</p>
 
 <p>Para usuarios que principalmente reciben pagos (comerciantes, por ejemplo), conseguir liquidez entrante es un problema constante. Las soluciones existen (comprar liquidez, usar servicios de LSP, circular fondos) pero añaden complejidad.</p>
 

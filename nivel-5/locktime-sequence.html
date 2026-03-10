@@ -124,11 +124,11 @@
 
 <h2>Timelocks: control temporal</h2>
 
-<p>Bitcoin permite restringir cuándo una transacción o UTXO puede gastarse. Hay dos dimensiones:</p>
+<p>Bitcoin permite restringir cuándo una transacción o <a href="/nivel-3/modelo-utxo.html">UTXO</a> puede gastarse. Hay dos dimensiones:</p>
 
 <p><strong>Absoluto vs relativo:</strong> ¿La restricción es una fecha/altura fija, o un período desde otro evento?</p>
 
-<p><strong>Nivel de transacción vs nivel de script:</strong> ¿La restricción se aplica a toda la transacción, o es una condición dentro del script?</p>
+<p><strong>Nivel de transacción vs nivel de <a href="/nivel-5/bitcoin-script.html">script</a>:</strong> ¿La restricción se aplica a toda la transacción, o es una condición dentro del script?</p>
 
 <h2>nLocktime (transacción)</h2>
 
@@ -186,7 +186,7 @@
 
 <h2>OP_CHECKLOCKTIMEVERIFY (CLTV)</h2>
 
-<p>BIP 65. Un opcode de script que verifica timelocks absolutos. &lt;locktime&gt; OP_CHECKLOCKTIMEVERIFY OP_DROP</p>
+<p><a href="/nivel-6/que-es-un-bip.html">BIP</a> 65. Un opcode de script que verifica timelocks absolutos. &lt;locktime&gt; OP_CHECKLOCKTIMEVERIFY OP_DROP</p>
 
 <p>La transacción solo es válida si su nLocktime es ≥ al valor especificado. Esto bloquea un UTXO hasta una fecha/altura específica dentro del propio script.</p>
 
@@ -204,7 +204,7 @@
 
 <h3>Lightning Network</h3>
 
-<p>Los canales Lightning usan CSV extensivamente. Cuando se cierra un canal de forma no cooperativa, hay un período de disputa (típicamente 144-2016 bloques) durante el cual la otra parte puede publicar una transacción de penalización si el cierre intentaba hacer trampa.</p>
+<p>Los <a href="/nivel-4/canales-lightning.html">canales Lightning</a> usan CSV extensivamente. Cuando se cierra un canal de forma no cooperativa, hay un período de disputa (típicamente 144-2016 bloques) durante el cual la otra parte puede publicar una transacción de penalización si el cierre intentaba hacer trampa.</p>
 
 <h3>Herencia (Dead man&#x27;s switch)</h3>
 

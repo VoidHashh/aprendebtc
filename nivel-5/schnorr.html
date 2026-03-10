@@ -124,11 +124,11 @@
 
 <h2>Contexto histórico</h2>
 
-<p>Las firmas Schnorr fueron inventadas por Claus Schnorr en los años 80 y son matemáticamente más simples que ECDSA. Entonces, ¿por qué Bitcoin empezó con ECDSA?</p>
+<p>Las firmas Schnorr fueron inventadas por Claus Schnorr en los años 80 y son matemáticamente más simples que <a href="/nivel-5/ecdsa.html">ECDSA</a>. Entonces, ¿por qué Bitcoin empezó con ECDSA?</p>
 
-<p>Cuando Satoshi creó Bitcoin en 2008, las firmas Schnorr estaban bajo patente (expiró en 2008). ECDSA no tenía este problema. Además, ECDSA tenía implementaciones más maduras y probadas en el momento.</p>
+<p>Cuando <a href="/base/que-es-un-satoshi.html">Satoshi</a> creó Bitcoin en 2008, las firmas Schnorr estaban bajo patente (expiró en 2008). ECDSA no tenía este problema. Además, ECDSA tenía implementaciones más maduras y probadas en el momento.</p>
 
-<p>Con Taproot (activado en noviembre 2021, bloque 709.632), Bitcoin adoptó firmas Schnorr mediante BIP 340 para las transacciones que usan direcciones bc1p (P2TR).</p>
+<p>Con <a href="/nivel-5/taproot-internals.html">Taproot</a> (activado en noviembre 2021, bloque 709.632), Bitcoin adoptó firmas Schnorr mediante <a href="/nivel-6/que-es-un-bip.html">BIP</a> 340 para las transacciones que usan direcciones bc1p (P2TR).</p>
 
 <h2>Ventajas sobre ECDSA</h2>
 
@@ -136,7 +136,7 @@
 
 <p>La propiedad más importante: las firmas Schnorr son lineales. Esto significa que múltiples firmas pueden agregarse en una sola.</p>
 
-<p>En un multisig 3-de-3 con ECDSA, necesitas incluir 3 firmas separadas en la transacción. Con Schnorr, las 3 firmas se combinan matemáticamente en una sola firma que ocupa el mismo espacio que una firma individual.</p>
+<p>En un <a href="/nivel-4/que-es-multisig.html">multisig</a> 3-de-3 con ECDSA, necesitas incluir 3 firmas separadas en la transacción. Con Schnorr, las 3 firmas se combinan matemáticamente en una sola firma que ocupa el mismo espacio que una firma individual.</p>
 
 <p>Resultado: menor tamaño de transacción (menores fees) y mayor privacidad (un multisig parece una transacción normal de una sola firma).</p>
 
@@ -202,7 +202,7 @@
 
 <ul>
 
-<li>Usa la curva secp256k1 (la misma que ECDSA)</li>
+<li>Usa la curva <a href="/nivel-5/curva-eliptica.html">secp256k1</a> (la misma que ECDSA)</li>
 
 <li>Las claves públicas se representan con 32 bytes (solo coordenada x, se asume y par)</li>
 

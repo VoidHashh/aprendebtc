@@ -53,8 +53,8 @@
           <p>Lightning nace como respuesta técnica a esa tensión: mantener a Bitcoin como capa de liquidación final y mover pagos frecuentes a una capa de canales off-chain, sin cambiar reglas de consenso de Bitcoin.</p>
 
           <h2>El diseño original de 2015</h2>
-          <p>En el whitepaper de Joseph Poon y Thaddeus Dryja (2015), Lightning se describe como una red de canales de pago bidireccionales. Dos partes abren un canal con una transacción multisig en Bitcoin, actualizan saldos entre ellas fuera de cadena, y solo vuelven on-chain para cerrar con el estado final.</p>
-          <p>Si esa lógica se extiende en red, Alice puede pagar a Carol a través de Bob sin abrir canal directo con Carol. El enrutamiento ocurre mediante contratos condicionales (HTLC) que garantizan atomicidad: o se completa todo el pago o se deshace entero.</p>
+          <p>En el <a href="/base/el-whitepaper.html">whitepaper</a> de Joseph Poon y Thaddeus Dryja (2015), Lightning se describe como una red de canales de pago bidireccionales. Dos partes abren un canal con una transacción <a href="/nivel-4/que-es-multisig.html">multisig</a> en Bitcoin, actualizan saldos entre ellas fuera de cadena, y solo vuelven <a href="/base/on-chain-vs-lightning.html">on-chain</a> para cerrar con el estado final.</p>
+          <p>Si esa lógica se extiende en red, Alice puede pagar a Carol a través de Bob sin <a href="/nivel-4/canales-lightning.html">abrir canal</a> directo con Carol. El <a href="/nivel-4/routing-lightning.html">enrutamiento</a> ocurre mediante contratos condicionales (HTLC) que garantizan atomicidad: o se completa todo el pago o se deshace entero.</p>
 
           <div class="callout callout--info">
             <span class="callout__icon" aria-hidden="true">i</span>
@@ -66,7 +66,7 @@
 
           <h2>De experimento a red operativa</h2>
           <p>La maduración de Lightning llegó con múltiples implementaciones interoperables: LND, Core Lightning y Eclair. Esa diversidad redujo el riesgo de monocultivo y permitió que el estándar evolucionara con competencia real de ingeniería.</p>
-          <p>Desde 2018, la red ha pasado de ser una tecnología para usuarios técnicos a una capa de pagos utilizada por wallets móviles, exchanges, procesadores y aplicaciones sociales. En paralelo, la experiencia de usuario mejoró con LSP, rutas más robustas, MPP y mejores abstracciones de liquidez.</p>
+          <p>Desde 2018, la red ha pasado de ser una tecnología para usuarios técnicos a una capa de pagos utilizada por wallets móviles, exchanges, procesadores y aplicaciones sociales. En paralelo, la experiencia de usuario mejoró con LSP, rutas más robustas, <a href="/lightning/keysend-mpp-amp.html">MPP</a> y mejores abstracciones de liquidez.</p>
 
           <h2>Estado general en marzo de 2026</h2>
           <p>Lightning tiene miles de nodos públicos, gran cantidad de canales y uso significativo en pagos cotidianos. Los datos exactos de volumen siempre son aproximados porque gran parte de la actividad no es pública por diseño, pero la evidencia práctica es clara: pagos rápidos y baratos ya funcionan en producción.</p>
@@ -75,8 +75,8 @@
           <h2>Por qué hoy se habla de plataforma</h2>
           <p>Lightning dejó de ser únicamente un rail de pagos. Encima de sus primitivas se construyeron capas que habilitan nuevos modelos:</p>
           <ul>
-            <li><strong>Autenticación y acceso:</strong> LNURL-auth, L402 y modelos de API de pago por uso.</li>
-            <li><strong>Identidad y apps:</strong> NWC y WebLN para conectar wallets con software sin exponer claves.</li>
+            <li><strong>Autenticación y acceso:</strong> LNURL-auth, <a href="/lightning/l402.html">L402</a> y modelos de API de pago por uso.</li>
+            <li><strong>Identidad y apps:</strong> <a href="/lightning/nwc.html">NWC</a> y WebLN para conectar wallets con software sin exponer claves.</li>
             <li><strong>Pagos máquina a máquina:</strong> agentes de IA comprando recursos computacionales en tiempo real.</li>
             <li><strong>Economía de contenido:</strong> Podcasting 2.0, zaps de Nostr y micropagos nativos.</li>
             <li><strong>Activos y privacidad:</strong> Taproot Assets y eCash (Cashu/Fedimint) como capas complementarias.</li>

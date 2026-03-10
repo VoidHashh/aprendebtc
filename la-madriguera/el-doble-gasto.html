@@ -52,7 +52,7 @@
 
 <p>Si tu &quot;billete digital&quot; es simplemente un archivo, ¿qué impide que lo copies y lo gastes dos veces? ¿O mil veces?</p>
 
-<p>Este es el problema del doble gasto, y fue el obstáculo central que impidió el dinero digital durante décadas. Satoshi lo resolvió, y esa solución es el corazón de Bitcoin.</p>
+<p>Este es el problema del doble gasto, y fue el obstáculo central que impidió el dinero digital durante décadas. <a href="/base/que-es-un-satoshi.html">Satoshi</a> lo resolvió, y esa solución es el corazón de Bitcoin.</p>
 
 <h2>El problema</h2>
 
@@ -98,7 +98,7 @@
 
 <ul><li>TX1: envía 1 BTC a Bob</li><li>TX2: envía 1 BTC a Carol</li></ul>
 
-<p>Ambas transacciones son técnicamente válidas — ambas gastan el mismo UTXO (output no gastado) que Alice controla.</p>
+<p>Ambas transacciones son técnicamente válidas — ambas gastan el mismo <a href="/nivel-3/modelo-utxo.html">UTXO</a> (output no gastado) que Alice controla.</p>
 
 <p>Alice envía TX1 a Bob y TX2 a Carol simultáneamente, esperando que ambos le den algo a cambio antes de que se den cuenta del conflicto.</p>
 
@@ -116,13 +116,13 @@
 
 <p>Este es el origen de la recomendación de &quot;esperar confirmaciones&quot;:</p>
 
-<p><strong>0 confirmaciones</strong>: la transacción está en la mempool pero no en ningún bloque. Un atacante con buena conectividad podría hacer doble gasto enviando una transacción conflictiva que llegue antes a los mineros.</p>
+<p><strong>0 confirmaciones</strong>: la transacción está en la <a href="/nivel-3/mempool.html">mempool</a> pero no en ningún bloque. Un atacante con buena conectividad podría hacer doble gasto enviando una transacción conflictiva que llegue antes a los mineros.</p>
 
 <p><strong>1 confirmación</strong>: la transacción está en un bloque. Para revertirla, el atacante necesita que ese bloque se vuelva stale (reorganización de la cadena). Posible pero difícil.</p>
 
 <p><strong>6 confirmaciones</strong>: hay 6 bloques encima de la transacción. Para revertirla, el atacante necesita reorganizar 6 bloques. Extremadamente difícil sin una cantidad masiva de hashrate.</p>
 
-<p>En el capítulo 15 del Libro de Satoshi (&quot;Más Sobre Doble Gasto, Prueba de Trabajo y Comisiones de Transacción&quot;), Satoshi discutió estos escenarios en detalle. Su posición era pragmática: para transacciones pequeñas, 0 confirmaciones es aceptable (el riesgo es bajo). Para cantidades significativas, esperar confirmaciones es prudente.</p>
+<p>En el capítulo 15 del Libro de Satoshi (&quot;Más Sobre Doble Gasto, <a href="/nivel-5/proof-of-work.html">Prueba de Trabajo</a> y <a href="/base/que-son-las-fees.html">Comisiones</a> de Transacción&quot;), Satoshi discutió estos escenarios en detalle. Su posición era pragmática: para transacciones pequeñas, 0 confirmaciones es aceptable (el riesgo es bajo). Para cantidades significativas, esperar confirmaciones es prudente.</p>
 
 <h2>Vectores de ataque reales</h2>
 
@@ -136,7 +136,7 @@
 
 <p>Mitigación: esperar confirmaciones. El ataque solo funciona si el atacante publica su bloque antes de que otro minero encuentre uno.</p>
 
-<p><strong>Ataque del 51%</strong>: con mayoría del hashrate, un atacante puede minar una cadena secreta y publicarla después de haber hecho doble gasto. Ya cubierto en detalle en el artículo sobre el ataque del 51%.</p>
+<p><strong>Ataque del 51%</strong>: con mayoría del hashrate, un atacante puede <a href="/base/que-es-la-mineria.html">minar</a> una cadena secreta y publicarla después de haber hecho doble gasto. Ya cubierto en detalle en el artículo sobre el ataque del 51%.</p>
 
 <p><strong>RBF (Replace-By-Fee)</strong>: técnicamente no es un &quot;ataque&quot; sino una feature del protocolo. Una transacción marcada como RBF puede ser reemplazada por otra con fee más alta antes de confirmarse. Los comerciantes que aceptan 0-conf deben verificar si la transacción tiene el flag RBF.</p>
 
@@ -150,7 +150,7 @@
 
 <h2>Lightning Network y el doble gasto</h2>
 
-<p>Lightning Network resuelve el problema de las confirmaciones para pagos pequeños.</p>
+<p><a href="/lightning/que-es-lightning.html">Lightning Network</a> resuelve el problema de las confirmaciones para pagos pequeños.</p>
 
 <p>En Lightning, los pagos son casi instantáneos porque no requieren confirmación en la blockchain. Pero Lightning tiene sus propios mecanismos anti-fraude: si alguien intenta publicar un estado antiguo de un canal (una forma de doble gasto), la contraparte puede publicar una &quot;penalty transaction&quot; que confisca todos los fondos del atacante.</p>
 
@@ -170,7 +170,7 @@
 
 <h2>Fuentes y referencias:</h2>
 
-<ul><li>Whitepaper de Bitcoin, secciones 1, 2 y 11</li><li>El Libro de Satoshi, capítulos 12 y 15</li><li>&quot;Two Bitcoins at the Price of One? Double-Spending Attacks on Fast Payments in Bitcoin&quot; (Karame et al., 2012)</li><li>Documentación de BIP 125 (Replace-By-Fee)</li></ul>
+<ul><li>Whitepaper de Bitcoin, secciones 1, 2 y 11</li><li>El Libro de Satoshi, capítulos 12 y 15</li><li>&quot;Two Bitcoins at the Price of One? Double-Spending Attacks on Fast Payments in Bitcoin&quot; (Karame et al., 2012)</li><li>Documentación de <a href="/nivel-6/que-es-un-bip.html">BIP</a> 125 (Replace-By-Fee)</li></ul>
 
 <h2>Enlaces internos:</h2>
 

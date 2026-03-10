@@ -126,9 +126,9 @@
 
 <p>Taproot es realmente un conjunto de tres mejoras que se activaron juntas en noviembre de 2021:</p>
 
-<p><strong>BIP 340:</strong> Define las firmas Schnorr para secp256k1.</p>
+<p><strong><a href="/nivel-6/que-es-un-bip.html">BIP</a> 340:</strong> Define las firmas <a href="/nivel-5/schnorr.html">Schnorr</a> para secp256k1.</p>
 
-<p><strong>BIP 341:</strong> Define Taproot propiamente: cómo se construyen las direcciones P2TR, el key path, el script path, y la estructura MAST.</p>
+<p><strong>BIP 341:</strong> Define Taproot propiamente: cómo se construyen las direcciones P2TR, el key path, el <a href="/nivel-5/bitcoin-script.html">script</a> path, y la estructura MAST.</p>
 
 <p><strong>BIP 342:</strong> Define Tapscript, las reglas de script modificadas para outputs Taproot.</p>
 
@@ -142,7 +142,7 @@
 
 <li>P es la clave pública interna</li>
 
-<li>m es el Merkle root del árbol de scripts (o bytes vacíos si no hay scripts)</li>
+<li>m es el <a href="/nivel-5/merkle-tree.html">Merkle root</a> del árbol de scripts (o bytes vacíos si no hay scripts)</li>
 
 <li>G es el punto generador</li>
 
@@ -176,7 +176,7 @@
 
 <h2>Script path: cuando necesitas condiciones</h2>
 
-<p>Si quieres gastar usando un script alternativo (timelock, multisig, etc.):</p>
+<p>Si quieres gastar usando un script alternativo (timelock, <a href="/nivel-4/que-es-multisig.html">multisig</a>, etc.):</p>
 
 <ol>
 
@@ -256,7 +256,7 @@
 
 <li>Se añade OP_CHECKSIGADD para multisig eficiente con Schnorr</li>
 
-<li>Las firmas usan Schnorr (64 bytes) en lugar de ECDSA DER</li>
+<li>Las firmas usan Schnorr (64 bytes) en lugar de <a href="/nivel-5/ecdsa.html">ECDSA</a> DER</li>
 
 <li>Límites de recursos ajustados</li>
 

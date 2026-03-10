@@ -152,7 +152,7 @@
 
 <h2>La solución: Segregated Witness</h2>
 
-<p>SegWit (Segregated Witness, BIP 141) resuelve esto separando los datos de firma (&quot;witness&quot;) del cálculo del txid.</p>
+<p>SegWit (Segregated Witness, <a href="/nivel-6/que-es-un-bip.html">BIP</a> 141) resuelve esto separando los datos de firma (&quot;witness&quot;) del cálculo del txid.</p>
 
 <p>La idea:</p>
 
@@ -200,11 +200,11 @@
 
 <li>Un bloque de ~4 MB si es todo witness (teórico, imposible en práctica)</li>
 
-<li>Un bloque típico de 1.5-2 MB con mezcla de transacciones</li>
+<li>Un bloque típico de 1.5-2 MB con <a href="/nivel-4/coinjoin.html">mezcla de transacciones</a></li>
 
 </ul>
 
-<p>El diseño incentiva las transacciones SegWit: los datos de firma (witness) son más baratos, resultando en fees menores para los usuarios.</p>
+<p>El diseño incentiva las transacciones SegWit: los datos de firma (witness) son más baratos, resultando en <a href="/base/que-son-las-fees.html">fees</a> menores para los usuarios.</p>
 
 <h2>Virtual bytes (vBytes)</h2>
 
@@ -212,7 +212,7 @@
 
 <p>Una transacción de 400 WU = 100 vBytes.</p>
 
-<p>Las fees se expresan típicamente en sat/vB (satoshis por virtual byte).</p>
+<p>Las fees se expresan típicamente en <a href="/herramientas/calculadora-fees.html">sat/vB</a> (satoshis por virtual byte).</p>
 
 <h2>BIP 143: nuevo algoritmo de firma</h2>
 
@@ -240,7 +240,7 @@
 
 <li>Versión 0 (OP_0): SegWit original (P2WPKH, P2WSH)</li>
 
-<li>Versión 1 (OP_1): Taproot (P2TR)</li>
+<li>Versión 1 (OP_1): <a href="/nivel-5/taproot-internals.html">Taproot</a> (P2TR)</li>
 
 <li>Versiones 2-16: reservadas para futuras mejoras</li>
 
@@ -250,7 +250,7 @@
 
 <h2>Activación</h2>
 
-<p>SegWit se activó el 24 de agosto de 2017 (bloque 481.824) mediante un soft fork. Fue una de las actualizaciones más debatidas de la historia de Bitcoin, culminando en el &quot;User Activated Soft Fork&quot; (UASF) donde los usuarios amenazaron con activar SegWit sin apoyo mayoritario de mineros.</p>
+<p>SegWit se activó el 24 de agosto de 2017 (bloque 481.824) mediante un soft <a href="/nivel-6/soft-fork-hard-fork.html">fork</a>. Fue una de las actualizaciones más debatidas de la historia de Bitcoin, culminando en el &quot;User Activated Soft Fork&quot; (UASF) donde los usuarios amenazaron con activar SegWit sin apoyo mayoritario de mineros.</p>
 
 <p>La controversia sobre SegWit y el tamaño de bloque resultó en el fork de Bitcoin Cash, que rechazó SegWit y optó por aumentar el límite de bloque en su lugar.</p>
 

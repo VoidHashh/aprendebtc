@@ -44,14 +44,14 @@
           <p>Bitcoin aporta escasez y soberanía, pero tiene volatilidad. En pagos diarios, comercio o remesas, mucha gente sigue pensando en dólares o moneda local. Taproot Assets nace para cubrir esa demanda sin salir del stack Bitcoin + Lightning.</p>
 
           <h2>Qué es Taproot Assets</h2>
-          <p>Es un protocolo impulsado por Lightning Labs para emitir y transferir activos sobre Bitcoin y moverlos por Lightning. La emisión se ancla en Bitcoin usando Taproot; la transferencia aprovecha la red Lightning existente.</p>
+          <p>Es un protocolo impulsado por Lightning Labs para emitir y transferir activos sobre Bitcoin y moverlos por Lightning. La emisión se ancla en Bitcoin usando Taproot; la transferencia aprovecha la <a href="/lightning/que-es-lightning.html">red Lightning</a> existente.</p>
 
           <h2>Arquitectura en tres capas</h2>
           <h3>1. Emisión en Bitcoin</h3>
           <p>El activo se acuña en una transacción Taproot en capa base. El anclaje criptográfico asegura su existencia y reglas de emisión.</p>
 
           <h3>2. Transporte por Lightning (edge liquidity)</h3>
-          <p>Los nodos intermedios siguen viendo sats normales. La conversión activo↔sats ocurre en los nodos de borde (origen y destino). Esto evita tener que actualizar toda la red para que un activo nuevo circule.</p>
+          <p>Los nodos intermedios siguen viendo <a href="/base/que-es-un-satoshi.html">sats</a> normales. La conversión activo↔sats ocurre en los nodos de borde (origen y destino). Esto evita tener que actualizar toda la red para que un activo nuevo circule.</p>
 
           <h3>3. Mercado de tipo de cambio</h3>
           <p>Los nodos edge publican liquidez y precio de conversión. El wallet selecciona combinación de ruta y tipo de cambio según coste y probabilidad de éxito.</p>

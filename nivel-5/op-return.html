@@ -122,9 +122,9 @@
           <h1>OP_RETURN</h1>
           <p class="article__subtitle">El opcode para meter datos arbitrarios en la blockchain. Una válvula de escape diseñada para evitar males mayores.</p>
 
-<p>Qué es OP_RETURN OP_RETURN es un opcode de Bitcoin Script que inmediatamente marca un output como inválido para gastar. Cualquier script que empiece con OP_RETURN es &quot;provably unspendable&quot; (demostrablemente no gastable). Pero tiene un uso secundario crucial: permite incluir hasta 80 bytes de datos arbitrarios en la blockchain. El script OP_RETURN &lt;datos&gt; En hexadecimal: 6a&lt;longitud&gt;&lt;datos&gt; Ejemplo con el texto &quot;Hello Bitcoin&quot;: 6a0d48656c6c6f20426974636f696e Comportamiento especial Cuando un nodo ve un output con OP_RETURN:</p>
+<p>Qué es OP_RETURN OP_RETURN es un opcode de <a href="/nivel-5/bitcoin-script.html">Bitcoin Script</a> que inmediatamente marca un output como inválido para gastar. Cualquier script que empiece con OP_RETURN es &quot;provably unspendable&quot; (demostrablemente no gastable). Pero tiene un uso secundario crucial: permite incluir hasta 80 bytes de datos arbitrarios en la <a href="/base/que-es-blockchain.html">blockchain</a>. El script OP_RETURN &lt;datos&gt; En hexadecimal: 6a&lt;longitud&gt;&lt;datos&gt; Ejemplo con el texto &quot;Hello Bitcoin&quot;: 6a0d48656c6c6f20426974636f696e Comportamiento especial Cuando un nodo ve un output con OP_RETURN:</p>
 
-<p>Verifica que los datos no excedan el límite (80 bytes estándar) NO añade este output al UTXO set El output queda en la blockchain pero no consume memoria de estado</p>
+<p>Verifica que los datos no excedan el límite (80 bytes estándar) NO añade este output al <a href="/nivel-3/modelo-utxo.html">UTXO</a> set El output queda en la blockchain pero no consume memoria de estado</p>
 
 <p>Este último punto es crucial: los outputs OP_RETURN no inflan el UTXO set que todos los nodos deben mantener en memoria. Por qué existe Antes de OP_RETURN, la gente que quería poner datos en la blockchain usaba hacks:</p>
 

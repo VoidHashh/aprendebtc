@@ -46,9 +46,9 @@
           <p class="article__subtitle">Dos mineros, un bloque. ¿Cómo resuelve Bitcoin este conflicto sin un árbitro central?</p>
           <p style="color: var(--text-secondary);">Fecha de publicacion: Febrero 2026 &middot; Tiempo de lectura: ~6 minutos</p>
 
-<p>Imagina que dos mineros en lados opuestos del mundo encuentran un bloque válido casi simultáneamente. Ambos bloques son correctos según las reglas de consenso. Ambos extienden la misma cadena anterior. Pero solo uno puede ser parte de la historia oficial de Bitcoin.</p>
+<p>Imagina que dos <a href="/base/que-es-la-mineria.html">mineros</a> en lados opuestos del mundo encuentran un bloque válido casi simultáneamente. Ambos bloques son correctos según las reglas de consenso. Ambos extienden la misma cadena anterior. Pero solo uno puede ser parte de la historia oficial de Bitcoin.</p>
 
-<p>¿Cómo resuelve Bitcoin este conflicto sin un árbitro central? La respuesta es elegante y fue diseñada por Satoshi desde el principio.</p>
+<p>¿Cómo resuelve Bitcoin este conflicto sin un árbitro central? La respuesta es elegante y fue diseñada por <a href="/base/que-es-un-satoshi.html">Satoshi</a> desde el principio.</p>
 
 <h2>El escenario</h2>
 
@@ -64,7 +64,7 @@
 
 <h2>La resolución natural</h2>
 
-<p>Satoshi explicó la solución en la sección 5 del whitepaper: &quot;el empate se romperá cuando se encuentre la siguiente proof-of-work y una ramificación se convierta en la más larga&quot;.</p>
+<p>Satoshi explicó la solución en la sección 5 del <a href="/base/el-whitepaper.html">whitepaper</a>: &quot;el empate se romperá cuando se encuentre la siguiente proof-of-work y una ramificación se convierta en la más larga&quot;.</p>
 
 <p>Los mineros trabajan para extender la cadena que conocen. Los mineros que tienen el bloque A trabajan encima de A. Los mineros que tienen el bloque B trabajan encima de B.</p>
 
@@ -90,7 +90,7 @@
 
 <p>Cuando un bloque se vuelve stale, las transacciones que contenía no se pierden.</p>
 
-<p>Las transacciones en un stale block vuelven a la mempool (el conjunto de transacciones pendientes). La mayoría de estas transacciones probablemente también estaban en el bloque ganador, ya que los mineros suelen ver las mismas transacciones en la mempool. Si no estaban, se incluirán en un bloque futuro.</p>
+<p>Las transacciones en un stale block vuelven a la <a href="/nivel-3/mempool.html">mempool</a> (el conjunto de transacciones pendientes). La mayoría de estas transacciones probablemente también estaban en el bloque ganador, ya que los mineros suelen ver las mismas transacciones en la mempool. Si no estaban, se incluirán en un bloque futuro.</p>
 
 <p>El usuario no pierde bitcoin. Simplemente su transacción tiene que esperar un poco más para confirmarse. Es como si la transacción nunca hubiera sido confirmada en primer lugar.</p>
 
@@ -124,7 +124,7 @@
 
 <p>La frecuencia de stale blocks ha disminuido con el tiempo gracias a mejoras en cómo se propagan los bloques:</p>
 
-<p><strong>Compact Block Relay (BIP 152)</strong>: en lugar de enviar el bloque completo, los nodos envían solo los headers y un resumen de las transacciones. El nodo receptor ya tiene la mayoría de las transacciones en su mempool y puede reconstruir el bloque localmente. Esto reduce drásticamente el tiempo de propagación.</p>
+<p><strong>Compact Block Relay (<a href="/nivel-6/que-es-un-bip.html">BIP</a> 152)</strong>: en lugar de enviar el bloque completo, los nodos envían solo los headers y un resumen de las transacciones. El nodo receptor ya tiene la mayoría de las transacciones en su mempool y puede reconstruir el bloque localmente. Esto reduce drásticamente el tiempo de propagación.</p>
 
 <p><strong>FIBRE (Fast Internet Bitcoin Relay Engine)</strong>: una red de retransmisión de baja latencia diseñada específicamente para mineros. Reduce la propagación de bloques a milisegundos en lugar de segundos.</p>
 
@@ -164,7 +164,7 @@
 
 <p><strong>Para pagos grandes (coches, propiedades)</strong>: espera 6+ confirmaciones, o usa un servicio de custodia.</p>
 
-<p>Lightning Network elimina este problema para pagos pequeños: los pagos Lightning son instantáneos y no dependen de confirmaciones on-chain.</p>
+<p><a href="/lightning/que-es-lightning.html">Lightning Network</a> elimina este problema para pagos pequeños: los pagos Lightning son instantáneos y no dependen de confirmaciones on-chain.</p>
 
 <h2>Fuentes y referencias:</h2>
 

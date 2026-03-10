@@ -124,7 +124,7 @@
 
 <h2>El estándar más avanzado</h2>
 
-<p>P2TR (Pay-to-Taproot), definido en BIP 341, es el tipo de transacción más moderno de Bitcoin. Las direcciones empiezan por <code>bc1p</code>.</p>
+<p>P2TR (Pay-to-<a href="/nivel-5/taproot-internals.html">Taproot</a>), definido en <a href="/nivel-6/que-es-un-bip.html">BIP</a> 341, es el tipo de transacción más moderno de Bitcoin. Las direcciones empiezan por <code>bc1p</code>.</p>
 
 <p>P2TR combina todo lo aprendido de los tipos anteriores:</p>
 
@@ -136,7 +136,7 @@
 
 <li>La privacidad de ocultar condiciones no usadas</li>
 
-<li>La eficiencia de firmas Schnorr</li>
+<li>La eficiencia de firmas <a href="/nivel-5/schnorr.html">Schnorr</a></li>
 
 </ul>
 
@@ -158,7 +158,7 @@
 
 <li>P = clave pública interna</li>
 
-<li>m = Merkle root del árbol de scripts (o bytes vacíos si no hay scripts)</li>
+<li>m = <a href="/nivel-5/merkle-tree.html">Merkle root</a> del árbol de scripts (o bytes vacíos si no hay scripts)</li>
 
 <li>G = punto generador</li>
 
@@ -184,11 +184,11 @@
 
 <p>Solo 64 bytes. El nodo verifica que la firma es válida para Q. No sabe ni le importa si había scripts alternativos.</p>
 
-<p>Desde fuera, todo gasto por key path se ve igual: una firma de 64 bytes. Un multisig 3-de-5 donde los 3 firmantes cooperan se ve idéntico a un pago simple de una persona.</p>
+<p>Desde fuera, todo gasto por key path se ve igual: una firma de 64 bytes. Un <a href="/nivel-4/que-es-multisig.html">multisig</a> 3-de-5 donde los 3 firmantes cooperan se ve idéntico a un pago simple de una persona.</p>
 
 <h2>Script path: cuando necesitas scripts</h2>
 
-<p>Si quieres gastar usando un script del árbol MAST:</p>
+<p>Si quieres gastar usando un <a href="/nivel-5/bitcoin-script.html">script</a> del árbol MAST:</p>
 
 <p><strong>Witness:</strong> &lt;datos que satisfacen el script&gt; &lt;script&gt; &lt;control block&gt; ``` El control block contiene:</p>
 

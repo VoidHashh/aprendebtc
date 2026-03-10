@@ -160,7 +160,7 @@
 
 <p>SHA-256 (Secure Hash Algorithm, 256 bits) es la función hash principal de Bitcoin. Se usa en:</p>
 
-<p><strong>Minería:</strong> Los mineros calculan SHA-256(SHA-256(block_header)) hasta encontrar un hash menor que el target. El doble hashing añade seguridad adicional.</p>
+<p><strong>Minería:</strong> Los <a href="/base/que-es-la-mineria.html">mineros</a> calculan SHA-256(SHA-256(block_header)) hasta encontrar un hash menor que el target. El doble hashing añade seguridad adicional.</p>
 
 <p><strong>Identificación de transacciones:</strong> El txid de una transacción es el doble SHA-256 de la transacción serializada.</p>
 
@@ -196,7 +196,7 @@
 
 </ol>
 
-<p>Este mismo principio es lo que hace que la blockchain sea inmutable: cada bloque contiene el hash del anterior. Modificar un bloque cambiaría su hash, invalidando todos los bloques posteriores.</p>
+<p>Este mismo principio es lo que hace que la <a href="/base/que-es-blockchain.html">blockchain</a> sea inmutable: cada bloque contiene el hash del anterior. Modificar un bloque cambiaría su hash, invalidando todos los bloques posteriores.</p>
 
 <div class="callout callout--info"><span class="callout__icon" aria-hidden="true">&#128161;</span><div class="callout__content"><div class="callout__title">Pruébalo tú mismo</div><p class="callout__text">Puedes experimentar con funciones hash en <a href="../herramientas/hash.html">/herramientas/hash</a>. Introduce cualquier texto y observa cómo cambia el hash con cada modificación.</p></div></div>
 

@@ -88,11 +88,11 @@
 
 <ol>
 
-<li>1. Creas una transacci&#243;n que ocupa X bytes (o vBytes en SegWit)</li>
+<li>1. Creas una transacci&#243;n que ocupa X bytes (o vBytes en <a href="/nivel-5/segwit-internals.html">SegWit</a>)</li>
 
 <li>2. Decides cu&#225;ntos satoshis por byte ofrecer</li>
 
-<li>3. Los mineros priorizan las transacciones que pagan m&#225;s por byte</li>
+<li>3. Los <a href="/base/que-es-la-mineria.html">mineros</a> priorizan las transacciones que pagan m&#225;s por byte</li>
 
 <li>4. Tu transacci&#243;n se confirma m&#225;s r&#225;pido si pagas m&#225;s</li>
 
@@ -102,7 +102,7 @@
 
 <h2>C&#243;mo se miden</h2>
 
-<p><strong>sat/vB (satoshis por virtual byte):</strong> La unidad est&#225;ndar.</p>
+<p><strong><a href="/herramientas/calculadora-fees.html">sat/vB</a> (satoshis por virtual byte):</strong> La unidad est&#225;ndar.</p>
 
 <p>Una transacci&#243;n t&#237;pica ocupa 140-250 vBytes dependiendo del tipo y n&#250;mero de inputs/outputs.</p>
 
@@ -114,7 +114,7 @@
 
 <li>Fee de 20 sat/vB</li>
 
-<li>Total: 200 &#215; 20 = 4.000 sats</li>
+<li>Total: 200 &#215; 20 = 4.000 <a href="/base/que-es-un-satoshi.html">sats</a></li>
 
 </ul>
 
@@ -124,7 +124,7 @@
 
 <p>El tama&#241;o de tu transacci&#243;n depende de:</p>
 
-<p><strong>N&#250;mero de inputs:</strong> Cada UTXO que gastas a&#241;ade bytes. Consolidar muchos UTXOs peque&#241;os es m&#225;s caro.</p>
+<p><strong>N&#250;mero de inputs:</strong> Cada <a href="/nivel-3/modelo-utxo.html">UTXO</a> que gastas a&#241;ade bytes. Consolidar muchos UTXOs peque&#241;os es m&#225;s caro.</p>
 
 <p><strong>N&#250;mero de outputs:</strong> Normalmente 2 (el pago y el cambio). M&#225;s outputs = m&#225;s bytes.</p>
 

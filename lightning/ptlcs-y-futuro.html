@@ -44,10 +44,10 @@
           <p>Lightning está en producción desde 2018, pero su arquitectura sigue evolucionando. A diferencia de capa base Bitcoin, la adopción de mejoras en Lightning puede ser incremental por implementación y por nodo.</p>
 
           <h2>HTLCs vs PTLCs</h2>
-          <p>El modelo HTLC actual reutiliza hash de pago entre saltos, lo que deja espacio para correlación en escenarios adversos. PTLCs reemplaza esa mecánica con puntos/adaptor signatures de Schnorr, mejorando privacidad y flexibilidad de construcción de pagos.</p>
+          <p>El modelo HTLC actual reutiliza hash de pago entre saltos, lo que deja espacio para correlación en escenarios adversos. PTLCs reemplaza esa mecánica con puntos/adaptor signatures de <a href="/nivel-5/schnorr.html">Schnorr</a>, mejorando privacidad y flexibilidad de construcción de pagos.</p>
 
           <h2>Taproot channels</h2>
-          <p>Canales sobre P2TR mejoran eficiencia y privacidad on-chain frente a esquemas anteriores. También son base técnica para despliegues más amplios de PTLC.</p>
+          <p>Canales sobre P2TR mejoran eficiencia y privacidad <a href="/base/on-chain-vs-lightning.html">on-chain</a> frente a esquemas anteriores. También son base técnica para despliegues más amplios de PTLC.</p>
 
           <h2>Trampoline routing</h2>
           <p>Permite delegar cálculo pesado de rutas en nodos mejor conectados, facilitando UX móvil y reduciendo carga local de wallet ligera.</p>
