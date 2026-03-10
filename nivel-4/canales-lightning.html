@@ -136,17 +136,17 @@
 
 <h2>El concepto de canal</h2>
 
-<p>Un canal de pago Lightning es una conexión directa entre dos nodos con una cantidad de bitcoin bloqueada que puede moverse instantáneamente entre ellos.</p>
+<p>Un canal de <a href="/lightning/como-funciona-un-pago.html">pago Lightning</a> es una conexión directa entre dos nodos con una cantidad de bitcoin bloqueada que puede moverse instantáneamente entre ellos.</p>
 
 <p>Imagina un tubo entre Alice y Bob con 1 BTC dentro. Ese bitcoin puede deslizarse hacia Alice o hacia Bob infinitas veces, de forma instantánea, sin tocar la blockchain. Solo cuando quieren "cerrar el tubo" y extraer su parte, vuelven a la blockchain.</p>
 
 <h2>Abrir un canal</h2>
 
-<p>Para abrir un canal, se crea una transacción on-chain que:</p>
+<p>Para abrir un canal, se crea una transacción <a href="/base/on-chain-vs-lightning.html">on-chain</a> que:</p>
 
 <ol>
 
-  <li>Bloquea bitcoin en una dirección multisig 2-de-2 (ambas partes deben firmar para gastar)</li>
+  <li>Bloquea bitcoin en una dirección <a href="/nivel-4/que-es-multisig.html">multisig</a> 2-de-2 (ambas partes deben firmar para gastar)</li>
 
   <li>Define la capacidad total del canal</li>
 
@@ -248,7 +248,7 @@
 
 <h3>Penalización por fraude</h3>
 
-<p>Si Alice intenta cerrar con un estado antiguo donde tenía más bitcoin (fraude):</p>
+<p>Si Alice intenta cerrar con un estado antiguo donde tenía más bitcoin (<a href="/base/estafas-comunes.html">fraude</a>):</p>
 
 <ul>
 
@@ -300,7 +300,7 @@
 
 <h3>Para usuarios con wallet (Phoenix, Breez)</h3>
 
-<p>La wallet gestiona canales automáticamente. Cuando necesitas más capacidad, abre o ajusta canales por ti. Pagas fees por esto pero no tienes que entender los detalles.</p>
+<p>La wallet gestiona canales automáticamente. Cuando necesitas más capacidad, abre o ajusta canales por ti. Pagas <a href="/base/que-son-las-fees.html">fees</a> por esto pero no tienes que entender los detalles.</p>
 
 <h3>Para operadores de nodo</h3>
 

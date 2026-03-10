@@ -144,7 +144,7 @@
 
 <h2>El problema: transacción atascada</h2>
 
-<p>Has enviado una transacción con una fee que parecía razonable, pero la mempool se ha congestionado y llevas horas (o días) esperando confirmación. Tu wallet muestra la transacción como &quot;pendiente&quot; y no hay señales de que vaya a confirmar pronto.</p>
+<p>Has enviado una transacción con una fee que parecía razonable, pero la <a href="/nivel-3/mempool.html">mempool</a> se ha congestionado y llevas horas (o días) esperando confirmación. Tu wallet muestra la transacción como &quot;pendiente&quot; y no hay señales de que vaya a confirmar pronto.</p>
 
 <p>Esto no significa que hayas perdido tus bitcoin. La transacción está en la mempool, esperando. Pero necesitas acelararla para que se confirme en tiempo razonable.</p>
 
@@ -158,11 +158,11 @@
 
 <ol>
 
-  <li>Tu wallet crea una transacción que gasta exactamente los mismos UTXOs que la original</li>
+  <li>Tu wallet crea una transacción que gasta exactamente los mismos <a href="/nivel-3/modelo-utxo.html">UTXOs</a> que la original</li>
 
   <li>La nueva transacción paga una fee significativamente mayor</li>
 
-  <li>Los nodos y mineros ven la nueva transacción y descartan la antigua</li>
+  <li>Los nodos y <a href="/base/que-es-la-mineria.html">mineros</a> ven la nueva transacción y descartan la antigua</li>
 
   <li>La versión con fee alta se confirma; la antigua nunca llegará a un bloque</li>
 
@@ -216,7 +216,7 @@
 
 <p>La idea: creas una nueva transacción (hijo) que gasta uno de los outputs de la transacción atascada (padre). El hijo paga una fee tan alta que cubre la fee de ambas transacciones.</p>
 
-<p>El minero tiene un incentivo para incluir ambas: no puede incluir la transacción hijo sin incluir primero la padre (necesita el UTXO que gasta), y la suma de fees de las dos es atractiva.</p>
+<p>El minero tiene un incentivo para incluir ambas: no puede incluir la transacción hijo sin incluir primero la padre (necesita el UTXO que gasta), y la suma de <a href="/base/que-son-las-fees.html">fees</a> de las dos es atractiva.</p>
 
 <h3>Cuándo usar CPFP</h3>
 
@@ -242,7 +242,7 @@
 
 <h3>El cálculo de fee</h3>
 
-<p>Si la transacción padre pagó 1 sat/vB y necesitas 20 sat/vB para confirmar rápido:</p>
+<p>Si la transacción padre pagó 1 <a href="/herramientas/calculadora-fees.html">sat/vB</a> y necesitas 20 sat/vB para confirmar rápido:</p>
 
 <ul>
 

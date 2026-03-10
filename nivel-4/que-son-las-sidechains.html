@@ -104,7 +104,7 @@
           <p>Una respuesta es Lightning Network. Otra son las sidechains: cadenas separadas con sus propias reglas, conectadas a Bitcoin mediante un peg bidireccional para usar BTC como moneda. La idea es potente. La implementacion es donde empiezan los matices de seguridad y confianza.</p>
 
           <h2>El paper que lo inicio todo</h2>
-          <p>En octubre de 2014, Adam Back, Matt Corallo, Luke Dashjr y otros investigadores publicaron <em>Enabling Blockchain Innovations with Pegged Sidechains</em>. El objetivo era claro: innovar sin tocar la capa base de Bitcoin y sin crear una moneda nueva para cada experimento.</p>
+          <p>En octubre de 2014, Adam Back, Matt Corallo, Luke Dashjr y otros investigadores publicaron <em>Enabling <a href="/base/que-es-blockchain.html">Blockchain</a> Innovations with Pegged Sidechains</em>. El objetivo era claro: innovar sin tocar la capa base de Bitcoin y sin crear una moneda nueva para cada experimento.</p>
           <p>La propuesta central fue el <strong>two-way peg</strong>: mover BTC de mainchain a una cadena lateral y de vuelta, manteniendo constante el suministro total. Si 1 BTC esta en una sidechain, ese BTC esta bloqueado en Bitcoin. Cuando vuelve, se desbloquea en mainchain.</p>
 
           <h2>Como funciona un peg bidireccional</h2>
@@ -124,14 +124,14 @@
 
           <h2>Tipos de peg por modelo de confianza</h2>
           <h3>Peg federado</h3>
-          <p>Es el modelo mas pragmatico y el que hoy funciona en produccion. Un conjunto de entidades conocidas custodia los BTC bloqueados mediante multisig y autoriza peg-ins y peg-outs. Funciona sin modificar Bitcoin, pero requiere confiar en esa federacion.</p>
+          <p>Es el modelo mas pragmatico y el que hoy funciona en produccion. Un conjunto de entidades conocidas custodia los BTC bloqueados mediante <a href="/nivel-4/que-es-multisig.html">multisig</a> y autoriza peg-ins y peg-outs. Funciona sin modificar Bitcoin, pero requiere confiar en esa federacion.</p>
           <h3>Merge mining</h3>
           <p>Protege el consenso de la sidechain aprovechando hashrate de Bitcoin. Reduce el coste de ataque a la cadena lateral, pero no elimina por si solo el riesgo del peg. El puente sigue teniendo su propio modelo de confianza.</p>
           <h3>Pruebas criptograficas nativas (ideal aun no activado)</h3>
           <p>El objetivo de largo plazo es que Bitcoin pueda verificar pruebas de la sidechain sin custodios identificables. Drivechains (BIP-300/301) es la propuesta mas desarrollada en esta direccion, pero a marzo de 2026 no tiene consenso para activacion.</p>
 
           <h3>Mints federados: Fedimint y Cashu</h3>
-          <p>Fedimint y Cashu no son sidechains clasicas: no son blockchains independientes. Son sistemas de eCash sobre Bitcoin y Lightning con custodia federada o local. Comparten objetivo de extender Bitcoin, pero su arquitectura es distinta.</p>
+          <p><a href="/lightning/ecash-cashu-fedimint.html">Fedimint</a> y Cashu no son sidechains clasicas: no son blockchains independientes. Son sistemas de eCash sobre Bitcoin y Lightning con custodia federada o local. Comparten objetivo de extender Bitcoin, pero su arquitectura es distinta.</p>
 
           <div class="callout callout--info">
             <span class="callout__icon" aria-hidden="true">i</span>
@@ -170,7 +170,7 @@
           </div>
 
           <h2>Drivechains (BIP-300/301): el debate mas profundo</h2>
-          <p>Drivechains propone que mineros y reglas de Bitcoin coordinen peg-ins y peg-outs con periodos largos de retiro, evitando federaciones corporativas. Sus defensores lo ven como camino hacia pegs menos confiados en terceros. Sus criticos advierten que aumenta poder de mineros y complejidad de gobernanza.</p>
+          <p>Drivechains propone que <a href="/base/que-es-la-mineria.html">mineros</a> y reglas de Bitcoin coordinen peg-ins y peg-outs con periodos largos de retiro, evitando federaciones corporativas. Sus defensores lo ven como camino hacia pegs menos confiados en terceros. Sus criticos advierten que aumenta poder de mineros y complejidad de gobernanza.</p>
           <p>El debate no es solo tecnico. Es filosofico: cuanto riesgo adicional acepta Bitcoin para ganar extensibilidad. A marzo de 2026, BIP-300/301 sigue sin consenso suficiente.</p>
 
           <h2>Stacks, RGB y el criterio de inclusion</h2>
@@ -183,7 +183,7 @@
 
           <h2>Futuro de las capas de Bitcoin</h2>
           <ul>
-            <li><strong>BitVM:</strong> abre una via para verificacion de computo y puentes menos confiados sin soft fork inmediato.</li>
+            <li><strong>BitVM:</strong> abre una via para verificacion de computo y puentes menos confiados sin <a href="/nivel-6/soft-fork-hard-fork.html">soft fork</a> inmediato.</li>
             <li><strong>Simplicity:</strong> lenguaje formal para contratos mas expresivos en ecosistemas como Liquid.</li>
             <li><strong>ZK-proofs sobre Bitcoin:</strong> camino prometedor, todavia en etapa de investigacion.</li>
             <li><strong>Drivechains:</strong> propuesta viva, sin consenso de activacion.</li>
@@ -215,7 +215,7 @@
             <li><strong>Fedimint/Cashu:</strong> privacidad fuerte y micropagos en comunidad.</li>
             <li><strong>Lightning:</strong> pagos diarios de bajo importe.</li>
           </ul>
-          <p>No uses una sidechain por inercia. Si Bitcoin on-chain o Lightning resuelven tu caso, no anadas capas de riesgo sin necesidad.</p>
+          <p>No uses una sidechain por inercia. Si Bitcoin <a href="/base/on-chain-vs-lightning.html">on-chain</a> o Lightning resuelven tu caso, no anadas capas de riesgo sin necesidad.</p>
 
           <h2>Fuentes y referencias</h2>
           <ul>

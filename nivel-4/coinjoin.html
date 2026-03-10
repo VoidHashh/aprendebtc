@@ -90,7 +90,7 @@
           <h1>CoinJoin: transacciones colaborativas para privacidad</h1>
           <p class="article__subtitle">La técnica que permite mezclar tus transacciones con las de otros para ganar privacidad en Bitcoin.</p>
 
-          <p>Bitcoin es pseudónimo, no anónimo. Todas las transacciones son públicas en la blockchain, y con suficiente análisis es posible conectar UTXOs con identidades reales. CoinJoin es la principal técnica nativa de Bitcoin para romper esa trazabilidad, sin necesidad de cambios al protocolo y sin que nadie pueda robar tus fondos en el proceso.</p>
+          <p>Bitcoin es pseudónimo, no anónimo. Todas las transacciones son públicas en la blockchain, y con suficiente análisis es posible conectar <a href="/nivel-3/modelo-utxo.html">UTXOs</a> con identidades reales. CoinJoin es la principal técnica nativa de Bitcoin para romper esa trazabilidad, sin necesidad de cambios al protocolo y sin que nadie pueda robar tus fondos en el proceso.</p>
 
           <h2>Qué es CoinJoin</h2>
           <p>CoinJoin es una técnica propuesta por Gregory Maxwell en 2013 en el foro BitcoinTalk. La idea es simple: si múltiples usuarios combinan sus inputs y outputs en una sola transacción, un observador externo no puede determinar con certeza qué input corresponde a qué output.</p>
@@ -109,7 +109,7 @@
           <ol>
             <li>Alice y Bob acuerdan (a través de un coordinador o directamente) crear una transacción conjunta.</li>
             <li>La transacción tiene <strong>2 inputs</strong>: el de Alice (0,1 BTC) y el de Bob (0,1 BTC).</li>
-            <li>La transacción tiene <strong>2 outputs</strong>: un output de 0,1 BTC a una dirección de Alice, y otro de 0,1 BTC a una dirección de Bob (menos las comisiones repartidas entre ambos).</li>
+            <li>La transacción tiene <strong>2 outputs</strong>: un output de 0,1 BTC a una dirección de Alice, y otro de 0,1 BTC a una dirección de Bob (menos las <a href="/base/que-son-las-fees.html">comisiones</a> repartidas entre ambos).</li>
             <li>Alice firma su input. Bob firma el suyo. Ninguno puede firmar el del otro, sus fondos están seguros en todo momento.</li>
             <li>Un observador externo ve una transacción con 2 inputs iguales y 2 outputs iguales. No puede saber cuál output es de Alice y cuál de Bob.</li>
           </ol>

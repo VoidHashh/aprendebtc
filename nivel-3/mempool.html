@@ -150,11 +150,11 @@
 
 <h2>Cómo funciona la cola</h2>
 
-<p>La mempool no es una cola ordenada de tipo &quot;primero que llega, primero que sale&quot;. Es más bien una subasta: los mineros eligen las transacciones que les pagan más por unidad de espacio.</p>
+<p>La mempool no es una cola ordenada de tipo &quot;primero que llega, primero que sale&quot;. Es más bien una subasta: los <a href="/base/que-es-la-mineria.html">mineros</a> eligen las transacciones que les pagan más por unidad de espacio.</p>
 
 <p>El espacio en cada bloque es limitado (aproximadamente 1 MB de datos, o unos 4.000 transacciones típicas). Los mineros maximizan sus ingresos seleccionando las transacciones con fee más alta por byte virtual.</p>
 
-<p>Cuando la mempool tiene pocas transacciones, incluso las fees bajas se confirman rápido. Cuando está congestionada, las transacciones con fees bajas pueden esperar horas o días.</p>
+<p>Cuando la mempool tiene pocas transacciones, incluso las <a href="/base/que-son-las-fees.html">fees</a> bajas se confirman rápido. Cuando está congestionada, las transacciones con fees bajas pueden esperar horas o días.</p>
 
 <h2>Mempool.space: la ventana a la mempool</h2>
 
@@ -210,7 +210,7 @@
 
 <p><strong>Esperar:</strong> La mempool eventualmente se vacía. Incluso transacciones con fees muy bajas se confirman durante períodos de baja actividad.</p>
 
-<p><strong>RBF (Replace-By-Fee):</strong> Reemplazar tu transacción por otra idéntica con fee más alta. Requiere que tu wallet lo soporte y que la transacción original lo permitiera.</p>
+<p><strong><a href="/nivel-3/rbf-cpfp.html">RBF</a> (Replace-By-Fee):</strong> Reemplazar tu transacción por otra idéntica con fee más alta. Requiere que tu wallet lo soporte y que la transacción original lo permitiera.</p>
 
 <p><strong>CPFP (Child-Pays-For-Parent):</strong> Crear una nueva transacción que gasta el output de la atascada, con fee alta que compense ambas.</p>
 
@@ -228,7 +228,7 @@
 
 <p>Ver la mempool llena con miles de transacciones pendientes puede parecer alarmante, pero es funcionamiento normal. Es el mercado de fees en acción: cuando hay mucha demanda, los precios (fees) suben.</p>
 
-<p>A largo plazo, Lightning Network reduce la presión sobre la mempool canalizando transacciones pequeñas y frecuentes fuera de la cadena principal.</p>
+<p>A largo plazo, <a href="/nivel-2/que-es-lightning.html">Lightning Network</a> reduce la presión sobre la mempool canalizando transacciones pequeñas y frecuentes fuera de la cadena principal.</p>
 
 <p>Para transacciones on-chain, entender la mempool te permite:</p>
 
