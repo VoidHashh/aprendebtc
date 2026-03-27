@@ -2456,6 +2456,13 @@ html[data-ads="on"] .sidebar__ad-wrap {
   text-overflow: ellipsis;
 }
 
+.donate__address-text--wrap {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-overflow: initial;
+}
+
 .donate__copy-btn {
   border: 1px solid var(--bg-border);
   border-radius: var(--radius-sm);
@@ -2483,12 +2490,49 @@ html[data-ads="on"] .sidebar__ad-wrap {
   text-decoration: none;
 }
 
+.donate__wallet-link--button {
+  align-items: center;
+  border: 1px solid var(--bg-border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  padding: 0.38rem 0.62rem;
+}
+
 .donate__wallet-link:hover {
   text-decoration: underline;
 }
 
+.donate__wallet-link--button:hover {
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
 .donate__invoice-display {
   text-align: center;
+}
+
+.donate__action-row {
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  margin: 0 0 0.9rem;
+}
+
+.donate__inline-note {
+  margin: 0 0 0.9rem;
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+}
+
+.donate__checklist {
+  margin: 0 0 1rem 1.1rem;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+
+.donate__checklist li + li {
+  margin-top: 0.35rem;
 }
 
 .donate__expiry {
@@ -2609,5 +2653,10 @@ html[data-ads="on"] .sidebar__ad-wrap {
 
   .donate__copy-btn {
     width: 100%;
+  }
+
+  .donate__wallet-link--button {
+    width: 100%;
+    justify-content: center;
   }
 }
