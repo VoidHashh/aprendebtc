@@ -442,7 +442,7 @@
         
         // Color según porcentaje (esperamos ~50% en promedio por efecto avalancha)
         if (diff.count > 0) {
-          avalancheCount.style.color = diff.count > 30  '#2ea043' : 'var(--accent)';
+          avalancheCount.style.color = diff.count > 30 ? '#2ea043' : 'var(--accent)';
         }
       } else {
         avalancheCount.textContent = '— / 64';
