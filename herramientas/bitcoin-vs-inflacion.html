@@ -9,7 +9,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aprendebtc.com/herramientas/bitcoin-vs-inflacion.html" />
   <meta property="og:title" content="Bitcoin vs inflación: el valor real de BTC — Herramientas | aprendebtc.com" />
-  <meta property="og:description" content="El precio nominal esconde la mitad de la historia: la vara de medir también encoge. Bitcoin en dólares y euros constantes de 2010." />
+  <meta property="og:description" content="El precio nominal esconde la mitad de la historia: la vara de medir también encoge. Bitcoin frente a la devaluación real del dólar (desde 1971) y del euro (desde 1999)." />
   <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
   <meta property="og:site_name" content="aprendeBTC" />
   <meta property="og:locale" content="es_ES" />
@@ -234,8 +234,8 @@
               <summary>Metodología y fuentes</summary>
               <div class="bvf__method-body">
                 <p>· <b>Poder de compra del fiat</b> (líneas verde y azul): cada moneda se mide desde su <b>origen como dinero fiat puro</b> — el <b>dólar desde 1971</b> (Nixon cierra la ventana del oro; CPI-U de 1971 = 40,48) y el <b>euro desde 1999</b> (su creación; HICP de 1999 = 74,48). 100% = valor en ese año. En 2010, cuando nace Bitcoin, el $ ya conservaba solo <b>~19%</b> de su valor de 1971 y el € <b>~80%</b> del de 1999: el dinero ya llegaba muy devaluado.</p>
-                <p>· <b>El "valor real" de Bitcoin se mide desde 2010</b> (su nacimiento): es el precio de hoy expresado en dinero de 2010, no otro precio de BTC. Medir Bitcoin en dólares de 1971 no tendría sentido, porque entonces no existía. Ej.: 62.437 $ de hoy ≈ 41.250 $ de 2010.</p>
-                <p>· <b>Valor real / dinero constante</b>: precio nominal ÷ (IPC del año ÷ IPC de 2010). Lo que quitas es exactamente la inflación acumulada desde 2010.</p>
+                <p>· <b>El "valor real" de Bitcoin</b> es su precio de hoy expresado en el dinero del <b>origen fiat</b> — dólares de 1971 o euros de 1999, cuando la moneda aún no se había devaluado. No es otro precio de BTC: es el mismo precio medido con una vara que no ha encogido. Ej.: 62.437 $ de hoy ≈ 7.656 $ de 1971.</p>
+                <p>· <b>Valor real / dinero constante</b>: precio nominal × (IPC del origen ÷ IPC del año). La franja de "devaluación" de la Descomposición es <b>exactamente</b> la misma caída de poder de compra que muestran las líneas verde y azul de Valor real — por eso en 2010 no es cero: el dinero ya llegaba devaluado.</p>
                 <p>· Fuentes <b>reales</b>, medias anuales: IPC de EE. UU. (<b>FRED CPIAUCSL</b>, desde 1971) y HICP de la zona euro (<b>Eurostat prc_hicp_midx</b>, desde 1996). El año en curso es media parcial (US hasta may 2026; EU hasta dic 2025). data/inflation.json se regenera cada mes; se publican con retraso.</p>
                 <p>· <b>Precio en vivo</b>: API pública de <b>CoinGecko</b>, refresco cada 60 s. Solo cambia el punto de "hoy".</p>
                 <p>· En la vista <b>Valor real</b>, el eje izquierdo (BTC) y el derecho (fiat) usan escalas distintas a propósito: es la única forma de que una caída del ~34% sea legible junto a una subida de seis órdenes de magnitud.</p>
@@ -321,8 +321,6 @@
 
     /* ---------- Construir filas ---------- */
     function buildRows() {
-      var us0 = (infl && infl.us0) || SEED[0][2];
-      var eu0 = (infl && infl.eu0) || SEED[0][3];
       var last = SEED.length - 1;
 
       ROWS = SEED.map(function (r, i) {
@@ -333,8 +331,9 @@
 
         var btcUsd = (isNow && live.usd) ? live.usd : btcUsdRaw;
         var btcEur = (isNow && live.eur) ? live.eur : btcUsd / eurusd;
-        var btcUsdReal = btcUsd * (us0 / cpiUs);
-        var btcEurReal = btcEur * (eu0 / cpiEu);
+        // Valor real anclado al ORIGEN fiat de cada moneda: $ en 1971, € en 1999
+        var btcUsdReal = btcUsd * (PP.us.base / cpiUs);
+        var btcEurReal = btcEur * (PP.eur.base / cpiEu);
 
         return {
           year: year,
@@ -458,7 +457,7 @@
       var midY = (yt + yb) / 2;
       var symL = ccy === "eur" ? "€" : "$";
       var tL = svgEl("text", { x: 13, y: midY, "text-anchor": "middle", "font-size": 10, fill: C.muted, transform: "rotate(-90 13 " + midY.toFixed(1) + ")" });
-      tL.textContent = "BTC · " + symL + " de 2010";
+      tL.textContent = "BTC · " + symL + " de " + (ccy === "eur" ? PP.eur.year : PP.us.year);
       svg.appendChild(tL);
       var xR = x1 + 44;
       var tR = svgEl("text", { x: xR, y: midY, "text-anchor": "middle", "font-size": 10, fill: C.muted, transform: "rotate(90 " + xR + " " + midY.toFixed(1) + ")" });
@@ -484,7 +483,8 @@
     }
 
     function renderLog(svg, x0, x1, yb, yt) {
-      var dom = [0.1, 200000];
+      // La descomposición ancla el valor real en 1971 → puede bajar de 0,1 en 2010
+      var dom = view === "descomp" ? [0.01, 200000] : [0.1, 200000];
       var i, yv;
       for (i = 0; i < LOG_TICKS.length; i++) {
         yv = scaleLog(LOG_TICKS[i], dom, yb, yt);
@@ -500,7 +500,7 @@
         var realBack = ROWS.map(function (r) { return xF(r.year).toFixed(1) + " " + yF(r.btcReal).toFixed(1); }).reverse();
         var ribbon = nomPath + " L " + realBack.join(" L ") + " Z";
         svg.appendChild(svgEl("path", { d: ribbon, fill: C.btc, "fill-opacity": 0.15, stroke: "none" }));
-        // precio de mercado (punteado) y valor en dinero de 2010 (naranja sólido)
+        // precio de mercado (punteado) y valor en dinero del origen fiat (naranja sólido)
         svg.appendChild(svgEl("path", { d: nomPath, fill: "none", stroke: C.muted, "stroke-width": 1.6, "stroke-dasharray": "5 3" }));
         svg.appendChild(svgEl("path", { d: pathFrom(ROWS, function (r) { return r.btcReal; }, xF, yF), fill: "none", stroke: C.btc, "stroke-width": 2.6 }));
 
@@ -519,7 +519,7 @@
           x0: x0, x1: x1, xF: xF,
           series: [
             { key: "btcNom", color: C.muted, yF: yF, fmt: moneyFmt, name: "Precio de mercado" },
-            { key: "btcReal", color: C.btc, yF: yF, fmt: moneyFmt, name: "Valor en dinero de 2010" }
+            { key: "btcReal", color: C.btc, yF: yF, fmt: moneyFmt, name: "Valor en dinero de " + (ccy === "eur" ? PP.eur.year : PP.us.year) }
           ]
         };
       } else {
@@ -602,8 +602,8 @@
 
     function chartAriaLabel() {
       var now = ROWS[ROWS.length - 1] || {};
-      if (view === "real") return "Bitcoin en dinero de 2010 (sube) frente al poder de compra del dólar desde 1971 y del euro desde 1999, ya devaluados en 2010 y cayendo.";
-      if (view === "descomp") return "Precio nominal de Bitcoin frente a su valor real en dinero de 2010; la banda entre ambos es la devaluación de la moneda.";
+      if (view === "real") return "Bitcoin en dinero constante (sube) frente al poder de compra del dólar desde 1971 y del euro desde 1999, ya devaluados en 2010 y cayendo.";
+      if (view === "descomp") return "Precio de mercado de Bitcoin frente a su valor en dinero del origen fiat (dólar de 1971, euro de 1999); la banda entre ambos es la devaluación acumulada de la moneda.";
       return "Precio nominal de Bitcoin en dólares y euros, escala logarítmica, 2010 a hoy.";
     }
 
@@ -615,9 +615,10 @@
       var el = $("bvf-legend");
       var sym = ccy === "eur" ? "€" : "$";
       if (view === "real") {
-        el.innerHTML = legendChip(C.btc, "1 BTC · " + sym + " de 2010") + legendChip(C.usd, "Poder del $ (desde " + PP.us.year + ")") + legendChip(C.eur, "Poder del € (desde " + PP.eur.year + ")");
+        el.innerHTML = legendChip(C.btc, "1 BTC · " + sym + " de " + (ccy === "eur" ? PP.eur.year : PP.us.year)) + legendChip(C.usd, "Poder del $ (desde " + PP.us.year + ")") + legendChip(C.eur, "Poder del € (desde " + PP.eur.year + ")");
       } else if (view === "descomp") {
-        el.innerHTML = legendChip(C.btc, "Valor en dinero de 2010") + legendChip(C.muted, "Precio de mercado (nominal)") + legendSwatch(C.btc, "Devaluación del " + sym + " desde 2010");
+        var oy = ccy === "eur" ? PP.eur.year : PP.us.year;
+        el.innerHTML = legendChip(C.btc, "Valor en dinero de " + oy) + legendChip(C.muted, "Precio de mercado (nominal)") + legendSwatch(C.btc, "Devaluación del " + sym + " desde " + oy);
       } else {
         el.innerHTML = legendChip(C.btc, "BTC / USD") + legendChip(C.eur, "BTC / EUR");
       }
@@ -648,11 +649,12 @@
       // subtítulo
       var sub;
       if (view === "real") {
-        sub = "Naranja: Bitcoin en dinero de 2010 (eje izq., log). Verde y azul: cuánto compran hoy 1 $ y 1 € frente a su origen como fiat — el $ desde 1971 (fin del patrón oro), el € desde 1999 (su nacimiento). Fíjate en 2010: el fiat ya llegaba muy devaluado (el $ conservaba solo ~19% de 1971). Bitcoin nació con el dinero ya erosionado, y sigue cayendo.";
+        sub = "Naranja: Bitcoin en dinero de " + (ccy === "eur" ? PP.eur.year : PP.us.year) + " (eje izq., log). Verde y azul: cuánto compran hoy 1 $ y 1 € frente a su origen como fiat — el $ desde 1971 (fin del patrón oro), el € desde 1999 (su nacimiento). Fíjate en 2010: el fiat ya llegaba muy devaluado (el $ conservaba solo ~19% de 1971). Bitcoin nació con el dinero ya erosionado, y sigue cayendo.";
       } else if (view === "descomp") {
         var m = ccy === "eur" ? nfEur : nfUsd;
         var moneda = ccy === "eur" ? "euro" : "dólar";
-        sub = 'Dos líneas: el precio de mercado (punteado) y ese mismo precio medido en dinero de 2010 (naranja). La franja entre ambas es la devaluación del ' + moneda + '. Hoy, de ' + m(now.btcNom) + ', unos ' + m(now.btcNom - now.btcReal) + ' (' + devalPct.toFixed(0) + '%) son solo el ' + moneda + ' valiendo menos que en 2010; el valor real es ' + m(now.btcReal) + '.';
+        var oy = ccy === "eur" ? PP.eur.year : PP.us.year;
+        sub = 'Dos líneas: el precio de mercado (punteado) y ese mismo precio medido en dinero de ' + oy + ' (naranja), cuando el ' + moneda + ' aún no se había devaluado. La franja entre ambas es la devaluación del ' + moneda + ' desde ' + oy + '. Hoy, de ' + m(now.btcNom) + ', unos ' + m(now.btcNom - now.btcReal) + ' (' + devalPct.toFixed(0) + '%) son solo el ' + moneda + ' valiendo menos que en ' + oy + '; el valor real es ' + m(now.btcReal) + '.';
       } else {
         sub = "El precio de mercado tal cual, sin ajustar. La historia que cuentan los titulares — y la que esconde la mitad del asunto.";
       }
