@@ -195,12 +195,12 @@
                 <div class="bvf__stat-sub" id="bvf-s-eur-sub">aprox.</div>
               </div>
               <div class="bvf__stat">
-                <div class="bvf__stat-label">1 $ de 2010 hoy vale</div>
+                <div class="bvf__stat-label">1 $ compra hoy</div>
                 <div class="bvf__stat-value" id="bvf-s-pp-usd" style="color:#3FB950">—</div>
                 <div class="bvf__stat-sub" id="bvf-s-pp-usd-sub">—</div>
               </div>
               <div class="bvf__stat">
-                <div class="bvf__stat-label">1 € de 2010 hoy vale</div>
+                <div class="bvf__stat-label">1 € compra hoy</div>
                 <div class="bvf__stat-value" id="bvf-s-pp-eur" style="color:#589BF7">—</div>
                 <div class="bvf__stat-sub" id="bvf-s-pp-eur-sub">—</div>
               </div>
@@ -234,7 +234,7 @@
               <summary>Metodología y fuentes</summary>
               <div class="bvf__method-body">
                 <p>· <b>Valor real / dinero constante</b>: precio nominal ÷ (IPC del año ÷ IPC de 2010). Lo que quitas es exactamente la inflación acumulada desde 2010.</p>
-                <p>· <b>¿Por qué 2010 = 100?</b> Es el año de referencia, la vara de medir. <b>No</b> significa que en 2010 no hubiera inflación: si ancláramos en otro año, la curva tendría la misma forma, solo se movería dónde está el "100".</p>
+                <p>· <b>¿Por qué 2010 = 100?</b> Es el año de referencia, como el <b>0 de una regla</b> o el <b>km 0</b> de una carretera: no es "nada", es desde donde mides. <b>No</b> significa que en 2010 no hubiera inflación (eso se mide contra años anteriores); si ancláramos en otro año, la curva tendría la misma forma, solo se movería el "100". Las líneas del $ y del € arrancan juntas en 100 porque cada una se compara con su <b>propio</b> 2010, no entre sí.</p>
                 <p>· <b>El "valor real" no es otro precio de Bitcoin</b>: es el mismo precio de hoy expresado en dinero de 2010. Por eso sale más bajo que el precio de mercado — se le ha restado la inflación acumulada, no valor de BTC. Ej.: 62.437 $ de hoy ≈ 41.250 $ de 2010 (los precios en EE. UU. subieron ~51 % desde 2010, así que el dólar conserva 1÷1,51 ≈ 66 % de su poder de compra).</p>
                 <p>· <b>Poder de compra</b>: base 100 = 2010. Datos <b>reales</b>: IPC de EE. UU. (CPI-U, <b>FRED CPIAUCSL</b>) y HICP de la zona euro (<b>Eurostat prc_hicp_midx</b>), medias anuales. 2010-2025 son años completos con dato real; 2026 es media parcial (US, hasta may 2026) y último dato disponible (EU, hasta dic 2025). Se publican mensualmente y con retraso.</p>
                 <p>· <b>Precio en vivo</b>: API pública de <b>CoinGecko</b>, refresco cada 60 s. Solo cambia el punto de "hoy".</p>
@@ -438,7 +438,7 @@
       var rTicks = [60, 70, 80, 90, 100];
       for (i = 0; i < rTicks.length; i++) {
         var yr = scaleLin(rTicks[i], rightDom, yb, yt);
-        yTickLabel(svg, x1 + 6, yr, rTicks[i] + "¢", "start");
+        yTickLabel(svg, x1 + 6, yr, rTicks[i] + "%", "start");
       }
       // línea de referencia poder de compra = 100
       var y100 = scaleLin(100, rightDom, yb, yt);
@@ -452,7 +452,7 @@
       svg.appendChild(tL);
       var xR = x1 + 44;
       var tR = svgEl("text", { x: xR, y: midY, "text-anchor": "middle", "font-size": 10, fill: C.muted, transform: "rotate(90 " + xR + " " + midY.toFixed(1) + ")" });
-      tR.textContent = "poder de compra (¢)";
+      tR.textContent = "poder de compra vs 2010 (%)";
       svg.appendChild(tR);
 
       var xF = function (y) { return scaleX(y, x0, x1); };
@@ -467,8 +467,8 @@
         x0: x0, x1: x1, xF: xF,
         series: [
           { key: "btcReal", color: C.btc, yF: lF, fmt: moneyFmt, name: "BTC real" },
-          { key: "ppUsd", color: C.usd, yF: rF, fmt: centFmt, name: "1 $ (¢)" },
-          { key: "ppEur", color: C.eur, yF: rF, fmt: centFmt, name: "1 € (¢)" }
+          { key: "ppUsd", color: C.usd, yF: rF, fmt: centFmt, name: "Poder 1 $" },
+          { key: "ppEur", color: C.eur, yF: rF, fmt: centFmt, name: "Poder 1 €" }
         ]
       };
     }
@@ -532,7 +532,7 @@
     }
 
     function moneyFmt(v) { return ccy === "eur" ? nfEur(v) : nfUsd(v); }
-    function centFmt(v) { return v.toFixed(1) + "¢"; }
+    function centFmt(v) { return v.toFixed(0) + "% de 2010"; }
 
     /* ---------- Hover ---------- */
     function nearestRow(px) {
@@ -632,13 +632,13 @@
       var apx = live.status === "live" ? "en vivo" : "aprox.";
       $("bvf-s-usd").textContent = nfUsd(now.btcUsd); $("bvf-s-usd-sub").textContent = apx;
       $("bvf-s-eur").textContent = now.btcEur ? nfEur(now.btcEur) : "—"; $("bvf-s-eur-sub").textContent = apx;
-      $("bvf-s-pp-usd").textContent = now.ppUsd.toFixed(0) + "¢"; $("bvf-s-pp-usd-sub").textContent = "perdió " + (100 - now.ppUsd).toFixed(0) + "%";
-      $("bvf-s-pp-eur").textContent = now.ppEur.toFixed(0) + "¢"; $("bvf-s-pp-eur-sub").textContent = "perdió " + (100 - now.ppEur).toFixed(0) + "%";
+      $("bvf-s-pp-usd").textContent = now.ppUsd.toFixed(0) + "%"; $("bvf-s-pp-usd-sub").textContent = "de lo de 2010 · −" + (100 - now.ppUsd).toFixed(0) + "%";
+      $("bvf-s-pp-eur").textContent = now.ppEur.toFixed(0) + "%"; $("bvf-s-pp-eur-sub").textContent = "de lo de 2010 · −" + (100 - now.ppEur).toFixed(0) + "%";
 
       // subtítulo
       var sub;
       if (view === "real") {
-        sub = "El naranja es Bitcoin subiendo, medido en dinero de 2010 (eje izq., log). El verde y el azul son 1 $ y 1 € perdiendo poder de compra (eje der.). Referencia: 2010 = 100¢ — es el punto de partida elegido, no significa que en 2010 no hubiera inflación.";
+        sub = "Naranja: Bitcoin medido en dinero de 2010 (eje izq., log). Verde y azul: cuánto compran hoy 1 $ y 1 € frente a 2010 (eje der.). Cada línea arranca en 100% en 2010 porque ahí empieza la medición (como el 0 de una regla), no porque el dinero fuera 'perfecto' ese año.";
       } else if (view === "descomp") {
         var m = ccy === "eur" ? nfEur : nfUsd;
         var moneda = ccy === "eur" ? "euro" : "dólar";
