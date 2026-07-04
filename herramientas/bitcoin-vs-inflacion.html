@@ -234,6 +234,8 @@
               <summary>Metodología y fuentes</summary>
               <div class="bvf__method-body">
                 <p>· <b>Valor real / dinero constante</b>: precio nominal ÷ (IPC del año ÷ IPC de 2010). Lo que quitas es exactamente la inflación acumulada desde 2010.</p>
+                <p>· <b>¿Por qué 2010 = 100?</b> Es el año de referencia, la vara de medir. <b>No</b> significa que en 2010 no hubiera inflación: si ancláramos en otro año, la curva tendría la misma forma, solo se movería dónde está el "100".</p>
+                <p>· <b>El "valor real" no es otro precio de Bitcoin</b>: es el mismo precio de hoy expresado en dinero de 2010. Por eso sale más bajo que el precio de mercado — se le ha restado la inflación acumulada, no valor de BTC. Ej.: 62.437 $ de hoy ≈ 41.500 $ de 2010.</p>
                 <p>· <b>Poder de compra</b>: base 100 = 2010. IPC de EE. UU. (CPI-U, <b>FRED CPIAUCSL</b>) y HICP de la zona euro (<b>Eurostat prc_hicp_midx</b>), medias/cierres anuales. Se publican mensualmente y con retraso; 2025-2026 provisionales.</p>
                 <p>· <b>Precio en vivo</b>: API pública de <b>CoinGecko</b>, refresco cada 60 s. Solo cambia el punto de "hoy".</p>
                 <p>· En la vista <b>Valor real</b>, el eje izquierdo (BTC) y el derecho (fiat) usan escalas distintas a propósito: es la única forma de que una caída del ~34% sea legible junto a una subida de seis órdenes de magnitud.</p>
@@ -480,17 +482,31 @@
       var yF = function (v) { return scaleLog(v, dom, yb, yt); };
 
       if (view === "descomp") {
-        // área precio nominal + línea valor real
-        var top = pathFrom(ROWS, function (r) { return r.btcNom; }, xF, yF);
-        var area = top + " L " + xF(YEARS[YEARS.length - 1]).toFixed(1) + " " + yb + " L " + xF(YEARS[0]).toFixed(1) + " " + yb + " Z";
-        svg.appendChild(svgEl("path", { d: area, fill: C.btcSoft, "fill-opacity": 0.35, stroke: "none" }));
-        svg.appendChild(svgEl("path", { d: top, fill: "none", stroke: C.faint, "stroke-width": 1.4, "stroke-dasharray": "4 3" }));
-        svg.appendChild(svgEl("path", { d: pathFrom(ROWS, function (r) { return r.btcReal; }, xF, yF), fill: "none", stroke: C.btc, "stroke-width": 2.4 }));
+        // La franja ENTRE la línea real y la nominal ES la devaluación acumulada.
+        var nomPath = pathFrom(ROWS, function (r) { return r.btcNom; }, xF, yF);
+        var realBack = ROWS.map(function (r) { return xF(r.year).toFixed(1) + " " + yF(r.btcReal).toFixed(1); }).reverse();
+        var ribbon = nomPath + " L " + realBack.join(" L ") + " Z";
+        svg.appendChild(svgEl("path", { d: ribbon, fill: C.btc, "fill-opacity": 0.15, stroke: "none" }));
+        // precio de mercado (punteado) y valor en dinero de 2010 (naranja sólido)
+        svg.appendChild(svgEl("path", { d: nomPath, fill: "none", stroke: C.muted, "stroke-width": 1.6, "stroke-dasharray": "5 3" }));
+        svg.appendChild(svgEl("path", { d: pathFrom(ROWS, function (r) { return r.btcReal; }, xF, yF), fill: "none", stroke: C.btc, "stroke-width": 2.6 }));
+
+        // marcador "hoy": corchete entre real y nominal con el % que es devaluación
+        var last = ROWS[ROWS.length - 1];
+        var lx = xF(last.year), yNom = yF(last.btcNom), yReal = yF(last.btcReal);
+        if (Math.abs(yReal - yNom) > 8) {
+          svg.appendChild(svgEl("line", { x1: lx, y1: yNom, x2: lx, y2: yReal, stroke: C.red, "stroke-width": 1.5 }));
+          svg.appendChild(svgEl("line", { x1: lx - 4, y1: yNom, x2: lx + 4, y2: yNom, stroke: C.red, "stroke-width": 1.5 }));
+          svg.appendChild(svgEl("line", { x1: lx - 4, y1: yReal, x2: lx + 4, y2: yReal, stroke: C.red, "stroke-width": 1.5 }));
+          var dlab = svgEl("text", { x: lx - 7, y: (yNom + yReal) / 2 + 3.5, "text-anchor": "end", "font-size": 11, fill: C.red });
+          dlab.textContent = ((1 - last.btcReal / last.btcNom) * 100).toFixed(0) + "%";
+          svg.appendChild(dlab);
+        }
         hoverCtx = {
           x0: x0, x1: x1, xF: xF,
           series: [
-            { key: "btcNom", color: C.faint, yF: yF, fmt: moneyFmt, name: "Nominal" },
-            { key: "btcReal", color: C.btc, yF: yF, fmt: moneyFmt, name: "Real" }
+            { key: "btcNom", color: C.muted, yF: yF, fmt: moneyFmt, name: "Precio de mercado" },
+            { key: "btcReal", color: C.btc, yF: yF, fmt: moneyFmt, name: "Valor en dinero de 2010" }
           ]
         };
       } else {
@@ -580,6 +596,7 @@
 
     /* ---------- Leyenda + subtítulo + stats + ticker ---------- */
     function legendChip(color, text) { return '<span><i style="border-color:' + color + '"></i>' + text + "</span>"; }
+    function legendSwatch(color, text) { return '<span><b style="width:15px;height:10px;display:inline-block;border-radius:2px;background:' + color + ';opacity:.6"></b>' + text + "</span>"; }
 
     function renderLegend() {
       var el = $("bvf-legend");
@@ -587,7 +604,7 @@
       if (view === "real") {
         el.innerHTML = legendChip(C.btc, "1 BTC · " + sym + " de 2010") + legendChip(C.usd, "Poder de compra 1 $") + legendChip(C.eur, "Poder de compra 1 €");
       } else if (view === "descomp") {
-        el.innerHTML = legendChip(C.faint, "Precio nominal") + legendChip(C.btc, "Valor real (" + sym + " de 2010)");
+        el.innerHTML = legendChip(C.btc, "Valor en dinero de 2010") + legendChip(C.muted, "Precio de mercado (nominal)") + legendSwatch(C.btc, "Devaluación del " + sym + " desde 2010");
       } else {
         el.innerHTML = legendChip(C.btc, "BTC / USD") + legendChip(C.eur, "BTC / EUR");
       }
@@ -618,9 +635,11 @@
       // subtítulo
       var sub;
       if (view === "real") {
-        sub = "El naranja es Bitcoin subiendo (eje izquierdo, log). El verde y el azul son 1 $ y 1 € perdiendo poder de compra (eje derecho). Dos fuerzas, al mismo tiempo.";
+        sub = "El naranja es Bitcoin subiendo, medido en dinero de 2010 (eje izq., log). El verde y el azul son 1 $ y 1 € perdiendo poder de compra (eje der.). Referencia: 2010 = 100¢ — es el punto de partida elegido, no significa que en 2010 no hubiera inflación.";
       } else if (view === "descomp") {
-        sub = 'De cada precio de BTC en ' + (ccy === "eur" ? "euros" : "dólares") + ' de hoy, solo una parte es Bitcoin apreciándose de verdad; el resto es la moneda valiendo menos que en 2010. Hoy esa parte "falsa" es ~' + devalPct.toFixed(0) + "%.";
+        var m = ccy === "eur" ? nfEur : nfUsd;
+        var moneda = ccy === "eur" ? "euro" : "dólar";
+        sub = 'Dos líneas: el precio de mercado (punteado) y ese mismo precio medido en dinero de 2010 (naranja). La franja entre ambas es la devaluación del ' + moneda + '. Hoy, de ' + m(now.btcNom) + ', unos ' + m(now.btcNom - now.btcReal) + ' (' + devalPct.toFixed(0) + '%) son solo el ' + moneda + ' valiendo menos que en 2010; el valor real es ' + m(now.btcReal) + '.';
       } else {
         sub = "El precio de mercado tal cual, sin ajustar. La historia que cuentan los titulares — y la que esconde la mitad del asunto.";
       }
