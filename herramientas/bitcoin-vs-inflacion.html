@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="es" data-base-path="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cuánto del precio de Bitcoin es revalorización real y cuánto es solo el dólar y el euro perdiendo poder de compra. Precio en vivo ajustado por inflación (CPI-U y HICP)." />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aprendebtc.com/herramientas/bitcoin-vs-inflacion.html" />
+  <meta property="og:title" content="Bitcoin vs inflación: el valor real de BTC — Herramientas | aprendebtc.com" />
+  <meta property="og:description" content="El precio nominal esconde la mitad de la historia: la vara de medir también encoge. Bitcoin en dólares y euros constantes de 2010." />
+  <meta property="og:image" content="https://aprendebtc.com/assets/og-image.png" />
+  <meta property="og:site_name" content="aprendeBTC" />
+  <meta property="og:locale" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Bitcoin vs inflación: el valor real de BTC — Herramientas | aprendebtc.com" />
+  <meta name="twitter:description" content="Cuánto del precio de Bitcoin es revalorización real y cuánto es solo el fiat devaluándose. En vivo, ajustado por inflación." />
+  <meta name="twitter:image" content="https://aprendebtc.com/assets/og-image.png" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://aprendebtc.com/herramientas/bitcoin-vs-inflacion.html" />
+  <link rel="alternate" hreflang="es" href="https://aprendebtc.com/herramientas/bitcoin-vs-inflacion.html" />
+  <link rel="alternate" hreflang="x-default" href="https://aprendebtc.com/herramientas/bitcoin-vs-inflacion.html" />
+  <title>Bitcoin vs inflación: el valor real de BTC — Herramientas | aprendebtc.com</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/tools.css" />
+
+  <style>
+    /* --- "terminal de nodo": panel oscuro autocontenido para esta herramienta --- */
+    .bvf {
+      --bvf-bg: #0B0E11;
+      --bvf-panel: #12171D;
+      --bvf-panel-soft: #171E26;
+      --bvf-border: #232C36;
+      --bvf-text: #E6EDF3;
+      --bvf-muted: #8B949E;
+      --bvf-faint: #5A6472;
+      --bvf-btc: #F7931A;
+      --bvf-usd: #3FB950;
+      --bvf-eur: #589BF7;
+      --bvf-red: #F85149;
+      --bvf-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+      background: var(--bvf-bg);
+      color: var(--bvf-text);
+      border: 1px solid var(--bvf-border);
+      border-radius: 14px;
+      padding: clamp(0.9rem, 2.5vw, 1.4rem);
+      margin: 1.25rem 0 1.5rem;
+    }
+    .bvf * { box-sizing: border-box; }
+
+    .bvf__ticker {
+      display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+      font-family: var(--bvf-mono); font-size: 0.9rem;
+    }
+    .bvf__brand { color: var(--bvf-btc); letter-spacing: 0.18em; font-size: 0.72rem; }
+    .bvf__ticker-price { color: var(--bvf-text); }
+    .bvf__ticker-price b { color: var(--bvf-btc); }
+    .bvf__live { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.72rem; }
+    .bvf__dot { width: 7px; height: 7px; border-radius: 999px; display: inline-block; background: var(--bvf-faint); }
+
+    .bvf__stats {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem;
+      margin: 0.9rem 0 1rem;
+    }
+    @media (min-width: 620px) { .bvf__stats { grid-template-columns: repeat(4, 1fr); } }
+    .bvf__stat {
+      background: var(--bvf-panel); border: 1px solid var(--bvf-border);
+      border-radius: 10px; padding: 0.55rem 0.7rem;
+    }
+    .bvf__stat-label { color: var(--bvf-muted); font-size: 0.7rem; margin-bottom: 0.15rem; line-height: 1.2; }
+    .bvf__stat-value { font-family: var(--bvf-mono); font-size: 1.05rem; font-weight: 600; line-height: 1.1; }
+    .bvf__stat-sub { color: var(--bvf-faint); font-size: 0.7rem; margin-top: 0.25rem; }
+
+    .bvf__toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem; }
+    .bvf__btn {
+      font-size: 0.82rem; padding: 0.4rem 0.75rem; border-radius: 8px; cursor: pointer;
+      background: var(--bvf-panel); color: var(--bvf-text); border: 1px solid var(--bvf-border);
+      transition: background 0.15s, border-color 0.15s, color 0.15s; font-family: inherit;
+    }
+    .bvf__btn[aria-pressed="true"] { background: var(--bvf-btc); color: #1A1206; border-color: var(--bvf-btc); font-weight: 600; }
+    .bvf__ccy { display: flex; gap: 0.25rem; margin-left: auto; }
+    .bvf__ccy .bvf__btn { font-family: var(--bvf-mono); padding: 0.4rem 0.6rem; font-size: 0.78rem; }
+    .bvf__btn:focus-visible { outline: 2px solid var(--bvf-eur); outline-offset: 2px; }
+
+    .bvf__subtitle { color: var(--bvf-muted); font-size: 0.85rem; line-height: 1.45; margin: 0 0 0.7rem; min-height: 2.6rem; }
+
+    .bvf__legend { display: flex; flex-wrap: wrap; gap: 0.75rem 1.1rem; margin: 0 0 0.5rem; font-family: var(--bvf-mono); font-size: 0.75rem; }
+    .bvf__legend span { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--bvf-muted); }
+    .bvf__legend i { width: 16px; height: 0; border-top: 2.5px solid; display: inline-block; }
+
+    .bvf__chart-wrap {
+      background: var(--bvf-panel); border: 1px solid var(--bvf-border);
+      border-radius: 12px; padding: 0.5rem;
+    }
+    .bvf__chart { position: relative; width: 100%; }
+    .bvf-svg { display: block; width: 100%; height: auto; }
+    .bvf-svg text { font-family: var(--bvf-mono); fill: var(--bvf-faint); }
+
+    .bvf__tip {
+      position: absolute; pointer-events: none; z-index: 5; display: none;
+      background: var(--bvf-panel-soft); border: 1px solid var(--bvf-border); border-radius: 8px;
+      padding: 7px 9px; font-family: var(--bvf-mono); font-size: 0.72rem; line-height: 1.5;
+      color: var(--bvf-text); white-space: nowrap; box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+    }
+    .bvf__tip-year { color: var(--bvf-text); margin-bottom: 3px; }
+
+    .bvf__status { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.7rem; }
+    .bvf__status-text { color: var(--bvf-faint); font-size: 0.72rem; font-family: var(--bvf-mono); }
+    .bvf__refresh {
+      font-size: 0.72rem; padding: 0.3rem 0.6rem; border-radius: 7px; cursor: pointer;
+      background: var(--bvf-panel-soft); border: 1px solid var(--bvf-border); color: var(--bvf-muted); font-family: inherit;
+    }
+    .bvf__refresh:focus-visible { outline: 2px solid var(--bvf-eur); outline-offset: 2px; }
+
+    .bvf__method { margin-top: 0.9rem; }
+    .bvf__method summary { color: var(--bvf-faint); font-size: 0.75rem; cursor: pointer; }
+    .bvf__method-body { color: var(--bvf-muted); font-size: 0.75rem; line-height: 1.55; margin-top: 0.5rem; }
+    .bvf__method-body p { margin: 0 0 0.45rem; }
+    .bvf__method-body b { color: var(--bvf-text); }
+    .bvf__disclaimer { color: var(--bvf-faint); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bvf__btn { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <div data-include="header"></div>
+
+  <div class="page-layout">
+    <aside class="page-layout__sidebar" aria-label="Navegación lateral">
+      <nav class="sidebar">
+        <div class="sidebar__ad-wrap">
+          <div class="ad-slot ad-sidebar" id="ad-sidebar-global" aria-hidden="true"></div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="page-layout__content" id="main-content">
+      <div class="content-inner">
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="../" class="breadcrumb__item">Inicio</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <a href="index.html" class="breadcrumb__item">Herramientas</a>
+          <span class="breadcrumb__separator" aria-hidden="true">&rsaquo;</span>
+          <span class="breadcrumb__current">Bitcoin vs inflación</span>
+        </nav>
+
+        <article class="article">
+          <h1>Bitcoin vs inflación: el valor real</h1>
+          <p class="article__subtitle">Bitcoin sube y el dinero baja — a la vez. El precio nominal esconde la mitad de la historia: parte de la subida es solo el dólar y el euro perdiendo poder de compra.</p>
+
+          <!-- ================= Herramienta ================= -->
+          <section class="bvf" id="bvf" aria-label="Gráfico Bitcoin frente a la inflación">
+
+            <div class="bvf__ticker">
+              <span class="bvf__brand">₿ITCOIN · FIAT</span>
+              <span class="bvf__ticker-price" id="bvf-ticker">1 BTC · <b id="bvf-tk-usd">—</b> · <b id="bvf-tk-eur">—</b></span>
+              <span class="bvf__live" id="bvf-live"><span class="bvf__dot" id="bvf-dot"></span><span id="bvf-live-txt">…</span></span>
+            </div>
+
+            <div class="bvf__stats">
+              <div class="bvf__stat">
+                <div class="bvf__stat-label">1 BTC</div>
+                <div class="bvf__stat-value" id="bvf-s-usd" style="color:#F7931A">—</div>
+                <div class="bvf__stat-sub" id="bvf-s-usd-sub">aprox.</div>
+              </div>
+              <div class="bvf__stat">
+                <div class="bvf__stat-label">1 BTC</div>
+                <div class="bvf__stat-value" id="bvf-s-eur" style="color:#F7931A">—</div>
+                <div class="bvf__stat-sub" id="bvf-s-eur-sub">aprox.</div>
+              </div>
+              <div class="bvf__stat">
+                <div class="bvf__stat-label">1 $ de 2010 hoy vale</div>
+                <div class="bvf__stat-value" id="bvf-s-pp-usd" style="color:#3FB950">—</div>
+                <div class="bvf__stat-sub" id="bvf-s-pp-usd-sub">—</div>
+              </div>
+              <div class="bvf__stat">
+                <div class="bvf__stat-label">1 € de 2010 hoy vale</div>
+                <div class="bvf__stat-value" id="bvf-s-pp-eur" style="color:#589BF7">—</div>
+                <div class="bvf__stat-sub" id="bvf-s-pp-eur-sub">—</div>
+              </div>
+            </div>
+
+            <div class="bvf__toolbar" role="group" aria-label="Vistas del gráfico">
+              <button class="bvf__btn" data-view="real" aria-pressed="true">Valor real</button>
+              <button class="bvf__btn" data-view="descomp" aria-pressed="false">Descomposición</button>
+              <button class="bvf__btn" data-view="nominal" aria-pressed="false">Precio nominal</button>
+              <div class="bvf__ccy" id="bvf-ccy" role="group" aria-label="Moneda">
+                <button class="bvf__btn" data-ccy="usd" aria-pressed="true">$</button>
+                <button class="bvf__btn" data-ccy="eur" aria-pressed="false">€</button>
+              </div>
+            </div>
+
+            <p class="bvf__subtitle" id="bvf-subtitle"></p>
+            <div class="bvf__legend" id="bvf-legend"></div>
+
+            <div class="bvf__chart-wrap">
+              <div class="bvf__chart" id="bvf-chart">
+                <div class="bvf__tip" id="bvf-tip"></div>
+              </div>
+            </div>
+
+            <div class="bvf__status">
+              <span class="bvf__status-text" id="bvf-status">Cargando…</span>
+              <button class="bvf__refresh" id="bvf-refresh" type="button">Actualizar ahora</button>
+            </div>
+
+            <details class="bvf__method">
+              <summary>Metodología y fuentes</summary>
+              <div class="bvf__method-body">
+                <p>· <b>Valor real / dinero constante</b>: precio nominal ÷ (IPC del año ÷ IPC de 2010). Lo que quitas es exactamente la inflación acumulada desde 2010.</p>
+                <p>· <b>Poder de compra</b>: base 100 = 2010. IPC de EE. UU. (CPI-U, <b>FRED CPIAUCSL</b>) y HICP de la zona euro (<b>Eurostat prc_hicp_midx</b>), medias/cierres anuales. Se publican mensualmente y con retraso; 2025-2026 provisionales.</p>
+                <p>· <b>Precio en vivo</b>: API pública de <b>CoinGecko</b>, refresco cada 60 s. Solo cambia el punto de "hoy".</p>
+                <p>· En la vista <b>Valor real</b>, el eje izquierdo (BTC) y el derecho (fiat) usan escalas distintas a propósito: es la única forma de que una caída del ~34% sea legible junto a una subida de seis órdenes de magnitud.</p>
+                <p>· Nota honesta: el BTC "real" sube <b>algo menos</b> que el nominal. Es correcto — y es justo el punto: parte de lo que parece revalorización es el dinero valiendo menos.</p>
+                <p class="bvf__disclaimer">Herramienta educativa, no es asesoramiento de inversión.</p>
+              </div>
+            </details>
+          </section>
+          <!-- =============== /Herramienta =============== -->
+
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="../js/includes.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/search.js"></script>
+
+  <script>
+  (function () {
+    "use strict";
+
+    /* ---------- Paleta ---------- */
+    var C = {
+      btc: "#F7931A", btcSoft: "#5A4225", usd: "#3FB950", eur: "#589BF7",
+      red: "#F85149", faint: "#5A6472", muted: "#8B949E", text: "#E6EDF3",
+      grid: "#232C36",
+    };
+
+    /* ---------- Datos semilla embebidos (respaldo si falla el JSON) ----------
+       [año, btcUsd (cierre aprox.), cpiUs (CPI-U 1982-84=100), cpiEu (HICP 2015=100), eurusd] */
+    var SEED = [
+      [2010, 0.30, 218.06, 93.3, 1.33],
+      [2011, 4.70, 224.94, 95.8, 1.39],
+      [2012, 13.50, 229.59, 98.2, 1.29],
+      [2013, 758, 232.96, 99.6, 1.33],
+      [2014, 320, 236.74, 100.0, 1.33],
+      [2015, 430, 237.02, 100.0, 1.11],
+      [2016, 963, 240.01, 100.2, 1.11],
+      [2017, 14156, 245.12, 101.7, 1.13],
+      [2018, 3742, 251.11, 103.5, 1.18],
+      [2019, 7193, 255.66, 104.8, 1.12],
+      [2020, 29001, 258.81, 105.1, 1.14],
+      [2021, 46306, 270.97, 107.8, 1.18],
+      [2022, 16547, 292.66, 116.9, 1.05],
+      [2023, 42258, 304.70, 123.2, 1.08],
+      [2024, 93500, 313.69, 126.2, 1.08],
+      [2025, 95000, 321.60, 129.2, 1.10],
+      [2026, 61500, 328.00, 131.5, 1.145]
+    ];
+    var ATH = 126272;
+    var YEARS = SEED.map(function (r) { return r[0]; });
+    var LOG_TICKS = [0.1, 1, 10, 100, 1000, 10000, 100000];
+
+    /* ---------- Formato ---------- */
+    function nfUsd(v) { return v >= 1 ? "$" + Math.round(v).toLocaleString("es-ES") : "$" + v.toFixed(2); }
+    function nfEur(v) { return v >= 1 ? Math.round(v).toLocaleString("es-ES") + " €" : v.toFixed(2) + " €"; }
+
+    /* ---------- Estado ---------- */
+    var view = "real";
+    var ccy = "usd";
+    var live = { usd: null, eur: null, at: null, status: "loading" };
+    var infl = null;   // { usByYear, euByYear, us0, eu0, usLatest, euLatest, seed }
+    var ROWS = [];
+    var timer = null;
+
+    /* ---------- Referencias DOM ---------- */
+    var $ = function (id) { return document.getElementById(id); };
+    var chartHost = $("bvf-chart");
+    var tip = $("bvf-tip");
+
+    /* ---------- Construir filas ---------- */
+    function buildRows() {
+      var us0 = (infl && infl.us0) || SEED[0][2];
+      var eu0 = (infl && infl.eu0) || SEED[0][3];
+      var last = SEED.length - 1;
+
+      ROWS = SEED.map(function (r, i) {
+        var year = r[0], btcUsdRaw = r[1], eurusd = r[4];
+        var cpiUs = (infl && infl.usByYear[year]) || r[2];
+        var cpiEu = (infl && infl.euByYear[year]) || r[3];
+        var isNow = i === last;
+
+        var btcUsd = (isNow && live.usd) ? live.usd : btcUsdRaw;
+        var btcEur = (isNow && live.eur) ? live.eur : btcUsd / eurusd;
+        var btcUsdReal = btcUsd * (us0 / cpiUs);
+        var btcEurReal = btcEur * (eu0 / cpiEu);
+
+        return {
+          year: year,
+          btcUsd: btcUsd, btcEur: btcEur,
+          btcUsdReal: btcUsdReal, btcEurReal: btcEurReal,
+          ppUsd: (us0 / cpiUs) * 100,
+          ppEur: (eu0 / cpiEu) * 100,
+          btcReal: ccy === "eur" ? btcEurReal : btcUsdReal,
+          btcNom: ccy === "eur" ? btcEur : btcUsd
+        };
+      });
+    }
+
+    /* ---------- Escalas ---------- */
+    function scaleX(year, x0, x1) {
+      var yMin = YEARS[0], yMax = YEARS[YEARS.length - 1];
+      return x0 + (year - yMin) / (yMax - yMin) * (x1 - x0);
+    }
+    function scaleLog(v, dom, yBottom, yTop) {
+      var l0 = Math.log10(dom[0]), l1 = Math.log10(dom[1]);
+      var t = (Math.log10(Math.max(v, dom[0])) - l0) / (l1 - l0);
+      return yBottom + t * (yTop - yBottom);
+    }
+    function scaleLin(v, dom, yBottom, yTop) {
+      var t = (v - dom[0]) / (dom[1] - dom[0]);
+      return yBottom + t * (yTop - yBottom);
+    }
+
+    /* ---------- Helpers SVG ---------- */
+    var NS = "http://www.w3.org/2000/svg";
+    function svgEl(tag, attrs) {
+      var n = document.createElementNS(NS, tag);
+      for (var k in attrs) n.setAttribute(k, attrs[k]);
+      return n;
+    }
+    function pathFrom(rows, valFn, xFn, yFn) {
+      var d = "";
+      for (var i = 0; i < rows.length; i++) {
+        d += (i ? "L" : "M") + xFn(rows[i].year).toFixed(1) + " " + yFn(valFn(rows[i])).toFixed(1) + " ";
+      }
+      return d.trim();
+    }
+    function kfmt(v) { return v >= 1000 ? (v / 1000) + "k" : "" + v; }
+
+    /* ---------- Render del gráfico ---------- */
+    var hoverCtx = null;
+
+    function renderChart() {
+      var old = chartHost.querySelector("svg");
+      if (old) old.parentNode.removeChild(old);
+
+      var W = chartHost.clientWidth || 760;
+      var H = Math.round(Math.min(430, Math.max(300, W * 0.52)));
+      var padL = 50, padR = (view === "real" ? 44 : 16), padT = 12, padB = 26;
+      var x0 = padL, x1 = W - padR, yb = H - padB, yt = padT;
+
+      var svg = svgEl("svg", {
+        viewBox: "0 0 " + W + " " + H, width: W, height: H,
+        "class": "bvf-svg", role: "img",
+        "aria-label": chartAriaLabel()
+      });
+
+      var stepYr = W < 480 ? 4 : (W < 700 ? 3 : 2);
+      // eje X (años)
+      for (var j = 0; j < YEARS.length; j++) {
+        var yr = YEARS[j];
+        var isLast = j === YEARS.length - 1;
+        if ((yr - YEARS[0]) % stepYr !== 0 && !isLast) continue;
+        var xx = scaleX(yr, x0, x1);
+        var tx = svgEl("text", { x: xx, y: H - 8, "text-anchor": "middle", "font-size": 10.5 });
+        tx.textContent = yr;
+        svg.appendChild(tx);
+      }
+
+      if (view === "real") renderReal(svg, x0, x1, yb, yt);
+      else renderLog(svg, x0, x1, yb, yt);
+
+      // overlay para hover
+      var overlay = svgEl("rect", { x: x0, y: yt, width: Math.max(1, x1 - x0), height: Math.max(1, yb - yt), fill: "transparent", style: "cursor:crosshair" });
+      var hoverG = svgEl("g", { "class": "bvf-hover", style: "display:none" });
+      svg.appendChild(hoverG);
+      svg.appendChild(overlay);
+
+      chartHost.appendChild(svg);
+      attachHover(overlay, hoverG, W, H);
+    }
+
+    function gridLine(svg, x0, x1, y) {
+      svg.appendChild(svgEl("line", { x1: x0, y1: y, x2: x1, y2: y, stroke: C.grid, "stroke-dasharray": "2 4" }));
+    }
+    function yTickLabel(svg, x, y, text, anchor) {
+      var t = svgEl("text", { x: x, y: y + 3.5, "text-anchor": anchor, "font-size": 10.5 });
+      t.textContent = text;
+      svg.appendChild(t);
+    }
+
+    function renderReal(svg, x0, x1, yb, yt) {
+      var leftDom = [0.1, 100000];
+      var rightDom = [55, 105];
+      var i;
+      // grid + eje izq (log, BTC real)
+      for (i = 0; i < LOG_TICKS.length; i++) {
+        var yv = scaleLog(LOG_TICKS[i], leftDom, yb, yt);
+        gridLine(svg, x0, x1, yv);
+        yTickLabel(svg, x0 - 6, yv, kfmt(LOG_TICKS[i]), "end");
+      }
+      // eje der (lineal, poder de compra)
+      var rTicks = [60, 70, 80, 90, 100];
+      for (i = 0; i < rTicks.length; i++) {
+        var yr = scaleLin(rTicks[i], rightDom, yb, yt);
+        yTickLabel(svg, x1 + 6, yr, rTicks[i] + "¢", "start");
+      }
+      // línea de referencia poder de compra = 100
+      var y100 = scaleLin(100, rightDom, yb, yt);
+      svg.appendChild(svgEl("line", { x1: x0, y1: y100, x2: x1, y2: y100, stroke: C.faint, "stroke-dasharray": "3 3" }));
+
+      var xF = function (y) { return scaleX(y, x0, x1); };
+      var lF = function (v) { return scaleLog(v, leftDom, yb, yt); };
+      var rF = function (v) { return scaleLin(v, rightDom, yb, yt); };
+
+      svg.appendChild(svgEl("path", { d: pathFrom(ROWS, function (r) { return r.ppUsd; }, xF, rF), fill: "none", stroke: C.usd, "stroke-width": 2 }));
+      svg.appendChild(svgEl("path", { d: pathFrom(ROWS, function (r) { return r.ppEur; }, xF, rF), fill: "none", stroke: C.eur, "stroke-width": 2 }));
+      svg.appendChild(svgEl("path", { d: pathFrom(ROWS, function (r) { return r.btcReal; }, xF, lF), fill: "none", stroke: C.btc, "stroke-width": 2.4 }));
+
+      hoverCtx = {
+        x0: x0, x1: x1, xF: xF,
+        series: [
+          { key: "btcReal", color: C.btc, yF: lF, fmt: moneyFmt, name: "BTC real" },
+          { key: "ppUsd", color: C.usd, yF: rF, fmt: centFmt, name: "1 $ (¢)" },
+          { key: "ppEur", color: C.eur, yF: rF, fmt: centFmt, name: "1 € (¢)" }
+        ]
+      };
+    }
+
+    function renderLog(svg, x0, x1, yb, yt) {
+      var dom = [0.1, 200000];
+      var i, yv;
+      for (i = 0; i < LOG_TICKS.length; i++) {
+        yv = scaleLog(LOG_TICKS[i], dom, yb, yt);
+        gridLine(svg, x0, x1, yv);
+        yTickLabel(svg, x0 - 6, yv, kfmt(LOG_TICKS[i]), "end");
+      }
+      var xF = function (y) { return scaleX(y, x0, x1); };
+      var yF = function (v) { return scaleLog(v, dom, yb, yt); };
+
+      if (view === "descomp") {
+        // área precio nominal + línea valor real
+        var top = pathFrom(ROWS, function (r) { return r.btcNom; }, xF, yF);
+        var area = top + " L " + xF(YEARS[YEARS.length - 1]).toFixed(1) + " " + yb + " L " + xF(YEARS[0]).toFixed(1) + " " + yb + " Z";
+        svg.appendChild(svgEl("path", { d: area, fill: C.btcSoft, "fill-opacity": 0.35, stroke: "none" }));
+        svg.appendChild(svgEl("path", { d: top, fill: "none", stroke: C.faint, "stroke-width": 1.4, "stroke-dasharray": "4 3" }));
+        svg.appendChild(svgEl("path", { d: pathFrom(ROWS, function (r) { return r.btcReal; }, xF, yF), fill: "none", stroke: C.btc, "stroke-width": 2.4 }));
+        hoverCtx = {
+          x0: x0, x1: x1, xF: xF,
+          series: [
+            { key: "btcNom", color: C.faint, yF: yF, fmt: moneyFmt, name: "Nominal" },
+            { key: "btcReal", color: C.btc, yF: yF, fmt: moneyFmt, name: "Real" }
+          ]
+        };
+      } else {
+        // nominal: BTC/USD + BTC/EUR + ATH
+        var yAth = scaleLog(ATH, dom, yb, yt);
+        svg.appendChild(svgEl("line", { x1: x0, y1: yAth, x2: x1, y2: yAth, stroke: C.btc, "stroke-opacity": 0.4, "stroke-dasharray": "3 3" }));
+        var lab = svgEl("text", { x: x1 - 2, y: yAth - 4, "text-anchor": "end", "font-size": 10, fill: C.btc });
+        lab.textContent = "ATH 126k";
+        svg.appendChild(lab);
+        svg.appendChild(svgEl("path", { d: pathFrom(ROWS, function (r) { return r.btcEur; }, xF, yF), fill: "none", stroke: C.eur, "stroke-width": 1.8 }));
+        svg.appendChild(svgEl("path", { d: pathFrom(ROWS, function (r) { return r.btcUsd; }, xF, yF), fill: "none", stroke: C.btc, "stroke-width": 2.2 }));
+        hoverCtx = {
+          x0: x0, x1: x1, xF: xF,
+          series: [
+            { key: "btcUsd", color: C.btc, yF: yF, fmt: function (v) { return nfUsd(v); }, name: "BTC/USD" },
+            { key: "btcEur", color: C.eur, yF: yF, fmt: function (v) { return nfEur(v); }, name: "BTC/EUR" }
+          ]
+        };
+      }
+    }
+
+    function moneyFmt(v) { return ccy === "eur" ? nfEur(v) : nfUsd(v); }
+    function centFmt(v) { return v.toFixed(1) + "¢"; }
+
+    /* ---------- Hover ---------- */
+    function nearestRow(px) {
+      var yMin = YEARS[0], yMax = YEARS[YEARS.length - 1];
+      var t = (px - hoverCtx.x0) / (hoverCtx.x1 - hoverCtx.x0);
+      var yr = Math.round(yMin + t * (yMax - yMin));
+      yr = Math.min(yMax, Math.max(yMin, yr));
+      for (var i = 0; i < ROWS.length; i++) if (ROWS[i].year === yr) return ROWS[i];
+      return ROWS[ROWS.length - 1];
+    }
+
+    function attachHover(overlay, hoverG, W, H) {
+      function move(ev) {
+        if (!hoverCtx) return;
+        var rect = overlay.ownerSVGElement.getBoundingClientRect();
+        var scale = W / rect.width; // viewBox px por px de pantalla
+        var clientX = (ev.touches ? ev.touches[0].clientX : ev.clientX);
+        var px = (clientX - rect.left) * scale;
+        px = Math.min(hoverCtx.x1, Math.max(hoverCtx.x0, px));
+        var row = nearestRow(px);
+        var cx = hoverCtx.xF(row.year);
+
+        // dibujar crosshair + puntos
+        while (hoverG.firstChild) hoverG.removeChild(hoverG.firstChild);
+        hoverG.appendChild(svgEl("line", { x1: cx, y1: 12, x2: cx, y2: H - 26, stroke: C.faint, "stroke-dasharray": "2 3" }));
+        var s, i;
+        for (i = 0; i < hoverCtx.series.length; i++) {
+          s = hoverCtx.series[i];
+          hoverG.appendChild(svgEl("circle", { cx: cx, cy: s.yF(row[s.key]), r: 3.2, fill: s.color, stroke: "#0B0E11", "stroke-width": 1.2 }));
+        }
+        hoverG.style.display = "";
+
+        // tooltip HTML
+        var html = '<div class="bvf__tip-year">' + row.year + "</div>";
+        for (i = 0; i < hoverCtx.series.length; i++) {
+          s = hoverCtx.series[i];
+          html += '<div style="color:' + s.color + '">' + s.name + ": " + s.fmt(row[s.key]) + "</div>";
+        }
+        if (view === "descomp") {
+          var dv = (1 - row.btcReal / row.btcNom) * 100;
+          html += '<div style="color:' + C.red + ';margin-top:3px">devaluación: ' + dv.toFixed(0) + "%</div>";
+        }
+        tip.innerHTML = html;
+        tip.style.display = "block";
+        var tipX = (cx / scale) + 12;
+        if (tipX + tip.offsetWidth > rect.width) tipX = (cx / scale) - tip.offsetWidth - 12;
+        tip.style.left = Math.max(0, tipX) + "px";
+        tip.style.top = "8px";
+      }
+      function leave() { hoverG.style.display = "none"; tip.style.display = "none"; }
+      overlay.addEventListener("mousemove", move);
+      overlay.addEventListener("mouseleave", leave);
+      overlay.addEventListener("touchstart", move, { passive: true });
+      overlay.addEventListener("touchmove", move, { passive: true });
+      overlay.addEventListener("touchend", leave);
+    }
+
+    function chartAriaLabel() {
+      var now = ROWS[ROWS.length - 1] || {};
+      if (view === "real") return "Bitcoin en dinero constante de 2010 (sube) frente al poder de compra del dólar y el euro (baja), 2010 a hoy.";
+      if (view === "descomp") return "Precio nominal de Bitcoin frente a su valor real en dinero de 2010; la banda entre ambos es la devaluación de la moneda.";
+      return "Precio nominal de Bitcoin en dólares y euros, escala logarítmica, 2010 a hoy.";
+    }
+
+    /* ---------- Leyenda + subtítulo + stats + ticker ---------- */
+    function legendChip(color, text) { return '<span><i style="border-color:' + color + '"></i>' + text + "</span>"; }
+
+    function renderLegend() {
+      var el = $("bvf-legend");
+      var sym = ccy === "eur" ? "€" : "$";
+      if (view === "real") {
+        el.innerHTML = legendChip(C.btc, "1 BTC · " + sym + " de 2010") + legendChip(C.usd, "Poder de compra 1 $") + legendChip(C.eur, "Poder de compra 1 €");
+      } else if (view === "descomp") {
+        el.innerHTML = legendChip(C.faint, "Precio nominal") + legendChip(C.btc, "Valor real (" + sym + " de 2010)");
+      } else {
+        el.innerHTML = legendChip(C.btc, "BTC / USD") + legendChip(C.eur, "BTC / EUR");
+      }
+    }
+
+    function renderMeta() {
+      var now = ROWS[ROWS.length - 1];
+      var devalPct = (1 - now.btcReal / now.btcNom) * 100;
+
+      // ticker
+      $("bvf-tk-usd").textContent = nfUsd(now.btcUsd);
+      $("bvf-tk-eur").textContent = now.btcEur ? nfEur(now.btcEur) : "—";
+
+      // live dot
+      var dot = $("bvf-dot"), txt = $("bvf-live-txt");
+      var col = live.status === "live" ? C.usd : (live.status === "offline" ? C.red : C.faint);
+      dot.style.background = col;
+      $("bvf-live").style.color = col;
+      txt.textContent = live.status === "live" ? "en vivo" : (live.status === "offline" ? "sin conexión" : "…");
+
+      // stats
+      var apx = live.status === "live" ? "en vivo" : "aprox.";
+      $("bvf-s-usd").textContent = nfUsd(now.btcUsd); $("bvf-s-usd-sub").textContent = apx;
+      $("bvf-s-eur").textContent = now.btcEur ? nfEur(now.btcEur) : "—"; $("bvf-s-eur-sub").textContent = apx;
+      $("bvf-s-pp-usd").textContent = now.ppUsd.toFixed(0) + "¢"; $("bvf-s-pp-usd-sub").textContent = "perdió " + (100 - now.ppUsd).toFixed(0) + "%";
+      $("bvf-s-pp-eur").textContent = now.ppEur.toFixed(0) + "¢"; $("bvf-s-pp-eur-sub").textContent = "perdió " + (100 - now.ppEur).toFixed(0) + "%";
+
+      // subtítulo
+      var sub;
+      if (view === "real") {
+        sub = "El naranja es Bitcoin subiendo (eje izquierdo, log). El verde y el azul son 1 $ y 1 € perdiendo poder de compra (eje derecho). Dos fuerzas, al mismo tiempo.";
+      } else if (view === "descomp") {
+        sub = 'De cada precio de BTC en ' + (ccy === "eur" ? "euros" : "dólares") + ' de hoy, solo una parte es Bitcoin apreciándose de verdad; el resto es la moneda valiendo menos que en 2010. Hoy esa parte "falsa" es ~' + devalPct.toFixed(0) + "%.";
+      } else {
+        sub = "El precio de mercado tal cual, sin ajustar. La historia que cuentan los titulares — y la que esconde la mitad del asunto.";
+      }
+      $("bvf-subtitle").textContent = sub;
+
+      // estado
+      var st = live.at ? "Precio: " + live.at.toLocaleTimeString("es-ES") : "Cargando precio…";
+      if (infl) {
+        var m = (infl.usLatest && infl.usLatest.date) || "";
+        var me = (infl.euLatest && infl.euLatest.date) || "";
+        st += "  ·  inflación US→" + (m || "?") + " · EU→" + (me || "?");
+        if (infl.seed) st += " (semilla)";
+      } else {
+        st += "  ·  inflación: datos semilla";
+      }
+      $("bvf-status").textContent = st;
+    }
+
+    function renderAll() {
+      buildRows();
+      renderLegend();
+      renderMeta();
+      renderChart();
+    }
+
+    /* ---------- Carga de inflación ---------- */
+    function loadInflation() {
+      return fetch("../data/inflation.json", { cache: "no-cache" })
+        .then(function (r) { if (!r.ok) throw new Error(); return r.json(); })
+        .then(function (j) {
+          var usBy = {}, euBy = {};
+          (j.us.annual || []).forEach(function (o) { usBy[o.year] = o.index; });
+          (j.eu.annual || []).forEach(function (o) { euBy[o.year] = o.index; });
+          if (!usBy[2010] || !euBy[2010]) throw new Error("sin base 2010");
+          infl = {
+            usByYear: usBy, euByYear: euBy,
+            us0: usBy[2010], eu0: euBy[2010],
+            usLatest: j.us.latestMonth, euLatest: j.eu.latestMonth,
+            seed: !!j.seed
+          };
+        })
+        .catch(function () { infl = null; });
+    }
+
+    /* ---------- Precio en vivo ---------- */
+    function fetchLive() {
+      return fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,eur")
+        .then(function (r) { if (!r.ok) throw new Error(); return r.json(); })
+        .then(function (d) {
+          var b = d.bitcoin;
+          if (!b || typeof b.usd !== "number") throw new Error();
+          live = { usd: b.usd, eur: (typeof b.eur === "number" ? b.eur : null), at: new Date(), status: "live" };
+          renderAll();
+        })
+        .catch(function () {
+          live.status = live.usd ? "live" : "offline";
+          live.at = live.at || new Date();
+          renderAll();
+        });
+    }
+
+    /* ---------- Eventos ---------- */
+    document.querySelectorAll(".bvf__btn[data-view]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        view = b.getAttribute("data-view");
+        document.querySelectorAll(".bvf__btn[data-view]").forEach(function (x) {
+          x.setAttribute("aria-pressed", x === b ? "true" : "false");
+        });
+        // el toggle de moneda solo aplica en real/descomp
+        $("bvf-ccy").style.visibility = (view === "nominal") ? "hidden" : "visible";
+        renderAll();
+      });
+    });
+    document.querySelectorAll(".bvf__btn[data-ccy]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        ccy = b.getAttribute("data-ccy");
+        document.querySelectorAll(".bvf__btn[data-ccy]").forEach(function (x) {
+          x.setAttribute("aria-pressed", x === b ? "true" : "false");
+        });
+        renderAll();
+      });
+    });
+    $("bvf-refresh").addEventListener("click", fetchLive);
+
+    // redibujar al cambiar el ancho
+    var ro;
+    if ("ResizeObserver" in window) {
+      var lastW = 0;
+      ro = new ResizeObserver(function () {
+        var w = chartHost.clientWidth;
+        if (Math.abs(w - lastW) > 2) { lastW = w; renderChart(); }
+      });
+      ro.observe(chartHost);
+    } else {
+      window.addEventListener("resize", function () { renderChart(); });
+    }
+
+    /* ---------- Init ---------- */
+    renderAll(); // pinta ya con semilla (sin parpadeo si la red tarda)
+    loadInflation().then(function () {
+      renderAll();
+      return fetchLive();
+    });
+    timer = setInterval(fetchLive, 60000);
+  })();
+  </script>
+</body>
+</html>

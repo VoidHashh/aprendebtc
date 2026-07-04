@@ -1,0 +1,41 @@
+name: Actualizar inflacion (FRED + Eurostat)
+
+# Regenera data/inflation.json una vez al mes. La inflacion se publica
+# mensualmente y con retraso, asi que no tiene sentido correrlo mas a menudo.
+on:
+  schedule:
+    # Dia 20 de cada mes a las 06:00 UTC (para entonces ya hay dato del mes anterior).
+    - cron: "0 6 20 * *"
+  workflow_dispatch: {} # permite lanzarlo a mano desde la pestana Actions
+
+permissions:
+  contents: write # necesario para commitear el JSON regenerado
+
+jobs:
+  update-inflation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Descargar FRED + Eurostat -> data/inflation.json
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+        run: node scripts/fetch-inflation.mjs
+
+      - name: Commit si hay cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- data/inflation.json; then
+            echo "Sin cambios en data/inflation.json"
+          else
+            git add data/inflation.json
+            git commit -m "chore(data): actualizar inflacion (FRED + Eurostat)"
+            git push
+          fi

@@ -1,0 +1,53 @@
+{
+  "updated": "2026-06-15T06:00:00.000Z",
+  "seed": true,
+  "note": "SEMILLA de respaldo. US: FRED CPIAUCSL (base 1982-84=100). EU: Eurostat prc_hicp_midx EA (base 2015=100). Los indices estan en bases distintas a proposito: el grafico los normaliza a 2010=100 antes de comparar poder de compra, asi que la base concreta de cada serie es irrelevante. 2025-2026 provisionales. Este fichero lo regenera mensualmente scripts/fetch-inflation.mjs via GitHub Action.",
+  "us": {
+    "source": "FRED CPIAUCSL",
+    "base": "1982-84=100",
+    "latestMonth": { "date": "2026-05", "v": 326.9 },
+    "annual": [
+      { "year": 2010, "index": 218.06 },
+      { "year": 2011, "index": 224.94 },
+      { "year": 2012, "index": 229.59 },
+      { "year": 2013, "index": 232.96 },
+      { "year": 2014, "index": 236.74 },
+      { "year": 2015, "index": 237.02 },
+      { "year": 2016, "index": 240.01 },
+      { "year": 2017, "index": 245.12 },
+      { "year": 2018, "index": 251.11 },
+      { "year": 2019, "index": 255.66 },
+      { "year": 2020, "index": 258.81 },
+      { "year": 2021, "index": 270.97 },
+      { "year": 2022, "index": 292.66 },
+      { "year": 2023, "index": 304.70 },
+      { "year": 2024, "index": 313.69 },
+      { "year": 2025, "index": 321.60 },
+      { "year": 2026, "index": 328.00 }
+    ]
+  },
+  "eu": {
+    "source": "Eurostat prc_hicp_midx EA",
+    "base": "2015=100",
+    "latestMonth": { "date": "2026-05", "v": 131.2 },
+    "annual": [
+      { "year": 2010, "index": 93.3 },
+      { "year": 2011, "index": 95.8 },
+      { "year": 2012, "index": 98.2 },
+      { "year": 2013, "index": 99.6 },
+      { "year": 2014, "index": 100.0 },
+      { "year": 2015, "index": 100.0 },
+      { "year": 2016, "index": 100.2 },
+      { "year": 2017, "index": 101.7 },
+      { "year": 2018, "index": 103.5 },
+      { "year": 2019, "index": 104.8 },
+      { "year": 2020, "index": 105.1 },
+      { "year": 2021, "index": 107.8 },
+      { "year": 2022, "index": 116.9 },
+      { "year": 2023, "index": 123.2 },
+      { "year": 2024, "index": 126.2 },
+      { "year": 2025, "index": 129.2 },
+      { "year": 2026, "index": 131.5 }
+    ]
+  }
+}
