@@ -1,18 +1,174 @@
 {
-  "updated": "2026-07-04T15:27:01.000Z",
+  "updated": "2026-07-04T16:00:26.000Z",
   "seed": false,
-  "note": "US: FRED CPIAUCSL (1982-84=100), media anual; EU: Eurostat prc_hicp_midx EA (2015=100), media anual. Anios completos 2010-2025 con dato real; el anio en curso es media de los meses disponibles. Normalizado a 2010 antes de comparar.",
+  "note": "Datos reales, media anual. US: FRED CPIAUCSL (1982-84=100) desde 1971. EU: Eurostat prc_hicp_midx EA (2015=100) desde 1996. El poder de compra se ancla en el origen fiat de cada moneda: $ en 1971 (fin patron oro), EUR en 1999 (nacimiento). El valor real de BTC se mide desde 2010 (Bitcoin no existia antes).",
   "us": {
     "source": "FRED CPIAUCSL (fredgraph.csv, keyless)",
     "base": "1982-84=100",
+    "anchor": {
+      "year": 1971,
+      "index": 40.48
+    },
     "latestMonth": {
       "date": "2026-05",
       "v": 333.979
     },
     "annual": [
       {
+        "year": 1971,
+        "index": 40.48
+      },
+      {
+        "year": 1972,
+        "index": 41.81
+      },
+      {
+        "year": 1973,
+        "index": 44.43
+      },
+      {
+        "year": 1974,
+        "index": 49.32
+      },
+      {
+        "year": 1975,
+        "index": 53.82
+      },
+      {
+        "year": 1976,
+        "index": 56.93
+      },
+      {
+        "year": 1977,
+        "index": 60.62
+      },
+      {
+        "year": 1978,
+        "index": 65.24
+      },
+      {
+        "year": 1979,
+        "index": 72.58
+      },
+      {
+        "year": 1980,
+        "index": 82.38
+      },
+      {
+        "year": 1981,
+        "index": 90.93
+      },
+      {
+        "year": 1982,
+        "index": 96.53
+      },
+      {
+        "year": 1983,
+        "index": 99.58
+      },
+      {
+        "year": 1984,
+        "index": 103.93
+      },
+      {
+        "year": 1985,
+        "index": 107.6
+      },
+      {
+        "year": 1986,
+        "index": 109.69
+      },
+      {
+        "year": 1987,
+        "index": 113.62
+      },
+      {
+        "year": 1988,
+        "index": 118.28
+      },
+      {
+        "year": 1989,
+        "index": 123.94
+      },
+      {
+        "year": 1990,
+        "index": 130.66
+      },
+      {
+        "year": 1991,
+        "index": 136.17
+      },
+      {
+        "year": 1992,
+        "index": 140.31
+      },
+      {
+        "year": 1993,
+        "index": 144.47
+      },
+      {
+        "year": 1994,
+        "index": 148.22
+      },
+      {
+        "year": 1995,
+        "index": 152.38
+      },
+      {
+        "year": 1996,
+        "index": 156.86
+      },
+      {
+        "year": 1997,
+        "index": 160.53
+      },
+      {
+        "year": 1998,
+        "index": 163.01
+      },
+      {
+        "year": 1999,
+        "index": 166.58
+      },
+      {
+        "year": 2000,
+        "index": 172.19
+      },
+      {
+        "year": 2001,
+        "index": 177.04
+      },
+      {
+        "year": 2002,
+        "index": 179.87
+      },
+      {
+        "year": 2003,
+        "index": 184
+      },
+      {
+        "year": 2004,
+        "index": 188.91
+      },
+      {
+        "year": 2005,
+        "index": 195.27
+      },
+      {
+        "year": 2006,
+        "index": 201.56
+      },
+      {
+        "year": 2007,
+        "index": 207.34
+      },
+      {
+        "year": 2008,
+        "index": 215.25
+      },
+      {
         "year": 2009,
-        "index": 217.35
+        "index": 214.56
       },
       {
         "year": 2010,
@@ -87,11 +243,67 @@
   "eu": {
     "source": "Eurostat prc_hicp_midx EA",
     "base": "2015=100",
+    "anchor": {
+      "year": 1999,
+      "index": 74.48
+    },
     "latestMonth": {
       "date": "2025-12",
       "v": 129.56
     },
     "annual": [
+      {
+        "year": 1996,
+        "index": 71.74
+      },
+      {
+        "year": 1997,
+        "index": 72.87
+      },
+      {
+        "year": 1998,
+        "index": 73.67
+      },
+      {
+        "year": 1999,
+        "index": 74.48
+      },
+      {
+        "year": 2000,
+        "index": 76.05
+      },
+      {
+        "year": 2001,
+        "index": 77.83
+      },
+      {
+        "year": 2002,
+        "index": 79.58
+      },
+      {
+        "year": 2003,
+        "index": 81.24
+      },
+      {
+        "year": 2004,
+        "index": 82.98
+      },
+      {
+        "year": 2005,
+        "index": 84.79
+      },
+      {
+        "year": 2006,
+        "index": 86.64
+      },
+      {
+        "year": 2007,
+        "index": 88.49
+      },
+      {
+        "year": 2008,
+        "index": 91.38
+      },
       {
         "year": 2009,
         "index": 91.65

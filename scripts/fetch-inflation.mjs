@@ -26,8 +26,10 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const FRED_KEY = process.env.FRED_API_KEY; // opcional
-const START = "2009-01-01";
-const EU_START = "2009-01";
+const START = "1971-01-01"; // ancla $ = 1971 (fin del patron oro)
+const EU_START = "1996-01"; // primer dato real de HICP zona euro (el EUR nace en 1999)
+const US_ANCHOR_YEAR = 1971; // origen fiat del dolar
+const EU_ANCHOR_YEAR = 1999; // nacimiento del euro
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT_PATH = join(__dirname, "..", "data", "inflation.json");
@@ -162,25 +164,32 @@ async function main() {
 
   const usLatest = usMonthly.at(-1);
   const euLatest = euMonthly.at(-1);
+  const usAnnual = annualAverage(usMonthly);
+  const euAnnual = annualAverage(euMonthly);
+  const usAnchor = usAnnual.find((o) => o.year === US_ANCHOR_YEAR) || null;
+  const euAnchor = euAnnual.find((o) => o.year === EU_ANCHOR_YEAR) || null;
 
   const out = {
     updated: new Date().toISOString(),
     seed: false,
     note:
-      "Datos reales, media anual. US: FRED CPIAUCSL (1982-84=100). EU: Eurostat " +
-      "prc_hicp_midx EA (2015=100). El anio en curso es media de los meses " +
-      "disponibles. El grafico normaliza a 2010 antes de comparar.",
+      "Datos reales, media anual. US: FRED CPIAUCSL (1982-84=100) desde 1971. EU: " +
+      "Eurostat prc_hicp_midx EA (2015=100) desde 1996. El poder de compra se ancla " +
+      "en el origen fiat de cada moneda ($ 1971, EUR 1999); el valor real de BTC se " +
+      "mide desde 2010. El anio en curso es media de los meses disponibles.",
     us: {
       source: "FRED CPIAUCSL (fredgraph.csv, keyless)",
       base: "1982-84=100",
+      anchor: usAnchor,
       latestMonth: usLatest,
-      annual: annualAverage(usMonthly),
+      annual: usAnnual,
     },
     eu: {
       source: "Eurostat prc_hicp_midx EA",
       base: "2015=100",
+      anchor: euAnchor,
       latestMonth: euLatest,
-      annual: annualAverage(euMonthly),
+      annual: euAnnual,
     },
   };
 
