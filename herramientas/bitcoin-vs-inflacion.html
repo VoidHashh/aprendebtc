@@ -57,6 +57,21 @@
     }
     .bvf * { box-sizing: border-box; }
 
+    /* En pantallas anchas, el panel rompe la columna de lectura (780px) y se
+       centra en el area de contenido. La resta = padding real de .page-layout__content
+       en cada tramo + ~16px de barra de scroll, para no provocar scroll horizontal. */
+    @media (min-width: 1024px) {
+      .bvf {
+        width: min(1200px, calc(100vw - var(--sidebar-width, 300px) - 4.8rem - 16px));
+        max-width: none;
+        margin-left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+    @media (min-width: 1440px) {
+      .bvf { width: min(1200px, calc(100vw - var(--sidebar-width, 300px) - 6.2rem - 16px)); }
+    }
+
     .bvf__ticker {
       display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
       font-family: var(--bvf-mono); font-size: 0.9rem;
@@ -170,12 +185,12 @@
 
             <div class="bvf__stats">
               <div class="bvf__stat">
-                <div class="bvf__stat-label">1 BTC</div>
+                <div class="bvf__stat-label">1 BTC en $</div>
                 <div class="bvf__stat-value" id="bvf-s-usd" style="color:#F7931A">—</div>
                 <div class="bvf__stat-sub" id="bvf-s-usd-sub">aprox.</div>
               </div>
               <div class="bvf__stat">
-                <div class="bvf__stat-label">1 BTC</div>
+                <div class="bvf__stat-label">1 BTC en €</div>
                 <div class="bvf__stat-value" id="bvf-s-eur" style="color:#F7931A">—</div>
                 <div class="bvf__stat-sub" id="bvf-s-eur-sub">aprox.</div>
               </div>
@@ -269,7 +284,7 @@
       [2023, 42258, 304.70, 123.2, 1.08],
       [2024, 93500, 313.69, 126.2, 1.08],
       [2025, 95000, 321.60, 129.2, 1.10],
-      [2026, 61500, 328.00, 131.5, 1.145]
+      [2026, 62437, 328.00, 131.5, 1.144]
     ];
     var ATH = 126272;
     var YEARS = SEED.map(function (r) { return r[0]; });
@@ -360,8 +375,8 @@
       if (old) old.parentNode.removeChild(old);
 
       var W = chartHost.clientWidth || 760;
-      var H = Math.round(Math.min(430, Math.max(300, W * 0.52)));
-      var padL = 50, padR = (view === "real" ? 44 : 16), padT = 12, padB = 26;
+      var H = Math.round(Math.min(460, Math.max(300, W * 0.46)));
+      var padL = 50, padR = (view === "real" ? 54 : 16), padT = 12, padB = 26;
       var x0 = padL, x1 = W - padR, yb = H - padB, yt = padT;
 
       var svg = svgEl("svg", {
@@ -405,7 +420,7 @@
     }
 
     function renderReal(svg, x0, x1, yb, yt) {
-      var leftDom = [0.1, 100000];
+      var leftDom = [0.1, 200000];
       var rightDom = [55, 105];
       var i;
       // grid + eje izq (log, BTC real)
@@ -423,6 +438,17 @@
       // línea de referencia poder de compra = 100
       var y100 = scaleLin(100, rightDom, yb, yt);
       svg.appendChild(svgEl("line", { x1: x0, y1: y100, x2: x1, y2: y100, stroke: C.faint, "stroke-dasharray": "3 3" }));
+
+      // títulos de eje: esta vista tiene doble escala, conviene rotularla
+      var midY = (yt + yb) / 2;
+      var symL = ccy === "eur" ? "€" : "$";
+      var tL = svgEl("text", { x: 13, y: midY, "text-anchor": "middle", "font-size": 10, fill: C.muted, transform: "rotate(-90 13 " + midY.toFixed(1) + ")" });
+      tL.textContent = "BTC · " + symL + " de 2010";
+      svg.appendChild(tL);
+      var xR = x1 + 44;
+      var tR = svgEl("text", { x: xR, y: midY, "text-anchor": "middle", "font-size": 10, fill: C.muted, transform: "rotate(90 " + xR + " " + midY.toFixed(1) + ")" });
+      tR.textContent = "poder de compra (¢)";
+      svg.appendChild(tR);
 
       var xF = function (y) { return scaleX(y, x0, x1); };
       var lF = function (v) { return scaleLog(v, leftDom, yb, yt); };
