@@ -235,8 +235,8 @@
               <div class="bvf__method-body">
                 <p>· <b>Valor real / dinero constante</b>: precio nominal ÷ (IPC del año ÷ IPC de 2010). Lo que quitas es exactamente la inflación acumulada desde 2010.</p>
                 <p>· <b>¿Por qué 2010 = 100?</b> Es el año de referencia, la vara de medir. <b>No</b> significa que en 2010 no hubiera inflación: si ancláramos en otro año, la curva tendría la misma forma, solo se movería dónde está el "100".</p>
-                <p>· <b>El "valor real" no es otro precio de Bitcoin</b>: es el mismo precio de hoy expresado en dinero de 2010. Por eso sale más bajo que el precio de mercado — se le ha restado la inflación acumulada, no valor de BTC. Ej.: 62.437 $ de hoy ≈ 41.500 $ de 2010.</p>
-                <p>· <b>Poder de compra</b>: base 100 = 2010. IPC de EE. UU. (CPI-U, <b>FRED CPIAUCSL</b>) y HICP de la zona euro (<b>Eurostat prc_hicp_midx</b>), medias/cierres anuales. Se publican mensualmente y con retraso; 2025-2026 provisionales.</p>
+                <p>· <b>El "valor real" no es otro precio de Bitcoin</b>: es el mismo precio de hoy expresado en dinero de 2010. Por eso sale más bajo que el precio de mercado — se le ha restado la inflación acumulada, no valor de BTC. Ej.: 62.437 $ de hoy ≈ 41.250 $ de 2010 (los precios en EE. UU. subieron ~51 % desde 2010, así que el dólar conserva 1÷1,51 ≈ 66 % de su poder de compra).</p>
+                <p>· <b>Poder de compra</b>: base 100 = 2010. Datos <b>reales</b>: IPC de EE. UU. (CPI-U, <b>FRED CPIAUCSL</b>) y HICP de la zona euro (<b>Eurostat prc_hicp_midx</b>), medias anuales. 2010-2025 son años completos con dato real; 2026 es media parcial (US, hasta may 2026) y último dato disponible (EU, hasta dic 2025). Se publican mensualmente y con retraso.</p>
                 <p>· <b>Precio en vivo</b>: API pública de <b>CoinGecko</b>, refresco cada 60 s. Solo cambia el punto de "hoy".</p>
                 <p>· En la vista <b>Valor real</b>, el eje izquierdo (BTC) y el derecho (fiat) usan escalas distintas a propósito: es la única forma de que una caída del ~34% sea legible junto a una subida de seis órdenes de magnitud.</p>
                 <p>· Nota honesta: el BTC "real" sube <b>algo menos</b> que el nominal. Es correcto — y es justo el punto: parte de lo que parece revalorización es el dinero valiendo menos.</p>
@@ -268,25 +268,28 @@
     };
 
     /* ---------- Datos semilla embebidos (respaldo si falla el JSON) ----------
-       [año, btcUsd (cierre aprox.), cpiUs (CPI-U 1982-84=100), cpiEu (HICP 2015=100), eurusd] */
+       Inflación = dato REAL (media anual): cpiUs = FRED CPIAUCSL (1982-84=100),
+       cpiEu = Eurostat HICP zona euro (2015=100). 2010-2025 completos; 2026 es
+       media parcial (US) y último dato real (EU, hasta dic 2025). btcUsd = cierre
+       anual aprox.; eurusd = media anual. data/inflation.json refresca esto. */
     var SEED = [
-      [2010, 0.30, 218.06, 93.3, 1.33],
-      [2011, 4.70, 224.94, 95.8, 1.39],
-      [2012, 13.50, 229.59, 98.2, 1.29],
-      [2013, 758, 232.96, 99.6, 1.33],
-      [2014, 320, 236.74, 100.0, 1.33],
-      [2015, 430, 237.02, 100.0, 1.11],
-      [2016, 963, 240.01, 100.2, 1.11],
-      [2017, 14156, 245.12, 101.7, 1.13],
-      [2018, 3742, 251.11, 103.5, 1.18],
-      [2019, 7193, 255.66, 104.8, 1.12],
-      [2020, 29001, 258.81, 105.1, 1.14],
-      [2021, 46306, 270.97, 107.8, 1.18],
-      [2022, 16547, 292.66, 116.9, 1.05],
-      [2023, 42258, 304.70, 123.2, 1.08],
-      [2024, 93500, 313.69, 126.2, 1.08],
-      [2025, 95000, 321.60, 129.2, 1.10],
-      [2026, 62437, 328.00, 131.5, 1.144]
+      [2010, 0.30, 218.08, 93.13, 1.33],
+      [2011, 4.70, 224.92, 95.66, 1.39],
+      [2012, 13.50, 229.59, 98.05, 1.29],
+      [2013, 758, 232.95, 99.38, 1.33],
+      [2014, 320, 236.72, 99.81, 1.33],
+      [2015, 430, 237.00, 100.00, 1.11],
+      [2016, 963, 240.01, 100.23, 1.11],
+      [2017, 14156, 245.12, 101.78, 1.13],
+      [2018, 3742, 251.10, 103.56, 1.18],
+      [2019, 7193, 255.65, 104.80, 1.12],
+      [2020, 29001, 258.86, 105.06, 1.14],
+      [2021, 46306, 270.97, 107.78, 1.18],
+      [2022, 16547, 292.63, 116.82, 1.05],
+      [2023, 42258, 304.70, 123.15, 1.08],
+      [2024, 93500, 313.70, 126.07, 1.08],
+      [2025, 95000, 321.96, 128.75, 1.10],
+      [2026, 62437, 330.15, 128.75, 1.144]
     ];
     var ATH = 126272;
     var YEARS = SEED.map(function (r) { return r[0]; });
