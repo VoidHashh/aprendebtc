@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-04T16:00:26.000Z",
+  "updated": "2026-07-20T08:58:10.650Z",
   "seed": false,
-  "note": "Datos reales, media anual. US: FRED CPIAUCSL (1982-84=100) desde 1971. EU: Eurostat prc_hicp_midx EA (2015=100) desde 1996. El poder de compra se ancla en el origen fiat de cada moneda: $ en 1971 (fin patron oro), EUR en 1999 (nacimiento). El valor real de BTC se mide desde 2010 (Bitcoin no existia antes).",
+  "note": "Datos reales, media anual. US: FRED CPIAUCSL (1982-84=100) desde 1971. EU: Eurostat prc_hicp_midx EA (2015=100) desde 1996. El poder de compra se ancla en el origen fiat de cada moneda ($ 1971, EUR 1999); el valor real de BTC se mide desde 2010. El anio en curso es media de los meses disponibles.",
   "us": {
     "source": "FRED CPIAUCSL (fredgraph.csv, keyless)",
     "base": "1982-84=100",
@@ -10,8 +10,8 @@
       "index": 40.48
     },
     "latestMonth": {
-      "date": "2026-05",
-      "v": 333.979
+      "date": "2026-06",
+      "v": 332.568
     },
     "annual": [
       {
@@ -236,7 +236,7 @@
       },
       {
         "year": 2026,
-        "index": 330.15
+        "index": 330.55
       }
     ]
   },
